@@ -4,37 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zenene — A softer place to understand yourself</title>
+<title>Zenene — where your mind blooms</title>
 
-<meta name="description"
-      content="Zenene is a gentle space for reflection, mood tracking, journaling and meaningful conversations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="icon" href="assets/images/floral-brain.jpg">
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+  rel="stylesheet"
+>
 
 <style>
 
 /* =========================================================
-   ZENENE V2
-   Pastel / editorial / soft / cinematic
+   ZENENE — ART-DIRECTED HOMEPAGE V1
    ========================================================= */
 
 :root {
-    --cream: #F8FAF8;
-    --paper: #F1F6F8;
 
-    --blue: #C9DDE8;
-    --blue-soft: #E5F0F4;
-    --blue-deep: #9FBFCE;
+  /* --- atmosphere --- */
 
-    --sage: #DCE7DE;
-    --lavender: #DDD9EA;
+  --sky: #C9DFEA;
+  --sky-light: #E8F2F5;
+  --sky-deep: #9EBFCC;
 
-    --green: #52645A;
-    --text: #35423B;
-    --muted: #7B8580;
+  --cream: #F7F1E7;
+  --paper: #FFFDF8;
+
+  /* --- botanical --- */
+
+  --sage: #D8E4D7;
+  --sage-deep: #72866E;
+
+  /* --- floral --- */
+
+  --rose: #E7C9CD;
+  --rose-deep: #B97880;
+
+  --lavender: #DCD8E8;
+
+  /* --- ink --- */
+
+  --brown: #624F43;
+  --brown-dark: #392D26;
+  --ink: #2F2B27;
+
+  /* --- type --- */
+
+  --typewriter: "Special Elite", "Courier New", monospace;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --script: "Dancing Script", cursive;
+
 }
 
-* {
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -45,759 +75,159 @@ html {
 body {
   margin: 0;
   background: var(--cream);
-  color: var(--text);
-  font-family: var(--sans);
+  color: var(--ink);
   overflow-x: hidden;
 }
 
+
 /* =========================================================
-   GRAIN
+   PAPER GRAIN
    ========================================================= */
 
 body::before {
+
   content: "";
+
   position: fixed;
   inset: 0;
+
   pointer-events: none;
+
   z-index: 9999;
-  opacity: .035;
+
+  opacity: .045;
 
   background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
 }
+
 
 /* =========================================================
    NAVIGATION
    ========================================================= */
 
-.zen-nav {
+.top-nav {
+
   position: fixed;
+
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 1000;
+  right: 0;
 
-  padding: 22px 5vw;
+  z-index: 500;
 
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
-  transition: .4s ease;
+  padding: 22px 34px;
+
+  transition:
+    background .5s ease,
+    backdrop-filter .5s ease;
+
 }
 
-.zen-nav.scrolled {
-  padding-top: 14px;
-  padding-bottom: 14px;
+.top-nav.scrolled {
 
-  background: rgba(251,247,239,.78);
-  backdrop-filter: blur(16px);
+  background: rgba(247,241,231,.75);
+
+  backdrop-filter: blur(18px);
+
+  border-bottom:
+    1px solid rgba(98,79,67,.08);
+
 }
 
-.logo {
-  text-decoration: none;
-  color: var(--green);
+.nav-wordmark {
 
-  font-family: var(--mono);
-  font-size: 1rem;
-  letter-spacing: .12em;
-}
+  font-family: var(--typewriter);
 
-.nav-links {
-  display: flex;
-  gap: 26px;
-}
-
-.nav-links a {
-  color: var(--green);
-  text-decoration: none;
   font-size: .78rem;
-  letter-spacing: .04em;
 
-  transition: transform .25s ease, opacity .25s ease;
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
 }
 
-.nav-links a:hover {
-  transform: translateY(-2px);
-  opacity: .65;
+.nav-cta {
+
+  color: var(--brown);
+
+  text-decoration: none;
+
+  font-family: var(--typewriter);
+
+  font-size: .7rem;
+
+  letter-spacing: .08em;
+
 }
+
+
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
+.story {
+
+  position: relative;
+
+}
+
+.section-label {
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+}
+
+.script {
+
+  font-family: var(--script);
+
+}
+
+.serif {
+
+  font-family: var(--serif);
+
+}
+
 
 /* =========================================================
    HERO
    ========================================================= */
 
 .hero {
-  min-height: 100vh;
-  position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100svh;
+
+  min-height: 700px;
+
+  position: relative;
 
   overflow: hidden;
 
   background:
-    radial-gradient(circle at 20% 30%, rgba(243,216,210,.55), transparent 30%),
-    radial-gradient(circle at 80% 70%, rgba(220,230,216,.65), transparent 30%),
-    var(--cream);
-}
 
-.hero-content {
-  position: relative;
-  z-index: 5;
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(255,255,255,.65),
+      transparent 35%
+    ),
 
-  width: min(1100px, 90%);
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-
-  gap: 40px;
-}
-
-.hero-copy {
-  max-width: 650px;
-}
-
-.eyebrow {
-  font-family: var(--mono);
-  font-size: .72rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-
-  color: var(--sage-dark);
-
-  margin-bottom: 28px;
-
-  opacity: 0;
-  animation: fadeUp 1s .2s forwards;
-}
-
-.hero-title {
-  margin: 0;
-
-  font-family: var(--serif);
-  font-weight: 400;
-
-  font-size: clamp(3.8rem, 8vw, 8rem);
-
-  line-height: .9;
-  letter-spacing: -.055em;
-
-  color: var(--green);
-
-  opacity: 0;
-  animation: titleReveal 1.2s .35s forwards;
-}
-
-.hero-title em {
-  font-weight: 400;
-  color: #a87870;
-}
-
-.hero-sub {
-  margin-top: 34px;
-
-  max-width: 460px;
-
-  font-family: var(--mono);
-  font-size: .9rem;
-  line-height: 1.8;
-
-  color: var(--muted);
-
-  opacity: 0;
-  animation: fadeUp 1s .75s forwards;
-}
-
-.hero-button {
-  display: inline-flex;
-
-  margin-top: 34px;
-  padding: 15px 24px;
-
-  border-radius: 999px;
-
-  background: var(--green);
-  color: white;
-
-  text-decoration: none;
-
-  font-family: var(--mono);
-  font-size: .75rem;
-
-  transition:
-    transform .3s ease,
-    box-shadow .3s ease;
-}
-
-.hero-button:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(83,100,83,.18);
-}
-
-/* =========================================================
-   HERO ART
-   ========================================================= */
-
-.hero-art {
-  position: relative;
-
-  width: min(470px, 80vw);
-  aspect-ratio: 1;
-
-  justify-self: center;
-}
-
-.art-orbit {
-  position: absolute;
-  inset: 4%;
-
-  border: 1px solid rgba(83,100,83,.12);
-  border-radius: 50%;
-
-  animation: orbitRotate 30s linear infinite;
-}
-
-.art-orbit::before,
-.art-orbit::after {
-  content: "";
-
-  position: absolute;
-
-  width: 13px;
-  height: 13px;
-
-  border-radius: 50%;
-}
-
-.art-orbit::before {
-  top: 15%;
-  left: 4%;
-  background: var(--pink);
-}
-
-.art-orbit::after {
-  right: 6%;
-  bottom: 17%;
-  background: var(--sage);
-}
-
-.brain-frame {
-  position: absolute;
-  inset: 12%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 42% 58% 52% 48% / 47% 44% 56% 53%;
-
-  background:
-    radial-gradient(circle at 35% 30%, white, transparent 45%),
-    var(--pink-soft);
-
-  box-shadow:
-    0 40px 90px rgba(120,100,90,.12);
-
-  animation:
-    float 6s ease-in-out infinite;
-}
-
-.brain-frame img {
-  width: 76%;
-  height: 76%;
-
-  object-fit: cover;
-
-  border-radius: 50%;
-
-  mix-blend-mode: multiply;
-
-  opacity: .92;
-}
-
-.floating-shape {
-  position: absolute;
-
-  border-radius: 50%;
-
-  filter: blur(.2px);
-
-  animation: float 5s ease-in-out infinite;
-}
-
-.shape-one {
-  width: 58px;
-  height: 58px;
-
-  top: 7%;
-  right: 12%;
-
-  background: var(--lavender);
-}
-
-.shape-two {
-  width: 38px;
-  height: 38px;
-
-  bottom: 10%;
-  left: 3%;
-
-  background: var(--peach);
-
-  animation-delay: -2s;
-}
-
-.shape-three {
-  width: 20px;
-  height: 20px;
-
-  top: 43%;
-  right: 0;
-
-  background: var(--sage);
-
-  animation-delay: -3s;
-}
-
-/* =========================================================
-   SECTION BASE
-   ========================================================= */
-
-.section {
-  min-height: 100vh;
-
-  padding: 150px 7vw;
-
-  position: relative;
-}
-
-.section-label {
-  font-family: var(--mono);
-  font-size: .7rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-
-  color: var(--sage-dark);
-}
-
-.section-title {
-  margin: 22px 0 70px;
-
-  font-family: var(--serif);
-  font-size: clamp(3rem, 7vw, 7rem);
-
-  font-weight: 400;
-
-  line-height: .95;
-  letter-spacing: -.05em;
-
-  max-width: 850px;
-}
-
-/* =========================================================
-   WHAT ZENENE IS
-   ========================================================= */
-
-.features {
-  background: var(--paper);
-}
-
-.feature-stage {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  min-height: 65vh;
-
-  align-items: center;
-
-  gap: 8vw;
-}
-
-.feature-copy {
-  position: sticky;
-  top: 25vh;
-}
-
-.feature-copy h3 {
-  font-family: var(--serif);
-  font-weight: 400;
-
-  font-size: clamp(2.5rem, 5vw, 5rem);
-
-  margin: 15px 0;
-}
-
-.feature-copy p {
-  max-width: 430px;
-
-  font-family: var(--mono);
-  font-size: .82rem;
-
-  line-height: 1.9;
-
-  color: var(--muted);
-}
-
-.feature-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.feature-card {
-  min-height: 260px;
-
-  padding: 45px;
-
-  border-radius: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  transition:
-    transform .5s cubic-bezier(.2,.8,.2,1),
-    box-shadow .5s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-8px) rotate(.3deg);
-  box-shadow: 0 25px 60px rgba(90,80,70,.1);
-}
-
-.feature-card:nth-child(1) {
-  background: var(--pink-soft);
-  transform: rotate(-1.5deg);
-}
-
-.feature-card:nth-child(2) {
-  background: var(--sage);
-  transform: rotate(1deg);
-}
-
-.feature-card:nth-child(3) {
-  background: var(--lavender);
-  transform: rotate(-.7deg);
-}
-
-.feature-card:nth-child(4) {
-  background: var(--peach);
-  transform: rotate(1.2deg);
-}
-
-.feature-number {
-  font-family: var(--mono);
-  font-size: .7rem;
-}
-
-.feature-card h4 {
-  margin: 0;
-
-  font-family: var(--serif);
-  font-weight: 400;
-
-  font-size: 2.5rem;
-}
-
-.feature-card p {
-  margin: 0;
-
-  max-width: 360px;
-
-  font-family: var(--mono);
-  font-size: .75rem;
-  line-height: 1.7;
-}
-
-/* =========================================================
-   VERA
-   ========================================================= */
-
-.vera-section {
-  background: var(--cream);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.vera-inner {
-  width: min(1100px, 90vw);
-
-  display: grid;
-  grid-template-columns: .8fr 1.2fr;
-
-  gap: 10vw;
-  align-items: center;
-}
-
-.vera-heading {
-  font-family: var(--serif);
-
-  font-weight: 400;
-
-  font-size: clamp(3rem, 6vw, 6rem);
-
-  line-height: .95;
-}
-
-.vera-heading em {
-  color: #a87870;
-}
-
-.chat-window {
-  background: white;
-
-  border-radius: 35px;
-
-  padding: 30px;
-
-  box-shadow:
-    0 35px 80px rgba(70,60,55,.1);
-
-  max-width: 500px;
-}
-
-.chat-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding-bottom: 25px;
-
-  border-bottom: 1px solid #eee;
-}
-
-.chat-avatar {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-
-  background: var(--pink-soft);
-
-  display: grid;
-  place-items: center;
-}
-
-.chat-name {
-  font-family: var(--mono);
-  font-size: .75rem;
-}
-
-.chat-status {
-  font-size: .65rem;
-  color: #7c9277;
-}
-
-.message {
-  max-width: 80%;
-
-  padding: 14px 17px;
-
-  margin-top: 22px;
-
-  border-radius: 18px;
-
-  font-size: .85rem;
-  line-height: 1.6;
-
-  opacity: 0;
-  transform: translateY(15px);
-
-  animation: messageIn .7s forwards;
-}
-
-.message.user {
-  margin-left: auto;
-
-  background: var(--sage);
-}
-
-.message.vera {
-  background: var(--pink-soft);
-
-  animation-delay: .8s;
-}
-
-.message:nth-child(3) {
-  animation-delay: 1.5s;
-}
-
-/* =========================================================
-   YOUR SPACE
-   ========================================================= */
-
-.space-section {
-  background: var(--sage);
-
-  overflow: hidden;
-}
-
-.space-grid {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 35px;
-
-  max-width: 1100px;
-
-  margin: auto;
-}
-
-.journal-preview,
-.mood-preview {
-  min-height: 500px;
-
-  padding: 45px;
-
-  border-radius: 40px;
-
-  background: rgba(255,255,255,.65);
-
-  box-shadow: 0 25px 60px rgba(70,90,70,.08);
-}
-
-.journal-preview h3,
-.mood-preview h3 {
-  font-family: var(--serif);
-
-  font-weight: 400;
-
-  font-size: 2.5rem;
-}
-
-.journal-line {
-  font-family: var(--mono);
-
-  font-size: .78rem;
-
-  line-height: 2;
-
-  color: var(--muted);
-
-  margin-top: 45px;
-}
-
-.mood-chart {
-  height: 180px;
-
-  margin-top: 60px;
-
-  position: relative;
-}
-
-.mood-chart svg {
-  width: 100%;
-  height: 100%;
-}
-
-.chart-path {
-  fill: none;
-
-  stroke: var(--green);
-
-  stroke-width: 2;
-
-  stroke-linecap: round;
-
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-
-  animation: drawChart 2s 1s forwards;
-}
-
-/* =========================================================
-   EXPLORE
-   ========================================================= */
-
-.explore-section {
-  background: var(--paper);
-}
-
-.explore-grid {
-  display: grid;
-
-  grid-template-columns: 1.5fr 1fr 1fr;
-
-  gap: 25px;
-
-  max-width: 1200px;
-
-  margin: auto;
-}
-
-.article-card {
-  min-height: 400px;
-
-  padding: 35px;
-
-  border-radius: 35px;
-
-  background: white;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  transition:
-    transform .5s ease,
-    box-shadow .5s ease;
-}
-
-.article-card:hover {
-  transform: translateY(-10px);
-
-  box-shadow:
-    0 25px 60px rgba(70,60,55,.1);
-}
-
-.article-card.featured {
-  min-height: 520px;
-
-  background: var(--pink-soft);
-}
-
-.article-tag {
-  font-family: var(--mono);
-
-  font-size: .65rem;
-
-  text-transform: uppercase;
-
-  letter-spacing: .12em;
-}
-
-.article-card h3 {
-  font-family: var(--serif);
-
-  font-weight: 400;
-
-  font-size: 2.6rem;
-
-  line-height: 1;
-}
-
-.article-card p {
-  font-family: var(--mono);
-
-  font-size: .75rem;
-
-  line-height: 1.8;
-
-  color: var(--muted);
-}
-
-/* =========================================================
-   CTA
-   ========================================================= */
-
-.final-section {
-  min-height: 90vh;
+    var(--sky);
 
   display: flex;
 
@@ -806,104 +236,276 @@ body::before {
 
   text-align: center;
 
-  background:
-    radial-gradient(circle at 50% 45%, var(--pink-soft), transparent 40%),
-    var(--cream);
 }
 
-.final-title {
-  font-family: var(--serif);
 
-  font-weight: 400;
+/* sky dots */
 
-  font-size: clamp(4rem, 9vw, 9rem);
+.hero::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.7) 2px,
+      transparent 2.5px
+    );
+
+  background-size: 32px 32px;
+
+  opacity: .45;
+
+}
+
+
+/* clouds */
+
+.cloud {
+
+  position: absolute;
+
+  width: 180px;
+  height: 60px;
+
+  border-radius: 100px;
+
+  background: rgba(255,255,255,.28);
+
+  filter: blur(2px);
+
+  animation:
+    cloudMove 30s linear infinite;
+
+}
+
+.cloud::before,
+.cloud::after {
+
+  content: "";
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  background: inherit;
+
+}
+
+.cloud::before {
+
+  width: 90px;
+  height: 90px;
+
+  left: 35px;
+  bottom: 10px;
+
+}
+
+.cloud::after {
+
+  width: 65px;
+  height: 65px;
+
+  left: 95px;
+  bottom: 5px;
+
+}
+
+.cloud-one {
+
+  top: 22%;
+  left: -200px;
+
+}
+
+.cloud-two {
+
+  top: 65%;
+  right: -220px;
+
+  transform: scale(.7);
+
+  animation-delay: -12s;
+
+}
+
+@keyframes cloudMove {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(100vw + 450px));
+  }
+
+}
+
+
+/* hero content */
+
+.hero-inner {
+
+  position: relative;
+
+  z-index: 5;
+
+  width: min(1000px, 90vw);
+
+}
+
+.hero-eyebrow {
+
+  font-family: var(--script);
+
+  font-size: 1.25rem;
+
+  color: var(--brown);
+
+  opacity: 0;
+
+  animation:
+    heroFade 1s .3s forwards;
+
+}
+
+.hero-title {
+
+  margin: 12px 0 0;
+
+  font-family: var(--typewriter);
+
+  font-weight: normal;
+
+  font-size:
+    clamp(4rem, 12vw, 10rem);
+
+  letter-spacing: .04em;
+
+  color: var(--brown-dark);
 
   line-height: .9;
 
-  letter-spacing: -.06em;
+  overflow: hidden;
 
-  max-width: 1000px;
-
-  margin: auto;
 }
 
-.final-title em {
-  color: #a87870;
-}
+.hero-title span {
 
-.final-button {
   display: inline-block;
 
-  margin-top: 45px;
+  opacity: 0;
 
-  padding: 17px 30px;
+  transform: translateY(110%);
 
-  border-radius: 999px;
-
-  background: var(--green);
-
-  color: white;
-
-  text-decoration: none;
-
-  font-family: var(--mono);
-
-  font-size: .75rem;
-
-  transition: .3s ease;
-}
-
-.final-button:hover {
-  transform: translateY(-4px);
-}
-
-/* =========================================================
-   ANIMATIONS
-   ========================================================= */
-
-@keyframes fadeUp {
-
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation:
+    letterIn .9s cubic-bezier(.16,1,.3,1) forwards;
 
 }
 
-@keyframes titleReveal {
+.hero-title span:nth-child(1) { animation-delay: .45s; }
+.hero-title span:nth-child(2) { animation-delay: .53s; }
+.hero-title span:nth-child(3) { animation-delay: .61s; }
+.hero-title span:nth-child(4) { animation-delay: .69s; }
+.hero-title span:nth-child(5) { animation-delay: .77s; }
+.hero-title span:nth-child(6) { animation-delay: .85s; }
 
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-    clip-path: inset(100% 0 0 0);
-  }
+.hero-tag {
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    clip-path: inset(0);
-  }
+  font-family: var(--serif);
 
-}
+  font-style: italic;
 
-@keyframes float {
+  font-size: clamp(1.2rem, 3vw, 2rem);
 
-  0%,100% {
-    transform: translateY(0) rotate(0deg);
-  }
+  color: var(--brown);
 
-  50% {
-    transform: translateY(-14px) rotate(2deg);
-  }
+  margin-top: 28px;
+
+  opacity: 0;
+
+  animation:
+    heroFade 1s 1.25s forwards;
 
 }
 
-@keyframes orbitRotate {
+
+/* hero brain */
+
+.hero-art {
+
+  position: absolute;
+
+  left: 50%;
+  top: 56%;
+
+  width: min(320px, 55vw);
+
+  transform:
+    translate(-50%, -50%)
+    scale(.7);
+
+  opacity: 0;
+
+  animation:
+    brainReveal 1.8s 1s forwards;
+
+  z-index: -1;
+
+}
+
+.hero-art img {
+
+  width: 100%;
+
+  display: block;
+
+  mix-blend-mode: multiply;
+
+  filter:
+    saturate(.82)
+    contrast(.92);
+
+}
+
+.hero-ring {
+
+  position: absolute;
+
+  inset: -14%;
+
+  border:
+    1px solid rgba(98,79,67,.18);
+
+  border-radius: 50%;
+
+  animation:
+    slowRotate 25s linear infinite;
+
+}
+
+.hero-ring::after {
+
+  content: "✿";
+
+  position: absolute;
+
+  top: 5%;
+
+  left: 15%;
+
+  font-size: 22px;
+
+  color: var(--rose-deep);
+
+}
+
+@keyframes slowRotate {
 
   to {
     transform: rotate(360deg);
@@ -911,83 +513,1754 @@ body::before {
 
 }
 
-@keyframes messageIn {
+@keyframes heroFade {
 
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 
 }
 
-@keyframes drawChart {
+@keyframes letterIn {
 
   to {
-    stroke-dashoffset: 0;
+
+    opacity: 1;
+
+    transform: translateY(0);
+
   }
 
 }
 
+@keyframes brainReveal {
+
+  to {
+
+    opacity: .72;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+  }
+
+}
+
+
+/* scroll indicator */
+
+.scroll-indicator {
+
+  position: absolute;
+
+  bottom: 35px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 9px;
+
+  font-family: var(--typewriter);
+
+  font-size: .58rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+}
+
+.scroll-line {
+
+  width: 1px;
+
+  height: 45px;
+
+  background: var(--brown);
+
+  transform-origin: top;
+
+  animation: scrollLine 2s ease-in-out infinite;
+
+}
+
+@keyframes scrollLine {
+
+  0%,100% {
+    transform: scaleY(.2);
+    opacity: .25;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: .8;
+  }
+
+}
+
+
 /* =========================================================
-   RESPONSIVE
+   STICKY FEATURE STORY
+   ========================================================= */
+
+.feature-story {
+
+  height: 500vh;
+
+  position: relative;
+
+  background: var(--cream);
+
+}
+
+.feature-stage {
+
+  position: sticky;
+
+  top: 0;
+
+  height: 100svh;
+
+  min-height: 700px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: var(--cream);
+
+}
+
+
+/* giant decorative dots */
+
+.feature-stage::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(98,79,67,.10) 2px,
+      transparent 2.5px
+    );
+
+  background-size: 34px 34px;
+
+  opacity: .5;
+
+}
+
+
+/* stage title */
+
+.story-title {
+
+  position: absolute;
+
+  top: 12%;
+
+  left: 7%;
+
+  z-index: 10;
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+}
+
+
+/* progress */
+
+.story-progress {
+
+  position: absolute;
+
+  right: 7%;
+
+  bottom: 9%;
+
+  z-index: 20;
+
+  display: flex;
+
+  gap: 8px;
+
+}
+
+.story-dot {
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: rgba(98,79,67,.25);
+
+  transition: .4s ease;
+
+}
+
+.story-dot.active {
+
+  width: 30px;
+
+  border-radius: 10px;
+
+  background: var(--brown);
+
+}
+
+
+/* slide */
+
+.feature-slide {
+
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  opacity: 0;
+
+  transform: scale(.92);
+
+  pointer-events: none;
+
+  transition:
+    opacity .7s ease,
+    transform 1s cubic-bezier(.16,1,.3,1);
+
+}
+
+.feature-slide.active {
+
+  opacity: 1;
+
+  transform: scale(1);
+
+}
+
+
+/* slide content */
+
+.slide-inner {
+
+  width: min(1100px, 86vw);
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8vw;
+
+  align-items: center;
+
+}
+
+.slide-copy {
+
+  max-width: 500px;
+
+}
+
+.slide-kicker {
+
+  font-family: var(--script);
+
+  font-size: 1.2rem;
+
+  color: var(--rose-deep);
+
+  margin-bottom: 15px;
+
+}
+
+.slide-heading {
+
+  font-family: var(--serif);
+
+  font-size: clamp(4rem, 8vw, 8rem);
+
+  line-height: .83;
+
+  font-weight: 300;
+
+  color: var(--brown-dark);
+
+}
+
+.slide-heading em {
+
+  font-family: var(--script);
+
+  font-size: .65em;
+
+  color: var(--sage-deep);
+
+}
+
+.slide-description {
+
+  margin-top: 28px;
+
+  max-width: 380px;
+
+  font-family: var(--typewriter);
+
+  font-size: .72rem;
+
+  line-height: 1.9;
+
+  color: var(--brown);
+
+}
+
+
+/* visual */
+
+.slide-visual {
+
+  position: relative;
+
+  height: 500px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+
+/* =========================================================
+   SLIDE 1 — BRAIN
+   ========================================================= */
+
+.brain-composition {
+
+  width: min(440px, 75vw);
+
+  position: relative;
+
+}
+
+.brain-composition img {
+
+  width: 100%;
+
+  mix-blend-mode: multiply;
+
+  filter: saturate(.75);
+
+}
+
+.neural-dot {
+
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--rose-deep);
+
+  box-shadow:
+    0 0 0 8px rgba(185,120,128,.1);
+
+  animation: neuralPulse 2.5s infinite;
+
+}
+
+.nd1 { top: 23%; left: 48%; }
+.nd2 { top: 42%; left: 64%; animation-delay: .7s; }
+.nd3 { top: 61%; left: 42%; animation-delay: 1.3s; }
+
+@keyframes neuralPulse {
+
+  0%,100% {
+    transform: scale(.7);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+
+}
+
+
+/* =========================================================
+   SLIDE 2 — REFLECT
+   ========================================================= */
+
+.diary {
+
+  width: 360px;
+
+  height: 460px;
+
+  position: relative;
+
+  perspective: 1200px;
+
+  filter:
+    drop-shadow(0 35px 40px rgba(62,45,35,.18));
+
+}
+
+.diary-cover {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #8A7666 0 2px,
+      #7B6758 2px 5px
+    );
+
+  border-radius: 5px;
+
+  transform-origin: left center;
+
+  z-index: 5;
+
+  box-shadow:
+    inset -5px 0 rgba(255,255,255,.12);
+
+  transition:
+    transform 1.4s cubic-bezier(.16,1,.3,1);
+
+}
+
+.diary.open .diary-cover {
+
+  transform:
+    rotateY(-145deg);
+
+}
+
+.diary-pages {
+
+  position: absolute;
+
+  inset: 8px;
+
+  background: var(--paper);
+
+  border-radius: 4px;
+
+  padding: 55px 35px;
+
+}
+
+.diary-pages::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity: .25;
+
+  background-image:
+    repeating-linear-gradient(
+      transparent 0 29px,
+      #A7B8BE 30px
+    );
+
+}
+
+.diary-content {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+.diary-date {
+
+  font-family: var(--typewriter);
+
+  font-size: .6rem;
+
+  color: var(--brown);
+
+}
+
+.diary-content h3 {
+
+  font-family: var(--script);
+
+  font-size: 2rem;
+
+  font-weight: 500;
+
+  margin: 25px 0;
+
+}
+
+.diary-content p {
+
+  font-family: var(--typewriter);
+
+  font-size: .7rem;
+
+  line-height: 2;
+
+  color: var(--brown);
+
+}
+
+
+/* =========================================================
+   SLIDE 3 — MOOD
+   ========================================================= */
+
+.mood-art {
+
+  width: 430px;
+
+  height: 380px;
+
+  position: relative;
+
+}
+
+.mood-dots {
+
+  position: absolute;
+
+  inset: 0;
+
+}
+
+.mood-point {
+
+  position: absolute;
+
+  width: 15px;
+  height: 15px;
+
+  border-radius: 50%;
+
+  background: var(--rose-deep);
+
+  box-shadow:
+    0 0 0 10px rgba(185,120,128,.08);
+
+  animation:
+    moodFloat 4s ease-in-out infinite;
+
+}
+
+.mp1 { left: 8%; top: 65%; }
+.mp2 { left: 22%; top: 45%; animation-delay: -.8s; }
+.mp3 { left: 39%; top: 57%; animation-delay: -1.4s; }
+.mp4 { left: 56%; top: 25%; animation-delay: -2s; }
+.mp5 { left: 73%; top: 42%; animation-delay: -2.7s; }
+.mp6 { left: 89%; top: 18%; animation-delay: -3.2s; }
+
+.mood-svg {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+}
+
+.mood-path {
+
+  fill: none;
+
+  stroke: var(--brown);
+
+  stroke-width: 2;
+
+  stroke-dasharray: 800;
+
+  stroke-dashoffset: 800;
+
+  transition:
+    stroke-dashoffset 1.6s ease;
+
+}
+
+.feature-slide.active .mood-path {
+
+  stroke-dashoffset: 0;
+
+}
+
+@keyframes moodFloat {
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+}
+
+
+/* =========================================================
+   SLIDE 4 — VERA
+   ========================================================= */
+
+.vera-art {
+
+  width: 450px;
+
+  height: 450px;
+
+  position: relative;
+
+}
+
+.vera-network {
+
+  position: absolute;
+
+  inset: 0;
+
+}
+
+.vera-network svg {
+
+  width: 100%;
+  height: 100%;
+
+}
+
+.vera-line {
+
+  stroke: var(--sage-deep);
+
+  stroke-width: 1;
+
+  opacity: .55;
+
+  stroke-dasharray: 500;
+
+  stroke-dashoffset: 500;
+
+  transition:
+    stroke-dashoffset 1.5s ease;
+
+}
+
+.feature-slide.active .vera-line {
+
+  stroke-dashoffset: 0;
+
+}
+
+.vera-node {
+
+  fill: var(--rose-deep);
+
+  animation: neuralPulse 2.4s infinite;
+
+}
+
+.vera-chat {
+
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+}
+
+.chat-bubble {
+
+  max-width: 280px;
+
+  padding: 17px 20px;
+
+  border-radius: 22px;
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  line-height: 1.7;
+
+  box-shadow:
+    0 15px 35px rgba(62,45,35,.08);
+
+}
+
+.chat-bubble.one {
+
+  background: var(--paper);
+
+  transform:
+    translateX(-35px)
+    rotate(-2deg);
+
+}
+
+.chat-bubble.two {
+
+  background: var(--sage);
+
+  transform:
+    translateX(35px)
+    rotate(2deg);
+
+}
+
+
+/* =========================================================
+   SLIDE 5 — CALM
+   ========================================================= */
+
+.calm-art {
+
+  width: 400px;
+  height: 400px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+}
+
+.calm-circle {
+
+  width: 170px;
+  height: 170px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      white,
+      var(--sky-deep)
+    );
+
+  box-shadow:
+
+    0 0 0 20px rgba(201,223,234,.3),
+
+    0 0 0 45px rgba(201,223,234,.16),
+
+    0 30px 70px rgba(98,79,67,.12);
+
+  transform:
+    scale(.75);
+
+  transition:
+    transform .25s linear;
+
+}
+
+.calm-word {
+
+  position: absolute;
+
+  font-family: var(--script);
+
+  font-size: 1.3rem;
+
+  color: white;
+
+}
+
+
+/* =========================================================
+   FLOWER GARDEN
+   ========================================================= */
+
+.garden {
+
+  height: 150vh;
+
+  position: relative;
+
+  background: var(--sky);
+
+  overflow: hidden;
+
+  cursor: crosshair;
+
+}
+
+.garden-inner {
+
+  position: sticky;
+
+  top: 0;
+
+  height: 100svh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+}
+
+.garden-title {
+
+  position: relative;
+
+  z-index: 10;
+
+  pointer-events: none;
+
+}
+
+.garden-title h2 {
+
+  font-family: var(--serif);
+
+  font-weight: 300;
+
+  font-size: clamp(3rem, 7vw, 7rem);
+
+  line-height: .9;
+
+  color: var(--brown-dark);
+
+}
+
+.garden-title p {
+
+  margin-top: 18px;
+
+  font-family: var(--script);
+
+  font-size: 1.3rem;
+
+  color: var(--brown);
+
+}
+
+.garden-flower {
+
+  position: absolute;
+
+  pointer-events: none;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  animation:
+    flowerAppear .8s cubic-bezier(.16,1,.3,1) forwards;
+
+}
+
+.garden-flower span {
+
+  display: block;
+
+  font-size: 28px;
+
+}
+
+@keyframes flowerAppear {
+
+  to {
+
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(var(--rotation));
+
+  }
+
+}
+
+
+/* =========================================================
+   JOURNAL TRANSFORMATION
+   ========================================================= */
+
+.journal-story {
+
+  height: 220vh;
+
+  background: var(--cream);
+
+  position: relative;
+
+}
+
+.journal-stage {
+
+  position: sticky;
+
+  top: 0;
+
+  height: 100svh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+}
+
+.journal-object {
+
+  position: relative;
+
+  width: min(400px, 70vw);
+
+  height: min(500px, 72vh);
+
+  perspective: 1500px;
+
+  transition:
+    transform .15s linear;
+
+}
+
+.journal-page {
+
+  position: absolute;
+
+  inset: 0;
+
+  background: var(--paper);
+
+  box-shadow:
+    0 35px 80px rgba(62,45,35,.15);
+
+  border-radius: 5px;
+
+}
+
+.journal-page.left {
+
+  transform-origin: left center;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #EEE5D6 0 1px,
+      #FFFDF8 1px 30px
+    );
+
+  transition:
+    transform 1.3s cubic-bezier(.16,1,.3,1);
+
+  z-index: 3;
+
+}
+
+.journal-page.right {
+
+  padding: 65px 45px;
+
+  z-index: 2;
+
+}
+
+.journal-story.open .journal-page.left {
+
+  transform:
+    rotateY(-135deg);
+
+}
+
+.journal-writing {
+
+  font-family: var(--typewriter);
+
+  font-size: .68rem;
+
+  line-height: 2;
+
+  color: var(--brown);
+
+}
+
+.journal-writing h3 {
+
+  font-family: var(--script);
+
+  font-size: 2rem;
+
+  margin-bottom: 25px;
+
+}
+
+.journal-title {
+
+  position: absolute;
+
+  z-index: 10;
+
+  font-family: var(--typewriter);
+
+  font-size: clamp(3rem, 8vw, 8rem);
+
+  letter-spacing: .05em;
+
+  color: var(--brown-dark);
+
+  opacity: 0;
+
+  transform: scale(.8);
+
+  pointer-events: none;
+
+  transition:
+    opacity .7s ease,
+    transform 1s cubic-bezier(.16,1,.3,1);
+
+}
+
+.journal-story.open .journal-title {
+
+  opacity: 1;
+
+  transform: scale(1);
+
+}
+
+.journal-link {
+
+  position: absolute;
+
+  bottom: 8%;
+
+  z-index: 20;
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: .12em;
+
+  color: var(--brown);
+
+  text-decoration: none;
+
+  opacity: 0;
+
+  transition: opacity .6s ease .3s;
+
+}
+
+.journal-story.open .journal-link {
+
+  opacity: 1;
+
+}
+
+
+/* =========================================================
+   EDITORIAL END
+   ========================================================= */
+
+.editorial {
+
+  min-height: 100vh;
+
+  padding: 13vh 7vw;
+
+  background: var(--paper);
+
+}
+
+.editorial-header {
+
+  max-width: 900px;
+
+  margin-bottom: 80px;
+
+}
+
+.editorial-header h2 {
+
+  font-family: var(--serif);
+
+  font-size: clamp(4rem, 9vw, 9rem);
+
+  font-weight: 300;
+
+  line-height: .82;
+
+  color: var(--brown-dark);
+
+}
+
+.editorial-header em {
+
+  font-family: var(--script);
+
+  color: var(--sage-deep);
+
+  font-size: .7em;
+
+}
+
+.editorial-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    1.4fr
+    .8fr
+    .8fr;
+
+  gap: 25px;
+
+}
+
+.editorial-card {
+
+  min-height: 400px;
+
+  padding: 35px;
+
+  border-radius: 5px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  background: var(--sky-light);
+
+  transition:
+    transform .5s cubic-bezier(.16,1,.3,1);
+
+}
+
+.editorial-card:hover {
+
+  transform:
+    translateY(-10px)
+    rotate(-.5deg);
+
+}
+
+.editorial-card:nth-child(2) {
+
+  background: var(--sage);
+
+  transform: rotate(1deg);
+
+}
+
+.editorial-card:nth-child(3) {
+
+  background: var(--rose);
+
+  transform: rotate(-1deg);
+
+}
+
+.editorial-card h3 {
+
+  font-family: var(--serif);
+
+  font-size: 2.8rem;
+
+  font-weight: 300;
+
+  line-height: .95;
+
+}
+
+.editorial-card p {
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  line-height: 1.8;
+
+  color: var(--brown);
+
+}
+
+
+/* =========================================================
+   FINAL
+   ========================================================= */
+
+.final {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  background: var(--sky);
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+.final h2 {
+
+  font-family: var(--serif);
+
+  font-size: clamp(4rem, 10vw, 10rem);
+
+  font-weight: 300;
+
+  line-height: .82;
+
+  color: var(--brown-dark);
+
+}
+
+.final h2 em {
+
+  font-family: var(--script);
+
+  color: var(--rose-deep);
+
+}
+
+.final p {
+
+  margin-top: 35px;
+
+  font-family: var(--typewriter);
+
+  font-size: .7rem;
+
+  letter-spacing: .08em;
+
+}
+
+.final a {
+
+  display: inline-block;
+
+  margin-top: 28px;
+
+  padding: 14px 24px;
+
+  border:
+    1px solid var(--brown);
+
+  border-radius: 999px;
+
+  color: var(--brown);
+
+  text-decoration: none;
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  transition:
+    background .3s,
+    color .3s;
+
+}
+
+.final a:hover {
+
+  background: var(--brown);
+
+  color: var(--cream);
+
+}
+
+
+/* =========================================================
+   EXISTING DOCK
+   ========================================================= */
+
+.dock-wrap {
+
+  position: fixed;
+
+  bottom: 1.8rem;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 300;
+
+}
+
+.dock-items {
+
+  position: absolute;
+
+  bottom: calc(100% + 8px);
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  pointer-events: none;
+
+}
+
+.dock-item {
+
+  width: 52px;
+  height: 52px;
+
+  margin-bottom: 8px;
+
+  border-radius: 50%;
+
+  background: rgba(247,241,231,.92);
+
+  backdrop-filter: blur(16px);
+
+  border:
+    1px solid rgba(98,79,67,.15);
+
+  box-shadow:
+    0 5px 20px rgba(62,45,35,.12);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  font-size: 1rem;
+
+  opacity: 0;
+
+  transform:
+    translateY(15px)
+    scale(.8);
+
+  transition:
+    opacity .28s,
+    transform .28s;
+
+  pointer-events: none;
+
+}
+
+.dock-wrap.open .dock-items {
+
+  pointer-events: auto;
+
+}
+
+.dock-wrap.open .dock-item {
+
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  pointer-events: auto;
+
+}
+
+.dock-item:nth-child(1) { transition-delay: .05s; }
+.dock-item:nth-child(2) { transition-delay: .1s; }
+.dock-item:nth-child(3) { transition-delay: .15s; }
+.dock-item:nth-child(4) { transition-delay: .2s; }
+.dock-item:nth-child(5) { transition-delay: .25s; }
+.dock-item:nth-child(6) { transition-delay: .3s; }
+
+.dock-btn {
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(98,79,67,.2);
+
+  background: rgba(247,241,231,.94);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 5px 25px rgba(62,45,35,.18);
+
+  cursor: pointer;
+
+  font-size: 1.15rem;
+
+}
+
+.dock-btn .close {
+
+  display: none;
+
+}
+
+.dock-wrap.open .dock-btn .menu {
+
+  display: none;
+
+}
+
+.dock-wrap.open .dock-btn .close {
+
+  display: inline;
+
+}
+
+
+/* =========================================================
+   CRISIS BUTTON
+   ========================================================= */
+
+.crisis-fab {
+
+  position: fixed;
+
+  right: 1.5rem;
+
+  bottom: 1.8rem;
+
+  z-index: 200;
+
+  border: none;
+
+  padding: 10px 15px;
+
+  border-radius:
+    16px 16px 16px 4px;
+
+  background: var(--sky);
+
+  color: var(--brown-dark);
+
+  font-family: var(--typewriter);
+
+  font-size: .62rem;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 900;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(47,43,39,.4);
+
+  backdrop-filter: blur(10px);
+
+}
+
+.overlay.open {
+
+  display: flex;
+
+}
+
+.modal {
+
+  width: min(420px, 100%);
+
+  padding: 30px;
+
+  background: var(--cream);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.2);
+
+}
+
+.m-close {
+
+  float: right;
+
+  border: none;
+
+  background: none;
+
+  font-size: 1.4rem;
+
+  cursor: pointer;
+
+}
+
+.m-title {
+
+  font-family: var(--serif);
+
+  font-size: 1.8rem;
+
+}
+
+.m-sub {
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  line-height: 1.7;
+
+  color: var(--brown);
+
+  margin: 8px 0 20px;
+
+}
+
+.c-link {
+
+  display: block;
+
+  padding: 13px;
+
+  margin-top: 8px;
+
+  border-radius: 12px;
+
+  background: rgba(255,255,255,.65);
+
+  text-decoration: none;
+
+  color: var(--brown-dark);
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+}
+
+
+/* =========================================================
+   MOBILE
    ========================================================= */
 
 @media (max-width: 800px) {
 
-  .nav-links {
-    display: none;
-  }
+  .top-nav {
 
-  .hero-content,
-  .feature-stage,
-  .vera-inner,
-  .space-grid {
-    grid-template-columns: 1fr;
+    padding:
+      18px 20px;
+
   }
 
   .hero {
-    padding-top: 100px;
-  }
 
-  .hero-copy {
-    text-align: center;
-    margin: auto;
-  }
+    min-height: 100svh;
 
-  .hero-sub {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .hero-art {
-    width: min(380px, 82vw);
+
+    width: 280px;
+
+    top: 57%;
+
   }
 
-  .feature-copy {
-    position: relative;
-    top: auto;
+  .feature-story {
+
+    height: 550vh;
+
   }
 
-  .vera-inner {
-    gap: 50px;
-  }
+  .slide-inner {
 
-  .explore-grid {
     grid-template-columns: 1fr;
+
+    text-align: center;
+
+    gap: 20px;
+
   }
 
-  .section {
-    padding: 100px 6vw;
+  .slide-copy {
+
+    margin: auto;
+
   }
 
-  .feature-card {
-    min-height: 220px;
+  .slide-heading {
+
+    font-size: clamp(3.5rem, 18vw, 6rem);
+
+  }
+
+  .slide-description {
+
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+
+  .slide-visual {
+
+    height: 320px;
+
+  }
+
+  .brain-composition {
+
+    width: 280px;
+
+  }
+
+  .diary {
+
+    width: 260px;
+    height: 350px;
+
+  }
+
+  .mood-art,
+  .vera-art {
+
+    transform: scale(.7);
+
+  }
+
+  .garden {
+
+    height: 130vh;
+
+  }
+
+  .journal-story {
+
+    height: 180vh;
+
+  }
+
+  .journal-object {
+
+    width: 290px;
+    height: 400px;
+
+  }
+
+  .editorial {
+
+    padding:
+      100px 6vw;
+
+  }
+
+  .editorial-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .editorial-card,
+  .editorial-card:nth-child(2),
+  .editorial-card:nth-child(3) {
+
+    transform: none;
+
+  }
+
+  .crisis-fab {
+
+    right: 1rem;
+
   }
 
 }
 
+
 /* =========================================================
-   ACCESSIBILITY
+   REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -995,9 +2268,15 @@ body::before {
   *,
   *::before,
   *::after {
+
     animation-duration: .01ms !important;
+
     animation-iteration-count: 1 !important;
+
+    transition-duration: .01ms !important;
+
     scroll-behavior: auto !important;
+
   }
 
 }
@@ -1005,28 +2284,23 @@ body::before {
 </style>
 </head>
 
+
 <body>
 
+
 <!-- ======================================================
-     NAV
+     NAVIGATION
      ====================================================== -->
 
-<nav class="zen-nav" id="nav">
+<nav class="top-nav" id="tnav">
 
-  <a href="index.html" class="logo">
+  <div class="nav-wordmark">
     ZENENE
-  </a>
-
-  <div class="nav-links">
-
-    <a href="journal.html">Journal</a>
-    <a href="chat.html">Vera</a>
-    <a href="calm.html">Calm</a>
-    <a href="stories.html">Stories</a>
-    <a href="explore.html">Explore</a>
-    <a href="mood.html">Mood</a>
-
   </div>
+
+  <a href="#story" class="nav-cta">
+    explore
+  </a>
 
 </nav>
 
@@ -1035,52 +2309,46 @@ body::before {
      HERO
      ====================================================== -->
 
-<section class="hero">
+<section class="hero" id="home">
 
-  <div class="hero-content">
+  <div class="cloud cloud-one"></div>
+  <div class="cloud cloud-two"></div>
 
-    <div class="hero-copy">
+  <div class="hero-inner">
 
-      <div class="eyebrow">
-        a softer space for you
-      </div>
-
-      <h1 class="hero-title">
-        Understand<br>
-        <em>yourself.</em>
-      </h1>
-
-      <p class="hero-sub">
-        A gentle space to reflect, understand
-        your feelings, talk things through,
-        and simply breathe.
-      </p>
-
-      <a href="journal.html" class="hero-button">
-        Begin your journey →
-      </a>
-
+    <div class="hero-eyebrow">
+      a space made for your mind
     </div>
 
+    <h1 class="hero-title">
+
+      <span>Z</span><span>E</span><span>N</span>
+      <span>E</span><span>N</span><span>E</span>
+
+    </h1>
+
+    <div class="hero-tag">
+      where your mind blooms
+    </div>
 
     <div class="hero-art">
 
-      <div class="art-orbit"></div>
+      <div class="hero-ring"></div>
 
-      <div class="floating-shape shape-one"></div>
-      <div class="floating-shape shape-two"></div>
-      <div class="floating-shape shape-three"></div>
-
-      <div class="brain-frame">
-
-        <img
-          src="assets/images/floral-brain.jpg"
-          alt="Floral Zenene illustration"
-        >
-
-      </div>
+      <img
+        src="assets/images/floral-brain.jpg"
+        alt="Floral botanical illustration of the human brain"
+      >
 
     </div>
+
+  </div>
+
+  <div class="scroll-indicator">
+
+    <span>scroll</span>
+
+    <div class="scroll-line"></div>
 
   </div>
 
@@ -1088,115 +2356,435 @@ body::before {
 
 
 <!-- ======================================================
-     WHAT ZENENE IS
+     APPLE-STYLE FEATURE STORY
      ====================================================== -->
 
-<section class="section features">
-
-  <div class="section-label">
-    01 — your space
-  </div>
-
-  <h2 class="section-title">
-    Four ways to take care of yourself.
-  </h2>
-
+<section
+  class="feature-story"
+  id="story"
+>
 
   <div class="feature-stage">
 
-    <div class="feature-copy">
-
-      <div class="section-label">
-        built gently
-      </div>
-
-      <h3>
-        Nothing here<br>
-        asks you to<br>
-        be perfect.
-      </h3>
-
-      <p>
-        Zenene is a collection of small,
-        quiet spaces designed to help you
-        understand what you're feeling.
-      </p>
-
+    <div class="story-title">
+      a little space for you
     </div>
 
 
-    <div class="feature-list">
+    <!-- ================================================
+         SLIDE 1
+         ================================================ -->
 
-      <a
-        href="journal.html"
-        class="feature-card"
-        style="text-decoration:none;color:inherit;"
-      >
+    <article class="feature-slide active">
 
-        <span class="feature-number">01</span>
+      <div class="slide-inner">
 
-        <h4>Journal</h4>
+        <div class="slide-copy">
 
-        <p>
-          Put your thoughts somewhere
-          outside your head.
-        </p>
+          <div class="slide-kicker">
+            understand
+          </div>
 
-      </a>
+          <h2 class="slide-heading">
 
+            Where your<br>
+            <em>mind</em> blooms.
 
-      <a
-        href="mood.html"
-        class="feature-card"
-        style="text-decoration:none;color:inherit;"
-      >
+          </h2>
 
-        <span class="feature-number">02</span>
+          <p class="slide-description">
 
-        <h4>Mood</h4>
+            Zenene brings reflection,
+            conversation, creativity and
+            calm into one gentle space.
 
-        <p>
-          Notice how you're feeling.
-          No judgement required.
-        </p>
+          </p>
 
-      </a>
+        </div>
 
 
-      <a
-        href="chat.html"
-        class="feature-card"
-        style="text-decoration:none;color:inherit;"
-      >
+        <div class="slide-visual">
 
-        <span class="feature-number">03</span>
+          <div class="brain-composition">
 
-        <h4>Vera</h4>
+            <img
+              src="assets/images/floral-brain.jpg"
+              alt=""
+            >
 
-        <p>
-          A space to talk things through
-          whenever you need it.
-        </p>
+            <span class="neural-dot nd1"></span>
+            <span class="neural-dot nd2"></span>
+            <span class="neural-dot nd3"></span>
 
-      </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
 
 
-      <a
-        href="calm.html"
-        class="feature-card"
-        style="text-decoration:none;color:inherit;"
-      >
+    <!-- ================================================
+         SLIDE 2 — JOURNAL
+         ================================================ -->
 
-        <span class="feature-number">04</span>
+    <article class="feature-slide">
 
-        <h4>Calm</h4>
+      <div class="slide-inner">
 
-        <p>
-          Slow down. Breathe.
-          Come back to yourself.
-        </p>
+        <div class="slide-copy">
 
-      </a>
+          <div class="slide-kicker">
+            reflect
+          </div>
+
+          <h2 class="slide-heading">
+
+            Put your<br>
+            thoughts<br>
+            <em>somewhere.</em>
+
+          </h2>
+
+          <p class="slide-description">
+
+            A private place to write,
+            notice and understand what
+            is happening inside your mind.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual">
+
+          <div
+            class="diary"
+            id="storyDiary"
+          >
+
+            <div class="diary-pages">
+
+              <div class="diary-content">
+
+                <div class="diary-date">
+                  monday · 8:42 pm
+                </div>
+
+                <h3>
+                  dear me,
+                </h3>
+
+                <p>
+
+                  Today felt a little strange.
+
+                  <br><br>
+
+                  I think I'm beginning to
+                  understand why I've been
+                  feeling this way.
+
+                  <br><br>
+
+                  Maybe tomorrow will feel
+                  a little different.
+
+                </p>
+
+              </div>
+
+            </div>
+
+            <div class="diary-cover"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ================================================
+         SLIDE 3 — MOOD
+         ================================================ -->
+
+    <article class="feature-slide">
+
+      <div class="slide-inner">
+
+        <div class="slide-copy">
+
+          <div class="slide-kicker">
+            notice
+          </div>
+
+          <h2 class="slide-heading">
+
+            How are<br>
+            you <em>today?</em>
+
+          </h2>
+
+          <p class="slide-description">
+
+            Track how you're feeling
+            without judging it.
+
+            Sometimes noticing is enough.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual">
+
+          <div class="mood-art">
+
+            <svg
+              class="mood-svg"
+              viewBox="0 0 430 380"
+            >
+
+              <path
+                class="mood-path"
+                d="
+                  M 20 290
+                  C 70 245,
+                    90 275,
+                    125 215
+                  S 190 245,
+                    225 185
+                  S 290 90,
+                    330 145
+                  S 380 105,
+                    415 50
+                "
+              />
+
+            </svg>
+
+            <div class="mood-dots">
+
+              <span class="mood-point mp1"></span>
+              <span class="mood-point mp2"></span>
+              <span class="mood-point mp3"></span>
+              <span class="mood-point mp4"></span>
+              <span class="mood-point mp5"></span>
+              <span class="mood-point mp6"></span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ================================================
+         SLIDE 4 — VERA
+         ================================================ -->
+
+    <article class="feature-slide">
+
+      <div class="slide-inner">
+
+        <div class="slide-copy">
+
+          <div class="slide-kicker">
+            talk
+          </div>
+
+          <h2 class="slide-heading">
+
+            Someone<br>
+            to <em>talk</em> to.
+
+          </h2>
+
+          <p class="slide-description">
+
+            Vera gives you somewhere
+            to put the thoughts that are
+            difficult to say out loud.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual">
+
+          <div class="vera-art">
+
+            <div class="vera-network">
+
+              <svg viewBox="0 0 450 450">
+
+                <line
+                  class="vera-line"
+                  x1="80" y1="90"
+                  x2="210" y2="190"
+                />
+
+                <line
+                  class="vera-line"
+                  x1="210" y1="190"
+                  x2="360" y2="110"
+                />
+
+                <line
+                  class="vera-line"
+                  x1="210" y1="190"
+                  x2="150" y2="350"
+                />
+
+                <line
+                  class="vera-line"
+                  x1="210" y1="190"
+                  x2="350" y2="340"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="80"
+                  cy="90"
+                  r="7"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="210"
+                  cy="190"
+                  r="10"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="360"
+                  cy="110"
+                  r="7"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="150"
+                  cy="350"
+                  r="7"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="350"
+                  cy="340"
+                  r="7"
+                />
+
+              </svg>
+
+            </div>
+
+
+            <div class="vera-chat">
+
+              <div class="chat-bubble one">
+
+                I've had a really
+                overwhelming day.
+
+              </div>
+
+              <div class="chat-bubble two">
+
+                You don't have to
+                figure everything out
+                all at once. 🌸
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ================================================
+         SLIDE 5 — CALM
+         ================================================ -->
+
+    <article class="feature-slide">
+
+      <div class="slide-inner">
+
+        <div class="slide-copy">
+
+          <div class="slide-kicker">
+            breathe
+          </div>
+
+          <h2 class="slide-heading">
+
+            Stay here<br>
+            for a <em>moment.</em>
+
+          </h2>
+
+          <p class="slide-description">
+
+            Slow down.
+
+            There is nowhere else
+            you need to be right now.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual">
+
+          <div class="calm-art">
+
+            <div
+              class="calm-circle"
+              id="calmCircle"
+            ></div>
+
+            <div class="calm-word">
+              breathe
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- progress -->
+
+    <div class="story-progress">
+
+      <span class="story-dot active"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
 
     </div>
 
@@ -1206,154 +2794,22 @@ body::before {
 
 
 <!-- ======================================================
-     VERA
+     FLOWER CURSOR GARDEN
      ====================================================== -->
 
-<section class="section vera-section">
+<section class="garden" id="garden">
 
-  <div class="vera-inner">
+  <div class="garden-inner">
 
-    <div>
+    <div class="garden-title">
 
-      <div class="section-label">
-        02 — vera
-      </div>
-
-      <h2 class="vera-heading">
-        Someone to talk to.<br>
-        <em>Whenever you need.</em>
+      <h2>
+        let your thoughts<br>
+        <em class="script">wander.</em>
       </h2>
 
-    </div>
-
-
-    <div class="chat-window">
-
-      <div class="chat-top">
-
-        <div class="chat-avatar">
-          🌸
-        </div>
-
-        <div>
-
-          <div class="chat-name">
-            Vera
-          </div>
-
-          <div class="chat-status">
-            ● always here
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="message user">
-        I've had a really overwhelming day.
-      </div>
-
-      <div class="message vera">
-        You don't have to figure everything
-        out all at once. Want to tell me
-        what made today feel overwhelming?
-      </div>
-
-      <div class="message user">
-        I think I just need somewhere to talk.
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ======================================================
-     YOUR SPACE
-     ====================================================== -->
-
-<section class="section space-section">
-
-  <div class="section-label">
-    03 — your space
-  </div>
-
-  <h2 class="section-title">
-    A place for the things
-    you don't always say.
-  </h2>
-
-
-  <div class="space-grid">
-
-    <div class="journal-preview">
-
-      <div class="section-label">
-        journal
-      </div>
-
-      <h3>
-        Dear me,
-      </h3>
-
-      <div class="journal-line">
-
-        Today felt a little strange.<br>
-        I think I'm beginning to understand<br>
-        why I've been feeling this way.<br>
-        <br>
-        Maybe tomorrow will feel different.
-
-      </div>
-
-    </div>
-
-
-    <div class="mood-preview">
-
-      <div class="section-label">
-        mood
-      </div>
-
-      <h3>
-        Your week.
-      </h3>
-
-      <div class="mood-chart">
-
-        <svg viewBox="0 0 500 180">
-
-          <path
-            class="chart-path"
-            d="
-              M 0 130
-              C 50 110,
-                70 135,
-                110 100
-              S 170 60,
-                210 90
-              S 280 120,
-                320 75
-              S 390 45,
-                430 70
-              S 470 35,
-                500 45
-            "
-          />
-
-        </svg>
-
-      </div>
-
-      <p style="
-        font-family:var(--mono);
-        font-size:.75rem;
-        color:var(--muted);
-      ">
-        No judgement. Just noticing.
+      <p>
+        move through the garden
       </p>
 
     </div>
@@ -1364,99 +2820,156 @@ body::before {
 
 
 <!-- ======================================================
-     EXPLORE
+     JOURNAL TRANSFORMATION
      ====================================================== -->
 
-<section class="section explore-section">
+<section
+  class="journal-story"
+  id="journalStory"
+>
 
-  <div class="section-label">
-    04 — explore
+  <div class="journal-stage">
+
+    <div class="journal-object">
+
+      <div class="journal-page left"></div>
+
+      <div class="journal-page right">
+
+        <div class="journal-writing">
+
+          <h3>
+            dear me,
+          </h3>
+
+          Today felt a little strange.
+
+          <br><br>
+
+          I don't think I have to
+          understand everything yet.
+
+          <br><br>
+
+          Maybe writing it down
+          is enough for tonight.
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="journal-title">
+      JOURNAL
+    </div>
+
+
+    <a
+      href="journal.html"
+      class="journal-link"
+    >
+      open your journal →
+    </a>
+
   </div>
 
-  <h2 class="section-title">
-    Things worth thinking about.
-  </h2>
+</section>
 
 
-  <div class="explore-grid">
+<!-- ======================================================
+     EDITORIAL / EXPLORE
+     ====================================================== -->
+
+<section class="editorial">
+
+  <div class="editorial-header">
+
+    <div class="section-label">
+      explore
+    </div>
+
+    <h2>
+
+      Things worth<br>
+      <em>thinking about.</em>
+
+    </h2>
+
+  </div>
+
+
+  <div class="editorial-grid">
+
 
     <a
       href="explore.html"
-      class="article-card featured"
+      class="editorial-card"
       style="text-decoration:none;color:inherit;"
     >
 
-      <div class="article-tag">
-        editor's pick
+      <div class="section-label">
+        featured
       </div>
 
-      <div>
+      <h3>
+        Understanding
+        the things we
+        feel.
+      </h3>
 
-        <h3>
-          You are allowed
-          to take up space.
-        </h3>
-
-        <p>
-          A reminder that your needs,
-          feelings, and presence matter.
-        </p>
-
-      </div>
+      <p>
+        gentle reads about emotions,
+        identity, school and life.
+      </p>
 
     </a>
 
 
     <a
       href="stories.html"
-      class="article-card"
+      class="editorial-card"
       style="text-decoration:none;color:inherit;"
     >
 
-      <div class="article-tag">
+      <div class="section-label">
         stories
       </div>
 
-      <div>
+      <h3>
+        You are
+        not alone.
+      </h3>
 
-        <h3>
-          Real people.
-          Real feelings.
-        </h3>
-
-        <p>
-          Stories from people figuring
-          things out too.
-        </p>
-
-      </div>
+      <p>
+        anonymous stories from
+        people figuring things out too.
+      </p>
 
     </a>
 
 
     <a
-      href="explore.html"
-      class="article-card"
+      href="mood.html"
+      class="editorial-card"
       style="text-decoration:none;color:inherit;"
     >
 
-      <div class="article-tag">
-        explore
+      <div class="section-label">
+        notice
       </div>
 
-      <div>
+      <h3>
+        Your feelings
+        are worth
+        noticing.
+      </h3>
 
-        <h3>
-          Learn something
-          about yourself.
-        </h3>
-
-        <p>
-          Gentle reads about emotions,
-          relationships, school and life.
-        </p>
-
-      </div>
+      <p>
+        Explore your emotional patterns
+        with compassion.
+      </p>
 
     </a>
 
@@ -1466,10 +2979,10 @@ body::before {
 
 
 <!-- ======================================================
-     FINAL CTA
+     FINAL
      ====================================================== -->
 
-<section class="final-section">
+<section class="final">
 
   <div>
 
@@ -1477,16 +2990,20 @@ body::before {
       zenene
     </div>
 
-    <h2 class="final-title">
-      You don't have to have
-      it <em>figured out.</em>
+    <h2>
+
+      You don't have<br>
+      to have it<br>
+      <em>figured out.</em>
+
     </h2>
 
-    <a
-      href="journal.html"
-      class="final-button"
-    >
-      Begin with Zenene →
+    <p>
+      a softer place to begin
+    </p>
+
+    <a href="journal.html">
+      begin your journey →
     </a>
 
   </div>
@@ -1494,85 +3011,510 @@ body::before {
 </section>
 
 
+<!-- ======================================================
+     EXISTING DOCK
+     ====================================================== -->
+
+<div class="dock-wrap" id="dock">
+
+  <div class="dock-items">
+
+    <a href="mood.html" class="dock-item">🌿</a>
+
+    <a href="explore.html" class="dock-item">📚</a>
+
+    <a href="stories.html" class="dock-item">✨</a>
+
+    <a href="calm.html" class="dock-item">🌸</a>
+
+    <a href="chat.html" class="dock-item">💬</a>
+
+    <a href="journal.html" class="dock-item">📓</a>
+
+  </div>
+
+  <button
+    class="dock-btn"
+    id="dockBtn"
+    aria-label="Open navigation"
+  >
+
+    <span class="menu">☰</span>
+    <span class="close">✕</span>
+
+  </button>
+
+</div>
+
+
+<!-- ======================================================
+     CRISIS
+     ====================================================== -->
+
+<button
+  class="crisis-fab"
+  onclick="document.getElementById('cm').classList.add('open')"
+>
+  💙 need help?
+</button>
+
+
+<div
+  class="overlay"
+  id="cm"
+  onclick="if(event.target===this)this.classList.remove('open')"
+>
+
+  <div class="modal">
+
+    <button
+      class="m-close"
+      onclick="document.getElementById('cm').classList.remove('open')"
+    >
+      ×
+    </button>
+
+    <div class="m-title">
+      You're not alone.
+    </div>
+
+    <div class="m-sub">
+      If you need immediate support,
+      please reach out to a trusted adult
+      or an appropriate local emergency/crisis service.
+    </div>
+
+    <a
+      class="c-link"
+      href="tel:112"
+    >
+      📞 Local emergency support
+    </a>
+
+  </div>
+
+</div>
+
+
 <script>
 
 /* =========================================================
-   NAVIGATION BLUR
+   NAV
    ========================================================= */
 
-const nav = document.getElementById("nav");
+const nav =
+  document.getElementById("tnav");
 
-window.addEventListener("scroll", () => {
+window.addEventListener(
+  "scroll",
+  () => {
 
-  if (window.scrollY > 60) {
-    nav.classList.add("scrolled");
-  } else {
-    nav.classList.remove("scrolled");
-  }
-
-});
-
-
-/* =========================================================
-   SIMPLE SCROLL PARALLAX
-   ========================================================= */
-
-const heroArt = document.querySelector(".hero-art");
-
-window.addEventListener("scroll", () => {
-
-  const y = window.scrollY;
-
-  if (heroArt && y < window.innerHeight) {
-
-    heroArt.style.transform =
-      `translateY(${y * 0.12}px) scale(${1 - y * 0.00008})`;
-
-  }
-
-});
-
-
-/* =========================================================
-   INTERSECTION REVEALS
-   ========================================================= */
-
-const observer = new IntersectionObserver(
-  entries => {
-
-    entries.forEach(entry => {
-
-      if (entry.isIntersecting) {
-
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
-
-      }
-
-    });
+    nav.classList.toggle(
+      "scrolled",
+      window.scrollY > 60
+    );
 
   },
-  {
-    threshold: .15
+  { passive: true }
+);
+
+
+/* =========================================================
+   FEATURE STORY
+   ========================================================= */
+
+const featureStory =
+  document.querySelector(".feature-story");
+
+const slides =
+  document.querySelectorAll(".feature-slide");
+
+const dots =
+  document.querySelectorAll(".story-dot");
+
+const diary =
+  document.getElementById("storyDiary");
+
+const calmCircle =
+  document.getElementById("calmCircle");
+
+
+function clamp(value, min, max) {
+
+  return Math.max(
+    min,
+    Math.min(max, value)
+  );
+
+}
+
+
+function updateFeatureStory() {
+
+  if (!featureStory) return;
+
+
+  const rect =
+    featureStory.getBoundingClientRect();
+
+  const total =
+    featureStory.offsetHeight -
+    window.innerHeight;
+
+
+  const progress =
+    clamp(
+      -rect.top / total,
+      0,
+      1
+    );
+
+
+  const slideCount =
+    slides.length;
+
+  const raw =
+    progress * slideCount;
+
+  const index =
+    Math.min(
+      slideCount - 1,
+      Math.floor(raw)
+    );
+
+
+  slides.forEach(
+    (slide, i) => {
+
+      slide.classList.toggle(
+        "active",
+        i === index
+      );
+
+    }
+  );
+
+
+  dots.forEach(
+    (dot, i) => {
+
+      dot.classList.toggle(
+        "active",
+        i === index
+      );
+
+    }
+  );
+
+
+  /* diary */
+
+  if (diary) {
+
+    diary.classList.toggle(
+      "open",
+      index === 1
+    );
+
+  }
+
+
+  /* breathing */
+
+  if (calmCircle && index === 4) {
+
+    const local =
+      raw - 4;
+
+    const breathe =
+      Math.sin(
+        local * Math.PI
+      );
+
+    calmCircle.style.transform =
+      `scale(${.75 + breathe * .35})`;
+
+  }
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateFeatureStory,
+  { passive: true }
+);
+
+window.addEventListener(
+  "resize",
+  updateFeatureStory
+);
+
+updateFeatureStory();
+
+
+/* =========================================================
+   FLOWER CURSOR GARDEN
+   ========================================================= */
+
+const garden =
+  document.getElementById("garden");
+
+let lastFlower = 0;
+
+const flowers = [
+  "🌸",
+  "🌼",
+  "✿",
+  "❀",
+  "🌷"
+];
+
+
+garden.addEventListener(
+  "pointermove",
+  event => {
+
+    const now =
+      performance.now();
+
+    if (now - lastFlower < 90) {
+      return;
+    }
+
+    lastFlower = now;
+
+
+    const flower =
+      document.createElement("div");
+
+    flower.className =
+      "garden-flower";
+
+
+    flower.style.left =
+      `${event.clientX}px`;
+
+    flower.style.top =
+      `${event.clientY}px`;
+
+
+    flower.style.setProperty(
+      "--rotation",
+      `${Math.random() * 50 - 25}deg`
+    );
+
+
+    const span =
+      document.createElement("span");
+
+    span.textContent =
+      flowers[
+        Math.floor(
+          Math.random() *
+          flowers.length
+        )
+      ];
+
+
+    flower.appendChild(span);
+
+    garden.appendChild(flower);
+
+
+    setTimeout(
+      () => {
+
+        flower.style.transition =
+          "opacity 1.5s ease, transform 1.5s ease";
+
+        flower.style.opacity =
+          "0";
+
+        flower.style.transform =
+          "translate(-50%,-50%) scale(.7)";
+
+      },
+      3500
+    );
+
+
+    setTimeout(
+      () => {
+
+        flower.remove();
+
+      },
+      5200
+    );
+
   }
 );
 
 
+/* =========================================================
+   JOURNAL SCROLL TRANSFORMATION
+   ========================================================= */
+
+const journalStory =
+  document.getElementById(
+    "journalStory"
+  );
+
+
+function updateJournal() {
+
+  if (!journalStory) return;
+
+
+  const rect =
+    journalStory.getBoundingClientRect();
+
+
+  const total =
+    journalStory.offsetHeight -
+    window.innerHeight;
+
+
+  const progress =
+    clamp(
+      -rect.top / total,
+      0,
+      1
+    );
+
+
+  journalStory.classList.toggle(
+    "open",
+    progress > .32
+  );
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateJournal,
+  { passive: true }
+);
+
+updateJournal();
+
+
+/* =========================================================
+   DOCK
+   ========================================================= */
+
+const dock =
+  document.getElementById("dock");
+
+const dockBtn =
+  document.getElementById("dockBtn");
+
+
+dockBtn.addEventListener(
+  "click",
+  () => {
+
+    dock.classList.toggle(
+      "open"
+    );
+
+  }
+);
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    if (!dock.contains(event.target)) {
+
+      dock.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SMOOTH INTERNAL LINKS
+   ========================================================= */
+
 document
   .querySelectorAll(
-    ".feature-card, .journal-preview, .mood-preview, .article-card"
+    'a[href^="#"]'
   )
-  .forEach(el => {
+  .forEach(
+    link => {
 
-    el.style.opacity = "0";
-    el.style.transform = "translateY(35px)";
+      link.addEventListener(
+        "click",
+        event => {
 
-    el.style.transition =
-      "opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1)";
+          const target =
+            document.querySelector(
+              link.getAttribute("href")
+            );
 
-    observer.observe(el);
+          if (!target) return;
 
-  });
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior: "smooth"
+          });
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   PARALLAX HERO
+   ========================================================= */
+
+const heroArt =
+  document.querySelector(
+    ".hero-art"
+  );
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!heroArt) return;
+
+    const y =
+      window.scrollY;
+
+    if (
+      y <
+      window.innerHeight
+    ) {
+
+      heroArt.style.marginTop =
+        `${y * .08}px`;
+
+      heroArt.style.opacity =
+        `${Math.max(
+          0,
+          .72 -
+          y /
+          window.innerHeight
+        )}`;
+
+    }
+
+  },
+  { passive: true }
+);
 
 </script>
 

@@ -756,22 +756,27 @@ body::before {
 }
 
 .slide-kicker {
-
   position: absolute;
 
-  top: 72px;
-  left: 0;
+  top: calc(12% + 42px);
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 15;
 
   font-family: var(--script);
-
   font-size: 1.2rem;
+  line-height: 1;
 
   color: var(--rose-deep);
 
   margin: 0;
 
-  z-index: 10;
+  text-align: center;
+  white-space: nowrap;
 
+  pointer-events: none;
 }
 
 .slide-heading {

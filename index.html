@@ -1387,391 +1387,468 @@ body::before {
 }
 
 
-.journal-section {
+/* ══════════════════════════════════════════
+   ZENENE JOURNAL — SCROLL OPENING
+   ══════════════════════════════════════════ */
 
+.journal-story {
     position: relative;
-
-    height: 300vh;
-
-    background:
-        radial-gradient(
-            circle at 70% 40%,
-            rgba(201,225,239,.7),
-            transparent 45%
-        ),
-        var(--cream);
+    height: 230vh;
+    background: #dcecf3;
+    overflow: clip;
 }
 
-.journal-sticky {
-
+.journal-stage {
     position: sticky;
-
     top: 0;
-
     height: 100svh;
+    min-height: 620px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     overflow: hidden;
 }
 
-
-/* single paper */
-
-.journal-book {
-
-    width: min(430px, 68vw);
-
-    height: min(570px, 73vh);
-
-    position: relative;
-
-    perspective: 1600px;
-
-    transform:
-        translateY(20px)
-        rotate(-1deg);
-
-    transition:
-        width 1.2s cubic-bezier(.16,1,.3,1);
-}
-
-
-/* paper */
-
-.journal-paper {
-
+/* soft paper texture */
+.journal-stage::before {
+    content: "";
     position: absolute;
-
     inset: 0;
 
-    background: var(--paper);
+    background-image:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(255,255,255,.55),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(255,255,255,.35),
+            transparent 28%
+        );
 
-    border-radius: 5px;
+    pointer-events: none;
+}
+
+/* ───────── JOURNAL OBJECT ───────── */
+
+.journal-object {
+    position: relative;
+
+    width: min(430px, 65vw);
+    height: min(570px, 72vh);
+
+    perspective: 1800px;
+
+    transform:
+        translateY(
+            calc(var(--journal-progress, 0) * -4vh)
+        )
+        scale(
+            calc(1 - var(--journal-progress, 0) * .08)
+        );
+
+    transition: transform .08s linear;
+
+    z-index: 5;
+}
+
+/* both pages */
+
+.journal-page {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 6px;
 
     box-shadow:
-        0 30px 80px rgba(70,50,40,.15);
+        0 35px 90px rgba(55,75,80,.18),
+        0 8px 25px rgba(55,75,80,.08);
 
     overflow: hidden;
 }
 
+/* ───────── LEFT COVER ───────── */
 
-/* ruled paper */
+.journal-page.left {
+    z-index: 3;
 
-.journal-paper::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            transparent 0 42px,
-            rgba(105,90,75,.13) 43px,
-            transparent 44px
-        );
-}
-
-
-/* opening page */
-
-.journal-cover {
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 5;
+    transform-origin: left center;
 
     background:
         linear-gradient(
             135deg,
-            #e7e0d6,
-            #d5c9bb
+            #76594d,
+            #8b6b5d
         );
 
-    border-radius: 5px;
-
-    transform-origin: left center;
+    transform:
+        rotateY(
+            calc(var(--journal-progress, 0) * -165deg)
+        );
 
     transition:
-        transform 1.4s cubic-bezier(.16,1,.3,1);
+        transform .08s linear;
+
+    backface-visibility: hidden;
 }
 
+/* subtle cover texture */
 
-/* little paper texture */
-
-.journal-cover::after {
-
+.journal-page.left::before {
     content: "";
 
     position: absolute;
-
     inset: 0;
 
-    opacity: .18;
+    opacity: .22;
 
     background:
         repeating-linear-gradient(
             0deg,
-            transparent 0 4px,
-            rgba(70,50,40,.14) 5px
+            transparent 0 3px,
+            rgba(255,255,255,.22) 4px
         );
 }
 
+/* small decorative mark on cover */
 
-/* journal content */
-
-.journal-writing {
-
+.journal-cover-mark {
     position: absolute;
 
-    inset: 0;
-
-    padding: 55px 42px;
-
-    z-index: 2;
-}
-
-.journal-date {
-
-    font-family: var(--typewriter);
-
-    font-size: 9px;
-
-    color: var(--brown-light);
-
-    margin-bottom: 28px;
-}
-
-.journal-writing h3 {
-
-    font-family: var(--script);
-
-    font-size: 40px;
-
-    color: var(--brown);
-
-    margin-bottom: 25px;
-}
-
-.journal-writing p {
-
-    font-family: var(--typewriter);
-
-    font-size: 11px;
-
-    line-height: 2.2;
-
-    color: var(--brown);
-}
-
-
-/* journal heading outside paper */
-
-.journal-side-copy {
-
-    position: absolute;
-
-    left: 8%;
-
+    left: 50%;
     top: 50%;
 
     transform:
-        translateY(-50%)
-        translateX(-30px);
+        translate(-50%, -50%)
+        rotate(-4deg);
+
+    color: rgba(255,248,239,.85);
+
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+
+    white-space: nowrap;
+}
+
+/* ───────── RIGHT PAGE ───────── */
+
+.journal-page.right {
+    z-index: 2;
+
+    background: #fffdf8;
+
+    padding: clamp(40px, 7vw, 70px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 34px,
+            rgba(130,150,155,.13) 35px
+        );
+}
+
+/* writing */
+
+.journal-writing {
+    color: #5c4639;
+
+    font-family: 'Special Elite', monospace;
+
+    font-size: clamp(.62rem, 1vw, .76rem);
+
+    line-height: 2;
+
+    max-width: 330px;
+
+    opacity:
+        calc(
+            .25 +
+            var(--journal-progress, 0) * .75
+        );
+
+    transform:
+        translateY(
+            calc(
+                25px -
+                var(--journal-progress, 0) * 25px
+            )
+        );
+
+    transition:
+        opacity .15s linear,
+        transform .15s linear;
+}
+
+.journal-writing h3 {
+    margin-bottom: 28px;
+
+    color: #4a3529;
+
+    font-family: 'Dancing Script', cursive;
+
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+
+    font-weight: 700;
+}
+
+.journal-writing p {
+    margin-bottom: 22px;
+}
+
+/* ───────── TITLE ───────── */
+
+.journal-title {
+    position: absolute;
+
+    left: 50%;
+    bottom: 13%;
+
+    transform:
+        translateX(-50%)
+        translateY(25px);
+
+    z-index: 20;
+
+    font-family: 'Special Elite', monospace;
+
+    font-size: clamp(.65rem, 1vw, .78rem);
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+
+    color: #5d493d;
 
     opacity: 0;
 
     transition:
-        opacity 1s ease .5s,
-        transform 1.2s cubic-bezier(.16,1,.3,1);
+        opacity .5s ease,
+        transform .7s cubic-bezier(.16,1,.3,1);
+
+    pointer-events: none;
 }
 
-.journal-section.open
-.journal-side-copy {
-
+.journal-story.open .journal-title {
     opacity: 1;
 
     transform:
-        translateY(-50%)
-        translateX(0);
+        translateX(-50%)
+        translateY(0);
 }
 
-.journal-side-copy small {
+/* ───────── LINK ───────── */
 
-    font-family: var(--typewriter);
+.journal-link {
+    position: absolute;
 
-    font-size: 11px;
+    left: 50%;
+    bottom: 7%;
+
+    transform: translateX(-50%);
+
+    z-index: 25;
+
+    font-family: 'Special Elite', monospace;
+
+    font-size: .65rem;
 
     letter-spacing: .12em;
 
     text-transform: uppercase;
 
-    color: var(--sage);
-}
-
-.journal-side-copy h2 {
-
-    font-family: var(--serif);
-
-    font-size: clamp(
-        3rem,
-        5vw,
-        6rem
-    );
-
-    font-weight: 300;
-
-    line-height: .9;
-
-    margin-top: 18px;
-
-    color: var(--brown-dark);
-}
-
-.journal-side-copy em {
-
-    font-family: var(--script);
-
-    color: var(--sage);
-}
-
-
-/* open state */
-
-.journal-section.open
-.journal-cover {
-
-    transform:
-        rotateY(-135deg);
-}
-
-
-/* =========================================================
-   FEATURES
-========================================================= */
-
-.feature-section {
-
-    min-height: 100svh;
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    align-items: center;
-
-    gap: 8vw;
-
-    padding: 10vw;
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-.feature-section.blue {
-    background: var(--blue-light);
-}
-
-.feature-section.lavender {
-    background: #f0ebf6;
-}
-
-.feature-section.cream {
-    background: var(--cream);
-}
-
-.feature-copy {
-
-    max-width: 480px;
-}
-
-.feature-eyebrow {
-
-    font-family: var(--typewriter);
-
-    font-size: 10px;
-
-    letter-spacing: .14em;
-
-    text-transform: uppercase;
-
-    color: var(--sage);
-
-    margin-bottom: 22px;
-}
-
-.feature-copy h2 {
-
-    font-family: var(--serif);
-
-    font-weight: 300;
-
-    font-size: clamp(
-        4rem,
-        7vw,
-        7rem
-    );
-
-    line-height: .85;
-
-    color: var(--brown-dark);
-}
-
-.feature-copy h2 em {
-
-    font-family: var(--script);
-
-    color: var(--pink);
-
-    font-size: .75em;
-}
-
-.feature-copy p {
-
-    font-family: var(--typewriter);
-
-    font-size: 12px;
-
-    line-height: 1.9;
-
-    color: var(--brown-light);
-
-    max-width: 390px;
-
-    margin-top: 30px;
-}
-
-.feature-link {
-
-    display: inline-block;
-
-    margin-top: 30px;
-
-    font-family: var(--typewriter);
-
-    font-size: 10px;
-
-    letter-spacing: .1em;
-
-    text-transform: uppercase;
+    color: #5c4639;
 
     text-decoration: none;
 
-    border-bottom: 1px solid var(--brown);
+    opacity: 0;
 
-    padding-bottom: 5px;
+    transition:
+        opacity .5s ease .15s;
+
+    white-space: nowrap;
 }
 
+.journal-story.open .journal-link {
+    opacity: 1;
+}
+
+.journal-link:hover {
+    color: var(--green-d);
+}
+
+/* ───────── LITTLE PAPER SHADOW ───────── */
+
+.journal-shadow {
+    position: absolute;
+
+    width: min(440px, 67vw);
+    height: 40px;
+
+    bottom: 12%;
+
+    background: rgba(65,85,90,.12);
+
+    filter: blur(25px);
+
+    border-radius: 50%;
+
+    transform:
+        scaleX(
+            calc(
+                1 -
+                var(--journal-progress, 0) * .2
+            )
+        );
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+/* ───────── MOBILE ───────── */
+
+@media (max-width: 700px) {
+
+    .journal-story {
+        height: 210vh;
+    }
+
+    .journal-object {
+        width: 78vw;
+        height: 68vh;
+    }
+
+    .journal-page.right {
+        padding: 35px;
+    }
+
+    .journal-writing {
+        font-size: .62rem;
+    }
+
+    .journal-cover-mark {
+        font-size: 2rem;
+    }
+}
+  <!-- ══════════════════════════════════════════
+     JOURNAL — SCROLL OPENING
+     ══════════════════════════════════════════ -->
+
+<section class="journal-story" id="journal">
+
+    <div class="journal-stage">
+
+        <div class="journal-shadow"></div>
+
+        <div class="journal-object">
+
+            <!-- COVER -->
+            <div class="journal-page left">
+
+                <div class="journal-cover-mark">
+                    a little space to write
+                </div>
+
+            </div>
+
+            <!-- INSIDE PAGE -->
+            <div class="journal-page right">
+
+                <div class="journal-writing">
+
+                    <h3>dear me,</h3>
+
+                    <p>
+                        Today felt a little strange.
+                    </p>
+
+                    <p>
+                        I don't think I have to understand
+                        everything yet.
+                    </p>
+
+                    <p>
+                        Maybe writing it down is enough
+                        for tonight.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="journal-title">
+            a place to put your thoughts
+        </div>
+
+        <a
+            href="journal.html"
+            class="journal-link"
+        >
+            open your journal →
+        </a>
+
+    </div>
+
+</section>
+
+  /* ══════════════════════════════════════════
+   JOURNAL SCROLL ANIMATION
+   ══════════════════════════════════════════ */
+
+const journalStory = document.querySelector('.journal-story');
+
+if (journalStory) {
+
+    function updateJournal() {
+
+        const rect = journalStory.getBoundingClientRect();
+
+        const total =
+            journalStory.offsetHeight -
+            window.innerHeight;
+
+        let progress = -rect.top / total;
+
+        progress = Math.max(
+            0,
+            Math.min(1, progress)
+        );
+
+        journalStory.style.setProperty(
+            '--journal-progress',
+            progress
+        );
+
+        journalStory.classList.toggle(
+            'open',
+            progress > 0.72
+        );
+    }
+
+    window.addEventListener(
+        'scroll',
+        updateJournal,
+        { passive: true }
+    );
+
+    window.addEventListener(
+        'resize',
+        updateJournal
+    );
+
+    updateJournal();
+}
+    
 /* =========================================================
    EDITORIAL END
    ========================================================= */

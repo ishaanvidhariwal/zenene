@@ -4017,43 +4017,6 @@ document
    PARALLAX HERO
    ========================================================= */
 
-const heroArt =
-  document.querySelector(
-    ".hero-art"
-  );
-
-
-window.addEventListener(
-  "scroll",
-  () => {
-
-    if (!heroArt) return;
-
-    const y =
-      window.scrollY;
-
-    if (
-      y <
-      window.innerHeight
-    ) {
-
-      heroArt.style.marginTop =
-        `${y * .08}px`;
-
-      heroArt.style.opacity =
-        `${Math.max(
-          0,
-          .72 -
-          y /
-          window.innerHeight
-        )}`;
-
-    }
-
-  },
-  { passive: true }
-);
-
 </script>
 
 </body>

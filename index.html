@@ -22,8 +22,6 @@
 
 :root {
 
-  /* --- atmosphere --- */
-
   --sky: #C9DFEA;
   --sky-light: #E8F2F5;
   --sky-deep: #9EBFCC;
@@ -31,25 +29,17 @@
   --cream: #F7F1E7;
   --paper: #FFFDF8;
 
-  /* --- botanical --- */
-
   --sage: #D8E4D7;
   --sage-deep: #72866E;
-
-  /* --- floral --- */
 
   --rose: #E7C9CD;
   --rose-deep: #B97880;
 
   --lavender: #DCD8E8;
 
-  /* --- ink --- */
-
   --brown: #624F43;
   --brown-dark: #392D26;
   --ink: #2F2B27;
-
-  /* --- type --- */
 
   --typewriter: "Special Elite", "Courier New", monospace;
   --serif: "Cormorant Garamond", Georgia, serif;
@@ -238,9 +228,6 @@ body::before {
 
 }
 
-
-/* sky dots */
-
 .hero::before {
 
   content: "";
@@ -262,8 +249,6 @@ body::before {
 
 }
 
-
-/* clouds */
 
 .cloud {
 
@@ -337,9 +322,13 @@ body::before {
 
 @keyframes cloudFloat {
 
-  0%,100% { margin-top: 0; }
+  0%,100% {
+    margin-top: 0;
+  }
 
-  50% { margin-top: -10px; }
+  50% {
+    margin-top: -10px;
+  }
 
 }
 
@@ -355,8 +344,6 @@ body::before {
 
 }
 
-
-/* hero content */
 
 .hero-inner {
 
@@ -438,9 +425,6 @@ body::before {
 
 }
 
-
-/* Hero atmosphere */
-
 .hero::after {
 
   content: "";
@@ -490,11 +474,8 @@ body::before {
 @keyframes letterIn {
 
   to {
-
     opacity: 1;
-
     transform: translateY(0);
-
   }
 
 }
@@ -502,19 +483,14 @@ body::before {
 @keyframes brainReveal {
 
   to {
-
     opacity: .72;
-
     transform:
       translate(-50%, -50%)
       scale(1);
-
   }
 
 }
 
-
-/* scroll indicator */
 
 .scroll-indicator {
 
@@ -611,9 +587,6 @@ body::before {
 
 }
 
-
-/* giant decorative dots */
-
 .feature-stage::before {
 
   content: "";
@@ -634,9 +607,6 @@ body::before {
   opacity: .5;
 
 }
-
-
-/* stage title */
 
 .story-title {
 
@@ -659,9 +629,6 @@ body::before {
   color: var(--brown);
 
 }
-
-
-/* progress */
 
 .story-progress {
 
@@ -702,9 +669,6 @@ body::before {
 
 }
 
-
-/* slide */
-
 .feature-slide {
 
   position: absolute;
@@ -737,9 +701,6 @@ body::before {
 
 }
 
-
-/* slide content */
-
 .slide-inner {
 
   width: min(1100px, 86vw);
@@ -761,6 +722,7 @@ body::before {
 }
 
 .slide-kicker {
+
   position: absolute;
 
   top: calc(12% + 32px);
@@ -782,6 +744,7 @@ body::before {
   white-space: nowrap;
 
   pointer-events: none;
+
 }
 
 .slide-heading {
@@ -823,9 +786,6 @@ body::before {
   color: var(--brown);
 
 }
-
-
-/* visual */
 
 .slide-visual {
 
@@ -900,14 +860,16 @@ body::before {
 
 
 /* =========================================================
-   SLIDE 2 — REFLECT / JOURNAL
+   SLIDE 2 — JOURNAL
    ========================================================= */
 
 .journal-visual {
 
   width: 100%;
   height: 500px;
+
   position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -917,76 +879,158 @@ body::before {
 .journal-backdrop {
 
   position: absolute;
+
   width: 390px;
   height: 470px;
+
   background: #f7f2e9;
+
   left: 50%;
   top: 50%;
-  transform: translate(-46%,-50%) rotate(3deg) scale(.94);
+
+  transform:
+    translate(-46%,-50%)
+    rotate(3deg)
+    scale(.94);
+
   border-radius: 4px;
-  box-shadow: 0 30px 70px rgba(75,58,47,.10);
+
+  box-shadow:
+    0 30px 70px rgba(75,58,47,.10);
+
   opacity: 0;
-  transition: opacity 1s ease .15s, transform 1.2s cubic-bezier(.16,1,.3,1);
+
+  transition:
+    opacity 1s ease .15s,
+    transform 1.2s cubic-bezier(.16,1,.3,1);
+
 }
 
 .journal-asset-wrap {
 
   position: relative;
+
   width: min(390px, 75vw);
-  transform: translate3d(70px,30px,0) rotate(7deg) scale(.88);
+
+  transform:
+    translate3d(70px,30px,0)
+    rotate(7deg)
+    scale(.88);
+
   opacity: 0;
-  filter: drop-shadow(0 35px 35px rgba(55,39,31,.20));
-  transition: opacity .9s ease, transform 1.25s cubic-bezier(.16,1,.3,1);
+
+  filter:
+    drop-shadow(
+      0 35px 35px rgba(55,39,31,.20)
+    );
+
+  transition:
+    opacity .9s ease,
+    transform 1.25s cubic-bezier(.16,1,.3,1);
+
   z-index: 2;
+
 }
 
 .journal-asset {
+
   display: block;
+
   width: 100%;
   height: auto;
+
   border-radius: 3px;
+
   object-fit: cover;
+
 }
 
 .journal-scribble {
 
   position: absolute;
+
   right: 0;
   bottom: 38px;
+
   font-family: var(--script);
+
   font-size: 1.55rem;
+
   line-height: 1.05;
+
   color: var(--sage-deep);
-  transform: rotate(-7deg) translateY(15px);
+
+  transform:
+    rotate(-7deg)
+    translateY(15px);
+
   opacity: 0;
-  transition: opacity .8s ease .55s, transform .9s cubic-bezier(.16,1,.3,1);
+
+  transition:
+    opacity .8s ease .55s,
+    transform .9s cubic-bezier(.16,1,.3,1);
+
   z-index: 4;
+
   pointer-events: none;
+
 }
 
 .feature-slide.active .journal-backdrop {
+
   opacity: 1;
-  transform: translate(-50%,-50%) rotate(2deg) scale(1);
+
+  transform:
+    translate(-50%,-50%)
+    rotate(2deg)
+    scale(1);
+
 }
 
 .feature-slide.active .journal-asset-wrap {
+
   opacity: 1;
-  transform: translate3d(0,0,0) rotate(-3deg) scale(1);
+
+  transform:
+    translate3d(0,0,0)
+    rotate(-3deg)
+    scale(1);
+
 }
 
 .feature-slide.active .journal-scribble {
+
   opacity: 1;
-  transform: rotate(-7deg) translateY(0);
+
+  transform:
+    rotate(-7deg)
+    translateY(0);
+
 }
 
 @keyframes journalSettle {
-  0%,100% { transform: translate3d(0,0,0) rotate(-3deg); }
-  50% { transform: translate3d(0,-5px,0) rotate(-2.4deg); }
+
+  0%,100% {
+    transform:
+      translate3d(0,0,0)
+      rotate(-3deg);
+  }
+
+  50% {
+    transform:
+      translate3d(0,-5px,0)
+      rotate(-2.4deg);
+  }
+
 }
 
 .feature-slide.active .journal-asset-wrap {
-  animation: journalSettle 5s ease-in-out 1.3s infinite;
+
+  animation:
+    journalSettle 5s ease-in-out 1.3s infinite;
+
 }
+
 
 /* =========================================================
    SLIDE 3 — MOOD
@@ -1080,142 +1124,340 @@ body::before {
 
 
 /* =========================================================
-   SLIDE 4 — VERA / AI SYSTEM
+   SLIDE 4 — VERA
    ========================================================= */
 
 .vera-art {
+
   width: 450px;
   height: 450px;
+
   position: relative;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
 }
 
 .vera-system {
+
   width: 400px;
   height: 400px;
+
   position: relative;
+
   transform: scale(.55);
+
   opacity: 0;
-  transition: transform 1.25s cubic-bezier(.16,1,.3,1), opacity .7s ease;
+
+  transition:
+    transform 1.25s cubic-bezier(.16,1,.3,1),
+    opacity .7s ease;
+
 }
 
 .feature-slide.active .vera-system {
+
   transform: scale(1);
+
   opacity: 1;
+
 }
 
 .vera-core {
+
   position: absolute;
+
   left: 50%;
   top: 50%;
+
   width: 112px;
   height: 112px;
-  transform: translate(-50%,-50%);
+
+  transform:
+    translate(-50%,-50%);
+
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff, var(--sky-deep));
-  border: 1px solid rgba(98,79,67,.18);
-  box-shadow: 0 0 0 16px rgba(201,223,234,.28), 0 0 0 42px rgba(201,223,234,.13), 0 25px 60px rgba(62,45,35,.13);
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fff,
+      var(--sky-deep)
+    );
+
+  border:
+    1px solid rgba(98,79,67,.18);
+
+  box-shadow:
+    0 0 0 16px rgba(201,223,234,.28),
+    0 0 0 42px rgba(201,223,234,.13),
+    0 25px 60px rgba(62,45,35,.13);
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   z-index: 5;
+
 }
 
 .vera-core-glow {
+
   position: absolute;
+
   inset: -18px;
+
   border-radius: 50%;
-  border: 1px solid rgba(185,120,128,.22);
-  animation: veraPulse 3.5s ease-in-out infinite;
+
+  border:
+    1px solid rgba(185,120,128,.22);
+
+  animation:
+    veraPulse 3.5s ease-in-out infinite;
+
 }
 
 .vera-core-label {
+
   font-family: var(--typewriter);
+
   font-size: .78rem;
+
   letter-spacing: .16em;
+
   color: var(--brown-dark);
+
   z-index: 2;
+
 }
 
 .vera-orbit {
+
   position: absolute;
+
   left: 50%;
   top: 50%;
-  border: 1px solid rgba(98,79,67,.18);
+
+  border:
+    1px solid rgba(98,79,67,.18);
+
   border-radius: 50%;
-  transform: translate(-50%,-50%) scale(.3);
+
+  transform:
+    translate(-50%,-50%)
+    scale(.3);
+
   opacity: 0;
-  transition: transform 1.2s cubic-bezier(.16,1,.3,1), opacity .8s ease;
+
+  transition:
+    transform 1.2s cubic-bezier(.16,1,.3,1),
+    opacity .8s ease;
+
 }
 
-.orbit-one { width: 190px; height: 190px; }
-.orbit-two { width: 285px; height: 285px; }
-.orbit-three { width: 380px; height: 380px; border-style: dashed; opacity: .5; }
+.orbit-one {
+  width: 190px;
+  height: 190px;
+}
+
+.orbit-two {
+  width: 285px;
+  height: 285px;
+}
+
+.orbit-three {
+
+  width: 380px;
+  height: 380px;
+
+  border-style: dashed;
+
+  opacity: .5;
+
+}
 
 .feature-slide.active .vera-orbit {
-  transform: translate(-50%,-50%) scale(1);
+
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+
   opacity: 1;
+
 }
 
-.feature-slide.active .orbit-one { transition-delay: .15s; }
-.feature-slide.active .orbit-two { transition-delay: .32s; }
-.feature-slide.active .orbit-three { transition-delay: .5s; }
+.feature-slide.active .orbit-one {
+  transition-delay: .15s;
+}
+
+.feature-slide.active .orbit-two {
+  transition-delay: .32s;
+}
+
+.feature-slide.active .orbit-three {
+  transition-delay: .5s;
+}
 
 .vera-system-node {
+
   position: absolute;
+
   width: 13px;
   height: 13px;
+
   border-radius: 50%;
+
   background: var(--rose-deep);
-  box-shadow: 0 0 0 9px rgba(185,120,128,.10);
+
+  box-shadow:
+    0 0 0 9px rgba(185,120,128,.10);
+
   transform: scale(0);
-  transition: transform .65s cubic-bezier(.16,1,.3,1);
+
+  transition:
+    transform .65s cubic-bezier(.16,1,.3,1);
+
 }
 
-.node-one { left: 50%; top: 5%; transform-origin: center; }
-.node-two { right: 8%; top: 28%; }
-.node-three { right: 18%; bottom: 12%; }
-.node-four { left: 18%; bottom: 12%; }
-.node-five { left: 8%; top: 28%; }
-.node-six { left: 50%; top: 50%; width: 7px; height: 7px; background: var(--sage-deep); }
+.node-one {
+  left: 50%;
+  top: 5%;
+}
 
-.feature-slide.active .vera-system-node { transform: scale(1); }
-.feature-slide.active .node-one { transition-delay: .65s; }
-.feature-slide.active .node-two { transition-delay: .8s; }
-.feature-slide.active .node-three { transition-delay: .95s; }
-.feature-slide.active .node-four { transition-delay: 1.1s; }
-.feature-slide.active .node-five { transition-delay: 1.25s; }
-.feature-slide.active .node-six { transition-delay: .55s; }
+.node-two {
+  right: 8%;
+  top: 28%;
+}
+
+.node-three {
+  right: 18%;
+  bottom: 12%;
+}
+
+.node-four {
+  left: 18%;
+  bottom: 12%;
+}
+
+.node-five {
+  left: 8%;
+  top: 28%;
+}
+
+.node-six {
+
+  left: 50%;
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  background: var(--sage-deep);
+
+}
+
+.feature-slide.active .vera-system-node {
+  transform: scale(1);
+}
+
+.feature-slide.active .node-one {
+  transition-delay: .65s;
+}
+
+.feature-slide.active .node-two {
+  transition-delay: .8s;
+}
+
+.feature-slide.active .node-three {
+  transition-delay: .95s;
+}
+
+.feature-slide.active .node-four {
+  transition-delay: 1.1s;
+}
+
+.feature-slide.active .node-five {
+  transition-delay: 1.25s;
+}
+
+.feature-slide.active .node-six {
+  transition-delay: .55s;
+}
 
 .vera-system-label {
+
   position: absolute;
+
   font-family: var(--script);
+
   font-size: 1rem;
+
   color: var(--brown);
+
   opacity: 0;
+
   transform: translateY(8px);
-  transition: opacity .7s ease, transform .7s ease;
+
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
+
 }
 
-.label-one { left: 4%; top: 20%; }
-.label-two { right: 2%; top: 52%; }
-.label-three { left: 4%; bottom: 19%; }
+.label-one {
+  left: 4%;
+  top: 20%;
+}
+
+.label-two {
+  right: 2%;
+  top: 52%;
+}
+
+.label-three {
+  left: 4%;
+  bottom: 19%;
+}
 
 .feature-slide.active .vera-system-label {
+
   opacity: 1;
-  transform: translateY(0);
+
+  transform:
+    translateY(0);
+
 }
 
-.feature-slide.active .label-one { transition-delay: 1.15s; }
-.feature-slide.active .label-two { transition-delay: 1.35s; }
-.feature-slide.active .label-three { transition-delay: 1.55s; }
+.feature-slide.active .label-one {
+  transition-delay: 1.15s;
+}
+
+.feature-slide.active .label-two {
+  transition-delay: 1.35s;
+}
+
+.feature-slide.active .label-three {
+  transition-delay: 1.55s;
+}
 
 @keyframes veraPulse {
-  0%,100% { transform: scale(.92); opacity: .45; }
-  50% { transform: scale(1.08); opacity: .85; }
+
+  0%,100% {
+    transform: scale(.92);
+    opacity: .45;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: .85;
+  }
+
 }
+
 
 /* =========================================================
    SLIDE 5 — CALM
@@ -1387,468 +1629,560 @@ body::before {
 }
 
 
-/* ══════════════════════════════════════════
-   ZENENE JOURNAL — SCROLL OPENING
-   ══════════════════════════════════════════ */
+/* =========================================================
+   JOURNAL — SCROLL OPENING
+   ========================================================= */
 
 .journal-story {
-    position: relative;
-    height: 230vh;
-    background: #dcecf3;
-    overflow: clip;
+
+  position: relative;
+
+  height: 240vh;
+
+  background:
+    linear-gradient(
+      180deg,
+      #dcecf3 0%,
+      #e7f1f3 55%,
+      #dcecf3 100%
+    );
+
+  overflow: clip;
+
 }
 
 .journal-stage {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    min-height: 620px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: sticky;
 
-    overflow: hidden;
+  top: 0;
+
+  height: 100svh;
+
+  min-height: 650px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
 }
 
-/* soft paper texture */
+
+/* soft atmosphere */
+
 .journal-stage::before {
-    content: "";
-    position: absolute;
-    inset: 0;
 
-    background-image:
-        radial-gradient(
-            circle at 20% 30%,
-            rgba(255,255,255,.55),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(255,255,255,.35),
-            transparent 28%
-        );
+  content: "";
 
-    pointer-events: none;
+  position: absolute;
+
+  inset: 0;
+
+  background:
+
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255,255,255,.6),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 75% 70%,
+      rgba(255,255,255,.4),
+      transparent 30%
+    );
+
+  pointer-events: none;
+
 }
 
-/* ───────── JOURNAL OBJECT ───────── */
+
+/* little background dots */
+
+.journal-stage::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(98,79,67,.07) 1.5px,
+      transparent 2px
+    );
+
+  background-size: 34px 34px;
+
+  opacity: .45;
+
+  pointer-events: none;
+
+}
+
+
+/* =========================================================
+   JOURNAL OBJECT
+   ========================================================= */
 
 .journal-object {
-    position: relative;
 
-    width: min(430px, 65vw);
-    height: min(570px, 72vh);
+  position: relative;
 
-    perspective: 1800px;
+  width: min(430px, 70vw);
 
-    transform:
-        translateY(
-            calc(var(--journal-progress, 0) * -4vh)
-        )
-        scale(
-            calc(1 - var(--journal-progress, 0) * .08)
-        );
+  height: min(560px, 72vh);
 
-    transition: transform .08s linear;
+  perspective: 1800px;
 
-    z-index: 5;
+  z-index: 5;
+
+  transform:
+    translate3d(
+      calc(var(--journal-progress, 0) * -13vw),
+      calc(var(--journal-progress, 0) * -3vh),
+      0
+    )
+    scale(
+      calc(
+        1 -
+        var(--journal-progress, 0) * .05
+      )
+    );
+
+  transition:
+    transform .08s linear;
+
 }
 
-/* both pages */
+
+/* =========================================================
+   JOURNAL PAGES
+   ========================================================= */
 
 .journal-page {
-    position: absolute;
-    inset: 0;
 
-    border-radius: 6px;
+  position: absolute;
 
-    box-shadow:
-        0 35px 90px rgba(55,75,80,.18),
-        0 8px 25px rgba(55,75,80,.08);
+  inset: 0;
 
-    overflow: hidden;
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 35px 90px rgba(55,75,80,.18),
+    0 8px 25px rgba(55,75,80,.08);
+
 }
 
-/* ───────── LEFT COVER ───────── */
+
+/* =========================================================
+   CLOSED COVER
+   ========================================================= */
 
 .journal-page.left {
-    z-index: 3;
 
-    transform-origin: left center;
+  z-index: 3;
 
-    background:
-        linear-gradient(
-            135deg,
-            #76594d,
-            #8b6b5d
-        );
+  transform-origin: left center;
 
-    transform:
-        rotateY(
-            calc(var(--journal-progress, 0) * -165deg)
-        );
+  background:
+    linear-gradient(
+      135deg,
+      #76594d,
+      #8b6b5d
+    );
 
-    transition:
-        transform .08s linear;
+  transform:
+    rotateY(
+      calc(
+        var(--journal-progress, 0) * -168deg
+      )
+    );
 
-    backface-visibility: hidden;
+  transition:
+    transform .08s linear;
+
+  backface-visibility: hidden;
+
 }
 
-/* subtle cover texture */
+
+/* cover texture */
 
 .journal-page.left::before {
-    content: "";
 
-    position: absolute;
-    inset: 0;
+  content: "";
 
-    opacity: .22;
+  position: absolute;
 
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0 3px,
-            rgba(255,255,255,.22) 4px
-        );
+  inset: 0;
+
+  opacity: .18;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 3px,
+      rgba(255,255,255,.22) 4px
+    );
+
 }
 
-/* small decorative mark on cover */
 
-.journal-cover-mark {
-    position: absolute;
+/* cover decoration */
 
-    left: 50%;
-    top: 50%;
+.journal-page.left::after {
 
-    transform:
-        translate(-50%, -50%)
-        rotate(-4deg);
+  content: "ZENENE";
 
-    color: rgba(255,248,239,.85);
+  position: absolute;
 
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+  left: 50%;
+  top: 50%;
 
-    white-space: nowrap;
+  transform:
+    translate(-50%,-50%)
+    rotate(-4deg);
+
+  color:
+    rgba(255,248,239,.82);
+
+  font-family:
+    var(--typewriter);
+
+  font-size:
+    clamp(.7rem, 1.4vw, .9rem);
+
+  letter-spacing:
+    .28em;
+
 }
 
-/* ───────── RIGHT PAGE ───────── */
+
+/* =========================================================
+   INSIDE PAGE
+   ========================================================= */
 
 .journal-page.right {
-    z-index: 2;
 
-    background: #fffdf8;
+  z-index: 2;
 
-    padding: clamp(40px, 7vw, 70px);
+  background: #fffdf8;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  padding:
+    clamp(42px, 7vw, 70px);
 
-    background-image:
-        repeating-linear-gradient(
-            to bottom,
-            transparent 0,
-            transparent 34px,
-            rgba(130,150,155,.13) 35px
-        );
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  background-image:
+
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 34px,
+      rgba(130,150,155,.13) 35px
+    );
+
 }
 
-/* writing */
+
+/* subtle paper edge */
+
+.journal-page.right::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(220,205,185,.2),
+      transparent 30%
+    );
+
+}
+
+
+/* =========================================================
+   JOURNAL WRITING
+   ========================================================= */
 
 .journal-writing {
-    color: #5c4639;
 
-    font-family: 'Special Elite', monospace;
+  position: relative;
 
-    font-size: clamp(.62rem, 1vw, .76rem);
+  z-index: 2;
 
-    line-height: 2;
+  color: #5c4639;
 
-    max-width: 330px;
+  font-family:
+    var(--typewriter);
 
-    opacity:
-        calc(
-            .25 +
-            var(--journal-progress, 0) * .75
-        );
+  font-size:
+    clamp(.62rem, 1vw, .76rem);
 
-    transform:
-        translateY(
-            calc(
-                25px -
-                var(--journal-progress, 0) * 25px
-            )
-        );
+  line-height: 2;
 
-    transition:
-        opacity .15s linear,
-        transform .15s linear;
+  max-width: 330px;
+
+  opacity:
+    calc(
+      .05 +
+      var(--journal-progress, 0) * .95
+    );
+
+  transform:
+    translateY(
+      calc(
+        35px -
+        var(--journal-progress, 0) * 35px
+      )
+    );
+
+  transition:
+    opacity .12s linear,
+    transform .12s linear;
+
 }
+
 
 .journal-writing h3 {
-    margin-bottom: 28px;
 
-    color: #4a3529;
+  margin:
+    0 0 28px;
 
-    font-family: 'Dancing Script', cursive;
+  color: #4a3529;
 
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-family:
+    var(--script);
 
-    font-weight: 700;
+  font-size:
+    clamp(2rem, 4vw, 2.7rem);
+
+  font-weight: 600;
+
 }
+
 
 .journal-writing p {
-    margin-bottom: 22px;
+
+  margin:
+    0 0 22px;
+
 }
 
-/* ───────── TITLE ───────── */
+
+/* =========================================================
+   SMALL HANDWRITTEN NOTE
+   ========================================================= */
+
+.journal-note {
+
+  position: absolute;
+
+  right: -80px;
+
+  bottom: 65px;
+
+  font-family:
+    var(--script);
+
+  font-size: 1.35rem;
+
+  line-height: 1;
+
+  color:
+    var(--rose-deep);
+
+  transform:
+    rotate(-8deg)
+    translateY(12px);
+
+  opacity: 0;
+
+  transition:
+    opacity .7s ease .45s,
+    transform .8s cubic-bezier(.16,1,.3,1);
+
+  white-space: nowrap;
+
+  z-index: 8;
+
+}
+
+.journal-story.open .journal-note {
+
+  opacity: 1;
+
+  transform:
+    rotate(-8deg)
+    translateY(0);
+
+}
+
+
+/* =========================================================
+   JOURNAL TITLE
+   ========================================================= */
 
 .journal-title {
-    position: absolute;
 
-    left: 50%;
-    bottom: 13%;
+  position: absolute;
 
-    transform:
-        translateX(-50%)
-        translateY(25px);
+  left: 50%;
 
-    z-index: 20;
+  bottom: 12%;
 
-    font-family: 'Special Elite', monospace;
+  transform:
+    translateX(-50%)
+    translateY(20px);
 
-    font-size: clamp(.65rem, 1vw, .78rem);
+  z-index: 20;
 
-    letter-spacing: .18em;
+  font-family:
+    var(--typewriter);
 
-    text-transform: uppercase;
+  font-size: .65rem;
 
-    color: #5d493d;
+  letter-spacing: .18em;
 
-    opacity: 0;
+  text-transform: uppercase;
 
-    transition:
-        opacity .5s ease,
-        transform .7s cubic-bezier(.16,1,.3,1);
+  color: #5d493d;
 
-    pointer-events: none;
+  opacity: 0;
+
+  transition:
+    opacity .5s ease,
+    transform .7s cubic-bezier(.16,1,.3,1);
+
+  pointer-events: none;
+
 }
 
 .journal-story.open .journal-title {
-    opacity: 1;
 
-    transform:
-        translateX(-50%)
-        translateY(0);
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
 }
 
-/* ───────── LINK ───────── */
+
+/* =========================================================
+   JOURNAL LINK
+   ========================================================= */
 
 .journal-link {
-    position: absolute;
 
-    left: 50%;
-    bottom: 7%;
+  position: absolute;
 
-    transform: translateX(-50%);
+  left: 50%;
 
-    z-index: 25;
+  bottom: 6%;
 
-    font-family: 'Special Elite', monospace;
+  transform:
+    translateX(-50%);
 
-    font-size: .65rem;
+  z-index: 25;
 
-    letter-spacing: .12em;
+  font-family:
+    var(--typewriter);
 
-    text-transform: uppercase;
+  font-size: .65rem;
 
-    color: #5c4639;
+  letter-spacing: .12em;
 
-    text-decoration: none;
+  text-transform: uppercase;
 
-    opacity: 0;
+  color: #5c4639;
 
-    transition:
-        opacity .5s ease .15s;
+  text-decoration: none;
 
-    white-space: nowrap;
+  opacity: 0;
+
+  transition:
+    opacity .5s ease .15s;
+
+  white-space: nowrap;
+
 }
 
 .journal-story.open .journal-link {
-    opacity: 1;
+
+  opacity: 1;
+
 }
 
 .journal-link:hover {
-    color: var(--green-d);
+
+  color:
+    var(--sage-deep);
+
 }
 
-/* ───────── LITTLE PAPER SHADOW ───────── */
+
+/* =========================================================
+   JOURNAL SHADOW
+   ========================================================= */
 
 .journal-shadow {
-    position: absolute;
 
-    width: min(440px, 67vw);
-    height: 40px;
+  position: absolute;
 
-    bottom: 12%;
+  width: min(450px, 70vw);
 
-    background: rgba(65,85,90,.12);
+  height: 42px;
 
-    filter: blur(25px);
+  bottom: 13%;
 
-    border-radius: 50%;
+  background:
+    rgba(65,85,90,.12);
 
-    transform:
-        scaleX(
-            calc(
-                1 -
-                var(--journal-progress, 0) * .2
-            )
-        );
+  filter:
+    blur(25px);
 
-    pointer-events: none;
+  border-radius: 50%;
 
-    z-index: 1;
-}
-
-/* ───────── MOBILE ───────── */
-
-@media (max-width: 700px) {
-
-    .journal-story {
-        height: 210vh;
-    }
-
-    .journal-object {
-        width: 78vw;
-        height: 68vh;
-    }
-
-    .journal-page.right {
-        padding: 35px;
-    }
-
-    .journal-writing {
-        font-size: .62rem;
-    }
-
-    .journal-cover-mark {
-        font-size: 2rem;
-    }
-}
-  <!-- ══════════════════════════════════════════
-     JOURNAL — SCROLL OPENING
-     ══════════════════════════════════════════ -->
-
-<section class="journal-story" id="journal">
-
-    <div class="journal-stage">
-
-        <div class="journal-shadow"></div>
-
-        <div class="journal-object">
-
-            <!-- COVER -->
-            <div class="journal-page left">
-
-                <div class="journal-cover-mark">
-                    a little space to write
-                </div>
-
-            </div>
-
-            <!-- INSIDE PAGE -->
-            <div class="journal-page right">
-
-                <div class="journal-writing">
-
-                    <h3>dear me,</h3>
-
-                    <p>
-                        Today felt a little strange.
-                    </p>
-
-                    <p>
-                        I don't think I have to understand
-                        everything yet.
-                    </p>
-
-                    <p>
-                        Maybe writing it down is enough
-                        for tonight.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="journal-title">
-            a place to put your thoughts
-        </div>
-
-        <a
-            href="journal.html"
-            class="journal-link"
-        >
-            open your journal →
-        </a>
-
-    </div>
-
-</section>
-
-  /* ══════════════════════════════════════════
-   JOURNAL SCROLL ANIMATION
-   ══════════════════════════════════════════ */
-
-const journalStory = document.querySelector('.journal-story');
-
-if (journalStory) {
-
-    function updateJournal() {
-
-        const rect = journalStory.getBoundingClientRect();
-
-        const total =
-            journalStory.offsetHeight -
-            window.innerHeight;
-
-        let progress = -rect.top / total;
-
-        progress = Math.max(
-            0,
-            Math.min(1, progress)
-        );
-
-        journalStory.style.setProperty(
-            '--journal-progress',
-            progress
-        );
-
-        journalStory.classList.toggle(
-            'open',
-            progress > 0.72
-        );
-    }
-
-    window.addEventListener(
-        'scroll',
-        updateJournal,
-        { passive: true }
+  transform:
+    translateX(
+      calc(
+        var(--journal-progress, 0) * -6vw
+      )
+    )
+    scaleX(
+      calc(
+        1 -
+        var(--journal-progress, 0) * .18
+      )
     );
 
-    window.addEventListener(
-        'resize',
-        updateJournal
-    );
+  pointer-events: none;
 
-    updateJournal();
+  z-index: 1;
+
 }
-    
+
+
 /* =========================================================
    EDITORIAL END
    ========================================================= */
@@ -2378,14 +2712,6 @@ if (journalStory) {
 
   }
 
-  .hero-art {
-
-    width: 280px;
-
-    top: 57%;
-
-  }
-
   .feature-story {
 
     height: 550vh;
@@ -2433,13 +2759,6 @@ if (journalStory) {
 
   }
 
-  .diary {
-
-    width: 260px;
-    height: 350px;
-
-  }
-
   .mood-art,
   .vera-art {
 
@@ -2455,14 +2774,23 @@ if (journalStory) {
 
   .journal-story {
 
-    height: 180vh;
+    height: 210vh;
 
   }
 
   .journal-object {
 
     width: 290px;
+
     height: 400px;
+
+  }
+
+  .journal-note {
+
+    right: -45px;
+
+    font-size: 1rem;
 
   }
 
@@ -2526,40 +2854,61 @@ if (journalStory) {
 @media (max-width: 800px) {
 
   .slide-kicker {
+
     top: 38px;
+
     left: 7vw;
+
   }
 
   .journal-visual {
+
     height: 430px;
+
   }
 
   .journal-asset-wrap {
+
     width: min(330px, 70vw);
+
   }
 
   .journal-backdrop {
+
     width: min(330px, 70vw);
+
     height: 390px;
+
   }
 
   .journal-scribble {
+
     right: 3vw;
+
     bottom: 18px;
+
     font-size: 1.2rem;
+
   }
 
   .vera-art {
+
     width: min(380px, 85vw);
+
     height: min(380px, 85vw);
+
   }
 
   .vera-system {
+
     transform: scale(.72);
+
   }
 
   .feature-slide.active .vera-system {
+
     transform: scale(.72);
+
   }
 
 }
@@ -2609,8 +2958,6 @@ if (journalStory) {
       where your mind blooms
     </div>
 
-
-
   </div>
 
   <div class="scroll-indicator">
@@ -2640,9 +2987,7 @@ if (journalStory) {
     </div>
 
 
-    <!-- ================================================
-         SLIDE 1
-         ================================================ -->
+    <!-- SLIDE 1 -->
 
     <article class="feature-slide active">
 
@@ -2694,9 +3039,7 @@ if (journalStory) {
     </article>
 
 
-    <!-- ================================================
-         SLIDE 2 — JOURNAL
-         ================================================ -->
+    <!-- SLIDE 2 — JOURNAL -->
 
     <article class="feature-slide">
 
@@ -2742,8 +3085,10 @@ if (journalStory) {
           </div>
 
           <div class="journal-scribble">
+
             a place to put<br>
             your thoughts
+
           </div>
 
         </div>
@@ -2753,9 +3098,7 @@ if (journalStory) {
     </article>
 
 
-    <!-- ================================================
-         SLIDE 3 — MOOD
-         ================================================ -->
+    <!-- SLIDE 3 — MOOD -->
 
     <article class="feature-slide">
 
@@ -2833,9 +3176,7 @@ if (journalStory) {
     </article>
 
 
-    <!-- ================================================
-         SLIDE 4 — VERA
-         ================================================ -->
+    <!-- SLIDE 4 — VERA -->
 
     <article class="feature-slide">
 
@@ -2876,8 +3217,13 @@ if (journalStory) {
               <div class="vera-orbit orbit-three"></div>
 
               <div class="vera-core">
+
                 <span class="vera-core-glow"></span>
-                <span class="vera-core-label">VERA</span>
+
+                <span class="vera-core-label">
+                  VERA
+                </span>
+
               </div>
 
               <span class="vera-system-node node-one"></span>
@@ -2887,9 +3233,17 @@ if (journalStory) {
               <span class="vera-system-node node-five"></span>
               <span class="vera-system-node node-six"></span>
 
-              <span class="vera-system-label label-one">listen</span>
-              <span class="vera-system-label label-two">notice</span>
-              <span class="vera-system-label label-three">understand</span>
+              <span class="vera-system-label label-one">
+                listen
+              </span>
+
+              <span class="vera-system-label label-two">
+                notice
+              </span>
+
+              <span class="vera-system-label label-three">
+                understand
+              </span>
 
             </div>
 
@@ -2902,9 +3256,7 @@ if (journalStory) {
     </article>
 
 
-    <!-- ================================================
-         SLIDE 5 — CALM
-         ================================================ -->
+    <!-- SLIDE 5 — CALM -->
 
     <article class="feature-slide">
 
@@ -2956,8 +3308,6 @@ if (journalStory) {
 
     </article>
 
-
-    <!-- progress -->
 
     <div class="story-progress">
 
@@ -3011,9 +3361,16 @@ if (journalStory) {
 
   <div class="journal-stage">
 
+    <div class="journal-shadow"></div>
+
     <div class="journal-object">
 
+      <!-- FRONT COVER -->
+
       <div class="journal-page left"></div>
+
+
+      <!-- INSIDE PAGE -->
 
       <div class="journal-page right">
 
@@ -3023,27 +3380,33 @@ if (journalStory) {
             dear me,
           </h3>
 
-          Today felt a little strange.
+          <p>
+            Today felt a little strange.
+          </p>
 
-          <br><br>
+          <p>
+            I don't think I have to
+            understand everything yet.
+          </p>
 
-          I don't think I have to
-          understand everything yet.
-
-          <br><br>
-
-          Maybe writing it down
-          is enough for tonight.
+          <p>
+            Maybe writing it down
+            is enough for tonight.
+          </p>
 
         </div>
 
+      </div>
+
+      <div class="journal-note">
+        it's okay to take your time.
       </div>
 
     </div>
 
 
     <div class="journal-title">
-      JOURNAL
+      a place to put your thoughts
     </div>
 
 
@@ -3385,9 +3748,6 @@ function updateFeatureStory() {
   );
 
 
-
-  /* breathing */
-
   if (calmCircle && index === 4) {
 
     const local =
@@ -3551,9 +3911,15 @@ function updateJournal() {
     );
 
 
+  journalStory.style.setProperty(
+    "--journal-progress",
+    progress
+  );
+
+
   journalStory.classList.toggle(
     "open",
-    progress > .32
+    progress > .42
   );
 
 }
@@ -3563,6 +3929,11 @@ window.addEventListener(
   "scroll",
   updateJournal,
   { passive: true }
+);
+
+window.addEventListener(
+  "resize",
+  updateJournal
 );
 
 updateJournal();

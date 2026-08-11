@@ -758,12 +758,10 @@ body::before {
 .slide-kicker {
   position: absolute;
 
-  top: calc(12% + 42px);
-  left: 50%;
+  top: calc(12% + 32px);
+  left: 7%;
 
-  transform: translateX(-50%);
-
-  z-index: 15;
+  margin: 0;
 
   font-family: var(--script);
   font-size: 1.2rem;
@@ -771,14 +769,15 @@ body::before {
 
   color: var(--rose-deep);
 
-  margin: 0;
+  z-index: 15;
 
-  text-align: center;
+  transform: none;
+
+  text-align: left;
   white-space: nowrap;
 
   pointer-events: none;
 }
-
 .slide-heading {
 
   font-family: var(--serif);

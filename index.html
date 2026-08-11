@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,7 +19,7 @@
 <style>
 
 /* =========================================================
-   ZENENE — ART-DIRECTED HOMEPAGE V1
+   ZENENE — ART-DIRECTED HOMEPAGE
    ========================================================= */
 
 :root {
@@ -467,26 +469,6 @@ body::before {
 
   to {
     opacity: 1;
-  }
-
-}
-
-@keyframes letterIn {
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-}
-
-@keyframes brainReveal {
-
-  to {
-    opacity: .72;
-    transform:
-      translate(-50%, -50%)
-      scale(1);
   }
 
 }
@@ -1580,6 +1562,14 @@ body::before {
 
 }
 
+.garden-title h2 em {
+
+  font-family: var(--script);
+
+  color: var(--sage-deep);
+
+}
+
 .garden-title p {
 
   margin-top: 18px;
@@ -2313,95 +2303,328 @@ body::before {
 
 
 /* =========================================================
-   FINAL
+   FOOTER
    ========================================================= */
 
-.final {
-
-  min-height: 100vh;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-align: center;
-
-  background: var(--sky);
+.footer {
 
   position: relative;
+
+  min-height: 72vh;
+
+  padding: 90px 7vw 35px;
+
+  background: var(--brown-dark);
+
+  color: var(--cream);
 
   overflow: hidden;
 
 }
 
-.final h2 {
+.footer::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.06) 1.5px,
+      transparent 2px
+    );
+
+  background-size: 34px 34px;
+
+  opacity: .45;
+
+  pointer-events: none;
+
+}
+
+.footer-inner {
+
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1200px;
+
+  margin: auto;
+
+}
+
+
+/* FOOTER TOP */
+
+.footer-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 60px;
+
+  padding-bottom: 90px;
+
+}
+
+.footer-brand {
+
+  max-width: 520px;
+
+}
+
+.footer-label {
+
+  font-family: var(--typewriter);
+
+  font-size: .62rem;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  color: var(--sky);
+
+  margin-bottom: 25px;
+
+}
+
+.footer-brand h2 {
+
+  margin: 0;
 
   font-family: var(--serif);
 
-  font-size: clamp(4rem, 10vw, 10rem);
+  font-size: clamp(3.8rem, 8vw, 8rem);
 
   font-weight: 300;
 
-  line-height: .82;
+  line-height: .8;
 
-  color: var(--brown-dark);
+  letter-spacing: -.03em;
 
 }
 
-.final h2 em {
+.footer-brand h2 em {
 
   font-family: var(--script);
 
-  color: var(--rose-deep);
+  color: var(--rose);
+
+  font-size: .72em;
 
 }
 
-.final p {
+.footer-tagline {
 
-  margin-top: 35px;
+  margin-top: 32px;
+
+  max-width: 370px;
 
   font-family: var(--typewriter);
 
-  font-size: .7rem;
+  font-size: .68rem;
 
-  letter-spacing: .08em;
+  line-height: 1.9;
+
+  color: rgba(247,241,231,.65);
 
 }
 
-.final a {
 
-  display: inline-block;
+/* FOOTER LINKS */
 
-  margin-top: 28px;
+.footer-links {
 
-  padding: 14px 24px;
+  display: grid;
 
-  border:
-    1px solid var(--brown);
+  grid-template-columns:
+    repeat(2, minmax(110px, 1fr));
 
-  border-radius: 999px;
+  gap: 55px;
 
-  color: var(--brown);
+  min-width: 300px;
+
+}
+
+.footer-column {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+}
+
+.footer-column-title {
+
+  margin-bottom: 10px;
+
+  font-family: var(--typewriter);
+
+  font-size: .58rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+  color: var(--sky);
+
+}
+
+.footer-column a {
+
+  width: fit-content;
+
+  color: rgba(247,241,231,.72);
 
   text-decoration: none;
 
-  font-family: var(--typewriter);
+  font-family: var(--serif);
 
-  font-size: .65rem;
+  font-size: 1.15rem;
 
   transition:
-    background .3s,
-    color .3s;
+    color .3s ease,
+    transform .3s ease;
 
 }
 
-.final a:hover {
-
-  background: var(--brown);
+.footer-column a:hover {
 
   color: var(--cream);
+
+  transform: translateX(5px);
+
+}
+
+
+/* FLOATING FLOWER */
+
+.footer-flower {
+
+  position: absolute;
+
+  right: 7vw;
+
+  top: 55px;
+
+  font-size: 80px;
+
+  line-height: 1;
+
+  color: var(--rose);
+
+  opacity: .35;
+
+  transform: rotate(-12deg);
+
+  animation:
+    footerFlowerFloat 6s ease-in-out infinite;
+
+}
+
+@keyframes footerFlowerFloat {
+
+  0%,100% {
+
+    transform:
+      rotate(-12deg)
+      translateY(0);
+
+  }
+
+  50% {
+
+    transform:
+      rotate(-5deg)
+      translateY(-10px);
+
+  }
+
+}
+
+
+/* FOOTER DIVIDER */
+
+.footer-divider {
+
+  height: 1px;
+
+  width: 100%;
+
+  background:
+    rgba(247,241,231,.15);
+
+  margin-bottom: 25px;
+
+}
+
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  font-family: var(--typewriter);
+
+  font-size: .55rem;
+
+  letter-spacing: .08em;
+
+  color:
+    rgba(247,241,231,.45);
+
+}
+
+.footer-bottom-left {
+
+  display: flex;
+
+  gap: 25px;
+
+}
+
+.footer-bottom a {
+
+  color: inherit;
+
+  text-decoration: none;
+
+  transition:
+    color .3s ease;
+
+}
+
+.footer-bottom a:hover {
+
+  color: var(--cream);
+
+}
+
+.footer-made {
+
+  font-family: var(--script);
+
+  font-size: 1rem;
+
+  color:
+    rgba(247,241,231,.65);
 
 }
 
@@ -2504,12 +2727,29 @@ body::before {
 
 }
 
-.dock-item:nth-child(1) { transition-delay: .05s; }
-.dock-item:nth-child(2) { transition-delay: .1s; }
-.dock-item:nth-child(3) { transition-delay: .15s; }
-.dock-item:nth-child(4) { transition-delay: .2s; }
-.dock-item:nth-child(5) { transition-delay: .25s; }
-.dock-item:nth-child(6) { transition-delay: .3s; }
+.dock-item:nth-child(1) {
+  transition-delay: .05s;
+}
+
+.dock-item:nth-child(2) {
+  transition-delay: .1s;
+}
+
+.dock-item:nth-child(3) {
+  transition-delay: .15s;
+}
+
+.dock-item:nth-child(4) {
+  transition-delay: .2s;
+}
+
+.dock-item:nth-child(5) {
+  transition-delay: .25s;
+}
+
+.dock-item:nth-child(6) {
+  transition-delay: .3s;
+}
 
 .dock-btn {
 
@@ -2607,7 +2847,8 @@ body::before {
 
   padding: 20px;
 
-  background: rgba(47,43,39,.4);
+  background:
+    rgba(47,43,39,.4);
 
   backdrop-filter: blur(10px);
 
@@ -2736,7 +2977,8 @@ body::before {
 
   .slide-heading {
 
-    font-size: clamp(3.5rem, 18vw, 6rem);
+    font-size:
+      clamp(3.5rem, 18vw, 6rem);
 
   }
 
@@ -2821,6 +3063,67 @@ body::before {
 
   }
 
+  /* FOOTER MOBILE */
+
+  .footer {
+
+    min-height: auto;
+
+    padding:
+      80px 7vw 30px;
+
+  }
+
+  .footer-top {
+
+    flex-direction: column;
+
+    padding-bottom: 60px;
+
+    gap: 55px;
+
+  }
+
+  .footer-brand h2 {
+
+    font-size:
+      clamp(4rem, 18vw, 7rem);
+
+  }
+
+  .footer-links {
+
+    width: 100%;
+
+    min-width: 0;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 35px;
+
+  }
+
+  .footer-flower {
+
+    right: 5vw;
+
+    top: 35px;
+
+    font-size: 55px;
+
+  }
+
+  .footer-bottom {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+  }
+
 }
 
 
@@ -2834,13 +3137,17 @@ body::before {
   *::before,
   *::after {
 
-    animation-duration: .01ms !important;
+    animation-duration:
+      .01ms !important;
 
-    animation-iteration-count: 1 !important;
+    animation-iteration-count:
+      1 !important;
 
-    transition-duration: .01ms !important;
+    transition-duration:
+      .01ms !important;
 
-    scroll-behavior: auto !important;
+    scroll-behavior:
+      auto !important;
 
   }
 
@@ -2869,13 +3176,15 @@ body::before {
 
   .journal-asset-wrap {
 
-    width: min(330px, 70vw);
+    width:
+      min(330px, 70vw);
 
   }
 
   .journal-backdrop {
 
-    width: min(330px, 70vw);
+    width:
+      min(330px, 70vw);
 
     height: 390px;
 
@@ -2893,9 +3202,11 @@ body::before {
 
   .vera-art {
 
-    width: min(380px, 85vw);
+    width:
+      min(380px, 85vw);
 
-    height: min(380px, 85vw);
+    height:
+      min(380px, 85vw);
 
   }
 
@@ -2912,170 +3223,9 @@ body::before {
   }
 
 }
-  /* =========================================================
-   FORMAL FOOTER
-   ========================================================= */
-
-.site-footer {
-    background: var(--brown-dark);
-    color: var(--cream);
-    padding: 80px 7vw 30px;
-    position: relative;
-    overflow: hidden;
-}
-
-.site-footer::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(255,255,255,.06),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(216,228,215,.06),
-            transparent 28%
-        );
-    pointer-events: none;
-}
-
-.footer-inner {
-    position: relative;
-    z-index: 2;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.footer-top {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 60px;
-    padding-bottom: 70px;
-}
-
-.footer-brand {
-    max-width: 360px;
-}
-
-.footer-logo {
-    font-family: var(--typewriter);
-    font-size: 1rem;
-    letter-spacing: .2em;
-    margin-bottom: 20px;
-}
-
-.footer-tagline {
-    font-family: var(--serif);
-    font-size: 2rem;
-    line-height: 1;
-    font-weight: 300;
-    color: var(--cream);
-}
-
-.footer-description {
-    margin-top: 20px;
-    font-family: var(--typewriter);
-    font-size: .62rem;
-    line-height: 1.9;
-    color: rgba(247,241,231,.65);
-    max-width: 300px;
-}
-
-.footer-column h4 {
-    margin: 0 0 20px;
-    font-family: var(--typewriter);
-    font-size: .62rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    font-weight: normal;
-    color: var(--rose);
-}
-
-.footer-column a {
-    display: block;
-    width: fit-content;
-    margin-bottom: 12px;
-
-    color: rgba(247,241,231,.72);
-    text-decoration: none;
-
-    font-family: var(--typewriter);
-    font-size: .62rem;
-
-    transition:
-        color .3s ease,
-        transform .3s ease;
-}
-
-.footer-column a:hover {
-    color: var(--cream);
-    transform: translateX(4px);
-}
-
-.footer-contact {
-    font-family: var(--typewriter);
-    font-size: .62rem;
-    line-height: 1.9;
-    color: rgba(247,241,231,.72);
-}
-
-.footer-contact a {
-    margin-top: 8px;
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(247,241,231,.12);
-
-    padding-top: 25px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.footer-copyright {
-    font-family: var(--typewriter);
-    font-size: .55rem;
-    letter-spacing: .08em;
-    color: rgba(247,241,231,.45);
-}
-
-.footer-note {
-    font-family: var(--script);
-    font-size: 1rem;
-    color: rgba(247,241,231,.55);
-}
-
-/* footer responsive */
-
-@media (max-width: 800px) {
-
-    .site-footer {
-        padding: 65px 7vw 25px;
-    }
-
-    .footer-top {
-        grid-template-columns: 1fr 1fr;
-        gap: 45px 30px;
-        padding-bottom: 50px;
-    }
-
-    .footer-brand {
-        grid-column: 1 / -1;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-}
 
 </style>
+
 </head>
 
 
@@ -3114,7 +3264,9 @@ body::before {
       a space made for your mind
     </div>
 
-    <h1 class="hero-title">ZENENE</h1>
+    <h1 class="hero-title">
+      ZENENE
+    </h1>
 
     <div class="hero-tag">
       where your mind blooms
@@ -3685,36 +3837,130 @@ body::before {
 
 
 <!-- ======================================================
-     FINAL
+     FOOTER
      ====================================================== -->
 
-<section class="final">
+<footer class="footer">
 
-  <div>
+  <div class="footer-flower">
+    ✿
+  </div>
 
-    <div class="section-label">
-      zenene
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+
+      <!-- BRAND -->
+
+      <div class="footer-brand">
+
+        <div class="footer-label">
+          zenene
+        </div>
+
+        <h2>
+          where your<br>
+          <em>mind blooms.</em>
+        </h2>
+
+        <p class="footer-tagline">
+          A softer space for reflection,
+          conversation, creativity and calm.
+        </p>
+
+      </div>
+
+
+      <!-- LINKS -->
+
+      <div class="footer-links">
+
+
+        <div class="footer-column">
+
+          <div class="footer-column-title">
+            explore
+          </div>
+
+          <a href="journal.html">
+            Journal
+          </a>
+
+          <a href="mood.html">
+            Mood
+          </a>
+
+          <a href="chat.html">
+            Vera
+          </a>
+
+          <a href="calm.html">
+            Calm
+          </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <div class="footer-column-title">
+            discover
+          </div>
+
+          <a href="explore.html">
+            Explore
+          </a>
+
+          <a href="stories.html">
+            Stories
+          </a>
+
+          <a href="#home">
+            Home
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <h2>
 
-      You don't have<br>
-      to have it<br>
-      <em>figured out.</em>
+    <!-- DIVIDER -->
 
-    </h2>
+    <div class="footer-divider"></div>
 
-    <p>
-      a softer place to begin
-    </p>
 
-    <a href="journal.html">
-      begin your journey →
-    </a>
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+      <div class="footer-bottom-left">
+
+        <span>
+          © 2026 Zenene
+        </span>
+
+        <a href="#">
+          Privacy
+        </a>
+
+        <a href="#">
+          Terms
+        </a>
+
+      </div>
+
+      <div class="footer-made">
+        made gently, for you.
+      </div>
+
+    </div>
 
   </div>
 
-</section>
+</footer>
 
 
 <!-- ======================================================
@@ -3856,7 +4102,6 @@ function updateFeatureStory() {
 
   if (!featureStory) return;
 
-
   const rect =
     featureStory.getBoundingClientRect();
 
@@ -3864,14 +4109,12 @@ function updateFeatureStory() {
     featureStory.offsetHeight -
     window.innerHeight;
 
-
   const progress =
     clamp(
       -rect.top / total,
       0,
       1
     );
-
 
   const slideCount =
     slides.length;
@@ -3885,7 +4128,6 @@ function updateFeatureStory() {
       Math.floor(raw)
     );
 
-
   slides.forEach(
     (slide, i) => {
 
@@ -3897,7 +4139,6 @@ function updateFeatureStory() {
     }
   );
 
-
   dots.forEach(
     (dot, i) => {
 
@@ -3908,7 +4149,6 @@ function updateFeatureStory() {
 
     }
   );
-
 
   if (calmCircle && index === 4) {
 
@@ -3973,13 +4213,11 @@ garden.addEventListener(
 
     lastFlower = now;
 
-
     const flower =
       document.createElement("div");
 
     flower.className =
       "garden-flower";
-
 
     flower.style.left =
       `${event.clientX}px`;
@@ -3987,12 +4225,10 @@ garden.addEventListener(
     flower.style.top =
       `${event.clientY}px`;
 
-
     flower.style.setProperty(
       "--rotation",
       `${Math.random() * 50 - 25}deg`
     );
-
 
     const span =
       document.createElement("span");
@@ -4005,11 +4241,9 @@ garden.addEventListener(
         )
       ];
 
-
     flower.appendChild(span);
 
     garden.appendChild(flower);
-
 
     setTimeout(
       () => {
@@ -4026,7 +4260,6 @@ garden.addEventListener(
       },
       3500
     );
-
 
     setTimeout(
       () => {
@@ -4055,15 +4288,12 @@ function updateJournal() {
 
   if (!journalStory) return;
 
-
   const rect =
     journalStory.getBoundingClientRect();
-
 
   const total =
     journalStory.offsetHeight -
     window.innerHeight;
-
 
   const progress =
     clamp(
@@ -4072,12 +4302,10 @@ function updateJournal() {
       1
     );
 
-
   journalStory.style.setProperty(
     "--journal-progress",
     progress
   );
-
 
   journalStory.classList.toggle(
     "open",
@@ -4099,95 +4327,6 @@ window.addEventListener(
 );
 
 updateJournal();
-
-  <!-- ======================================================
-     FORMAL FOOTER
-     ====================================================== -->
-
-<footer class="site-footer">
-
-  <div class="footer-main">
-
-    <div class="footer-brand">
-      <div class="footer-logo">ZENENE</div>
-
-      <p>
-        a softer place for your mind.
-      </p>
-    </div>
-
-
-    <div class="footer-column">
-
-      <div class="footer-heading">
-        explore
-      </div>
-
-      <a href="journal.html">Journal</a>
-      <a href="mood.html">Mood</a>
-      <a href="chat.html">Vera</a>
-      <a href="explore.html">Explore</a>
-
-    </div>
-
-
-    <div class="footer-column">
-
-      <div class="footer-heading">
-        connect
-      </div>
-
-      <a
-        href="https://instagram.com/zenene.app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Instagram
-      </a>
-
-      <a href="mailto:hello@zenene.app">
-        hello@zenene.app
-      </a>
-
-      <a
-        href="https://zenene.app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        zenene.app
-      </a>
-
-    </div>
-
-
-    <div class="footer-column">
-
-      <div class="footer-heading">
-        zenene
-      </div>
-
-      <a href="about.html">About</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-
-    </div>
-
-  </div>
-
-
-  <div class="footer-bottom">
-
-    <span>
-      © 2026 Zenene. All rights reserved.
-    </span>
-
-    <span class="footer-note">
-      made with intention, for the mind.
-    </span>
-
-  </div>
-
-</footer>
 
 
 /* =========================================================
@@ -4267,6 +4406,43 @@ document
 /* =========================================================
    PARALLAX HERO
    ========================================================= */
+
+const heroArt =
+  document.querySelector(
+    ".hero-art"
+  );
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!heroArt) return;
+
+    const y =
+      window.scrollY;
+
+    if (
+      y <
+      window.innerHeight
+    ) {
+
+      heroArt.style.marginTop =
+        `${y * .08}px`;
+
+      heroArt.style.opacity =
+        `${Math.max(
+          0,
+          .72 -
+          y /
+          window.innerHeight
+        )}`;
+
+    }
+
+  },
+  { passive: true }
+);
 
 </script>
 

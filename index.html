@@ -279,7 +279,8 @@ body::before {
   filter: blur(2px);
 
   animation:
-    cloudMove 30s linear infinite;
+    cloudMove 30s linear infinite,
+    cloudFloat 6s ease-in-out infinite;
 
 }
 
@@ -334,6 +335,14 @@ body::before {
 
 }
 
+@keyframes cloudFloat {
+
+  0%,100% { margin-top: 0; }
+
+  50% { margin-top: -10px; }
+
+}
+
 @keyframes cloudMove {
 
   from {
@@ -385,37 +394,20 @@ body::before {
   font-size:
     clamp(4rem, 12vw, 10rem);
 
-  letter-spacing: .04em;
-
-  color: var(--brown-dark);
-
-  line-height: .9;
-
-  overflow: hidden;
-
-}
-
-.hero-title {
-
-  margin: 12px 0 0;
-
-  font-family: var(--typewriter);
-  font-weight: normal;
-
-  font-size:
-    clamp(4rem, 12vw, 10rem);
-
   letter-spacing: 0;
   word-spacing: 0;
 
   color: var(--brown-dark);
+
   line-height: .9;
 
   opacity: 0;
+
   transform: translateY(35px);
 
   animation:
     heroTitleIn 1.1s cubic-bezier(.16,1,.3,1) .45s forwards;
+
 }
 
 @keyframes heroTitleIn {
@@ -427,7 +419,27 @@ body::before {
 
 }
 
-/* subtle hero atmosphere */
+.hero-tag {
+
+  font-family: var(--serif);
+
+  font-style: italic;
+
+  font-size: clamp(1.2rem, 3vw, 2rem);
+
+  color: var(--brown);
+
+  margin-top: 28px;
+
+  opacity: 0;
+
+  animation:
+    heroFade 1s 1.25s forwards;
+
+}
+
+
+/* Hero atmosphere */
 
 .hero::after {
 
@@ -444,16 +456,18 @@ body::before {
   border-radius: 50%;
 
   background: rgba(255,255,255,.18);
+
   filter: blur(18px);
 
   animation: heroGlow 7s ease-in-out infinite;
 
   pointer-events: none;
+
 }
 
 @keyframes heroGlow {
 
-  0%, 100% {
+  0%,100% {
     transform: translate3d(0,0,0) scale(1);
     opacity: .45;
   }
@@ -465,25 +479,40 @@ body::before {
 
 }
 
-/* clouds get a very gentle vertical drift */
+@keyframes heroFade {
 
-.cloud {
-  animation:
-    cloudMove 30s linear infinite,
-    cloudFloat 6s ease-in-out infinite;
-}
-
-@keyframes cloudFloat {
-
-  0%, 100% {
-    margin-top: 0;
-  }
-
-  50% {
-    margin-top: -10px;
+  to {
+    opacity: 1;
   }
 
 }
+
+@keyframes letterIn {
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+@keyframes brainReveal {
+
+  to {
+
+    opacity: .72;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+  }
+
+}
+
 
 /* scroll indicator */
 
@@ -733,13 +762,20 @@ body::before {
 
 .slide-kicker {
 
+  position: absolute;
+
+  top: 72px;
+  left: 0;
+
   font-family: var(--script);
 
   font-size: 1.2rem;
 
   color: var(--rose-deep);
 
-  margin-bottom: 15px;
+  margin: 0;
+
+  z-index: 10;
 
 }
 
@@ -859,77 +895,47 @@ body::before {
 
 
 /* =========================================================
-   SLIDE 2 — REFLECT
-   ========================================================= */
-
-/* =========================================================
-   SLIDE 2 — REFLECT / JOURNAL ASSET
+   SLIDE 2 — REFLECT / JOURNAL
    ========================================================= */
 
 .journal-visual {
 
-  position: relative;
+  width: 100%;
   height: 500px;
-  overflow: visible;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .journal-backdrop {
 
   position: absolute;
-
   width: 390px;
   height: 470px;
-
-  background: #F7F2E9;
-
+  background: #f7f2e9;
   left: 50%;
   top: 50%;
-
-  transform:
-    translate(-46%, -50%)
-    rotate(3deg)
-    scale(.94);
-
+  transform: translate(-46%,-50%) rotate(3deg) scale(.94);
   border-radius: 4px;
-
-  box-shadow:
-    0 30px 70px rgba(75,58,47,.10);
-
+  box-shadow: 0 30px 70px rgba(75,58,47,.10);
   opacity: 0;
-
-  transition:
-    opacity 1s ease .15s,
-    transform 1.2s cubic-bezier(.16,1,.3,1);
+  transition: opacity 1s ease .15s, transform 1.2s cubic-bezier(.16,1,.3,1);
 }
 
 .journal-asset-wrap {
 
   position: relative;
-
-  width: 390px;
-
-  transform:
-    translate3d(70px,30px,0)
-    rotate(7deg)
-    scale(.88);
-
+  width: min(390px, 75vw);
+  transform: translate3d(70px,30px,0) rotate(7deg) scale(.88);
   opacity: 0;
-
-  filter:
-    drop-shadow(0 35px 35px rgba(55,39,31,.20));
-
-  transition:
-    opacity .9s ease,
-    transform 1.25s cubic-bezier(.16,1,.3,1);
-
+  filter: drop-shadow(0 35px 35px rgba(55,39,31,.20));
+  transition: opacity .9s ease, transform 1.25s cubic-bezier(.16,1,.3,1);
   z-index: 2;
 }
 
 .journal-asset {
-
   display: block;
   width: 100%;
   height: auto;
@@ -940,76 +946,42 @@ body::before {
 .journal-scribble {
 
   position: absolute;
-
-  right: -25px;
-  bottom: 42px;
-
+  right: 0;
+  bottom: 38px;
   font-family: var(--script);
   font-size: 1.55rem;
   line-height: 1.05;
   color: var(--sage-deep);
-
-  transform:
-    rotate(-7deg)
-    translateY(15px);
-
+  transform: rotate(-7deg) translateY(15px);
   opacity: 0;
-
-  transition:
-    opacity .8s ease .55s,
-    transform .9s cubic-bezier(.16,1,.3,1);
-
+  transition: opacity .8s ease .55s, transform .9s cubic-bezier(.16,1,.3,1);
   z-index: 4;
   pointer-events: none;
 }
 
 .feature-slide.active .journal-backdrop {
-
   opacity: 1;
-
-  transform:
-    translate(-50%,-50%)
-    rotate(2deg)
-    scale(1);
+  transform: translate(-50%,-50%) rotate(2deg) scale(1);
 }
 
 .feature-slide.active .journal-asset-wrap {
-
   opacity: 1;
-
-  transform:
-    translate3d(0,0,0)
-    rotate(-3deg)
-    scale(1);
-
-  animation:
-    journalSettle 5s ease-in-out 1.3s infinite;
+  transform: translate3d(0,0,0) rotate(-3deg) scale(1);
 }
 
 .feature-slide.active .journal-scribble {
-
   opacity: 1;
-
-  transform:
-    rotate(-7deg)
-    translateY(0);
+  transform: rotate(-7deg) translateY(0);
 }
 
 @keyframes journalSettle {
-
-  0%,100% {
-    transform:
-      translate3d(0,0,0)
-      rotate(-3deg);
-  }
-
-  50% {
-    transform:
-      translate3d(0,-5px,0)
-      rotate(-2.4deg);
-  }
+  0%,100% { transform: translate3d(0,0,0) rotate(-3deg); }
+  50% { transform: translate3d(0,-5px,0) rotate(-2.4deg); }
 }
 
+.feature-slide.active .journal-asset-wrap {
+  animation: journalSettle 5s ease-in-out 1.3s infinite;
+}
 
 /* =========================================================
    SLIDE 3 — MOOD
@@ -1103,122 +1075,142 @@ body::before {
 
 
 /* =========================================================
-   SLIDE 4 — VERA
+   SLIDE 4 — VERA / AI SYSTEM
    ========================================================= */
 
 .vera-art {
-
   width: 450px;
-
   height: 450px;
-
   position: relative;
-
-}
-
-.vera-network {
-
-  position: absolute;
-
-  inset: 0;
-
-}
-
-.vera-network svg {
-
-  width: 100%;
-  height: 100%;
-
-}
-
-.vera-line {
-
-  stroke: var(--sage-deep);
-
-  stroke-width: 1;
-
-  opacity: .55;
-
-  stroke-dasharray: 500;
-
-  stroke-dashoffset: 500;
-
-  transition:
-    stroke-dashoffset 1.5s ease;
-
-}
-
-.feature-slide.active .vera-line {
-
-  stroke-dashoffset: 0;
-
-}
-
-.vera-node {
-
-  fill: var(--rose-deep);
-
-  animation: neuralPulse 2.4s infinite;
-
-}
-
-.vera-chat {
-
-  position: absolute;
-
-  inset: 0;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
-  flex-direction: column;
-
-  gap: 12px;
-
 }
 
-.chat-bubble {
+.vera-system {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  transform: scale(.55);
+  opacity: 0;
+  transition: transform 1.25s cubic-bezier(.16,1,.3,1), opacity .7s ease;
+}
 
-  max-width: 280px;
+.feature-slide.active .vera-system {
+  transform: scale(1);
+  opacity: 1;
+}
 
-  padding: 17px 20px;
+.vera-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 112px;
+  height: 112px;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--sky-deep));
+  border: 1px solid rgba(98,79,67,.18);
+  box-shadow: 0 0 0 16px rgba(201,223,234,.28), 0 0 0 42px rgba(201,223,234,.13), 0 25px 60px rgba(62,45,35,.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
 
-  border-radius: 22px;
+.vera-core-glow {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid rgba(185,120,128,.22);
+  animation: veraPulse 3.5s ease-in-out infinite;
+}
 
+.vera-core-label {
   font-family: var(--typewriter);
-
-  font-size: .65rem;
-
-  line-height: 1.7;
-
-  box-shadow:
-    0 15px 35px rgba(62,45,35,.08);
-
+  font-size: .78rem;
+  letter-spacing: .16em;
+  color: var(--brown-dark);
+  z-index: 2;
 }
 
-.chat-bubble.one {
-
-  background: var(--paper);
-
-  transform:
-    translateX(-35px)
-    rotate(-2deg);
-
+.vera-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(98,79,67,.18);
+  border-radius: 50%;
+  transform: translate(-50%,-50%) scale(.3);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(.16,1,.3,1), opacity .8s ease;
 }
 
-.chat-bubble.two {
+.orbit-one { width: 190px; height: 190px; }
+.orbit-two { width: 285px; height: 285px; }
+.orbit-three { width: 380px; height: 380px; border-style: dashed; opacity: .5; }
 
-  background: var(--sage);
-
-  transform:
-    translateX(35px)
-    rotate(2deg);
-
+.feature-slide.active .vera-orbit {
+  transform: translate(-50%,-50%) scale(1);
+  opacity: 1;
 }
 
+.feature-slide.active .orbit-one { transition-delay: .15s; }
+.feature-slide.active .orbit-two { transition-delay: .32s; }
+.feature-slide.active .orbit-three { transition-delay: .5s; }
+
+.vera-system-node {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--rose-deep);
+  box-shadow: 0 0 0 9px rgba(185,120,128,.10);
+  transform: scale(0);
+  transition: transform .65s cubic-bezier(.16,1,.3,1);
+}
+
+.node-one { left: 50%; top: 5%; transform-origin: center; }
+.node-two { right: 8%; top: 28%; }
+.node-three { right: 18%; bottom: 12%; }
+.node-four { left: 18%; bottom: 12%; }
+.node-five { left: 8%; top: 28%; }
+.node-six { left: 50%; top: 50%; width: 7px; height: 7px; background: var(--sage-deep); }
+
+.feature-slide.active .vera-system-node { transform: scale(1); }
+.feature-slide.active .node-one { transition-delay: .65s; }
+.feature-slide.active .node-two { transition-delay: .8s; }
+.feature-slide.active .node-three { transition-delay: .95s; }
+.feature-slide.active .node-four { transition-delay: 1.1s; }
+.feature-slide.active .node-five { transition-delay: 1.25s; }
+.feature-slide.active .node-six { transition-delay: .55s; }
+
+.vera-system-label {
+  position: absolute;
+  font-family: var(--script);
+  font-size: 1rem;
+  color: var(--brown);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.label-one { left: 4%; top: 20%; }
+.label-two { right: 2%; top: 52%; }
+.label-three { left: 4%; bottom: 19%; }
+
+.feature-slide.active .vera-system-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-slide.active .label-one { transition-delay: 1.15s; }
+.feature-slide.active .label-two { transition-delay: 1.35s; }
+.feature-slide.active .label-three { transition-delay: 1.55s; }
+
+@keyframes veraPulse {
+  0%,100% { transform: scale(.92); opacity: .45; }
+  50% { transform: scale(1.08); opacity: .85; }
+}
 
 /* =========================================================
    SLIDE 5 — CALM
@@ -2103,6 +2095,14 @@ body::before {
 
   }
 
+  .hero-art {
+
+    width: 280px;
+
+    top: 57%;
+
+  }
+
   .feature-story {
 
     height: 550vh;
@@ -2150,23 +2150,11 @@ body::before {
 
   }
 
-  .journal-visual {
-    height: 320px;
-  }
+  .diary {
 
-  .journal-asset-wrap {
     width: 260px;
-  }
+    height: 350px;
 
-  .journal-backdrop {
-    width: 260px;
-    height: 310px;
-  }
-
-  .journal-scribble {
-    right: -5px;
-    bottom: 10px;
-    font-size: 1.2rem;
   }
 
   .mood-art,
@@ -2243,6 +2231,52 @@ body::before {
 
     scroll-behavior: auto !important;
 
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE REFINEMENTS
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .slide-kicker {
+    top: 38px;
+    left: 7vw;
+  }
+
+  .journal-visual {
+    height: 430px;
+  }
+
+  .journal-asset-wrap {
+    width: min(330px, 70vw);
+  }
+
+  .journal-backdrop {
+    width: min(330px, 70vw);
+    height: 390px;
+  }
+
+  .journal-scribble {
+    right: 3vw;
+    bottom: 18px;
+    font-size: 1.2rem;
+  }
+
+  .vera-art {
+    width: min(380px, 85vw);
+    height: min(380px, 85vw);
+  }
+
+  .vera-system {
+    transform: scale(.72);
+  }
+
+  .feature-slide.active .vera-system {
+    transform: scale(.72);
   }
 
 }
@@ -2552,90 +2586,27 @@ body::before {
 
           <div class="vera-art">
 
-            <div class="vera-network">
+            <div class="vera-system">
 
-              <svg viewBox="0 0 450 450">
+              <div class="vera-orbit orbit-one"></div>
+              <div class="vera-orbit orbit-two"></div>
+              <div class="vera-orbit orbit-three"></div>
 
-                <line
-                  class="vera-line"
-                  x1="80" y1="90"
-                  x2="210" y2="190"
-                />
-
-                <line
-                  class="vera-line"
-                  x1="210" y1="190"
-                  x2="360" y2="110"
-                />
-
-                <line
-                  class="vera-line"
-                  x1="210" y1="190"
-                  x2="150" y2="350"
-                />
-
-                <line
-                  class="vera-line"
-                  x1="210" y1="190"
-                  x2="350" y2="340"
-                />
-
-                <circle
-                  class="vera-node"
-                  cx="80"
-                  cy="90"
-                  r="7"
-                />
-
-                <circle
-                  class="vera-node"
-                  cx="210"
-                  cy="190"
-                  r="10"
-                />
-
-                <circle
-                  class="vera-node"
-                  cx="360"
-                  cy="110"
-                  r="7"
-                />
-
-                <circle
-                  class="vera-node"
-                  cx="150"
-                  cy="350"
-                  r="7"
-                />
-
-                <circle
-                  class="vera-node"
-                  cx="350"
-                  cy="340"
-                  r="7"
-                />
-
-              </svg>
-
-            </div>
-
-
-            <div class="vera-chat">
-
-              <div class="chat-bubble one">
-
-                I've had a really
-                overwhelming day.
-
+              <div class="vera-core">
+                <span class="vera-core-glow"></span>
+                <span class="vera-core-label">VERA</span>
               </div>
 
-              <div class="chat-bubble two">
+              <span class="vera-system-node node-one"></span>
+              <span class="vera-system-node node-two"></span>
+              <span class="vera-system-node node-three"></span>
+              <span class="vera-system-node node-four"></span>
+              <span class="vera-system-node node-five"></span>
+              <span class="vera-system-node node-six"></span>
 
-                You don't have to
-                figure everything out
-                all at once. 🌸
-
-              </div>
+              <span class="vera-system-label label-one">listen</span>
+              <span class="vera-system-label label-two">notice</span>
+              <span class="vera-system-label label-three">understand</span>
 
             </div>
 
@@ -3131,6 +3102,7 @@ function updateFeatureStory() {
   );
 
 
+
   /* breathing */
 
   if (calmCircle && index === 4) {
@@ -3390,6 +3362,43 @@ document
 /* =========================================================
    PARALLAX HERO
    ========================================================= */
+
+const heroArt =
+  document.querySelector(
+    ".hero-art"
+  );
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!heroArt) return;
+
+    const y =
+      window.scrollY;
+
+    if (
+      y <
+      window.innerHeight
+    ) {
+
+      heroArt.style.marginTop =
+        `${y * .08}px`;
+
+      heroArt.style.opacity =
+        `${Math.max(
+          0,
+          .72 -
+          y /
+          window.innerHeight
+        )}`;
+
+    }
+
+  },
+  { passive: true }
+);
 
 </script>
 

@@ -335,14 +335,6 @@ body::before {
 
 }
 
-@keyframes cloudFloat {
-
-  0%,100% { margin-top: 0; }
-
-  50% { margin-top: -10px; }
-
-}
-
 @keyframes cloudMove {
 
   from {
@@ -351,6 +343,18 @@ body::before {
 
   to {
     transform: translateX(calc(100vw + 450px));
+  }
+
+}
+
+@keyframes cloudFloat {
+
+  0%, 100% {
+    margin-top: 0;
+  }
+
+  50% {
+    margin-top: -10px;
   }
 
 }
@@ -385,7 +389,7 @@ body::before {
 
 .hero-title {
 
-  margin: 12px 0 0;
+  margin: 28px 0 0;
 
   font-family: var(--typewriter);
 
@@ -395,11 +399,14 @@ body::before {
     clamp(4rem, 12vw, 10rem);
 
   letter-spacing: 0;
+
   word-spacing: 0;
 
   color: var(--brown-dark);
 
   line-height: .9;
+
+  overflow: hidden;
 
   opacity: 0;
 
@@ -439,7 +446,7 @@ body::before {
 }
 
 
-/* Hero atmosphere */
+/* hero atmosphere */
 
 .hero::after {
 
@@ -459,60 +466,27 @@ body::before {
 
   filter: blur(18px);
 
-  animation: heroGlow 7s ease-in-out infinite;
-
   pointer-events: none;
+
+  z-index: 1;
+
+  animation: heroGlow 7s ease-in-out infinite;
 
 }
 
 @keyframes heroGlow {
 
-  0%,100% {
-    transform: translate3d(0,0,0) scale(1);
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
     opacity: .45;
   }
 
   50% {
-    transform: translate3d(-25px,18px,0) scale(1.12);
+    transform: translate3d(-25px, 18px, 0) scale(1.12);
     opacity: .7;
   }
 
 }
-
-@keyframes heroFade {
-
-  to {
-    opacity: 1;
-  }
-
-}
-
-@keyframes letterIn {
-
-  to {
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-  }
-
-}
-
-@keyframes brainReveal {
-
-  to {
-
-    opacity: .72;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-
-  }
-
-}
-
 
 /* scroll indicator */
 
@@ -639,22 +613,27 @@ body::before {
 /* stage title */
 
 .story-title {
+
   position: absolute;
+
   top: 12%;
-  left: 50%;
-  transform: translateX(-50%);
+
+  left: 7%;
 
   z-index: 10;
 
   font-family: var(--typewriter);
+
   font-size: .65rem;
+
   letter-spacing: .18em;
+
   text-transform: uppercase;
+
   color: var(--brown);
 
-  text-align: center;
-  white-space: nowrap;
 }
+
 
 /* progress */
 
@@ -756,28 +735,17 @@ body::before {
 }
 
 .slide-kicker {
-  position: absolute;
-
-  top: calc(12% + 32px);
-  left: 7%;
-
-  margin: 0;
 
   font-family: var(--script);
+
   font-size: 1.2rem;
-  line-height: 1;
 
   color: var(--rose-deep);
 
-  z-index: 15;
+  margin-bottom: 15px;
 
-  transform: none;
-
-  text-align: left;
-  white-space: nowrap;
-
-  pointer-events: none;
 }
+
 .slide-heading {
 
   font-family: var(--serif);
@@ -894,93 +862,132 @@ body::before {
 
 
 /* =========================================================
-   SLIDE 2 — REFLECT / JOURNAL
+   SLIDE 2 — REFLECT
    ========================================================= */
 
-.journal-visual {
+.diary {
 
-  width: 100%;
-  height: 500px;
+  width: 360px;
+
+  height: 460px;
+
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  perspective: 1200px;
+
+  filter:
+    drop-shadow(0 35px 40px rgba(62,45,35,.18));
 
 }
 
-.journal-backdrop {
+.diary-cover {
 
   position: absolute;
-  width: 390px;
-  height: 470px;
-  background: #f7f2e9;
-  left: 50%;
-  top: 50%;
-  transform: translate(-46%,-50%) rotate(3deg) scale(.94);
+
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #8A7666 0 2px,
+      #7B6758 2px 5px
+    );
+
+  border-radius: 5px;
+
+  transform-origin: left center;
+
+  z-index: 5;
+
+  box-shadow:
+    inset -5px 0 rgba(255,255,255,.12);
+
+  transition:
+    transform 1.4s cubic-bezier(.16,1,.3,1);
+
+}
+
+.diary.open .diary-cover {
+
+  transform:
+    rotateY(-145deg);
+
+}
+
+.diary-pages {
+
+  position: absolute;
+
+  inset: 8px;
+
+  background: var(--paper);
+
   border-radius: 4px;
-  box-shadow: 0 30px 70px rgba(75,58,47,.10);
-  opacity: 0;
-  transition: opacity 1s ease .15s, transform 1.2s cubic-bezier(.16,1,.3,1);
+
+  padding: 55px 35px;
+
 }
 
-.journal-asset-wrap {
+.diary-pages::before {
 
-  position: relative;
-  width: min(390px, 75vw);
-  transform: translate3d(70px,30px,0) rotate(7deg) scale(.88);
-  opacity: 0;
-  filter: drop-shadow(0 35px 35px rgba(55,39,31,.20));
-  transition: opacity .9s ease, transform 1.25s cubic-bezier(.16,1,.3,1);
-  z-index: 2;
-}
-
-.journal-asset {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 3px;
-  object-fit: cover;
-}
-
-.journal-scribble {
+  content: "";
 
   position: absolute;
-  right: 0;
-  bottom: 38px;
+
+  inset: 0;
+
+  opacity: .25;
+
+  background-image:
+    repeating-linear-gradient(
+      transparent 0 29px,
+      #A7B8BE 30px
+    );
+
+}
+
+.diary-content {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+.diary-date {
+
+  font-family: var(--typewriter);
+
+  font-size: .6rem;
+
+  color: var(--brown);
+
+}
+
+.diary-content h3 {
+
   font-family: var(--script);
-  font-size: 1.55rem;
-  line-height: 1.05;
-  color: var(--sage-deep);
-  transform: rotate(-7deg) translateY(15px);
-  opacity: 0;
-  transition: opacity .8s ease .55s, transform .9s cubic-bezier(.16,1,.3,1);
-  z-index: 4;
-  pointer-events: none;
+
+  font-size: 2rem;
+
+  font-weight: 500;
+
+  margin: 25px 0;
+
 }
 
-.feature-slide.active .journal-backdrop {
-  opacity: 1;
-  transform: translate(-50%,-50%) rotate(2deg) scale(1);
+.diary-content p {
+
+  font-family: var(--typewriter);
+
+  font-size: .7rem;
+
+  line-height: 2;
+
+  color: var(--brown);
+
 }
 
-.feature-slide.active .journal-asset-wrap {
-  opacity: 1;
-  transform: translate3d(0,0,0) rotate(-3deg) scale(1);
-}
-
-.feature-slide.active .journal-scribble {
-  opacity: 1;
-  transform: rotate(-7deg) translateY(0);
-}
-
-@keyframes journalSettle {
-  0%,100% { transform: translate3d(0,0,0) rotate(-3deg); }
-  50% { transform: translate3d(0,-5px,0) rotate(-2.4deg); }
-}
-
-.feature-slide.active .journal-asset-wrap {
-  animation: journalSettle 5s ease-in-out 1.3s infinite;
-}
 
 /* =========================================================
    SLIDE 3 — MOOD
@@ -1074,142 +1081,122 @@ body::before {
 
 
 /* =========================================================
-   SLIDE 4 — VERA / AI SYSTEM
+   SLIDE 4 — VERA
    ========================================================= */
 
 .vera-art {
+
   width: 450px;
+
   height: 450px;
+
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
 }
 
-.vera-system {
-  width: 400px;
-  height: 400px;
-  position: relative;
-  transform: scale(.55);
-  opacity: 0;
-  transition: transform 1.25s cubic-bezier(.16,1,.3,1), opacity .7s ease;
-}
+.vera-network {
 
-.feature-slide.active .vera-system {
-  transform: scale(1);
-  opacity: 1;
-}
-
-.vera-core {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 112px;
-  height: 112px;
-  transform: translate(-50%,-50%);
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff, var(--sky-deep));
-  border: 1px solid rgba(98,79,67,.18);
-  box-shadow: 0 0 0 16px rgba(201,223,234,.28), 0 0 0 42px rgba(201,223,234,.13), 0 25px 60px rgba(62,45,35,.13);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
+
+  inset: 0;
+
 }
 
-.vera-core-glow {
+.vera-network svg {
+
+  width: 100%;
+  height: 100%;
+
+}
+
+.vera-line {
+
+  stroke: var(--sage-deep);
+
+  stroke-width: 1;
+
+  opacity: .55;
+
+  stroke-dasharray: 500;
+
+  stroke-dashoffset: 500;
+
+  transition:
+    stroke-dashoffset 1.5s ease;
+
+}
+
+.feature-slide.active .vera-line {
+
+  stroke-dashoffset: 0;
+
+}
+
+.vera-node {
+
+  fill: var(--rose-deep);
+
+  animation: neuralPulse 2.4s infinite;
+
+}
+
+.vera-chat {
+
   position: absolute;
-  inset: -18px;
-  border-radius: 50%;
-  border: 1px solid rgba(185,120,128,.22);
-  animation: veraPulse 3.5s ease-in-out infinite;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 12px;
+
 }
 
-.vera-core-label {
+.chat-bubble {
+
+  max-width: 280px;
+
+  padding: 17px 20px;
+
+  border-radius: 22px;
+
   font-family: var(--typewriter);
-  font-size: .78rem;
-  letter-spacing: .16em;
-  color: var(--brown-dark);
-  z-index: 2;
+
+  font-size: .65rem;
+
+  line-height: 1.7;
+
+  box-shadow:
+    0 15px 35px rgba(62,45,35,.08);
+
 }
 
-.vera-orbit {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border: 1px solid rgba(98,79,67,.18);
-  border-radius: 50%;
-  transform: translate(-50%,-50%) scale(.3);
-  opacity: 0;
-  transition: transform 1.2s cubic-bezier(.16,1,.3,1), opacity .8s ease;
+.chat-bubble.one {
+
+  background: var(--paper);
+
+  transform:
+    translateX(-35px)
+    rotate(-2deg);
+
 }
 
-.orbit-one { width: 190px; height: 190px; }
-.orbit-two { width: 285px; height: 285px; }
-.orbit-three { width: 380px; height: 380px; border-style: dashed; opacity: .5; }
+.chat-bubble.two {
 
-.feature-slide.active .vera-orbit {
-  transform: translate(-50%,-50%) scale(1);
-  opacity: 1;
+  background: var(--sage);
+
+  transform:
+    translateX(35px)
+    rotate(2deg);
+
 }
 
-.feature-slide.active .orbit-one { transition-delay: .15s; }
-.feature-slide.active .orbit-two { transition-delay: .32s; }
-.feature-slide.active .orbit-three { transition-delay: .5s; }
-
-.vera-system-node {
-  position: absolute;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: var(--rose-deep);
-  box-shadow: 0 0 0 9px rgba(185,120,128,.10);
-  transform: scale(0);
-  transition: transform .65s cubic-bezier(.16,1,.3,1);
-}
-
-.node-one { left: 50%; top: 5%; transform-origin: center; }
-.node-two { right: 8%; top: 28%; }
-.node-three { right: 18%; bottom: 12%; }
-.node-four { left: 18%; bottom: 12%; }
-.node-five { left: 8%; top: 28%; }
-.node-six { left: 50%; top: 50%; width: 7px; height: 7px; background: var(--sage-deep); }
-
-.feature-slide.active .vera-system-node { transform: scale(1); }
-.feature-slide.active .node-one { transition-delay: .65s; }
-.feature-slide.active .node-two { transition-delay: .8s; }
-.feature-slide.active .node-three { transition-delay: .95s; }
-.feature-slide.active .node-four { transition-delay: 1.1s; }
-.feature-slide.active .node-five { transition-delay: 1.25s; }
-.feature-slide.active .node-six { transition-delay: .55s; }
-
-.vera-system-label {
-  position: absolute;
-  font-family: var(--script);
-  font-size: 1rem;
-  color: var(--brown);
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .7s ease, transform .7s ease;
-}
-
-.label-one { left: 4%; top: 20%; }
-.label-two { right: 2%; top: 52%; }
-.label-three { left: 4%; bottom: 19%; }
-
-.feature-slide.active .vera-system-label {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.feature-slide.active .label-one { transition-delay: 1.15s; }
-.feature-slide.active .label-two { transition-delay: 1.35s; }
-.feature-slide.active .label-three { transition-delay: 1.55s; }
-
-@keyframes veraPulse {
-  0%,100% { transform: scale(.92); opacity: .45; }
-  50% { transform: scale(1.08); opacity: .85; }
-}
 
 /* =========================================================
    SLIDE 5 — CALM
@@ -1385,488 +1372,317 @@ body::before {
    JOURNAL TRANSFORMATION
    ========================================================= */
 
-/* =========================================================
-   JOURNAL SECTION
-   ========================================================= */
-
 .journal-story {
+
   height: 220vh;
-  background: var(--cream);
+
+  background: #E1EDF1;
+
   position: relative;
-  overflow: hidden;
+
 }
 
-
-/* =========================================================
-   MAIN STAGE
-   ========================================================= */
-
 .journal-stage {
+
   position: sticky;
+
   top: 0;
 
   height: 100svh;
-  min-height: 650px;
-
-  display: grid;
-
-  grid-template-columns:
-    0.9fr
-    1.1fr;
-
-  align-items: center;
-
-  gap: 5vw;
-
-  width: min(1150px, 88vw);
-
-  margin: 0 auto;
-
-  overflow: hidden;
-}
-
-
-/* =========================================================
-   LEFT — TEXT
-   ========================================================= */
-
-.journal-copy {
-  position: relative;
-
-  z-index: 10;
-
-  padding-left: 2vw;
-
-  opacity: 0;
-
-  transform: translateY(45px);
-
-  transition:
-    opacity 1s ease,
-    transform 1.1s cubic-bezier(.16,1,.3,1);
-}
-
-
-.journal-kicker {
-  font-family: var(--typewriter);
-
-  font-size: .65rem;
-
-  letter-spacing: .16em;
-
-  text-transform: uppercase;
-
-  color: var(--brown);
-
-  margin-bottom: 24px;
-}
-
-
-.journal-title {
-  position: relative;
-
-  margin: 0;
-
-  font-family: var(--typewriter);
-
-  font-size:
-    clamp(4rem, 7vw, 7.5rem);
-
-  font-weight: normal;
-
-  line-height: .82;
-
-  letter-spacing: -.035em;
-
-  color: var(--brown-dark);
-
-  white-space: nowrap;
-}
-
-
-.journal-subtitle {
-  max-width: 280px;
-
-  margin:
-    32px 0 0;
-
-  font-family: var(--script);
-
-  font-size: 1.45rem;
-
-  line-height: 1.2;
-
-  color: var(--sage-deep);
-}
-
-
-.journal-link {
-  display: inline-block;
-
-  position: relative;
-
-  margin-top: 38px;
-
-  padding-bottom: 6px;
-
-  font-family: var(--typewriter);
-
-  font-size: .65rem;
-
-  letter-spacing: .12em;
-
-  text-transform: uppercase;
-
-  color: var(--brown-dark);
-
-  text-decoration: none;
-
-  opacity: 1;
-
-  border-bottom:
-    1px solid rgba(62,45,35,.35);
-
-  transition:
-    transform .3s ease,
-    border-color .3s ease;
-}
-
-
-.journal-link:hover {
-  transform: translateX(7px);
-
-  border-color:
-    var(--brown-dark);
-}
-
-
-/* =========================================================
-   RIGHT — JOURNAL IMAGE
-   ========================================================= */
-
-.journal-visual {
-  position: relative;
-
-  height: 650px;
 
   display: flex;
 
   align-items: center;
 
   justify-content: center;
-}
 
-
-/* soft paper behind the journal */
-
-.journal-paper-shadow {
-  position: absolute;
-
-  width: min(390px, 30vw);
-
-  aspect-ratio: .78;
-
-  background: #f8f3e9;
-
-  border-radius: 5px;
-
-  transform:
-    translate(
-      35px,
-      35px
-    )
-    rotate(5deg)
-    scale(.9);
-
-  opacity: 0;
-
-  box-shadow:
-    0 25px 70px
-    rgba(62,45,35,.12);
-
-  transition:
-    opacity .8s ease .2s,
-    transform 1.2s cubic-bezier(.16,1,.3,1);
-}
-
-
-/* actual journal */
-
-.journal-image-wrap {
-  position: relative;
-
-  z-index: 3;
-
-  width: min(390px, 32vw);
-
-  transform:
-    translate(
-      100px,
-      45px
-    )
-    rotate(8deg)
-    scale(.88);
-
-  opacity: 0;
-
-  transition:
-    opacity .9s ease .1s,
-    transform 1.3s cubic-bezier(.16,1,.3,1);
-
-  filter:
-    drop-shadow(
-      0 30px 30px
-      rgba(62,45,35,.20)
-    );
-}
-
-
-.journal-image {
-  display: block;
-
-  width: 100%;
-
-  height: auto;
-
-  border-radius: 4px;
-}
-
-
-/* =========================================================
-   LITTLE HANDWRITTEN DETAIL
-   ========================================================= */
-
-.journal-note {
-  position: absolute;
-
-  z-index: 8;
-
-  right: 4%;
-
-  bottom: 12%;
-
-  font-family: var(--script);
-
-  font-size: 1.5rem;
-
-  color: var(--rose-deep);
-
-  transform:
-    rotate(-8deg)
-    translateY(20px);
-
-  opacity: 0;
-
-  transition:
-    opacity .8s ease .7s,
-    transform .9s cubic-bezier(.16,1,.3,1);
-}
-
-
-/* =========================================================
-   SCROLL REVEAL
-   ========================================================= */
-
-.journal-story.is-visible
-.journal-copy {
-
-  opacity: 1;
-
-  transform:
-    translateY(0);
-}
-
-
-.journal-story.is-visible
-.journal-paper-shadow {
-
-  opacity: 1;
-
-  transform:
-    translate(
-      35px,
-      35px
-    )
-    rotate(4deg)
-    scale(1);
-}
-
-
-.journal-story.is-visible
-.journal-image-wrap {
-
-  opacity: 1;
-
-  transform:
-    translate(
-      0,
-      0
-    )
-    rotate(-3deg)
-    scale(1);
-}
-
-
-.journal-story.is-visible
-.journal-note {
-
-  opacity: 1;
-
-  transform:
-    rotate(-8deg)
-    translateY(0);
-}
-
-
-/* =========================================================
-   VERY SUBTLE JOURNAL FLOAT
-   ========================================================= */
-
-@keyframes journalFloat {
-
-  0%,
-  100% {
-    transform:
-      translateY(0)
-      rotate(-3deg);
-  }
-
-  50% {
-    transform:
-      translateY(-8px)
-      rotate(-2.3deg);
-  }
+  overflow: hidden;
 
 }
 
-
-.journal-story.is-visible
-.journal-image-wrap {
-
-  animation:
-    journalFloat
-    6s
-    ease-in-out
-    1.5s
-    infinite;
-}
-
-
-/* =========================================================
-   DECORATIVE PAPER GLOW
-   ========================================================= */
-
-.journal-visual::before {
+.journal-stage::before {
 
   content: "";
 
   position: absolute;
 
-  width: 500px;
-  height: 500px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.75) 0%,
-      rgba(255,255,255,0) 70%
-    );
+  inset: 0;
 
   pointer-events: none;
 
-  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 28%, rgba(255,255,255,.55), transparent 25%),
+    radial-gradient(circle at 82% 68%, rgba(255,255,255,.42), transparent 28%);
+
+  opacity: .8;
+
 }
 
+.journal-object {
+
+  position: relative;
+
+  width: min(400px, 70vw);
+
+  height: min(500px, 72vh);
+
+  perspective: 1500px;
+
+  transition:
+    transform .15s linear;
+
+}
+
+.journal-page {
+
+  position: absolute;
+
+  inset: 0;
+
+  background: var(--paper);
+
+  box-shadow:
+    0 35px 80px rgba(62,45,35,.15);
+
+  border-radius: 5px;
+
+}
+
+.journal-page.left {
+
+  transform-origin: left center;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #EEE5D6 0 1px,
+      #FFFDF8 1px 30px
+    );
+
+  transition:
+    transform 1.3s cubic-bezier(.16,1,.3,1);
+
+  z-index: 3;
+
+}
+
+.journal-page.right {
+
+  padding: 65px 45px;
+
+  z-index: 2;
+
+}
+
+.journal-story.open .journal-page.left {
+
+  transform:
+    rotateY(-135deg);
+
+}
+
+.journal-writing {
+
+  font-family: var(--typewriter);
+
+  font-size: .68rem;
+
+  line-height: 2;
+
+  color: var(--brown);
+
+}
+
+.journal-writing h3 {
+
+  font-family: var(--script);
+
+  font-size: 2rem;
+
+  margin-bottom: 25px;
+
+}
 
 /* =========================================================
-   RESPONSIVE
+   JOURNAL SIDE NOTE
    ========================================================= */
 
-@media (max-width: 800px) {
+.journal-side-note {
 
-  .journal-stage {
+  position: absolute;
 
-    grid-template-columns: 1fr;
+  left: calc(50% + min(250px, 31vw));
 
-    width: 88vw;
+  top: 50%;
 
-    gap: 20px;
+  transform: translateY(-50%) translateX(35px);
 
-    padding-top: 60px;
+  width: min(280px, 25vw);
+
+  z-index: 12;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity .8s ease .45s,
+    transform 1s cubic-bezier(.16,1,.3,1);
+
+}
+
+.journal-story.open .journal-side-note {
+
+  opacity: 1;
+
+  transform: translateY(-50%) translateX(0);
+
+}
+
+.journal-side-note .note-kicker {
+
+  font-family: var(--typewriter);
+
+  font-size: .58rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+  color: var(--sage-deep);
+
+  margin-bottom: 18px;
+
+}
+
+.journal-side-note h3 {
+
+  margin: 0 0 18px;
+
+  font-family: var(--serif);
+
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
+
+  line-height: .95;
+
+  font-weight: 300;
+
+  color: var(--brown-dark);
+
+}
+
+.journal-side-note h3 em {
+
+  font-family: var(--script);
+
+  color: var(--sage-deep);
+
+  font-size: .8em;
+
+}
+
+.journal-side-note p {
+
+  margin: 0;
+
+  max-width: 245px;
+
+  font-family: var(--typewriter);
+
+  font-size: .64rem;
+
+  line-height: 1.9;
+
+  color: var(--brown);
+
+}
+
+.journal-side-note .note-fragments {
+
+  margin-top: 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  font-family: var(--script);
+
+  font-size: 1rem;
+
+  color: var(--rose-deep);
+
+}
+
+.journal-side-note .note-fragments span:nth-child(2) {
+
+  margin-left: 22px;
+
+  color: var(--sage-deep);
+
+}
+
+.journal-side-note .note-fragments span:nth-child(3) {
+
+  margin-left: 8px;
+
+  color: var(--brown);
+
+}
+
+@media (max-width: 900px) {
+
+  .journal-side-note {
+
+    left: auto;
+
+    right: 6%;
+
+    top: auto;
+
+    bottom: 14%;
+
+    width: min(230px, 34vw);
+
+    transform: translateY(18px);
 
   }
 
+  .journal-story.open .journal-side-note {
 
-  .journal-copy {
-
-    text-align: center;
-
-    padding-left: 0;
+    transform: translateY(0);
 
   }
 
+}
 
-  .journal-title {
+@media (max-width: 650px) {
 
-    font-size:
-      clamp(3.5rem, 16vw, 6rem);
-
-  }
-
-
-  .journal-subtitle {
-
-    margin-left: auto;
-    margin-right: auto;
-
-  }
-
-
-  .journal-link {
-
-    margin-top: 25px;
-
-  }
-
-
-  .journal-visual {
-
-    height: 420px;
-
-  }
-
-
-  .journal-image-wrap {
-
-    width: min(
-      320px,
-      65vw
-    );
-
-  }
-
-
-  .journal-paper-shadow {
-
-    width: min(
-      320px,
-      65vw
-    );
-
-  }
-
-
-  .journal-note {
+  .journal-side-note {
 
     right: 8%;
 
-    bottom: 5%;
+    bottom: 10%;
+
+    width: 190px;
+
+  }
+
+  .journal-side-note h3 {
+
+    font-size: 1.8rem;
+
+  }
+
+  .journal-side-note p {
+
+    font-size: .56rem;
 
   }
 
 }
+
 
 /* =========================================================
    EDITORIAL END
@@ -2397,14 +2213,6 @@ body::before {
 
   }
 
-  .hero-art {
-
-    width: 280px;
-
-    top: 57%;
-
-  }
-
   .feature-story {
 
     height: 550vh;
@@ -2537,52 +2345,6 @@ body::before {
 
 }
 
-
-/* =========================================================
-   RESPONSIVE REFINEMENTS
-   ========================================================= */
-
-@media (max-width: 800px) {
-
-  .slide-kicker {
-    top: 38px;
-    left: 7vw;
-  }
-
-  .journal-visual {
-    height: 430px;
-  }
-
-  .journal-asset-wrap {
-    width: min(330px, 70vw);
-  }
-
-  .journal-backdrop {
-    width: min(330px, 70vw);
-    height: 390px;
-  }
-
-  .journal-scribble {
-    right: 3vw;
-    bottom: 18px;
-    font-size: 1.2rem;
-  }
-
-  .vera-art {
-    width: min(380px, 85vw);
-    height: min(380px, 85vw);
-  }
-
-  .vera-system {
-    transform: scale(.72);
-  }
-
-  .feature-slide.active .vera-system {
-    transform: scale(.72);
-  }
-
-}
-
 </style>
 </head>
 
@@ -2627,7 +2389,6 @@ body::before {
     <div class="hero-tag">
       where your mind blooms
     </div>
-
 
 
   </div>
@@ -2746,23 +2507,48 @@ body::before {
         </div>
 
 
-        <div class="slide-visual journal-visual">
+        <div class="slide-visual">
 
-          <div class="journal-backdrop"></div>
+          <div
+            class="diary"
+            id="storyDiary"
+          >
 
-          <div class="journal-asset-wrap">
+            <div class="diary-pages">
 
-            <img
-              src="assets/images/journal.png"
-              alt="A decorated personal journal"
-              class="journal-asset"
-            >
+              <div class="diary-content">
 
-          </div>
+                <div class="diary-date">
+                  monday · 8:42 pm
+                </div>
 
-          <div class="journal-scribble">
-            a place to put<br>
-            your thoughts
+                <h3>
+                  dear me,
+                </h3>
+
+                <p>
+
+                  Today felt a little strange.
+
+                  <br><br>
+
+                  I think I'm beginning to
+                  understand why I've been
+                  feeling this way.
+
+                  <br><br>
+
+                  Maybe tomorrow will feel
+                  a little different.
+
+                </p>
+
+              </div>
+
+            </div>
+
+            <div class="diary-cover"></div>
+
           </div>
 
         </div>
@@ -2888,27 +2674,90 @@ body::before {
 
           <div class="vera-art">
 
-            <div class="vera-system">
+            <div class="vera-network">
 
-              <div class="vera-orbit orbit-one"></div>
-              <div class="vera-orbit orbit-two"></div>
-              <div class="vera-orbit orbit-three"></div>
+              <svg viewBox="0 0 450 450">
 
-              <div class="vera-core">
-                <span class="vera-core-glow"></span>
-                <span class="vera-core-label">VERA</span>
+                <line
+                  class="vera-line"
+                  x1="80" y1="90"
+                  x2="210" y2="190"
+                />
+
+                <line
+                  class="vera-line"
+                  x1="210" y1="190"
+                  x2="360" y2="110"
+                />
+
+                <line
+                  class="vera-line"
+                  x1="210" y1="190"
+                  x2="150" y2="350"
+                />
+
+                <line
+                  class="vera-line"
+                  x1="210" y1="190"
+                  x2="350" y2="340"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="80"
+                  cy="90"
+                  r="7"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="210"
+                  cy="190"
+                  r="10"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="360"
+                  cy="110"
+                  r="7"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="150"
+                  cy="350"
+                  r="7"
+                />
+
+                <circle
+                  class="vera-node"
+                  cx="350"
+                  cy="340"
+                  r="7"
+                />
+
+              </svg>
+
+            </div>
+
+
+            <div class="vera-chat">
+
+              <div class="chat-bubble one">
+
+                I've had a really
+                overwhelming day.
+
               </div>
 
-              <span class="vera-system-node node-one"></span>
-              <span class="vera-system-node node-two"></span>
-              <span class="vera-system-node node-three"></span>
-              <span class="vera-system-node node-four"></span>
-              <span class="vera-system-node node-five"></span>
-              <span class="vera-system-node node-six"></span>
+              <div class="chat-bubble two">
 
-              <span class="vera-system-label label-one">listen</span>
-              <span class="vera-system-label label-two">notice</span>
-              <span class="vera-system-label label-three">understand</span>
+                You don't have to
+                figure everything out
+                all at once. 🌸
+
+              </div>
 
             </div>
 
@@ -3061,8 +2910,28 @@ body::before {
     </div>
 
 
-    <div class="journal-title">
-      JOURNAL
+    <div class="journal-side-note">
+
+      <div class="note-kicker">
+        a place to reflect
+      </div>
+
+      <h3>
+        Let your thoughts<br>
+        <em>land somewhere.</em>
+      </h3>
+
+      <p>
+        You don't have to make sense of everything.
+        Sometimes noticing what you feel is enough.
+      </p>
+
+      <div class="note-fragments">
+        <span>today I noticed...</span>
+        <span>maybe tomorrow...</span>
+        <span>I felt...</span>
+      </div>
+
     </div>
 
 
@@ -3332,6 +3201,9 @@ const slides =
 const dots =
   document.querySelectorAll(".story-dot");
 
+const diary =
+  document.getElementById("storyDiary");
+
 const calmCircle =
   document.getElementById("calmCircle");
 
@@ -3403,6 +3275,17 @@ function updateFeatureStory() {
     }
   );
 
+
+  /* diary */
+
+  if (diary) {
+
+    diary.classList.toggle(
+      "open",
+      index === 1
+    );
+
+  }
 
 
   /* breathing */

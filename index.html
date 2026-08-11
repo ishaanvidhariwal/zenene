@@ -2912,6 +2912,168 @@ body::before {
   }
 
 }
+  /* =========================================================
+   FORMAL FOOTER
+   ========================================================= */
+
+.site-footer {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 80px 7vw 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.site-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.06),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(216,228,215,.06),
+            transparent 28%
+        );
+    pointer-events: none;
+}
+
+.footer-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 70px;
+}
+
+.footer-brand {
+    max-width: 360px;
+}
+
+.footer-logo {
+    font-family: var(--typewriter);
+    font-size: 1rem;
+    letter-spacing: .2em;
+    margin-bottom: 20px;
+}
+
+.footer-tagline {
+    font-family: var(--serif);
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 300;
+    color: var(--cream);
+}
+
+.footer-description {
+    margin-top: 20px;
+    font-family: var(--typewriter);
+    font-size: .62rem;
+    line-height: 1.9;
+    color: rgba(247,241,231,.65);
+    max-width: 300px;
+}
+
+.footer-column h4 {
+    margin: 0 0 20px;
+    font-family: var(--typewriter);
+    font-size: .62rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-weight: normal;
+    color: var(--rose);
+}
+
+.footer-column a {
+    display: block;
+    width: fit-content;
+    margin-bottom: 12px;
+
+    color: rgba(247,241,231,.72);
+    text-decoration: none;
+
+    font-family: var(--typewriter);
+    font-size: .62rem;
+
+    transition:
+        color .3s ease,
+        transform .3s ease;
+}
+
+.footer-column a:hover {
+    color: var(--cream);
+    transform: translateX(4px);
+}
+
+.footer-contact {
+    font-family: var(--typewriter);
+    font-size: .62rem;
+    line-height: 1.9;
+    color: rgba(247,241,231,.72);
+}
+
+.footer-contact a {
+    margin-top: 8px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(247,241,231,.12);
+
+    padding-top: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-copyright {
+    font-family: var(--typewriter);
+    font-size: .55rem;
+    letter-spacing: .08em;
+    color: rgba(247,241,231,.45);
+}
+
+.footer-note {
+    font-family: var(--script);
+    font-size: 1rem;
+    color: rgba(247,241,231,.55);
+}
+
+/* footer responsive */
+
+@media (max-width: 800px) {
+
+    .site-footer {
+        padding: 65px 7vw 25px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 45px 30px;
+        padding-bottom: 50px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
 
 </style>
 </head>
@@ -3937,6 +4099,95 @@ window.addEventListener(
 );
 
 updateJournal();
+
+  <!-- ======================================================
+     FORMAL FOOTER
+     ====================================================== -->
+
+<footer class="site-footer">
+
+  <div class="footer-main">
+
+    <div class="footer-brand">
+      <div class="footer-logo">ZENENE</div>
+
+      <p>
+        a softer place for your mind.
+      </p>
+    </div>
+
+
+    <div class="footer-column">
+
+      <div class="footer-heading">
+        explore
+      </div>
+
+      <a href="journal.html">Journal</a>
+      <a href="mood.html">Mood</a>
+      <a href="chat.html">Vera</a>
+      <a href="explore.html">Explore</a>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <div class="footer-heading">
+        connect
+      </div>
+
+      <a
+        href="https://instagram.com/zenene.app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Instagram
+      </a>
+
+      <a href="mailto:hello@zenene.app">
+        hello@zenene.app
+      </a>
+
+      <a
+        href="https://zenene.app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        zenene.app
+      </a>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <div class="footer-heading">
+        zenene
+      </div>
+
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © 2026 Zenene. All rights reserved.
+    </span>
+
+    <span class="footer-note">
+      made with intention, for the mind.
+    </span>
+
+  </div>
+
+</footer>
 
 
 /* =========================================================

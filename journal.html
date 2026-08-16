@@ -1,1778 +1,2060 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Journal — Zenene</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* =========================================================
-           ZENENE JOURNAL
-           ========================================================= */
-
-        :root {
-            --sky: #dcecf0;
-            --sky-dark: #b9d6dc;
-
-            --paper: #f9f4e9;
-            --paper-light: #fffdf7;
-            --paper-dark: #eee5d4;
-
-            --brown: #5a3d2b;
-            --brown-light: #806652;
-
-            --pink: #efb7bd;
-            --pink-soft: #f8dfe1;
-
-            --sage: #b8c89b;
-            --sage-dark: #7f9363;
-
-            --cream: #f5eddd;
-
-            --text: #4e382a;
-            --muted: #8c7868;
-
-            --shadow:
-                0 12px 35px rgba(78, 56, 42, 0.09);
-
-            --radius: 24px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            background: var(--sky);
-            color: var(--text);
-            font-family: "DM Mono", monospace;
-            overflow-x: hidden;
-
-            /* subtle paper grain */
-            background-image:
-                radial-gradient(
-                    rgba(255,255,255,0.45) 1px,
-                    transparent 1px
-                );
-            background-size: 9px 9px;
-        }
-
-        /* =========================================================
-           DECORATIVE BACKGROUND
-           ========================================================= */
-
-        .background-flower {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.55;
-        }
-
-        .flower-left {
-            left: 18px;
-            bottom: 30px;
-            font-size: 120px;
-            transform: rotate(-10deg);
-        }
-
-        .flower-right {
-            right: 30px;
-            top: 110px;
-            font-size: 90px;
-            transform: rotate(8deg);
-        }
-
-        /* =========================================================
-           LAYOUT
-           ========================================================= */
-
-        .app {
-            display: flex;
-            min-height: 100vh;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* =========================================================
-           SIDEBAR
-           ========================================================= */
-
-        .sidebar {
-            width: 225px;
-            min-height: 100vh;
-            padding: 35px 20px;
-
-            position: fixed;
-            left: 0;
-            top: 0;
-
-            display: flex;
-            flex-direction: column;
-
-            background: rgba(216, 236, 240, 0.72);
-            border-right: 1px solid rgba(90, 61, 43, 0.08);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            backdrop-filter: blur(10px);
-        }
+  <title>Journal — Zenene</title>
 
-        .logo {
-            margin-left: 10px;
-            margin-bottom: 48px;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        .logo-name {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 42px;
-            line-height: 0.8;
-            font-weight: 600;
-            letter-spacing: -1px;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet">
 
-        .logo-sub {
-            margin-top: 12px;
-            font-family: "Kalam", cursive;
-            font-size: 13px;
-            color: var(--brown-light);
-        }
-
-        .brain {
-            font-size: 22px;
-            margin-top: 5px;
-        }
-
-        .nav {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-
-            padding: 13px 14px;
-
-            border-radius: 14px;
-
-            color: var(--text);
-            text-decoration: none;
-
-            font-size: 13px;
-
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        .nav-item:hover {
-            background: rgba(255,255,255,0.45);
-            transform: translateX(3px);
-        }
-
-        .nav-item.active {
-            background: var(--pink);
-            box-shadow: 0 5px 18px rgba(120, 70, 70, 0.09);
-        }
-
-        .nav-icon {
-            width: 25px;
-            text-align: center;
-            font-size: 20px;
-        }
-
-        .sidebar-note {
-            margin-top: auto;
+  <style>
 
-            padding: 18px;
-
-            background: var(--paper);
-            border-radius: 5px;
-
-            transform: rotate(-2deg);
-
-            box-shadow: 0 8px 20px rgba(80,60,40,0.08);
-
-            font-family: "Kalam", cursive;
-            font-size: 15px;
-            line-height: 1.5;
-
-            position: relative;
-        }
-
-        .sidebar-note::before {
-            content: "";
-            position: absolute;
-
-            width: 65px;
-            height: 18px;
-
-            top: -9px;
-            left: 28px;
-
-            background: #d9c895;
-            opacity: 0.75;
-
-            transform: rotate(-4deg);
-        }
+    /* =========================================================
+       ZENENE — JOURNAL
+       ========================================================= */
 
-        /* =========================================================
-           MAIN
-           ========================================================= */
+    :root {
+      --sky: #c7ddef;
+      --sky-dark: #a9c8df;
 
-        .main {
-            margin-left: 225px;
-            width: calc(100% - 225px);
-            padding: 55px 55px 80px;
-        }
+      --cream: #fffaf2;
+      --paper: #fffdf8;
+      --paper-soft: rgba(255, 253, 248, 0.82);
 
-        .content {
-            max-width: 1150px;
-            margin: auto;
-        }
+      --brown: #4a392f;
+      --brown-soft: #806c5e;
+      --brown-light: #aa9788;
 
-        /* =========================================================
-           HEADER
-           ========================================================= */
+      --sage: #9db69b;
+      --sage-dark: #759477;
 
-        .page-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
+      --rose: #e7b6bc;
+      --rose-dark: #ca8994;
 
-            margin-bottom: 35px;
-        }
+      --lavender: #d8cee6;
 
-        .header-title {
-            font-family: "Cormorant Garamond", serif;
-            font-size: clamp(55px, 6vw, 78px);
-            line-height: 0.85;
-            font-weight: 600;
-            letter-spacing: -2px;
+      --line: rgba(74, 57, 47, 0.11);
 
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+      --shadow: 0 12px 35px rgba(74, 57, 47, 0.08);
+    }
 
-        .header-title span {
-            font-family: "Kalam", cursive;
-            font-size: 32px;
-            color: var(--sage-dark);
-            transform: rotate(-10deg);
-        }
 
-        .subtitle {
-            margin-top: 16px;
+    /* RESET */
 
-            font-family: "Kalam", cursive;
-            font-size: 22px;
-            color: var(--brown-light);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .privacy-card {
-            padding: 17px 22px;
 
-            background: var(--paper);
+    html {
+      scroll-behavior: smooth;
+    }
 
-            box-shadow: var(--shadow);
 
-            transform: rotate(1.5deg);
+    body {
+      min-height: 100vh;
 
-            min-width: 190px;
-        }
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(255,255,255,.48) 0 2px,
+          transparent 3px
+        ),
+        var(--sky);
 
-        .privacy-title {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
+      background-size: 42px 42px;
 
-        .privacy-text {
-            font-size: 10px;
-            color: var(--muted);
-        }
+      color: var(--brown);
 
-        /* =========================================================
-           JOURNAL PAPER
-           ========================================================= */
+      font-family: 'DM Mono', monospace;
 
-        .journal-paper {
-            position: relative;
+      padding-bottom: 100px;
+    }
 
-            background:
-                linear-gradient(
-                    rgba(255,255,255,0.3),
-                    rgba(255,255,255,0.3)
-                ),
-                var(--paper);
 
-            border-radius: var(--radius);
+    /* =========================================================
+       PAPER GRAIN
+       ========================================================= */
 
-            box-shadow: var(--shadow);
+    body::before {
+      content: "";
 
-            padding: 40px 55px 35px;
+      position: fixed;
+      inset: 0;
 
-            overflow: hidden;
-        }
+      pointer-events: none;
 
-        /* notebook rings */
+      opacity: .18;
 
-        .journal-paper::before {
-            content: "";
-            position: absolute;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          rgba(74,57,47,.025) 0px,
+          rgba(74,57,47,.025) 1px,
+          transparent 1px,
+          transparent 4px
+        );
 
-            left: 17px;
-            top: 25px;
-            bottom: 25px;
+      z-index: 0;
+    }
 
-            width: 14px;
 
-            background:
-                radial-gradient(
-                    circle,
-                    var(--paper-dark) 0 5px,
-                    transparent 6px
-                );
+    /* =========================================================
+       HEADER
+       ========================================================= */
 
-            background-size: 14px 30px;
-        }
+    .topbar {
+      position: sticky;
+      top: 0;
 
-        .paper-decoration {
-            position: absolute;
-            right: 35px;
-            top: 40px;
+      z-index: 100;
 
-            font-size: 80px;
-            opacity: 0.45;
+      height: 68px;
 
-            transform: rotate(12deg);
-        }
+      display: flex;
+      align-items: center;
 
-        /* =========================================================
-           MOOD
-           ========================================================= */
+      padding: 0 28px;
 
-        .mood-title {
-            text-align: center;
+      background: rgba(255,250,242,.84);
 
-            font-family: "Kalam", cursive;
-            font-size: 22px;
+      backdrop-filter: blur(18px);
 
-            color: #df7e83;
+      border-bottom: 1px solid rgba(74,57,47,.08);
+    }
 
-            margin-bottom: 25px;
-        }
 
-        .moods {
-            display: flex;
-            justify-content: center;
-            gap: clamp(25px, 5vw, 70px);
+    .back {
+      width: 38px;
+      height: 38px;
 
-            margin-bottom: 35px;
-        }
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-        .mood {
-            border: none;
-            background: transparent;
+      border-radius: 50%;
 
-            cursor: pointer;
+      text-decoration: none;
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+      color: var(--brown);
 
-            gap: 8px;
+      font-size: 20px;
 
-            color: var(--text);
+      transition: .25s;
+    }
 
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
 
-            transition:
-                transform 0.25s ease;
-        }
+    .back:hover {
+      background: rgba(255,255,255,.65);
+      transform: translateX(-3px);
+    }
 
-        .mood:hover {
-            transform: translateY(-5px);
-        }
 
-        .mood-face {
-            width: 58px;
-            height: 58px;
+    .brand {
+      margin-left: 10px;
 
-            border-radius: 50%;
+      font-family: 'Playfair Display', serif;
 
-            display: grid;
-            place-items: center;
+      font-size: 17px;
+      letter-spacing: .02em;
+    }
 
-            font-size: 27px;
 
-            transition:
-                box-shadow 0.25s ease,
-                transform 0.25s ease;
-        }
+    .header-note {
+      margin-left: auto;
 
-        .mood.selected .mood-face {
-            box-shadow:
-                0 0 0 4px var(--sage),
-                0 0 0 8px rgba(184,200,155,0.25);
+      font-family: 'Caveat', cursive;
 
-            transform: scale(1.06);
-        }
+      font-size: 19px;
 
-        .mood.selected span:last-child {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
+      color: var(--brown-soft);
+    }
 
-        .amazing {
-            background: #f7d6c5;
-        }
 
-        .good {
-            background: #dce8c7;
-        }
+    /* =========================================================
+       MAIN
+       ========================================================= */
 
-        .okay {
-            background: #f7dfb9;
-        }
+    .page {
+      position: relative;
+      z-index: 1;
 
-        .low {
-            background: #e4dcec;
-        }
+      width: min(920px, calc(100% - 36px));
 
-        .awful {
-            background: #eadbdf;
-        }
+      margin: 0 auto;
 
-        /* =========================================================
-           TEXT AREA
-           ========================================================= */
+      padding: 58px 0 50px;
+    }
 
-        .entry-area {
-            position: relative;
-        }
 
-        .journal-input {
-            width: 100%;
-            min-height: 210px;
+    /* =========================================================
+       HERO
+       ========================================================= */
 
-            resize: vertical;
+    .hero {
+      text-align: center;
 
-            border: none;
-            outline: none;
+      margin-bottom: 46px;
 
-            background: transparent;
+      animation: fadeUp .7s ease both;
+    }
 
-            color: var(--text);
 
-            font-family: "DM Mono", monospace;
-            font-size: 14px;
-            line-height: 2;
+    .eyebrow {
+      font-size: 10px;
 
-            padding: 10px 10px 20px;
+      letter-spacing: .22em;
 
-            background-image:
-                repeating-linear-gradient(
-                    transparent 0,
-                    transparent 31px,
-                    rgba(120, 100, 80, 0.09) 32px
-                );
-        }
+      text-transform: uppercase;
 
-        .journal-input::placeholder {
-            color: #9c8d7e;
-            opacity: 0.8;
-        }
+      color: var(--sage-dark);
 
-        .entry-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+      margin-bottom: 12px;
+    }
 
-            margin-top: 5px;
-        }
 
-        .prompt-button {
-            border: 1px solid rgba(90,61,43,0.13);
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
 
-            background: rgba(255,255,255,0.4);
+      font-size: clamp(48px, 8vw, 76px);
 
-            padding: 13px 20px;
+      font-weight: 400;
 
-            border-radius: 30px;
+      line-height: .95;
 
-            color: var(--text);
+      letter-spacing: -.035em;
+    }
 
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
 
-            cursor: pointer;
+    .hero h1 span {
+      font-family: 'Caveat', cursive;
 
-            transition: 0.25s ease;
-        }
+      font-size: .62em;
 
-        .prompt-button:hover {
-            background: white;
-            transform: translateY(-2px);
-        }
+      color: var(--rose-dark);
 
-        .save-button {
-            border: none;
+      margin-left: 7px;
+    }
 
-            background: var(--sage);
 
-            color: #3d4b2f;
+    .hero p {
+      margin-top: 18px;
 
-            padding: 14px 25px;
+      font-family: 'Caveat', cursive;
 
-            border-radius: 30px;
+      font-size: 22px;
 
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
+      color: var(--brown-soft);
+    }
 
-            cursor: pointer;
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
+    .date {
+      margin-top: 16px;
 
-        .save-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 18px rgba(90,100,60,0.15);
-        }
+      font-size: 10px;
 
-        .counter {
-            font-size: 10px;
-            color: var(--muted);
-        }
+      letter-spacing: .13em;
 
-        /* =========================================================
-           QUICK TOOLS
-           ========================================================= */
+      text-transform: uppercase;
 
-        .tools {
-            display: grid;
+      color: var(--brown-light);
+    }
 
-            grid-template-columns:
-                repeat(4, 1fr);
 
-            gap: 12px;
+    /* =========================================================
+       SECTION LABEL
+       ========================================================= */
 
-            margin-top: 18px;
-        }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 13px;
 
-        .tool-card {
-            background: var(--paper);
+      margin-bottom: 17px;
 
-            padding: 20px;
+      font-size: 10px;
 
-            min-height: 145px;
+      letter-spacing: .15em;
 
-            border-radius: 17px;
+      text-transform: uppercase;
 
-            box-shadow: 0 6px 20px rgba(78,56,42,0.05);
+      color: var(--brown-soft);
+    }
 
-            position: relative;
 
-            cursor: pointer;
+    .section-label::after {
+      content: "";
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
+      height: 1px;
 
-        .tool-card:hover {
-            transform: translateY(-4px) rotate(-0.4deg);
-            box-shadow: 0 12px 25px rgba(78,56,42,0.09);
-        }
+      flex: 1;
 
-        .tool-icon {
-            font-size: 23px;
-            margin-bottom: 12px;
-        }
+      background: var(--line);
+    }
 
-        .tool-title {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 20px;
-            font-weight: 600;
 
-            margin-bottom: 8px;
-        }
+    /* =========================================================
+       MOOD
+       ========================================================= */
 
-        .tool-description {
-            font-size: 10px;
-            line-height: 1.7;
-            color: var(--muted);
-        }
+    .mood-section {
+      margin-bottom: 38px;
 
-        .tool-arrow {
-            position: absolute;
-            right: 15px;
-            bottom: 12px;
+      animation: fadeUp .7s .08s ease both;
+    }
 
-            width: 25px;
-            height: 25px;
 
-            border: 1px solid var(--brown-light);
+    .mood-box {
+      background: rgba(255,253,248,.58);
 
-            border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.65);
 
-            display: grid;
-            place-items: center;
+      border-radius: 24px;
 
-            font-size: 12px;
-        }
+      padding: 23px 24px;
 
-        /* =========================================================
-           ENTRIES HEADER
-           ========================================================= */
+      box-shadow: var(--shadow);
+    }
 
-        .entries-header {
-            margin-top: 55px;
-            margin-bottom: 22px;
 
-            display: flex;
-            align-items: end;
-            justify-content: space-between;
-        }
+    .mood-question {
+      font-family: 'Playfair Display', serif;
 
-        .entries-title {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 42px;
-            font-weight: 600;
-        }
+      font-size: 19px;
 
-        .entries-title span {
-            color: #e58d97;
-        }
+      margin-bottom: 18px;
+    }
 
-        .entry-controls {
-            display: flex;
-            gap: 10px;
-        }
 
-        .search {
-            width: 220px;
+    .moods {
+      display: flex;
 
-            border: 1px solid rgba(90,61,43,0.12);
+      gap: 10px;
 
-            background: rgba(255,255,255,0.65);
+      flex-wrap: wrap;
+    }
 
-            border-radius: 30px;
 
-            padding: 12px 17px;
+    .mood {
+      border: 1px solid transparent;
 
-            outline: none;
+      background: rgba(255,255,255,.65);
 
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
+      border-radius: 100px;
 
-            color: var(--text);
-        }
+      padding: 8px 13px;
 
-        .filter {
-            border: 1px solid rgba(90,61,43,0.12);
+      cursor: pointer;
 
-            background: rgba(255,255,255,0.65);
+      display: flex;
+      align-items: center;
 
-            border-radius: 30px;
+      gap: 7px;
 
-            padding: 12px 17px;
+      font-family: 'DM Mono', monospace;
 
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
+      color: var(--brown-soft);
 
-            cursor: pointer;
-        }
+      font-size: 11px;
 
-        /* =========================================================
-           ENTRY CARDS
-           ========================================================= */
+      transition:
+        transform .2s,
+        background .2s,
+        border .2s,
+        box-shadow .2s;
+    }
 
-        .entries {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
 
-        .entry-card {
-            display: grid;
+    .mood:hover {
+      transform: translateY(-2px);
 
-            grid-template-columns: 105px 70px 1fr 100px 35px;
+      background: white;
+    }
 
-            align-items: center;
 
-            gap: 20px;
+    .mood.selected {
+      background: white;
 
-            padding: 25px 30px;
+      border-color: var(--sage);
 
-            background: var(--paper);
+      box-shadow:
+        0 5px 18px rgba(117,148,119,.14);
 
-            border-radius: 18px;
+      transform: translateY(-2px);
+    }
 
-            box-shadow: 0 6px 18px rgba(78,56,42,0.05);
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
+    .mood-emoji {
+      font-size: 18px;
+    }
 
-        .entry-card:hover {
-            transform: translateX(4px);
-            box-shadow: 0 10px 25px rgba(78,56,42,0.08);
-        }
 
-        .entry-date {
-            text-align: center;
-        }
+    .mood-status {
+      min-height: 20px;
 
-        .date-number {
-            display: block;
+      margin-top: 15px;
 
-            font-family: "Cormorant Garamond", serif;
+      font-family: 'Caveat', cursive;
 
-            font-size: 37px;
+      font-size: 18px;
 
-            line-height: 0.8;
-        }
+      color: var(--sage-dark);
+    }
 
-        .date-month {
-            display: block;
 
-            margin-top: 8px;
+    /* =========================================================
+       WRITING AREA
+       ========================================================= */
 
-            font-size: 11px;
-        }
+    .write-section {
+      animation: fadeUp .7s .15s ease both;
 
-        .date-year {
-            display: block;
+      margin-bottom: 38px;
+    }
 
-            margin-top: 4px;
 
-            font-size: 9px;
+    .paper {
+      position: relative;
 
-            color: var(--muted);
-        }
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 31px,
+          rgba(74,57,47,.055) 32px
+        ),
+        var(--paper);
 
-        .entry-mood {
-            width: 50px;
-            height: 50px;
+      border-radius: 5px;
 
-            border-radius: 50%;
+      padding: 34px 38px 27px;
 
-            display: grid;
-            place-items: center;
+      box-shadow:
+        0 18px 45px rgba(74,57,47,.12),
+        0 2px 4px rgba(74,57,47,.05);
 
-            font-size: 23px;
-        }
+      transform: rotate(-.25deg);
 
-        .entry-content h3 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 24px;
+      transition: transform .3s ease;
+    }
 
-            margin-bottom: 8px;
-        }
 
-        .entry-content p {
-            font-size: 11px;
-            line-height: 1.7;
+    .paper:hover {
+      transform: rotate(0deg) translateY(-2px);
+    }
 
-            color: var(--muted);
 
-            max-width: 650px;
-        }
+    .paper::before {
+      content: "✦";
 
-        .entry-time {
-            font-size: 9px;
-            text-align: right;
-            color: var(--muted);
-        }
+      position: absolute;
 
-        .entry-menu {
-            border: none;
-            background: transparent;
+      top: 20px;
+      right: 27px;
 
-            font-size: 18px;
+      color: var(--rose);
 
-            cursor: pointer;
+      font-size: 18px;
+    }
 
-            color: var(--brown-light);
-        }
 
-        /* =========================================================
-           BOTTOM NOTE
-           ========================================================= */
+    .paper-top {
+      display: flex;
 
-        .bottom-note {
-            margin: 35px auto 0;
+      align-items: center;
+      justify-content: space-between;
 
-            max-width: 700px;
+      margin-bottom: 17px;
+    }
 
-            text-align: center;
 
-            padding: 15px 25px;
+    .paper-title {
+      font-family: 'Caveat', cursive;
 
-            border: 1px dashed rgba(90,61,43,0.2);
+      font-size: 25px;
 
-            background: rgba(245,237,221,0.65);
+      color: var(--rose-dark);
+    }
 
-            font-family: "Kalam", cursive;
 
-            font-size: 17px;
+    .private {
+      font-size: 9px;
 
-            color: var(--brown-light);
-        }
+      letter-spacing: .1em;
 
-        /* =========================================================
-           TOAST
-           ========================================================= */
+      text-transform: uppercase;
 
-        .toast {
-            position: fixed;
+      color: var(--brown-light);
 
-            bottom: 30px;
-            left: 50%;
+      display: flex;
+      align-items: center;
 
-            transform:
-                translate(-50%, 100px);
+      gap: 5px;
+    }
 
-            opacity: 0;
 
-            background: var(--brown);
+    textarea {
+      display: block;
 
-            color: white;
+      width: 100%;
 
-            padding: 13px 22px;
+      min-height: 245px;
 
-            border-radius: 30px;
+      border: none;
 
-            font-size: 11px;
+      outline: none;
 
-            z-index: 100;
+      resize: vertical;
 
-            transition: 0.35s ease;
-        }
+      background: transparent;
 
-        .toast.show {
-            transform: translate(-50%, 0);
-            opacity: 1;
-        }
+      color: var(--brown);
 
-        /* =========================================================
-           RESPONSIVE
-           ========================================================= */
+      font-family: 'Caveat', cursive;
 
-        @media (max-width: 1000px) {
+      font-size: 24px;
 
-            .sidebar {
-                width: 180px;
-            }
+      line-height: 32px;
 
-            .main {
-                margin-left: 180px;
-                width: calc(100% - 180px);
-                padding: 40px 25px;
-            }
+      padding: 0;
+    }
 
-            .tools {
-                grid-template-columns: repeat(2, 1fr);
-            }
 
-            .entry-card {
-                grid-template-columns: 75px 55px 1fr 70px;
-            }
+    textarea::placeholder {
+      color: #bcaea4;
 
-            .entry-menu {
-                display: none;
-            }
-        }
+      opacity: .85;
+    }
 
-        @media (max-width: 750px) {
 
-            .sidebar {
-                position: relative;
-                width: 100%;
-                min-height: auto;
+    .paper-bottom {
+      display: flex;
 
-                flex-direction: row;
-                align-items: center;
+      align-items: center;
+      justify-content: space-between;
 
-                padding: 15px;
+      padding-top: 15px;
 
-                overflow-x: auto;
-            }
+      border-top: 1px dashed rgba(74,57,47,.13);
+    }
 
-            .logo {
-                margin: 0 20px 0 5px;
-            }
 
-            .logo-name {
-                font-size: 30px;
-            }
+    .word-count {
+      font-size: 9px;
 
-            .logo-sub,
-            .brain,
-            .sidebar-note {
-                display: none;
-            }
+      color: var(--brown-light);
 
-            .nav {
-                flex-direction: row;
-            }
+      letter-spacing: .04em;
+    }
 
-            .nav-item {
-                white-space: nowrap;
-            }
 
-            .main {
-                margin-left: 0;
-                width: 100%;
-                padding: 30px 15px;
-            }
+    .save-area {
+      display: flex;
 
-            .page-header {
-                flex-direction: column;
-                gap: 25px;
-            }
+      align-items: center;
 
-            .privacy-card {
-                align-self: flex-start;
-            }
+      gap: 12px;
+    }
 
-            .journal-paper {
-                padding: 35px 25px;
-            }
 
-            .moods {
-                gap: 15px;
-            }
+    .saved {
+      font-family: 'Caveat', cursive;
 
-            .mood-face {
-                width: 48px;
-                height: 48px;
-            }
+      font-size: 16px;
 
-            .tools {
-                grid-template-columns: 1fr 1fr;
-            }
+      color: var(--sage-dark);
 
-            .entries-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
+      opacity: 0;
 
-            .entry-controls {
-                width: 100%;
-            }
+      transition: opacity .3s;
+    }
 
-            .search {
-                flex: 1;
-            }
 
-            .entry-card {
-                grid-template-columns: 65px 50px 1fr;
-            }
+    .saved.show {
+      opacity: 1;
+    }
 
-            .entry-time {
-                display: none;
-            }
-        }
 
-        @media (max-width: 500px) {
+    .save {
+      border: none;
 
-            .moods {
-                justify-content: space-between;
-            }
+      background: var(--sage);
 
-            .mood-face {
-                width: 42px;
-                height: 42px;
-                font-size: 20px;
-            }
+      color: white;
 
-            .mood {
-                font-size: 8px;
-            }
+      border-radius: 100px;
 
-            .tools {
-                grid-template-columns: 1fr;
-            }
+      padding: 10px 20px;
 
-            .entry-card {
-                grid-template-columns: 50px 1fr;
-            }
+      font-family: 'DM Mono', monospace;
 
-            .entry-mood {
-                display: none;
-            }
+      font-size: 10px;
 
-            .entry-content h3 {
-                font-size: 20px;
-            }
-        }
-    </style>
+      cursor: pointer;
+
+      letter-spacing: .04em;
+
+      transition: .25s;
+    }
+
+
+    .save:hover {
+      background: var(--sage-dark);
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 6px 18px rgba(117,148,119,.22);
+    }
+
+
+    /* =========================================================
+       PROMPTS
+       ========================================================= */
+
+    .prompt-section {
+      margin-bottom: 43px;
+
+      animation: fadeUp .7s .22s ease both;
+    }
+
+
+    .prompts {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 13px;
+    }
+
+
+    .prompt {
+      position: relative;
+
+      min-height: 105px;
+
+      padding: 20px 17px;
+
+      border: 1px solid rgba(255,255,255,.65);
+
+      border-radius: 4px;
+
+      background: rgba(255,253,248,.72);
+
+      box-shadow: 0 7px 20px rgba(74,57,47,.055);
+
+      cursor: pointer;
+
+      text-align: left;
+
+      transition: .25s;
+    }
+
+
+    .prompt:nth-child(2) {
+      transform: rotate(.6deg);
+    }
+
+
+    .prompt:nth-child(3) {
+      transform: rotate(-.5deg);
+    }
+
+
+    .prompt:hover {
+      transform: translateY(-5px) rotate(0deg);
+
+      box-shadow: 0 13px 27px rgba(74,57,47,.09);
+
+      background: rgba(255,255,255,.9);
+    }
+
+
+    .prompt-icon {
+      font-size: 15px;
+
+      margin-bottom: 10px;
+
+      color: var(--rose-dark);
+    }
+
+
+    .prompt-text {
+      font-family: 'Caveat', cursive;
+
+      font-size: 19px;
+
+      line-height: 1.1;
+
+      color: var(--brown);
+    }
+
+
+    /* =========================================================
+       ENTRIES
+       ========================================================= */
+
+    .entries-section {
+      animation: fadeUp .7s .3s ease both;
+    }
+
+
+    .entries-header {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 17px;
+    }
+
+
+    .entries-title {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 23px;
+
+      font-weight: 400;
+    }
+
+
+    .entry-count {
+      font-size: 9px;
+
+      color: var(--brown-light);
+
+      letter-spacing: .1em;
+
+      text-transform: uppercase;
+    }
+
+
+    .entries {
+      display: grid;
+
+      gap: 12px;
+    }
+
+
+    .entry {
+      position: relative;
+
+      background: rgba(255,253,248,.76);
+
+      border: 1px solid rgba(255,255,255,.6);
+
+      border-radius: 8px;
+
+      padding: 20px 23px;
+
+      box-shadow: 0 7px 20px rgba(74,57,47,.05);
+
+      transition: .25s;
+    }
+
+
+    .entry:hover {
+      transform: translateY(-2px);
+
+      background: rgba(255,255,255,.92);
+    }
+
+
+    .entry::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      top: 17px;
+      bottom: 17px;
+
+      width: 3px;
+
+      background: var(--sage);
+
+      border-radius: 0 4px 4px 0;
+    }
+
+
+    .entry-head {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 10px;
+    }
+
+
+    .entry-mood {
+      font-size: 17px;
+    }
+
+
+    .entry-date {
+      font-size: 9px;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+
+      color: var(--brown-light);
+    }
+
+
+    .entry-text {
+      font-family: 'Caveat', cursive;
+
+      font-size: 20px;
+
+      line-height: 1.35;
+
+      color: var(--brown-soft);
+
+      max-width: 85%;
+
+      display: -webkit-box;
+
+      -webkit-line-clamp: 3;
+
+      -webkit-box-orient: vertical;
+
+      overflow: hidden;
+    }
+
+
+    .entry-delete {
+      position: absolute;
+
+      top: 18px;
+      right: 18px;
+
+      border: none;
+
+      background: transparent;
+
+      color: var(--brown-light);
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+      opacity: .45;
+
+      transition: .2s;
+    }
+
+
+    .entry-delete:hover {
+      opacity: 1;
+
+      color: var(--rose-dark);
+    }
+
+
+    .empty {
+      text-align: center;
+
+      padding: 45px 20px;
+
+      color: var(--brown-light);
+    }
+
+
+    .empty-flower {
+      font-size: 30px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .empty-text {
+      font-family: 'Caveat', cursive;
+
+      font-size: 21px;
+    }
+
+
+    /* =========================================================
+       DELETE MODAL
+       ========================================================= */
+
+    .overlay {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 300;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background: rgba(55,42,34,.25);
+
+      backdrop-filter: blur(9px);
+    }
+
+
+    .overlay.open {
+      display: flex;
+    }
+
+
+    .modal {
+      width: min(350px, 100%);
+
+      background: var(--cream);
+
+      padding: 32px 27px;
+
+      border-radius: 12px;
+
+      text-align: center;
+
+      box-shadow: 0 25px 70px rgba(55,42,34,.2);
+
+      animation: pop .25s ease;
+    }
+
+
+    .modal-flower {
+      font-size: 26px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .modal h2 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 21px;
+
+      font-weight: 400;
+
+      margin-bottom: 9px;
+    }
+
+
+    .modal p {
+      font-size: 10px;
+
+      line-height: 1.7;
+
+      color: var(--brown-soft);
+
+      margin-bottom: 22px;
+    }
+
+
+    .modal-buttons {
+      display: flex;
+
+      gap: 9px;
+    }
+
+
+    .modal-btn {
+      flex: 1;
+
+      padding: 10px;
+
+      border-radius: 100px;
+
+      font-family: 'DM Mono', monospace;
+
+      font-size: 9px;
+
+      cursor: pointer;
+    }
+
+
+    .cancel {
+      border: 1px solid var(--line);
+
+      background: white;
+
+      color: var(--brown-soft);
+    }
+
+
+    .confirm {
+      border: none;
+
+      background: var(--rose-dark);
+
+      color: white;
+    }
+
+
+    /* =========================================================
+       BOTTOM NAV
+       ========================================================= */
+
+    .bottom-nav {
+      position: fixed;
+
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 200;
+
+      height: 70px;
+
+      display: flex;
+      justify-content: center;
+
+      background: rgba(255,250,242,.87);
+
+      backdrop-filter: blur(18px);
+
+      border-top: 1px solid rgba(74,57,47,.08);
+    }
+
+
+    .nav-inner {
+      width: min(650px, 100%);
+
+      display: flex;
+
+      justify-content: space-around;
+      align-items: center;
+    }
+
+
+    .nav-item {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 4px;
+
+      text-decoration: none;
+
+      color: var(--brown-light);
+
+      font-size: 8px;
+
+      letter-spacing: .02em;
+
+      transition: .2s;
+
+      min-width: 60px;
+    }
+
+
+    .nav-icon {
+      font-size: 20px;
+
+      line-height: 1;
+
+      transition: .2s;
+    }
+
+
+    .nav-item:hover,
+    .nav-item.active {
+      color: var(--sage-dark);
+    }
+
+
+    .nav-item:hover .nav-icon,
+    .nav-item.active .nav-icon {
+      transform: translateY(-2px) scale(1.08);
+    }
+
+
+    /* =========================================================
+       ANIMATIONS
+       ========================================================= */
+
+    @keyframes fadeUp {
+
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    @keyframes pop {
+
+      from {
+        opacity: 0;
+        transform: scale(.95) translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 650px) {
+
+      .page {
+        width: min(100% - 24px, 920px);
+
+        padding-top: 42px;
+      }
+
+
+      .topbar {
+        padding: 0 17px;
+      }
+
+
+      .header-note {
+        display: none;
+      }
+
+
+      .hero {
+        margin-bottom: 35px;
+      }
+
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+
+      .paper {
+        padding: 28px 23px 22px;
+      }
+
+
+      textarea {
+        min-height: 220px;
+
+        font-size: 22px;
+      }
+
+
+      .prompts {
+        grid-template-columns: 1fr;
+      }
+
+
+      .prompt {
+        min-height: 80px;
+      }
+
+
+      .prompt:nth-child(2),
+      .prompt:nth-child(3) {
+        transform: none;
+      }
+
+
+      .mood-box {
+        padding: 20px 17px;
+      }
+
+
+      .mood {
+        flex: 1;
+
+        justify-content: center;
+
+        min-width: 85px;
+      }
+
+
+      .bottom-nav {
+        height: 64px;
+      }
+
+
+      .nav-item {
+        min-width: 48px;
+
+        font-size: 7px;
+      }
+
+
+      .nav-icon {
+        font-size: 18px;
+      }
+
+    }
+
+  </style>
 </head>
 
 
 <body>
 
-    <!-- Decorative elements -->
-    <div class="background-flower flower-left">🌿</div>
-    <div class="background-flower flower-right">🌾</div>
 
+  <!-- =======================================================
+       HEADER
+       ======================================================== -->
 
-    <div class="app">
+  <header class="topbar">
 
-        <!-- =====================================================
-             SIDEBAR
-             ===================================================== -->
+    <a href="index.html" class="back">←</a>
 
-        <aside class="sidebar">
+    <div class="brand">
+      Zenene
+    </div>
 
-            <div class="logo">
-                <div class="logo-name">zenene</div>
-                <div class="brain">🧠</div>
-                <div class="logo-sub">where your mind blooms</div>
-            </div>
+    <div class="header-note">
+      your private little corner
+    </div>
 
+  </header>
 
-            <nav class="nav">
 
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">⌂</span>
-                    Home
-                </a>
 
-                <a href="#" class="nav-item active">
-                    <span class="nav-icon">▤</span>
-                    Journal
-                </a>
+  <!-- =======================================================
+       MAIN
+       ======================================================== -->
 
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">☻</span>
-                    Mood
-                </a>
+  <main class="page">
 
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">◈</span>
-                    Explore
-                </a>
 
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">☏</span>
-                    Vera
-                </a>
+    <!-- HERO -->
 
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">♧</span>
-                    Calm
-                </a>
+    <section class="hero">
 
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">▤</span>
-                    Stories
-                </a>
+      <div class="eyebrow">
+        a quiet place to return to
+      </div>
 
-            </nav>
+      <h1>
+        Journal
+        <span>✦</span>
+      </h1>
 
+      <p>
+        a little space for your thoughts.
+      </p>
 
-            <div class="sidebar-note">
-                “Your mind is a garden.
-                Your thoughts are the seeds.”
-                <br><br>
-                ♡
-            </div>
+      <div class="date" id="dateLabel"></div>
 
-        </aside>
+    </section>
 
 
-        <!-- =====================================================
-             MAIN CONTENT
-             ===================================================== -->
 
-        <main class="main">
+    <!-- =====================================================
+         MOOD
+         ====================================================== -->
 
-            <div class="content">
+    <section class="mood-section">
 
+      <div class="section-label">
+        before you write
+      </div>
 
-                <!-- HEADER -->
+      <div class="mood-box">
 
-                <header class="page-header">
+        <div class="mood-question">
+          How are you feeling today?
+        </div>
 
-                    <div>
+        <div class="moods" id="moods">
 
-                        <h1 class="header-title">
-                            Journal
-                            <span>✿</span>
-                        </h1>
+          <button class="mood" data-mood="😄" data-label="amazing">
 
-                        <p class="subtitle">
-                            A little space that's just yours.
-                        </p>
+            <span class="mood-emoji">😄</span>
+            <span>amazing</span>
 
-                    </div>
+          </button>
 
 
-                    <div class="privacy-card">
+          <button class="mood" data-mood="😊" data-label="good">
 
-                        <div class="privacy-title">
-                            🔒 Private & Safe
-                        </div>
+            <span class="mood-emoji">😊</span>
+            <span>good</span>
 
-                        <div class="privacy-text">
-                            Only you can see this.
-                        </div>
+          </button>
 
-                    </div>
 
-                </header>
+          <button class="mood" data-mood="😌" data-label="peaceful">
 
+            <span class="mood-emoji">😌</span>
+            <span>peaceful</span>
 
+          </button>
 
-                <!-- =================================================
-                     WRITING AREA
-                     ================================================= -->
 
-                <section class="journal-paper">
+          <button class="mood" data-mood="😐" data-label="okay">
 
-                    <div class="paper-decoration">
-                        🌿
-                    </div>
+            <span class="mood-emoji">😐</span>
+            <span>okay</span>
 
+          </button>
 
-                    <h2 class="mood-title">
-                        How are you feeling today?
-                    </h2>
 
+          <button class="mood" data-mood="😔" data-label="low">
 
-                    <div class="moods">
+            <span class="mood-emoji">😔</span>
+            <span>low</span>
 
-                        <button class="mood" data-mood="Amazing">
+          </button>
 
-                            <span class="mood-face amazing">
-                                😄
-                            </span>
 
-                            <span>Amazing</span>
+          <button class="mood" data-mood="😢" data-label="sad">
 
-                        </button>
+            <span class="mood-emoji">😢</span>
+            <span>sad</span>
 
+          </button>
 
-                        <button class="mood selected" data-mood="Good">
 
-                            <span class="mood-face good">
-                                😊
-                            </span>
+          <button class="mood" data-mood="😤" data-label="frustrated">
 
-                            <span>Good</span>
+            <span class="mood-emoji">😤</span>
+            <span>frustrated</span>
 
-                        </button>
+          </button>
 
 
-                        <button class="mood" data-mood="Okay">
+          <button class="mood" data-mood="😰" data-label="anxious">
 
-                            <span class="mood-face okay">
-                                😐
-                            </span>
+            <span class="mood-emoji">😰</span>
+            <span>anxious</span>
 
-                            <span>Okay</span>
+          </button>
 
-                        </button>
+        </div>
 
 
-                        <button class="mood" data-mood="Low">
+        <div class="mood-status" id="moodStatus">
+          choose whatever feels closest.
+        </div>
 
-                            <span class="mood-face low">
-                                😔
-                            </span>
+      </div>
 
-                            <span>Low</span>
+    </section>
 
-                        </button>
 
 
-                        <button class="mood" data-mood="Awful">
+    <!-- =====================================================
+         WRITING PAPER
+         ====================================================== -->
 
-                            <span class="mood-face awful">
-                                😞
-                            </span>
+    <section class="write-section">
 
-                            <span>Awful</span>
+      <div class="section-label">
+        today's page
+      </div>
 
-                        </button>
 
-                    </div>
+      <div class="paper">
 
+        <div class="paper-top">
 
-                    <div class="entry-area">
+          <div class="paper-title">
+            dear me,
+          </div>
 
-                        <textarea
-                            id="journalInput"
-                            class="journal-input"
-                            maxlength="2000"
-                            placeholder="Write whatever comes to mind..."
-                        ></textarea>
+          <div class="private">
+            ♧ only on this device
+          </div>
 
-                    </div>
+        </div>
 
 
-                    <div class="entry-footer">
+        <textarea
+          id="journalText"
+          placeholder="What's on your mind?"
+          oninput="updateWordCount()"
+        ></textarea>
 
-                        <button
-                            class="prompt-button"
-                            id="promptButton"
-                        >
-                            💡 Add Prompt
-                        </button>
 
+        <div class="paper-bottom">
 
-                        <div style="display:flex; align-items:center; gap:18px;">
+          <div class="word-count" id="wordCount">
+            0 words
+          </div>
 
-                            <span class="counter">
-                                <span id="counter">0</span>/2000
-                            </span>
 
-                            <button
-                                class="save-button"
-                                id="saveButton"
-                            >
-                                ⊕ Add to Journal
-                            </button>
+          <div class="save-area">
 
-                        </div>
+            <span class="saved" id="savedMessage">
+              saved ✦
+            </span>
 
-                    </div>
+            <button class="save" onclick="saveEntry()">
+              save entry&nbsp; ✦
+            </button>
 
-                </section>
+          </div>
 
+        </div>
 
+      </div>
 
-                <!-- =================================================
-                     QUICK TOOLS
-                     ================================================= -->
+    </section>
 
-                <section class="tools">
 
 
-                    <div class="tool-card" id="dailyPrompt">
+    <!-- =====================================================
+         PROMPTS
+         ====================================================== -->
 
-                        <div class="tool-icon">📜</div>
+    <section class="prompt-section">
 
-                        <div class="tool-title">
-                            Today's Prompt
-                        </div>
+      <div class="section-label">
+        something to think about
+      </div>
 
-                        <div class="tool-description">
-                            What has been taking up space
-                            in your mind lately?
-                        </div>
 
-                        <div class="tool-arrow">
-                            →
-                        </div>
+      <div class="prompts" id="prompts">
 
-                    </div>
 
+        <button class="prompt" onclick="usePrompt(this)">
 
-                    <div class="tool-card">
+          <div class="prompt-icon">✿</div>
 
-                        <div class="tool-icon">📅</div>
+          <div class="prompt-text">
+            What made you smile today?
+          </div>
 
-                        <div class="tool-title">
-                            On This Day
-                        </div>
+        </button>
 
-                        <div class="tool-description">
-                            See what you wrote on this
-                            day in previous years.
-                        </div>
 
-                        <div class="tool-arrow">
-                            →
-                        </div>
+        <button class="prompt" onclick="usePrompt(this)">
 
-                    </div>
+          <div class="prompt-icon">☁</div>
 
+          <div class="prompt-text">
+            What feels a little heavy right now?
+          </div>
 
-                    <div class="tool-card">
+        </button>
 
-                        <div class="tool-icon">🗓</div>
 
-                        <div class="tool-title">
-                            Calendar View
-                        </div>
+        <button class="prompt" onclick="usePrompt(this)">
 
-                        <div class="tool-description">
-                            Browse your entries
-                            by calendar.
-                        </div>
+          <div class="prompt-icon">✦</div>
 
-                        <div class="tool-arrow">
-                            →
-                        </div>
+          <div class="prompt-text">
+            What are you proud of lately?
+          </div>
 
-                    </div>
+        </button>
 
 
-                    <div class="tool-card">
+        <button class="prompt" onclick="usePrompt(this)">
 
-                        <div class="tool-icon">💌</div>
+          <div class="prompt-icon">♡</div>
 
-                        <div class="tool-title">
-                            Letter to Future Me
-                        </div>
+          <div class="prompt-text">
+            What do you wish someone understood about you?
+          </div>
 
-                        <div class="tool-description">
-                            Write a letter your future
-                            self will thank you for.
-                        </div>
+        </button>
 
-                        <div class="tool-arrow">
-                            →
-                        </div>
 
-                    </div>
+        <button class="prompt" onclick="usePrompt(this)">
 
-                </section>
+          <div class="prompt-icon">⌁</div>
 
+          <div class="prompt-text">
+            What do you need more of these days?
+          </div>
 
+        </button>
 
-                <!-- =================================================
-                     ENTRIES
-                     ================================================= -->
 
-                <section>
+        <button class="prompt" onclick="usePrompt(this)">
 
-                    <div class="entries-header">
+          <div class="prompt-icon">🌱</div>
 
-                        <h2 class="entries-title">
-                            Your Entries <span>♥</span>
-                        </h2>
+          <div class="prompt-text">
+            Three small things you're grateful for.
+          </div>
 
+        </button>
 
-                        <div class="entry-controls">
 
-                            <input
-                                type="search"
-                                class="search"
-                                id="search"
-                                placeholder="Search entries..."
-                            >
+      </div>
 
-                            <button class="filter">
-                                ☷ Filter
-                            </button>
+    </section>
 
-                        </div>
 
-                    </div>
 
+    <!-- =====================================================
+         PAST ENTRIES
+         ====================================================== -->
 
-                    <div class="entries" id="entries">
+    <section class="entries-section">
 
+      <div class="section-label">
+        your pages
+      </div>
 
-                        <!-- ENTRY 1 -->
 
-                        <article class="entry-card">
+      <div class="entries-header">
 
-                            <div class="entry-date">
+        <div class="entries-title">
+          Recent thoughts
+        </div>
 
-                                <span class="date-number">
-                                    16
-                                </span>
+        <div class="entry-count" id="entryCount">
+          0 entries
+        </div>
 
-                                <span class="date-month">
-                                    Aug
-                                </span>
+      </div>
 
-                                <span class="date-year">
-                                    2026
-                                </span>
 
-                            </div>
+      <div class="entries" id="entriesList"></div>
 
+    </section>
 
-                            <div class="entry-mood good">
-                                😊
-                            </div>
 
+  </main>
 
-                            <div class="entry-content">
 
-                                <h3>
-                                    A calm kind of day
-                                </h3>
 
-                                <p>
-                                    Today felt lighter. I woke up early,
-                                    had tea by the window and just watched
-                                    the world go by. Somehow, the little
-                                    things felt a lot bigger today...
-                                </p>
+  <!-- =======================================================
+       BOTTOM NAV
+       ======================================================== -->
 
-                            </div>
+  <nav class="bottom-nav">
 
+    <div class="nav-inner">
 
-                            <div class="entry-time">
-                                8:45 PM
-                            </div>
 
+      <a href="journal.html" class="nav-item active">
 
-                            <button class="entry-menu">
-                                •••
-                            </button>
+        <div class="nav-icon">📓</div>
+        <span>Journal</span>
 
-                        </article>
+      </a>
 
 
+      <a href="mood.html" class="nav-item">
 
-                        <!-- ENTRY 2 -->
+        <div class="nav-icon">🌿</div>
+        <span>Mood</span>
 
-                        <article class="entry-card">
+      </a>
 
-                            <div class="entry-date">
 
-                                <span class="date-number">
-                                    14
-                                </span>
+      <a href="explore.html" class="nav-item">
 
-                                <span class="date-month">
-                                    Aug
-                                </span>
+        <div class="nav-icon">⌁</div>
+        <span>Explore</span>
 
-                                <span class="date-year">
-                                    2026
-                                </span>
+      </a>
 
-                            </div>
 
+      <a href="chat.html" class="nav-item">
 
-                            <div class="entry-mood amazing">
-                                ☀️
-                            </div>
+        <div class="nav-icon">☁</div>
+        <span>Vera</span>
 
+      </a>
 
-                            <div class="entry-content">
 
-                                <h3>
-                                    Grateful for small wins
-                                </h3>
+      <a href="calm.html" class="nav-item">
 
-                                <p>
-                                    I finally finished that one task I had
-                                    been procrastinating on for so long.
-                                    It feels good to be a little more in
-                                    control of my thoughts today.
-                                </p>
+        <div class="nav-icon">🌸</div>
+        <span>Calm</span>
 
-                            </div>
+      </a>
 
 
-                            <div class="entry-time">
-                                10:30 PM
-                            </div>
+      <a href="stories.html" class="nav-item">
 
+        <div class="nav-icon">✦</div>
+        <span>Stories</span>
 
-                            <button class="entry-menu">
-                                •••
-                            </button>
+      </a>
 
-                        </article>
-
-
-
-                        <!-- ENTRY 3 -->
-
-                        <article class="entry-card">
-
-                            <div class="entry-date">
-
-                                <span class="date-number">
-                                    11
-                                </span>
-
-                                <span class="date-month">
-                                    Aug
-                                </span>
-
-                                <span class="date-year">
-                                    2026
-                                </span>
-
-                            </div>
-
-
-                            <div class="entry-mood okay">
-                                😐
-                            </div>
-
-
-                            <div class="entry-content">
-
-                                <h3>
-                                    Things I'm thinking about
-                                </h3>
-
-                                <p>
-                                    I've been thinking a lot about where
-                                    I want to be a year from now. So many
-                                    dreams, but so many “what ifs”...
-                                </p>
-
-                            </div>
-
-
-                            <div class="entry-time">
-                                9:10 PM
-                            </div>
-
-
-                            <button class="entry-menu">
-                                •••
-                            </button>
-
-                        </article>
-
-                    </div>
-
-                </section>
-
-
-
-                <!-- =================================================
-                     BOTTOM MESSAGE
-                     ================================================= -->
-
-                <div class="bottom-note">
-
-                    🌱 There’s no right or wrong way to journal.
-                    This is your space. Be honest. Be you. ♡
-
-                </div>
-
-            </div>
-
-        </main>
 
     </div>
 
+  </nav>
 
-    <!-- Toast -->
 
-    <div class="toast" id="toast">
-        Your entry has been added to your journal ♡
+
+  <!-- =======================================================
+       DELETE MODAL
+       ======================================================== -->
+
+  <div class="overlay" id="deleteOverlay">
+
+    <div class="modal">
+
+      <div class="modal-flower">
+        🌸
+      </div>
+
+      <h2>
+        Let this page go?
+      </h2>
+
+      <p>
+        This entry will be removed from this device.
+        You won't be able to undo this.
+      </p>
+
+      <div class="modal-buttons">
+
+        <button
+          class="modal-btn cancel"
+          onclick="closeDeleteModal()"
+        >
+          keep it
+        </button>
+
+        <button
+          class="modal-btn confirm"
+          onclick="confirmDelete()"
+        >
+          delete
+        </button>
+
+      </div>
+
     </div>
 
+  </div>
 
 
-    <script>
 
-        /* =========================================================
-           MOOD SELECTION
-           ========================================================= */
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================== -->
 
-        const moods = document.querySelectorAll(".mood");
-
-        let selectedMood = "Good";
-
-        moods.forEach(mood => {
-
-            mood.addEventListener("click", () => {
-
-                moods.forEach(item => {
-                    item.classList.remove("selected");
-                });
-
-                mood.classList.add("selected");
-
-                selectedMood =
-                    mood.dataset.mood;
-
-            });
-
-        });
+  <script>
 
 
-        /* =========================================================
-           CHARACTER COUNTER
-           ========================================================= */
+    /* =======================================================
+       DATE
+       ======================================================== */
 
-        const input =
-            document.getElementById("journalInput");
+    const now = new Date();
 
-        const counter =
-            document.getElementById("counter");
-
-        input.addEventListener("input", () => {
-
-            counter.textContent =
-                input.value.length;
-
-        });
-
-
-        /* =========================================================
-           DAILY PROMPTS
-           ========================================================= */
-
-        const prompts = [
-
-            "What has been taking up space in your mind lately?",
-
-            "What is something small that made you smile today?",
-
-            "What do you wish you could tell yourself right now?",
-
-            "What are you grateful for today?",
-
-            "What felt difficult today?",
-
-            "What are you looking forward to?",
-
-            "If today had a colour, what would it be and why?",
-
-            "What is something you need to let yourself feel?"
-
-        ];
-
-
-        const promptButton =
-            document.getElementById("promptButton");
-
-        const dailyPrompt =
-            document.getElementById("dailyPrompt");
-
-
-        function addPrompt() {
-
-            const random =
-                prompts[
-                    Math.floor(
-                        Math.random() * prompts.length
-                    )
-                ];
-
-            input.value =
-                `✦ ${random}\n\n`;
-
-            input.focus();
-
-            counter.textContent =
-                input.value.length;
-
+    document.getElementById("dateLabel").textContent =
+      now.toLocaleDateString(
+        "en-US",
+        {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric"
         }
+      );
 
 
-        promptButton.addEventListener(
-            "click",
-            addPrompt
+
+    /* =======================================================
+       MOOD
+       ======================================================== */
+
+    let selectedMood = null;
+
+
+    document.querySelectorAll(".mood").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        document
+          .querySelectorAll(".mood")
+          .forEach(item => item.classList.remove("selected"));
+
+
+        button.classList.add("selected");
+
+
+        selectedMood = button.dataset.mood;
+
+
+        document.getElementById("moodStatus").textContent =
+          "feeling " + button.dataset.label + " today.";
+      });
+
+    });
+
+
+
+    /* =======================================================
+       WORD COUNT
+       ======================================================== */
+
+    function updateWordCount() {
+
+      const text =
+        document.getElementById("journalText").value.trim();
+
+
+      const count =
+        text
+          ? text.split(/\s+/).length
+          : 0;
+
+
+      document.getElementById("wordCount").textContent =
+        count + (count === 1 ? " word" : " words");
+
+    }
+
+
+
+    /* =======================================================
+       PROMPTS
+       ======================================================== */
+
+    function usePrompt(button) {
+
+      const prompt =
+        button.querySelector(".prompt-text").textContent.trim();
+
+
+      const textarea =
+        document.getElementById("journalText");
+
+
+      textarea.value =
+        prompt + "\n\n";
+
+
+      textarea.focus();
+
+
+      updateWordCount();
+
+    }
+
+
+
+    /* =======================================================
+       SAVE ENTRY
+       ======================================================== */
+
+    function saveEntry() {
+
+      const textarea =
+        document.getElementById("journalText");
+
+
+      const text =
+        textarea.value.trim();
+
+
+      if (!text) {
+
+        textarea.focus();
+
+        return;
+
+      }
+
+
+      const entries =
+        JSON.parse(
+          localStorage.getItem("z_entries") || "[]"
         );
 
-        dailyPrompt.addEventListener(
-            "click",
-            addPrompt
+
+      entries.unshift({
+
+        id: Date.now(),
+
+        text: text,
+
+        mood: selectedMood || "📓",
+
+        date: new Date().toISOString()
+
+      });
+
+
+      localStorage.setItem(
+        "z_entries",
+        JSON.stringify(entries)
+      );
+
+
+      textarea.value = "";
+
+
+      updateWordCount();
+
+
+      selectedMood = null;
+
+
+      document
+        .querySelectorAll(".mood")
+        .forEach(item =>
+          item.classList.remove("selected")
         );
 
 
-        /* =========================================================
-           SAVE ENTRY
-           ========================================================= */
-
-        const saveButton =
-            document.getElementById("saveButton");
-
-        const toast =
-            document.getElementById("toast");
+      document.getElementById("moodStatus").textContent =
+        "choose whatever feels closest.";
 
 
-        saveButton.addEventListener(
-            "click",
-            () => {
+      const saved =
+        document.getElementById("savedMessage");
 
-                if (!input.value.trim()) {
 
-                    input.focus();
+      saved.classList.add("show");
 
-                    return;
 
-                }
+      setTimeout(() => {
 
-                toast.classList.add("show");
+        saved.classList.remove("show");
 
-                setTimeout(() => {
+      }, 2200);
 
-                    toast.classList.remove("show");
 
-                }, 2500);
+      renderEntries();
 
-                input.value = "";
+    }
 
-                counter.textContent = "0";
 
-            }
+
+    /* =======================================================
+       RENDER ENTRIES
+       ======================================================== */
+
+    function renderEntries() {
+
+      const entries =
+        JSON.parse(
+          localStorage.getItem("z_entries") || "[]"
         );
 
 
-        /* =========================================================
-           SEARCH ENTRIES
-           ========================================================= */
-
-        const search =
-            document.getElementById("search");
-
-        const entries =
-            document.querySelectorAll(".entry-card");
+      const container =
+        document.getElementById("entriesList");
 
 
-        search.addEventListener(
-            "input",
-            () => {
+      const count =
+        document.getElementById("entryCount");
 
-                const query =
-                    search.value.toLowerCase();
 
-                entries.forEach(entry => {
+      count.textContent =
+        entries.length +
+        (entries.length === 1 ? " entry" : " entries");
 
-                    const text =
-                        entry.innerText.toLowerCase();
 
-                    if (text.includes(query)) {
+      if (!entries.length) {
 
-                        entry.style.display =
-                            "grid";
+        container.innerHTML = `
 
-                    } else {
+          <div class="empty">
 
-                        entry.style.display =
-                            "none";
+            <div class="empty-flower">
+              🌱
+            </div>
 
-                    }
+            <div class="empty-text">
+              Your pages will grow here.
+            </div>
 
-                });
+          </div>
 
-            }
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        entries.map(entry => {
+
+          const date =
+            new Date(entry.date);
+
+
+          const formattedDate =
+            date.toLocaleDateString(
+              "en-US",
+              {
+                weekday: "long",
+                month: "short",
+                day: "numeric"
+              }
+            );
+
+
+          const safeText =
+            escapeHTML(entry.text);
+
+
+          return `
+
+            <article class="entry">
+
+              <div class="entry-head">
+
+                <span class="entry-mood">
+                  ${entry.mood}
+                </span>
+
+                <span class="entry-date">
+                  ${formattedDate}
+                </span>
+
+              </div>
+
+
+              <div class="entry-text">
+                ${safeText}
+              </div>
+
+
+              <button
+                class="entry-delete"
+                onclick="openDeleteModal(${entry.id})"
+                aria-label="Delete entry"
+              >
+                ✕
+              </button>
+
+            </article>
+
+          `;
+
+        }).join("");
+
+    }
+
+
+
+    /* =======================================================
+       ESCAPE HTML
+       ======================================================== */
+
+    function escapeHTML(text) {
+
+      const div =
+        document.createElement("div");
+
+
+      div.textContent = text;
+
+
+      return div.innerHTML;
+
+    }
+
+
+
+    /* =======================================================
+       DELETE
+       ======================================================== */
+
+    let pendingDelete = null;
+
+
+    function openDeleteModal(id) {
+
+      pendingDelete = id;
+
+
+      document
+        .getElementById("deleteOverlay")
+        .classList.add("open");
+
+    }
+
+
+    function closeDeleteModal() {
+
+      pendingDelete = null;
+
+
+      document
+        .getElementById("deleteOverlay")
+        .classList.remove("open");
+
+    }
+
+
+    function confirmDelete() {
+
+      if (pendingDelete === null) return;
+
+
+      let entries =
+        JSON.parse(
+          localStorage.getItem("z_entries") || "[]"
         );
 
-    </script>
+
+      entries =
+        entries.filter(
+          entry => entry.id !== pendingDelete
+        );
+
+
+      localStorage.setItem(
+        "z_entries",
+        JSON.stringify(entries)
+      );
+
+
+      closeDeleteModal();
+
+
+      renderEntries();
+
+    }
+
+
+
+    /* =======================================================
+       ESCAPE KEY
+       ======================================================== */
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape") {
+
+        closeDeleteModal();
+
+      }
+
+    });
+
+
+
+    /* =======================================================
+       INITIAL LOAD
+       ======================================================== */
+
+    renderEntries();
+
+
+  </script>
 
 </body>
+
 </html>

@@ -1,2060 +1,1963 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Journal — Zenene</title>
+<title>Zenene — Journal</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Mono:wght@300;400;500&family=Homemade+Apple&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
-    rel="stylesheet">
+<style>
 
-  <style>
+/* =========================================================
+   ZENENE JOURNAL
+   ========================================================= */
 
-    /* =========================================================
-       ZENENE — JOURNAL
-       ========================================================= */
+:root {
+    --paper: #f5f0e7;
+    --paper-light: #fbf9f3;
+    --ink: #332e2a;
+    --muted: #746960;
 
-    :root {
-      --sky: #c7ddef;
-      --sky-dark: #a9c8df;
+    --rose: #b8787d;
+    --rose-soft: #ead2d0;
 
-      --cream: #fffaf2;
-      --paper: #fffdf8;
-      --paper-soft: rgba(255, 253, 248, 0.82);
+    --sage: #aeb69a;
+    --sage-soft: #dfe4d2;
 
-      --brown: #4a392f;
-      --brown-soft: #806c5e;
-      --brown-light: #aa9788;
+    --blue: #b8cbd3;
+    --blue-soft: #dbe8ec;
 
-      --sage: #9db69b;
-      --sage-dark: #759477;
+    --lavender: #d8d2df;
+    --cream: #eee6d7;
 
-      --rose: #e7b6bc;
-      --rose-dark: #ca8994;
+    --border: rgba(72, 60, 52, .16);
 
-      --lavender: #d8cee6;
+    --serif: "Cormorant Garamond", serif;
+    --mono: "DM Mono", monospace;
+    --script: "Homemade Apple", cursive;
+}
 
-      --line: rgba(74, 57, 47, 0.11);
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-      --shadow: 0 12px 35px rgba(74, 57, 47, 0.08);
-    }
+html {
+    scroll-behavior: smooth;
+}
 
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    overflow-x: hidden;
+}
 
-    /* RESET */
+/* =========================================================
+   PAPER GRAIN
+   ========================================================= */
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: .20;
 
+    background-image:
+        radial-gradient(rgba(50,40,30,.20) .5px, transparent .6px),
+        radial-gradient(rgba(255,255,255,.5) .5px, transparent .6px);
 
-    html {
-      scroll-behavior: smooth;
-    }
+    background-size: 7px 7px, 11px 11px;
+    mix-blend-mode: multiply;
+}
 
+/* =========================================================
+   BACKGROUND PAPER PIECES
+   ========================================================= */
 
-    body {
-      min-height: 100vh;
+.paper-piece {
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+}
 
-      background:
-        radial-gradient(
-          circle at 15% 10%,
-          rgba(255,255,255,.48) 0 2px,
-          transparent 3px
-        ),
-        var(--sky);
+.paper-blue {
+    width: 270px;
+    height: 410px;
+    left: -110px;
+    top: 140px;
+    background: var(--blue-soft);
+    transform: rotate(-7deg);
+    opacity: .85;
+}
 
-      background-size: 42px 42px;
-
-      color: var(--brown);
-
-      font-family: 'DM Mono', monospace;
-
-      padding-bottom: 100px;
-    }
-
-
-    /* =========================================================
-       PAPER GRAIN
-       ========================================================= */
-
-    body::before {
-      content: "";
-
-      position: fixed;
-      inset: 0;
-
-      pointer-events: none;
-
-      opacity: .18;
-
-      background-image:
+.paper-blue::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
         repeating-linear-gradient(
-          0deg,
-          rgba(74,57,47,.025) 0px,
-          rgba(74,57,47,.025) 1px,
-          transparent 1px,
-          transparent 4px
+            0deg,
+            transparent,
+            transparent 27px,
+            rgba(70,100,110,.08) 28px
         );
+}
+
+.paper-pink {
+    width: 240px;
+    height: 340px;
+    right: -100px;
+    top: 530px;
+    background: var(--rose-soft);
+    transform: rotate(8deg);
+}
+
+.paper-green {
+    width: 230px;
+    height: 310px;
+    left: -80px;
+    bottom: 300px;
+    background: var(--sage-soft);
+    transform: rotate(6deg);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+    height: 72px;
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 48px;
+
+    position: relative;
+    z-index: 20;
+
+    background: rgba(245,240,231,.72);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: 500;
+}
+
+.nav {
+    display: flex;
+    gap: 34px;
+    align-items: center;
+}
+
+.nav a {
+    color: var(--ink);
+    text-decoration: none;
+
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .5px;
 
-      z-index: 0;
-    }
-
-
-    /* =========================================================
-       HEADER
-       ========================================================= */
-
-    .topbar {
-      position: sticky;
-      top: 0;
-
-      z-index: 100;
-
-      height: 68px;
-
-      display: flex;
-      align-items: center;
-
-      padding: 0 28px;
-
-      background: rgba(255,250,242,.84);
-
-      backdrop-filter: blur(18px);
-
-      border-bottom: 1px solid rgba(74,57,47,.08);
-    }
-
-
-    .back {
-      width: 38px;
-      height: 38px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      text-decoration: none;
-
-      color: var(--brown);
-
-      font-size: 20px;
-
-      transition: .25s;
-    }
-
-
-    .back:hover {
-      background: rgba(255,255,255,.65);
-      transform: translateX(-3px);
-    }
-
-
-    .brand {
-      margin-left: 10px;
-
-      font-family: 'Playfair Display', serif;
-
-      font-size: 17px;
-      letter-spacing: .02em;
-    }
-
-
-    .header-note {
-      margin-left: auto;
-
-      font-family: 'Caveat', cursive;
-
-      font-size: 19px;
-
-      color: var(--brown-soft);
-    }
-
-
-    /* =========================================================
-       MAIN
-       ========================================================= */
-
-    .page {
-      position: relative;
-      z-index: 1;
-
-      width: min(920px, calc(100% - 36px));
-
-      margin: 0 auto;
-
-      padding: 58px 0 50px;
-    }
-
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-
-    .hero {
-      text-align: center;
-
-      margin-bottom: 46px;
-
-      animation: fadeUp .7s ease both;
-    }
-
-
-    .eyebrow {
-      font-size: 10px;
-
-      letter-spacing: .22em;
-
-      text-transform: uppercase;
-
-      color: var(--sage-dark);
-
-      margin-bottom: 12px;
-    }
-
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-
-      font-size: clamp(48px, 8vw, 76px);
-
-      font-weight: 400;
-
-      line-height: .95;
-
-      letter-spacing: -.035em;
-    }
-
-
-    .hero h1 span {
-      font-family: 'Caveat', cursive;
-
-      font-size: .62em;
-
-      color: var(--rose-dark);
-
-      margin-left: 7px;
-    }
-
-
-    .hero p {
-      margin-top: 18px;
-
-      font-family: 'Caveat', cursive;
-
-      font-size: 22px;
-
-      color: var(--brown-soft);
-    }
-
-
-    .date {
-      margin-top: 16px;
-
-      font-size: 10px;
-
-      letter-spacing: .13em;
-
-      text-transform: uppercase;
-
-      color: var(--brown-light);
-    }
-
-
-    /* =========================================================
-       SECTION LABEL
-       ========================================================= */
-
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      margin-bottom: 17px;
-
-      font-size: 10px;
-
-      letter-spacing: .15em;
-
-      text-transform: uppercase;
-
-      color: var(--brown-soft);
-    }
-
-
-    .section-label::after {
-      content: "";
-
-      height: 1px;
-
-      flex: 1;
-
-      background: var(--line);
-    }
-
-
-    /* =========================================================
-       MOOD
-       ========================================================= */
-
-    .mood-section {
-      margin-bottom: 38px;
-
-      animation: fadeUp .7s .08s ease both;
-    }
-
-
-    .mood-box {
-      background: rgba(255,253,248,.58);
-
-      border: 1px solid rgba(255,255,255,.65);
-
-      border-radius: 24px;
-
-      padding: 23px 24px;
-
-      box-shadow: var(--shadow);
-    }
-
-
-    .mood-question {
-      font-family: 'Playfair Display', serif;
-
-      font-size: 19px;
-
-      margin-bottom: 18px;
-    }
-
-
-    .moods {
-      display: flex;
-
-      gap: 10px;
-
-      flex-wrap: wrap;
-    }
-
-
-    .mood {
-      border: 1px solid transparent;
-
-      background: rgba(255,255,255,.65);
-
-      border-radius: 100px;
-
-      padding: 8px 13px;
-
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-
-      gap: 7px;
-
-      font-family: 'DM Mono', monospace;
-
-      color: var(--brown-soft);
-
-      font-size: 11px;
-
-      transition:
-        transform .2s,
-        background .2s,
-        border .2s,
-        box-shadow .2s;
-    }
-
-
-    .mood:hover {
-      transform: translateY(-2px);
-
-      background: white;
-    }
-
-
-    .mood.selected {
-      background: white;
-
-      border-color: var(--sage);
-
-      box-shadow:
-        0 5px 18px rgba(117,148,119,.14);
-
-      transform: translateY(-2px);
-    }
-
-
-    .mood-emoji {
-      font-size: 18px;
-    }
-
-
-    .mood-status {
-      min-height: 20px;
-
-      margin-top: 15px;
-
-      font-family: 'Caveat', cursive;
-
-      font-size: 18px;
-
-      color: var(--sage-dark);
-    }
-
-
-    /* =========================================================
-       WRITING AREA
-       ========================================================= */
-
-    .write-section {
-      animation: fadeUp .7s .15s ease both;
-
-      margin-bottom: 38px;
-    }
-
-
-    .paper {
-      position: relative;
-
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          transparent 0px,
-          transparent 31px,
-          rgba(74,57,47,.055) 32px
-        ),
-        var(--paper);
-
-      border-radius: 5px;
-
-      padding: 34px 38px 27px;
-
-      box-shadow:
-        0 18px 45px rgba(74,57,47,.12),
-        0 2px 4px rgba(74,57,47,.05);
-
-      transform: rotate(-.25deg);
-
-      transition: transform .3s ease;
-    }
-
-
-    .paper:hover {
-      transform: rotate(0deg) translateY(-2px);
-    }
-
-
-    .paper::before {
-      content: "✦";
-
-      position: absolute;
-
-      top: 20px;
-      right: 27px;
-
-      color: var(--rose);
-
-      font-size: 18px;
-    }
-
-
-    .paper-top {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 17px;
-    }
-
-
-    .paper-title {
-      font-family: 'Caveat', cursive;
-
-      font-size: 25px;
-
-      color: var(--rose-dark);
-    }
-
-
-    .private {
-      font-size: 9px;
-
-      letter-spacing: .1em;
-
-      text-transform: uppercase;
-
-      color: var(--brown-light);
-
-      display: flex;
-      align-items: center;
-
-      gap: 5px;
-    }
-
-
-    textarea {
-      display: block;
-
-      width: 100%;
-
-      min-height: 245px;
-
-      border: none;
-
-      outline: none;
-
-      resize: vertical;
-
-      background: transparent;
-
-      color: var(--brown);
-
-      font-family: 'Caveat', cursive;
-
-      font-size: 24px;
-
-      line-height: 32px;
-
-      padding: 0;
-    }
-
-
-    textarea::placeholder {
-      color: #bcaea4;
-
-      opacity: .85;
-    }
-
-
-    .paper-bottom {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      padding-top: 15px;
-
-      border-top: 1px dashed rgba(74,57,47,.13);
-    }
-
-
-    .word-count {
-      font-size: 9px;
-
-      color: var(--brown-light);
-
-      letter-spacing: .04em;
-    }
-
-
-    .save-area {
-      display: flex;
-
-      align-items: center;
+    padding: 8px 0;
 
-      gap: 12px;
-    }
-
-
-    .saved {
-      font-family: 'Caveat', cursive;
-
-      font-size: 16px;
-
-      color: var(--sage-dark);
-
-      opacity: 0;
-
-      transition: opacity .3s;
-    }
-
-
-    .saved.show {
-      opacity: 1;
-    }
-
-
-    .save {
-      border: none;
-
-      background: var(--sage);
-
-      color: white;
-
-      border-radius: 100px;
-
-      padding: 10px 20px;
-
-      font-family: 'DM Mono', monospace;
-
-      font-size: 10px;
-
-      cursor: pointer;
-
-      letter-spacing: .04em;
-
-      transition: .25s;
-    }
-
-
-    .save:hover {
-      background: var(--sage-dark);
-
-      transform: translateY(-2px);
-
-      box-shadow: 0 6px 18px rgba(117,148,119,.22);
-    }
-
-
-    /* =========================================================
-       PROMPTS
-       ========================================================= */
-
-    .prompt-section {
-      margin-bottom: 43px;
-
-      animation: fadeUp .7s .22s ease both;
-    }
-
-
-    .prompts {
-      display: grid;
-
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 13px;
-    }
-
-
-    .prompt {
-      position: relative;
-
-      min-height: 105px;
-
-      padding: 20px 17px;
-
-      border: 1px solid rgba(255,255,255,.65);
-
-      border-radius: 4px;
-
-      background: rgba(255,253,248,.72);
-
-      box-shadow: 0 7px 20px rgba(74,57,47,.055);
-
-      cursor: pointer;
-
-      text-align: left;
-
-      transition: .25s;
-    }
-
-
-    .prompt:nth-child(2) {
-      transform: rotate(.6deg);
-    }
-
-
-    .prompt:nth-child(3) {
-      transform: rotate(-.5deg);
-    }
-
-
-    .prompt:hover {
-      transform: translateY(-5px) rotate(0deg);
-
-      box-shadow: 0 13px 27px rgba(74,57,47,.09);
-
-      background: rgba(255,255,255,.9);
-    }
-
-
-    .prompt-icon {
-      font-size: 15px;
-
-      margin-bottom: 10px;
-
-      color: var(--rose-dark);
-    }
-
-
-    .prompt-text {
-      font-family: 'Caveat', cursive;
-
-      font-size: 19px;
-
-      line-height: 1.1;
-
-      color: var(--brown);
-    }
-
-
-    /* =========================================================
-       ENTRIES
-       ========================================================= */
-
-    .entries-section {
-      animation: fadeUp .7s .3s ease both;
-    }
-
-
-    .entries-header {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 17px;
-    }
-
-
-    .entries-title {
-      font-family: 'Playfair Display', serif;
-
-      font-size: 23px;
-
-      font-weight: 400;
-    }
-
-
-    .entry-count {
-      font-size: 9px;
-
-      color: var(--brown-light);
-
-      letter-spacing: .1em;
-
-      text-transform: uppercase;
-    }
-
-
-    .entries {
-      display: grid;
-
-      gap: 12px;
-    }
-
-
-    .entry {
-      position: relative;
-
-      background: rgba(255,253,248,.76);
-
-      border: 1px solid rgba(255,255,255,.6);
-
-      border-radius: 8px;
-
-      padding: 20px 23px;
-
-      box-shadow: 0 7px 20px rgba(74,57,47,.05);
-
-      transition: .25s;
-    }
-
-
-    .entry:hover {
-      transform: translateY(-2px);
-
-      background: rgba(255,255,255,.92);
-    }
-
-
-    .entry::before {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      top: 17px;
-      bottom: 17px;
+    position: relative;
+}
 
-      width: 3px;
+.nav a::after {
+    content: "";
+    position: absolute;
 
-      background: var(--sage);
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-      border-radius: 0 4px 4px 0;
-    }
-
-
-    .entry-head {
-      display: flex;
-
-      align-items: center;
-
-      gap: 9px;
-
-      margin-bottom: 10px;
-    }
-
-
-    .entry-mood {
-      font-size: 17px;
-    }
-
-
-    .entry-date {
-      font-size: 9px;
-
-      letter-spacing: .08em;
-
-      text-transform: uppercase;
-
-      color: var(--brown-light);
-    }
-
-
-    .entry-text {
-      font-family: 'Caveat', cursive;
-
-      font-size: 20px;
-
-      line-height: 1.35;
-
-      color: var(--brown-soft);
-
-      max-width: 85%;
-
-      display: -webkit-box;
-
-      -webkit-line-clamp: 3;
-
-      -webkit-box-orient: vertical;
-
-      overflow: hidden;
-    }
-
-
-    .entry-delete {
-      position: absolute;
-
-      top: 18px;
-      right: 18px;
-
-      border: none;
-
-      background: transparent;
-
-      color: var(--brown-light);
-
-      cursor: pointer;
-
-      font-size: 12px;
-
-      opacity: .45;
-
-      transition: .2s;
-    }
-
-
-    .entry-delete:hover {
-      opacity: 1;
-
-      color: var(--rose-dark);
-    }
-
-
-    .empty {
-      text-align: center;
-
-      padding: 45px 20px;
-
-      color: var(--brown-light);
-    }
-
-
-    .empty-flower {
-      font-size: 30px;
-
-      margin-bottom: 8px;
-    }
-
-
-    .empty-text {
-      font-family: 'Caveat', cursive;
-
-      font-size: 21px;
-    }
-
+    height: 1px;
 
-    /* =========================================================
-       DELETE MODAL
-       ========================================================= */
+    background: var(--rose);
 
-    .overlay {
-      position: fixed;
+    transform: scaleX(0);
+    transform-origin: left;
 
-      inset: 0;
+    transition: transform .3s ease;
+}
 
-      z-index: 300;
+.nav a:hover::after,
+.nav a.active::after {
+    transform: scaleX(1);
+}
 
-      display: none;
+/* =========================================================
+   PAGE
+   ========================================================= */
 
-      align-items: center;
-      justify-content: center;
+.page {
+    width: min(1120px, calc(100% - 48px));
+    margin: auto;
+}
 
-      padding: 20px;
+/* =========================================================
+   HERO
+   ========================================================= */
 
-      background: rgba(55,42,34,.25);
+.hero {
+    min-height: 330px;
 
-      backdrop-filter: blur(9px);
-    }
-
-
-    .overlay.open {
-      display: flex;
-    }
-
-
-    .modal {
-      width: min(350px, 100%);
-
-      background: var(--cream);
-
-      padding: 32px 27px;
-
-      border-radius: 12px;
-
-      text-align: center;
-
-      box-shadow: 0 25px 70px rgba(55,42,34,.2);
-
-      animation: pop .25s ease;
-    }
-
-
-    .modal-flower {
-      font-size: 26px;
-
-      margin-bottom: 12px;
-    }
-
-
-    .modal h2 {
-      font-family: 'Playfair Display', serif;
-
-      font-size: 21px;
-
-      font-weight: 400;
-
-      margin-bottom: 9px;
-    }
-
-
-    .modal p {
-      font-size: 10px;
-
-      line-height: 1.7;
-
-      color: var(--brown-soft);
-
-      margin-bottom: 22px;
-    }
-
-
-    .modal-buttons {
-      display: flex;
-
-      gap: 9px;
-    }
-
-
-    .modal-btn {
-      flex: 1;
-
-      padding: 10px;
-
-      border-radius: 100px;
-
-      font-family: 'DM Mono', monospace;
-
-      font-size: 9px;
-
-      cursor: pointer;
-    }
-
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    align-items: center;
 
-    .cancel {
-      border: 1px solid var(--line);
+    position: relative;
+}
 
-      background: white;
+.hero-copy {
+    padding-left: 90px;
+}
 
-      color: var(--brown-soft);
-    }
-
-
-    .confirm {
-      border: none;
-
-      background: var(--rose-dark);
-
-      color: white;
-    }
-
+.eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--rose);
 
-    /* =========================================================
-       BOTTOM NAV
-       ========================================================= */
+    margin-bottom: 20px;
+}
 
-    .bottom-nav {
-      position: fixed;
+.hero h1 {
+    font-size: clamp(65px, 8vw, 100px);
+    line-height: .75;
+    font-weight: 400;
+    letter-spacing: -3px;
+}
 
-      bottom: 0;
-      left: 0;
-      right: 0;
+.hero h1 span {
+    font-family: var(--script);
+    font-size: .55em;
+    color: var(--rose);
 
-      z-index: 200;
+    display: inline-block;
 
-      height: 70px;
+    transform: rotate(-5deg);
+    margin-left: 15px;
+}
 
-      display: flex;
-      justify-content: center;
+.hero-description {
+    max-width: 380px;
 
-      background: rgba(255,250,242,.87);
+    margin-top: 28px;
 
-      backdrop-filter: blur(18px);
+    font-size: 18px;
+    line-height: 1.55;
+}
 
-      border-top: 1px solid rgba(74,57,47,.08);
-    }
-
+/* little note */
 
-    .nav-inner {
-      width: min(650px, 100%);
+.hero-note {
+    background: #efe4d4;
 
-      display: flex;
+    padding: 28px;
 
-      justify-content: space-around;
-      align-items: center;
-    }
+    width: 230px;
 
+    transform: rotate(4deg);
 
-    .nav-item {
-      display: flex;
+    box-shadow: 0 10px 30px rgba(60,50,40,.08);
 
-      flex-direction: column;
+    animation: floatNote 5s ease-in-out infinite;
+}
 
-      align-items: center;
+.hero-note::before {
+    content: "";
 
-      gap: 4px;
+    position: absolute;
 
-      text-decoration: none;
+    width: 74px;
+    height: 22px;
 
-      color: var(--brown-light);
+    top: -12px;
+    left: 75px;
 
-      font-size: 8px;
+    background: rgba(190,125,125,.45);
 
-      letter-spacing: .02em;
+    transform: rotate(-4deg);
+}
 
-      transition: .2s;
+.hero-note p {
+    font-family: var(--script);
+    font-size: 14px;
+    line-height: 2;
+    color: #756056;
+}
 
-      min-width: 60px;
+@keyframes floatNote {
+    0%,100% {
+        transform: rotate(4deg) translateY(0);
     }
-
 
-    .nav-icon {
-      font-size: 20px;
-
-      line-height: 1;
-
-      transition: .2s;
+    50% {
+        transform: rotate(3deg) translateY(-7px);
     }
+}
 
+/* =========================================================
+   JOURNAL PAPER
+   ========================================================= */
 
-    .nav-item:hover,
-    .nav-item.active {
-      color: var(--sage-dark);
-    }
+.journal-paper {
+    position: relative;
 
+    background: var(--paper-light);
 
-    .nav-item:hover .nav-icon,
-    .nav-item.active .nav-icon {
-      transform: translateY(-2px) scale(1.08);
-    }
+    border: 1px solid rgba(70,60,50,.12);
 
+    padding: 42px 52px 48px;
 
-    /* =========================================================
-       ANIMATIONS
-       ========================================================= */
+    box-shadow:
+        0 18px 50px rgba(55,45,35,.09);
 
-    @keyframes fadeUp {
+    animation: paperAppear .8s ease both;
+}
 
-      from {
+@keyframes paperAppear {
+    from {
         opacity: 0;
-        transform: translateY(18px);
-      }
+        transform: translateY(20px);
+    }
 
-      to {
+    to {
         opacity: 1;
         transform: translateY(0);
-      }
+    }
+}
 
+/* notebook holes */
+
+.notebook-holes {
+    position: absolute;
+    left: 15px;
+    top: 32px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.notebook-holes span {
+    width: 13px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background: var(--paper);
+
+    border: 1px solid rgba(70,60,50,.15);
+
+    box-shadow: inset 0 2px 4px rgba(50,40,30,.08);
+}
+
+/* tape */
+
+.tape {
+    position: absolute;
+
+    width: 90px;
+    height: 25px;
+
+    background: rgba(211,145,145,.4);
+
+    top: -13px;
+    right: 70px;
+
+    transform: rotate(4deg);
+}
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.date {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--rose);
+
+    margin-bottom: 18px;
+}
+
+.journal-paper h2 {
+    font-size: 36px;
+    font-weight: 400;
+
+    margin-bottom: 24px;
+}
+
+/* =========================================================
+   MOOD SELECTOR
+   ========================================================= */
+
+.mood-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.mood {
+    background: #f8f3ea;
+
+    border: 1px solid var(--border);
+
+    padding: 18px 10px;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.mood:hover {
+    transform: translateY(-3px);
+}
+
+.mood.selected {
+    background: var(--sage-soft);
+
+    border-color: rgba(100,110,80,.4);
+
+    box-shadow: 0 6px 18px rgba(80,80,60,.08);
+}
+
+.mood-emoji {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 9px;
+}
+
+.mood-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.write-title {
+    font-size: 28px;
+    margin-top: 30px;
+    margin-bottom: 13px;
+}
+
+.text-wrapper {
+    position: relative;
+}
+
+textarea {
+    width: 100%;
+    min-height: 180px;
+
+    resize: vertical;
+
+    border: 1px solid var(--border);
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent,
+            transparent 31px,
+            rgba(120,100,80,.09) 32px
+        );
+
+    background-color: #fcfaf5;
+
+    padding: 18px;
+
+    font-family: var(--mono);
+    font-size: 12px;
+
+    color: var(--ink);
+
+    outline: none;
+
+    line-height: 32px;
+
+    transition: border-color .25s ease;
+}
+
+textarea:focus {
+    border-color: rgba(170,110,110,.55);
+}
+
+textarea::placeholder {
+    color: #a69a8d;
+}
+
+.word-count {
+    position: absolute;
+
+    bottom: 12px;
+    right: 15px;
+
+    font-family: var(--mono);
+    font-size: 9px;
+
+    color: #95877c;
+}
+
+/* =========================================================
+   SAVE ROW
+   ========================================================= */
+
+.save-row {
+    margin-top: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.private {
+    font-size: 16px;
+    color: #75675d;
+}
+
+.save-btn {
+    border: none;
+
+    background: var(--ink);
+    color: white;
+
+    padding: 14px 27px;
+
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    background: #51463f;
+}
+
+/* =========================================================
+   PROMPTS
+   ========================================================= */
+
+.section {
+    margin-top: 70px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    margin-bottom: 22px;
+}
+
+.section-heading h3 {
+    font-size: 35px;
+    font-weight: 400;
+}
+
+.section-heading h3::after {
+    content: "";
+    display: block;
+
+    width: 70px;
+    height: 1px;
+
+    background: var(--rose);
+
+    margin-top: 4px;
+}
+
+.section-heading p {
+    font-family: var(--script);
+    font-size: 13px;
+    color: var(--rose);
+}
+
+.prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.prompt {
+    min-height: 165px;
+
+    padding: 25px;
+
+    position: relative;
+
+    cursor: pointer;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.prompt:hover {
+    transform: translateY(-7px) rotate(-1deg);
+
+    box-shadow: 0 14px 28px rgba(50,40,30,.09);
+}
+
+.prompt:nth-child(1) {
+    background: #ded8e7;
+    transform: rotate(-1deg);
+}
+
+.prompt:nth-child(2) {
+    background: #dfe4d2;
+    transform: rotate(1deg);
+}
+
+.prompt:nth-child(3) {
+    background: #eee4d5;
+    transform: rotate(-.5deg);
+}
+
+.prompt:nth-child(4) {
+    background: #d7e5e9;
+    transform: rotate(1.5deg);
+}
+
+.prompt-icon {
+    font-size: 19px;
+    margin-bottom: 20px;
+}
+
+.prompt p {
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.prompt small {
+    display: block;
+
+    width: 45px;
+
+    border-bottom: 1px solid currentColor;
+
+    margin-top: 20px;
+}
+
+/* =========================================================
+   ENTRIES
+   ========================================================= */
+
+.entries-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    margin-bottom: 20px;
+}
+
+.search-area {
+    display: flex;
+    gap: 8px;
+}
+
+.search-area input,
+.search-area select {
+    background: rgba(255,255,255,.5);
+
+    border: 1px solid var(--border);
+
+    padding: 11px 13px;
+
+    font-family: var(--mono);
+    font-size: 10px;
+
+    color: var(--ink);
+
+    outline: none;
+}
+
+.search-area input {
+    width: 200px;
+}
+
+.entries {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.35);
+}
+
+.entry {
+    display: grid;
+    grid-template-columns: 90px 50px 1fr 70px;
+
+    padding: 24px 25px;
+
+    border-bottom: 1px solid var(--border);
+
+    align-items: start;
+
+    transition: background .25s ease;
+}
+
+.entry:last-child {
+    border-bottom: none;
+}
+
+.entry:hover {
+    background: rgba(255,255,255,.5);
+}
+
+.entry-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.7;
+    color: #81766e;
+}
+
+.entry-date strong {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ink);
+}
+
+.entry-mood {
+    font-size: 20px;
+}
+
+.entry-content h4 {
+    font-size: 23px;
+    font-weight: 500;
+    margin-bottom: 7px;
+}
+
+.entry-content p {
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.7;
+    color: #766c64;
+
+    max-width: 650px;
+}
+
+.tags {
+    display: flex;
+    gap: 7px;
+    margin-top: 11px;
+}
+
+.tag {
+    background: #e6e0e8;
+    padding: 5px 9px;
+
+    font-family: var(--mono);
+    font-size: 8px;
+}
+
+.entry-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-btn {
+    border: none;
+    background: none;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    color: #746960;
+}
+
+/* =========================================================
+   BOTTOM CARDS
+   ========================================================= */
+
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 22px;
+
+    margin-top: 24px;
+}
+
+.bottom-card {
+    min-height: 145px;
+
+    padding: 25px 30px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.bottom-card:first-child {
+    background: #ead6d3;
+}
+
+.bottom-card:last-child {
+    background: #dfe3d3;
+}
+
+.bottom-card h4 {
+    font-size: 26px;
+    font-weight: 400;
+
+    margin-bottom: 10px;
+}
+
+.bottom-card p {
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.7;
+
+    max-width: 380px;
+}
+
+.card-link {
+    display: inline-block;
+
+    margin-top: 15px;
+
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    text-align: center;
+
+    padding: 65px 0 40px;
+}
+
+.footer-script {
+    font-family: var(--script);
+    color: var(--rose);
+    font-size: 15px;
+
+    margin-bottom: 20px;
+}
+
+.footer-brand {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast {
+    position: fixed;
+
+    bottom: 25px;
+    left: 50%;
+
+    transform: translate(-50%, 100px);
+
+    background: var(--ink);
+    color: white;
+
+    padding: 13px 22px;
+
+    font-family: var(--mono);
+    font-size: 10px;
+
+    z-index: 1000;
+
+    opacity: 0;
+
+    transition:
+        transform .35s ease,
+        opacity .35s ease;
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .site-header {
+        padding: 0 20px;
     }
 
-
-    @keyframes pop {
-
-      from {
-        opacity: 0;
-        transform: scale(.95) translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-
+    .nav {
+        gap: 15px;
     }
 
+    .nav a {
+        font-size: 9px;
+    }
 
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-
-    @media (max-width: 650px) {
-
-      .page {
-        width: min(100% - 24px, 920px);
-
-        padding-top: 42px;
-      }
-
-
-      .topbar {
-        padding: 0 17px;
-      }
-
-
-      .header-note {
-        display: none;
-      }
-
-
-      .hero {
-        margin-bottom: 35px;
-      }
-
-
-      .hero h1 {
-        font-size: 52px;
-      }
-
-
-      .paper {
-        padding: 28px 23px 22px;
-      }
-
-
-      textarea {
-        min-height: 220px;
-
-        font-size: 22px;
-      }
-
-
-      .prompts {
+    .hero {
         grid-template-columns: 1fr;
-      }
-
-
-      .prompt {
-        min-height: 80px;
-      }
-
-
-      .prompt:nth-child(2),
-      .prompt:nth-child(3) {
-        transform: none;
-      }
-
-
-      .mood-box {
-        padding: 20px 17px;
-      }
-
-
-      .mood {
-        flex: 1;
-
-        justify-content: center;
-
-        min-width: 85px;
-      }
-
-
-      .bottom-nav {
-        height: 64px;
-      }
-
-
-      .nav-item {
-        min-width: 48px;
-
-        font-size: 7px;
-      }
-
-
-      .nav-icon {
-        font-size: 18px;
-      }
-
+        padding: 60px 0;
     }
 
-  </style>
-</head>
+    .hero-copy {
+        padding-left: 25px;
+    }
 
+    .hero-note {
+        display: none;
+    }
+
+    .journal-paper {
+        padding: 35px 25px;
+    }
+
+    .mood-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prompt-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .entry {
+        grid-template-columns: 65px 40px 1fr;
+    }
+
+    .entry-actions {
+        display: none;
+    }
+
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .site-header {
+        height: auto;
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    .nav {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .page {
+        width: calc(100% - 28px);
+    }
+
+    .hero h1 {
+        font-size: 62px;
+    }
+
+    .prompt-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .entries-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .search-area {
+        width: 100%;
+    }
+
+    .search-area input {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
 
 <body>
 
+<!-- =======================================================
+     BACKGROUND
+======================================================= -->
 
-  <!-- =======================================================
-       HEADER
-       ======================================================== -->
+<div class="paper-piece paper-blue"></div>
+<div class="paper-piece paper-pink"></div>
+<div class="paper-piece paper-green"></div>
 
-  <header class="topbar">
 
-    <a href="index.html" class="back">←</a>
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
-    <div class="brand">
-      Zenene
+<header class="site-header">
+
+    <div class="logo">
+        ZENENE
     </div>
 
-    <div class="header-note">
-      your private little corner
-    </div>
+    <nav class="nav">
 
-  </header>
+        <a href="index.html">HOME</a>
 
+        <a href="journal.html" class="active">
+            JOURNAL
+        </a>
 
+        <a href="mood.html">
+            MOOD
+        </a>
 
-  <!-- =======================================================
-       MAIN
-       ======================================================== -->
+        <a href="explore.html">
+            EXPLORE
+        </a>
 
-  <main class="page">
+        <a href="vera.html">
+            VERA
+        </a>
 
+    </nav>
 
-    <!-- HERO -->
-
-    <section class="hero">
-
-      <div class="eyebrow">
-        a quiet place to return to
-      </div>
-
-      <h1>
-        Journal
-        <span>✦</span>
-      </h1>
-
-      <p>
-        a little space for your thoughts.
-      </p>
-
-      <div class="date" id="dateLabel"></div>
-
-    </section>
+</header>
 
 
+<main class="page">
 
-    <!-- =====================================================
-         MOOD
-         ====================================================== -->
+<!-- =======================================================
+     HERO
+======================================================= -->
 
-    <section class="mood-section">
+<section class="hero">
 
-      <div class="section-label">
-        before you write
-      </div>
+    <div class="hero-copy">
 
-      <div class="mood-box">
-
-        <div class="mood-question">
-          How are you feeling today?
+        <div class="eyebrow">
+            WRITE
         </div>
 
-        <div class="moods" id="moods">
+        <h1>
+            your
+            <span>journal.</span>
+        </h1>
 
-          <button class="mood" data-mood="😄" data-label="amazing">
+        <p class="hero-description">
+            A little space for your thoughts,
+            your feelings, your everyday moments
+            that matter to you.
+        </p>
 
-            <span class="mood-emoji">😄</span>
-            <span>amazing</span>
-
-          </button>
+    </div>
 
 
-          <button class="mood" data-mood="😊" data-label="good">
+    <div class="hero-note">
 
+        <p>
+            there is peace<br>
+            in putting things<br>
+            into words.
+            ♡
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     NEW ENTRY
+======================================================= -->
+
+<section class="journal-paper">
+
+    <div class="tape"></div>
+
+    <div class="notebook-holes">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+    <div class="date">
+        <span id="todayDate"></span>
+    </div>
+
+
+    <h2>
+        How are you feeling today?
+    </h2>
+
+
+    <!-- MOODS -->
+
+    <div class="mood-grid">
+
+        <div class="mood" data-mood="very good" data-emoji="😁">
+            <span class="mood-emoji">😁</span>
+            <span class="mood-label">Very good</span>
+        </div>
+
+        <div class="mood" data-mood="good" data-emoji="😊">
             <span class="mood-emoji">😊</span>
-            <span>good</span>
+            <span class="mood-label">Good</span>
+        </div>
 
-          </button>
-
-
-          <button class="mood" data-mood="😌" data-label="peaceful">
-
-            <span class="mood-emoji">😌</span>
-            <span>peaceful</span>
-
-          </button>
-
-
-          <button class="mood" data-mood="😐" data-label="okay">
-
+        <div class="mood" data-mood="okay" data-emoji="😐">
             <span class="mood-emoji">😐</span>
-            <span>okay</span>
+            <span class="mood-label">Okay</span>
+        </div>
 
-          </button>
-
-
-          <button class="mood" data-mood="😔" data-label="low">
-
+        <div class="mood" data-mood="low" data-emoji="😔">
             <span class="mood-emoji">😔</span>
-            <span>low</span>
-
-          </button>
-
-
-          <button class="mood" data-mood="😢" data-label="sad">
-
-            <span class="mood-emoji">😢</span>
-            <span>sad</span>
-
-          </button>
-
-
-          <button class="mood" data-mood="😤" data-label="frustrated">
-
-            <span class="mood-emoji">😤</span>
-            <span>frustrated</span>
-
-          </button>
-
-
-          <button class="mood" data-mood="😰" data-label="anxious">
-
-            <span class="mood-emoji">😰</span>
-            <span>anxious</span>
-
-          </button>
-
+            <span class="mood-label">Low</span>
         </div>
 
-
-        <div class="mood-status" id="moodStatus">
-          choose whatever feels closest.
+        <div class="mood" data-mood="difficult" data-emoji="🌧️">
+            <span class="mood-emoji">🌧️</span>
+            <span class="mood-label">Difficult</span>
         </div>
 
-      </div>
-
-    </section>
+    </div>
 
 
-
-    <!-- =====================================================
-         WRITING PAPER
-         ====================================================== -->
-
-    <section class="write-section">
-
-      <div class="section-label">
-        today's page
-      </div>
+    <h3 class="write-title">
+        What's on your mind?
+    </h3>
 
 
-      <div class="paper">
-
-        <div class="paper-top">
-
-          <div class="paper-title">
-            dear me,
-          </div>
-
-          <div class="private">
-            ♧ only on this device
-          </div>
-
-        </div>
-
+    <div class="text-wrapper">
 
         <textarea
-          id="journalText"
-          placeholder="What's on your mind?"
-          oninput="updateWordCount()"
+            id="journalText"
+            placeholder="Start writing..."
         ></textarea>
 
-
-        <div class="paper-bottom">
-
-          <div class="word-count" id="wordCount">
+        <span class="word-count" id="wordCount">
             0 words
-          </div>
+        </span>
+
+    </div>
 
 
-          <div class="save-area">
+    <div class="save-row">
 
-            <span class="saved" id="savedMessage">
-              saved ✦
+        <div class="private">
+            ♧ &nbsp; Private to you only
+        </div>
+
+        <button class="save-btn" id="saveEntry">
+            SAVE ENTRY
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     PROMPTS
+======================================================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <div>
+            <h3>
+                Need a prompt?
+            </h3>
+        </div>
+
+        <p>
+            some ideas to get you started →
+        </p>
+
+    </div>
+
+
+    <div class="prompt-grid">
+
+        <div class="prompt">
+
+            <div class="prompt-icon">
+                ♧
+            </div>
+
+            <p>
+                What made<br>
+                you smile today?
+            </p>
+
+            <small></small>
+
+        </div>
+
+
+        <div class="prompt">
+
+            <div class="prompt-icon">
+                ♧
+            </div>
+
+            <p>
+                What's been<br>
+                on your mind lately?
+            </p>
+
+            <small></small>
+
+        </div>
+
+
+        <div class="prompt">
+
+            <div class="prompt-icon">
+                ♧
+            </div>
+
+            <p>
+                What are you<br>
+                grateful for right now?
+            </p>
+
+            <small></small>
+
+        </div>
+
+
+        <div class="prompt">
+
+            <div class="prompt-icon">
+                ☁
+            </div>
+
+            <p>
+                What do you<br>
+                need more of these days?
+            </p>
+
+            <small></small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     ENTRIES
+======================================================= -->
+
+<section class="section">
+
+    <div class="entries-header">
+
+        <div class="section-heading" style="margin:0;">
+            <h3>
+                Your entries
+            </h3>
+        </div>
+
+
+        <div class="search-area">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search entries..."
+            >
+
+            <select id="tagFilter">
+
+                <option value="all">
+                    All tags
+                </option>
+
+                <option value="thoughts">
+                    thoughts
+                </option>
+
+                <option value="peaceful">
+                    peaceful
+                </option>
+
+                <option value="self-care">
+                    self-care
+                </option>
+
+                <option value="feelings">
+                    feelings
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="entries" id="entriesList">
+
+        <!-- Example entry -->
+
+        <article class="entry">
+
+            <div class="entry-date">
+                AUG<br>
+                <strong>16</strong><br>
+                2026
+            </div>
+
+            <div class="entry-mood">
+                😁
+            </div>
+
+            <div class="entry-content">
+
+                <h4>
+                    things I don't know how to say out loud
+                </h4>
+
+                <p>
+                    Sometimes writing things down makes them
+                    feel a little easier to understand.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        personal
+                    </span>
+
+                    <span class="tag">
+                        thoughts
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="entry-actions">
+                <button class="menu-btn">
+                    ···
+                </button>
+            </div>
+
+        </article>
+
+
+        <article class="entry">
+
+            <div class="entry-date">
+                AUG<br>
+                <strong>15</strong><br>
+                2026
+            </div>
+
+            <div class="entry-mood">
+                😌
+            </div>
+
+            <div class="entry-content">
+
+                <h4>
+                    a calm kind of day
+                </h4>
+
+                <p>
+                    Didn't do much today and that's okay.
+                    Read a book, had tea, listened to music.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        peaceful
+                    </span>
+
+                    <span class="tag">
+                        self-care
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="entry-actions">
+                <button class="menu-btn">
+                    ···
+                </button>
+            </div>
+
+        </article>
+
+
+        <article class="entry">
+
+            <div class="entry-date">
+                AUG<br>
+                <strong>14</strong><br>
+                2026
+            </div>
+
+            <div class="entry-mood">
+                🌧️
+            </div>
+
+            <div class="entry-content">
+
+                <h4>
+                    heavy heart
+                </h4>
+
+                <p>
+                    Some days just feel heavier for no clear reason.
+                    Trying to be gentle with myself.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        feelings
+                    </span>
+
+                    <span class="tag">
+                        difficult
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="entry-actions">
+                <button class="menu-btn">
+                    ···
+                </button>
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <!-- BOTTOM CARDS -->
+
+    <div class="bottom-grid">
+
+        <div class="bottom-card">
+
+            <h4>
+                Weekly reflection
+            </h4>
+
+            <p>
+                Look back on your week, notice patterns,
+                and be kind to yourself.
+            </p>
+
+            <span class="card-link">
+                VIEW THIS WEEK →
             </span>
 
-            <button class="save" onclick="saveEntry()">
-              save entry&nbsp; ✦
-            </button>
-
-          </div>
-
         </div>
 
-      </div>
 
-    </section>
+        <div class="bottom-card">
 
+            <h4>
+                Export your journal
+            </h4>
 
+            <p>
+                Download your entries as a .txt file
+                to keep forever.
+            </p>
 
-    <!-- =====================================================
-         PROMPTS
-         ====================================================== -->
+            <span
+                class="card-link"
+                id="exportBtn"
+            >
+                EXPORT ENTRIES ↓
+            </span>
 
-    <section class="prompt-section">
-
-      <div class="section-label">
-        something to think about
-      </div>
-
-
-      <div class="prompts" id="prompts">
-
-
-        <button class="prompt" onclick="usePrompt(this)">
-
-          <div class="prompt-icon">✿</div>
-
-          <div class="prompt-text">
-            What made you smile today?
-          </div>
-
-        </button>
-
-
-        <button class="prompt" onclick="usePrompt(this)">
-
-          <div class="prompt-icon">☁</div>
-
-          <div class="prompt-text">
-            What feels a little heavy right now?
-          </div>
-
-        </button>
-
-
-        <button class="prompt" onclick="usePrompt(this)">
-
-          <div class="prompt-icon">✦</div>
-
-          <div class="prompt-text">
-            What are you proud of lately?
-          </div>
-
-        </button>
-
-
-        <button class="prompt" onclick="usePrompt(this)">
-
-          <div class="prompt-icon">♡</div>
-
-          <div class="prompt-text">
-            What do you wish someone understood about you?
-          </div>
-
-        </button>
-
-
-        <button class="prompt" onclick="usePrompt(this)">
-
-          <div class="prompt-icon">⌁</div>
-
-          <div class="prompt-text">
-            What do you need more of these days?
-          </div>
-
-        </button>
-
-
-        <button class="prompt" onclick="usePrompt(this)">
-
-          <div class="prompt-icon">🌱</div>
-
-          <div class="prompt-text">
-            Three small things you're grateful for.
-          </div>
-
-        </button>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         PAST ENTRIES
-         ====================================================== -->
-
-    <section class="entries-section">
-
-      <div class="section-label">
-        your pages
-      </div>
-
-
-      <div class="entries-header">
-
-        <div class="entries-title">
-          Recent thoughts
         </div>
-
-        <div class="entry-count" id="entryCount">
-          0 entries
-        </div>
-
-      </div>
-
-
-      <div class="entries" id="entriesList"></div>
-
-    </section>
-
-
-  </main>
-
-
-
-  <!-- =======================================================
-       BOTTOM NAV
-       ======================================================== -->
-
-  <nav class="bottom-nav">
-
-    <div class="nav-inner">
-
-
-      <a href="journal.html" class="nav-item active">
-
-        <div class="nav-icon">📓</div>
-        <span>Journal</span>
-
-      </a>
-
-
-      <a href="mood.html" class="nav-item">
-
-        <div class="nav-icon">🌿</div>
-        <span>Mood</span>
-
-      </a>
-
-
-      <a href="explore.html" class="nav-item">
-
-        <div class="nav-icon">⌁</div>
-        <span>Explore</span>
-
-      </a>
-
-
-      <a href="chat.html" class="nav-item">
-
-        <div class="nav-icon">☁</div>
-        <span>Vera</span>
-
-      </a>
-
-
-      <a href="calm.html" class="nav-item">
-
-        <div class="nav-icon">🌸</div>
-        <span>Calm</span>
-
-      </a>
-
-
-      <a href="stories.html" class="nav-item">
-
-        <div class="nav-icon">✦</div>
-        <span>Stories</span>
-
-      </a>
-
 
     </div>
 
-  </nav>
+</section>
 
 
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 
-  <!-- =======================================================
-       DELETE MODAL
-       ======================================================== -->
+<footer>
 
-  <div class="overlay" id="deleteOverlay">
-
-    <div class="modal">
-
-      <div class="modal-flower">
-        🌸
-      </div>
-
-      <h2>
-        Let this page go?
-      </h2>
-
-      <p>
-        This entry will be removed from this device.
-        You won't be able to undo this.
-      </p>
-
-      <div class="modal-buttons">
-
-        <button
-          class="modal-btn cancel"
-          onclick="closeDeleteModal()"
-        >
-          keep it
-        </button>
-
-        <button
-          class="modal-btn confirm"
-          onclick="confirmDelete()"
-        >
-          delete
-        </button>
-
-      </div>
-
+    <div class="footer-script">
+        be gentle with yourself.
     </div>
 
-  </div>
+    <div class="footer-brand">
+        ZENENE · WHERE YOUR MIND BLOOMS
+    </div>
+
+</footer>
+
+</main>
 
 
-
-  <!-- =======================================================
-       JAVASCRIPT
-       ======================================================== -->
-
-  <script>
+<div class="toast" id="toast">
+    Entry saved.
+</div>
 
 
-    /* =======================================================
-       DATE
-       ======================================================== */
+<script>
 
-    const now = new Date();
+/* =========================================================
+   DATE
+========================================================= */
 
-    document.getElementById("dateLabel").textContent =
-      now.toLocaleDateString(
-        "en-US",
-        {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        }
-      );
+const today = new Date();
 
+const options = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+};
 
-
-    /* =======================================================
-       MOOD
-       ======================================================== */
-
-    let selectedMood = null;
+document.getElementById("todayDate").textContent =
+    today.toLocaleDateString("en-US", options).toUpperCase();
 
 
-    document.querySelectorAll(".mood").forEach(button => {
+/* =========================================================
+   MOOD
+========================================================= */
 
-      button.addEventListener("click", () => {
+let selectedMood = null;
+let selectedEmoji = null;
 
-        document
-          .querySelectorAll(".mood")
-          .forEach(item => item.classList.remove("selected"));
+document.querySelectorAll(".mood").forEach(mood => {
 
+    mood.addEventListener("click", () => {
 
-        button.classList.add("selected");
+        document.querySelectorAll(".mood")
+            .forEach(item => item.classList.remove("selected"));
 
+        mood.classList.add("selected");
 
-        selectedMood = button.dataset.mood;
-
-
-        document.getElementById("moodStatus").textContent =
-          "feeling " + button.dataset.label + " today.";
-      });
+        selectedMood = mood.dataset.mood;
+        selectedEmoji = mood.dataset.emoji;
 
     });
 
+});
 
 
-    /* =======================================================
-       WORD COUNT
-       ======================================================== */
+/* =========================================================
+   WORD COUNT
+========================================================= */
 
-    function updateWordCount() {
+const textarea =
+    document.getElementById("journalText");
 
-      const text =
-        document.getElementById("journalText").value.trim();
+const wordCount =
+    document.getElementById("wordCount");
 
+textarea.addEventListener("input", () => {
 
-      const count =
-        text
-          ? text.split(/\s+/).length
-          : 0;
+    const text = textarea.value.trim();
 
+    const words =
+        text === ""
+            ? 0
+            : text.split(/\s+/).length;
 
-      document.getElementById("wordCount").textContent =
-        count + (count === 1 ? " word" : " words");
+    wordCount.textContent =
+        `${words} ${words === 1 ? "word" : "words"}`;
 
-    }
-
-
-
-    /* =======================================================
-       PROMPTS
-       ======================================================== */
-
-    function usePrompt(button) {
-
-      const prompt =
-        button.querySelector(".prompt-text").textContent.trim();
+});
 
 
-      const textarea =
-        document.getElementById("journalText");
+/* =========================================================
+   SAVE
+========================================================= */
 
+const saveButton =
+    document.getElementById("saveEntry");
 
-      textarea.value =
-        prompt + "\n\n";
+const toast =
+    document.getElementById("toast");
 
+function showToast(message) {
 
-      textarea.focus();
+    toast.textContent = message;
 
+    toast.classList.add("show");
 
-      updateWordCount();
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
 
-    }
+}
 
+saveButton.addEventListener("click", () => {
 
+    const text = textarea.value.trim();
 
-    /* =======================================================
-       SAVE ENTRY
-       ======================================================== */
-
-    function saveEntry() {
-
-      const textarea =
-        document.getElementById("journalText");
-
-
-      const text =
-        textarea.value.trim();
-
-
-      if (!text) {
-
-        textarea.focus();
-
+    if (!selectedMood) {
+        showToast("Choose how you're feeling first.");
         return;
-
-      }
-
-
-      const entries =
-        JSON.parse(
-          localStorage.getItem("z_entries") || "[]"
-        );
-
-
-      entries.unshift({
-
-        id: Date.now(),
-
-        text: text,
-
-        mood: selectedMood || "📓",
-
-        date: new Date().toISOString()
-
-      });
-
-
-      localStorage.setItem(
-        "z_entries",
-        JSON.stringify(entries)
-      );
-
-
-      textarea.value = "";
-
-
-      updateWordCount();
-
-
-      selectedMood = null;
-
-
-      document
-        .querySelectorAll(".mood")
-        .forEach(item =>
-          item.classList.remove("selected")
-        );
-
-
-      document.getElementById("moodStatus").textContent =
-        "choose whatever feels closest.";
-
-
-      const saved =
-        document.getElementById("savedMessage");
-
-
-      saved.classList.add("show");
-
-
-      setTimeout(() => {
-
-        saved.classList.remove("show");
-
-      }, 2200);
-
-
-      renderEntries();
-
     }
 
+    if (!text) {
+        showToast("Write something before saving.");
+        return;
+    }
+
+    const entry = {
+        text: text,
+        mood: selectedMood,
+        emoji: selectedEmoji,
+        date: new Date().toISOString()
+    };
+
+    const saved =
+        JSON.parse(localStorage.getItem("zeneneEntries")) || [];
+
+    saved.unshift(entry);
+
+    localStorage.setItem(
+        "zeneneEntries",
+        JSON.stringify(saved)
+    );
+
+    textarea.value = "";
+
+    wordCount.textContent = "0 words";
+
+    document.querySelectorAll(".mood")
+        .forEach(item => item.classList.remove("selected"));
+
+    selectedMood = null;
+    selectedEmoji = null;
+
+    showToast("Your entry has been saved ♡");
+
+    loadSavedEntries();
+
+});
 
 
-    /* =======================================================
-       RENDER ENTRIES
-       ======================================================== */
+/* =========================================================
+   LOAD SAVED ENTRIES
+========================================================= */
 
-    function renderEntries() {
+function loadSavedEntries() {
 
-      const entries =
-        JSON.parse(
-          localStorage.getItem("z_entries") || "[]"
-        );
+    const saved =
+        JSON.parse(localStorage.getItem("zeneneEntries")) || [];
 
+    if (saved.length === 0) return;
 
-      const container =
+    const list =
         document.getElementById("entriesList");
 
+    saved.forEach((entry, index) => {
 
-      const count =
-        document.getElementById("entryCount");
-
-
-      count.textContent =
-        entries.length +
-        (entries.length === 1 ? " entry" : " entries");
-
-
-      if (!entries.length) {
-
-        container.innerHTML = `
-
-          <div class="empty">
-
-            <div class="empty-flower">
-              🌱
-            </div>
-
-            <div class="empty-text">
-              Your pages will grow here.
-            </div>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      container.innerHTML =
-        entries.map(entry => {
-
-          const date =
+        const date =
             new Date(entry.date);
 
+        const article =
+            document.createElement("article");
 
-          const formattedDate =
-            date.toLocaleDateString(
-              "en-US",
-              {
-                weekday: "long",
-                month: "short",
-                day: "numeric"
-              }
+        article.className = "entry saved-entry";
+
+        article.dataset.index = index;
+
+        const month =
+            date.toLocaleString("en-US", {
+                month: "short"
+            }).toUpperCase();
+
+        const day =
+            date.getDate();
+
+        const year =
+            date.getFullYear();
+
+        const preview =
+            entry.text.length > 160
+                ? entry.text.substring(0, 160) + "..."
+                : entry.text;
+
+        article.innerHTML = `
+
+            <div class="entry-date">
+                ${month}<br>
+                <strong>${day}</strong><br>
+                ${year}
+            </div>
+
+            <div class="entry-mood">
+                ${entry.emoji}
+            </div>
+
+            <div class="entry-content">
+
+                <h4>
+                    ${entry.text.split(" ").slice(0, 8).join(" ")}
+                </h4>
+
+                <p>
+                    ${preview}
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ${entry.mood}
+                    </span>
+
+                    <span class="tag">
+                        personal
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="entry-actions">
+
+                <button
+                    class="menu-btn"
+                    onclick="deleteEntry(${index})"
+                >
+                    ×
+                </button>
+
+            </div>
+        `;
+
+        list.prepend(article);
+
+    });
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteEntry(index) {
+
+    const saved =
+        JSON.parse(localStorage.getItem("zeneneEntries")) || [];
+
+    saved.splice(index, 1);
+
+    localStorage.setItem(
+        "zeneneEntries",
+        JSON.stringify(saved)
+    );
+
+    showToast("Entry deleted.");
+
+    setTimeout(() => {
+        location.reload();
+    }, 400);
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchInput =
+    document.getElementById("searchInput");
+
+searchInput.addEventListener("input", filterEntries);
+
+
+document.getElementById("tagFilter")
+    .addEventListener("change", filterEntries);
+
+
+function filterEntries() {
+
+    const search =
+        searchInput.value.toLowerCase();
+
+    const tag =
+        document.getElementById("tagFilter").value;
+
+    document.querySelectorAll(".entry")
+        .forEach(entry => {
+
+            const content =
+                entry.innerText.toLowerCase();
+
+            const matchesSearch =
+                content.includes(search);
+
+            const matchesTag =
+                tag === "all" ||
+                content.includes(tag);
+
+            entry.style.display =
+                matchesSearch && matchesTag
+                    ? "grid"
+                    : "none";
+
+        });
+
+}
+
+
+/* =========================================================
+   PROMPTS
+========================================================= */
+
+const promptTexts = [
+
+    "What made you smile today?",
+
+    "What's been on your mind lately?",
+
+    "What are you grateful for right now?",
+
+    "What do you need more of these days?"
+
+];
+
+document.querySelectorAll(".prompt")
+    .forEach((prompt, index) => {
+
+        prompt.addEventListener("click", () => {
+
+            textarea.value =
+                promptTexts[index] + "\n\n";
+
+            textarea.focus();
+
+            textarea.dispatchEvent(
+                new Event("input")
             );
 
-
-          const safeText =
-            escapeHTML(entry.text);
-
-
-          return `
-
-            <article class="entry">
-
-              <div class="entry-head">
-
-                <span class="entry-mood">
-                  ${entry.mood}
-                </span>
-
-                <span class="entry-date">
-                  ${formattedDate}
-                </span>
-
-              </div>
-
-
-              <div class="entry-text">
-                ${safeText}
-              </div>
-
-
-              <button
-                class="entry-delete"
-                onclick="openDeleteModal(${entry.id})"
-                aria-label="Delete entry"
-              >
-                ✕
-              </button>
-
-            </article>
-
-          `;
-
-        }).join("");
-
-    }
-
-
-
-    /* =======================================================
-       ESCAPE HTML
-       ======================================================== */
-
-    function escapeHTML(text) {
-
-      const div =
-        document.createElement("div");
-
-
-      div.textContent = text;
-
-
-      return div.innerHTML;
-
-    }
-
-
-
-    /* =======================================================
-       DELETE
-       ======================================================== */
-
-    let pendingDelete = null;
-
-
-    function openDeleteModal(id) {
-
-      pendingDelete = id;
-
-
-      document
-        .getElementById("deleteOverlay")
-        .classList.add("open");
-
-    }
-
-
-    function closeDeleteModal() {
-
-      pendingDelete = null;
-
-
-      document
-        .getElementById("deleteOverlay")
-        .classList.remove("open");
-
-    }
-
-
-    function confirmDelete() {
-
-      if (pendingDelete === null) return;
-
-
-      let entries =
-        JSON.parse(
-          localStorage.getItem("z_entries") || "[]"
-        );
-
-
-      entries =
-        entries.filter(
-          entry => entry.id !== pendingDelete
-        );
-
-
-      localStorage.setItem(
-        "z_entries",
-        JSON.stringify(entries)
-      );
-
-
-      closeDeleteModal();
-
-
-      renderEntries();
-
-    }
-
-
-
-    /* =======================================================
-       ESCAPE KEY
-       ======================================================== */
-
-    document.addEventListener("keydown", event => {
-
-      if (event.key === "Escape") {
-
-        closeDeleteModal();
-
-      }
+        });
 
     });
 
 
+/* =========================================================
+   EXPORT
+========================================================= */
 
-    /* =======================================================
-       INITIAL LOAD
-       ======================================================== */
+document.getElementById("exportBtn")
+    .addEventListener("click", () => {
 
-    renderEntries();
+        const saved =
+            JSON.parse(localStorage.getItem("zeneneEntries")) || [];
 
+        if (saved.length === 0) {
+            showToast("You don't have any saved entries yet.");
+            return;
+        }
 
-  </script>
+        let output =
+            "ZENENE — MY JOURNAL\n\n";
+
+        saved.forEach((entry, index) => {
+
+            const date =
+                new Date(entry.date)
+                    .toLocaleDateString();
+
+            output +=
+                `ENTRY ${index + 1}\n`;
+
+            output +=
+                `${date}\n`;
+
+            output +=
+                `MOOD: ${entry.mood}\n\n`;
+
+            output +=
+                `${entry.text}\n\n`;
+
+            output +=
+                "--------------------------------\n\n";
+
+        });
+
+        const blob =
+            new Blob([output], {
+                type: "text/plain"
+            });
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+        link.download = "zenene-journal.txt";
+
+        link.click();
+
+        URL.revokeObjectURL(url);
+
+        showToast("Your journal has been exported.");
+
+    });
+
+</script>
 
 </body>
-
 </html>

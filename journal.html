@@ -1,255 +1,1778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Journal — Zenene</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root{--blue:#C5DCF0;--pink:#F2BFC8;--pink-d:#E8909F;--peach:#F5C9A0;--green:#A8C4A2;--green-d:#7A9E75;--cream:#FEF6ED;--lav:#D4C5E8;--text:#3D2B1F;--tl:#8A6A58;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--blue);min-height:100vh;padding-bottom:72px;}
-.polka{position:fixed;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.38) 4px,transparent 4px);background-size:38px 38px;pointer-events:none;z-index:0;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* HEADER */
-.hdr{background:rgba(254,246,237,.9);backdrop-filter:blur(14px);padding:.9rem 1.4rem;display:flex;align-items:center;gap:.8rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(168,196,162,.2);}
-.back{text-decoration:none;color:var(--green-d);font-size:1.3rem;display:flex;align-items:center;}
-.hdr-title{font-family:'Playfair Display',serif;font-size:1.3rem;}
-.hdr-sub{font-family:'Dancing Script',cursive;font-size:.85rem;color:var(--tl);margin-left:auto;}
+    <title>Journal — Zenene</title>
 
-/* MAIN */
-.main{position:relative;z-index:1;max-width:540px;margin:0 auto;padding:1.5rem 1.2rem;}
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-/* DATE */
-.date-chip{font-family:'Dancing Script',cursive;font-size:1rem;color:var(--tl);text-align:center;margin-bottom:1.2rem;}
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
 
-/* MOOD */
-.mood-row{display:flex;justify-content:center;gap:.6rem;margin-bottom:1.2rem;flex-wrap:wrap;}
-.mood-btn{font-size:1.6rem;background:rgba(255,255,255,.6);border:2px solid transparent;border-radius:50px;padding:.3rem .55rem;cursor:pointer;transition:all .2s;line-height:1;}
-.mood-btn.sel{background:rgba(255,255,255,.95);border-color:var(--green);transform:scale(1.15);box-shadow:0 4px 14px rgba(120,158,117,.25);}
-.mood-label{text-align:center;font-size:.75rem;color:var(--tl);margin-bottom:1rem;min-height:1em;}
+    <style>
+        /* =========================================================
+           ZENENE JOURNAL
+           ========================================================= */
 
-/* TEXTAREA CARD */
-.write-card{background:rgba(255,255,255,.78);border-radius:20px;padding:1.2rem;box-shadow:0 4px 24px rgba(61,43,31,.08);border:1px solid rgba(255,255,255,.6);margin-bottom:1rem;}
-.write-prompt{font-family:'Dancing Script',cursive;font-size:.82rem;color:var(--pink-d);margin-bottom:.5rem;}
-textarea{width:100%;min-height:160px;border:none;background:none;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--text);resize:vertical;outline:none;line-height:1.72;color:var(--tl);}
-textarea::placeholder{color:#C4AFA8;font-style:italic;}
-.write-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem;}
-.char-count{font-size:.7rem;color:var(--tl);}
-.save-btn{padding:.6rem 1.6rem;background:var(--green);color:#fff;border:none;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.88rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.4rem;}
-.save-btn:hover{background:var(--green-d);transform:translateY(-1px);}
-.save-toast{font-size:.75rem;color:var(--green-d);font-weight:500;opacity:0;transition:opacity .3s;}
-.save-toast.show{opacity:1;}
+        :root {
+            --sky: #dcecf0;
+            --sky-dark: #b9d6dc;
 
-/* PROMPTS */
-.prompts-row{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.3rem;margin-bottom:1.4rem;scrollbar-width:none;}
-.prompts-row::-webkit-scrollbar{display:none;}
-.prompt-chip{flex-shrink:0;background:rgba(255,255,255,.7);border-radius:50px;padding:.42rem .9rem;font-size:.72rem;color:var(--tl);cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,.6);transition:background .2s;}
-.prompt-chip:hover{background:rgba(255,255,255,.95);}
+            --paper: #f9f4e9;
+            --paper-light: #fffdf7;
+            --paper-dark: #eee5d4;
 
-/* ENTRIES */
-.entries-hd{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:.8rem;}
-.entry-card{background:rgba(255,255,255,.78);border-radius:14px;padding:1rem 1.1rem;margin-bottom:.75rem;box-shadow:0 2px 12px rgba(61,43,31,.06);border-left:3px solid var(--green);position:relative;cursor:pointer;transition:background .2s;}
-.entry-card:hover{background:rgba(255,255,255,.92);}
-.entry-top{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;}
-.entry-em{font-size:1.15rem;}
-.entry-date{font-size:.7rem;color:var(--tl);}
-.entry-text{font-size:.88rem;color:var(--tl);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
-.entry-del{position:absolute;top:.8rem;right:.9rem;background:none;border:none;font-size:.95rem;cursor:pointer;opacity:.35;transition:opacity .2s;}
-.entry-del:hover{opacity:.8;}
-.no-entries{text-align:center;padding:2rem;color:var(--tl);font-family:'Dancing Script',cursive;font-size:1rem;opacity:.7;}
+            --brown: #5a3d2b;
+            --brown-light: #806652;
 
-/* DELETE CONFIRM */
-.confirm-overlay{position:fixed;inset:0;background:rgba(61,43,31,.35);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;}
-.confirm-overlay.open{display:flex;}
-.confirm-card{background:var(--cream);border-radius:20px;padding:1.6rem 1.4rem;max-width:320px;width:100%;box-shadow:0 20px 50px rgba(61,43,31,.25);text-align:center;animation:popIn .22s ease;}
-@keyframes popIn{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.confirm-title{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:.4rem;}
-.confirm-sub{font-size:.82rem;color:var(--tl);margin-bottom:1.3rem;line-height:1.5;}
-.confirm-actions{display:flex;gap:.7rem;justify-content:center;}
-.confirm-btn{flex:1;padding:.6rem 1rem;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;transition:transform .15s;}
-.confirm-btn:hover{transform:translateY(-1px);}
-.confirm-btn.no{background:rgba(255,255,255,.85);color:var(--tl);border:1px solid rgba(168,196,162,.3);}
-.confirm-btn.yes{background:var(--pink-d);color:#fff;}
+            --pink: #efb7bd;
+            --pink-soft: #f8dfe1;
 
-/* BOTTOM NAV */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(254,246,237,.92);backdrop-filter:blur(16px);border-top:1px solid rgba(168,196,162,.22);display:flex;justify-content:space-around;align-items:center;height:58px;padding:0 .5rem;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--tl);font-size:.58rem;padding:.35rem .5rem;border-radius:12px;transition:color .2s,transform .2s;flex:1;}
-.nav-item:hover,.nav-item.active{color:var(--green-d);transform:translateY(-2px);}
-.ni-emo{font-size:1.25rem;transition:transform .2s;}
-.nav-item:hover .ni-emo,.nav-item.active .ni-emo{transform:scale(1.12);}
-.ni-dot{width:4px;height:4px;border-radius:50%;background:var(--green);opacity:0;transition:opacity .2s;margin-top:1px;}
-.nav-item.active .ni-dot{opacity:1;}
+            --sage: #b8c89b;
+            --sage-dark: #7f9363;
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.ani{animation:fadeUp .5s ease both;}
-.d1{animation-delay:.06s}.d2{animation-delay:.14s}.d3{animation-delay:.22s}.d4{animation-delay:.3s}
-</style>
+            --cream: #f5eddd;
+
+            --text: #4e382a;
+            --muted: #8c7868;
+
+            --shadow:
+                0 12px 35px rgba(78, 56, 42, 0.09);
+
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--sky);
+            color: var(--text);
+            font-family: "DM Mono", monospace;
+            overflow-x: hidden;
+
+            /* subtle paper grain */
+            background-image:
+                radial-gradient(
+                    rgba(255,255,255,0.45) 1px,
+                    transparent 1px
+                );
+            background-size: 9px 9px;
+        }
+
+        /* =========================================================
+           DECORATIVE BACKGROUND
+           ========================================================= */
+
+        .background-flower {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.55;
+        }
+
+        .flower-left {
+            left: 18px;
+            bottom: 30px;
+            font-size: 120px;
+            transform: rotate(-10deg);
+        }
+
+        .flower-right {
+            right: 30px;
+            top: 110px;
+            font-size: 90px;
+            transform: rotate(8deg);
+        }
+
+        /* =========================================================
+           LAYOUT
+           ========================================================= */
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =========================================================
+           SIDEBAR
+           ========================================================= */
+
+        .sidebar {
+            width: 225px;
+            min-height: 100vh;
+            padding: 35px 20px;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            background: rgba(216, 236, 240, 0.72);
+            border-right: 1px solid rgba(90, 61, 43, 0.08);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            margin-left: 10px;
+            margin-bottom: 48px;
+        }
+
+        .logo-name {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 42px;
+            line-height: 0.8;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        .logo-sub {
+            margin-top: 12px;
+            font-family: "Kalam", cursive;
+            font-size: 13px;
+            color: var(--brown-light);
+        }
+
+        .brain {
+            font-size: 22px;
+            margin-top: 5px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 13px 14px;
+
+            border-radius: 14px;
+
+            color: var(--text);
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.45);
+            transform: translateX(3px);
+        }
+
+        .nav-item.active {
+            background: var(--pink);
+            box-shadow: 0 5px 18px rgba(120, 70, 70, 0.09);
+        }
+
+        .nav-icon {
+            width: 25px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .sidebar-note {
+            margin-top: auto;
+
+            padding: 18px;
+
+            background: var(--paper);
+            border-radius: 5px;
+
+            transform: rotate(-2deg);
+
+            box-shadow: 0 8px 20px rgba(80,60,40,0.08);
+
+            font-family: "Kalam", cursive;
+            font-size: 15px;
+            line-height: 1.5;
+
+            position: relative;
+        }
+
+        .sidebar-note::before {
+            content: "";
+            position: absolute;
+
+            width: 65px;
+            height: 18px;
+
+            top: -9px;
+            left: 28px;
+
+            background: #d9c895;
+            opacity: 0.75;
+
+            transform: rotate(-4deg);
+        }
+
+        /* =========================================================
+           MAIN
+           ========================================================= */
+
+        .main {
+            margin-left: 225px;
+            width: calc(100% - 225px);
+            padding: 55px 55px 80px;
+        }
+
+        .content {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        /* =========================================================
+           HEADER
+           ========================================================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            margin-bottom: 35px;
+        }
+
+        .header-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(55px, 6vw, 78px);
+            line-height: 0.85;
+            font-weight: 600;
+            letter-spacing: -2px;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-title span {
+            font-family: "Kalam", cursive;
+            font-size: 32px;
+            color: var(--sage-dark);
+            transform: rotate(-10deg);
+        }
+
+        .subtitle {
+            margin-top: 16px;
+
+            font-family: "Kalam", cursive;
+            font-size: 22px;
+            color: var(--brown-light);
+        }
+
+        .privacy-card {
+            padding: 17px 22px;
+
+            background: var(--paper);
+
+            box-shadow: var(--shadow);
+
+            transform: rotate(1.5deg);
+
+            min-width: 190px;
+        }
+
+        .privacy-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .privacy-text {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        /* =========================================================
+           JOURNAL PAPER
+           ========================================================= */
+
+        .journal-paper {
+            position: relative;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.3),
+                    rgba(255,255,255,0.3)
+                ),
+                var(--paper);
+
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow);
+
+            padding: 40px 55px 35px;
+
+            overflow: hidden;
+        }
+
+        /* notebook rings */
+
+        .journal-paper::before {
+            content: "";
+            position: absolute;
+
+            left: 17px;
+            top: 25px;
+            bottom: 25px;
+
+            width: 14px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    var(--paper-dark) 0 5px,
+                    transparent 6px
+                );
+
+            background-size: 14px 30px;
+        }
+
+        .paper-decoration {
+            position: absolute;
+            right: 35px;
+            top: 40px;
+
+            font-size: 80px;
+            opacity: 0.45;
+
+            transform: rotate(12deg);
+        }
+
+        /* =========================================================
+           MOOD
+           ========================================================= */
+
+        .mood-title {
+            text-align: center;
+
+            font-family: "Kalam", cursive;
+            font-size: 22px;
+
+            color: #df7e83;
+
+            margin-bottom: 25px;
+        }
+
+        .moods {
+            display: flex;
+            justify-content: center;
+            gap: clamp(25px, 5vw, 70px);
+
+            margin-bottom: 35px;
+        }
+
+        .mood {
+            border: none;
+            background: transparent;
+
+            cursor: pointer;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--text);
+
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .mood:hover {
+            transform: translateY(-5px);
+        }
+
+        .mood-face {
+            width: 58px;
+            height: 58px;
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 27px;
+
+            transition:
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .mood.selected .mood-face {
+            box-shadow:
+                0 0 0 4px var(--sage),
+                0 0 0 8px rgba(184,200,155,0.25);
+
+            transform: scale(1.06);
+        }
+
+        .mood.selected span:last-child {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .amazing {
+            background: #f7d6c5;
+        }
+
+        .good {
+            background: #dce8c7;
+        }
+
+        .okay {
+            background: #f7dfb9;
+        }
+
+        .low {
+            background: #e4dcec;
+        }
+
+        .awful {
+            background: #eadbdf;
+        }
+
+        /* =========================================================
+           TEXT AREA
+           ========================================================= */
+
+        .entry-area {
+            position: relative;
+        }
+
+        .journal-input {
+            width: 100%;
+            min-height: 210px;
+
+            resize: vertical;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: var(--text);
+
+            font-family: "DM Mono", monospace;
+            font-size: 14px;
+            line-height: 2;
+
+            padding: 10px 10px 20px;
+
+            background-image:
+                repeating-linear-gradient(
+                    transparent 0,
+                    transparent 31px,
+                    rgba(120, 100, 80, 0.09) 32px
+                );
+        }
+
+        .journal-input::placeholder {
+            color: #9c8d7e;
+            opacity: 0.8;
+        }
+
+        .entry-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-top: 5px;
+        }
+
+        .prompt-button {
+            border: 1px solid rgba(90,61,43,0.13);
+
+            background: rgba(255,255,255,0.4);
+
+            padding: 13px 20px;
+
+            border-radius: 30px;
+
+            color: var(--text);
+
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+        .prompt-button:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .save-button {
+            border: none;
+
+            background: var(--sage);
+
+            color: #3d4b2f;
+
+            padding: 14px 25px;
+
+            border-radius: 30px;
+
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .save-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(90,100,60,0.15);
+        }
+
+        .counter {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        /* =========================================================
+           QUICK TOOLS
+           ========================================================= */
+
+        .tools {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+        .tool-card {
+            background: var(--paper);
+
+            padding: 20px;
+
+            min-height: 145px;
+
+            border-radius: 17px;
+
+            box-shadow: 0 6px 20px rgba(78,56,42,0.05);
+
+            position: relative;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px) rotate(-0.4deg);
+            box-shadow: 0 12px 25px rgba(78,56,42,0.09);
+        }
+
+        .tool-icon {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .tool-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 20px;
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+        .tool-description {
+            font-size: 10px;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .tool-arrow {
+            position: absolute;
+            right: 15px;
+            bottom: 12px;
+
+            width: 25px;
+            height: 25px;
+
+            border: 1px solid var(--brown-light);
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           ENTRIES HEADER
+           ========================================================= */
+
+        .entries-header {
+            margin-top: 55px;
+            margin-bottom: 22px;
+
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+        }
+
+        .entries-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 42px;
+            font-weight: 600;
+        }
+
+        .entries-title span {
+            color: #e58d97;
+        }
+
+        .entry-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search {
+            width: 220px;
+
+            border: 1px solid rgba(90,61,43,0.12);
+
+            background: rgba(255,255,255,0.65);
+
+            border-radius: 30px;
+
+            padding: 12px 17px;
+
+            outline: none;
+
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+
+            color: var(--text);
+        }
+
+        .filter {
+            border: 1px solid rgba(90,61,43,0.12);
+
+            background: rgba(255,255,255,0.65);
+
+            border-radius: 30px;
+
+            padding: 12px 17px;
+
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           ENTRY CARDS
+           ========================================================= */
+
+        .entries {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .entry-card {
+            display: grid;
+
+            grid-template-columns: 105px 70px 1fr 100px 35px;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 25px 30px;
+
+            background: var(--paper);
+
+            border-radius: 18px;
+
+            box-shadow: 0 6px 18px rgba(78,56,42,0.05);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .entry-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 10px 25px rgba(78,56,42,0.08);
+        }
+
+        .entry-date {
+            text-align: center;
+        }
+
+        .date-number {
+            display: block;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 37px;
+
+            line-height: 0.8;
+        }
+
+        .date-month {
+            display: block;
+
+            margin-top: 8px;
+
+            font-size: 11px;
+        }
+
+        .date-year {
+            display: block;
+
+            margin-top: 4px;
+
+            font-size: 9px;
+
+            color: var(--muted);
+        }
+
+        .entry-mood {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 23px;
+        }
+
+        .entry-content h3 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 24px;
+
+            margin-bottom: 8px;
+        }
+
+        .entry-content p {
+            font-size: 11px;
+            line-height: 1.7;
+
+            color: var(--muted);
+
+            max-width: 650px;
+        }
+
+        .entry-time {
+            font-size: 9px;
+            text-align: right;
+            color: var(--muted);
+        }
+
+        .entry-menu {
+            border: none;
+            background: transparent;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            color: var(--brown-light);
+        }
+
+        /* =========================================================
+           BOTTOM NOTE
+           ========================================================= */
+
+        .bottom-note {
+            margin: 35px auto 0;
+
+            max-width: 700px;
+
+            text-align: center;
+
+            padding: 15px 25px;
+
+            border: 1px dashed rgba(90,61,43,0.2);
+
+            background: rgba(245,237,221,0.65);
+
+            font-family: "Kalam", cursive;
+
+            font-size: 17px;
+
+            color: var(--brown-light);
+        }
+
+        /* =========================================================
+           TOAST
+           ========================================================= */
+
+        .toast {
+            position: fixed;
+
+            bottom: 30px;
+            left: 50%;
+
+            transform:
+                translate(-50%, 100px);
+
+            opacity: 0;
+
+            background: var(--brown);
+
+            color: white;
+
+            padding: 13px 22px;
+
+            border-radius: 30px;
+
+            font-size: 11px;
+
+            z-index: 100;
+
+            transition: 0.35s ease;
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .sidebar {
+                width: 180px;
+            }
+
+            .main {
+                margin-left: 180px;
+                width: calc(100% - 180px);
+                padding: 40px 25px;
+            }
+
+            .tools {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .entry-card {
+                grid-template-columns: 75px 55px 1fr 70px;
+            }
+
+            .entry-menu {
+                display: none;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                min-height: auto;
+
+                flex-direction: row;
+                align-items: center;
+
+                padding: 15px;
+
+                overflow-x: auto;
+            }
+
+            .logo {
+                margin: 0 20px 0 5px;
+            }
+
+            .logo-name {
+                font-size: 30px;
+            }
+
+            .logo-sub,
+            .brain,
+            .sidebar-note {
+                display: none;
+            }
+
+            .nav {
+                flex-direction: row;
+            }
+
+            .nav-item {
+                white-space: nowrap;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 30px 15px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .privacy-card {
+                align-self: flex-start;
+            }
+
+            .journal-paper {
+                padding: 35px 25px;
+            }
+
+            .moods {
+                gap: 15px;
+            }
+
+            .mood-face {
+                width: 48px;
+                height: 48px;
+            }
+
+            .tools {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .entries-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .entry-controls {
+                width: 100%;
+            }
+
+            .search {
+                flex: 1;
+            }
+
+            .entry-card {
+                grid-template-columns: 65px 50px 1fr;
+            }
+
+            .entry-time {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .moods {
+                justify-content: space-between;
+            }
+
+            .mood-face {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+            }
+
+            .mood {
+                font-size: 8px;
+            }
+
+            .tools {
+                grid-template-columns: 1fr;
+            }
+
+            .entry-card {
+                grid-template-columns: 50px 1fr;
+            }
+
+            .entry-mood {
+                display: none;
+            }
+
+            .entry-content h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
+
+
 <body>
-<div class="polka"></div>
 
-<div class="hdr">
-  <a href="index.html" class="back">←</a>
-  <div class="hdr-title">📓 Journal</div>
-  <div class="hdr-sub">your private space</div>
-</div>
+    <!-- Decorative elements -->
+    <div class="background-flower flower-left">🌿</div>
+    <div class="background-flower flower-right">🌾</div>
 
-<div class="main">
-  <div class="date-chip ani d1" id="dateLabel"></div>
 
-  <!-- MOOD -->
-  <div class="mood-row ani d2" id="moodRow">
-    <button class="mood-btn" data-m="😄" data-l="Amazing">😄</button>
-    <button class="mood-btn" data-m="😊" data-l="Good">😊</button>
-    <button class="mood-btn" data-m="😌" data-l="Peaceful">😌</button>
-    <button class="mood-btn" data-m="😐" data-l="Okay">😐</button>
-    <button class="mood-btn" data-m="😔" data-l="Low">😔</button>
-    <button class="mood-btn" data-m="😢" data-l="Sad">😢</button>
-    <button class="mood-btn" data-m="😤" data-l="Frustrated">😤</button>
-    <button class="mood-btn" data-m="😰" data-l="Anxious">😰</button>
-  </div>
-  <div class="mood-label" id="moodLabel">how are you feeling today?</div>
+    <div class="app">
 
-  <!-- PROMPTS -->
-  <div class="prompts-row ani d2" id="promptsRow"></div>
+        <!-- =====================================================
+             SIDEBAR
+             ===================================================== -->
 
-  <!-- WRITE -->
-  <div class="write-card ani d3">
-    <div class="write-prompt" id="writePmt">Write whatever is on your mind...</div>
-    <textarea id="ta" placeholder="Start writing... This space is only for you 🌸" oninput="onType()"></textarea>
-    <div class="write-foot">
-      <span class="char-count" id="cc">0 words</span>
-      <div style="display:flex;align-items:center;gap:.7rem;">
-        <span class="save-toast" id="toast">Saved! 🌿</span>
-        <button class="save-btn" onclick="saveEntry()">save ✦</button>
-      </div>
+        <aside class="sidebar">
+
+            <div class="logo">
+                <div class="logo-name">zenene</div>
+                <div class="brain">🧠</div>
+                <div class="logo-sub">where your mind blooms</div>
+            </div>
+
+
+            <nav class="nav">
+
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">⌂</span>
+                    Home
+                </a>
+
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">▤</span>
+                    Journal
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">☻</span>
+                    Mood
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">◈</span>
+                    Explore
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">☏</span>
+                    Vera
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">♧</span>
+                    Calm
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">▤</span>
+                    Stories
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-note">
+                “Your mind is a garden.
+                Your thoughts are the seeds.”
+                <br><br>
+                ♡
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================================
+             MAIN CONTENT
+             ===================================================== -->
+
+        <main class="main">
+
+            <div class="content">
+
+
+                <!-- HEADER -->
+
+                <header class="page-header">
+
+                    <div>
+
+                        <h1 class="header-title">
+                            Journal
+                            <span>✿</span>
+                        </h1>
+
+                        <p class="subtitle">
+                            A little space that's just yours.
+                        </p>
+
+                    </div>
+
+
+                    <div class="privacy-card">
+
+                        <div class="privacy-title">
+                            🔒 Private & Safe
+                        </div>
+
+                        <div class="privacy-text">
+                            Only you can see this.
+                        </div>
+
+                    </div>
+
+                </header>
+
+
+
+                <!-- =================================================
+                     WRITING AREA
+                     ================================================= -->
+
+                <section class="journal-paper">
+
+                    <div class="paper-decoration">
+                        🌿
+                    </div>
+
+
+                    <h2 class="mood-title">
+                        How are you feeling today?
+                    </h2>
+
+
+                    <div class="moods">
+
+                        <button class="mood" data-mood="Amazing">
+
+                            <span class="mood-face amazing">
+                                😄
+                            </span>
+
+                            <span>Amazing</span>
+
+                        </button>
+
+
+                        <button class="mood selected" data-mood="Good">
+
+                            <span class="mood-face good">
+                                😊
+                            </span>
+
+                            <span>Good</span>
+
+                        </button>
+
+
+                        <button class="mood" data-mood="Okay">
+
+                            <span class="mood-face okay">
+                                😐
+                            </span>
+
+                            <span>Okay</span>
+
+                        </button>
+
+
+                        <button class="mood" data-mood="Low">
+
+                            <span class="mood-face low">
+                                😔
+                            </span>
+
+                            <span>Low</span>
+
+                        </button>
+
+
+                        <button class="mood" data-mood="Awful">
+
+                            <span class="mood-face awful">
+                                😞
+                            </span>
+
+                            <span>Awful</span>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="entry-area">
+
+                        <textarea
+                            id="journalInput"
+                            class="journal-input"
+                            maxlength="2000"
+                            placeholder="Write whatever comes to mind..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="entry-footer">
+
+                        <button
+                            class="prompt-button"
+                            id="promptButton"
+                        >
+                            💡 Add Prompt
+                        </button>
+
+
+                        <div style="display:flex; align-items:center; gap:18px;">
+
+                            <span class="counter">
+                                <span id="counter">0</span>/2000
+                            </span>
+
+                            <button
+                                class="save-button"
+                                id="saveButton"
+                            >
+                                ⊕ Add to Journal
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     QUICK TOOLS
+                     ================================================= -->
+
+                <section class="tools">
+
+
+                    <div class="tool-card" id="dailyPrompt">
+
+                        <div class="tool-icon">📜</div>
+
+                        <div class="tool-title">
+                            Today's Prompt
+                        </div>
+
+                        <div class="tool-description">
+                            What has been taking up space
+                            in your mind lately?
+                        </div>
+
+                        <div class="tool-arrow">
+                            →
+                        </div>
+
+                    </div>
+
+
+                    <div class="tool-card">
+
+                        <div class="tool-icon">📅</div>
+
+                        <div class="tool-title">
+                            On This Day
+                        </div>
+
+                        <div class="tool-description">
+                            See what you wrote on this
+                            day in previous years.
+                        </div>
+
+                        <div class="tool-arrow">
+                            →
+                        </div>
+
+                    </div>
+
+
+                    <div class="tool-card">
+
+                        <div class="tool-icon">🗓</div>
+
+                        <div class="tool-title">
+                            Calendar View
+                        </div>
+
+                        <div class="tool-description">
+                            Browse your entries
+                            by calendar.
+                        </div>
+
+                        <div class="tool-arrow">
+                            →
+                        </div>
+
+                    </div>
+
+
+                    <div class="tool-card">
+
+                        <div class="tool-icon">💌</div>
+
+                        <div class="tool-title">
+                            Letter to Future Me
+                        </div>
+
+                        <div class="tool-description">
+                            Write a letter your future
+                            self will thank you for.
+                        </div>
+
+                        <div class="tool-arrow">
+                            →
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     ENTRIES
+                     ================================================= -->
+
+                <section>
+
+                    <div class="entries-header">
+
+                        <h2 class="entries-title">
+                            Your Entries <span>♥</span>
+                        </h2>
+
+
+                        <div class="entry-controls">
+
+                            <input
+                                type="search"
+                                class="search"
+                                id="search"
+                                placeholder="Search entries..."
+                            >
+
+                            <button class="filter">
+                                ☷ Filter
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="entries" id="entries">
+
+
+                        <!-- ENTRY 1 -->
+
+                        <article class="entry-card">
+
+                            <div class="entry-date">
+
+                                <span class="date-number">
+                                    16
+                                </span>
+
+                                <span class="date-month">
+                                    Aug
+                                </span>
+
+                                <span class="date-year">
+                                    2026
+                                </span>
+
+                            </div>
+
+
+                            <div class="entry-mood good">
+                                😊
+                            </div>
+
+
+                            <div class="entry-content">
+
+                                <h3>
+                                    A calm kind of day
+                                </h3>
+
+                                <p>
+                                    Today felt lighter. I woke up early,
+                                    had tea by the window and just watched
+                                    the world go by. Somehow, the little
+                                    things felt a lot bigger today...
+                                </p>
+
+                            </div>
+
+
+                            <div class="entry-time">
+                                8:45 PM
+                            </div>
+
+
+                            <button class="entry-menu">
+                                •••
+                            </button>
+
+                        </article>
+
+
+
+                        <!-- ENTRY 2 -->
+
+                        <article class="entry-card">
+
+                            <div class="entry-date">
+
+                                <span class="date-number">
+                                    14
+                                </span>
+
+                                <span class="date-month">
+                                    Aug
+                                </span>
+
+                                <span class="date-year">
+                                    2026
+                                </span>
+
+                            </div>
+
+
+                            <div class="entry-mood amazing">
+                                ☀️
+                            </div>
+
+
+                            <div class="entry-content">
+
+                                <h3>
+                                    Grateful for small wins
+                                </h3>
+
+                                <p>
+                                    I finally finished that one task I had
+                                    been procrastinating on for so long.
+                                    It feels good to be a little more in
+                                    control of my thoughts today.
+                                </p>
+
+                            </div>
+
+
+                            <div class="entry-time">
+                                10:30 PM
+                            </div>
+
+
+                            <button class="entry-menu">
+                                •••
+                            </button>
+
+                        </article>
+
+
+
+                        <!-- ENTRY 3 -->
+
+                        <article class="entry-card">
+
+                            <div class="entry-date">
+
+                                <span class="date-number">
+                                    11
+                                </span>
+
+                                <span class="date-month">
+                                    Aug
+                                </span>
+
+                                <span class="date-year">
+                                    2026
+                                </span>
+
+                            </div>
+
+
+                            <div class="entry-mood okay">
+                                😐
+                            </div>
+
+
+                            <div class="entry-content">
+
+                                <h3>
+                                    Things I'm thinking about
+                                </h3>
+
+                                <p>
+                                    I've been thinking a lot about where
+                                    I want to be a year from now. So many
+                                    dreams, but so many “what ifs”...
+                                </p>
+
+                            </div>
+
+
+                            <div class="entry-time">
+                                9:10 PM
+                            </div>
+
+
+                            <button class="entry-menu">
+                                •••
+                            </button>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     BOTTOM MESSAGE
+                     ================================================= -->
+
+                <div class="bottom-note">
+
+                    🌱 There’s no right or wrong way to journal.
+                    This is your space. Be honest. Be you. ♡
+
+                </div>
+
+            </div>
+
+        </main>
+
     </div>
-  </div>
 
-  <!-- PAST ENTRIES -->
-  <div class="entries-hd ani d4">Past Entries</div>
-  <div id="entriesList"></div>
-</div>
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-  <a href="journal.html" class="nav-item active"><div class="ni-emo">📓</div><span>Journal</span><div class="ni-dot"></div></a>
-  <a href="chat.html"    class="nav-item"><div class="ni-emo">💬</div><span>Vera</span><div class="ni-dot"></div></a>
-  <a href="calm.html"    class="nav-item"><div class="ni-emo">🌸</div><span>Calm</span><div class="ni-dot"></div></a>
-  <a href="stories.html" class="nav-item"><div class="ni-emo">✨</div><span>Stories</span><div class="ni-dot"></div></a>
-  <a href="explore.html" class="nav-item"><div class="ni-emo">📚</div><span>Explore</span><div class="ni-dot"></div></a>
-  <a href="mood.html"    class="nav-item"><div class="ni-emo">🌿</div><span>Mood</span><div class="ni-dot"></div></a>
-</nav>
+    <!-- Toast -->
 
-<!-- DELETE CONFIRM MODAL -->
-<div class="confirm-overlay" id="delOverlay" onclick="if(event.target===this)closeDeleteConfirm()">
-  <div class="confirm-card">
-    <div class="confirm-title">Delete this entry?</div>
-    <div class="confirm-sub">This can't be undone — your words will be gone for good.</div>
-    <div class="confirm-actions">
-      <button class="confirm-btn no" onclick="closeDeleteConfirm()">No, keep it</button>
-      <button class="confirm-btn yes" onclick="confirmDelete()">Yes, delete</button>
+    <div class="toast" id="toast">
+        Your entry has been added to your journal ♡
     </div>
-  </div>
-</div>
 
-<script>
-const PROMPTS = [
-  "What made you smile today?","Write a letter to your past self.","What are you proud of lately?",
-  "What feels heavy right now?","Describe how your body feels in this moment.","What do you wish someone understood about you?",
-  "What would you tell a friend in your situation?","Three things you're grateful for today.",
-  "What do you need more of in your life?","Where do you feel safest?"
-];
 
-let selMood = null;
 
-// Date
-const now = new Date();
-document.getElementById('dateLabel').textContent = now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    <script>
 
-// Prompts
-const pr = document.getElementById('promptsRow');
-PROMPTS.forEach(p => {
-  const el = document.createElement('button');
-  el.className = 'prompt-chip';
-  el.textContent = p;
-  el.onclick = () => { document.getElementById('ta').value = p + '\n\n'; document.getElementById('ta').focus(); onType(); };
-  pr.appendChild(el);
-});
+        /* =========================================================
+           MOOD SELECTION
+           ========================================================= */
 
-// Mood select
-document.querySelectorAll('.mood-btn').forEach(b => {
-  b.onclick = () => {
-    document.querySelectorAll('.mood-btn').forEach(x => x.classList.remove('sel'));
-    b.classList.add('sel');
-    selMood = b.dataset.m;
-    document.getElementById('moodLabel').textContent = 'Feeling ' + b.dataset.l.toLowerCase() + ' today';
-  };
-});
+        const moods = document.querySelectorAll(".mood");
 
-function onType(){
-  const v = document.getElementById('ta').value.trim();
-  const wc = v ? v.split(/\s+/).length : 0;
-  document.getElementById('cc').textContent = wc + (wc===1?' word':' words');
-}
+        let selectedMood = "Good";
 
-function saveEntry(){
-  const text = document.getElementById('ta').value.trim();
-  if(!text) return;
-  const entries = JSON.parse(localStorage.getItem('z_entries')||'[]');
-  entries.unshift({id:Date.now(),text,mood:selMood||'📓',date:now.toISOString()});
-  localStorage.setItem('z_entries',JSON.stringify(entries));
-  document.getElementById('ta').value='';
-  document.getElementById('cc').textContent='0 words';
-  selMood=null;
-  document.querySelectorAll('.mood-btn').forEach(x=>x.classList.remove('sel'));
-  document.getElementById('moodLabel').textContent='how are you feeling today?';
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
-  renderEntries();
-}
+        moods.forEach(mood => {
 
-function renderEntries(){
-  const entries = JSON.parse(localStorage.getItem('z_entries')||'[]');
-  const el = document.getElementById('entriesList');
-  if(!entries.length){el.innerHTML='<div class="no-entries">Your entries will appear here 🌱<br>Start writing something beautiful.</div>';return;}
-  el.innerHTML = entries.map(e=>{
-    const d = new Date(e.date);
-    const ds = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-    const safe = e.text.replace(/</g,'&lt;');
-    return `<div class="entry-card">
-      <div class="entry-top"><span class="entry-em">${e.mood}</span><span class="entry-date">${ds}</span></div>
-      <div class="entry-text">${safe}</div>
-      <button class="entry-del" onclick="deleteEntry(${e.id},event)" title="delete">🗑</button>
-    </div>`;
-  }).join('');
-}
+            mood.addEventListener("click", () => {
 
-let pendingDeleteId = null;
+                moods.forEach(item => {
+                    item.classList.remove("selected");
+                });
 
-function deleteEntry(id,ev){
-  ev.stopPropagation();
-  pendingDeleteId = id;
-  document.getElementById('delOverlay').classList.add('open');
-}
+                mood.classList.add("selected");
 
-function closeDeleteConfirm(){
-  pendingDeleteId = null;
-  document.getElementById('delOverlay').classList.remove('open');
-}
+                selectedMood =
+                    mood.dataset.mood;
 
-function confirmDelete(){
-  if(pendingDeleteId===null) return;
-  let entries = JSON.parse(localStorage.getItem('z_entries')||'[]');
-  entries = entries.filter(e=>e.id!==pendingDeleteId);
-  localStorage.setItem('z_entries',JSON.stringify(entries));
-  closeDeleteConfirm();
-  renderEntries();
-}
+            });
 
-renderEntries();
-</script>
+        });
+
+
+        /* =========================================================
+           CHARACTER COUNTER
+           ========================================================= */
+
+        const input =
+            document.getElementById("journalInput");
+
+        const counter =
+            document.getElementById("counter");
+
+        input.addEventListener("input", () => {
+
+            counter.textContent =
+                input.value.length;
+
+        });
+
+
+        /* =========================================================
+           DAILY PROMPTS
+           ========================================================= */
+
+        const prompts = [
+
+            "What has been taking up space in your mind lately?",
+
+            "What is something small that made you smile today?",
+
+            "What do you wish you could tell yourself right now?",
+
+            "What are you grateful for today?",
+
+            "What felt difficult today?",
+
+            "What are you looking forward to?",
+
+            "If today had a colour, what would it be and why?",
+
+            "What is something you need to let yourself feel?"
+
+        ];
+
+
+        const promptButton =
+            document.getElementById("promptButton");
+
+        const dailyPrompt =
+            document.getElementById("dailyPrompt");
+
+
+        function addPrompt() {
+
+            const random =
+                prompts[
+                    Math.floor(
+                        Math.random() * prompts.length
+                    )
+                ];
+
+            input.value =
+                `✦ ${random}\n\n`;
+
+            input.focus();
+
+            counter.textContent =
+                input.value.length;
+
+        }
+
+
+        promptButton.addEventListener(
+            "click",
+            addPrompt
+        );
+
+        dailyPrompt.addEventListener(
+            "click",
+            addPrompt
+        );
+
+
+        /* =========================================================
+           SAVE ENTRY
+           ========================================================= */
+
+        const saveButton =
+            document.getElementById("saveButton");
+
+        const toast =
+            document.getElementById("toast");
+
+
+        saveButton.addEventListener(
+            "click",
+            () => {
+
+                if (!input.value.trim()) {
+
+                    input.focus();
+
+                    return;
+
+                }
+
+                toast.classList.add("show");
+
+                setTimeout(() => {
+
+                    toast.classList.remove("show");
+
+                }, 2500);
+
+                input.value = "";
+
+                counter.textContent = "0";
+
+            }
+        );
+
+
+        /* =========================================================
+           SEARCH ENTRIES
+           ========================================================= */
+
+        const search =
+            document.getElementById("search");
+
+        const entries =
+            document.querySelectorAll(".entry-card");
+
+
+        search.addEventListener(
+            "input",
+            () => {
+
+                const query =
+                    search.value.toLowerCase();
+
+                entries.forEach(entry => {
+
+                    const text =
+                        entry.innerText.toLowerCase();
+
+                    if (text.includes(query)) {
+
+                        entry.style.display =
+                            "grid";
+
+                    } else {
+
+                        entry.style.display =
+                            "none";
+
+                    }
+
+                });
+
+            }
+        );
+
+    </script>
+
 </body>
 </html>

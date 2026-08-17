@@ -1,1308 +1,1033 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zenene — Journal</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Mono:wght@300;400;500&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   ZENENE — JOURNAL
+   ========================================================= */
+
+:root {
+    --paper: #f7f1e7;
+    --paper-light: #fbf8f2;
+    --ink: #302b27;
+    --muted: #75685e;
+    --line: #ddd3c7;
+    --pink: #bd7b84;
+    --pink-soft: #ead3d1;
+    --brown: #4a3d35;
+
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --mono: "DM Mono", monospace;
+    --script: "Kalam", cursive;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    overflow-x: hidden;
+}
 
-    <title>Zenene — Journal</title>
+/* ---------------------------------------------------------
+   PAPER TEXTURE
+--------------------------------------------------------- */
 
-    <!-- Same typography family as the Mood page -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Parisienne&display=swap" rel="stylesheet">
+    background-image:
+        radial-gradient(rgba(80, 65, 55, 0.10) 0.6px, transparent 0.6px);
 
-    <style>
+    background-size: 5px 5px;
+    opacity: 0.16;
+}
+
+/* ---------------------------------------------------------
+   NAVIGATION — SAME ZENENE HEADER
+--------------------------------------------------------- */
+
+.navbar {
+    height: 73px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 48px;
 
-        /* =========================================================
-           ZENENE — JOURNAL
-           Visual language intentionally matches mood.html
-        ========================================================= */
+    border-top: 1px solid #2f2a26;
+    border-bottom: 1px solid var(--line);
 
-        :root {
-            --cream: #f5f0e7;
-            --paper: #fbf9f4;
-            --paper-warm: #f8f2e8;
+    background: rgba(247, 241, 231, 0.95);
+
+    position: relative;
+    z-index: 50;
+}
+
+.logo {
+    font-family: var(--mono);
+    font-size: 15px;
+    letter-spacing: 5px;
+    font-weight: 500;
+}
 
-            --ink: #302b27;
-            --muted: #776c63;
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+}
 
-            --line: #ddd4c8;
-            --line-dark: #c9beb0;
+.nav-links a {
+    position: relative;
 
-            --rose: #b97880;
-            --rose-soft: #ead4d3;
+    color: var(--ink);
+    text-decoration: none;
 
-            --sage: #d8e1d4;
-            --blue: #dbe2e7;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 1.3px;
 
-            --shadow: rgba(58, 48, 42, 0.08);
+    padding: 27px 0 24px;
 
-            --serif: "Cormorant Garamond", Georgia, serif;
-            --display: "Playfair Display", Georgia, serif;
-            --mono: "DM Mono", monospace;
-            --script: "Parisienne", cursive;
-        }
+    transition: opacity 0.25s ease;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+.nav-links a:hover {
+    opacity: 0.55;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+.nav-links a.active::after {
+    content: "";
 
-        body {
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    rgba(255,255,255,0.55),
-                    transparent 35%
-                ),
-                var(--cream);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 19px;
 
-            color: var(--ink);
+    height: 1px;
 
-            font-family: var(--serif);
+    background: var(--pink);
+}
 
-            min-height: 100vh;
+/* ---------------------------------------------------------
+   HERO
+--------------------------------------------------------- */
 
-            overflow-x: hidden;
-        }
+.hero {
+    min-height: 420px;
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    align-items: center;
 
-            pointer-events: none;
+    padding: 85px 8% 65px;
 
-            opacity: 0.18;
+    position: relative;
+}
 
-            background-image:
-                radial-gradient(
-                    rgba(60,50,40,0.25) 0.5px,
-                    transparent 0.5px
-                );
+.hero-left {
+    animation: fadeUp 0.9s ease both;
+}
 
-            background-size: 5px 5px;
+.eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 78px;
+}
 
-            z-index: 100;
-        }
+.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(90px, 9vw, 145px);
+    line-height: 0.68;
+    font-weight: 500;
+    letter-spacing: -5px;
+}
 
+.hero-title span {
+    font-family: var(--script);
+    font-size: 0.55em;
+    color: var(--pink);
 
-        /* =========================================================
-           HEADER — SAME SYSTEM AS MOOD
-        ========================================================= */
+    display: inline-block;
 
-        header {
-            height: 70px;
+    margin-left: 20px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    transform: rotate(-4deg);
+    letter-spacing: -2px;
+}
 
-            padding: 0 36px;
+.hero-right {
+    max-width: 500px;
+    padding-left: 40px;
 
-            border-bottom: 1px solid rgba(80,70,60,0.12);
+    animation: fadeUp 1s 0.15s ease both;
+}
 
-            background: rgba(247,242,233,0.88);
+.hero-description {
+    font-size: 27px;
+    line-height: 1.45;
+    color: #655950;
+}
 
-            backdrop-filter: blur(8px);
+.hero-description em {
+    color: var(--pink);
+    font-family: var(--script);
+    font-size: 1.12em;
+}
 
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
+/* ---------------------------------------------------------
+   MAIN JOURNAL AREA
+--------------------------------------------------------- */
 
-        .logo {
-            font-family: var(--mono);
-            font-size: 13px;
+.journal-wrapper {
+    width: 84%;
+    max-width: 1220px;
+    margin: 0 auto 120px;
+}
 
-            letter-spacing: 4px;
+/* ---------------------------------------------------------
+   JOURNAL PAPER
+--------------------------------------------------------- */
 
-            color: var(--ink);
+.write-card {
+    background: var(--paper-light);
 
-            text-decoration: none;
-        }
+    border: 1px solid #e3d9cd;
 
-        nav {
-            display: flex;
-            align-items: center;
+    padding: 45px 48px 50px;
 
-            gap: 31px;
-        }
+    position: relative;
 
-        nav a {
-            position: relative;
+    box-shadow:
+        0 25px 60px rgba(76, 58, 43, 0.07);
 
-            text-decoration: none;
+    animation: fadeUp 0.9s 0.2s ease both;
+}
 
-            color: var(--ink);
+/* little tape */
 
-            font-family: var(--mono);
-            font-size: 10px;
+.write-card::before {
+    content: "";
 
-            letter-spacing: 1px;
+    position: absolute;
 
-            text-transform: uppercase;
+    width: 85px;
+    height: 23px;
 
-            padding: 25px 0;
-        }
+    top: -11px;
+    right: 70px;
 
-        nav a::after {
-            content: "";
+    background: rgba(210, 153, 158, 0.30);
 
-            position: absolute;
+    transform: rotate(2deg);
+}
 
-            left: 0;
-            right: 0;
-            bottom: 15px;
+/* ---------------------------------------------------------
+   WRITE HEADER
+--------------------------------------------------------- */
 
-            height: 1px;
+.write-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 
-            background: var(--rose);
+    margin-bottom: 28px;
+}
 
-            transform: scaleX(0);
+.section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
 
-            transform-origin: center;
+.date {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+}
 
-            transition: transform 0.3s ease;
-        }
+/* ---------------------------------------------------------
+   TEXT AREA
+--------------------------------------------------------- */
 
-        nav a:hover::after,
-        nav a.active::after {
-            transform: scaleX(1);
-        }
+#journalText {
+    width: 100%;
+    min-height: 210px;
 
-        nav a.active {
-            color: #403531;
-        }
+    resize: vertical;
 
+    border: none;
+    outline: none;
 
-        /* =========================================================
-           HERO
-        ========================================================= */
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 34px,
+            rgba(120, 105, 94, 0.10) 35px
+        );
 
-        .hero {
-            max-width: 1225px;
+    font-family: var(--serif);
+    font-size: 23px;
+    line-height: 35px;
 
-            margin: 0 auto;
+    color: var(--ink);
 
-            padding: 88px 0 55px;
+    padding: 8px 3px;
 
-            display: grid;
+    transition: background 0.3s ease;
+}
 
-            grid-template-columns: 1.2fr 0.8fr;
+#journalText::placeholder {
+    color: #a89b90;
+    font-style: italic;
+}
 
-            gap: 80px;
+/* ---------------------------------------------------------
+   TOOLBAR
+--------------------------------------------------------- */
 
-            animation: fadeUp 0.8s ease both;
-        }
+.write-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-        .eyebrow {
-            font-family: var(--mono);
+    margin-top: 25px;
 
-            font-size: 10px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+}
 
-            letter-spacing: 2px;
+.small-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+}
 
-            text-transform: uppercase;
+/* ---------------------------------------------------------
+   BUTTONS
+--------------------------------------------------------- */
 
-            margin-bottom: 38px;
-        }
+.primary-btn {
+    border: none;
+    background: var(--brown);
+    color: #fff;
 
-        .hero h1 {
-            font-family: var(--display);
+    padding: 14px 24px;
 
-            font-size: clamp(68px, 7vw, 104px);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
 
-            line-height: 0.85;
+    cursor: pointer;
 
-            font-weight: 400;
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
 
-            letter-spacing: -4px;
-        }
+.primary-btn:hover {
+    background: var(--pink);
+    transform: translateY(-2px);
+}
 
-        .hero h1 span {
-            font-family: var(--script);
+/* ---------------------------------------------------------
+   MOOD SECTION
+--------------------------------------------------------- */
 
-            font-size: 0.72em;
+.mood-section {
+    margin-top: 80px;
+}
 
-            color: var(--rose);
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 
-            letter-spacing: 0;
+    margin-bottom: 30px;
+}
 
-            margin-left: 10px;
-        }
+.section-heading h2 {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 500;
+}
 
-        .hero-copy {
-            padding-top: 43px;
+.section-heading span {
+    font-family: var(--script);
+    color: var(--pink);
+    font-size: 20px;
+}
 
-            font-size: 20px;
+/* ---------------------------------------------------------
+   MOOD GRID
+--------------------------------------------------------- */
 
-            line-height: 1.55;
+.mood-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 12px;
+}
 
-            color: #665a51;
+/* Individual mood */
 
-            max-width: 440px;
-        }
+.mood-option {
+    border: 1px solid transparent;
+    background: transparent;
 
-        .hero-copy em {
-            font-family: var(--script);
+    padding: 15px 7px;
 
-            font-size: 30px;
+    cursor: pointer;
 
-            color: var(--rose);
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border 0.25s ease;
+}
 
-            font-style: normal;
-        }
+.mood-option:hover {
+    transform: translateY(-6px);
+}
 
+.mood-option.selected {
+    background: rgba(255,255,255,0.55);
+    border-color: var(--pink);
+}
 
-        /* =========================================================
-           MAIN
-        ========================================================= */
+/* ---------------------------------------------------------
+   CUSTOM PASTEL FACES
+   --------------------------------------------------------- */
 
-        main {
-            max-width: 1225px;
+.face {
+    width: 76px;
+    height: 76px;
 
-            margin: 0 auto;
+    max-width: 100%;
 
-            padding-bottom: 100px;
-        }
+    margin: 0 auto 10px;
 
+    border-radius: 50%;
 
-        /* =========================================================
-           JOURNAL WRITE CARD
-        ========================================================= */
+    position: relative;
 
-        .journal-card {
-            position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            background: var(--paper);
+    box-shadow:
+        inset 0 0 12px rgba(255,255,255,0.35);
 
-            border: 1px solid rgba(100,85,70,0.12);
+    transition: transform 0.25s ease;
+}
 
-            box-shadow:
-                0 18px 45px var(--shadow);
+.mood-option:hover .face {
+    transform: scale(1.05);
+}
 
-            padding: 45px;
+/* eyes */
 
-            margin-bottom: 78px;
+.eye {
+    width: 8px;
+    height: 8px;
 
-            animation: fadeUp 0.8s 0.15s ease both;
-        }
+    border-radius: 50%;
 
-        /* paper tape */
+    background: #666b6c;
 
-        .journal-card::before {
-            content: "";
+    position: absolute;
+    top: 28px;
+}
 
-            position: absolute;
+.eye.left {
+    left: 22px;
+}
 
-            width: 84px;
-            height: 22px;
+.eye.right {
+    right: 22px;
+}
 
-            top: -11px;
-            right: 70px;
+/* mouth */
 
-            background: rgba(185,120,128,0.25);
+.mouth {
+    position: absolute;
 
-            transform: rotate(2deg);
-        }
+    left: 50%;
+    transform: translateX(-50%);
 
-        .card-top {
-            display: flex;
+    top: 43px;
 
-            align-items: center;
+    width: 27px;
+    height: 14px;
 
-            justify-content: space-between;
+    border-bottom: 4px solid #666b6c;
 
-            margin-bottom: 28px;
-        }
+    border-radius: 0 0 30px 30px;
+}
 
-        .today {
-            font-family: var(--mono);
+/* moods */
 
-            font-size: 10px;
+.face-angry {
+    background: #e7aaa0;
+}
 
-            letter-spacing: 1.5px;
+.face-angry .eye.left {
+    transform: rotate(20deg);
+}
 
-            text-transform: uppercase;
-        }
+.face-angry .eye.right {
+    transform: rotate(-20deg);
+}
 
-        .private-toggle {
-            display: flex;
+.face-angry .mouth {
+    top: 48px;
+    border-bottom: none;
+    border-top: 4px solid #666b6c;
+    border-radius: 30px 30px 0 0;
+}
 
-            align-items: center;
+.face-happy {
+    background: #f5c982;
+}
 
-            gap: 9px;
+.face-veryhappy {
+    background: #f1e38e;
+}
 
-            font-family: var(--mono);
+.face-veryhappy .mouth {
+    height: 17px;
+}
 
-            font-size: 9px;
+.face-love {
+    background: #e9b6bc;
+}
 
-            letter-spacing: 1px;
+.face-love .eye {
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    border-radius: 2px;
+}
 
-            text-transform: uppercase;
+.face-neutral {
+    background: #e9ddc7;
+}
 
-            cursor: pointer;
-        }
+.face-neutral .mouth {
+    border-bottom: none;
+    border-top: 4px solid #666b6c;
+    border-radius: 0;
+    height: 0;
+}
 
-        .private-toggle input {
-            appearance: none;
+.face-excited {
+    background: #d8e68e;
+}
 
-            width: 15px;
-            height: 15px;
+.face-excited .eye.left {
+    transform: rotate(45deg);
+}
 
-            border: 1px solid var(--line-dark);
+.face-excited .eye.right {
+    transform: rotate(-45deg);
+}
 
-            background: transparent;
+.face-sad {
+    background: #d6cbe3;
+}
 
-            cursor: pointer;
+.face-sad .mouth {
+    border-bottom: none;
+    border-top: 4px solid #666b6c;
+    border-radius: 30px 30px 0 0;
+}
 
-            position: relative;
-        }
+.face-cry {
+    background: #b9cee4;
+}
 
-        .private-toggle input:checked::after {
-            content: "✓";
+.face-cry::after {
+    content: "";
+    position: absolute;
 
-            position: absolute;
+    width: 7px;
+    height: 11px;
 
-            left: 2px;
-            top: -2px;
+    border-radius: 50%;
 
-            font-size: 13px;
+    background: #7894ad;
 
-            color: var(--rose);
-        }
+    top: 39px;
+    left: 19px;
 
+    transform: rotate(20deg);
+}
 
-        .journal-card h2 {
-            font-family: var(--display);
+.face-surprise {
+    background: #bddcae;
+}
 
-            font-size: 36px;
+.face-surprise .mouth {
+    width: 17px;
+    height: 23px;
 
-            font-weight: 400;
+    border: 4px solid #666b6c;
+    border-radius: 50%;
 
-            margin-bottom: 25px;
-        }
+    top: 42px;
+}
 
+.mood-name {
+    display: block;
 
-        /* =========================================================
-           TEXTAREA
-        ========================================================= */
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.7px;
 
-        textarea {
-            width: 100%;
+    text-align: center;
 
-            min-height: 260px;
+    color: #655950;
+}
 
-            resize: vertical;
+/* ---------------------------------------------------------
+   ENTRIES
+--------------------------------------------------------- */
 
-            border: 1px solid var(--line);
+.entries-section {
+    margin-top: 95px;
+}
 
-            background:
-                linear-gradient(
-                    to bottom,
-                    transparent 38px,
-                    rgba(130,110,90,0.07) 39px
-                );
+.entries-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 
-            background-size: 100% 39px;
+    border-bottom: 1px solid var(--line);
 
-            padding: 22px 25px;
+    padding-bottom: 15px;
+}
 
-            font-family: var(--serif);
+.entries-heading h2 {
+    font-size: 42px;
+    font-weight: 500;
+}
 
-            font-size: 20px;
+.search-box {
+    background: transparent;
 
-            line-height: 39px;
+    border: none;
+    border-bottom: 1px solid #b9aea4;
 
-            color: var(--ink);
+    padding: 8px 4px;
 
-            outline: none;
+    width: 190px;
 
-            transition:
-                border 0.3s ease,
-                box-shadow 0.3s ease;
-        }
+    outline: none;
 
-        textarea::placeholder {
-            color: #a0958b;
-            font-style: italic;
-        }
+    font-family: var(--mono);
+    font-size: 10px;
+}
 
-        textarea:focus {
-            border-color: rgba(185,120,128,0.55);
+.search-box::placeholder {
+    color: #9b8d82;
+}
 
-            box-shadow:
-                0 0 0 4px rgba(185,120,128,0.07);
-        }
+/* entry */
 
+.entry {
+    padding: 35px 5px;
 
-        /* =========================================================
-           JOURNAL META
-        ========================================================= */
+    border-bottom: 1px solid var(--line);
 
-        .journal-meta {
-            display: grid;
+    display: grid;
+    grid-template-columns: 160px 1fr 110px;
 
-            grid-template-columns: 1fr 1fr;
+    gap: 30px;
 
-            gap: 25px;
+    animation: fadeUp 0.5s ease both;
+}
 
-            margin-top: 27px;
-        }
+.entry-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
 
-        .meta-block label {
-            display: block;
+.entry-content {
+    font-size: 20px;
+    line-height: 1.55;
 
-            font-family: var(--mono);
+    white-space: pre-wrap;
+}
 
-            font-size: 9px;
+.entry-mood {
+    text-align: right;
 
-            letter-spacing: 1.5px;
+    font-family: var(--mono);
+    font-size: 9px;
 
-            text-transform: uppercase;
+    color: var(--pink);
+}
 
-            margin-bottom: 11px;
-        }
+.entry-actions {
+    margin-top: 10px;
+}
 
-        .mood-options {
-            display: flex;
+.entry-actions button {
+    border: none;
+    background: none;
 
-            gap: 8px;
+    font-family: var(--mono);
+    font-size: 9px;
 
-            flex-wrap: wrap;
-        }
+    color: #8d8076;
 
-        .mood-option {
-            border: 1px solid var(--line);
+    cursor: pointer;
 
-            background: transparent;
+    margin-left: 12px;
+}
 
-            padding: 10px 14px;
+.entry-actions button:hover {
+    color: var(--pink);
+}
 
-            cursor: pointer;
+/* ---------------------------------------------------------
+   EMPTY STATE
+--------------------------------------------------------- */
 
-            font-family: var(--mono);
+.empty-state {
+    text-align: center;
 
-            font-size: 9px;
+    padding: 65px 20px;
 
-            transition: all 0.25s ease;
-        }
+    color: var(--muted);
+}
 
-        .mood-option:hover {
-            background: var(--paper-warm);
-        }
+.empty-state .script {
+    display: block;
 
-        .mood-option.selected {
-            background: var(--rose-soft);
+    font-family: var(--script);
+    color: var(--pink);
 
-            border-color: #d3a5a7;
-        }
+    font-size: 24px;
 
-        .tag-input {
-            width: 100%;
+    margin-bottom: 8px;
+}
 
-            border: none;
+.empty-state p {
+    font-size: 18px;
+}
 
-            border-bottom: 1px solid var(--line);
+/* ---------------------------------------------------------
+   FOOTER
+--------------------------------------------------------- */
 
-            background: transparent;
+.journal-footer {
+    margin-top: 100px;
 
-            padding: 9px 2px;
+    padding-top: 30px;
 
-            font-family: var(--serif);
+    border-top: 1px solid var(--line);
 
-            font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+}
 
-            outline: none;
-        }
+.journal-footer span {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
 
-        .tag-input:focus {
-            border-color: var(--rose);
-        }
+    color: var(--muted);
+}
 
+/* ---------------------------------------------------------
+   ANIMATIONS
+--------------------------------------------------------- */
 
-        /* =========================================================
-           BUTTONS
-        ========================================================= */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
 
-        .write-actions {
-            display: flex;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-            justify-content: flex-end;
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
 
-            gap: 12px;
+@media (max-width: 1000px) {
 
-            margin-top: 30px;
-        }
+    .navbar {
+        padding: 0 25px;
+    }
 
-        button {
-            font-family: var(--mono);
+    .nav-links {
+        gap: 17px;
+    }
 
-            font-size: 9px;
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 70px 8%;
+    }
 
-            letter-spacing: 1px;
+    .hero-right {
+        padding-left: 0;
+    }
 
-            text-transform: uppercase;
+    .mood-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
 
-            cursor: pointer;
+    .entry {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
 
-            transition:
-                transform 0.25s ease,
-                background 0.25s ease;
-        }
+    .entry-mood {
+        text-align: left;
+    }
+}
 
-        button:hover {
-            transform: translateY(-2px);
-        }
+@media (max-width: 650px) {
 
-        .save-btn {
-            background: #403630;
+    .navbar {
+        height: auto;
+        min-height: 70px;
+        padding: 18px 20px;
 
-            color: white;
+        align-items: flex-start;
+    }
 
-            border: none;
+    .nav-links {
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
 
-            padding: 14px 24px;
-        }
+    .nav-links a {
+        font-size: 9px;
+        padding: 5px 0;
+    }
 
-        .save-btn:hover {
-            background: #2f2925;
-        }
+    .nav-links a.active::after {
+        bottom: 0;
+    }
 
-        .clear-btn {
-            background: transparent;
+    .logo {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
 
-            border: 1px solid var(--line-dark);
+    .hero {
+        padding: 65px 7% 50px;
+        min-height: 400px;
+    }
 
-            color: var(--ink);
+    .eyebrow {
+        margin-bottom: 50px;
+    }
 
-            padding: 13px 20px;
-        }
+    .hero-title {
+        font-size: 75px;
+    }
 
+    .hero-title span {
+        display: block;
+        margin-left: 25px;
+        margin-top: 20px;
+    }
 
-        /* =========================================================
-           PROMPT
-        ========================================================= */
+    .hero-description {
+        font-size: 22px;
+    }
 
-        .prompt-section {
-            display: grid;
+    .journal-wrapper {
+        width: 90%;
+    }
 
-            grid-template-columns: 0.7fr 1.3fr;
+    .write-card {
+        padding: 30px 25px;
+    }
 
-            gap: 60px;
+    .write-bottom {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
 
-            margin-bottom: 90px;
+    .mood-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+    }
 
-            align-items: center;
-        }
+    .face {
+        width: 65px;
+        height: 65px;
+    }
 
-        .section-label {
-            font-family: var(--mono);
+    .section-heading,
+    .entries-heading {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
 
-            font-size: 10px;
+    .search-box {
+        width: 100%;
+    }
+}
 
-            letter-spacing: 2px;
-
-            text-transform: uppercase;
-        }
-
-        .prompt-title {
-            font-family: var(--display);
-
-            font-size: 43px;
-
-            font-weight: 400;
-
-            margin-top: 13px;
-        }
-
-        .prompt-title span {
-            font-family: var(--script);
-
-            color: var(--rose);
-
-            font-size: 35px;
-        }
-
-        .prompt-card {
-            position: relative;
-
-            background: var(--sage);
-
-            padding: 37px 45px;
-
-            min-height: 145px;
-
-            display: flex;
-
-            align-items: center;
-
-            border: 1px solid rgba(80,90,70,0.08);
-
-            transform: rotate(-0.6deg);
-
-            transition: transform 0.4s ease;
-        }
-
-        .prompt-card:hover {
-            transform: rotate(0deg) translateY(-4px);
-        }
-
-        .prompt-card p {
-            font-family: var(--serif);
-
-            font-size: 24px;
-
-            line-height: 1.35;
-
-            max-width: 700px;
-        }
-
-        .new-prompt {
-            position: absolute;
-
-            right: 22px;
-            bottom: 17px;
-
-            border: none;
-
-            background: transparent;
-
-            color: #665e55;
-        }
-
-
-        /* =========================================================
-           ENTRIES HEADER
-        ========================================================= */
-
-        .entries-header {
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: end;
-
-            margin-bottom: 27px;
-        }
-
-        .entries-header h2 {
-            font-family: var(--display);
-
-            font-size: 48px;
-
-            font-weight: 400;
-        }
-
-        .entries-header h2 span {
-            font-family: var(--script);
-
-            color: var(--rose);
-
-            font-size: 32px;
-        }
-
-        .entry-tools {
-            display: flex;
-
-            gap: 12px;
-
-            align-items: center;
-        }
-
-        .search {
-            width: 220px;
-
-            border: none;
-
-            border-bottom: 1px solid var(--line-dark);
-
-            background: transparent;
-
-            padding: 9px 2px;
-
-            font-family: var(--mono);
-
-            font-size: 9px;
-
-            outline: none;
-        }
-
-        .search::placeholder {
-            color: #968b81;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-        }
-
-
-        /* =========================================================
-           ENTRY LIST
-        ========================================================= */
-
-        .entries {
-            display: grid;
-
-            gap: 18px;
-        }
-
-        .entry {
-            position: relative;
-
-            background: rgba(251,249,244,0.72);
-
-            border: 1px solid var(--line);
-
-            padding: 29px 32px;
-
-            display: grid;
-
-            grid-template-columns: 125px 1fr auto;
-
-            gap: 30px;
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                background 0.3s ease;
-        }
-
-        .entry:hover {
-            transform: translateY(-3px);
-
-            background: var(--paper);
-
-            box-shadow: 0 12px 28px var(--shadow);
-        }
-
-        .entry-date {
-            font-family: var(--mono);
-
-            font-size: 9px;
-
-            line-height: 1.6;
-
-            letter-spacing: 1px;
-
-            text-transform: uppercase;
-
-            color: var(--muted);
-        }
-
-        .entry-date strong {
-            display: block;
-
-            font-family: var(--display);
-
-            font-size: 27px;
-
-            font-weight: 400;
-
-            letter-spacing: 0;
-
-            color: var(--ink);
-
-            margin-bottom: 3px;
-        }
-
-        .entry-content h3 {
-            font-family: var(--display);
-
-            font-size: 28px;
-
-            font-weight: 400;
-
-            margin-bottom: 7px;
-        }
-
-        .entry-content p {
-            color: #6e6259;
-
-            font-size: 16px;
-
-            line-height: 1.5;
-
-            max-width: 650px;
-
-            display: -webkit-box;
-
-            -webkit-line-clamp: 2;
-
-            -webkit-box-orient: vertical;
-
-            overflow: hidden;
-        }
-
-        .entry-tags {
-            display: flex;
-
-            gap: 6px;
-
-            flex-wrap: wrap;
-
-            margin-top: 13px;
-        }
-
-        .tag {
-            font-family: var(--mono);
-
-            font-size: 8px;
-
-            letter-spacing: 0.5px;
-
-            padding: 5px 8px;
-
-            border: 1px solid var(--line);
-
-            color: #766b62;
-        }
-
-        .entry-mood {
-            font-size: 22px;
-
-            align-self: start;
-
-            margin-top: 2px;
-        }
-
-        .entry-actions {
-            display: flex;
-
-            gap: 7px;
-
-            align-self: center;
-        }
-
-        .entry-actions button {
-            border: 1px solid var(--line);
-
-            background: transparent;
-
-            padding: 9px 10px;
-
-            font-size: 8px;
-        }
-
-        .entry-actions button:hover {
-            background: var(--paper-warm);
-        }
-
-
-        /* =========================================================
-           WEEKLY REFLECTION
-        ========================================================= */
-
-        .reflection {
-            margin-top: 100px;
-
-            padding: 50px;
-
-            background: var(--blue);
-
-            position: relative;
-
-            transform: rotate(0.35deg);
-        }
-
-        .reflection::after {
-            content: "";
-
-            position: absolute;
-
-            width: 72px;
-            height: 18px;
-
-            top: -9px;
-            left: 75px;
-
-            background: rgba(185,120,128,0.22);
-
-            transform: rotate(-3deg);
-        }
-
-        .reflection h2 {
-            font-family: var(--display);
-
-            font-size: 44px;
-
-            font-weight: 400;
-
-            margin: 11px 0 25px;
-        }
-
-        .reflection h2 span {
-            font-family: var(--script);
-
-            color: var(--rose);
-
-            font-size: 34px;
-        }
-
-        .reflection p {
-            font-size: 18px;
-
-            color: #655d57;
-
-            max-width: 620px;
-
-            line-height: 1.5;
-
-            margin-bottom: 25px;
-        }
-
-        .reflection textarea {
-            background: rgba(251,249,244,0.6);
-
-            min-height: 150px;
-        }
-
-
-        /* =========================================================
-           EXPORT
-        ========================================================= */
-
-        .bottom-actions {
-            margin-top: 30px;
-
-            display: flex;
-
-            justify-content: flex-end;
-
-            gap: 10px;
-        }
-
-        .export-btn {
-            background: transparent;
-
-            border: 1px solid var(--line-dark);
-
-            padding: 12px 18px;
-        }
-
-
-        /* =========================================================
-           EMPTY STATE
-        ========================================================= */
-
-        .empty {
-            text-align: center;
-
-            padding: 70px 20px;
-
-            border: 1px dashed var(--line);
-
-            color: #8b8077;
-        }
-
-        .empty strong {
-            display: block;
-
-            font-family: var(--display);
-
-            font-size: 28px;
-
-            font-weight: 400;
-
-            color: var(--ink);
-
-            margin-bottom: 8px;
-        }
-
-
-        /* =========================================================
-           TOAST
-        ========================================================= */
-
-        .toast {
-            position: fixed;
-
-            right: 28px;
-            bottom: 28px;
-
-            background: #403630;
-
-            color: white;
-
-            padding: 13px 19px;
-
-            font-family: var(--mono);
-
-            font-size: 9px;
-
-            letter-spacing: 0.8px;
-
-            opacity: 0;
-
-            transform: translateY(15px);
-
-            pointer-events: none;
-
-            transition: all 0.35s ease;
-
-            z-index: 200;
-        }
-
-        .toast.show {
-            opacity: 1;
-
-            transform: translateY(0);
-        }
-
-
-        /* =========================================================
-           ANIMATION
-        ========================================================= */
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
-
-        @media (max-width: 900px) {
-
-            header {
-                padding: 0 20px;
-            }
-
-            nav {
-                gap: 15px;
-            }
-
-            nav a {
-                font-size: 8px;
-            }
-
-            .hero,
-            .prompt-section {
-                grid-template-columns: 1fr;
-
-                gap: 25px;
-
-                padding-left: 25px;
-                padding-right: 25px;
-            }
-
-            main {
-                padding-left: 25px;
-                padding-right: 25px;
-            }
-
-            .hero {
-                padding-top: 60px;
-            }
-
-            .hero h1 {
-                font-size: 72px;
-            }
-
-            .journal-card {
-                padding: 28px;
-            }
-
-            .journal-meta {
-                grid-template-columns: 1fr;
-            }
-
-            .entry {
-                grid-template-columns: 90px 1fr;
-            }
-
-            .entry-actions {
-                grid-column: 2;
-                justify-content: flex-start;
-            }
-
-            .entry-mood {
-                position: absolute;
-
-                top: 26px;
-                right: 27px;
-            }
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            header {
-                height: auto;
-
-                padding: 20px;
-
-                flex-direction: column;
-
-                gap: 17px;
-            }
-
-            nav {
-                flex-wrap: wrap;
-
-                justify-content: center;
-            }
-
-            nav a {
-                padding: 5px 0;
-            }
-
-            nav a::after {
-                bottom: 0;
-            }
-
-            .hero h1 {
-                font-size: 59px;
-
-                letter-spacing: -2px;
-            }
-
-            .hero h1 span {
-                display: block;
-
-                margin-left: 0;
-
-                margin-top: 5px;
-            }
-
-            .journal-card {
-                padding: 22px;
-            }
-
-            .card-top {
-                align-items: flex-start;
-
-                gap: 15px;
-
-                flex-direction: column;
-            }
-
-            .write-actions {
-                justify-content: stretch;
-            }
-
-            .write-actions button {
-                flex: 1;
-            }
-
-            .entries-header {
-                align-items: flex-start;
-
-                flex-direction: column;
-
-                gap: 20px;
-            }
-
-            .search {
-                width: 100%;
-            }
-
-            .entry {
-                grid-template-columns: 1fr;
-
-                gap: 15px;
-            }
-
-            .entry-actions {
-                grid-column: auto;
-            }
-
-            .reflection {
-                padding: 30px 24px;
-            }
-        }
-
-    </style>
+</style>
 </head>
 
 
 <body>
 
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
-    <!-- =========================================================
-         HEADER
-    ========================================================= -->
+<header class="navbar">
 
-    <header>
+    <div class="logo">
+        ZENENE
+    </div>
 
-        <a href="index.html" class="logo">
-            ZENENE
+    <nav class="nav-links">
+
+        <a href="index.html">HOME</a>
+
+        <a href="journal.html" class="active">
+            JOURNAL
         </a>
 
-        <nav>
+        <a href="mood.html">
+            MOOD
+        </a>
 
-            <a href="index.html">
-                Home
-            </a>
+        <a href="explore.html">
+            EXPLORE
+        </a>
 
-            <a href="journal.html" class="active">
-                Journal
-            </a>
+        <a href="vera.html">
+            VERA
+        </a>
 
-            <a href="mood.html">
-                Mood
-            </a>
+    </nav>
 
-            <a href="explore.html">
-                Explore
-            </a>
-
-            <a href="vera.html">
-                Vera
-            </a>
-
-        </nav>
-
-    </header>
+</header>
 
 
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-    <!-- =========================================================
-         HERO
-    ========================================================= -->
+<section class="hero">
 
-    <section class="hero">
+    <div class="hero-left">
 
-        <div>
+        <div class="eyebrow">
+            A QUIET PLACE TO WRITE
+        </div>
 
-            <div class="eyebrow">
-                A quiet place to write
-            </div>
+        <h1 class="hero-title">
+            your
+            <span>journal</span>
+        </h1>
 
-            <h1>
-                your
-                <span>journal</span>
-            </h1>
+    </div>
+
+
+    <div class="hero-right">
+
+        <p class="hero-description">
+            Some thoughts don't need to be
+            <em>fixed.</em><br>
+            They just need somewhere to exist.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     JOURNAL
+===================================================== -->
+
+<main class="journal-wrapper">
+
+
+    <!-- WRITE -->
+
+    <section class="write-card">
+
+        <div class="write-top">
+
+            <span class="section-label">
+                TODAY'S ENTRY
+            </span>
+
+            <span class="date" id="todayDate">
+            </span>
 
         </div>
 
 
-        <div class="hero-copy">
+        <textarea
+            id="journalText"
+            placeholder="Write whatever is on your mind..."
+        ></textarea>
 
-            Some thoughts don't need to be
-            <em>fixed.</em>
 
-            <br>
+        <div class="write-bottom">
 
-            They just need somewhere to exist.
+            <span class="small-note">
+                Nothing has to sound perfect here.
+            </span>
+
+            <button
+                class="primary-btn"
+                onclick="saveEntry()"
+            >
+                SAVE ENTRY
+            </button>
 
         </div>
 
@@ -1310,673 +1035,549 @@
 
 
 
-    <main>
+    <!-- =================================================
+         MOOD
+    ================================================== -->
 
+    <section class="mood-section">
 
-        <!-- =====================================================
-             WRITE
-        ===================================================== -->
-
-        <section class="journal-card">
-
-            <div class="card-top">
-
-                <div class="today" id="todayDate">
-                    TODAY · AUG 17
-                </div>
-
-
-                <label class="private-toggle">
-
-                    <input
-                        type="checkbox"
-                        id="privateEntry"
-                        checked
-                    >
-
-                    Keep this entry private
-
-                </label>
-
-            </div>
-
+        <div class="section-heading">
 
             <h2>
-                What's on your mind?
+                How are you feeling?
             </h2>
 
+            <span>
+                before you write...
+            </span>
 
-            <textarea
-                id="journalText"
-                placeholder="Write whatever feels worth putting into words..."
-            ></textarea>
-
-
-            <div class="journal-meta">
+        </div>
 
 
-                <!-- MOOD -->
+        <div class="mood-grid">
 
-                <div class="meta-block">
 
-                    <label>
-                        How are you feeling?
-                    </label>
+            <button class="mood-option" data-mood="Angry">
 
-                    <div class="mood-options">
+                <div class="face face-angry">
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
+                </div>
 
-                        <button
-                            class="mood-option"
-                            data-mood="😊"
-                        >
-                            😊 good
-                        </button>
+                <span class="mood-name">
+                    ANGRY
+                </span>
 
-                        <button
-                            class="mood-option"
-                            data-mood="😌"
-                        >
-                            😌 calm
-                        </button>
+            </button>
 
-                        <button
-                            class="mood-option"
-                            data-mood="😐"
-                        >
-                            😐 okay
-                        </button>
 
-                        <button
-                            class="mood-option"
-                            data-mood="😔"
-                        >
-                            😔 low
-                        </button>
 
-                        <button
-                            class="mood-option"
-                            data-mood="☁️"
-                        >
-                            ☁️ difficult
-                        </button>
+            <button class="mood-option" data-mood="Happy">
 
-                    </div>
+                <div class="face face-happy">
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
+                </div>
+
+                <span class="mood-name">
+                    HAPPY
+                </span>
+
+            </button>
+
+
+
+            <button class="mood-option" data-mood="Very Happy">
+
+                <div class="face face-veryhappy">
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
+                </div>
+
+                <span class="mood-name">
+                    JOYFUL
+                </span>
+
+            </button>
+
+
+
+            <button class="mood-option" data-mood="Loved">
+
+                <div class="face face-love">
+
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
 
                 </div>
 
+                <span class="mood-name">
+                    LOVED
+                </span>
 
-                <!-- TAGS -->
+            </button>
 
-                <div class="meta-block">
 
-                    <label>
-                        Add a tag
-                    </label>
 
-                    <input
-                        class="tag-input"
-                        id="tagInput"
-                        type="text"
-                        placeholder="school, family, thoughts..."
-                    >
+            <button class="mood-option" data-mood="Okay">
+
+                <div class="face face-neutral">
+
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
 
                 </div>
 
-            </div>
+                <span class="mood-name">
+                    OKAY
+                </span>
 
-
-            <div class="write-actions">
-
-                <button
-                    class="clear-btn"
-                    id="clearBtn"
-                >
-                    Clear
-                </button>
-
-                <button
-                    class="save-btn"
-                    id="saveBtn"
-                >
-                    Save this thought
-                </button>
-
-            </div>
-
-        </section>
+            </button>
 
 
 
-        <!-- =====================================================
-             PROMPT
-        ===================================================== -->
+            <button class="mood-option" data-mood="Excited">
 
-        <section class="prompt-section">
+                <div class="face face-excited">
 
-            <div>
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
 
-                <div class="section-label">
-                    A little prompt
                 </div>
 
-                <div class="prompt-title">
-                    if you need
-                    <span>a place to begin.</span>
+                <span class="mood-name">
+                    EXCITED
+                </span>
+
+            </button>
+
+
+
+            <button class="mood-option" data-mood="Sad">
+
+                <div class="face face-sad">
+
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
+
                 </div>
 
-            </div>
+                <span class="mood-name">
+                    SAD
+                </span>
+
+            </button>
 
 
-            <div class="prompt-card">
 
-                <p id="promptText">
-                    What is something you've been carrying
-                    that you haven't given yourself time
-                    to think about?
+            <button class="mood-option" data-mood="Crying">
+
+                <div class="face face-cry">
+
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
+
+                </div>
+
+                <span class="mood-name">
+                    UPSET
+                </span>
+
+            </button>
+
+
+
+            <button class="mood-option" data-mood="Surprised">
+
+                <div class="face face-surprise">
+
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
+
+                </div>
+
+                <span class="mood-name">
+                    SURPRISED
+                </span>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PREVIOUS ENTRIES
+    ================================================== -->
+
+    <section class="entries-section">
+
+        <div class="entries-heading">
+
+            <h2>
+                Your entries
+            </h2>
+
+            <input
+                class="search-box"
+                id="searchInput"
+                type="text"
+                placeholder="SEARCH YOUR JOURNAL..."
+                oninput="renderEntries()"
+            >
+
+        </div>
+
+
+        <div id="entriesContainer">
+
+            <div class="empty-state">
+
+                <span class="script">
+                    a blank page is a beginning.
+                </span>
+
+                <p>
+                    Your journal entries will appear here.
                 </p>
 
-                <button
-                    class="new-prompt"
-                    id="newPrompt"
-                >
-                    another →
-                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="journal-footer">
+
+        <span>
+            ZENENE
+        </span>
+
+        <span>
+            A LITTLE SPACE FOR YOURSELF.
+        </span>
+
+    </footer>
+
+
+</main>
+
+
+
+<script>
+
+/* =========================================================
+   DATE
+========================================================= */
+
+const today = new Date();
+
+const dateOptions = {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+};
+
+document.getElementById("todayDate").textContent =
+    today.toLocaleDateString("en-US", dateOptions).toUpperCase();
+
+
+
+/* =========================================================
+   MOOD SELECTION
+========================================================= */
+
+let selectedMood = null;
+
+const moodOptions =
+    document.querySelectorAll(".mood-option");
+
+moodOptions.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+        moodOptions.forEach(item =>
+            item.classList.remove("selected")
+        );
+
+        option.classList.add("selected");
+
+        selectedMood =
+            option.dataset.mood;
+
+    });
+
+});
+
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function getEntries() {
+
+    return JSON.parse(
+        localStorage.getItem("zeneneJournalEntries")
+    ) || [];
+
+}
+
+
+
+/* =========================================================
+   SAVE ENTRY
+========================================================= */
+
+function saveEntry() {
+
+    const textarea =
+        document.getElementById("journalText");
+
+    const text =
+        textarea.value.trim();
+
+
+    if (!text) {
+
+        textarea.focus();
+
+        return;
+
+    }
+
+
+    const entries = getEntries();
+
+
+    const newEntry = {
+
+        id: Date.now(),
+
+        text: text,
+
+        mood: selectedMood || "No mood",
+
+        date: new Date().toLocaleDateString(
+            "en-US",
+            {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+            }
+        ),
+
+        timestamp: Date.now()
+
+    };
+
+
+    entries.unshift(newEntry);
+
+
+    localStorage.setItem(
+        "zeneneJournalEntries",
+        JSON.stringify(entries)
+    );
+
+
+    textarea.value = "";
+
+    selectedMood = null;
+
+    moodOptions.forEach(item =>
+        item.classList.remove("selected")
+    );
+
+
+    renderEntries();
+
+}
+
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteEntry(id) {
+
+    const entries = getEntries();
+
+    const updated =
+        entries.filter(entry =>
+            entry.id !== id
+        );
+
+    localStorage.setItem(
+        "zeneneJournalEntries",
+        JSON.stringify(updated)
+    );
+
+    renderEntries();
+
+}
+
+
+
+/* =========================================================
+   EDIT
+========================================================= */
+
+function editEntry(id) {
+
+    const entries = getEntries();
+
+    const entry =
+        entries.find(item =>
+            item.id === id
+        );
+
+
+    if (!entry) return;
+
+
+    const newText =
+        prompt(
+            "Edit your journal entry:",
+            entry.text
+        );
+
+
+    if (newText === null) return;
+
+
+    const cleanText =
+        newText.trim();
+
+
+    if (!cleanText) return;
+
+
+    entry.text = cleanText;
+
+
+    localStorage.setItem(
+        "zeneneJournalEntries",
+        JSON.stringify(entries)
+    );
+
+
+    renderEntries();
+
+}
+
+
+
+/* =========================================================
+   RENDER ENTRIES
+========================================================= */
+
+function renderEntries() {
+
+    const container =
+        document.getElementById(
+            "entriesContainer"
+        );
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    let entries =
+        getEntries();
+
+
+    if (search) {
+
+        entries =
+            entries.filter(entry =>
+
+                entry.text
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                entry.mood
+                    .toLowerCase()
+                    .includes(search)
+
+            );
+
+    }
+
+
+    if (entries.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <span class="script">
+                    ${search
+                        ? "nothing here yet."
+                        : "a blank page is a beginning."
+                    }
+                </span>
+
+                <p>
+                    ${search
+                        ? "Try another search."
+                        : "Your journal entries will appear here."
+                    }
+                </p>
 
             </div>
 
-        </section>
+        `;
+
+        return;
+
+    }
 
 
+    container.innerHTML =
+        entries.map(entry => `
 
-        <!-- =====================================================
-             ENTRIES
-        ===================================================== -->
-
-        <section>
-
-            <div class="entries-header">
+            <article class="entry">
 
                 <div>
 
-                    <div class="section-label">
-                        Your thoughts
-                    </div>
-
-                    <h2>
-                        recent
-                        <span>entries.</span>
-                    </h2>
-
-                </div>
-
-
-                <div class="entry-tools">
-
-                    <input
-                        class="search"
-                        id="searchInput"
-                        type="search"
-                        placeholder="Search your journal..."
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="entries"
-                id="entriesContainer"
-            ></div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             WEEKLY REFLECTION
-        ===================================================== -->
-
-        <section class="reflection">
-
-            <div class="section-label">
-                once a week
-            </div>
-
-            <h2>
-                pause & reflect
-                <span>♡</span>
-            </h2>
-
-            <p>
-                You don't have to have everything figured out.
-                Just notice what has been happening lately.
-            </p>
-
-            <textarea
-                id="reflectionText"
-                placeholder="What felt good this week? What felt difficult? What do you want to carry into next week?"
-            ></textarea>
-
-
-            <div class="bottom-actions">
-
-                <button
-                    class="export-btn"
-                    id="exportBtn"
-                >
-                    Export journal
-                </button>
-
-                <button
-                    class="save-btn"
-                    id="saveReflection"
-                >
-                    Save reflection
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <div
-        class="toast"
-        id="toast"
-    >
-        Saved.
-    </div>
-
-
-
-    <script>
-
-        /* =========================================================
-           ZENENE JOURNAL — FUNCTIONALITY
-        ========================================================= */
-
-
-        let entries =
-            JSON.parse(
-                localStorage.getItem("zeneneJournal")
-            ) || [];
-
-
-        let editingId = null;
-
-        let selectedMood = "";
-
-
-        /* =========================================================
-           DATE
-        ========================================================= */
-
-        function formatDate(date) {
-
-            return date.toLocaleDateString(
-                "en-US",
-                {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric"
-                }
-            ).toUpperCase();
-
-        }
-
-        document.getElementById("todayDate").textContent =
-            "TODAY · " + formatDate(new Date());
-
-
-        /* =========================================================
-           TOAST
-        ========================================================= */
-
-        function showToast(message) {
-
-            const toast =
-                document.getElementById("toast");
-
-            toast.textContent = message;
-
-            toast.classList.add("show");
-
-            setTimeout(() => {
-
-                toast.classList.remove("show");
-
-            }, 2200);
-
-        }
-
-
-        /* =========================================================
-           MOOD SELECT
-        ========================================================= */
-
-        document
-            .querySelectorAll(".mood-option")
-            .forEach(button => {
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        document
-                            .querySelectorAll(".mood-option")
-                            .forEach(btn =>
-                                btn.classList.remove("selected")
-                            );
-
-                        button.classList.add("selected");
-
-                        selectedMood =
-                            button.dataset.mood;
-
-                    }
-                );
-
-            });
-
-
-        /* =========================================================
-           SAVE ENTRY
-        ========================================================= */
-
-        document
-            .getElementById("saveBtn")
-            .addEventListener(
-                "click",
-                saveEntry
-            );
-
-
-        function saveEntry() {
-
-            const text =
-                document
-                    .getElementById("journalText")
-                    .value
-                    .trim();
-
-            const tag =
-                document
-                    .getElementById("tagInput")
-                    .value
-                    .trim();
-
-
-            if (!text) {
-
-                showToast(
-                    "Write something first."
-                );
-
-                return;
-
-            }
-
-
-            if (editingId) {
-
-                const entry =
-                    entries.find(
-                        item =>
-                            item.id === editingId
-                    );
-
-                if (entry) {
-
-                    entry.text = text;
-
-                    entry.tag = tag;
-
-                    entry.mood =
-                        selectedMood ||
-                        entry.mood;
-
-                    entry.private =
-                        document
-                            .getElementById(
-                                "privateEntry"
-                            )
-                            .checked;
-
-                }
-
-                editingId = null;
-
-                document.getElementById(
-                    "saveBtn"
-                ).textContent =
-                    "Save this thought";
-
-                showToast("Entry updated.");
-
-            }
-
-            else {
-
-                entries.unshift({
-
-                    id:
-                        Date.now(),
-
-                    date:
-                        new Date().toISOString(),
-
-                    text,
-
-                    tag,
-
-                    mood:
-                        selectedMood || "♡",
-
-                    private:
-                        document
-                            .getElementById(
-                                "privateEntry"
-                            )
-                            .checked
-
-                });
-
-                showToast("Thought saved.");
-
-            }
-
-
-            localStorage.setItem(
-                "zeneneJournal",
-                JSON.stringify(entries)
-            );
-
-
-            clearEditor();
-
-            renderEntries();
-
-        }
-
-
-        /* =========================================================
-           CLEAR
-        ========================================================= */
-
-        document
-            .getElementById("clearBtn")
-            .addEventListener(
-                "click",
-                clearEditor
-            );
-
-
-        function clearEditor() {
-
-            document.getElementById(
-                "journalText"
-            ).value = "";
-
-            document.getElementById(
-                "tagInput"
-            ).value = "";
-
-            selectedMood = "";
-
-            document
-                .querySelectorAll(".mood-option")
-                .forEach(btn =>
-                    btn.classList.remove("selected")
-                );
-
-            editingId = null;
-
-            document.getElementById(
-                "saveBtn"
-            ).textContent =
-                "Save this thought";
-
-        }
-
-
-        /* =========================================================
-           RENDER ENTRIES
-        ========================================================= */
-
-        function renderEntries(
-            searchTerm = ""
-        ) {
-
-            const container =
-                document.getElementById(
-                    "entriesContainer"
-                );
-
-            container.innerHTML = "";
-
-
-            const filtered =
-                entries.filter(entry => {
-
-                    const search =
-                        searchTerm.toLowerCase();
-
-                    return (
-                        entry.text
-                            .toLowerCase()
-                            .includes(search)
-
-                        ||
-
-                        entry.tag
-                            .toLowerCase()
-                            .includes(search)
-                    );
-
-                });
-
-
-            if (!filtered.length) {
-
-                container.innerHTML = `
-
-                    <div class="empty">
-
-                        <strong>
-                            Nothing here yet.
-                        </strong>
-
-                        Your thoughts will live here
-                        once you write them down.
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
-
-
-            filtered.forEach(entry => {
-
-                const date =
-                    new Date(entry.date);
-
-
-                const article =
-                    document.createElement(
-                        "article"
-                    );
-
-                article.className = "entry";
-
-
-                article.innerHTML = `
-
                     <div class="entry-date">
-
-                        <strong>
-                            ${date.getDate()}
-                        </strong>
-
-                        ${date.toLocaleDateString(
-                            "en-US",
-                            {
-                                month: "short"
-                            }
-                        ).toUpperCase()}
-
-                        ·
-
-                        ${date.getFullYear()}
-
+                        ${entry.date}
                     </div>
 
+                </div>
+
+
+                <div>
 
                     <div class="entry-content">
-
-                        <h3>
-                            ${getTitle(entry.text)}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(entry.text)}
-                        </p>
-
-
-                        <div class="entry-tags">
-
-                            ${
-                                entry.tag
-                                ?
-                                `<span class="tag">
-                                    #${escapeHTML(entry.tag)}
-                                </span>`
-                                :
-                                ""
-                            }
-
-                            ${
-                                entry.private
-                                ?
-                                `<span class="tag">
-                                    PRIVATE
-                                </span>`
-                                :
-                                ""
-                            }
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="entry-mood">
-                        ${entry.mood}
+                        ${escapeHTML(entry.text)}
                     </div>
 
 
@@ -1985,415 +1586,58 @@
                         <button
                             onclick="editEntry(${entry.id})"
                         >
-                            Edit
+                            EDIT
                         </button>
 
                         <button
                             onclick="deleteEntry(${entry.id})"
                         >
-                            Delete
+                            DELETE
                         </button>
 
                     </div>
 
-                `;
+                </div>
 
 
-                container.appendChild(article);
+                <div class="entry-mood">
 
-            });
+                    ${entry.mood}
 
-        }
+                </div>
 
+            </article>
 
-        /* =========================================================
-           TITLE FROM FIRST WORDS
-        ========================================================= */
+        `).join("");
 
-        function getTitle(text) {
+}
 
-            const words =
-                text.trim().split(/\s+/);
 
-            if (words.length <= 6) {
 
-                return escapeHTML(text);
+/* =========================================================
+   SECURITY
+========================================================= */
 
-            }
+function escapeHTML(text) {
 
-            return (
-                escapeHTML(
-                    words
-                        .slice(0, 6)
-                        .join(" ")
-                ) + "..."
-            );
+    const div =
+        document.createElement("div");
 
-        }
+    div.textContent = text;
 
+    return div.innerHTML;
 
-        /* =========================================================
-           ESCAPE HTML
-        ========================================================= */
+}
 
-        function escapeHTML(text) {
 
-            const div =
-                document.createElement("div");
 
-            div.textContent = text;
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
 
-            return div.innerHTML;
+renderEntries();
 
-        }
-
-
-        /* =========================================================
-           EDIT
-        ========================================================= */
-
-        window.editEntry =
-            function(id) {
-
-                const entry =
-                    entries.find(
-                        item =>
-                            item.id === id
-                    );
-
-                if (!entry) return;
-
-
-                document.getElementById(
-                    "journalText"
-                ).value =
-                    entry.text;
-
-
-                document.getElementById(
-                    "tagInput"
-                ).value =
-                    entry.tag;
-
-
-                selectedMood =
-                    entry.mood;
-
-
-                document.getElementById(
-                    "privateEntry"
-                ).checked =
-                    entry.private;
-
-
-                document
-                    .querySelectorAll(".mood-option")
-                    .forEach(button => {
-
-                        button.classList.toggle(
-                            "selected",
-                            button.dataset.mood ===
-                            entry.mood
-                        );
-
-                    });
-
-
-                editingId = id;
-
-
-                document.getElementById(
-                    "saveBtn"
-                ).textContent =
-                    "Update this thought";
-
-
-                window.scrollTo({
-
-                    top:
-                        document
-                            .querySelector(
-                                ".journal-card"
-                            )
-                            .offsetTop - 100,
-
-                    behavior: "smooth"
-
-                });
-
-            };
-
-
-        /* =========================================================
-           DELETE
-        ========================================================= */
-
-        window.deleteEntry =
-            function(id) {
-
-                entries =
-                    entries.filter(
-                        entry =>
-                            entry.id !== id
-                    );
-
-
-                localStorage.setItem(
-                    "zeneneJournal",
-                    JSON.stringify(entries)
-                );
-
-
-                renderEntries();
-
-                showToast(
-                    "Entry removed."
-                );
-
-            };
-
-
-        /* =========================================================
-           SEARCH
-        ========================================================= */
-
-        document
-            .getElementById("searchInput")
-            .addEventListener(
-                "input",
-                event => {
-
-                    renderEntries(
-                        event.target.value
-                    );
-
-                }
-            );
-
-
-        /* =========================================================
-           PROMPTS
-        ========================================================= */
-
-        const prompts = [
-
-            "What is something you've been carrying that you haven't given yourself time to think about?",
-
-            "What made you feel most like yourself today?",
-
-            "What is something you wish someone understood about you?",
-
-            "What has been taking up more space in your mind than you'd like?",
-
-            "What is one small thing that made today a little softer?",
-
-            "If you could give yourself one piece of advice right now, what would it be?",
-
-            "What are you looking forward to, even if it's something small?",
-
-            "What do you need more of lately?",
-
-            "What is something you handled better than you thought you would?"
-
-        ];
-
-
-        document
-            .getElementById("newPrompt")
-            .addEventListener(
-                "click",
-                () => {
-
-                    const current =
-                        document
-                            .getElementById(
-                                "promptText"
-                            )
-                            .textContent;
-
-
-                    let next;
-
-                    do {
-
-                        next =
-                            prompts[
-                                Math.floor(
-                                    Math.random() *
-                                    prompts.length
-                                )
-                            ];
-
-                    } while (
-                        next === current
-                    );
-
-
-                    document
-                        .getElementById(
-                            "promptText"
-                        )
-                        .textContent =
-                            next;
-
-                }
-            );
-
-
-        /* =========================================================
-           REFLECTION
-        ========================================================= */
-
-        const savedReflection =
-            localStorage.getItem(
-                "zeneneReflection"
-            );
-
-
-        if (savedReflection) {
-
-            document.getElementById(
-                "reflectionText"
-            ).value =
-                savedReflection;
-
-        }
-
-
-        document
-            .getElementById("saveReflection")
-            .addEventListener(
-                "click",
-                () => {
-
-                    const value =
-                        document
-                            .getElementById(
-                                "reflectionText"
-                            )
-                            .value;
-
-
-                    localStorage.setItem(
-                        "zeneneReflection",
-                        value
-                    );
-
-
-                    showToast(
-                        "Reflection saved."
-                    );
-
-                }
-            );
-
-
-        /* =========================================================
-           EXPORT
-        ========================================================= */
-
-        document
-            .getElementById("exportBtn")
-            .addEventListener(
-                "click",
-                () => {
-
-                    if (!entries.length) {
-
-                        showToast(
-                            "There is nothing to export yet."
-                        );
-
-                        return;
-
-                    }
-
-
-                    let content =
-                        "ZENENE — MY JOURNAL\n\n";
-
-
-                    entries
-                        .slice()
-                        .reverse()
-                        .forEach(entry => {
-
-                            const date =
-                                new Date(
-                                    entry.date
-                                );
-
-
-                            content +=
-                                `${formatDate(date)}\n`;
-
-                            content +=
-                                `Mood: ${entry.mood}\n`;
-
-                            content +=
-                                entry.tag
-                                ? `Tag: #${entry.tag}\n`
-                                : "";
-
-                            content +=
-                                "\n" +
-                                entry.text +
-                                "\n\n";
-
-                            content +=
-                                "-------------------------\n\n";
-
-                        });
-
-
-                    const blob =
-                        new Blob(
-                            [content],
-                            {
-                                type:
-                                    "text/plain"
-                            }
-                        );
-
-
-                    const url =
-                        URL.createObjectURL(
-                            blob
-                        );
-
-
-                    const link =
-                        document.createElement(
-                            "a"
-                        );
-
-                    link.href = url;
-
-                    link.download =
-                        "zenene-journal.txt";
-
-                    link.click();
-
-
-                    URL.revokeObjectURL(url);
-
-
-                    showToast(
-                        "Journal exported."
-                    );
-
-                }
-            );
-
-
-        /* =========================================================
-           INITIAL RENDER
-        ========================================================= */
-
-        renderEntries();
-
-    </script>
+</script>
 
 </body>
-
 </html>

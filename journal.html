@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IM+Fell+DW+Pica:ital@0;1&family=Special+Elite&display=swap"
     rel="stylesheet"
 >
 
@@ -27,9 +28,12 @@
     --paper: #f7f1e7;
     --paper-light: #fbf8f2;
 
+    --blue: #dcecf2;
+    --blue-light: #e8f3f6;
+    --blue-grid: rgba(91, 127, 140, 0.075);
+
     --ink: #2F2B27;
     --muted: #75685e;
-
     --line: #ddd3c7;
 
     --pink: #B97880;
@@ -43,12 +47,15 @@
 
     --serif: "Cormorant Garamond", Georgia, serif;
     --typewriter: "Special Elite", "Courier New", monospace;
+    --script: "IM Fell DW Pica", Georgia, serif;
 
-    /* kept for the existing journal styling */
     --mono: "Special Elite", "Courier New", monospace;
-    --script: "Dancing Script", cursive;
 }
 
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 * {
     margin: 0;
@@ -56,15 +63,22 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
 
-
 body {
 
-    background: var(--paper);
+    background-color: var(--blue);
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(80, 110, 120, 0.11) 1px,
+            transparent 1.2px
+        );
+
+    background-size: 18px 18px;
 
     color: var(--ink);
 
@@ -96,12 +110,12 @@ body::before {
 
     background-size: 5px 5px;
 
-    opacity: 0.16;
+    opacity: 0.10;
 }
 
 
 /* =========================================================
-   NAVIGATION — EXACT SAME AS MOOD.HTML
+   NAVIGATION
    ========================================================= */
 
 .top-nav {
@@ -120,13 +134,12 @@ body::before {
 
     padding: 20px 34px;
 
-    background: rgba(247,241,231,.78);
+    background: rgba(247,241,231,.92);
 
     backdrop-filter: blur(18px);
 
     border-bottom: 1px solid rgba(98,79,67,.08);
 }
-
 
 .nav-wordmark {
 
@@ -139,7 +152,6 @@ body::before {
     text-transform: uppercase;
 }
 
-
 .nav-links {
 
     display: flex;
@@ -148,7 +160,6 @@ body::before {
 
     align-items: center;
 }
-
 
 .nav-links a {
 
@@ -167,12 +178,10 @@ body::before {
     transition: .3s ease;
 }
 
-
 .nav-links a:hover {
 
     color: var(--rose-deep);
 }
-
 
 .nav-links .active {
 
@@ -181,7 +190,6 @@ body::before {
     position: relative;
 }
 
-
 .nav-links .active::after {
 
     content: "";
@@ -189,6 +197,7 @@ body::before {
     position: absolute;
 
     left: 0;
+
     right: 0;
 
     bottom: -7px;
@@ -218,12 +227,10 @@ body::before {
     position: relative;
 }
 
-
 .hero-left {
 
     animation: fadeUp 0.9s ease both;
 }
-
 
 .eyebrow {
 
@@ -235,7 +242,6 @@ body::before {
 
     margin-bottom: 78px;
 }
-
 
 .hero-title {
 
@@ -249,7 +255,6 @@ body::before {
 
     letter-spacing: -5px;
 }
-
 
 .hero-title span {
 
@@ -268,7 +273,6 @@ body::before {
     letter-spacing: -2px;
 }
 
-
 .hero-right {
 
     max-width: 500px;
@@ -278,7 +282,6 @@ body::before {
     animation: fadeUp 1s 0.15s ease both;
 }
 
-
 .hero-description {
 
     font-size: 27px;
@@ -287,7 +290,6 @@ body::before {
 
     color: #655950;
 }
-
 
 .hero-description em {
 
@@ -300,7 +302,7 @@ body::before {
 
 
 /* =========================================================
-   MAIN JOURNAL AREA
+   MAIN JOURNAL
    ========================================================= */
 
 .journal-wrapper {
@@ -332,9 +334,6 @@ body::before {
 
     animation: fadeUp 0.9s 0.2s ease both;
 }
-
-
-/* little tape */
 
 .write-card::before {
 
@@ -371,7 +370,6 @@ body::before {
     margin-bottom: 28px;
 }
 
-
 .section-label {
 
     font-family: var(--typewriter);
@@ -380,7 +378,6 @@ body::before {
 
     letter-spacing: 2px;
 }
-
 
 .date {
 
@@ -412,23 +409,24 @@ body::before {
         repeating-linear-gradient(
             to bottom,
             transparent 0,
-            transparent 34px,
-            rgba(120, 105, 94, 0.10) 35px
+            transparent 30px,
+            rgba(120, 105, 94, 0.10) 31px
         );
 
     font-family: var(--serif);
 
-    font-size: 23px;
+    /* smaller and better aligned with the writing lines */
 
-    line-height: 35px;
+    font-size: 18px;
+
+    line-height: 31px;
 
     color: var(--ink);
 
-    padding: 8px 3px;
+    padding: 5px 3px;
 
     transition: background 0.3s ease;
 }
-
 
 #journalText::placeholder {
 
@@ -439,7 +437,7 @@ body::before {
 
 
 /* =========================================================
-   TOOLBAR
+   WRITE BOTTOM
    ========================================================= */
 
 .write-bottom {
@@ -457,7 +455,6 @@ body::before {
     padding-top: 24px;
 }
 
-
 .small-note {
 
     font-family: var(--typewriter);
@@ -469,7 +466,7 @@ body::before {
 
 
 /* =========================================================
-   BUTTONS
+   BUTTON
    ========================================================= */
 
 .primary-btn {
@@ -495,7 +492,6 @@ body::before {
         background 0.25s ease;
 }
 
-
 .primary-btn:hover {
 
     background: var(--pink);
@@ -513,7 +509,6 @@ body::before {
     margin-top: 80px;
 }
 
-
 .section-heading {
 
     display: flex;
@@ -525,7 +520,6 @@ body::before {
     margin-bottom: 30px;
 }
 
-
 .section-heading h2 {
 
     font-family: var(--serif);
@@ -534,7 +528,6 @@ body::before {
 
     font-weight: 500;
 }
-
 
 .section-heading span {
 
@@ -559,7 +552,6 @@ body::before {
     gap: 12px;
 }
 
-
 .mood-option {
 
     border: 1px solid transparent;
@@ -576,12 +568,10 @@ body::before {
         border 0.25s ease;
 }
 
-
 .mood-option:hover {
 
     transform: translateY(-6px);
 }
-
 
 .mood-option.selected {
 
@@ -592,7 +582,7 @@ body::before {
 
 
 /* =========================================================
-   CUSTOM PASTEL FACES
+   ACTUAL MOOD IMAGE ASSETS
    ========================================================= */
 
 .face {
@@ -605,232 +595,23 @@ body::before {
 
     margin: 0 auto 10px;
 
-    border-radius: 50%;
+    display: block;
 
-    position: relative;
+    object-fit: contain;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    box-shadow:
-        inset 0 0 12px rgba(255,255,255,0.35);
-
-    transition: transform 0.25s ease;
+    transition:
+        transform 0.25s ease;
 }
-
 
 .mood-option:hover .face {
 
-    transform: scale(1.05);
+    transform: scale(1.06) rotate(-2deg);
 }
 
 
-/* eyes */
-
-.eye {
-
-    width: 8px;
-
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #666b6c;
-
-    position: absolute;
-
-    top: 28px;
-}
-
-
-.eye.left {
-    left: 22px;
-}
-
-
-.eye.right {
-    right: 22px;
-}
-
-
-/* mouth */
-
-.mouth {
-
-    position: absolute;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    top: 43px;
-
-    width: 27px;
-
-    height: 14px;
-
-    border-bottom: 4px solid #666b6c;
-
-    border-radius: 0 0 30px 30px;
-}
-
-
-/* moods */
-
-.face-angry {
-    background: #e7aaa0;
-}
-
-
-.face-angry .eye.left {
-    transform: rotate(20deg);
-}
-
-
-.face-angry .eye.right {
-    transform: rotate(-20deg);
-}
-
-
-.face-angry .mouth {
-
-    top: 48px;
-
-    border-bottom: none;
-
-    border-top: 4px solid #666b6c;
-
-    border-radius: 30px 30px 0 0;
-}
-
-
-.face-happy {
-    background: #f5c982;
-}
-
-
-.face-veryhappy {
-    background: #f1e38e;
-}
-
-
-.face-veryhappy .mouth {
-    height: 17px;
-}
-
-
-.face-love {
-    background: #e9b6bc;
-}
-
-
-.face-love .eye {
-
-    width: 10px;
-
-    height: 10px;
-
-    transform: rotate(45deg);
-
-    border-radius: 2px;
-}
-
-
-.face-neutral {
-    background: #e9ddc7;
-}
-
-
-.face-neutral .mouth {
-
-    border-bottom: none;
-
-    border-top: 4px solid #666b6c;
-
-    border-radius: 0;
-
-    height: 0;
-}
-
-
-.face-excited {
-    background: #d8e68e;
-}
-
-
-.face-excited .eye.left {
-    transform: rotate(45deg);
-}
-
-
-.face-excited .eye.right {
-    transform: rotate(-45deg);
-}
-
-
-.face-sad {
-    background: #d6cbe3;
-}
-
-
-.face-sad .mouth {
-
-    border-bottom: none;
-
-    border-top: 4px solid #666b6c;
-
-    border-radius: 30px 30px 0 0;
-}
-
-
-.face-cry {
-    background: #b9cee4;
-}
-
-
-.face-cry::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 7px;
-
-    height: 11px;
-
-    border-radius: 50%;
-
-    background: #7894ad;
-
-    top: 39px;
-
-    left: 19px;
-
-    transform: rotate(20deg);
-}
-
-
-.face-surprise {
-    background: #bddcae;
-}
-
-
-.face-surprise .mouth {
-
-    width: 17px;
-
-    height: 23px;
-
-    border: 4px solid #666b6c;
-
-    border-radius: 50%;
-
-    top: 42px;
-}
-
+/* =========================================================
+   MOOD NAME
+   ========================================================= */
 
 .mood-name {
 
@@ -849,30 +630,26 @@ body::before {
 
 
 /* =========================================================
-   ENTRIES
+   CALENDAR SECTION
    ========================================================= */
 
-.entries-section {
+.calendar-section {
 
-    margin-top: 95px;
+    margin-top: 105px;
 }
 
-
-.entries-heading {
+.calendar-heading {
 
     display: flex;
 
     justify-content: space-between;
 
-    align-items: baseline;
+    align-items: flex-end;
 
-    border-bottom: 1px solid var(--line);
-
-    padding-bottom: 15px;
+    margin-bottom: 30px;
 }
 
-
-.entries-heading h2 {
+.calendar-heading h2 {
 
     font-family: var(--serif);
 
@@ -881,112 +658,643 @@ body::before {
     font-weight: 500;
 }
 
+.calendar-heading span {
 
-.search-box {
+    font-family: var(--script);
 
-    background: transparent;
+    color: var(--pink);
 
-    border: none;
-
-    border-bottom: 1px solid #b9aea4;
-
-    padding: 8px 4px;
-
-    width: 190px;
-
-    outline: none;
-
-    font-family: var(--typewriter);
-
-    font-size: 10px;
+    font-size: 20px;
 }
 
 
-.search-box::placeholder {
-    color: #9b8d82;
+/* =========================================================
+   CALENDAR PAPER
+   ========================================================= */
+
+.calendar-card {
+
+    background: var(--paper-light);
+
+    border: 1px solid #e3d9cd;
+
+    padding: 35px;
+
+    position: relative;
+
+    box-shadow:
+        0 25px 60px rgba(76, 58, 43, 0.07);
+}
+
+.calendar-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 75px;
+
+    height: 22px;
+
+    top: -10px;
+
+    left: 75px;
+
+    background: rgba(210, 153, 158, 0.28);
+
+    transform: rotate(-3deg);
 }
 
 
-/* entry */
+/* =========================================================
+   CALENDAR TOP
+   ========================================================= */
 
-.entry {
+.calendar-top {
 
-    padding: 35px 5px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-bottom: 25px;
 
     border-bottom: 1px solid var(--line);
 
-    display: grid;
-
-    grid-template-columns: 160px 1fr 110px;
-
-    gap: 30px;
-
-    animation: fadeUp 0.5s ease both;
+    margin-bottom: 20px;
 }
 
-
-.entry-date {
-
-    font-family: var(--typewriter);
-
-    font-size: 10px;
-
-    letter-spacing: 1px;
-
-    color: var(--muted);
-}
-
-
-.entry-content {
+.calendar-month {
 
     font-family: var(--serif);
 
-    font-size: 20px;
+    font-size: 36px;
 
-    line-height: 1.55;
+    font-weight: 500;
+}
 
-    white-space: pre-wrap;
+.calendar-nav {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.calendar-nav button {
+
+    width: 38px;
+
+    height: 38px;
+
+    border: 1px solid var(--line);
+
+    background: transparent;
+
+    color: var(--brown);
+
+    font-family: var(--typewriter);
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.calendar-nav button:hover {
+
+    background: var(--brown-dark);
+
+    color: white;
 }
 
 
-.entry-mood {
+/* =========================================================
+   WEEKDAYS
+   ========================================================= */
 
-    text-align: right;
+.calendar-weekdays {
+
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    margin-bottom: 8px;
+}
+
+.calendar-weekday {
+
+    text-align: center;
 
     font-family: var(--typewriter);
 
     font-size: 9px;
 
+    letter-spacing: 1px;
+
+    color: var(--muted);
+
+    padding: 8px 0;
+}
+
+
+/* =========================================================
+   CALENDAR GRID
+   ========================================================= */
+
+.calendar-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 8px;
+}
+
+.calendar-day {
+
+    min-height: 105px;
+
+    background: rgba(255,255,255,0.42);
+
+    border: 1px solid rgba(221,211,199,0.75);
+
+    padding: 10px;
+
+    position: relative;
+
+    cursor: default;
+
+    transition:
+        background .25s ease,
+        transform .25s ease,
+        border .25s ease;
+}
+
+.calendar-day:hover {
+
+    background: rgba(255,255,255,0.75);
+
+    border-color: #d5c5b8;
+}
+
+.calendar-day.other-month {
+
+    opacity: .35;
+}
+
+.calendar-number {
+
+    font-family: var(--typewriter);
+
+    font-size: 10px;
+
+    color: var(--muted);
+
+    display: block;
+
+    margin-bottom: 9px;
+}
+
+.calendar-day.today {
+
+    border-color: var(--pink);
+}
+
+.calendar-day.today .calendar-number {
+
     color: var(--pink);
 }
 
 
-.entry-actions {
+/* =========================================================
+   JOURNAL ENTRY TAB INSIDE CALENDAR
+   ========================================================= */
 
-    margin-top: 10px;
+.calendar-entry {
+
+    width: 100%;
+
+    border: none;
+
+    background: var(--pink-soft);
+
+    padding: 6px 7px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    font-family: var(--typewriter);
+
+    font-size: 7px;
+
+    letter-spacing: .4px;
+
+    color: var(--brown-dark);
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+    position: relative;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.calendar-entry::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 4px;
+
+    background: var(--pink);
+}
+
+.calendar-entry:hover {
+
+    transform: translateX(2px);
+
+    background: #ead3d1;
+}
+
+.calendar-entry + .calendar-entry {
+
+    margin-top: 5px;
 }
 
 
-.entry-actions button {
+/* =========================================================
+   ENTRY MODAL
+   ========================================================= */
+
+.entry-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    background: rgba(49, 57, 59, 0.32);
+
+    backdrop-filter: blur(8px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+}
+
+.entry-modal.open {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.entry-modal-paper {
+
+    width: min(650px, 92vw);
+
+    max-height: 82vh;
+
+    overflow-y: auto;
+
+    background: var(--paper-light);
+
+    border: 1px solid #ded3c7;
+
+    box-shadow:
+        0 30px 80px rgba(45, 38, 32, .20);
+
+    padding: 42px 45px;
+
+    position: relative;
+
+    transform: translateY(35px) rotate(-1deg) scale(.96);
+
+    transition:
+        transform .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.entry-modal.open .entry-modal-paper {
+
+    transform: translateY(0) rotate(-1deg) scale(1);
+}
+
+.entry-modal-paper::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -11px;
+
+    right: 80px;
+
+    width: 95px;
+
+    height: 23px;
+
+    background: rgba(210, 153, 158, .3);
+
+    transform: rotate(3deg);
+}
+
+.modal-close {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 20px;
 
     border: none;
 
     background: none;
 
+    color: var(--muted);
+
+    font-family: var(--typewriter);
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.modal-close:hover {
+
+    color: var(--pink);
+}
+
+.modal-date {
+
+    font-family: var(--typewriter);
+
+    font-size: 10px;
+
+    color: var(--muted);
+
+    letter-spacing: 1px;
+
+    margin-bottom: 20px;
+}
+
+.modal-mood {
+
+    display: inline-block;
+
+    font-family: var(--typewriter);
+
+    font-size: 8px;
+
+    color: var(--pink);
+
+    border: 1px solid var(--pink-soft);
+
+    padding: 6px 9px;
+
+    margin-bottom: 25px;
+}
+
+.modal-content {
+
+    font-family: var(--serif);
+
+    font-size: 22px;
+
+    line-height: 1.65;
+
+    white-space: pre-wrap;
+
+    color: var(--ink);
+}
+
+.modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    border-top: 1px solid var(--line);
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+}
+
+.modal-actions button {
+
+    border: none;
+
+    background: transparent;
+
     font-family: var(--typewriter);
 
     font-size: 9px;
 
-    color: #8d8076;
+    letter-spacing: .8px;
+
+    color: var(--muted);
 
     cursor: pointer;
 
-    margin-left: 12px;
+    padding: 8px 4px;
+}
+
+.modal-actions button:hover {
+
+    color: var(--pink);
+}
+
+.modal-actions .delete-btn:hover {
+
+    color: #9d5757;
 }
 
 
-.entry-actions button:hover {
-    color: var(--pink);
+/* =========================================================
+   EDIT MODE
+   ========================================================= */
+
+.edit-area {
+
+    width: 100%;
+
+    min-height: 220px;
+
+    border: 1px solid var(--line);
+
+    outline: none;
+
+    resize: vertical;
+
+    padding: 15px;
+
+    background: #fffdf8;
+
+    font-family: var(--serif);
+
+    font-size: 20px;
+
+    line-height: 1.6;
+
+    color: var(--ink);
+}
+
+.edit-buttons {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 15px;
+
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   DELETE CONFIRMATION
+   ========================================================= */
+
+.confirm-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    background: rgba(45, 38, 32, .25);
+
+    backdrop-filter: blur(5px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .25s ease;
+}
+
+.confirm-overlay.open {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.confirm-box {
+
+    background: var(--paper-light);
+
+    border: 1px solid #ded3c7;
+
+    padding: 35px;
+
+    width: min(390px, 90vw);
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 60px rgba(50,40,30,.18);
+
+    transform: scale(.94);
+
+    transition: .3s ease;
+}
+
+.confirm-overlay.open .confirm-box {
+
+    transform: scale(1);
+}
+
+.confirm-box h3 {
+
+    font-family: var(--serif);
+
+    font-size: 28px;
+
+    font-weight: 500;
+
+    margin-bottom: 10px;
+}
+
+.confirm-box p {
+
+    font-family: var(--typewriter);
+
+    font-size: 9px;
+
+    color: var(--muted);
+
+    margin-bottom: 25px;
+}
+
+.confirm-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+}
+
+.confirm-buttons button {
+
+    border: 1px solid var(--line);
+
+    background: transparent;
+
+    padding: 11px 20px;
+
+    font-family: var(--typewriter);
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+.confirm-buttons .confirm-delete {
+
+    background: var(--brown-dark);
+
+    color: white;
+
+    border-color: var(--brown-dark);
 }
 
 
@@ -994,31 +1302,15 @@ body::before {
    EMPTY STATE
    ========================================================= */
 
-.empty-state {
+.empty-calendar {
+
+    grid-column: 1 / -1;
 
     text-align: center;
 
-    padding: 65px 20px;
+    padding: 60px 20px;
 
     color: var(--muted);
-}
-
-
-.empty-state .script {
-
-    display: block;
-
-    font-family: var(--script);
-
-    color: var(--pink);
-
-    font-size: 24px;
-
-    margin-bottom: 8px;
-}
-
-
-.empty-state p {
 
     font-family: var(--serif);
 
@@ -1042,7 +1334,6 @@ body::before {
 
     justify-content: space-between;
 }
-
 
 .journal-footer span {
 
@@ -1089,12 +1380,10 @@ body::before {
         padding: 20px 25px;
     }
 
-
     .nav-links {
 
         gap: 17px;
     }
-
 
     .hero {
 
@@ -1105,30 +1394,19 @@ body::before {
         padding: 70px 8%;
     }
 
-
     .hero-right {
 
         padding-left: 0;
     }
-
 
     .mood-grid {
 
         grid-template-columns: repeat(5, 1fr);
     }
 
+    .calendar-day {
 
-    .entry {
-
-        grid-template-columns: 1fr;
-
-        gap: 12px;
-    }
-
-
-    .entry-mood {
-
-        text-align: left;
+        min-height: 90px;
     }
 }
 
@@ -1146,7 +1424,6 @@ body::before {
         align-items: flex-start;
     }
 
-
     .nav-links {
 
         gap: 12px;
@@ -1156,18 +1433,15 @@ body::before {
         justify-content: flex-end;
     }
 
-
     .nav-links a {
 
         font-size: .52rem;
     }
 
-
     .nav-links .active::after {
 
         bottom: -5px;
     }
-
 
     .nav-wordmark {
 
@@ -1176,7 +1450,6 @@ body::before {
         letter-spacing: .12em;
     }
 
-
     .hero {
 
         padding: 65px 7% 50px;
@@ -1184,18 +1457,15 @@ body::before {
         min-height: 400px;
     }
 
-
     .eyebrow {
 
         margin-bottom: 50px;
     }
 
-
     .hero-title {
 
         font-size: 75px;
     }
-
 
     .hero-title span {
 
@@ -1206,24 +1476,20 @@ body::before {
         margin-top: 20px;
     }
 
-
     .hero-description {
 
         font-size: 22px;
     }
-
 
     .journal-wrapper {
 
         width: 90%;
     }
 
-
     .write-card {
 
         padding: 30px 25px;
     }
-
 
     .write-bottom {
 
@@ -1234,14 +1500,12 @@ body::before {
         align-items: flex-start;
     }
 
-
     .mood-grid {
 
         grid-template-columns: repeat(3, 1fr);
 
         gap: 5px;
     }
-
 
     .face {
 
@@ -1250,9 +1514,7 @@ body::before {
         height: 65px;
     }
 
-
-    .section-heading,
-    .entries-heading {
+    .section-heading {
 
         flex-direction: column;
 
@@ -1261,14 +1523,104 @@ body::before {
         align-items: flex-start;
     }
 
+    /* Mobile calendar */
 
-    .search-box {
+    .calendar-card {
 
-        width: 100%;
+        padding: 20px 12px;
+    }
+
+    .calendar-heading {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+    .calendar-heading h2 {
+
+        font-size: 36px;
+    }
+
+    .calendar-top {
+
+        padding-bottom: 18px;
+    }
+
+    .calendar-month {
+
+        font-size: 28px;
+    }
+
+    .calendar-grid {
+
+        gap: 4px;
+    }
+
+    .calendar-day {
+
+        min-height: 72px;
+
+        padding: 6px;
+    }
+
+    .calendar-number {
+
+        font-size: 8px;
+
+        margin-bottom: 5px;
+    }
+
+    .calendar-entry {
+
+        padding: 5px 4px;
+
+        font-size: 6px;
+    }
+
+    .calendar-weekday {
+
+        font-size: 7px;
+    }
+
+    /* Mobile modal */
+
+    .entry-modal {
+
+        padding: 18px;
+    }
+
+    .entry-modal-paper {
+
+        padding: 35px 25px;
+
+        max-height: 88vh;
+    }
+
+    .modal-content {
+
+        font-size: 19px;
+
+        line-height: 1.6;
+    }
+
+    .modal-actions {
+
+        justify-content: space-between;
+    }
+
+    .journal-footer {
+
+        flex-direction: column;
+
+        gap: 10px;
     }
 }
 
 </style>
+
 </head>
 
 
@@ -1276,7 +1628,7 @@ body::before {
 
 
 <!-- =====================================================
-     NAVIGATION — EXACT MOOD.HTML HEADER
+     NAVIGATION
 ===================================================== -->
 
 <nav class="top-nav">
@@ -1287,19 +1639,19 @@ body::before {
 
     <div class="nav-links">
 
-  <a href="index.html">home</a>
+        <a href="index.html">home</a>
 
-  <a href="journal.html" class="active">journal</a>
+        <a href="journal.html" class="active">journal</a>
 
-  <a href="mood.html">mood</a>
+        <a href="mood.html">mood</a>
 
-  <a href="explore.html">explore</a>
+        <a href="explore.html">explore</a>
 
-  <a href="vera.html">vera</a>
+        <a href="vera.html">vera</a>
 
-  <a href="calm.html">calm</a>
+        <a href="calm.html">calm</a>
 
-</div>
+    </div>
 
 </nav>
 
@@ -1347,337 +1699,410 @@ body::before {
 <main class="journal-wrapper">
 
 
-    <!-- WRITE -->
+<!-- WRITE -->
 
-    <section class="write-card">
+<section class="write-card">
 
-        <div class="write-top">
+    <div class="write-top">
 
-            <span class="section-label">
-                TODAY'S ENTRY
+        <span class="section-label">
+            TODAY'S ENTRY
+        </span>
+
+        <span class="date" id="todayDate"></span>
+
+    </div>
+
+
+    <textarea
+        id="journalText"
+        placeholder="Write whatever is on your mind..."
+    ></textarea>
+
+
+    <div class="write-bottom">
+
+        <span class="small-note">
+            Nothing has to sound perfect here.
+        </span>
+
+        <button
+            class="primary-btn"
+            onclick="saveEntry()"
+        >
+            SAVE ENTRY
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MOOD
+===================================================== -->
+
+<section class="mood-section">
+
+    <div class="section-heading">
+
+        <h2>
+            How are you feeling?
+        </h2>
+
+        <span>
+            before you write...
+        </span>
+
+    </div>
+
+
+    <div class="mood-grid">
+
+
+        <button class="mood-option" data-mood="Angry">
+
+            <img
+                class="face"
+                src="assets/moods/angry.png"
+                alt="Angry"
+            >
+
+            <span class="mood-name">
+                ANGRY
             </span>
 
-            <span class="date" id="todayDate"></span>
-
-        </div>
+        </button>
 
 
-        <textarea
-            id="journalText"
-            placeholder="Write whatever is on your mind..."
-        ></textarea>
+        <button class="mood-option" data-mood="Happy">
 
+            <img
+                class="face"
+                src="assets/moods/happy.png"
+                alt="Happy"
+            >
 
-        <div class="write-bottom">
-
-            <span class="small-note">
-                Nothing has to sound perfect here.
+            <span class="mood-name">
+                HAPPY
             </span>
 
-            <button
-                class="primary-btn"
-                onclick="saveEntry()"
+        </button>
+
+
+        <button class="mood-option" data-mood="Very Happy">
+
+            <img
+                class="face"
+                src="assets/moods/joyful.png"
+                alt="Joyful"
             >
-                SAVE ENTRY
-            </button>
 
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         MOOD
-    ================================================== -->
-
-    <section class="mood-section">
-
-        <div class="section-heading">
-
-            <h2>
-                How are you feeling?
-            </h2>
-
-            <span>
-                before you write...
+            <span class="mood-name">
+                JOYFUL
             </span>
 
-        </div>
+        </button>
 
 
-        <div class="mood-grid">
+        <button class="mood-option" data-mood="Loved">
 
-
-            <button
-                class="mood-option"
-                data-mood="Angry"
+            <img
+                class="face"
+                src="assets/moods/loved.png"
+                alt="Loved"
             >
 
-                <div class="face face-angry">
+            <span class="mood-name">
+                LOVED
+            </span>
 
-                    <span class="eye left"></span>
-
-                    <span class="eye right"></span>
-
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    ANGRY
-                </span>
-
-            </button>
+        </button>
 
 
-            <button
-                class="mood-option"
-                data-mood="Happy"
+        <button class="mood-option" data-mood="Okay">
+
+            <img
+                class="face"
+                src="assets/moods/okay.png"
+                alt="Okay"
             >
 
-                <div class="face face-happy">
+            <span class="mood-name">
+                OKAY
+            </span>
 
-                    <span class="eye left"></span>
-
-                    <span class="eye right"></span>
-
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    HAPPY
-                </span>
-
-            </button>
+        </button>
 
 
-            <button
-                class="mood-option"
-                data-mood="Very Happy"
+        <button class="mood-option" data-mood="Excited">
+
+            <img
+                class="face"
+                src="assets/moods/excited.png"
+                alt="Excited"
             >
 
-                <div class="face face-veryhappy">
+            <span class="mood-name">
+                EXCITED
+            </span>
 
-                    <span class="eye left"></span>
-
-                    <span class="eye right"></span>
-
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    JOYFUL
-                </span>
-
-            </button>
+        </button>
 
 
-            <button
-                class="mood-option"
-                data-mood="Loved"
+        <button class="mood-option" data-mood="Sad">
+
+            <img
+                class="face"
+                src="assets/moods/sad.png"
+                alt="Sad"
             >
 
-                <div class="face face-love">
+            <span class="mood-name">
+                SAD
+            </span>
 
-                    <span class="eye left"></span>
-
-                    <span class="eye right"></span>
-
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    LOVED
-                </span>
-
-            </button>
+        </button>
 
 
-            <button
-                class="mood-option"
-                data-mood="Okay"
+        <button class="mood-option" data-mood="Crying">
+
+            <img
+                class="face"
+                src="assets/moods/upset.png"
+                alt="Upset"
             >
 
-                <div class="face face-neutral">
+            <span class="mood-name">
+                UPSET
+            </span>
 
-                    <span class="eye left"></span>
-
-                    <span class="eye right"></span>
-
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    OKAY
-                </span>
-
-            </button>
+        </button>
 
 
-            <button
-                class="mood-option"
-                data-mood="Excited"
+        <button class="mood-option" data-mood="Surprised">
+
+            <img
+                class="face"
+                src="assets/moods/surprised.png"
+                alt="Surprised"
             >
 
-                <div class="face face-excited">
+            <span class="mood-name">
+                SURPRISED
+            </span>
 
-                    <span class="eye left"></span>
-
-                    <span class="eye right"></span>
-
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    EXCITED
-                </span>
-
-            </button>
+        </button>
 
 
-            <button
-                class="mood-option"
-                data-mood="Sad"
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CALENDAR
+===================================================== -->
+
+<section class="calendar-section">
+
+    <div class="calendar-heading">
+
+        <h2>
+            Your journal
+        </h2>
+
+        <span>
+            little pieces of your days...
+        </span>
+
+    </div>
+
+
+    <div class="calendar-card">
+
+        <div class="calendar-top">
+
+            <div
+                class="calendar-month"
+                id="calendarMonth"
             >
+            </div>
 
-                <div class="face face-sad">
+            <div class="calendar-nav">
 
-                    <span class="eye left"></span>
+                <button onclick="changeMonth(-1)">
+                    ←
+                </button>
 
-                    <span class="eye right"></span>
+                <button onclick="goToToday()">
+                    TODAY
+                </button>
 
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    SAD
-                </span>
-
-            </button>
-
-
-            <button
-                class="mood-option"
-                data-mood="Crying"
-            >
-
-                <div class="face face-cry">
-
-                    <span class="eye left"></span>
-
-                    <span class="eye right"></span>
-
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    UPSET
-                </span>
-
-            </button>
-
-
-            <button
-                class="mood-option"
-                data-mood="Surprised"
-            >
-
-                <div class="face face-surprise">
-
-                    <span class="eye left"></span>
-
-                    <span class="eye right"></span>
-
-                    <span class="mouth"></span>
-
-                </div>
-
-                <span class="mood-name">
-                    SURPRISED
-                </span>
-
-            </button>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         PREVIOUS ENTRIES
-    ================================================== -->
-
-    <section class="entries-section">
-
-        <div class="entries-heading">
-
-            <h2>
-                Your entries
-            </h2>
-
-            <input
-                class="search-box"
-                id="searchInput"
-                type="text"
-                placeholder="SEARCH YOUR JOURNAL..."
-                oninput="renderEntries()"
-            >
-
-        </div>
-
-
-        <div id="entriesContainer">
-
-            <div class="empty-state">
-
-                <span class="script">
-                    a blank page is a beginning.
-                </span>
-
-                <p>
-                    Your journal entries will appear here.
-                </p>
+                <button onclick="changeMonth(1)">
+                    →
+                </button>
 
             </div>
 
         </div>
 
-    </section>
+
+        <div class="calendar-weekdays">
+
+            <div class="calendar-weekday">SUN</div>
+            <div class="calendar-weekday">MON</div>
+            <div class="calendar-weekday">TUE</div>
+            <div class="calendar-weekday">WED</div>
+            <div class="calendar-weekday">THU</div>
+            <div class="calendar-weekday">FRI</div>
+            <div class="calendar-weekday">SAT</div>
+
+        </div>
 
 
-    <!-- =================================================
-         FOOTER
-    ================================================== -->
+        <div
+            class="calendar-grid"
+            id="calendarGrid"
+        >
+        </div>
 
-    <footer class="journal-footer">
+    </div>
 
-        <span>
-            ZENENE
-        </span>
+</section>
 
-        <span>
-            A LITTLE SPACE FOR YOURSELF.
-        </span>
 
-    </footer>
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="journal-footer">
+
+    <span>
+        ZENENE
+    </span>
+
+    <span>
+        A LITTLE SPACE FOR YOURSELF.
+    </span>
+
+</footer>
 
 
 </main>
 
 
+<!-- =====================================================
+     ENTRY MODAL
+===================================================== -->
+
+<div
+    class="entry-modal"
+    id="entryModal"
+    onclick="handleModalBackground(event)"
+>
+
+    <div class="entry-modal-paper">
+
+        <button
+            class="modal-close"
+            onclick="closeEntryModal()"
+        >
+            CLOSE ×
+        </button>
+
+
+        <div
+            class="modal-date"
+            id="modalDate"
+        >
+        </div>
+
+
+        <div
+            class="modal-mood"
+            id="modalMood"
+        >
+        </div>
+
+
+        <div
+            class="modal-body"
+            id="modalBody"
+        >
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                onclick="editCurrentEntry()"
+            >
+                EDIT
+            </button>
+
+            <button
+                class="delete-btn"
+                onclick="askDeleteCurrentEntry()"
+            >
+                DELETE
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     DELETE CONFIRMATION
+===================================================== -->
+
+<div
+    class="confirm-overlay"
+    id="confirmOverlay"
+>
+
+    <div class="confirm-box">
+
+        <h3>
+            Do you want to delete this?
+        </h3>
+
+        <p>
+            This journal entry will be removed from your calendar.
+        </p>
+
+
+        <div class="confirm-buttons">
+
+            <button
+                onclick="closeDeleteConfirmation()"
+            >
+                NO
+            </button>
+
+            <button
+                class="confirm-delete"
+                onclick="confirmDelete()"
+            >
+                CONFIRM
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 <script>
+
 
 /* =========================================================
    DATE
-   ========================================================= */
+========================================================= */
 
 const today = new Date();
 
@@ -1702,10 +2127,9 @@ document.getElementById("todayDate").textContent =
 
 /* =========================================================
    MOOD SELECTION
-   ========================================================= */
+========================================================= */
 
 let selectedMood = null;
-
 
 const moodOptions =
     document.querySelectorAll(".mood-option");
@@ -1731,7 +2155,7 @@ moodOptions.forEach(option => {
 
 /* =========================================================
    STORAGE
-   ========================================================= */
+========================================================= */
 
 function getEntries() {
 
@@ -1746,7 +2170,7 @@ function getEntries() {
 
 /* =========================================================
    SAVE ENTRY
-   ========================================================= */
+========================================================= */
 
 function saveEntry() {
 
@@ -1800,11 +2224,8 @@ function saveEntry() {
 
 
     localStorage.setItem(
-
         "zeneneJournalEntries",
-
         JSON.stringify(entries)
-
     );
 
 
@@ -1818,46 +2239,360 @@ function saveEntry() {
     );
 
 
-    renderEntries();
+    renderCalendar();
 
 }
 
 
 /* =========================================================
-   DELETE
-   ========================================================= */
+   CALENDAR STATE
+========================================================= */
 
-function deleteEntry(id) {
+let calendarDate = new Date();
+
+
+/* =========================================================
+   CHANGE MONTH
+========================================================= */
+
+function changeMonth(direction) {
+
+    calendarDate.setMonth(
+        calendarDate.getMonth() + direction
+    );
+
+    renderCalendar();
+
+}
+
+
+/* =========================================================
+   TODAY
+========================================================= */
+
+function goToToday() {
+
+    calendarDate = new Date();
+
+    renderCalendar();
+
+}
+
+
+/* =========================================================
+   DATE KEY
+========================================================= */
+
+function getDateKey(date) {
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+/* =========================================================
+   ENTRY DATE KEY
+========================================================= */
+
+function getEntryDateKey(entry) {
+
+    const date =
+        new Date(entry.timestamp);
+
+    return getDateKey(date);
+
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+function renderCalendar() {
+
+    const grid =
+        document.getElementById(
+            "calendarGrid"
+        );
+
+    const monthLabel =
+        document.getElementById(
+            "calendarMonth"
+        );
+
+
+    const year =
+        calendarDate.getFullYear();
+
+    const month =
+        calendarDate.getMonth();
+
+
+    monthLabel.textContent =
+        new Date(
+            year,
+            month,
+            1
+        ).toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    grid.innerHTML = "";
+
+
+    const firstDay =
+        new Date(
+            year,
+            month,
+            1
+        ).getDay();
+
+
+    const daysInMonth =
+        new Date(
+            year,
+            month + 1,
+            0
+        ).getDate();
+
+
+    const daysInPreviousMonth =
+        new Date(
+            year,
+            month,
+            0
+        ).getDate();
+
 
     const entries =
         getEntries();
 
 
-    const updated =
-        entries.filter(
-            entry => entry.id !== id
-        );
+    /* Previous month */
+
+    for (
+        let i = firstDay - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const day =
+            daysInPreviousMonth - i;
+
+        const cell =
+            createCalendarDay(
+                day,
+                true
+            );
+
+        grid.appendChild(cell);
+
+    }
 
 
-    localStorage.setItem(
+    /* Current month */
 
-        "zeneneJournalEntries",
+    for (
+        let day = 1;
+        day <= daysInMonth;
+        day++
+    ) {
 
-        JSON.stringify(updated)
+        const date =
+            new Date(
+                year,
+                month,
+                day
+            );
 
-    );
+        const cell =
+            createCalendarDay(
+                day,
+                false,
+                date,
+                entries
+            );
+
+        grid.appendChild(cell);
+
+    }
 
 
-    renderEntries();
+    /* Next month */
+
+    const totalCells =
+        42;
+
+    const usedCells =
+        firstDay + daysInMonth;
+
+    const remaining =
+        totalCells - usedCells;
+
+
+    for (
+        let day = 1;
+        day <= remaining;
+        day++
+    ) {
+
+        const cell =
+            createCalendarDay(
+                day,
+                true
+            );
+
+        grid.appendChild(cell);
+
+    }
 
 }
 
 
 /* =========================================================
-   EDIT
-   ========================================================= */
+   CREATE CALENDAR DAY
+========================================================= */
 
-function editEntry(id) {
+function createCalendarDay(
+    day,
+    otherMonth,
+    date = null,
+    entries = []
+) {
+
+    const cell =
+        document.createElement(
+            "div"
+        );
+
+    cell.className =
+        "calendar-day";
+
+
+    if (otherMonth) {
+
+        cell.classList.add(
+            "other-month"
+        );
+
+    }
+
+
+    if (date) {
+
+        const todayKey =
+            getDateKey(
+                new Date()
+            );
+
+        const currentKey =
+            getDateKey(
+                date
+            );
+
+
+        if (
+            todayKey === currentKey
+        ) {
+
+            cell.classList.add(
+                "today"
+            );
+
+        }
+
+    }
+
+
+    const number =
+        document.createElement(
+            "span"
+        );
+
+    number.className =
+        "calendar-number";
+
+    number.textContent =
+        day;
+
+
+    cell.appendChild(number);
+
+
+    if (date) {
+
+        const key =
+            getDateKey(date);
+
+
+        const dayEntries =
+            entries.filter(
+                entry =>
+                    getEntryDateKey(entry) === key
+            );
+
+
+        dayEntries.forEach(entry => {
+
+            const tab =
+                document.createElement(
+                    "button"
+                );
+
+            tab.className =
+                "calendar-entry";
+
+            tab.textContent =
+                entry.mood;
+
+            tab.title =
+                "Open journal entry";
+
+
+            tab.addEventListener(
+                "click",
+                () => openEntryModal(entry.id)
+            );
+
+
+            cell.appendChild(tab);
+
+        });
+
+    }
+
+
+    return cell;
+
+}
+
+
+/* =========================================================
+   ENTRY MODAL
+========================================================= */
+
+let currentEntryId = null;
+
+
+function openEntryModal(id) {
 
     const entries =
         getEntries();
@@ -1872,185 +2607,291 @@ function editEntry(id) {
     if (!entry) return;
 
 
-    const newText =
-        prompt(
-            "Edit your journal entry:",
-            entry.text
-        );
+    currentEntryId =
+        id;
 
 
-    if (newText === null) return;
+    document.getElementById(
+        "modalDate"
+    ).textContent =
+        entry.date.toUpperCase();
 
 
-    const cleanText =
-        newText.trim();
+    document.getElementById(
+        "modalMood"
+    ).textContent =
+        entry.mood.toUpperCase();
 
 
-    if (!cleanText) return;
+    document.getElementById(
+        "modalBody"
+    ).innerHTML = `
+        <div class="modal-content">
+            ${escapeHTML(entry.text)}
+        </div>
+    `;
 
 
-    entry.text = cleanText;
+    document.getElementById(
+        "entryModal"
+    ).classList.add("open");
 
 
-    localStorage.setItem(
-
-        "zeneneJournalEntries",
-
-        JSON.stringify(entries)
-
-    );
-
-
-    renderEntries();
+    document.body.style.overflow =
+        "hidden";
 
 }
 
 
 /* =========================================================
-   RENDER ENTRIES
-   ========================================================= */
+   CLOSE MODAL
+========================================================= */
 
-function renderEntries() {
+function closeEntryModal() {
 
-    const container =
-        document.getElementById(
-            "entriesContainer"
-        );
-
-
-    const search =
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .toLowerCase()
-            .trim();
+    document.getElementById(
+        "entryModal"
+    ).classList.remove("open");
 
 
-    let entries =
+    document.body.style.overflow =
+        "";
+
+
+    currentEntryId = null;
+
+}
+
+
+/* =========================================================
+   CLICK OUTSIDE MODAL
+========================================================= */
+
+function handleModalBackground(event) {
+
+    if (
+        event.target.id ===
+        "entryModal"
+    ) {
+
+        closeEntryModal();
+
+    }
+
+}
+
+
+/* =========================================================
+   EDIT ENTRY
+========================================================= */
+
+function editCurrentEntry() {
+
+    if (!currentEntryId) return;
+
+
+    const entries =
         getEntries();
 
 
-    if (search) {
-
-        entries =
-            entries.filter(entry =>
-
-                entry.text
-                    .toLowerCase()
-                    .includes(search)
-
-                ||
-
-                entry.mood
-                    .toLowerCase()
-                    .includes(search)
-
-            );
-
-    }
+    const entry =
+        entries.find(
+            item =>
+                item.id === currentEntryId
+        );
 
 
-    if (entries.length === 0) {
-
-        container.innerHTML = `
-
-            <div class="empty-state">
-
-                <span class="script">
-
-                    ${
-                        search
-                            ? "nothing here yet."
-                            : "a blank page is a beginning."
-                    }
-
-                </span>
-
-                <p>
-
-                    ${
-                        search
-                            ? "Try another search."
-                            : "Your journal entries will appear here."
-                    }
-
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
+    if (!entry) return;
 
 
-    container.innerHTML =
+    document.getElementById(
+        "modalBody"
+    ).innerHTML = `
 
-        entries
-            .map(entry => `
+        <textarea
+            class="edit-area"
+            id="editEntryText"
+        >${escapeHTML(entry.text)}</textarea>
 
-                <article class="entry">
+        <div class="edit-buttons">
 
-                    <div>
+            <button
+                class="primary-btn"
+                onclick="cancelEdit()"
+            >
+                CANCEL
+            </button>
 
-                        <div class="entry-date">
+            <button
+                class="primary-btn"
+                onclick="saveEditedEntry()"
+            >
+                SAVE CHANGES
+            </button>
 
-                            ${entry.date}
+        </div>
 
-                        </div>
+    `;
 
-                    </div>
-
-
-                    <div>
-
-                        <div class="entry-content">
-
-                            ${escapeHTML(entry.text)}
-
-                        </div>
-
-
-                        <div class="entry-actions">
-
-                            <button
-                                onclick="editEntry(${entry.id})"
-                            >
-                                EDIT
-                            </button>
+}
 
 
-                            <button
-                                onclick="deleteEntry(${entry.id})"
-                            >
-                                DELETE
-                            </button>
+/* =========================================================
+   CANCEL EDIT
+========================================================= */
 
-                        </div>
+function cancelEdit() {
 
-                    </div>
+    if (!currentEntryId) return;
+
+    const entries =
+        getEntries();
+
+    const entry =
+        entries.find(
+            item =>
+                item.id === currentEntryId
+        );
+
+    if (!entry) return;
 
 
-                    <div class="entry-mood">
+    document.getElementById(
+        "modalBody"
+    ).innerHTML = `
 
-                        ${entry.mood}
+        <div class="modal-content">
+            ${escapeHTML(entry.text)}
+        </div>
 
-                    </div>
+    `;
 
-                </article>
+}
 
-            `)
-            .join("");
+
+/* =========================================================
+   SAVE EDITED ENTRY
+========================================================= */
+
+function saveEditedEntry() {
+
+    if (!currentEntryId) return;
+
+
+    const textarea =
+        document.getElementById(
+            "editEntryText"
+        );
+
+
+    const newText =
+        textarea.value.trim();
+
+
+    if (!newText) return;
+
+
+    const entries =
+        getEntries();
+
+
+    const entry =
+        entries.find(
+            item =>
+                item.id === currentEntryId
+        );
+
+
+    if (!entry) return;
+
+
+    entry.text =
+        newText;
+
+
+    localStorage.setItem(
+        "zeneneJournalEntries",
+        JSON.stringify(entries)
+    );
+
+
+    renderCalendar();
+
+
+    openEntryModal(
+        currentEntryId
+    );
+
+}
+
+
+/* =========================================================
+   DELETE CONFIRMATION
+========================================================= */
+
+function askDeleteCurrentEntry() {
+
+    if (!currentEntryId) return;
+
+
+    document.getElementById(
+        "confirmOverlay"
+    ).classList.add("open");
+
+}
+
+
+/* =========================================================
+   CLOSE DELETE CONFIRMATION
+========================================================= */
+
+function closeDeleteConfirmation() {
+
+    document.getElementById(
+        "confirmOverlay"
+    ).classList.remove("open");
+
+}
+
+
+/* =========================================================
+   CONFIRM DELETE
+========================================================= */
+
+function confirmDelete() {
+
+    if (!currentEntryId) return;
+
+
+    const entries =
+        getEntries();
+
+
+    const updated =
+        entries.filter(
+            entry =>
+                entry.id !== currentEntryId
+        );
+
+
+    localStorage.setItem(
+        "zeneneJournalEntries",
+        JSON.stringify(updated)
+    );
+
+
+    closeDeleteConfirmation();
+
+    closeEntryModal();
+
+    renderCalendar();
 
 }
 
 
 /* =========================================================
    SECURITY
-   ========================================================= */
+========================================================= */
 
 function escapeHTML(text) {
 
@@ -2060,7 +2901,8 @@ function escapeHTML(text) {
         );
 
 
-    div.textContent = text;
+    div.textContent =
+        text;
 
 
     return div.innerHTML;
@@ -2070,11 +2912,35 @@ function escapeHTML(text) {
 
 /* =========================================================
    INITIAL LOAD
-   ========================================================= */
+========================================================= */
 
-renderEntries();
+renderCalendar();
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeDeleteConfirmation();
+
+            closeEntryModal();
+
+        }
+
+    }
+);
 
 </script>
 
+
 </body>
+
 </html>

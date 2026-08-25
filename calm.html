@@ -1,285 +1,2431 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calm — Zenene</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root{--blue:#C5DCF0;--pink:#F2BFC8;--pink-d:#E8909F;--peach:#F5C9A0;--peach-d:#E8A878;--green:#A8C4A2;--green-d:#7A9E75;--cream:#FEF6ED;--text:#3D2B1F;--tl:#8A6A58;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;}
-body{font-family:'DM Sans',sans-serif;color:var(--text);background:#EFF7EE;padding-bottom:72px;overflow-x:hidden;}
-.polka{position:fixed;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.38) 4px,transparent 4px);background-size:38px 38px;pointer-events:none;z-index:0;}
 
-.hdr{background:rgba(254,246,237,.92);backdrop-filter:blur(14px);padding:.9rem 1.4rem;display:flex;align-items:center;gap:.8rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(168,196,162,.2);}
-.back{text-decoration:none;color:var(--green-d);font-size:1.3rem;}
-.hdr-title{font-family:'Playfair Display',serif;font-size:1.3rem;}
-.hdr-sub{font-family:'Dancing Script',cursive;font-size:.85rem;color:var(--tl);margin-left:auto;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.main{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:1.5rem 1.2rem;}
+  <title>Zenene — Calm</title>
 
-/* TABS */
-.calm-tabs{display:flex;gap:.5rem;margin-bottom:1.6rem;background:rgba(255,255,255,.6);border-radius:50px;padding:.3rem;}
-.c-tab{flex:1;padding:.5rem;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:.82rem;cursor:pointer;background:transparent;color:var(--tl);transition:all .25s;}
-.c-tab.active{background:#fff;color:var(--green-d);box-shadow:0 2px 10px rgba(120,158,117,.15);}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-.panel{display:none;}
-.panel.active{display:block;animation:fadeUp .4s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+    rel="stylesheet"
+  >
 
-/* ── BREATHING ── */
-.breath-area{display:flex;flex-direction:column;align-items:center;padding:2rem 1rem;}
-.breath-ring{position:relative;width:200px;height:200px;margin-bottom:1.5rem;}
-.breath-outer{position:absolute;inset:0;border-radius:50%;border:2.5px solid rgba(168,196,162,.3);}
-.breath-mid{position:absolute;inset:16px;border-radius:50%;border:2px solid rgba(168,196,162,.2);}
-.breath-circle{position:absolute;inset:32px;border-radius:50%;background:radial-gradient(circle at 40% 36%,var(--peach),var(--pink));box-shadow:0 0 0 0 rgba(245,201,160,.4);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.2rem;transition:all .6s ease;}
-.breath-word{font-family:'Dancing Script',cursive;font-size:1.15rem;color:#fff;}
-.breath-count{font-size:.7rem;color:rgba(255,255,255,.8);}
-.breath-phase{font-family:'Playfair Display',serif;font-size:1rem;color:var(--tl);margin-bottom:.4rem;}
-.breath-desc{font-size:.78rem;color:var(--tl);text-align:center;max-width:260px;margin-bottom:1.5rem;line-height:1.6;}
-.breath-btns{display:flex;gap:.8rem;}
-.b-btn{padding:.6rem 1.6rem;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:.88rem;cursor:pointer;transition:all .2s;}
-.b-start{background:var(--green);color:#fff;}.b-start:hover{background:var(--green-d);}
-.b-stop{background:rgba(255,255,255,.8);color:var(--tl);}.b-stop:hover{background:#fff;}
-.cycles-left{font-size:.75rem;color:var(--tl);margin-top:.9rem;}
+  <style>
 
-/* ── COLOR FLOW ── */
-.cf-area{display:flex;flex-direction:column;align-items:center;padding:1rem;}
-.cf-desc{font-size:.82rem;color:var(--tl);text-align:center;margin-bottom:1rem;font-family:'Dancing Script',cursive;font-size:.95rem;}
-.cf-colors{display:flex;gap:.5rem;justify-content:center;margin-bottom:.8rem;flex-wrap:wrap;}
-.cc{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:transform .15s,border-color .15s;}
-.cc.sel{transform:scale(1.25);border-color:#fff;}
-.cf-sizes{display:flex;gap:.5rem;justify-content:center;margin-bottom.8rem;align-items:center;}
-.cf-sz{width:12px;height:12px;border-radius:50%;background:var(--tl);cursor:pointer;opacity:.35;transition:opacity .15s,transform .15s;}
-.cf-sz.sel{opacity:1;transform:scale(1.3);}
-canvas#cf{border-radius:18px;max-width:100%;touch-action:none;cursor:crosshair;background:#fff;box-shadow:0 4px 24px rgba(61,43,31,.1);margin:1rem 0;}
-.cf-actions{display:flex;gap:.6rem;}
-.cf-btn{padding:.55rem 1.3rem;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:.82rem;cursor:pointer;background:rgba(255,255,255,.85);color:var(--tl);transition:background .2s;}
-.cf-btn:hover{background:#fff;}
+    /* =========================================================
+       ZENENE — CALM
+       ========================================================= */
 
-/* ── GRATITUDE ── */
-.gg-area{padding:.5rem 0;}
-.gg-prompt{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--text);margin-bottom:.4rem;text-align:center;}
-.gg-sub{font-size:.78rem;color:var(--tl);text-align:center;margin-bottom:1.3rem;}
-.gg-items{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.3rem;}
-.gg-inp-wrap{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.8);border-radius:12px;padding:.6rem .9rem;}
-.gg-num{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--pink-d);flex-shrink:0;width:1.4rem;}
-.gg-inp{flex:1;border:none;background:none;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--text);outline:none;}
-.gg-inp::placeholder{color:#C4AFA8;font-style:italic;}
-.gg-save{padding:.65rem 1.8rem;background:var(--green);color:#fff;border:none;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.88rem;cursor:pointer;width:100%;transition:background .2s;}
-.gg-save:hover{background:var(--green-d);}
-.gg-garden{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.4rem;}
-.gg-card{background:rgba(255,255,255,.78);border-radius:12px;padding:.8rem;font-size:.78rem;color:var(--tl);line-height:1.5;border-top:3px solid var(--green);}
-.gg-card-date{font-size:.62rem;color:var(--tl);margin-bottom:.3rem;}
+    :root {
 
-/* BOTTOM NAV */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(254,246,237,.92);backdrop-filter:blur(16px);border-top:1px solid rgba(168,196,162,.22);display:flex;justify-content:space-around;align-items:center;height:58px;padding:0 .5rem;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--tl);font-size:.58rem;padding:.35rem .5rem;border-radius:12px;transition:color .2s,transform .2s;flex:1;}
-.nav-item:hover,.nav-item.active{color:var(--green-d);transform:translateY(-2px);}
-.ni-emo{font-size:1.25rem;transition:transform .2s;}
-.nav-item:hover .ni-emo,.nav-item.active .ni-emo{transform:scale(1.12);}
-.ni-dot{width:4px;height:4px;border-radius:50%;background:var(--green);opacity:0;margin-top:1px;}
-.nav-item.active .ni-dot{opacity:1;}
-</style>
+      --sky: #C9DFEA;
+      --sky-light: #E8F2F5;
+      --sky-deep: #9EBFCC;
+
+      --cream: #F7F1E7;
+      --paper: #FFFDF8;
+
+      --sage: #D8E4D7;
+      --sage-deep: #72866E;
+
+      --rose: #E7C9CD;
+      --rose-deep: #B97880;
+
+      --lavender: #DCD8E8;
+
+      --peach: #EED9C8;
+      --peach-deep: #C99576;
+
+      --brown: #624F43;
+      --brown-dark: #392D26;
+      --ink: #2F2B27;
+
+      --typewriter: "Special Elite", "Courier New", monospace;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --script: "Dancing Script", cursive;
+    }
+
+
+    /* =========================================================
+       RESET
+       ========================================================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+
+      margin: 0;
+
+      background: var(--cream);
+
+      color: var(--ink);
+
+      overflow-x: hidden;
+
+      padding-bottom: 60px;
+    }
+
+
+    /* =========================================================
+       PAPER GRAIN
+       ========================================================= */
+
+    body::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 9999;
+
+      opacity: .045;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+
+    /* =========================================================
+       NAVIGATION — SAME AS MOOD / JOURNAL
+       ========================================================= */
+
+    .top-nav {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 500;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding: 20px 34px;
+
+      background: rgba(247,241,231,.78);
+
+      backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(98,79,67,.08);
+    }
+
+
+    .nav-wordmark {
+
+      font-family: var(--typewriter);
+
+      font-size: .78rem;
+
+      letter-spacing: .16em;
+
+      text-transform: uppercase;
+    }
+
+
+    .nav-links {
+
+      display: flex;
+
+      gap: 28px;
+
+      align-items: center;
+    }
+
+
+    .nav-links a {
+
+      color: var(--brown);
+
+      text-decoration: none;
+
+      font-family: var(--typewriter);
+
+      font-size: .65rem;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+
+      transition: .3s ease;
+    }
+
+
+    .nav-links a:hover {
+      color: var(--rose-deep);
+    }
+
+
+    .nav-links .active {
+
+      color: var(--ink);
+
+      position: relative;
+    }
+
+
+    .nav-links .active::after {
+
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      bottom: -7px;
+
+      height: 1px;
+
+      background: var(--rose-deep);
+    }
+
+
+    /* =========================================================
+       PAGE
+       ========================================================= */
+
+    .page {
+
+      width: min(1180px, calc(100% - 48px));
+
+      margin: auto;
+
+      padding: 70px 0 100px;
+    }
+
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    .page-header {
+
+      display: grid;
+
+      grid-template-columns: 1.1fr .9fr;
+
+      gap: 60px;
+
+      align-items: end;
+
+      margin-bottom: 55px;
+    }
+
+
+    .eyebrow {
+
+      font-family: var(--typewriter);
+
+      font-size: .65rem;
+
+      letter-spacing: .17em;
+
+      text-transform: uppercase;
+
+      color: var(--brown);
+
+      margin-bottom: 18px;
+    }
+
+
+    h1 {
+
+      margin: 0;
+
+      font-family: var(--serif);
+
+      font-size: clamp(4rem, 8vw, 7rem);
+
+      font-weight: 300;
+
+      line-height: .85;
+
+      letter-spacing: -.04em;
+    }
+
+
+    h1 em {
+
+      font-family: var(--script);
+
+      font-size: .7em;
+
+      font-weight: 500;
+
+      color: var(--rose-deep);
+    }
+
+
+    .intro {
+
+      max-width: 400px;
+
+      font-family: var(--serif);
+
+      font-size: 1.25rem;
+
+      line-height: 1.45;
+
+      color: var(--brown);
+
+      margin: 0;
+    }
+
+
+    /* =========================================================
+       CALM TABS
+       ========================================================= */
+
+    .calm-tabs {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 12px;
+
+      margin-bottom: 30px;
+    }
+
+
+    .c-tab {
+
+      border: 1px solid rgba(98,79,67,.12);
+
+      background: var(--paper);
+
+      min-height: 80px;
+
+      cursor: pointer;
+
+      font-family: var(--typewriter);
+
+      font-size: .62rem;
+
+      letter-spacing: .06em;
+
+      text-transform: uppercase;
+
+      color: var(--brown);
+
+      transition:
+        transform .3s ease,
+        background .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+    }
+
+
+    .c-tab:hover {
+
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 12px 25px rgba(98,79,67,.08);
+    }
+
+
+    .c-tab.active {
+
+      background: var(--sky-light);
+
+      border-color: var(--sky-deep);
+
+      color: var(--ink);
+
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 12px 25px rgba(98,79,67,.07);
+    }
+
+
+    .tab-icon {
+
+      display: block;
+
+      font-size: 1.45rem;
+
+      margin-bottom: 7px;
+    }
+
+
+    /* =========================================================
+       PANELS
+       ========================================================= */
+
+    .panel {
+
+      display: none;
+    }
+
+
+    .panel.active {
+
+      display: block;
+
+      animation: fadeUp .5s ease forwards;
+    }
+
+
+    @keyframes fadeUp {
+
+      from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+      }
+    }
+
+
+    /* =========================================================
+       BREATHING
+       ========================================================= */
+
+    .breath-card {
+
+      background: var(--paper);
+
+      border: 1px solid rgba(98,79,67,.12);
+
+      box-shadow:
+        0 20px 60px rgba(98,79,67,.06);
+
+      padding: 50px;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+
+    .breath-card::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: -12px;
+
+      right: 35px;
+
+      width: 85px;
+
+      height: 20px;
+
+      background: rgba(231,201,205,.65);
+
+      transform: rotate(2deg);
+    }
+
+
+    .breath-label {
+
+      font-family: var(--typewriter);
+
+      font-size: .62rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .12em;
+
+      color: var(--brown);
+
+      margin-bottom: 35px;
+
+      text-align: center;
+    }
+
+
+    .breath-area {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+    }
+
+
+    .breath-ring {
+
+      position: relative;
+
+      width: 230px;
+
+      height: 230px;
+
+      margin-bottom: 30px;
+    }
+
+
+    .breath-outer {
+
+      position: absolute;
+
+      inset: 0;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(114,134,110,.3);
+    }
+
+
+    .breath-mid {
+
+      position: absolute;
+
+      inset: 18px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(114,134,110,.22);
+    }
+
+
+    .breath-circle {
+
+      position: absolute;
+
+      inset: 38px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 40% 35%,
+          var(--sky),
+          var(--rose)
+        );
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      gap: 3px;
+
+      transition:
+        transform .6s ease,
+        box-shadow .6s ease;
+    }
+
+
+    .breath-word {
+
+      font-family: var(--script);
+
+      font-size: 1.5rem;
+
+      color: var(--paper);
+    }
+
+
+    .breath-count {
+
+      font-family: var(--typewriter);
+
+      font-size: .55rem;
+
+      color: rgba(255,255,255,.85);
+
+      letter-spacing: .08em;
+    }
+
+
+    .breath-phase {
+
+      font-family: var(--serif);
+
+      font-size: 2rem;
+
+      font-weight: 300;
+
+      margin-bottom: 10px;
+    }
+
+
+    .breath-desc {
+
+      font-family: var(--serif);
+
+      font-size: 1.1rem;
+
+      line-height: 1.5;
+
+      color: var(--brown);
+
+      text-align: center;
+
+      max-width: 500px;
+
+      margin-bottom: 28px;
+    }
+
+
+    .breath-btns {
+
+      display: flex;
+
+      gap: 12px;
+    }
+
+
+    .b-btn {
+
+      border: none;
+
+      padding: 14px 28px;
+
+      font-family: var(--typewriter);
+
+      font-size: .62rem;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      transition: .3s ease;
+    }
+
+
+    .b-start {
+
+      background: var(--brown-dark);
+
+      color: var(--paper);
+    }
+
+
+    .b-start:hover {
+
+      background: var(--rose-deep);
+
+      transform: translateY(-2px);
+    }
+
+
+    .b-stop {
+
+      background: var(--cream);
+
+      color: var(--brown);
+
+      border: 1px solid rgba(98,79,67,.12);
+    }
+
+
+    .b-stop:hover {
+
+      background: var(--rose);
+    }
+
+
+    .cycles-left {
+
+      font-family: var(--script);
+
+      color: var(--rose-deep);
+
+      font-size: 1.15rem;
+
+      margin-top: 18px;
+    }
+
+
+    /* =========================================================
+       COLOR FLOW
+       ========================================================= */
+
+    .color-card {
+
+      background: var(--sage);
+
+      border: 1px solid rgba(98,79,67,.08);
+
+      padding: 38px;
+    }
+
+
+    .cf-area {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+    }
+
+
+    .cf-desc {
+
+      font-family: var(--serif);
+
+      font-size: 1.2rem;
+
+      color: var(--brown-dark);
+
+      text-align: center;
+
+      margin-bottom: 25px;
+    }
+
+
+    .cf-colors {
+
+      display: flex;
+
+      gap: 12px;
+
+      justify-content: center;
+
+      margin-bottom: 20px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .cc {
+
+      width: 31px;
+
+      height: 31px;
+
+      border-radius: 50%;
+
+      cursor: pointer;
+
+      border: 3px solid transparent;
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease;
+    }
+
+
+    .cc.sel {
+
+      transform: scale(1.2);
+
+      border-color: var(--paper);
+    }
+
+
+    .cf-sizes {
+
+      display: flex;
+
+      gap: 15px;
+
+      justify-content: center;
+
+      align-items: center;
+
+      margin-bottom: 10px;
+    }
+
+
+    .cf-sz {
+
+      border-radius: 50%;
+
+      background: var(--brown);
+
+      cursor: pointer;
+
+      opacity: .35;
+
+      transition:
+        opacity .2s ease,
+        transform .2s ease;
+    }
+
+
+    .cf-sz.sel {
+
+      opacity: 1;
+
+      transform: scale(1.15);
+    }
+
+
+    canvas#cf {
+
+      border-radius: 0;
+
+      width: 100%;
+
+      max-width: 650px;
+
+      height: auto;
+
+      touch-action: none;
+
+      cursor: crosshair;
+
+      background: var(--paper);
+
+      border: 1px solid rgba(98,79,67,.1);
+
+      box-shadow:
+        0 15px 40px rgba(98,79,67,.08);
+
+      margin: 20px 0;
+    }
+
+
+    .cf-actions {
+
+      display: flex;
+
+      gap: 10px;
+    }
+
+
+    .cf-btn {
+
+      border: 1px solid rgba(98,79,67,.12);
+
+      background: var(--paper);
+
+      color: var(--brown);
+
+      padding: 12px 20px;
+
+      font-family: var(--typewriter);
+
+      font-size: .6rem;
+
+      letter-spacing: .06em;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      transition: .3s ease;
+    }
+
+
+    .cf-btn:hover {
+
+      background: var(--rose);
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       GRATITUDE
+       ========================================================= */
+
+    .gratitude {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 30px;
+    }
+
+
+    .gg-card-main {
+
+      background: var(--paper);
+
+      border: 1px solid rgba(98,79,67,.1);
+
+      padding: 40px;
+    }
+
+
+    .gg-prompt {
+
+      font-family: var(--serif);
+
+      font-size: 2.2rem;
+
+      font-weight: 300;
+
+      margin-bottom: 8px;
+    }
+
+
+    .gg-sub {
+
+      font-family: var(--serif);
+
+      font-size: 1rem;
+
+      color: var(--brown);
+
+      line-height: 1.45;
+
+      margin-bottom: 30px;
+    }
+
+
+    .gg-items {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+      margin-bottom: 25px;
+    }
+
+
+    .gg-inp-wrap {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      background: var(--cream);
+
+      border: 1px solid rgba(98,79,67,.08);
+
+      padding: 14px 16px;
+
+      transition: .3s ease;
+    }
+
+
+    .gg-inp-wrap:focus-within {
+
+      border-color: var(--sky-deep);
+
+      background: var(--sky-light);
+    }
+
+
+    .gg-num {
+
+      font-family: var(--script);
+
+      font-size: 1.35rem;
+
+      color: var(--rose-deep);
+
+      flex-shrink: 0;
+    }
+
+
+    .gg-inp {
+
+      flex: 1;
+
+      border: none;
+
+      background: none;
+
+      font-family: var(--serif);
+
+      font-size: 1.1rem;
+
+      color: var(--ink);
+
+      outline: none;
+    }
+
+
+    .gg-inp::placeholder {
+
+      color: var(--brown);
+
+      opacity: .5;
+
+      font-style: italic;
+    }
+
+
+    .gg-save {
+
+      width: 100%;
+
+      border: none;
+
+      background: var(--brown-dark);
+
+      color: var(--paper);
+
+      padding: 15px 20px;
+
+      font-family: var(--typewriter);
+
+      font-size: .62rem;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      transition: .3s ease;
+    }
+
+
+    .gg-save:hover {
+
+      background: var(--rose-deep);
+
+      transform: translateY(-2px);
+    }
+
+
+    .garden-side {
+
+      background: var(--lavender);
+
+      padding: 40px;
+
+      min-height: 350px;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+
+    .garden-side::after {
+
+      content: "✽";
+
+      position: absolute;
+
+      right: 15px;
+
+      bottom: -5px;
+
+      font-family: var(--serif);
+
+      font-size: 8rem;
+
+      line-height: .7;
+
+      color: rgba(255,255,255,.4);
+    }
+
+
+    .garden-title {
+
+      font-family: var(--serif);
+
+      font-size: 2.2rem;
+
+      font-weight: 300;
+
+      margin-bottom: 10px;
+    }
+
+
+    .garden-note {
+
+      font-family: var(--script);
+
+      color: var(--rose-deep);
+
+      font-size: 1.3rem;
+
+      margin-bottom: 25px;
+    }
+
+
+    .gg-garden {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+      position: relative;
+
+      z-index: 2;
+    }
+
+
+    .gg-card {
+
+      background: rgba(255,253,248,.72);
+
+      border-left: 3px solid var(--sage-deep);
+
+      padding: 13px 15px;
+
+      font-family: var(--serif);
+
+      font-size: 1rem;
+
+      color: var(--brown-dark);
+
+      line-height: 1.45;
+    }
+
+
+    .gg-card-date {
+
+      font-family: var(--typewriter);
+
+      font-size: .52rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .08em;
+
+      color: var(--brown);
+
+      margin-bottom: 6px;
+    }
+
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+
+      text-align: center;
+
+      padding: 20px 20px 30px;
+
+      color: var(--brown);
+    }
+
+
+    footer .script {
+
+      font-family: var(--script);
+
+      font-size: 1.6rem;
+
+      margin-bottom: 10px;
+    }
+
+
+    footer p {
+
+      font-family: var(--typewriter);
+
+      font-size: .55rem;
+
+      letter-spacing: .1em;
+
+      text-transform: uppercase;
+
+      opacity: .65;
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 800px) {
+
+      .top-nav {
+
+        padding: 18px 20px;
+
+      }
+
+
+      .nav-links {
+
+        gap: 13px;
+
+      }
+
+
+      .nav-links a {
+
+        font-size: .52rem;
+
+      }
+
+
+      .page {
+
+        width: min(100% - 30px, 600px);
+
+        padding-top: 55px;
+
+      }
+
+
+      .page-header {
+
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+      }
+
+
+      h1 {
+
+        font-size: 5rem;
+
+      }
+
+
+      .calm-tabs {
+
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+
+      }
+
+
+      .c-tab {
+
+        min-height: 62px;
+
+      }
+
+
+      .tab-icon {
+
+        display: inline;
+
+        margin-right: 7px;
+
+      }
+
+
+      .breath-card {
+
+        padding: 30px 20px;
+
+      }
+
+
+      .breath-ring {
+
+        width: 190px;
+
+        height: 190px;
+
+      }
+
+
+      .breath-phase {
+
+        font-size: 1.7rem;
+
+      }
+
+
+      .breath-desc {
+
+        font-size: 1rem;
+
+      }
+
+
+      .color-card {
+
+        padding: 20px 15px;
+
+      }
+
+
+      .gratitude {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .gg-card-main {
+
+        padding: 25px;
+
+      }
+
+
+      .garden-side {
+
+        padding: 30px;
+
+      }
+
+
+      .gg-prompt {
+
+        font-size: 1.9rem;
+
+      }
+
+
+      .cf-actions {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+      }
+
+    }
+
+  </style>
+
 </head>
+
+
 <body>
-<div class="polka"></div>
 
-<div class="hdr">
-  <a href="index.html" class="back">←</a>
-  <div class="hdr-title">🌸 Calm Space</div>
-  <div class="hdr-sub">pause &amp; breathe</div>
-</div>
 
-<div class="main">
-  <div class="calm-tabs">
-    <button class="c-tab active" onclick="switchTab('breath',this)">🫁 Breathe</button>
-    <button class="c-tab" onclick="switchTab('color',this)">🎨 Color Flow</button>
-    <button class="c-tab" onclick="switchTab('garden',this)">🌱 Gratitude</button>
-  </div>
+  <!-- =======================================================
+       NAVIGATION
+       ======================================================= -->
 
-  <!-- BREATHING -->
-  <div class="panel active" id="panel-breath">
-    <div class="breath-area">
-      <div class="breath-ring">
-        <div class="breath-outer"></div>
-        <div class="breath-mid"></div>
-        <div class="breath-circle" id="bc">
-          <div class="breath-word" id="bw">breathe</div>
-          <div class="breath-count" id="bcnt"></div>
+  <nav class="top-nav">
+
+    <div class="nav-wordmark">
+      zenene
+    </div>
+
+    <div class="nav-links">
+
+      <a href="index.html">home</a>
+
+      <a href="journal.html">journal</a>
+
+      <a href="mood.html">mood</a>
+
+      <a href="explore.html">explore</a>
+
+      <a href="vera.html">vera</a>
+
+      <a href="calm.html" class="active">calm</a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =======================================================
+       PAGE
+       ======================================================= -->
+
+  <main class="page">
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="page-header fade-up">
+
+      <div>
+
+        <div class="eyebrow">
+          slow down
         </div>
+
+        <h1>
+          your <em>calm.</em>
+        </h1>
+
       </div>
-      <div class="breath-phase" id="bphase">4-7-8 Breathing</div>
-      <div class="breath-desc">Inhale for 4 · Hold for 7 · Exhale for 8. This pattern activates your parasympathetic nervous system, calming anxiety naturally.</div>
-      <div class="breath-btns">
-        <button class="b-btn b-start" id="bstart" onclick="startBreath()">begin</button>
-        <button class="b-btn b-stop" id="bstop" onclick="stopBreath()" style="display:none">stop</button>
-      </div>
-      <div class="cycles-left" id="cycleInfo"></div>
+
+      <p class="intro">
+        A small place to pause, breathe,
+        make something, and remember that
+        you don't have to rush through
+        every moment.
+      </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         CALM TABS
+         ===================================================== -->
+
+    <div class="calm-tabs fade-up">
+
+      <button
+        class="c-tab active"
+        onclick="switchTab('breath',this)"
+      >
+        <span class="tab-icon">🫁</span>
+        breathe
+      </button>
+
+
+      <button
+        class="c-tab"
+        onclick="switchTab('color',this)"
+      >
+        <span class="tab-icon">🎨</span>
+        color flow
+      </button>
+
+
+      <button
+        class="c-tab"
+        onclick="switchTab('garden',this)"
+      >
+        <span class="tab-icon">🌱</span>
+        gratitude
+      </button>
+
     </div>
-  </div>
 
-  <!-- COLOR FLOW -->
-  <div class="panel" id="panel-color">
-    <div class="cf-area">
-      <div class="cf-desc">Paint freely. No rules, no mistakes. Just colour and calm. 🎨</div>
-      <div class="cf-colors" id="cfColors"></div>
-      <div class="cf-sizes" id="cfSizes">
-        <div class="cf-sz sel" data-s="6" style="width:10px;height:10px;"></div>
-        <div class="cf-sz" data-s="14" style="width:16px;height:16px;"></div>
-        <div class="cf-sz" data-s="26" style="width:24px;height:24px;"></div>
-        <div class="cf-sz" data-s="44" style="width:34px;height:34px;"></div>
+
+    <!-- =====================================================
+         BREATHING
+         ===================================================== -->
+
+    <div class="panel active" id="panel-breath">
+
+      <div class="breath-card">
+
+        <div class="breath-label">
+          a moment to breathe
+        </div>
+
+        <div class="breath-area">
+
+          <div class="breath-ring">
+
+            <div class="breath-outer"></div>
+
+            <div class="breath-mid"></div>
+
+            <div
+              class="breath-circle"
+              id="bc"
+            >
+
+              <div
+                class="breath-word"
+                id="bw"
+              >
+                breathe
+              </div>
+
+              <div
+                class="breath-count"
+                id="bcnt"
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="breath-phase"
+            id="bphase"
+          >
+            4-7-8 Breathing
+          </div>
+
+
+          <div class="breath-desc">
+
+            Inhale for 4 · Hold for 7 ·
+            Exhale for 8. This pattern
+            activates your parasympathetic
+            nervous system, creating a
+            little more room to breathe.
+
+          </div>
+
+
+          <div class="breath-btns">
+
+            <button
+              class="b-btn b-start"
+              id="bstart"
+              onclick="startBreath()"
+            >
+              begin
+            </button>
+
+
+            <button
+              class="b-btn b-stop"
+              id="bstop"
+              onclick="stopBreath()"
+              style="display:none"
+            >
+              stop
+            </button>
+
+          </div>
+
+
+          <div
+            class="cycles-left"
+            id="cycleInfo"
+          ></div>
+
+        </div>
+
       </div>
-      <canvas id="cf" width="500" height="420"></canvas>
-      <div class="cf-actions">
-        <button class="cf-btn" onclick="cfUndo()">↩ undo</button>
-        <button class="cf-btn" onclick="cfClear()">clear</button>
-        <button class="cf-btn" onclick="cfSave()">save ↓</button>
-      </div>
+
     </div>
-  </div>
 
-  <!-- GRATITUDE GARDEN -->
-  <div class="panel" id="panel-garden">
-    <div class="gg-area">
-      <div class="gg-prompt">Plant three seeds of gratitude 🌱</div>
-      <div class="gg-sub">What are three small things you appreciate right now?</div>
-      <div class="gg-items">
-        <div class="gg-inp-wrap"><div class="gg-num">①</div><input class="gg-inp" id="g1" placeholder="I'm grateful for..."></div>
-        <div class="gg-inp-wrap"><div class="gg-num">②</div><input class="gg-inp" id="g2" placeholder="Something small that helped..."></div>
-        <div class="gg-inp-wrap"><div class="gg-num">③</div><input class="gg-inp" id="g3" placeholder="A moment I want to remember..."></div>
+
+    <!-- =====================================================
+         COLOR FLOW
+         ===================================================== -->
+
+    <div class="panel" id="panel-color">
+
+      <div class="color-card">
+
+        <div class="cf-area">
+
+          <div class="cf-desc">
+            Paint freely. No rules, no mistakes.
+            Just colour and calm. 🎨
+          </div>
+
+
+          <div
+            class="cf-colors"
+            id="cfColors"
+          ></div>
+
+
+          <div
+            class="cf-sizes"
+            id="cfSizes"
+          >
+
+            <div
+              class="cf-sz sel"
+              data-s="6"
+              style="width:10px;height:10px;"
+            ></div>
+
+            <div
+              class="cf-sz"
+              data-s="14"
+              style="width:16px;height:16px;"
+            ></div>
+
+            <div
+              class="cf-sz"
+              data-s="26"
+              style="width:24px;height:24px;"
+            ></div>
+
+            <div
+              class="cf-sz"
+              data-s="44"
+              style="width:34px;height:34px;"
+            ></div>
+
+          </div>
+
+
+          <canvas
+            id="cf"
+            width="650"
+            height="420"
+          ></canvas>
+
+
+          <div class="cf-actions">
+
+            <button
+              class="cf-btn"
+              onclick="cfUndo()"
+            >
+              ↩ undo
+            </button>
+
+            <button
+              class="cf-btn"
+              onclick="cfClear()"
+            >
+              clear
+            </button>
+
+            <button
+              class="cf-btn"
+              onclick="cfSave()"
+            >
+              save ↓
+            </button>
+
+          </div>
+
+        </div>
+
       </div>
-      <button class="gg-save" onclick="saveGratitude()">plant in my garden 🌻</button>
-      <div class="gg-garden" id="ggarden"></div>
+
     </div>
-  </div>
-</div>
 
-<nav class="bottom-nav">
-  <a href="journal.html" class="nav-item"><div class="ni-emo">📓</div><span>Journal</span><div class="ni-dot"></div></a>
-  <a href="chat.html"    class="nav-item"><div class="ni-emo">💬</div><span>Vera</span><div class="ni-dot"></div></a>
-  <a href="calm.html"    class="nav-item active"><div class="ni-emo">🌸</div><span>Calm</span><div class="ni-dot"></div></a>
-  <a href="stories.html" class="nav-item"><div class="ni-emo">✨</div><span>Stories</span><div class="ni-dot"></div></a>
-  <a href="explore.html" class="nav-item"><div class="ni-emo">📚</div><span>Explore</span><div class="ni-dot"></div></a>
-  <a href="mood.html"    class="nav-item"><div class="ni-emo">🌿</div><span>Mood</span><div class="ni-dot"></div></a>
-</nav>
 
-<script>
-// ── TAB ──
-function switchTab(id, btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.c-tab').forEach(b=>b.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  btn.classList.add('active');
-}
+    <!-- =====================================================
+         GRATITUDE
+         ===================================================== -->
 
-// ── BREATHING ──
-let bTimer=null,bCycle=0,bPhase=0;
-const PHASES=[{name:'Inhale',dur:4,scale:1.32,shadow:'0 0 0 24px rgba(245,201,160,.18)'},
-              {name:'Hold',dur:7,scale:1.32,shadow:'0 0 0 28px rgba(245,201,160,.12)'},
-              {name:'Exhale',dur:8,scale:1,shadow:'0 0 0 0 rgba(245,201,160,0)'}];
-const MAX_CYCLES=4;
+    <div class="panel" id="panel-garden">
 
-function startBreath(){
-  document.getElementById('bstart').style.display='none';
-  document.getElementById('bstop').style.display='';
-  bCycle=0; bPhase=0;
-  runPhase();
-}
+      <div class="gratitude">
 
-function runPhase(){
-  if(bCycle>=MAX_CYCLES){stopBreath(true);return;}
-  const p=PHASES[bPhase];
-  const bc=document.getElementById('bc');
-  bc.style.transform='scale('+p.scale+')';
-  bc.style.boxShadow=p.shadow;
-  document.getElementById('bw').textContent=p.name;
-  document.getElementById('bphase').textContent=p.name + ' for ' + p.dur + 's';
-  document.getElementById('cycleInfo').textContent='Cycle '+(bCycle+1)+' of '+MAX_CYCLES;
-  let cnt=p.dur;
-  document.getElementById('bcnt').textContent=cnt;
-  const tick=()=>{cnt--;document.getElementById('bcnt').textContent=cnt>0?cnt:'';if(cnt<=0){nextPhase();}else{bTimer=setTimeout(tick,1000);}};
-  bTimer=setTimeout(tick,1000);
-}
 
-function nextPhase(){
-  bPhase++;
-  if(bPhase>=PHASES.length){bPhase=0;bCycle++;}
-  runPhase();
-}
+        <div class="gg-card-main">
 
-function stopBreath(done=false){
-  clearTimeout(bTimer);
-  const bc=document.getElementById('bc');
-  bc.style.transform='scale(1)';
-  bc.style.boxShadow='';
-  document.getElementById('bw').textContent='breathe';
-  document.getElementById('bcnt').textContent='';
-  document.getElementById('bphase').textContent=done?'Well done 🌿 4-7-8 Breathing':'4-7-8 Breathing';
-  document.getElementById('cycleInfo').textContent=done?'You completed '+MAX_CYCLES+' cycles. How do you feel?':'';
-  document.getElementById('bstart').style.display='';
-  document.getElementById('bstop').style.display='none';
-}
+          <div class="gg-prompt">
+            Plant three seeds of gratitude.
+          </div>
 
-// ── COLOR FLOW ──
-const COLORS=['#C5DCF0','#F2BFC8','#F5C9A0','#A8C4A2','#D4C5E8','#E8909F','#7AB075','#2A1C12','#FFFFFF'];
-let cfColor=COLORS[0], cfSize=6, cfDrawing=false, cfSnaps=[];
+          <div class="gg-sub">
+            What are three small things
+            you appreciate right now?
+          </div>
 
-const ccWrap=document.getElementById('cfColors');
-COLORS.forEach((c,i)=>{
-  const d=document.createElement('div');
-  d.className='cc'+(i===0?' sel':'');
-  d.style.background=c;
-  if(c==='#FFFFFF') d.style.border='2px solid #ddd';
-  d.onclick=()=>{document.querySelectorAll('.cc').forEach(x=>x.classList.remove('sel'));d.classList.add('sel');cfColor=c;};
-  ccWrap.appendChild(d);
-});
-document.querySelectorAll('.cf-sz').forEach(s=>{
-  s.onclick=()=>{document.querySelectorAll('.cf-sz').forEach(x=>x.classList.remove('sel'));s.classList.add('sel');cfSize=+s.dataset.s;};
-});
 
-const canvas=document.getElementById('cf');
-const ctx=canvas.getContext('2d');
-ctx.lineJoin='round';ctx.lineCap='round';
+          <div class="gg-items">
 
-function pos(e){
-  const r=canvas.getBoundingClientRect();
-  const cx=canvas.width/r.width, cy=canvas.height/r.height;
-  const src=e.touches?e.touches[0]:e;
-  return {x:(src.clientX-r.left)*cx,y:(src.clientY-r.top)*cy};
-}
-canvas.addEventListener('mousedown',e=>{cfSnaps.push(ctx.getImageData(0,0,canvas.width,canvas.height));cfDrawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});
-canvas.addEventListener('mousemove',e=>{if(!cfDrawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.strokeStyle=cfColor;ctx.lineWidth=cfSize;ctx.stroke();});
-canvas.addEventListener('mouseup',()=>cfDrawing=false);
-canvas.addEventListener('mouseleave',()=>cfDrawing=false);
-canvas.addEventListener('touchstart',e=>{e.preventDefault();cfSnaps.push(ctx.getImageData(0,0,canvas.width,canvas.height));cfDrawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);},{passive:false});
-canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!cfDrawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.strokeStyle=cfColor;ctx.lineWidth=cfSize;ctx.stroke();},{passive:false});
-canvas.addEventListener('touchend',()=>cfDrawing=false);
+            <div class="gg-inp-wrap">
 
-function cfUndo(){if(cfSnaps.length){ctx.putImageData(cfSnaps.pop(),0,0);}}
-function cfClear(){ctx.clearRect(0,0,canvas.width,canvas.height);cfSnaps=[];}
-function cfSave(){const a=document.createElement('a');a.download='zenene-color-flow.png';a.href=canvas.toDataURL();a.click();}
+              <div class="gg-num">
+                ①
+              </div>
 
-// ── GRATITUDE ──
-function saveGratitude(){
-  const vals=[document.getElementById('g1').value.trim(),document.getElementById('g2').value.trim(),document.getElementById('g3').value.trim()];
-  if(!vals.some(v=>v)) return;
-  const saved=JSON.parse(localStorage.getItem('z_gratitude')||'[]');
-  const d=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});
-  saved.unshift({date:d,items:vals.filter(Boolean)});
-  localStorage.setItem('z_gratitude',JSON.stringify(saved.slice(0,30)));
-  ['g1','g2','g3'].forEach(id=>document.getElementById(id).value='');
-  renderGarden();
-}
+              <input
+                class="gg-inp"
+                id="g1"
+                placeholder="I'm grateful for..."
+              >
 
-function renderGarden(){
-  const saved=JSON.parse(localStorage.getItem('z_gratitude')||'[]');
-  const el=document.getElementById('ggarden');
-  el.innerHTML=saved.map(e=>`<div class="gg-card"><div class="gg-card-date">🌿 ${e.date}</div>${e.items.map(i=>`<div>• ${escH(i)}</div>`).join('')}</div>`).join('');
-}
-function escH(s){return s.replace(/</g,'&lt;');}
-renderGarden();
-</script>
+            </div>
+
+
+            <div class="gg-inp-wrap">
+
+              <div class="gg-num">
+                ②
+              </div>
+
+              <input
+                class="gg-inp"
+                id="g2"
+                placeholder="Something small that helped..."
+              >
+
+            </div>
+
+
+            <div class="gg-inp-wrap">
+
+              <div class="gg-num">
+                ③
+              </div>
+
+              <input
+                class="gg-inp"
+                id="g3"
+                placeholder="A moment I want to remember..."
+              >
+
+            </div>
+
+          </div>
+
+
+          <button
+            class="gg-save"
+            onclick="saveGratitude()"
+          >
+            plant in my garden 🌻
+          </button>
+
+        </div>
+
+
+        <div class="garden-side">
+
+          <div class="garden-title">
+            your little garden.
+          </div>
+
+          <div class="garden-note">
+            small things still count.
+          </div>
+
+
+          <div
+            class="gg-garden"
+            id="ggarden"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+
+    <div class="script">
+      be gentle with yourself.
+    </div>
+
+    <p>
+      zenene · where your mind blooms
+    </p>
+
+  </footer>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
+
+  <script>
+
+
+    /* =======================================================
+       TAB SWITCHING
+       ======================================================= */
+
+    function switchTab(id, btn) {
+
+      document
+        .querySelectorAll(".panel")
+        .forEach(panel =>
+          panel.classList.remove("active")
+        );
+
+
+      document
+        .querySelectorAll(".c-tab")
+        .forEach(button =>
+          button.classList.remove("active")
+        );
+
+
+      document
+        .getElementById("panel-" + id)
+        .classList.add("active");
+
+
+      btn.classList.add("active");
+
+    }
+
+
+    /* =======================================================
+       BREATHING
+       ======================================================= */
+
+    let bTimer = null;
+
+    let bCycle = 0;
+
+    let bPhase = 0;
+
+
+    const PHASES = [
+
+      {
+        name: "Inhale",
+        dur: 4,
+        scale: 1.32,
+        shadow:
+          "0 0 0 24px rgba(245,201,160,.18)"
+      },
+
+      {
+        name: "Hold",
+        dur: 7,
+        scale: 1.32,
+        shadow:
+          "0 0 0 28px rgba(245,201,160,.12)"
+      },
+
+      {
+        name: "Exhale",
+        dur: 8,
+        scale: 1,
+        shadow:
+          "0 0 0 0 rgba(245,201,160,0)"
+      }
+
+    ];
+
+
+    const MAX_CYCLES = 4;
+
+
+    function startBreath() {
+
+      document
+        .getElementById("bstart")
+        .style.display = "none";
+
+
+      document
+        .getElementById("bstop")
+        .style.display = "";
+
+
+      bCycle = 0;
+
+      bPhase = 0;
+
+      runPhase();
+
+    }
+
+
+    function runPhase() {
+
+      if (bCycle >= MAX_CYCLES) {
+
+        stopBreath(true);
+
+        return;
+      }
+
+
+      const p = PHASES[bPhase];
+
+      const bc =
+        document.getElementById("bc");
+
+
+      bc.style.transform =
+        "scale(" + p.scale + ")";
+
+
+      bc.style.boxShadow =
+        p.shadow;
+
+
+      document.getElementById("bw")
+        .textContent = p.name;
+
+
+      document.getElementById("bphase")
+        .textContent =
+          p.name + " for " + p.dur + "s";
+
+
+      document.getElementById("cycleInfo")
+        .textContent =
+          "Cycle " +
+          (bCycle + 1) +
+          " of " +
+          MAX_CYCLES;
+
+
+      let cnt = p.dur;
+
+
+      document.getElementById("bcnt")
+        .textContent = cnt;
+
+
+      const tick = () => {
+
+        cnt--;
+
+        document.getElementById("bcnt")
+          .textContent =
+            cnt > 0 ? cnt : "";
+
+
+        if (cnt <= 0) {
+
+          nextPhase();
+
+        } else {
+
+          bTimer =
+            setTimeout(tick, 1000);
+
+        }
+
+      };
+
+
+      bTimer =
+        setTimeout(tick, 1000);
+
+    }
+
+
+    function nextPhase() {
+
+      bPhase++;
+
+
+      if (bPhase >= PHASES.length) {
+
+        bPhase = 0;
+
+        bCycle++;
+
+      }
+
+
+      runPhase();
+
+    }
+
+
+    function stopBreath(done = false) {
+
+      clearTimeout(bTimer);
+
+
+      const bc =
+        document.getElementById("bc");
+
+
+      bc.style.transform =
+        "scale(1)";
+
+
+      bc.style.boxShadow = "";
+
+
+      document.getElementById("bw")
+        .textContent = "breathe";
+
+
+      document.getElementById("bcnt")
+        .textContent = "";
+
+
+      document.getElementById("bphase")
+        .textContent =
+          done
+            ? "Well done 🌿 4-7-8 Breathing"
+            : "4-7-8 Breathing";
+
+
+      document.getElementById("cycleInfo")
+        .textContent =
+          done
+            ? "You completed " +
+              MAX_CYCLES +
+              " cycles. How do you feel?"
+            : "";
+
+
+      document.getElementById("bstart")
+        .style.display = "";
+
+
+      document.getElementById("bstop")
+        .style.display = "none";
+
+    }
+
+
+    /* =======================================================
+       COLOR FLOW
+       ======================================================= */
+
+    const COLORS = [
+
+      "#C5DCF0",
+      "#F2BFC8",
+      "#F5C9A0",
+      "#A8C4A2",
+      "#D4C5E8",
+      "#E8909F",
+      "#7AB075",
+      "#2A1C12",
+      "#FFFFFF"
+
+    ];
+
+
+    let cfColor = COLORS[0];
+
+    let cfSize = 6;
+
+    let cfDrawing = false;
+
+    let cfSnaps = [];
+
+
+    const ccWrap =
+      document.getElementById("cfColors");
+
+
+    COLORS.forEach((c, i) => {
+
+      const d =
+        document.createElement("div");
+
+
+      d.className =
+        "cc" +
+        (i === 0 ? " sel" : "");
+
+
+      d.style.background = c;
+
+
+      if (c === "#FFFFFF") {
+
+        d.style.border =
+          "2px solid #ddd";
+
+      }
+
+
+      d.onclick = () => {
+
+        document
+          .querySelectorAll(".cc")
+          .forEach(x =>
+            x.classList.remove("sel")
+          );
+
+
+        d.classList.add("sel");
+
+
+        cfColor = c;
+
+      };
+
+
+      ccWrap.appendChild(d);
+
+    });
+
+
+    document
+      .querySelectorAll(".cf-sz")
+      .forEach(s => {
+
+        s.onclick = () => {
+
+          document
+            .querySelectorAll(".cf-sz")
+            .forEach(x =>
+              x.classList.remove("sel")
+            );
+
+
+          s.classList.add("sel");
+
+
+          cfSize =
+            +s.dataset.s;
+
+        };
+
+      });
+
+
+    const canvas =
+      document.getElementById("cf");
+
+
+    const ctx =
+      canvas.getContext("2d");
+
+
+    ctx.lineJoin = "round";
+
+    ctx.lineCap = "round";
+
+
+    function pos(e) {
+
+      const r =
+        canvas.getBoundingClientRect();
+
+
+      const cx =
+        canvas.width / r.width;
+
+
+      const cy =
+        canvas.height / r.height;
+
+
+      const src =
+        e.touches
+          ? e.touches[0]
+          : e;
+
+
+      return {
+
+        x:
+          (src.clientX - r.left) * cx,
+
+        y:
+          (src.clientY - r.top) * cy
+
+      };
+
+    }
+
+
+    canvas.addEventListener(
+      "mousedown",
+      e => {
+
+        cfSnaps.push(
+          ctx.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          )
+        );
+
+
+        cfDrawing = true;
+
+
+        const p = pos(e);
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(p.x, p.y);
+
+      }
+    );
+
+
+    canvas.addEventListener(
+      "mousemove",
+      e => {
+
+        if (!cfDrawing) return;
+
+
+        const p = pos(e);
+
+
+        ctx.lineTo(p.x, p.y);
+
+
+        ctx.strokeStyle = cfColor;
+
+        ctx.lineWidth = cfSize;
+
+        ctx.stroke();
+
+      }
+    );
+
+
+    canvas.addEventListener(
+      "mouseup",
+      () => cfDrawing = false
+    );
+
+
+    canvas.addEventListener(
+      "mouseleave",
+      () => cfDrawing = false
+    );
+
+
+    canvas.addEventListener(
+      "touchstart",
+      e => {
+
+        e.preventDefault();
+
+
+        cfSnaps.push(
+          ctx.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          )
+        );
+
+
+        cfDrawing = true;
+
+
+        const p = pos(e);
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(p.x, p.y);
+
+      },
+      { passive: false }
+    );
+
+
+    canvas.addEventListener(
+      "touchmove",
+      e => {
+
+        e.preventDefault();
+
+
+        if (!cfDrawing) return;
+
+
+        const p = pos(e);
+
+
+        ctx.lineTo(p.x, p.y);
+
+
+        ctx.strokeStyle = cfColor;
+
+        ctx.lineWidth = cfSize;
+
+        ctx.stroke();
+
+      },
+      { passive: false }
+    );
+
+
+    canvas.addEventListener(
+      "touchend",
+      () => cfDrawing = false
+    );
+
+
+    function cfUndo() {
+
+      if (cfSnaps.length) {
+
+        ctx.putImageData(
+          cfSnaps.pop(),
+          0,
+          0
+        );
+
+      }
+
+    }
+
+
+    function cfClear() {
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      cfSnaps = [];
+
+    }
+
+
+    function cfSave() {
+
+      const a =
+        document.createElement("a");
+
+
+      a.download =
+        "zenene-color-flow.png";
+
+
+      a.href =
+        canvas.toDataURL();
+
+
+      a.click();
+
+    }
+
+
+    /* =======================================================
+       GRATITUDE
+       ======================================================= */
+
+    function saveGratitude() {
+
+      const vals = [
+
+        document
+          .getElementById("g1")
+          .value
+          .trim(),
+
+        document
+          .getElementById("g2")
+          .value
+          .trim(),
+
+        document
+          .getElementById("g3")
+          .value
+          .trim()
+
+      ];
+
+
+      if (!vals.some(v => v)) return;
+
+
+      const saved =
+        JSON.parse(
+          localStorage.getItem(
+            "z_gratitude"
+          ) || "[]"
+        );
+
+
+      const d =
+        new Date().toLocaleDateString(
+          "en-US",
+          {
+            month: "short",
+            day: "numeric"
+          }
+        );
+
+
+      saved.unshift({
+
+        date: d,
+
+        items:
+          vals.filter(Boolean)
+
+      });
+
+
+      localStorage.setItem(
+        "z_gratitude",
+        JSON.stringify(
+          saved.slice(0, 30)
+        )
+      );
+
+
+      ["g1", "g2", "g3"]
+        .forEach(id =>
+          document.getElementById(id)
+            .value = ""
+        );
+
+
+      renderGarden();
+
+    }
+
+
+    function renderGarden() {
+
+      const saved =
+        JSON.parse(
+          localStorage.getItem(
+            "z_gratitude"
+          ) || "[]"
+        );
+
+
+      const el =
+        document.getElementById(
+          "ggarden"
+        );
+
+
+      el.innerHTML =
+        saved
+          .map(e => `
+
+            <div class="gg-card">
+
+              <div class="gg-card-date">
+                🌿 ${e.date}
+              </div>
+
+              ${e.items
+                .map(i =>
+                  `<div>• ${escH(i)}</div>`
+                )
+                .join("")}
+
+            </div>
+
+          `)
+          .join("");
+
+    }
+
+
+    function escH(s) {
+
+      return s
+        .replace(/</g, "&lt;");
+
+    }
+
+
+    /* =======================================================
+       INITIALIZE
+       ======================================================= */
+
+    renderGarden();
+
+  </script>
+
+
 </body>
+
 </html>

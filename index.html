@@ -2032,12 +2032,12 @@ body::before {
 
   position: absolute;
 
-  right: 7vw;
+  left: 7vw;
   top: 50%;
 
   width: min(230px, 20vw);
 
-  transform: translateY(18px) rotate(3deg);
+  transform: translateY(18px) rotate(-3deg);
 
   font-family: var(--script);
   font-size: clamp(1.1rem, 2vw, 1.55rem);
@@ -2055,6 +2055,12 @@ body::before {
   z-index: 6;
 }
 
+.journal-story.open .journal-side-note {
+
+  opacity: .9;
+
+  transform: translateY(0) rotate(-3deg);
+}
 .journal-story.open .journal-side-note {
 
   opacity: .9;

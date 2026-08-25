@@ -68,73 +68,98 @@ body::before {
     opacity: 0.16;
 }
 
+
 /* ---------------------------------------------------------
-   NAVIGATION — SAME ZENENE HEADER
+   NAVIGATION — SAME HEADER AS MOOD.HTML
 --------------------------------------------------------- */
 
-.navbar {
-    height: 73px;
-    width: 100%;
+.top-nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 500;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    padding: 0 48px;
+    padding: 20px 34px;
 
-    border-top: 1px solid #2f2a26;
-    border-bottom: 1px solid var(--line);
+    background: rgba(247,241,231,.78);
 
-    background: rgba(247, 241, 231, 0.95);
+    backdrop-filter: blur(18px);
 
-    position: relative;
-    z-index: 50;
+    border-bottom: 1px solid rgba(98,79,67,.08);
 }
 
-.logo {
-    font-family: var(--mono);
-    font-size: 15px;
-    letter-spacing: 5px;
-    font-weight: 500;
+.nav-wordmark {
+
+    font-family: "Special Elite", "Courier New", monospace;
+
+    font-size: .78rem;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
 }
 
 .nav-links {
+
     display: flex;
+
+    gap: 28px;
+
     align-items: center;
-    gap: 34px;
 }
 
 .nav-links a {
-    position: relative;
 
-    color: var(--ink);
+    color: var(--brown);
+
     text-decoration: none;
 
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 1.3px;
+    font-family: "Special Elite", "Courier New", monospace;
 
-    padding: 27px 0 24px;
+    font-size: .65rem;
 
-    transition: opacity 0.25s ease;
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+    transition: .3s ease;
 }
 
 .nav-links a:hover {
-    opacity: 0.55;
+    color: var(--pink);
 }
 
-.nav-links a.active::after {
+.nav-links .active {
+
+    color: var(--ink);
+
+    position: relative;
+}
+
+.nav-links .active::after {
+
     content: "";
 
     position: absolute;
+
     left: 0;
     right: 0;
-    bottom: 19px;
+
+    bottom: -7px;
 
     height: 1px;
 
     background: var(--pink);
 }
+
 
 /* ---------------------------------------------------------
    HERO
@@ -203,6 +228,7 @@ body::before {
     font-size: 1.12em;
 }
 
+
 /* ---------------------------------------------------------
    MAIN JOURNAL AREA
 --------------------------------------------------------- */
@@ -212,6 +238,7 @@ body::before {
     max-width: 1220px;
     margin: 0 auto 120px;
 }
+
 
 /* ---------------------------------------------------------
    JOURNAL PAPER
@@ -250,6 +277,7 @@ body::before {
     transform: rotate(2deg);
 }
 
+
 /* ---------------------------------------------------------
    WRITE HEADER
 --------------------------------------------------------- */
@@ -273,6 +301,7 @@ body::before {
     font-size: 10px;
     color: var(--muted);
 }
+
 
 /* ---------------------------------------------------------
    TEXT AREA
@@ -311,6 +340,7 @@ body::before {
     font-style: italic;
 }
 
+
 /* ---------------------------------------------------------
    TOOLBAR
 --------------------------------------------------------- */
@@ -331,6 +361,7 @@ body::before {
     font-size: 10px;
     color: var(--muted);
 }
+
 
 /* ---------------------------------------------------------
    BUTTONS
@@ -358,6 +389,7 @@ body::before {
     background: var(--pink);
     transform: translateY(-2px);
 }
+
 
 /* ---------------------------------------------------------
    MOOD SECTION
@@ -387,6 +419,7 @@ body::before {
     font-size: 20px;
 }
 
+
 /* ---------------------------------------------------------
    MOOD GRID
 --------------------------------------------------------- */
@@ -396,8 +429,6 @@ body::before {
     grid-template-columns: repeat(9, 1fr);
     gap: 12px;
 }
-
-/* Individual mood */
 
 .mood-option {
     border: 1px solid transparent;
@@ -422,9 +453,10 @@ body::before {
     border-color: var(--pink);
 }
 
+
 /* ---------------------------------------------------------
    CUSTOM PASTEL FACES
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 
 .face {
     width: 76px;
@@ -452,6 +484,7 @@ body::before {
     transform: scale(1.05);
 }
 
+
 /* eyes */
 
 .eye {
@@ -474,6 +507,7 @@ body::before {
     right: 22px;
 }
 
+
 /* mouth */
 
 .mouth {
@@ -491,6 +525,7 @@ body::before {
 
     border-radius: 0 0 30px 30px;
 }
+
 
 /* moods */
 
@@ -616,6 +651,7 @@ body::before {
     color: #655950;
 }
 
+
 /* ---------------------------------------------------------
    ENTRIES
 --------------------------------------------------------- */
@@ -658,6 +694,7 @@ body::before {
 .search-box::placeholder {
     color: #9b8d82;
 }
+
 
 /* entry */
 
@@ -719,6 +756,7 @@ body::before {
     color: var(--pink);
 }
 
+
 /* ---------------------------------------------------------
    EMPTY STATE
 --------------------------------------------------------- */
@@ -746,6 +784,7 @@ body::before {
     font-size: 18px;
 }
 
+
 /* ---------------------------------------------------------
    FOOTER
 --------------------------------------------------------- */
@@ -769,6 +808,7 @@ body::before {
     color: var(--muted);
 }
 
+
 /* ---------------------------------------------------------
    ANIMATIONS
 --------------------------------------------------------- */
@@ -785,14 +825,15 @@ body::before {
     }
 }
 
+
 /* ---------------------------------------------------------
    RESPONSIVE
 --------------------------------------------------------- */
 
 @media (max-width: 1000px) {
 
-    .navbar {
-        padding: 0 25px;
+    .top-nav {
+        padding: 18px 25px;
     }
 
     .nav-links {
@@ -825,32 +866,16 @@ body::before {
 
 @media (max-width: 650px) {
 
-    .navbar {
-        height: auto;
-        min-height: 70px;
+    .top-nav {
         padding: 18px 20px;
-
-        align-items: flex-start;
     }
 
     .nav-links {
-        gap: 12px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
+        gap: 13px;
     }
 
     .nav-links a {
-        font-size: 9px;
-        padding: 5px 0;
-    }
-
-    .nav-links a.active::after {
-        bottom: 0;
-    }
-
-    .logo {
-        font-size: 12px;
-        letter-spacing: 3px;
+        font-size: .52rem;
     }
 
     .hero {
@@ -918,39 +943,42 @@ body::before {
 
 <body>
 
+
 <!-- =====================================================
      NAVIGATION
 ===================================================== -->
 
-<header class="navbar">
+<nav class="top-nav">
 
-    <div class="logo">
-        ZENENE
+    <div class="nav-wordmark">
+        zenene
     </div>
 
-    <nav class="nav-links">
+    <div class="nav-links">
 
-        <a href="index.html">HOME</a>
+        <a href="index.html">
+            home
+        </a>
 
         <a href="journal.html" class="active">
-            JOURNAL
+            journal
         </a>
 
         <a href="mood.html">
-            MOOD
+            mood
         </a>
 
         <a href="explore.html">
-            EXPLORE
+            explore
         </a>
 
         <a href="vera.html">
-            VERA
+            vera
         </a>
 
-    </nav>
+    </div>
 
-</header>
+</nav>
 
 
 <!-- =====================================================

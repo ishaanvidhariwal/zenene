@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Vera — Zenene</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="vera.css">
+
+</head>
+
+
+<body>
+
+<main class="vera-page">
+
+    <div class="vera-shell">
+
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="vera-header">
+
+            <div class="vera-brand">
+
+                <div class="vera-name">
+                    vera
+                </div>
+
+                <div class="vera-subtitle">
+                    a space to understand yourself
+                </div>
+
+            </div>
+
+
+            <div class="vera-status">
+
+                <span class="vera-status-dot"></span>
+
+                here to listen
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             CHAT AREA
+        ========================== -->
+
+        <section
+            class="vera-chat"
+            id="veraChat"
+        >
+
+
+            <!-- WELCOME -->
+
+            <div
+                class="vera-welcome"
+                id="veraWelcome"
+            >
+
+                <div class="vera-symbol">
+                    V
+                </div>
+
+
+                <h1>
+                    Hi, I'm Vera.
+                </h1>
+
+
+                <p>
+                    You don't need to have the right words.
+                    Just tell me what's on your mind.
+                </p>
+
+
+                <div class="vera-suggestions">
+
+                    <button
+                        type="button"
+                        data-message="I don't really understand what I'm feeling."
+                    >
+                        I don't understand what I'm feeling
+                    </button>
+
+
+                    <button
+                        type="button"
+                        data-message="I just need someone to listen."
+                    >
+                        I just need someone to listen
+                    </button>
+
+
+                    <button
+                        type="button"
+                        data-message="Something happened today."
+                    >
+                        Something happened today
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MESSAGES -->
+
+            <div
+                class="vera-messages"
+                id="veraMessages"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             MESSAGE INPUT
+        ========================== -->
+
+        <form
+            class="vera-input-area"
+            id="veraForm"
+        >
+
+            <textarea
+                id="veraInput"
+                rows="1"
+                maxlength="8000"
+                placeholder="What's on your mind?"
+            ></textarea>
+
+
+            <button
+                type="submit"
+                id="veraSend"
+                aria-label="Send message"
+            >
+                ↑
+            </button>
+
+        </form>
+
+
+
+        <!-- =========================
+             DISCLAIMER
+        ========================== -->
+
+        <p class="vera-disclaimer">
+
+            Vera is an AI designed to provide
+            psychologically informed support.
+            She isn't a replacement for a
+            mental-health professional.
+
+        </p>
+
+
+    </div>
+
+</main>
+
+
+<script src="vera.js"></script>
+
+</body>
+
+</html>

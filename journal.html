@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Mono:wght@300;400;500&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+    rel="stylesheet"
+>
 
 <style>
 
@@ -19,19 +23,32 @@
    ========================================================= */
 
 :root {
+
     --paper: #f7f1e7;
     --paper-light: #fbf8f2;
-    --ink: #302b27;
+
+    --ink: #2F2B27;
     --muted: #75685e;
+
     --line: #ddd3c7;
-    --pink: #bd7b84;
+
+    --pink: #B97880;
     --pink-soft: #ead3d1;
-    --brown: #4a3d35;
+
+    --brown: #624F43;
+    --brown-dark: #392D26;
+
+    --cream: #F7F1E7;
+    --rose-deep: #B97880;
 
     --serif: "Cormorant Garamond", Georgia, serif;
-    --mono: "DM Mono", monospace;
-    --script: "Kalam", cursive;
+    --typewriter: "Special Elite", "Courier New", monospace;
+
+    /* kept for the existing journal styling */
+    --mono: "Special Elite", "Courier New", monospace;
+    --script: "Dancing Script", cursive;
 }
+
 
 * {
     margin: 0;
@@ -39,39 +56,53 @@
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
+
     background: var(--paper);
+
     color: var(--ink);
-    font-family: var(--serif);
+
     overflow-x: hidden;
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    PAPER TEXTURE
---------------------------------------------------------- */
+   ========================================================= */
 
 body::before {
+
     content: "";
+
     position: fixed;
+
     inset: 0;
+
     pointer-events: none;
+
     z-index: 999;
 
     background-image:
-        radial-gradient(rgba(80, 65, 55, 0.10) 0.6px, transparent 0.6px);
+        radial-gradient(
+            rgba(80, 65, 55, 0.10) 0.6px,
+            transparent 0.6px
+        );
 
     background-size: 5px 5px;
+
     opacity: 0.16;
 }
 
 
-/* ---------------------------------------------------------
-   NAVIGATION — SAME HEADER AS MOOD.HTML
---------------------------------------------------------- */
+/* =========================================================
+   NAVIGATION — EXACT SAME AS MOOD.HTML
+   ========================================================= */
 
 .top-nav {
 
@@ -96,9 +127,10 @@ body::before {
     border-bottom: 1px solid rgba(98,79,67,.08);
 }
 
+
 .nav-wordmark {
 
-    font-family: "Special Elite", "Courier New", monospace;
+    font-family: var(--typewriter);
 
     font-size: .78rem;
 
@@ -106,6 +138,7 @@ body::before {
 
     text-transform: uppercase;
 }
+
 
 .nav-links {
 
@@ -116,13 +149,14 @@ body::before {
     align-items: center;
 }
 
+
 .nav-links a {
 
     color: var(--brown);
 
     text-decoration: none;
 
-    font-family: "Special Elite", "Courier New", monospace;
+    font-family: var(--typewriter);
 
     font-size: .65rem;
 
@@ -133,9 +167,12 @@ body::before {
     transition: .3s ease;
 }
 
+
 .nav-links a:hover {
-    color: var(--pink);
+
+    color: var(--rose-deep);
 }
+
 
 .nav-links .active {
 
@@ -143,6 +180,7 @@ body::before {
 
     position: relative;
 }
+
 
 .nav-links .active::after {
 
@@ -157,19 +195,22 @@ body::before {
 
     height: 1px;
 
-    background: var(--pink);
+    background: var(--rose-deep);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    HERO
---------------------------------------------------------- */
+   ========================================================= */
 
 .hero {
+
     min-height: 420px;
 
     display: grid;
+
     grid-template-columns: 1fr 0.9fr;
+
     align-items: center;
 
     padding: 85px 8% 65px;
@@ -177,28 +218,45 @@ body::before {
     position: relative;
 }
 
+
 .hero-left {
+
     animation: fadeUp 0.9s ease both;
 }
 
+
 .eyebrow {
-    font-family: var(--mono);
+
+    font-family: var(--typewriter);
+
     font-size: 12px;
+
     letter-spacing: 2px;
+
     margin-bottom: 78px;
 }
 
+
 .hero-title {
+
     font-family: var(--serif);
+
     font-size: clamp(90px, 9vw, 145px);
+
     line-height: 0.68;
+
     font-weight: 500;
+
     letter-spacing: -5px;
 }
 
+
 .hero-title span {
+
     font-family: var(--script);
+
     font-size: 0.55em;
+
     color: var(--pink);
 
     display: inline-block;
@@ -206,45 +264,61 @@ body::before {
     margin-left: 20px;
 
     transform: rotate(-4deg);
+
     letter-spacing: -2px;
 }
 
+
 .hero-right {
+
     max-width: 500px;
+
     padding-left: 40px;
 
     animation: fadeUp 1s 0.15s ease both;
 }
 
+
 .hero-description {
+
     font-size: 27px;
+
     line-height: 1.45;
+
     color: #655950;
 }
 
+
 .hero-description em {
+
     color: var(--pink);
+
     font-family: var(--script);
+
     font-size: 1.12em;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    MAIN JOURNAL AREA
---------------------------------------------------------- */
+   ========================================================= */
 
 .journal-wrapper {
+
     width: 84%;
+
     max-width: 1220px;
+
     margin: 0 auto 120px;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    JOURNAL PAPER
---------------------------------------------------------- */
+   ========================================================= */
 
 .write-card {
+
     background: var(--paper-light);
 
     border: 1px solid #e3d9cd;
@@ -259,17 +333,21 @@ body::before {
     animation: fadeUp 0.9s 0.2s ease both;
 }
 
+
 /* little tape */
 
 .write-card::before {
+
     content: "";
 
     position: absolute;
 
     width: 85px;
+
     height: 23px;
 
     top: -11px;
+
     right: 70px;
 
     background: rgba(210, 153, 158, 0.30);
@@ -278,42 +356,56 @@ body::before {
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    WRITE HEADER
---------------------------------------------------------- */
+   ========================================================= */
 
 .write-top {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: flex-end;
 
     margin-bottom: 28px;
 }
 
+
 .section-label {
-    font-family: var(--mono);
+
+    font-family: var(--typewriter);
+
     font-size: 11px;
+
     letter-spacing: 2px;
 }
 
+
 .date {
-    font-family: var(--mono);
+
+    font-family: var(--typewriter);
+
     font-size: 10px;
+
     color: var(--muted);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    TEXT AREA
---------------------------------------------------------- */
+   ========================================================= */
 
 #journalText {
+
     width: 100%;
+
     min-height: 210px;
 
     resize: vertical;
 
     border: none;
+
     outline: none;
 
     background:
@@ -325,7 +417,9 @@ body::before {
         );
 
     font-family: var(--serif);
+
     font-size: 23px;
+
     line-height: 35px;
 
     color: var(--ink);
@@ -335,47 +429,63 @@ body::before {
     transition: background 0.3s ease;
 }
 
+
 #journalText::placeholder {
+
     color: #a89b90;
+
     font-style: italic;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    TOOLBAR
---------------------------------------------------------- */
+   ========================================================= */
 
 .write-bottom {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     margin-top: 25px;
 
     border-top: 1px solid var(--line);
+
     padding-top: 24px;
 }
 
+
 .small-note {
-    font-family: var(--mono);
+
+    font-family: var(--typewriter);
+
     font-size: 10px;
+
     color: var(--muted);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    BUTTONS
---------------------------------------------------------- */
+   ========================================================= */
 
 .primary-btn {
+
     border: none;
-    background: var(--brown);
+
+    background: var(--brown-dark);
+
     color: #fff;
 
     padding: 14px 24px;
 
-    font-family: var(--mono);
+    font-family: var(--typewriter);
+
     font-size: 10px;
+
     letter-spacing: 1px;
 
     cursor: pointer;
@@ -385,53 +495,75 @@ body::before {
         background 0.25s ease;
 }
 
+
 .primary-btn:hover {
+
     background: var(--pink);
+
     transform: translateY(-2px);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    MOOD SECTION
---------------------------------------------------------- */
+   ========================================================= */
 
 .mood-section {
+
     margin-top: 80px;
 }
 
+
 .section-heading {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: baseline;
 
     margin-bottom: 30px;
 }
 
+
 .section-heading h2 {
+
     font-family: var(--serif);
+
     font-size: 42px;
+
     font-weight: 500;
 }
 
+
 .section-heading span {
+
     font-family: var(--script);
+
     color: var(--pink);
+
     font-size: 20px;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    MOOD GRID
---------------------------------------------------------- */
+   ========================================================= */
 
 .mood-grid {
+
     display: grid;
+
     grid-template-columns: repeat(9, 1fr);
+
     gap: 12px;
 }
 
+
 .mood-option {
+
     border: 1px solid transparent;
+
     background: transparent;
 
     padding: 15px 7px;
@@ -444,22 +576,29 @@ body::before {
         border 0.25s ease;
 }
 
+
 .mood-option:hover {
+
     transform: translateY(-6px);
 }
 
+
 .mood-option.selected {
+
     background: rgba(255,255,255,0.55);
+
     border-color: var(--pink);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    CUSTOM PASTEL FACES
---------------------------------------------------------- */
+   ========================================================= */
 
 .face {
+
     width: 76px;
+
     height: 76px;
 
     max-width: 100%;
@@ -471,7 +610,9 @@ body::before {
     position: relative;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     box-shadow:
@@ -480,7 +621,9 @@ body::before {
     transition: transform 0.25s ease;
 }
 
+
 .mood-option:hover .face {
+
     transform: scale(1.05);
 }
 
@@ -488,7 +631,9 @@ body::before {
 /* eyes */
 
 .eye {
+
     width: 8px;
+
     height: 8px;
 
     border-radius: 50%;
@@ -496,12 +641,15 @@ body::before {
     background: #666b6c;
 
     position: absolute;
+
     top: 28px;
 }
+
 
 .eye.left {
     left: 22px;
 }
+
 
 .eye.right {
     right: 22px;
@@ -511,14 +659,17 @@ body::before {
 /* mouth */
 
 .mouth {
+
     position: absolute;
 
     left: 50%;
+
     transform: translateX(-50%);
 
     top: 43px;
 
     width: 27px;
+
     height: 14px;
 
     border-bottom: 4px solid #666b6c;
@@ -533,86 +684,121 @@ body::before {
     background: #e7aaa0;
 }
 
+
 .face-angry .eye.left {
     transform: rotate(20deg);
 }
+
 
 .face-angry .eye.right {
     transform: rotate(-20deg);
 }
 
+
 .face-angry .mouth {
+
     top: 48px;
+
     border-bottom: none;
+
     border-top: 4px solid #666b6c;
+
     border-radius: 30px 30px 0 0;
 }
+
 
 .face-happy {
     background: #f5c982;
 }
 
+
 .face-veryhappy {
     background: #f1e38e;
 }
+
 
 .face-veryhappy .mouth {
     height: 17px;
 }
 
+
 .face-love {
     background: #e9b6bc;
 }
 
+
 .face-love .eye {
+
     width: 10px;
+
     height: 10px;
+
     transform: rotate(45deg);
+
     border-radius: 2px;
 }
+
 
 .face-neutral {
     background: #e9ddc7;
 }
 
+
 .face-neutral .mouth {
+
     border-bottom: none;
+
     border-top: 4px solid #666b6c;
+
     border-radius: 0;
+
     height: 0;
 }
+
 
 .face-excited {
     background: #d8e68e;
 }
 
+
 .face-excited .eye.left {
     transform: rotate(45deg);
 }
+
 
 .face-excited .eye.right {
     transform: rotate(-45deg);
 }
 
+
 .face-sad {
     background: #d6cbe3;
 }
 
+
 .face-sad .mouth {
+
     border-bottom: none;
+
     border-top: 4px solid #666b6c;
+
     border-radius: 30px 30px 0 0;
 }
+
 
 .face-cry {
     background: #b9cee4;
 }
 
+
 .face-cry::after {
+
     content: "";
+
     position: absolute;
 
     width: 7px;
+
     height: 11px;
 
     border-radius: 50%;
@@ -620,30 +806,40 @@ body::before {
     background: #7894ad;
 
     top: 39px;
+
     left: 19px;
 
     transform: rotate(20deg);
 }
 
+
 .face-surprise {
     background: #bddcae;
 }
 
+
 .face-surprise .mouth {
+
     width: 17px;
+
     height: 23px;
 
     border: 4px solid #666b6c;
+
     border-radius: 50%;
 
     top: 42px;
 }
 
+
 .mood-name {
+
     display: block;
 
-    font-family: var(--mono);
+    font-family: var(--typewriter);
+
     font-size: 8px;
+
     letter-spacing: 0.7px;
 
     text-align: center;
@@ -652,17 +848,22 @@ body::before {
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    ENTRIES
---------------------------------------------------------- */
+   ========================================================= */
 
 .entries-section {
+
     margin-top: 95px;
 }
 
+
 .entries-heading {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: baseline;
 
     border-bottom: 1px solid var(--line);
@@ -670,15 +871,23 @@ body::before {
     padding-bottom: 15px;
 }
 
+
 .entries-heading h2 {
+
+    font-family: var(--serif);
+
     font-size: 42px;
+
     font-weight: 500;
 }
 
+
 .search-box {
+
     background: transparent;
 
     border: none;
+
     border-bottom: 1px solid #b9aea4;
 
     padding: 8px 4px;
@@ -687,9 +896,11 @@ body::before {
 
     outline: none;
 
-    font-family: var(--mono);
+    font-family: var(--typewriter);
+
     font-size: 10px;
 }
+
 
 .search-box::placeholder {
     color: #9b8d82;
@@ -699,11 +910,13 @@ body::before {
 /* entry */
 
 .entry {
+
     padding: 35px 5px;
 
     border-bottom: 1px solid var(--line);
 
     display: grid;
+
     grid-template-columns: 160px 1fr 110px;
 
     gap: 30px;
@@ -711,38 +924,57 @@ body::before {
     animation: fadeUp 0.5s ease both;
 }
 
+
 .entry-date {
-    font-family: var(--mono);
+
+    font-family: var(--typewriter);
+
     font-size: 10px;
+
     letter-spacing: 1px;
+
     color: var(--muted);
 }
 
+
 .entry-content {
+
+    font-family: var(--serif);
+
     font-size: 20px;
+
     line-height: 1.55;
 
     white-space: pre-wrap;
 }
 
+
 .entry-mood {
+
     text-align: right;
 
-    font-family: var(--mono);
+    font-family: var(--typewriter);
+
     font-size: 9px;
 
     color: var(--pink);
 }
 
+
 .entry-actions {
+
     margin-top: 10px;
 }
 
+
 .entry-actions button {
+
     border: none;
+
     background: none;
 
-    font-family: var(--mono);
+    font-family: var(--typewriter);
+
     font-size: 9px;
 
     color: #8d8076;
@@ -752,16 +984,18 @@ body::before {
     margin-left: 12px;
 }
 
+
 .entry-actions button:hover {
     color: var(--pink);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    EMPTY STATE
---------------------------------------------------------- */
+   ========================================================= */
 
 .empty-state {
+
     text-align: center;
 
     padding: 65px 20px;
@@ -769,10 +1003,13 @@ body::before {
     color: var(--muted);
 }
 
+
 .empty-state .script {
+
     display: block;
 
     font-family: var(--script);
+
     color: var(--pink);
 
     font-size: 24px;
@@ -780,16 +1017,21 @@ body::before {
     margin-bottom: 8px;
 }
 
+
 .empty-state p {
+
+    font-family: var(--serif);
+
     font-size: 18px;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    FOOTER
---------------------------------------------------------- */
+   ========================================================= */
 
 .journal-footer {
+
     margin-top: 100px;
 
     padding-top: 30px;
@@ -797,142 +1039,231 @@ body::before {
     border-top: 1px solid var(--line);
 
     display: flex;
+
     justify-content: space-between;
 }
 
+
 .journal-footer span {
-    font-family: var(--mono);
+
+    font-family: var(--typewriter);
+
     font-size: 9px;
+
     letter-spacing: 1px;
 
     color: var(--muted);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    ANIMATIONS
---------------------------------------------------------- */
+   ========================================================= */
 
 @keyframes fadeUp {
+
     from {
+
         opacity: 0;
+
         transform: translateY(18px);
     }
 
     to {
+
         opacity: 1;
+
         transform: translateY(0);
     }
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    RESPONSIVE
---------------------------------------------------------- */
+   ========================================================= */
 
 @media (max-width: 1000px) {
 
     .top-nav {
-        padding: 18px 25px;
+
+        padding: 20px 25px;
     }
 
+
     .nav-links {
+
         gap: 17px;
     }
 
+
     .hero {
+
         grid-template-columns: 1fr;
+
         gap: 50px;
+
         padding: 70px 8%;
     }
 
+
     .hero-right {
+
         padding-left: 0;
     }
 
+
     .mood-grid {
+
         grid-template-columns: repeat(5, 1fr);
     }
 
+
     .entry {
+
         grid-template-columns: 1fr;
+
         gap: 12px;
     }
 
+
     .entry-mood {
+
         text-align: left;
     }
 }
 
+
 @media (max-width: 650px) {
 
     .top-nav {
+
+        height: auto;
+
+        min-height: 70px;
+
         padding: 18px 20px;
+
+        align-items: flex-start;
     }
+
 
     .nav-links {
-        gap: 13px;
+
+        gap: 12px;
+
+        flex-wrap: wrap;
+
+        justify-content: flex-end;
     }
 
+
     .nav-links a {
+
         font-size: .52rem;
     }
 
+
+    .nav-links .active::after {
+
+        bottom: -5px;
+    }
+
+
+    .nav-wordmark {
+
+        font-size: .65rem;
+
+        letter-spacing: .12em;
+    }
+
+
     .hero {
+
         padding: 65px 7% 50px;
+
         min-height: 400px;
     }
 
+
     .eyebrow {
+
         margin-bottom: 50px;
     }
 
+
     .hero-title {
+
         font-size: 75px;
     }
 
+
     .hero-title span {
+
         display: block;
+
         margin-left: 25px;
+
         margin-top: 20px;
     }
 
+
     .hero-description {
+
         font-size: 22px;
     }
 
+
     .journal-wrapper {
+
         width: 90%;
     }
 
+
     .write-card {
+
         padding: 30px 25px;
     }
 
+
     .write-bottom {
+
         flex-direction: column;
+
         gap: 20px;
+
         align-items: flex-start;
     }
 
+
     .mood-grid {
+
         grid-template-columns: repeat(3, 1fr);
+
         gap: 5px;
     }
 
+
     .face {
+
         width: 65px;
+
         height: 65px;
     }
 
+
     .section-heading,
     .entries-heading {
+
         flex-direction: column;
+
         gap: 15px;
+
         align-items: flex-start;
     }
 
+
     .search-box {
+
         width: 100%;
     }
 }
@@ -945,7 +1276,7 @@ body::before {
 
 
 <!-- =====================================================
-     NAVIGATION
+     NAVIGATION — EXACT MOOD.HTML HEADER
 ===================================================== -->
 
 <nav class="top-nav">
@@ -1004,15 +1335,17 @@ body::before {
     <div class="hero-right">
 
         <p class="hero-description">
+
             Some thoughts don't need to be
             <em>fixed.</em><br>
+
             They just need somewhere to exist.
+
         </p>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
@@ -1032,8 +1365,7 @@ body::before {
                 TODAY'S ENTRY
             </span>
 
-            <span class="date" id="todayDate">
-            </span>
+            <span class="date" id="todayDate"></span>
 
         </div>
 
@@ -1062,7 +1394,6 @@ body::before {
     </section>
 
 
-
     <!-- =================================================
          MOOD
     ================================================== -->
@@ -1085,12 +1416,19 @@ body::before {
         <div class="mood-grid">
 
 
-            <button class="mood-option" data-mood="Angry">
+            <button
+                class="mood-option"
+                data-mood="Angry"
+            >
 
                 <div class="face face-angry">
+
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
+
                 </div>
 
                 <span class="mood-name">
@@ -1100,13 +1438,19 @@ body::before {
             </button>
 
 
-
-            <button class="mood-option" data-mood="Happy">
+            <button
+                class="mood-option"
+                data-mood="Happy"
+            >
 
                 <div class="face face-happy">
+
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
+
                 </div>
 
                 <span class="mood-name">
@@ -1116,13 +1460,19 @@ body::before {
             </button>
 
 
-
-            <button class="mood-option" data-mood="Very Happy">
+            <button
+                class="mood-option"
+                data-mood="Very Happy"
+            >
 
                 <div class="face face-veryhappy">
+
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
+
                 </div>
 
                 <span class="mood-name">
@@ -1132,13 +1482,17 @@ body::before {
             </button>
 
 
-
-            <button class="mood-option" data-mood="Loved">
+            <button
+                class="mood-option"
+                data-mood="Loved"
+            >
 
                 <div class="face face-love">
 
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
 
                 </div>
@@ -1150,13 +1504,17 @@ body::before {
             </button>
 
 
-
-            <button class="mood-option" data-mood="Okay">
+            <button
+                class="mood-option"
+                data-mood="Okay"
+            >
 
                 <div class="face face-neutral">
 
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
 
                 </div>
@@ -1168,13 +1526,17 @@ body::before {
             </button>
 
 
-
-            <button class="mood-option" data-mood="Excited">
+            <button
+                class="mood-option"
+                data-mood="Excited"
+            >
 
                 <div class="face face-excited">
 
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
 
                 </div>
@@ -1186,13 +1548,17 @@ body::before {
             </button>
 
 
-
-            <button class="mood-option" data-mood="Sad">
+            <button
+                class="mood-option"
+                data-mood="Sad"
+            >
 
                 <div class="face face-sad">
 
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
 
                 </div>
@@ -1204,13 +1570,17 @@ body::before {
             </button>
 
 
-
-            <button class="mood-option" data-mood="Crying">
+            <button
+                class="mood-option"
+                data-mood="Crying"
+            >
 
                 <div class="face face-cry">
 
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
 
                 </div>
@@ -1222,13 +1592,17 @@ body::before {
             </button>
 
 
-
-            <button class="mood-option" data-mood="Surprised">
+            <button
+                class="mood-option"
+                data-mood="Surprised"
+            >
 
                 <div class="face face-surprise">
 
                     <span class="eye left"></span>
+
                     <span class="eye right"></span>
+
                     <span class="mouth"></span>
 
                 </div>
@@ -1243,7 +1617,6 @@ body::before {
         </div>
 
     </section>
-
 
 
     <!-- =================================================
@@ -1288,7 +1661,6 @@ body::before {
     </section>
 
 
-
     <!-- =================================================
          FOOTER
     ================================================== -->
@@ -1309,34 +1681,43 @@ body::before {
 </main>
 
 
-
 <script>
 
 /* =========================================================
    DATE
-========================================================= */
+   ========================================================= */
 
 const today = new Date();
 
 const dateOptions = {
+
     month: "short",
+
     day: "numeric",
+
     year: "numeric"
+
 };
 
 document.getElementById("todayDate").textContent =
-    today.toLocaleDateString("en-US", dateOptions).toUpperCase();
-
+    today
+        .toLocaleDateString(
+            "en-US",
+            dateOptions
+        )
+        .toUpperCase();
 
 
 /* =========================================================
    MOOD SELECTION
-========================================================= */
+   ========================================================= */
 
 let selectedMood = null;
 
+
 const moodOptions =
     document.querySelectorAll(".mood-option");
+
 
 moodOptions.forEach(option => {
 
@@ -1356,29 +1737,31 @@ moodOptions.forEach(option => {
 });
 
 
-
 /* =========================================================
    STORAGE
-========================================================= */
+   ========================================================= */
 
 function getEntries() {
 
     return JSON.parse(
-        localStorage.getItem("zeneneJournalEntries")
+        localStorage.getItem(
+            "zeneneJournalEntries"
+        )
     ) || [];
 
 }
 
 
-
 /* =========================================================
    SAVE ENTRY
-========================================================= */
+   ========================================================= */
 
 function saveEntry() {
 
     const textarea =
-        document.getElementById("journalText");
+        document.getElementById(
+            "journalText"
+        );
 
     const text =
         textarea.value.trim();
@@ -1393,7 +1776,8 @@ function saveEntry() {
     }
 
 
-    const entries = getEntries();
+    const entries =
+        getEntries();
 
 
     const newEntry = {
@@ -1402,16 +1786,18 @@ function saveEntry() {
 
         text: text,
 
-        mood: selectedMood || "No mood",
+        mood:
+            selectedMood || "No mood",
 
-        date: new Date().toLocaleDateString(
-            "en-US",
-            {
-                month: "short",
-                day: "numeric",
-                year: "numeric"
-            }
-        ),
+        date:
+            new Date().toLocaleDateString(
+                "en-US",
+                {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                }
+            ),
 
         timestamp: Date.now()
 
@@ -1422,14 +1808,18 @@ function saveEntry() {
 
 
     localStorage.setItem(
+
         "zeneneJournalEntries",
+
         JSON.stringify(entries)
+
     );
 
 
     textarea.value = "";
 
     selectedMood = null;
+
 
     moodOptions.forEach(item =>
         item.classList.remove("selected")
@@ -1441,42 +1831,49 @@ function saveEntry() {
 }
 
 
-
 /* =========================================================
    DELETE
-========================================================= */
+   ========================================================= */
 
 function deleteEntry(id) {
 
-    const entries = getEntries();
+    const entries =
+        getEntries();
+
 
     const updated =
-        entries.filter(entry =>
-            entry.id !== id
+        entries.filter(
+            entry => entry.id !== id
         );
 
+
     localStorage.setItem(
+
         "zeneneJournalEntries",
+
         JSON.stringify(updated)
+
     );
+
 
     renderEntries();
 
 }
 
 
-
 /* =========================================================
    EDIT
-========================================================= */
+   ========================================================= */
 
 function editEntry(id) {
 
-    const entries = getEntries();
+    const entries =
+        getEntries();
+
 
     const entry =
-        entries.find(item =>
-            item.id === id
+        entries.find(
+            item => item.id === id
         );
 
 
@@ -1504,8 +1901,11 @@ function editEntry(id) {
 
 
     localStorage.setItem(
+
         "zeneneJournalEntries",
+
         JSON.stringify(entries)
+
     );
 
 
@@ -1514,10 +1914,9 @@ function editEntry(id) {
 }
 
 
-
 /* =========================================================
    RENDER ENTRIES
-========================================================= */
+   ========================================================= */
 
 function renderEntries() {
 
@@ -1528,11 +1927,13 @@ function renderEntries() {
 
 
     const search =
-        document.getElementById(
-            "searchInput"
-        ).value
-        .toLowerCase()
-        .trim();
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
 
 
     let entries =
@@ -1566,17 +1967,23 @@ function renderEntries() {
             <div class="empty-state">
 
                 <span class="script">
-                    ${search
-                        ? "nothing here yet."
-                        : "a blank page is a beginning."
+
+                    ${
+                        search
+                            ? "nothing here yet."
+                            : "a blank page is a beginning."
                     }
+
                 </span>
 
                 <p>
-                    ${search
-                        ? "Try another search."
-                        : "Your journal entries will appear here."
+
+                    ${
+                        search
+                            ? "Try another search."
+                            : "Your journal entries will appear here."
                     }
+
                 </p>
 
             </div>
@@ -1589,79 +1996,89 @@ function renderEntries() {
 
 
     container.innerHTML =
-        entries.map(entry => `
 
-            <article class="entry">
+        entries
+            .map(entry => `
 
-                <div>
+                <article class="entry">
 
-                    <div class="entry-date">
-                        ${entry.date}
-                    </div>
+                    <div>
 
-                </div>
+                        <div class="entry-date">
 
+                            ${entry.date}
 
-                <div>
-
-                    <div class="entry-content">
-                        ${escapeHTML(entry.text)}
-                    </div>
-
-
-                    <div class="entry-actions">
-
-                        <button
-                            onclick="editEntry(${entry.id})"
-                        >
-                            EDIT
-                        </button>
-
-                        <button
-                            onclick="deleteEntry(${entry.id})"
-                        >
-                            DELETE
-                        </button>
+                        </div>
 
                     </div>
 
-                </div>
+
+                    <div>
+
+                        <div class="entry-content">
+
+                            ${escapeHTML(entry.text)}
+
+                        </div>
 
 
-                <div class="entry-mood">
+                        <div class="entry-actions">
 
-                    ${entry.mood}
+                            <button
+                                onclick="editEntry(${entry.id})"
+                            >
+                                EDIT
+                            </button>
 
-                </div>
 
-            </article>
+                            <button
+                                onclick="deleteEntry(${entry.id})"
+                            >
+                                DELETE
+                            </button>
 
-        `).join("");
+                        </div>
+
+                    </div>
+
+
+                    <div class="entry-mood">
+
+                        ${entry.mood}
+
+                    </div>
+
+                </article>
+
+            `)
+            .join("");
 
 }
 
 
-
 /* =========================================================
    SECURITY
-========================================================= */
+   ========================================================= */
 
 function escapeHTML(text) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     div.textContent = text;
+
 
     return div.innerHTML;
 
 }
 
 
-
 /* =========================================================
    INITIAL LOAD
-========================================================= */
+   ========================================================= */
 
 renderEntries();
 

@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+okay thank you so so so much 
+just a few last changes in this particular code <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -374,7 +375,7 @@ body::before {
 
 .hero-title {
 
-  margin: 12px 0 0;
+  margin: 34px 0 0;
 
   font-family: var(--typewriter);
 
@@ -2028,6 +2029,41 @@ body::before {
 }
 
 
+.journal-side-note {
+
+  position: absolute;
+
+  right: 7vw;
+  top: 50%;
+
+  width: min(230px, 20vw);
+
+  transform: translateY(18px) rotate(3deg);
+
+  font-family: var(--script);
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  line-height: 1.15;
+  text-align: left;
+  color: var(--sage-deep);
+
+  opacity: 0;
+
+  transition:
+    opacity .8s ease .55s,
+    transform .9s cubic-bezier(.16,1,.3,1);
+
+  pointer-events: none;
+  z-index: 6;
+}
+
+.journal-story.open .journal-side-note {
+
+  opacity: .9;
+
+  transform: translateY(0) rotate(3deg);
+}
+
+
 /* =========================================================
    JOURNAL TITLE
    ========================================================= */
@@ -2345,6 +2381,24 @@ body::before {
 
 }
 
+.footer-ghost {
+
+  position: absolute;
+  right: 4vw;
+  bottom: 4vh;
+
+  font-family: var(--typewriter);
+  font-size: clamp(4rem, 12vw, 10rem);
+  letter-spacing: .02em;
+  line-height: .8;
+
+  color: rgba(247,241,231,.055);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
 .footer-inner {
 
   position: relative;
@@ -2641,7 +2695,9 @@ body::before {
 
   left: 50%;
 
-  transform: translateX(-50%);
+  transform: none;
+
+  left: calc(50% - 29px);
 
   z-index: 300;
 
@@ -2649,106 +2705,106 @@ body::before {
 
 .dock-items {
 
-  position: absolute;
-
-  bottom: calc(100% + 8px);
-
-  left: 50%;
-
-  transform: translateX(-50%);
+  position: fixed;
+  inset: 0;
 
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
+  justify-content: center;
+  gap: 8px;
 
+  padding: 90px 24px 120px;
+
+  background: rgba(247,241,231,.46);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 
+  transition:
+    opacity .45s ease,
+    visibility 0s linear .45s;
 }
 
 .dock-item {
 
-  width: 52px;
-  height: 52px;
+  width: min(520px, 82vw);
+  height: auto;
+  margin: 0;
+  padding: 10px 20px;
 
-  margin-bottom: 8px;
-
-  border-radius: 50%;
-
-  background: rgba(247,241,231,.92);
-
-  backdrop-filter: blur(16px);
-
-  border:
-    1px solid rgba(98,79,67,.15);
-
-  box-shadow:
-    0 5px 20px rgba(62,45,35,.12);
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
+  color: var(--brown-dark);
   text-decoration: none;
-
-  font-size: 1rem;
+  font-family: var(--typewriter);
+  font-size: clamp(1.45rem, 4vw, 2.6rem);
+  letter-spacing: .08em;
+  text-transform: lowercase;
 
   opacity: 0;
-
-  transform:
-    translateY(15px)
-    scale(.8);
+  transform: translateX(-80px) translateY(12px);
 
   transition:
-    opacity .28s,
-    transform .28s;
+    opacity .65s ease,
+    transform .8s cubic-bezier(.16,1,.3,1);
 
   pointer-events: none;
-
 }
 
 .dock-wrap.open .dock-items {
 
+  opacity: 1;
+  visibility: visible;
   pointer-events: auto;
-
+  transition: opacity .45s ease;
 }
 
 .dock-wrap.open .dock-item {
 
   opacity: 1;
-
-  transform:
-    translateY(0)
-    scale(1);
-
+  transform: translateX(0) translateY(0);
   pointer-events: auto;
-
 }
 
 .dock-item:nth-child(1) {
+  transform: translateX(-90px) translateY(12px);
   transition-delay: .05s;
 }
 
 .dock-item:nth-child(2) {
-  transition-delay: .1s;
+  transform: translateX(90px) translateY(12px);
+  transition-delay: .12s;
 }
 
 .dock-item:nth-child(3) {
-  transition-delay: .15s;
+  transform: translateX(-90px) translateY(12px);
+  transition-delay: .19s;
 }
 
 .dock-item:nth-child(4) {
-  transition-delay: .2s;
+  transform: translateX(90px) translateY(12px);
+  transition-delay: .26s;
 }
 
 .dock-item:nth-child(5) {
-  transition-delay: .25s;
+  transform: translateX(-90px) translateY(12px);
+  transition-delay: .33s;
 }
 
-.dock-item:nth-child(6) {
-  transition-delay: .3s;
+.dock-item:hover {
+  color: var(--rose-deep);
+  transform: scale(1.04) !important;
 }
 
 .dock-btn {
@@ -2959,39 +3015,62 @@ body::before {
 
   }
 
+  .feature-stage {
+
+    min-height: 0;
+
+    align-items: stretch;
+
+  }
+
+  .feature-slide {
+
+    overflow: hidden;
+    padding: 76px 0 78px;
+  }
+
   .slide-inner {
 
+    width: 88vw;
+    min-height: calc(100svh - 154px);
     grid-template-columns: 1fr;
-
+    grid-template-rows: auto auto;
     text-align: center;
-
-    gap: 20px;
+    align-content: center;
+    gap: 8px;
 
   }
 
   .slide-copy {
 
-    margin: auto;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
 
   }
 
   .slide-heading {
 
-    font-size:
-      clamp(3.5rem, 18vw, 6rem);
+    margin: 0;
+    font-size: clamp(2.65rem, 13vw, 4.8rem);
+    line-height: .86;
 
   }
 
   .slide-description {
 
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 330px;
+    margin: 16px auto 0;
+    font-size: .64rem;
+    line-height: 1.65;
 
   }
 
   .slide-visual {
 
-    height: 320px;
+    height: 245px;
+    min-height: 245px;
+    margin-top: 4px;
 
   }
 
@@ -3030,9 +3109,15 @@ body::before {
 
   .journal-note {
 
-    right: -45px;
+    right: 0;
+    bottom: 10px;
+    font-size: .9rem;
 
-    font-size: 1rem;
+  }
+
+  .journal-side-note {
+
+    display: none;
 
   }
 
@@ -3114,6 +3199,14 @@ body::before {
 
   }
 
+  .footer-ghost {
+
+    right: 4vw;
+    bottom: 3vh;
+    font-size: clamp(3.2rem, 18vw, 6rem);
+
+  }
+
   .footer-bottom {
 
     flex-direction: column;
@@ -3170,23 +3263,24 @@ body::before {
 
   .journal-visual {
 
-    height: 430px;
+    height: 270px;
+    min-height: 270px;
 
   }
 
   .journal-asset-wrap {
 
     width:
-      min(330px, 70vw);
+      min(285px, 72vw);
 
   }
 
   .journal-backdrop {
 
     width:
-      min(330px, 70vw);
+      min(285px, 72vw);
 
-    height: 390px;
+    height: 260px;
 
   }
 
@@ -3716,6 +3810,10 @@ body::before {
         it's okay to take your time.
       </div>
 
+      <div class="journal-side-note">
+        you don't have to make sense of everything at once.
+      </div>
+
     </div>
 
 
@@ -3786,23 +3884,24 @@ body::before {
 
 
     <a
-      href="stories.html"
+      href="calm.html"
       class="editorial-card"
       style="text-decoration:none;color:inherit;"
     >
 
       <div class="section-label">
-        stories
+        calm
       </div>
 
       <h3>
-        You are
-        not alone.
+        A little
+        room to
+        breathe.
       </h3>
 
       <p>
-        anonymous stories from
-        people figuring things out too.
+        gentle moments to slow down,
+        breathe and simply be here.
       </p>
 
     </a>
@@ -3841,6 +3940,8 @@ body::before {
      ====================================================== -->
 
 <footer class="footer">
+
+  <div class="footer-ghost" aria-hidden="true">ZENENE</div>
 
   <div class="footer-flower">
     ✿
@@ -3912,10 +4013,6 @@ body::before {
             Explore
           </a>
 
-          <a href="stories.html">
-            Stories
-          </a>
-
           <a href="#home">
             Home
           </a>
@@ -3969,19 +4066,17 @@ body::before {
 
 <div class="dock-wrap" id="dock">
 
-  <div class="dock-items">
+  <div class="dock-items" aria-label="Zenene navigation">
 
-    <a href="mood.html" class="dock-item">🌿</a>
+    <a href="journal.html" class="dock-item">journal</a>
 
-    <a href="explore.html" class="dock-item">📚</a>
+    <a href="mood.html" class="dock-item">mood</a>
 
-    <a href="stories.html" class="dock-item">✨</a>
+    <a href="explore.html" class="dock-item">explore</a>
 
-    <a href="calm.html" class="dock-item">🌸</a>
+    <a href="chat.html" class="dock-item">vera</a>
 
-    <a href="chat.html" class="dock-item">💬</a>
-
-    <a href="journal.html" class="dock-item">📓</a>
+    <a href="calm.html" class="dock-item">calm</a>
 
   </div>
 

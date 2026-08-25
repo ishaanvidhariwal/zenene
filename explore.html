@@ -1,178 +1,2188 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Explore — Zenene</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<title>Zenene — Explore</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+rel="stylesheet"
+>
+
 <style>
-:root{--blue:#C5DCF0;--pink:#F2BFC8;--pink-d:#E8909F;--peach:#F5C9A0;--peach-d:#E8A878;--green:#A8C4A2;--green-d:#7A9E75;--cream:#FEF6ED;--text:#3D2B1F;--tl:#8A6A58;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--cream);padding-bottom:72px;}
-.polka{position:fixed;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.38) 4px,transparent 4px);background-size:38px 38px;pointer-events:none;z-index:0;}
 
-.hdr{background:rgba(254,246,237,.92);backdrop-filter:blur(14px);padding:.9rem 1.4rem;display:flex;align-items:center;gap:.8rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(168,196,162,.2);}
-.back{text-decoration:none;color:var(--green-d);font-size:1.3rem;}
-.hdr-title{font-family:'Playfair Display',serif;font-size:1.3rem;}
-.hdr-sub{font-family:'Dancing Script',cursive;font-size:.85rem;color:var(--tl);margin-left:auto;}
+/* =========================================================
+   ZENENE — EXPLORE
+   ========================================================= */
 
-.main{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:1.5rem 1.2rem;}
+:root {
 
-/* FEATURED */
-.feat-article{background:linear-gradient(135deg,var(--peach),var(--pink));border-radius:22px;padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;cursor:pointer;}
-.feat-article::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:rgba(255,255,255,.15);border-radius:50%;}
-.feat-cat{font-size:.68rem;color:rgba(255,255,255,.85);text-transform:uppercase;font-weight:500;letter-spacing:.06em;margin-bottom:.5rem;}
-.feat-h{font-family:'Playfair Display',serif;font-size:1.35rem;color:#fff;line-height:1.25;margin-bottom:.5rem;}
-.feat-p{font-size:.8rem;color:rgba(255,255,255,.88);line-height:1.6;margin-bottom.7rem;}
-.feat-read{font-size:.75rem;color:#fff;font-weight:500;margin-top:.8rem;display:flex;align-items:center;gap:.3rem;}
+  --sky: #C9DFEA;
+  --sky-light: #E8F2F5;
+  --sky-deep: #9EBFCC;
 
-/* FILTERS */
-.filter-row{display:flex;gap:.45rem;overflow-x:auto;margin-bottom:1.2rem;padding-bottom:.3rem;scrollbar-width:none;}
-.filter-row::-webkit-scrollbar{display:none;}
-.f-btn{flex-shrink:0;padding:.36rem .85rem;border-radius:50px;font-size:.75rem;border:none;background:rgba(255,255,255,.82);color:var(--tl);cursor:pointer;transition:all .2s;}
-.f-btn.active{background:var(--peach-d);color:#fff;}
+  --cream: #F7F1E7;
+  --paper: #FFFDF8;
 
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;}
-@media(max-width:380px){.grid{grid-template-columns:1fr;}}
-.art-card{background:rgba(255,255,255,.84);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 12px rgba(61,43,31,.06);}
-.art-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(61,43,31,.1);}
-.art-emo{height:88px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;}
-.art-body{padding:.75rem .85rem .9rem;}
-.art-cat{font-size:.6rem;text-transform:uppercase;font-weight:600;letter-spacing:.06em;margin-bottom:.3rem;}
-.art-h{font-family:'Playfair Display',serif;font-size:.9rem;line-height:1.3;color:var(--text);margin-bottom:.35rem;}
-.art-read{font-size:.65rem;color:var(--tl);}
+  --sage: #D8E4D7;
+  --sage-deep: #72866E;
 
-/* ARTICLE MODAL */
-.overlay{position:fixed;inset:0;background:rgba(42,28,18,.42);backdrop-filter:blur(8px);z-index:300;display:none;align-items:flex-end;justify-content:center;}
-.overlay.open{display:flex;}
-.a-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-height:88vh;overflow-y:auto;padding:1.5rem 1.4rem 5rem;animation:slideUp .3s ease;}
-@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
-.sheet-cat{font-size:.72rem;text-transform:uppercase;font-weight:600;letter-spacing:.06em;margin-bottom:.4rem;}
-.sheet-h{font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1.22;margin-bottom:.5rem;}
-.sheet-sub{font-size:.82rem;color:var(--tl);margin-bottom:1.2rem;font-style:italic;}
-.sheet-body p{font-size:.9rem;color:var(--tl);line-height:1.76;margin-bottom:.9rem;}
-.sheet-body h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin:.9rem 0 .4rem;}
-.sheet-close{position:sticky;top:0;float:right;background:rgba(240,235,230,.9);border:none;border-radius:50%;width:34px;height:34px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-bottom:-.5rem;}
+  --rose: #E7C9CD;
+  --rose-deep: #B97880;
 
-/* BOTTOM NAV */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(254,246,237,.92);backdrop-filter:blur(16px);border-top:1px solid rgba(168,196,162,.22);display:flex;justify-content:space-around;align-items:center;height:58px;padding:0 .5rem;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--tl);font-size:.58rem;padding:.35rem .5rem;border-radius:12px;transition:color .2s,transform .2s;flex:1;}
-.nav-item:hover,.nav-item.active{color:var(--green-d);transform:translateY(-2px);}
-.ni-emo{font-size:1.25rem;}.ni-dot{width:4px;height:4px;border-radius:50%;background:var(--green);opacity:0;margin-top:1px;}
-.nav-item.active{color:var(--green-d);}.nav-item.active .ni-dot{opacity:1;}
+  --lavender: #DCD8E8;
+
+  --peach: #EFD4C2;
+
+  --brown: #624F43;
+  --brown-dark: #392D26;
+  --ink: #2F2B27;
+
+  --typewriter: "Special Elite", "Courier New", monospace;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --script: "Dancing Script", cursive;
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+
+  margin: 0;
+
+  background: var(--cream);
+
+  color: var(--ink);
+
+  overflow-x: hidden;
+
+}
+
+
+/* =========================================================
+   PAPER GRAIN
+   ========================================================= */
+
+body::before {
+
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 9999;
+
+  opacity: .045;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.top-nav {
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 500;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 20px 34px;
+
+  background: rgba(247,241,231,.78);
+
+  backdrop-filter: blur(18px);
+
+  border-bottom:
+    1px solid rgba(98,79,67,.08);
+
+}
+
+
+.nav-wordmark {
+
+  font-family: var(--typewriter);
+
+  font-size: .78rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+}
+
+
+.nav-links {
+
+  display: flex;
+
+  gap: 28px;
+
+  align-items: center;
+
+}
+
+
+.nav-links a {
+
+  color: var(--brown);
+
+  text-decoration: none;
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  transition: .3s ease;
+
+}
+
+
+.nav-links a:hover {
+
+  color: var(--rose-deep);
+
+}
+
+
+.nav-links .active {
+
+  color: var(--ink);
+
+  position: relative;
+
+}
+
+
+.nav-links .active::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: -7px;
+
+  height: 1px;
+
+  background: var(--rose-deep);
+
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.page {
+
+  width: min(1180px, calc(100% - 48px));
+
+  margin: auto;
+
+  padding: 80px 0 120px;
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+
+  display: grid;
+
+  grid-template-columns: 1.1fr .9fr;
+
+  gap: 60px;
+
+  align-items: end;
+
+  margin-bottom: 55px;
+
+}
+
+
+.eyebrow {
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  letter-spacing: .17em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+  margin-bottom: 18px;
+
+}
+
+
+h1 {
+
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-size: clamp(4rem, 8vw, 7rem);
+
+  font-weight: 300;
+
+  line-height: .85;
+
+  letter-spacing: -.04em;
+
+}
+
+
+h1 em {
+
+  font-family: var(--script);
+
+  font-size: .7em;
+
+  font-weight: 500;
+
+  color: var(--rose-deep);
+
+}
+
+
+.intro {
+
+  max-width: 400px;
+
+  font-family: var(--serif);
+
+  font-size: 1.25rem;
+
+  line-height: 1.45;
+
+  color: var(--brown);
+
+}
+
+
+/* =========================================================
+   FEATURED ARTICLE
+   ========================================================= */
+
+.featured {
+
+  position: relative;
+
+  padding: 42px;
+
+  margin-bottom: 45px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--peach),
+      var(--rose)
+    );
+
+  border: 1px solid rgba(98,79,67,.08);
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
+
+}
+
+
+.featured:hover {
+
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 20px 50px rgba(98,79,67,.1);
+
+}
+
+
+.featured::before {
+
+  content: "✽";
+
+  position: absolute;
+
+  right: 25px;
+
+  bottom: -15px;
+
+  font-family: var(--serif);
+
+  font-size: 10rem;
+
+  color: rgba(255,255,255,.25);
+
+  line-height: 1;
+
+}
+
+
+.featured-label {
+
+  font-family: var(--typewriter);
+
+  font-size: .6rem;
+
+  letter-spacing: .13em;
+
+  text-transform: uppercase;
+
+  color: rgba(57,45,38,.7);
+
+  margin-bottom: 18px;
+
+}
+
+
+.featured-title {
+
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 700px;
+
+  margin: 0 0 15px;
+
+  font-family: var(--serif);
+
+  font-size: clamp(2.3rem, 5vw, 4rem);
+
+  line-height: .95;
+
+  font-weight: 300;
+
+}
+
+
+.featured-text {
+
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 550px;
+
+  font-family: var(--serif);
+
+  font-size: 1.15rem;
+
+  line-height: 1.5;
+
+  color: var(--brown-dark);
+
+}
+
+
+.featured-read {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-block;
+
+  margin-top: 25px;
+
+  font-family: var(--typewriter);
+
+  font-size: .6rem;
+
+  letter-spacing: .1em;
+
+  text-transform: uppercase;
+
+  color: var(--brown-dark);
+
+}
+
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+.filter-section {
+
+  margin-bottom: 35px;
+
+}
+
+
+.filter-label {
+
+  font-family: var(--typewriter);
+
+  font-size: .58rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+  margin-bottom: 14px;
+
+}
+
+
+.filter-row {
+
+  display: flex;
+
+  gap: 9px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+
+  padding-bottom: 5px;
+
+}
+
+
+.filter-row::-webkit-scrollbar {
+
+  display: none;
+
+}
+
+
+.filter-button {
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(98,79,67,.12);
+
+  background: var(--paper);
+
+  color: var(--brown);
+
+  padding: 11px 17px;
+
+  font-family: var(--typewriter);
+
+  font-size: .58rem;
+
+  letter-spacing: .05em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: .3s ease;
+
+}
+
+
+.filter-button:hover {
+
+  transform: translateY(-2px);
+
+}
+
+
+.filter-button.active {
+
+  background: var(--brown-dark);
+
+  color: var(--paper);
+
+  border-color: var(--brown-dark);
+
+}
+
+
+/* =========================================================
+   ARTICLE GRID
+   ========================================================= */
+
+.article-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 18px;
+
+}
+
+
+.article-card {
+
+  position: relative;
+
+  background: var(--paper);
+
+  border: 1px solid rgba(98,79,67,.09);
+
+  min-height: 310px;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
+
+}
+
+
+.article-card:hover {
+
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 18px 35px rgba(98,79,67,.09);
+
+}
+
+
+.article-visual {
+
+  height: 135px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 3.5rem;
+
+  position: relative;
+
+}
+
+
+.article-visual::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 70px;
+
+  height: 70px;
+
+  border: 1px solid rgba(255,255,255,.45);
+
+  border-radius: 50%;
+
+}
+
+
+.article-body {
+
+  padding: 22px;
+
+}
+
+
+.article-category {
+
+  font-family: var(--typewriter);
+
+  font-size: .55rem;
+
+  letter-spacing: .1em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 12px;
+
+}
+
+
+.article-title {
+
+  font-family: var(--serif);
+
+  font-size: 1.55rem;
+
+  line-height: 1.05;
+
+  font-weight: 400;
+
+  margin-bottom: 14px;
+
+}
+
+
+.article-meta {
+
+  font-family: var(--typewriter);
+
+  font-size: .52rem;
+
+  letter-spacing: .06em;
+
+  color: var(--brown);
+
+  text-transform: uppercase;
+
+}
+
+
+/* =========================================================
+   ARTICLE SHEET / SOCIAL MEDIA STYLE
+   ========================================================= */
+
+.article-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 800;
+
+  background:
+    rgba(47,43,39,.28);
+
+  backdrop-filter: blur(5px);
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition:
+    opacity .35s ease,
+    visibility .35s ease;
+
+}
+
+
+.article-overlay.open {
+
+  opacity: 1;
+
+  visibility: visible;
+
+}
+
+
+.article-sheet {
+
+  position: relative;
+
+  width: min(760px, 100%);
+
+  max-height: 88vh;
+
+  overflow-y: auto;
+
+  background: var(--paper);
+
+  border-radius: 26px 26px 0 0;
+
+  padding: 25px 35px 70px;
+
+  transform: translateY(100%);
+
+  transition:
+    transform .5s cubic-bezier(.22,1,.36,1);
+
+  box-shadow:
+    0 -20px 70px rgba(47,43,39,.18);
+
+}
+
+
+.article-overlay.open .article-sheet {
+
+  transform: translateY(0);
+
+}
+
+
+.article-sheet::-webkit-scrollbar {
+
+  width: 5px;
+
+}
+
+
+.article-sheet::-webkit-scrollbar-thumb {
+
+  background: var(--rose);
+
+  border-radius: 10px;
+
+}
+
+
+/* DRAG HANDLE */
+
+.sheet-handle {
+
+  width: 42px;
+
+  height: 4px;
+
+  background: rgba(98,79,67,.2);
+
+  border-radius: 10px;
+
+  margin: 0 auto 25px;
+
+}
+
+
+/* CLOSE */
+
+.sheet-close {
+
+  position: absolute;
+
+  top: 22px;
+
+  right: 25px;
+
+  width: 38px;
+
+  height: 38px;
+
+  border: 1px solid rgba(98,79,67,.1);
+
+  border-radius: 50%;
+
+  background: rgba(247,241,231,.9);
+
+  color: var(--brown-dark);
+
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  transition: .3s ease;
+
+}
+
+
+.sheet-close:hover {
+
+  background: var(--rose);
+
+  transform: rotate(90deg);
+
+}
+
+
+/* SHEET CONTENT */
+
+.sheet-category {
+
+  font-family: var(--typewriter);
+
+  font-size: .58rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 15px;
+
+}
+
+
+.sheet-title {
+
+  max-width: 620px;
+
+  font-family: var(--serif);
+
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+
+  line-height: .95;
+
+  font-weight: 300;
+
+  margin-bottom: 14px;
+
+}
+
+
+.sheet-subtitle {
+
+  font-family: var(--script);
+
+  font-size: 1.45rem;
+
+  color: var(--rose-deep);
+
+  margin-bottom: 35px;
+
+}
+
+
+.sheet-body {
+
+  max-width: 650px;
+
+}
+
+
+.sheet-body p {
+
+  font-family: var(--serif);
+
+  font-size: 1.2rem;
+
+  line-height: 1.6;
+
+  color: var(--brown);
+
+  margin-bottom: 20px;
+
+}
+
+
+.sheet-body h3 {
+
+  font-family: var(--serif);
+
+  font-size: 2rem;
+
+  font-weight: 300;
+
+  margin: 30px 0 10px;
+
+}
+
+
+.sheet-body strong {
+
+  color: var(--brown-dark);
+
+}
+
+
+/* =========================================================
+   SHARE / FOOTER AREA OF ARTICLE
+   ========================================================= */
+
+.sheet-footer {
+
+  margin-top: 35px;
+
+  padding-top: 20px;
+
+  border-top:
+    1px solid rgba(98,79,67,.1);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+
+.sheet-footer-text {
+
+  font-family: var(--script);
+
+  font-size: 1.2rem;
+
+  color: var(--rose-deep);
+
+}
+
+
+.sheet-save {
+
+  border: none;
+
+  background: var(--sage);
+
+  color: var(--brown-dark);
+
+  padding: 10px 15px;
+
+  font-family: var(--typewriter);
+
+  font-size: .55rem;
+
+  letter-spacing: .07em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+.fade-up {
+
+  opacity: 0;
+
+  transform: translateY(25px);
+
+  animation:
+    fadeUp .8s ease forwards;
+
+}
+
+
+.delay-1 {
+
+  animation-delay: .1s;
+
+}
+
+
+.delay-2 {
+
+  animation-delay: .2s;
+
+}
+
+
+.delay-3 {
+
+  animation-delay: .3s;
+
+}
+
+
+@keyframes fadeUp {
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+
+@keyframes cardIn {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(18px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .article-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .top-nav {
+
+    padding: 18px 20px;
+
+  }
+
+  .nav-links {
+
+    gap: 13px;
+
+  }
+
+  .nav-links a {
+
+    font-size: .52rem;
+
+  }
+
+  .page {
+
+    width:
+      min(100% - 30px, 600px);
+
+    padding-top: 55px;
+
+  }
+
+  .page-header {
+
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+
+  }
+
+  h1 {
+
+    font-size: 5rem;
+
+  }
+
+  .featured {
+
+    padding: 30px;
+
+  }
+
+  .article-grid {
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+  }
+
+  .article-card {
+
+    min-height: 270px;
+
+  }
+
+  .article-visual {
+
+    height: 105px;
+
+  }
+
+  .article-body {
+
+    padding: 16px;
+
+  }
+
+  .article-title {
+
+    font-size: 1.3rem;
+
+  }
+
+  .article-sheet {
+
+    padding:
+      20px
+      24px
+      60px;
+
+    max-height: 90vh;
+
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .article-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .article-card {
+
+    min-height: auto;
+
+  }
+
+  .article-visual {
+
+    height: 125px;
+
+  }
+
+  .featured-title {
+
+    font-size: 2.4rem;
+
+  }
+
+  .sheet-title {
+
+    font-size: 2.8rem;
+
+  }
+
+  .sheet-body p {
+
+    font-size: 1.1rem;
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  * {
+
+    animation-duration: .01ms !important;
+
+    transition-duration: .01ms !important;
+
+  }
+
+}
+
 </style>
+
 </head>
+
+
 <body>
-<div class="polka"></div>
 
-<div class="hdr">
-  <a href="index.html" class="back">←</a>
-  <div class="hdr-title">📚 Explore</div>
-  <div class="hdr-sub">learn &amp; grow</div>
-</div>
 
-<div class="main">
-  <!-- FEATURED -->
-  <div class="feat-article" onclick="openArt(0)">
-    <div class="feat-cat">✦ Editor's Pick</div>
-    <div class="feat-h">You Are Allowed to Take Up Space</div>
-    <div class="feat-p">A gentle reminder that your needs, feelings, and presence matter — more than you realise.</div>
-    <div class="feat-read">Read now →</div>
+<!-- =======================================================
+     NAVIGATION
+     ======================================================= -->
+
+<nav class="top-nav">
+
+  <div class="nav-wordmark">
+    zenene
   </div>
 
-  <!-- FILTERS -->
-  <div class="filter-row" id="fr"></div>
+  <div class="nav-links">
 
-  <!-- GRID -->
-  <div class="grid" id="grid"></div>
-</div>
+    <a href="index.html">
+      home
+    </a>
 
-<!-- ARTICLE SHEET -->
-<div class="overlay" id="overlay" onclick="if(event.target===this)closeArt()">
-  <div class="a-sheet" id="asheet">
-    <button class="sheet-close" onclick="closeArt()">×</button>
-    <div class="sheet-cat" id="sCat"></div>
-    <div class="sheet-h" id="sH"></div>
-    <div class="sheet-sub" id="sSub"></div>
-    <div class="sheet-body" id="sBody"></div>
+    <a href="journal.html">
+      journal
+    </a>
+
+    <a href="mood.html">
+      mood
+    </a>
+
+    <a href="explore.html" class="active">
+      explore
+    </a>
+
+    <a href="vera.html">
+      vera
+    </a>
+
   </div>
-</div>
 
-<nav class="bottom-nav">
-  <a href="journal.html" class="nav-item"><div class="ni-emo">📓</div><span>Journal</span><div class="ni-dot"></div></a>
-  <a href="chat.html"    class="nav-item"><div class="ni-emo">💬</div><span>Vera</span><div class="ni-dot"></div></a>
-  <a href="calm.html"    class="nav-item"><div class="ni-emo">🌸</div><span>Calm</span><div class="ni-dot"></div></a>
-  <a href="stories.html" class="nav-item"><div class="ni-emo">✨</div><span>Stories</span><div class="ni-dot"></div></a>
-  <a href="explore.html" class="nav-item active"><div class="ni-emo">📚</div><span>Explore</span><div class="ni-dot"></div></a>
-  <a href="mood.html"    class="nav-item"><div class="ni-emo">🌿</div><span>Mood</span><div class="ni-dot"></div></a>
 </nav>
 
-<script>
-const CAT_COLORS={Journaling:'#E8C0CC',Anxiety:'#C5DCF0',Yoga:'#A8C4A2',Friendship:'#D4C5E8','Self-care':'#F5C9A0',Growth:'#A8C4A2'};
 
-const ARTICLES=[
-  {cat:'Growth',emo:'🌸',h:'You Are Allowed to Take Up Space',sub:'A reminder that your presence matters.',read:'3 min',bg:'#FDF0F5',
-   body:`<p>From a very young age, many of us are taught — subtly or directly — to make ourselves small. To not be too loud, too emotional, too much. This piece is a gentle counter-message: <em>you are allowed to take up space.</em></p><h3>What it means</h3><p>Taking up space doesn't mean being inconsiderate. It means allowing your needs to exist. Saying "I'm struggling" when you are. Asking for what you need. Occupying your life fully.</p><h3>A practice</h3><p>This week, try one thing that feels like taking up space. Ask for help with something. Share a feeling you'd normally keep inside. Let yourself be seen — even just a little.</p><p>You are not too much. You are exactly enough. 🌸</p>`},
-  {cat:'Journaling',emo:'📓',h:'10 Prompts for When You Feel Empty',sub:'Writing your way back to yourself.',read:'4 min',bg:'#FDF5F0',
-   body:`<p>There are days when words feel far away and numbness moves in. These 10 prompts are designed to gently start the conversation between you and yourself.</p><h3>The prompts</h3><p>1. What does this emptiness feel like physically in my body?<br>2. When did I last feel truly present?<br>3. What would I tell a friend feeling this way?<br>4. What am I avoiding?<br>5. What would make today 1% easier?<br>6. Who made me feel safe recently — and how?<br>7. What colour is my mood right now?<br>8. What do I wish someone would ask me?<br>9. If this feeling could speak, what would it say?<br>10. What would my most compassionate self do today?</p><p>You don't have to answer all of them. One is enough to begin. 💙</p>`},
-  {cat:'Anxiety',emo:'🌀',h:'Understanding Your Anxiety: A Gentle Guide',sub:'What\'s happening — and what helps.',read:'5 min',bg:'#EEF4FB',
-   body:`<p>Anxiety is one of the most common experiences among teenagers — and one of the most misunderstood. Here's what's actually happening, and what can help.</p><h3>What anxiety actually is</h3><p>Anxiety is your nervous system trying to protect you. It's an ancient alarm system — and it's malfunctioning slightly in our modern world. The thoughts are not facts. The fear is real, but the threat usually isn't as certain as it feels.</p><h3>Techniques that help</h3><p><strong>4-7-8 breathing</strong> — Inhale 4s, hold 7s, exhale 8s. Activates the parasympathetic system.<br><strong>Name it to tame it</strong> — Say "I'm feeling anxious right now" out loud. It reduces amygdala activation.<br><strong>Grounding (5-4-3-2-1)</strong> — Name 5 things you see, 4 you hear, 3 you can touch, 2 you smell, 1 you taste.</p><p>Anxiety does not mean something is wrong with you. It means you care deeply. 💙</p>`},
-  {cat:'Yoga',emo:'🧘',h:'Poses That Release Emotional Tension',sub:'Your body holds what your mind carries.',read:'6 min',bg:'#EFF7EE',
-   body:`<p>Emotions are stored in the body — tension in the shoulders, grief in the chest, anxiety in the belly. These poses help release what words sometimes can't.</p><h3>Child's Pose (Balasana)</h3><p>Kneel, lower your torso forward, arms extended or alongside your body. Breathe deeply into your back. Hold 1–3 minutes. This is the pose of surrender — it signals safety to the nervous system.</p><h3>Legs Up the Wall (Viparita Karani)</h3><p>Lie on your back and rest your legs up against a wall. This inverted position calms the nervous system within minutes.</p><h3>Heart Opener</h3><p>Lie back over a rolled blanket or pillow under your mid-back. Open your arms wide. This pose counters the physical posture of grief and withdrawal.</p><p>You don't need a mat or experience. Your breath is the only tool required. 🌿</p>`},
-  {cat:'Friendship',emo:'🤍',h:'What to Do When You Feel Alone',sub:'You are more connected than you think.',read:'4 min',bg:'#F5F0FA',
-   body:`<p>Loneliness can arrive even in a room full of people. It's not about how many friends you have — it's about how seen and known you feel. Here's what helps.</p><h3>Reach out imperfectly</h3><p>Send the text. Even "hey, I've been thinking about you" is enough. Loneliness shrinks when we stop waiting for the perfect moment.</p><h3>Choose depth over breadth</h3><p>One honest conversation is worth more than ten surface-level ones. Try asking people how they're really doing — and mean it.</p><h3>Create your own ritual</h3><p>A weekly walk, a shared playlist, a standing dinner. Friendship is built in repeated small moments, not grand gestures.</p><p>You deserve to be truly known by someone. And you will be. 🤍</p>`},
-  {cat:'Self-care',emo:'🛁',h:'The Art of Doing Nothing',sub:'Rest is not laziness — it\'s medicine.',read:'3 min',bg:'#FDF5ED',
-   body:`<p>In a world that glorifies productivity, choosing to rest can feel radical. But rest is not laziness. It is a biological necessity — especially for the developing adolescent brain.</p><h3>What real rest looks like</h3><p>Not just sleep (though sleep matters enormously). Real rest is also: time with no purpose, creative play, boredom allowed, nature, silence, gentle movement.</p><h3>Permission slip</h3><p>You are allowed to: cancel plans to stay in. Do nothing on a Sunday. Not be productive over the weekend. Take a slow morning. Sit with a cup of tea and just exist.</p><p>Rest is an act of self-respect. It says: I am more than what I produce. 🛁</p>`},
-  {cat:'Growth',emo:'🌱',h:'Tiny Habits That Changed My Mental Health',sub:'Small shifts. Real difference.',read:'4 min',bg:'#EFF7EE',
-   body:`<p>You don't need to overhaul your life. The smallest habits, done consistently, create the biggest shifts.</p><h3>Morning: one thing before your phone</h3><p>Drink water. Stretch. Write one sentence. This small act reclaims your morning before the noise begins.</p><h3>Day: the 2-minute mood check</h3><p>Stop. Breathe. Ask: how am I actually feeling? Name it. That's the whole thing. Naming creates space between you and the emotion.</p><h3>Evening: three things</h3><p>Before sleep, write three things — one you're proud of, one you're grateful for, one you're releasing. This pattern trains your brain toward appreciation and closure.</p><p>These aren't magic. They're kindness — offered to yourself, daily. 🌱</p>`},
-  {cat:'Anxiety',emo:'💤',h:'Why Your Sleep Matters More Than You Think',sub:'The connection between rest and mental health.',read:'4 min',bg:'#EEF4FB',
-   body:`<p>Sleep is the single most impactful thing you can do for your mental health — and the most underrated.</p><h3>What happens when you sleep</h3><p>Your brain consolidates memories, processes emotions, and literally clears out metabolic waste. Teenagers need 8–10 hours. Most get 6. That gap is enormous.</p><h3>What sleep deprivation does</h3><p>It increases anxiety, reduces emotional regulation, impairs memory and decision-making, and raises cortisol (the stress hormone). When you're in a low period, the first question to ask is: am I sleeping?</p><h3>One thing to try tonight</h3><p>Set your phone to Do Not Disturb one hour before bed. Use that hour to wind down your nervous system. Even a few nights in a row creates measurable difference. 💤</p>`},
+<!-- =======================================================
+     PAGE
+     ======================================================= -->
+
+<main class="page">
+
+
+<!-- HEADER -->
+
+<header class="page-header fade-up">
+
+  <div>
+
+    <div class="eyebrow">
+      wander a little
+    </div>
+
+    <h1>
+      <em>explore.</em>
+    </h1>
+
+  </div>
+
+  <p class="intro">
+
+    A collection of little things
+    to read, think about, and
+    carry with you.
+
+  </p>
+
+</header>
+
+
+<!-- =======================================================
+     FEATURED
+     ======================================================= -->
+
+<section
+class="featured fade-up delay-1"
+onclick="openArticle(0)"
+>
+
+  <div class="featured-label">
+    ✦ editor's pick · this week
+  </div>
+
+  <h2 class="featured-title">
+    You Are Allowed to Take Up Space
+  </h2>
+
+  <p class="featured-text">
+
+    A gentle reminder that your
+    needs, feelings, and presence
+    matter — more than you realise.
+
+  </p>
+
+  <span class="featured-read">
+    read the piece →
+  </span>
+
+</section>
+
+
+<!-- =======================================================
+     FILTERS
+     ======================================================= -->
+
+<section class="filter-section fade-up delay-2">
+
+  <div class="filter-label">
+    browse by feeling
+  </div>
+
+  <div
+    class="filter-row"
+    id="filterRow"
+  ></div>
+
+</section>
+
+
+<!-- =======================================================
+     ARTICLES
+     ======================================================= -->
+
+<section
+class="article-grid fade-up delay-3"
+id="articleGrid"
+></section>
+
+
+</main>
+
+
+<!-- =======================================================
+     ARTICLE OVERLAY
+     ======================================================= -->
+
+<div
+class="article-overlay"
+id="articleOverlay"
+onclick="backgroundClose(event)"
+>
+
+
+<div class="article-sheet" id="articleSheet">
+
+
+  <div class="sheet-handle"></div>
+
+
+  <button
+    class="sheet-close"
+    onclick="closeArticle()"
+    aria-label="Close article"
+  >
+    ×
+  </button>
+
+
+  <div
+    class="sheet-category"
+    id="sheetCategory"
+  ></div>
+
+
+  <h2
+    class="sheet-title"
+    id="sheetTitle"
+  ></h2>
+
+
+  <div
+    class="sheet-subtitle"
+    id="sheetSubtitle"
+  ></div>
+
+
+  <div
+    class="sheet-body"
+    id="sheetBody"
+  ></div>
+
+
+  <div class="sheet-footer">
+
+    <div class="sheet-footer-text">
+      take what you need.
+    </div>
+
+    <button
+      class="sheet-save"
+      onclick="saveArticle()"
+    >
+      save this piece
+    </button>
+
+  </div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   ARTICLE DATA
+   ========================================================= */
+
+const ARTICLES = [
+
+  {
+    cat: "Growth",
+    emoji: "🌸",
+    title: "You Are Allowed to Take Up Space",
+    subtitle: "A reminder that your presence matters.",
+    read: "3 min",
+    bg: "#F4DFE2",
+
+    body: `
+      <p>
+        From a very young age, many of us are taught —
+        subtly or directly — to make ourselves small.
+        To not be too loud, too emotional, too much.
+      </p>
+
+      <p>
+        This piece is a gentle counter-message:
+        <em>you are allowed to take up space.</em>
+      </p>
+
+      <h3>
+        What it means
+      </h3>
+
+      <p>
+        Taking up space doesn't mean being inconsiderate.
+        It means allowing your needs to exist.
+        Saying "I'm struggling" when you are.
+        Asking for what you need.
+        Occupying your life fully.
+      </p>
+
+      <h3>
+        A practice
+      </h3>
+
+      <p>
+        This week, try one thing that feels like taking
+        up space. Ask for help with something.
+        Share a feeling you'd normally keep inside.
+        Let yourself be seen — even just a little.
+      </p>
+
+      <p>
+        You are not too much.
+        You are exactly enough. 🌸
+      </p>
+    `
+  },
+
+
+  {
+    cat: "Journaling",
+    emoji: "📓",
+    title: "10 Prompts for When You Feel Empty",
+    subtitle: "Writing your way back to yourself.",
+    read: "4 min",
+    bg: "#F5EAE2",
+
+    body: `
+      <p>
+        There are days when words feel far away and
+        numbness moves in. These prompts are designed
+        to gently start the conversation between you
+        and yourself.
+      </p>
+
+      <h3>
+        The prompts
+      </h3>
+
+      <p>
+        1. What does this emptiness feel like physically
+        in my body?
+        <br><br>
+
+        2. When did I last feel truly present?
+        <br><br>
+
+        3. What would I tell a friend feeling this way?
+        <br><br>
+
+        4. What am I avoiding?
+        <br><br>
+
+        5. What would make today 1% easier?
+        <br><br>
+
+        6. Who made me feel safe recently — and how?
+        <br><br>
+
+        7. What colour is my mood right now?
+        <br><br>
+
+        8. What do I wish someone would ask me?
+        <br><br>
+
+        9. If this feeling could speak, what would it say?
+        <br><br>
+
+        10. What would my most compassionate self do today?
+      </p>
+
+      <p>
+        You don't have to answer all of them.
+        One is enough to begin. 💙
+      </p>
+    `
+  },
+
+
+  {
+    cat: "Anxiety",
+    emoji: "🌀",
+    title: "Understanding Your Anxiety: A Gentle Guide",
+    subtitle: "What's happening — and what helps.",
+    read: "5 min",
+    bg: "#E5F0F5",
+
+    body: `
+      <p>
+        Anxiety is one of the most common experiences
+        among teenagers — and one of the most misunderstood.
+        Here's what's actually happening, and what can help.
+      </p>
+
+      <h3>
+        What anxiety actually is
+      </h3>
+
+      <p>
+        Anxiety is your nervous system trying to protect you.
+        It's an ancient alarm system — and sometimes it reacts
+        more strongly than the situation requires.
+      </p>
+
+      <p>
+        The thoughts are not facts.
+        The fear is real, but the threat usually isn't as
+        certain as it feels.
+      </p>
+
+      <h3>
+        Techniques that help
+      </h3>
+
+      <p>
+        <strong>Slow breathing</strong> —
+        Take a comfortable breath in and make your exhale
+        slightly longer than your inhale.
+      </p>
+
+      <p>
+        <strong>Name it to tame it</strong> —
+        Say "I'm feeling anxious right now."
+        Putting a feeling into words can create some distance
+        from it.
+      </p>
+
+      <p>
+        <strong>Grounding</strong> —
+        Notice things you can see, hear and physically feel
+        around you.
+      </p>
+
+      <p>
+        Anxiety does not mean something is wrong with you.
+        💙
+      </p>
+    `
+  },
+
+
+  {
+    cat: "Yoga",
+    emoji: "🧘",
+    title: "Poses That Release Emotional Tension",
+    subtitle: "Your body holds what your mind carries.",
+    read: "6 min",
+    bg: "#E7F0E5",
+
+    body: `
+      <p>
+        Gentle movement can sometimes help us reconnect
+        with our bodies when our minds feel overwhelmed.
+      </p>
+
+      <h3>
+        Child's Pose
+      </h3>
+
+      <p>
+        Kneel and gently lower your torso forward,
+        resting your arms wherever feels comfortable.
+        Breathe slowly and stay for as long as feels good.
+      </p>
+
+      <h3>
+        Legs Up the Wall
+      </h3>
+
+      <p>
+        Lie comfortably on your back and rest your legs
+        against a wall. Let your breathing settle naturally.
+      </p>
+
+      <h3>
+        Heart Opener
+      </h3>
+
+      <p>
+        Lie back over a folded blanket or pillow.
+        Let your arms rest comfortably at your sides.
+      </p>
+
+      <p>
+        You don't need experience.
+        Gentle movement is enough. 🌿
+      </p>
+    `
+  },
+
+
+  {
+    cat: "Friendship",
+    emoji: "🤍",
+    title: "What to Do When You Feel Alone",
+    subtitle: "You are more connected than you think.",
+    read: "4 min",
+    bg: "#EAE4F1",
+
+    body: `
+      <p>
+        Loneliness can arrive even in a room full of people.
+        It's not always about how many friends you have —
+        it's about how seen and understood you feel.
+      </p>
+
+      <h3>
+        Reach out imperfectly
+      </h3>
+
+      <p>
+        Send the text.
+        Even "hey, I've been thinking about you"
+        is enough.
+      </p>
+
+      <h3>
+        Choose depth over breadth
+      </h3>
+
+      <p>
+        One honest conversation can mean more than
+        ten surface-level ones.
+      </p>
+
+      <h3>
+        Create your own ritual
+      </h3>
+
+      <p>
+        A weekly walk, a shared playlist, a standing dinner.
+        Friendship grows through repeated small moments.
+      </p>
+
+      <p>
+        You deserve to be truly known by someone. 🤍
+      </p>
+    `
+  },
+
+
+  {
+    cat: "Self-care",
+    emoji: "🛁",
+    title: "The Art of Doing Nothing",
+    subtitle: "Rest is not laziness.",
+    read: "3 min",
+    bg: "#F3E8DF",
+
+    body: `
+      <p>
+        In a world that glorifies productivity,
+        choosing to rest can feel strangely difficult.
+      </p>
+
+      <p>
+        But rest is part of taking care of yourself.
+        Your brain and body need periods without constant
+        demands.
+      </p>
+
+      <h3>
+        What real rest looks like
+      </h3>
+
+      <p>
+        It can mean sleep, creative play, boredom,
+        nature, silence, or simply spending time without
+        needing to accomplish anything.
+      </p>
+
+      <h3>
+        A permission slip
+      </h3>
+
+      <p>
+        You are allowed to have a slow morning.
+        You are allowed to take a break.
+        You are allowed to not be productive every moment.
+      </p>
+
+      <p>
+        Rest is an act of self-respect. 🛁
+      </p>
+    `
+  },
+
+
+  {
+    cat: "Growth",
+    emoji: "🌱",
+    title: "Tiny Habits That Changed My Mental Health",
+    subtitle: "Small shifts. Real difference.",
+    read: "4 min",
+    bg: "#E7F0E5",
+
+    body: `
+      <p>
+        You don't need to overhaul your entire life.
+        Small habits, repeated consistently,
+        can create meaningful changes.
+      </p>
+
+      <h3>
+        Morning
+      </h3>
+
+      <p>
+        Try doing one thing before immediately reaching
+        for your phone. Drink water. Stretch.
+        Write one sentence.
+      </p>
+
+      <h3>
+        During the day
+      </h3>
+
+      <p>
+        Stop for a moment and ask:
+        how am I actually feeling?
+        Naming the feeling is the whole exercise.
+      </p>
+
+      <h3>
+        Evening
+      </h3>
+
+      <p>
+        Write three things:
+        one you're proud of,
+        one you're grateful for,
+        and one thing you're ready to release.
+      </p>
+
+      <p>
+        These aren't magic.
+        They're small acts of kindness toward yourself. 🌱
+      </p>
+    `
+  },
+
+
+  {
+    cat: "Anxiety",
+    emoji: "💤",
+    title: "Why Your Sleep Matters More Than You Think",
+    subtitle: "The connection between rest and mental health.",
+    read: "4 min",
+    bg: "#E5F0F5",
+
+    body: `
+      <p>
+        Sleep plays an important role in mental health,
+        learning, memory, and emotional regulation.
+      </p>
+
+      <h3>
+        What happens when you sleep
+      </h3>
+
+      <p>
+        Your brain processes memories, supports learning,
+        and helps regulate emotions while you sleep.
+      </p>
+
+      <h3>
+        When you don't get enough
+      </h3>
+
+      <p>
+        Too little sleep can make it harder to concentrate,
+        manage emotions, and cope with everyday stress.
+      </p>
+
+      <h3>
+        One thing to try tonight
+      </h3>
+
+      <p>
+        Give yourself a little quiet time before bed.
+        Put away stimulating screens and let your mind
+        gradually slow down.
+      </p>
+
+      <p>
+        Sometimes the gentlest thing you can do
+        is let yourself rest. 💤
+      </p>
+    `
+  }
+
 ];
 
-const CATS=['All',...new Set(ARTICLES.map(a=>a.cat))];
-let selCat=null;
 
-// Filter row
-const fr=document.getElementById('fr');
-CATS.forEach(c=>{
-  const b=document.createElement('button');
-  b.className='f-btn'+(c==='All'?' active':'');
-  b.textContent=c;
-  b.onclick=()=>{document.querySelectorAll('.f-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');selCat=c==='All'?null:c;renderGrid();};
-  fr.appendChild(b);
+/* =========================================================
+   CATEGORY COLOURS
+   ========================================================= */
+
+const CATEGORY_COLORS = {
+
+  Journaling: "#B97880",
+
+  Anxiety: "#728FA0",
+
+  Yoga: "#72866E",
+
+  Friendship: "#887B9D",
+
+  "Self-care": "#B17E62",
+
+  Growth: "#72866E"
+
+};
+
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+const categories = [
+  "All",
+  ...new Set(
+    ARTICLES.map(article => article.cat)
+  )
+];
+
+
+const filterRow =
+  document.getElementById("filterRow");
+
+
+let selectedCategory = null;
+
+
+categories.forEach(category => {
+
+  const button =
+    document.createElement("button");
+
+  button.className =
+    "filter-button" +
+    (category === "All" ? " active" : "");
+
+  button.textContent =
+    category;
+
+
+  button.addEventListener("click", () => {
+
+    document
+      .querySelectorAll(".filter-button")
+      .forEach(button =>
+        button.classList.remove("active")
+      );
+
+    button.classList.add("active");
+
+    selectedCategory =
+      category === "All"
+        ? null
+        : category;
+
+    renderArticles();
+
+  });
+
+
+  filterRow.appendChild(button);
+
 });
 
-function renderGrid(){
-  const filtered=selCat?ARTICLES.filter(a=>a.cat===selCat):ARTICLES;
-  document.getElementById('grid').innerHTML=filtered.map((a,i)=>`
-    <div class="art-card" onclick="openArt(${ARTICLES.indexOf(a)})" style="animation:fadeUp .4s ${i*.05}s both">
-      <div class="art-emo" style="background:${a.bg}">${a.emo}</div>
-      <div class="art-body">
-        <div class="art-cat" style="color:${CAT_COLORS[a.cat]||'#888'}">${a.cat}</div>
-        <div class="art-h">${a.h}</div>
-        <div class="art-read">📖 ${a.read} read</div>
+
+/* =========================================================
+   RENDER ARTICLES
+   ========================================================= */
+
+function renderArticles() {
+
+  const grid =
+    document.getElementById("articleGrid");
+
+
+  const filtered =
+    selectedCategory
+      ? ARTICLES.filter(
+          article =>
+            article.cat === selectedCategory
+        )
+      : ARTICLES;
+
+
+  grid.innerHTML = "";
+
+
+  filtered.forEach((article, index) => {
+
+    const originalIndex =
+      ARTICLES.indexOf(article);
+
+
+    const card =
+      document.createElement("article");
+
+
+    card.className =
+      "article-card";
+
+
+    card.style.animation =
+      `cardIn .5s ease ${index * .06}s both`;
+
+
+    card.innerHTML = `
+
+      <div
+        class="article-visual"
+        style="background:${article.bg}"
+      >
+        ${article.emoji}
       </div>
-    </div>`).join('');
+
+      <div class="article-body">
+
+        <div
+          class="article-category"
+          style="color:${CATEGORY_COLORS[article.cat]}"
+        >
+          ${article.cat}
+        </div>
+
+        <div class="article-title">
+          ${article.title}
+        </div>
+
+        <div class="article-meta">
+          ${article.read} · read
+        </div>
+
+      </div>
+
+    `;
+
+
+    card.addEventListener(
+      "click",
+      () => openArticle(originalIndex)
+    );
+
+
+    grid.appendChild(card);
+
+  });
+
 }
 
-function openArt(i){
-  const a=ARTICLES[i];
-  document.getElementById('sCat').textContent=a.cat;
-  document.getElementById('sCat').style.color=CAT_COLORS[a.cat]||'#888';
-  document.getElementById('sH').textContent=a.h;
-  document.getElementById('sSub').textContent=a.sub;
-  document.getElementById('sBody').innerHTML=a.body;
-  document.getElementById('asheet').scrollTop=0;
-  document.getElementById('overlay').classList.add('open');
+
+/* =========================================================
+   OPEN ARTICLE
+   ========================================================= */
+
+function openArticle(index) {
+
+  const article =
+    ARTICLES[index];
+
+
+  document.getElementById(
+    "sheetCategory"
+  ).textContent =
+    article.cat;
+
+
+  document.getElementById(
+    "sheetCategory"
+  ).style.color =
+    CATEGORY_COLORS[article.cat];
+
+
+  document.getElementById(
+    "sheetTitle"
+  ).textContent =
+    article.title;
+
+
+  document.getElementById(
+    "sheetSubtitle"
+  ).textContent =
+    article.subtitle;
+
+
+  document.getElementById(
+    "sheetBody"
+  ).innerHTML =
+    article.body;
+
+
+  const overlay =
+    document.getElementById(
+      "articleOverlay"
+    );
+
+
+  const sheet =
+    document.getElementById(
+      "articleSheet"
+    );
+
+
+  sheet.scrollTop = 0;
+
+
+  overlay.classList.add("open");
+
+
+  document.body.style.overflow =
+    "hidden";
+
 }
-function closeArt(){document.getElementById('overlay').classList.remove('open');}
 
-const style=document.createElement('style');
-style.textContent='@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}';
-document.head.appendChild(style);
 
-renderGrid();
+/* =========================================================
+   CLOSE ARTICLE
+   ========================================================= */
+
+function closeArticle() {
+
+  document
+    .getElementById("articleOverlay")
+    .classList.remove("open");
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =========================================================
+   CLOSE BY CLICKING BACKGROUND
+   ========================================================= */
+
+function backgroundClose(event) {
+
+  if (
+    event.target ===
+    document.getElementById(
+      "articleOverlay"
+    )
+  ) {
+
+    closeArticle();
+
+  }
+
+}
+
+
+/* =========================================================
+   ESCAPE KEY
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closeArticle();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SAVE ARTICLE
+   ========================================================= */
+
+function saveArticle() {
+
+  const button =
+    document.querySelector(
+      ".sheet-save"
+    );
+
+
+  button.textContent =
+    "saved ✓";
+
+
+  button.style.background =
+    "var(--rose)";
+
+
+  setTimeout(() => {
+
+    button.textContent =
+      "save this piece";
+
+    button.style.background =
+      "var(--sage)";
+
+  }, 1600);
+
+}
+
+
+/* =========================================================
+   INITIALISE
+   ========================================================= */
+
+renderArticles();
+
+
 </script>
+
 </body>
+
 </html>

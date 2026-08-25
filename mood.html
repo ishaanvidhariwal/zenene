@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Special+Elite&display=swap"
     rel="stylesheet"
   >
 
@@ -23,28 +23,28 @@
 
     :root {
 
-      --sky: #C9DFEA;
-      --sky-light: #E8F2F5;
-      --sky-deep: #9EBFCC;
+      --sky: #BFD8E4;
+      --sky-light: #E8F1F4;
+      --sky-deep: #91B6C5;
 
-      --cream: #F7F1E7;
+      --cream: #F4F0E8;
       --paper: #FFFDF8;
 
-      --sage: #D8E4D7;
+      --sage: #D9E3D5;
       --sage-deep: #72866E;
 
-      --rose: #E7C9CD;
+      --rose: #E4C9CC;
       --rose-deep: #B97880;
 
-      --lavender: #DCD8E8;
+      --lavender: #DCD9E6;
 
       --brown: #624F43;
       --brown-dark: #392D26;
       --ink: #2F2B27;
 
       --typewriter: "Special Elite", "Courier New", monospace;
-      --serif: "Cormorant Garamond", Georgia, serif;
-      --script: "Dancing Script", cursive;
+      --serif: "Times New Roman", Times, serif;
+      --script: "Caveat", cursive;
     }
 
 
@@ -61,10 +61,51 @@
     }
 
     body {
+
       margin: 0;
-      background: var(--cream);
+
       color: var(--ink);
+
       overflow-x: hidden;
+
+      background-color: var(--cream);
+
+      /*
+        Very subtle paper/grid background.
+        Kept intentionally faded so the dashboard
+        doesn't become visually noisy.
+      */
+
+      background-image:
+
+        radial-gradient(
+          circle,
+          rgba(98, 79, 67, .055) 1px,
+          transparent 1.5px
+        ),
+
+        linear-gradient(
+          rgba(98, 79, 67, .025) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(98, 79, 67, .025) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        26px 26px,
+        52px 52px,
+        52px 52px;
+
+      background-position:
+        0 0,
+        0 0,
+        0 0;
+
+      background-attachment: fixed;
     }
 
 
@@ -77,13 +118,14 @@
       content: "";
 
       position: fixed;
+
       inset: 0;
 
       pointer-events: none;
 
       z-index: 9999;
 
-      opacity: .045;
+      opacity: .035;
 
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -159,7 +201,9 @@
     }
 
     .nav-links .active {
+
       color: var(--ink);
+
       position: relative;
     }
 
@@ -234,7 +278,7 @@
 
       font-size: clamp(4rem, 8vw, 7rem);
 
-      font-weight: 300;
+      font-weight: 400;
 
       line-height: .85;
 
@@ -268,23 +312,61 @@
 
 
     /* =========================================================
-       TODAY CHECK-IN
+       MOOD LOG DASHBOARD
        ========================================================= */
 
     .checkin {
 
       position: relative;
 
-      padding: 42px;
+      padding: 48px;
 
-      background: var(--paper);
+      background:
 
-      border: 1px solid rgba(98,79,67,.12);
+        linear-gradient(
+          135deg,
+          rgba(255,253,248,.96),
+          rgba(232,241,244,.88)
+        );
+
+      border: 1px solid rgba(98,79,67,.11);
 
       box-shadow:
-        0 20px 60px rgba(98,79,67,.06);
+        0 24px 70px rgba(98,79,67,.07);
 
       margin-bottom: 45px;
+
+      overflow: hidden;
+    }
+
+    /*
+      Subtle decorative dot field inside dashboard.
+    */
+
+    .checkin::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 220px;
+      height: 220px;
+
+      right: -65px;
+      bottom: -75px;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(145,182,197,.28) 1.5px,
+          transparent 1.8px
+        );
+
+      background-size: 18px 18px;
+
+      opacity: .65;
+
+      pointer-events: none;
     }
 
     .checkin::before {
@@ -294,14 +376,18 @@
       position: absolute;
 
       top: -10px;
+
       right: 30px;
 
       width: 80px;
+
       height: 20px;
 
       background: rgba(231,201,205,.65);
 
       transform: rotate(2deg);
+
+      z-index: 2;
     }
 
     .checkin-label {
@@ -317,17 +403,40 @@
       color: var(--brown);
 
       margin-bottom: 8px;
+
+      position: relative;
+
+      z-index: 2;
     }
 
     .checkin-title {
 
       font-family: var(--serif);
 
-      font-size: 2.4rem;
+      font-size: 2.7rem;
 
-      font-weight: 300;
+      font-weight: 400;
 
-      margin: 0 0 28px;
+      margin: 0 0 10px;
+
+      position: relative;
+
+      z-index: 2;
+    }
+
+    .checkin-subtitle {
+
+      font-family: var(--serif);
+
+      font-size: 1.05rem;
+
+      color: var(--brown);
+
+      margin: 0 0 32px;
+
+      position: relative;
+
+      z-index: 2;
     }
 
     .mood-options {
@@ -336,22 +445,27 @@
 
       grid-template-columns: repeat(5, 1fr);
 
-      gap: 14px;
+      gap: 12px;
+
+      position: relative;
+
+      z-index: 2;
     }
 
     .mood-button {
 
       border: 1px solid rgba(98,79,67,.12);
 
-      background: var(--cream);
+      background: rgba(247,241,231,.72);
 
-      min-height: 110px;
+      min-height: 105px;
 
       cursor: pointer;
 
       transition:
         transform .3s ease,
         background .3s ease,
+        border-color .3s ease,
         box-shadow .3s ease;
 
       display: flex;
@@ -362,15 +476,19 @@
 
       justify-content: center;
 
-      gap: 8px;
+      gap: 10px;
+
+      color: var(--ink);
     }
 
     .mood-button:hover {
 
-      transform: translateY(-5px);
+      transform: translateY(-4px);
+
+      background: rgba(255,253,248,.95);
 
       box-shadow:
-        0 12px 25px rgba(98,79,67,.08);
+        0 12px 25px rgba(98,79,67,.07);
     }
 
     .mood-button.selected {
@@ -379,12 +497,27 @@
 
       border-color: var(--sky-deep);
 
-      transform: translateY(-5px);
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 10px 25px rgba(98,79,67,.07);
     }
 
-    .mood-emoji {
+    /*
+      No emojis.
+      The mood is represented through typography
+      and a small editorial index number.
+    */
 
-      font-size: 2rem;
+    .mood-number {
+
+      font-family: var(--serif);
+
+      font-size: 1.35rem;
+
+      color: var(--rose-deep);
+
+      font-weight: 400;
     }
 
     .mood-name {
@@ -409,6 +542,10 @@
       margin-top: 30px;
 
       gap: 20px;
+
+      position: relative;
+
+      z-index: 2;
     }
 
     .checkin-note {
@@ -474,7 +611,7 @@
 
       font-size: 2.6rem;
 
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .section-heading span {
@@ -488,13 +625,45 @@
 
     .week-card {
 
-      background: var(--sage);
+      background:
+
+        linear-gradient(
+          135deg,
+          rgba(217,227,213,.92),
+          rgba(232,241,244,.88)
+        );
 
       padding: 38px;
 
       border: 1px solid rgba(98,79,67,.08);
 
       margin-bottom: 45px;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .week-card::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(98,79,67,.08) 1px,
+          transparent 1.5px
+        );
+
+      background-size: 22px 22px;
+
+      opacity: .45;
+
+      pointer-events: none;
     }
 
     .week-grid {
@@ -504,6 +673,10 @@
       grid-template-columns: repeat(7, 1fr);
 
       gap: 10px;
+
+      position: relative;
+
+      z-index: 2;
     }
 
     .day {
@@ -512,7 +685,7 @@
 
       padding: 18px 5px;
 
-      background: rgba(255,253,248,.55);
+      background: rgba(255,253,248,.65);
 
       transition: .3s ease;
     }
@@ -541,9 +714,13 @@
 
     .day-emoji {
 
-      font-size: 1.8rem;
+      font-family: var(--serif);
+
+      font-size: 1.4rem;
 
       margin-bottom: 10px;
+
+      color: var(--rose-deep);
     }
 
     .day-date {
@@ -618,7 +795,7 @@
 
       font-size: 3rem;
 
-      font-weight: 300;
+      font-weight: 400;
 
       line-height: 1;
     }
@@ -670,6 +847,7 @@
       position: absolute;
 
       right: 20px;
+
       bottom: 0;
 
       font-family: var(--serif);
@@ -689,7 +867,7 @@
 
       font-size: 2.2rem;
 
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .insight-card p {
@@ -741,7 +919,7 @@
 
       font-size: 2.2rem;
 
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .recommendation p {
@@ -787,6 +965,8 @@
     }
 
     footer .script {
+
+      font-family: var(--script);
 
       font-size: 1.6rem;
 
@@ -888,8 +1068,8 @@
         font-size: .45rem;
       }
 
-      .mood-emoji {
-        font-size: 1.5rem;
+      .mood-number {
+        font-size: 1.15rem;
       }
 
       .checkin {
@@ -910,7 +1090,7 @@
       }
 
       .day-emoji {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
       }
 
       .day-name {
@@ -994,7 +1174,7 @@
 
 
     <!-- =====================================================
-         TODAY
+         MOOD LOG
          ===================================================== -->
 
     <section class="checkin fade-up delay-1">
@@ -1004,35 +1184,78 @@
       </div>
 
       <h2 class="checkin-title">
-        How are you feeling?
+        Log your mood.
       </h2>
+
+      <p class="checkin-subtitle">
+        No explanation required. Just mark where you are today.
+      </p>
 
 
       <div class="mood-options">
 
         <button class="mood-button" data-mood="very-happy">
-          <span class="mood-emoji">😄</span>
-          <span class="mood-name">very good</span>
+
+          <span class="mood-number">
+            05
+          </span>
+
+          <span class="mood-name">
+            very good
+          </span>
+
         </button>
+
 
         <button class="mood-button" data-mood="good">
-          <span class="mood-emoji">😊</span>
-          <span class="mood-name">good</span>
+
+          <span class="mood-number">
+            04
+          </span>
+
+          <span class="mood-name">
+            good
+          </span>
+
         </button>
+
 
         <button class="mood-button" data-mood="okay">
-          <span class="mood-emoji">😐</span>
-          <span class="mood-name">okay</span>
+
+          <span class="mood-number">
+            03
+          </span>
+
+          <span class="mood-name">
+            okay
+          </span>
+
         </button>
+
 
         <button class="mood-button" data-mood="low">
-          <span class="mood-emoji">😔</span>
-          <span class="mood-name">low</span>
+
+          <span class="mood-number">
+            02
+          </span>
+
+          <span class="mood-name">
+            low
+          </span>
+
         </button>
 
+
         <button class="mood-button" data-mood="difficult">
-          <span class="mood-emoji">🌧️</span>
-          <span class="mood-name">difficult</span>
+
+          <span class="mood-number">
+            01
+          </span>
+
+          <span class="mood-name">
+            difficult
+          </span>
+
         </button>
 
       </div>
@@ -1041,7 +1264,7 @@
       <div class="checkin-footer">
 
         <div class="checkin-note" id="checkinMessage">
-          You can check in without writing anything.
+          Select one. You can add context later in your journal.
         </div>
 
         <button class="save-button" id="saveMood">
@@ -1137,7 +1360,7 @@
         </div>
 
         <div class="stat-small">
-          little moments of noticing 🌱
+          little moments of noticing
         </div>
 
       </div>
@@ -1230,31 +1453,26 @@
     const moodInfo = {
 
       "very-happy": {
-        emoji: "😄",
         label: "very good",
         value: 5
       },
 
       "good": {
-        emoji: "😊",
         label: "good",
         value: 4
       },
 
       "okay": {
-        emoji: "😐",
         label: "okay",
         value: 3
       },
 
       "low": {
-        emoji: "😔",
         label: "low",
         value: 2
       },
 
       "difficult": {
-        emoji: "🌧️",
         label: "difficult",
         value: 1
       }
@@ -1324,7 +1542,7 @@
           document.getElementById(
             "checkinMessage"
           ).textContent =
-            `You chose ${moodInfo[selectedMood].label}.`;
+            `You marked today as ${moodInfo[selectedMood].label}.`;
 
         });
 
@@ -1344,7 +1562,7 @@
           document.getElementById(
             "checkinMessage"
           ).textContent =
-            "Choose how you're feeling first 🌱";
+            "Select a mood before saving.";
 
           return;
 
@@ -1363,7 +1581,7 @@
         document.getElementById(
           "checkinMessage"
         ).textContent =
-          "Saved. Thank you for checking in.";
+          "Saved. Your check-in has been recorded.";
 
         renderDashboard();
 
@@ -1468,7 +1686,7 @@
           </div>
 
           <div class="day-emoji">
-            ${mood ? moodInfo[mood].emoji : "·"}
+            ${mood ? moodInfo[mood].value : "·"}
           </div>
 
           <div class="day-date">
@@ -1529,8 +1747,6 @@
       }
 
 
-      /* Average */
-
       const total =
         weekMoods.reduce(
           (sum, mood) =>
@@ -1566,8 +1782,6 @@
 
 
 
-      /* Most common */
-
       const frequency = {};
 
 
@@ -1590,7 +1804,7 @@
       document.getElementById(
         "commonMood"
       ).textContent =
-        moodInfo[mostCommon].emoji;
+        moodInfo[mostCommon].label;
 
     }
 

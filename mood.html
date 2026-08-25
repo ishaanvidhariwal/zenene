@@ -2,24 +2,39 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Zenene — Mood</title>
 
+
+  <!-- =====================================================
+       FONTS
+       ===================================================== -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Special+Elite&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IM+Fell+DW+Pica:ital@0;1&family=Special+Elite&display=swap"
     rel="stylesheet"
   >
 
+
   <style>
 
-    /* =========================================================
+    /* =====================================================
        ZENENE — MOOD
-       ========================================================= */
+       ===================================================== */
+
 
     :root {
 
@@ -42,23 +57,40 @@
       --brown-dark: #392D26;
       --ink: #2F2B27;
 
-      --typewriter: "Special Elite", "Courier New", monospace;
-      --serif: "Times New Roman", Times, serif;
-      --script: "Caveat", cursive;
+
+      /* FONTS */
+
+      --typewriter:
+        "Special Elite",
+        "Courier New",
+        monospace;
+
+      --serif:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+      --script:
+        "IM Fell DW Pica",
+        Georgia,
+        serif;
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        RESET
-       ========================================================= */
+       ===================================================== */
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
+
 
     body {
 
@@ -69,12 +101,6 @@
       overflow-x: hidden;
 
       background-color: var(--cream);
-
-      /*
-        Very subtle paper/grid background.
-        Kept intentionally faded so the dashboard
-        doesn't become visually noisy.
-      */
 
       background-image:
 
@@ -106,12 +132,13 @@
         0 0;
 
       background-attachment: fixed;
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        PAPER GRAIN
-       ========================================================= */
+       ===================================================== */
 
     body::before {
 
@@ -129,12 +156,13 @@
 
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        NAVIGATION
-       ========================================================= */
+       ===================================================== */
 
     .top-nav {
 
@@ -156,8 +184,12 @@
 
       backdrop-filter: blur(18px);
 
-      border-bottom: 1px solid rgba(98,79,67,.08);
+      border-bottom:
+        1px solid
+        rgba(98,79,67,.08);
+
     }
+
 
     .nav-wordmark {
 
@@ -168,7 +200,9 @@
       letter-spacing: .16em;
 
       text-transform: uppercase;
+
     }
+
 
     .nav-links {
 
@@ -177,7 +211,9 @@
       gap: 28px;
 
       align-items: center;
+
     }
+
 
     .nav-links a {
 
@@ -194,18 +230,23 @@
       text-transform: uppercase;
 
       transition: .3s ease;
+
     }
+
 
     .nav-links a:hover {
       color: var(--rose-deep);
     }
+
 
     .nav-links .active {
 
       color: var(--ink);
 
       position: relative;
+
     }
+
 
     .nav-links .active::after {
 
@@ -221,39 +262,50 @@
       height: 1px;
 
       background: var(--rose-deep);
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        PAGE
-       ========================================================= */
+       ===================================================== */
 
     .page {
 
-      width: min(1180px, calc(100% - 48px));
+      width:
+        min(
+          1180px,
+          calc(100% - 48px)
+        );
 
       margin: auto;
 
-      padding: 80px 0 120px;
+      padding:
+        80px 0
+        120px;
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        HEADER
-       ========================================================= */
+       ===================================================== */
 
     .page-header {
 
       display: grid;
 
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns:
+        1.1fr .9fr;
 
       gap: 60px;
 
       align-items: end;
 
       margin-bottom: 70px;
+
     }
+
 
     .eyebrow {
 
@@ -268,7 +320,9 @@
       color: var(--brown);
 
       margin-bottom: 18px;
+
     }
+
 
     h1 {
 
@@ -276,14 +330,21 @@
 
       font-family: var(--serif);
 
-      font-size: clamp(4rem, 8vw, 7rem);
+      font-size:
+        clamp(
+          4rem,
+          8vw,
+          7rem
+        );
 
       font-weight: 400;
 
       line-height: .85;
 
       letter-spacing: -.04em;
+
     }
+
 
     h1 em {
 
@@ -291,11 +352,12 @@
 
       font-size: .7em;
 
-      font-weight: 500;
+      font-weight: 400;
 
       color: var(--rose-deep);
 
     }
+
 
     .intro {
 
@@ -308,12 +370,13 @@
       line-height: 1.45;
 
       color: var(--brown);
+
     }
 
 
-    /* =========================================================
-       MOOD LOG DASHBOARD
-       ========================================================= */
+    /* =====================================================
+       MOOD CHECK-IN
+       ===================================================== */
 
     .checkin {
 
@@ -329,19 +392,20 @@
           rgba(232,241,244,.88)
         );
 
-      border: 1px solid rgba(98,79,67,.11);
+      border:
+        1px solid
+        rgba(98,79,67,.11);
 
       box-shadow:
-        0 24px 70px rgba(98,79,67,.07);
+        0 24px 70px
+        rgba(98,79,67,.07);
 
       margin-bottom: 45px;
 
       overflow: hidden;
+
     }
 
-    /*
-      Subtle decorative dot field inside dashboard.
-    */
 
     .checkin::after {
 
@@ -356,6 +420,7 @@
       bottom: -75px;
 
       background-image:
+
         radial-gradient(
           circle,
           rgba(145,182,197,.28) 1.5px,
@@ -367,7 +432,9 @@
       opacity: .65;
 
       pointer-events: none;
+
     }
+
 
     .checkin::before {
 
@@ -380,15 +447,18 @@
       right: 30px;
 
       width: 80px;
-
       height: 20px;
 
-      background: rgba(231,201,205,.65);
+      background:
+        rgba(231,201,205,.65);
 
-      transform: rotate(2deg);
+      transform:
+        rotate(2deg);
 
       z-index: 2;
+
     }
+
 
     .checkin-label {
 
@@ -407,7 +477,9 @@
       position: relative;
 
       z-index: 2;
+
     }
+
 
     .checkin-title {
 
@@ -417,12 +489,17 @@
 
       font-weight: 400;
 
-      margin: 0 0 10px;
+      margin:
+        0
+        0
+        10px;
 
       position: relative;
 
       z-index: 2;
+
     }
+
 
     .checkin-subtitle {
 
@@ -432,33 +509,52 @@
 
       color: var(--brown);
 
-      margin: 0 0 32px;
+      margin:
+        0
+        0
+        32px;
 
       position: relative;
 
       z-index: 2;
+
     }
+
+
+    /* =====================================================
+       MOOD OPTIONS
+       ===================================================== */
 
     .mood-options {
 
       display: grid;
 
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns:
+        repeat(5, 1fr);
 
       gap: 12px;
 
       position: relative;
 
       z-index: 2;
+
     }
+
 
     .mood-button {
 
-      border: 1px solid rgba(98,79,67,.12);
+      border:
+        1px solid
+        rgba(98,79,67,.12);
 
-      background: rgba(247,241,231,.72);
+      background:
+        rgba(247,241,231,.72);
 
-      min-height: 105px;
+      min-height: 145px;
+
+      padding:
+        18px
+        10px;
 
       cursor: pointer;
 
@@ -476,49 +572,45 @@
 
       justify-content: center;
 
-      gap: 10px;
+      gap: 12px;
 
       color: var(--ink);
+
     }
+
 
     .mood-button:hover {
 
-      transform: translateY(-4px);
+      transform:
+        translateY(-4px);
 
-      background: rgba(255,253,248,.95);
+      background:
+        rgba(255,253,248,.95);
 
       box-shadow:
-        0 12px 25px rgba(98,79,67,.07);
+        0 12px 25px
+        rgba(98,79,67,.07);
+
     }
+
 
     .mood-button.selected {
 
-      background: var(--sky-light);
+      background:
+        var(--sky-light);
 
-      border-color: var(--sky-deep);
+      border-color:
+        var(--sky-deep);
 
-      transform: translateY(-4px);
+      transform:
+        translateY(-4px);
 
       box-shadow:
-        0 10px 25px rgba(98,79,67,.07);
+        0 10px 25px
+        rgba(98,79,67,.07);
+
     }
 
-    /*
-      No emojis.
-      The mood is represented through typography
-      and a small editorial index number.
-    */
-
-    .mood-number {
-
-      font-family: var(--serif);
-
-      font-size: 1.35rem;
-
-      color: var(--rose-deep);
-
-      font-weight: 400;
-    }
 
     .mood-name {
 
@@ -529,7 +621,72 @@
       letter-spacing: .06em;
 
       text-transform: uppercase;
+
     }
+
+
+    /* =====================================================
+       MOOD SPRITE
+       assets/images/mood.png
+       ===================================================== */
+
+    .mood-icon {
+
+      width: 66px;
+
+      height: 66px;
+
+      background-image:
+        url("assets/images/mood.png");
+
+      background-size:
+        300% 300%;
+
+      background-repeat:
+        no-repeat;
+
+      flex-shrink: 0;
+
+    }
+
+
+    /*
+      Sprite layout:
+
+      [ difficult ] [ good ] [ happy ]
+      [ very good ] [ okay ] [ happy ]
+      [ sad ] [ low ] [ surprised ]
+    */
+
+
+    .mood-icon-difficult {
+      background-position: 0% 0%;
+    }
+
+
+    .mood-icon-good {
+      background-position: 50% 0%;
+    }
+
+
+    .mood-icon-very-happy {
+      background-position: 0% 50%;
+    }
+
+
+    .mood-icon-okay {
+      background-position: 50% 50%;
+    }
+
+
+    .mood-icon-low {
+      background-position: 50% 100%;
+    }
+
+
+    /* =====================================================
+       CHECK-IN FOOTER
+       ===================================================== */
 
     .checkin-footer {
 
@@ -546,7 +703,9 @@
       position: relative;
 
       z-index: 2;
+
     }
+
 
     .checkin-note {
 
@@ -555,19 +714,26 @@
       font-size: 1rem;
 
       color: var(--brown);
+
     }
+
 
     .save-button {
 
       border: none;
 
-      background: var(--brown-dark);
+      background:
+        var(--brown-dark);
 
-      color: var(--paper);
+      color:
+        var(--paper);
 
-      padding: 14px 25px;
+      padding:
+        14px
+        25px;
 
-      font-family: var(--typewriter);
+      font-family:
+        var(--typewriter);
 
       font-size: .65rem;
 
@@ -578,50 +744,77 @@
       cursor: pointer;
 
       transition: .3s ease;
+
+      white-space: nowrap;
+
     }
+
 
     .save-button:hover {
 
-      background: var(--rose-deep);
+      background:
+        var(--rose-deep);
 
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
+
     }
 
 
-    /* =========================================================
-       WEEK
-       ========================================================= */
+    /* =====================================================
+       SECTION HEADINGS
+       ===================================================== */
 
     .section-heading {
 
       display: flex;
 
-      justify-content: space-between;
+      justify-content:
+        space-between;
 
-      align-items: baseline;
+      align-items:
+        baseline;
 
       margin-bottom: 20px;
+
+      gap: 25px;
+
     }
+
 
     .section-heading h2 {
 
       margin: 0;
 
-      font-family: var(--serif);
+      font-family:
+        var(--serif);
 
-      font-size: 2.6rem;
+      font-size:
+        2.6rem;
 
-      font-weight: 400;
+      font-weight:
+        400;
+
     }
+
 
     .section-heading span {
 
-      font-family: var(--script);
+      font-family:
+        var(--script);
 
-      color: var(--rose-deep);
+      color:
+        var(--rose-deep);
 
-      font-size: 1.4rem;
+      font-size:
+        1.4rem;
+
     }
+
+
+    /* =====================================================
+       RECENT WEEK
+       ===================================================== */
 
     .week-card {
 
@@ -635,14 +828,18 @@
 
       padding: 38px;
 
-      border: 1px solid rgba(98,79,67,.08);
+      border:
+        1px solid
+        rgba(98,79,67,.08);
 
       margin-bottom: 45px;
 
       position: relative;
 
       overflow: hidden;
+
     }
+
 
     .week-card::before {
 
@@ -653,53 +850,70 @@
       inset: 0;
 
       background-image:
+
         radial-gradient(
           circle,
           rgba(98,79,67,.08) 1px,
           transparent 1.5px
         );
 
-      background-size: 22px 22px;
+      background-size:
+        22px 22px;
 
       opacity: .45;
 
       pointer-events: none;
+
     }
+
 
     .week-grid {
 
       display: grid;
 
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns:
+        repeat(7, 1fr);
 
       gap: 10px;
 
       position: relative;
 
       z-index: 2;
+
     }
+
 
     .day {
 
       text-align: center;
 
-      padding: 18px 5px;
+      padding:
+        18px
+        5px;
 
-      background: rgba(255,253,248,.65);
+      background:
+        rgba(255,253,248,.65);
 
       transition: .3s ease;
+
     }
+
 
     .day:hover {
 
-      transform: translateY(-5px);
+      transform:
+        translateY(-5px);
 
-      background: rgba(255,253,248,.9);
+      background:
+        rgba(255,253,248,.9);
+
     }
+
 
     .day-name {
 
-      font-family: var(--typewriter);
+      font-family:
+        var(--typewriter);
 
       font-size: .55rem;
 
@@ -707,138 +921,661 @@
 
       text-transform: uppercase;
 
-      color: var(--brown);
+      color:
+        var(--brown);
 
       margin-bottom: 14px;
+
     }
 
-    .day-emoji {
 
-      font-family: var(--serif);
+    .day-icon {
 
-      font-size: 1.4rem;
+      width: 42px;
+      height: 42px;
 
-      margin-bottom: 10px;
+      margin:
+        0 auto
+        10px;
 
-      color: var(--rose-deep);
+      background-image:
+        url("assets/images/mood.png");
+
+      background-size:
+        300% 300%;
+
+      background-repeat:
+        no-repeat;
+
     }
+
 
     .day-date {
 
-      font-family: var(--serif);
+      font-family:
+        var(--serif);
 
       font-size: .9rem;
 
-      color: var(--brown);
+      color:
+        var(--brown);
+
     }
 
-    .day.empty {
 
+    .day.empty {
       opacity: .45;
     }
 
 
-    /* =========================================================
-       STATS
-       ========================================================= */
+    .day-empty-symbol {
+
+      height: 42px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      margin-bottom: 10px;
+
+      font-family:
+        var(--serif);
+
+      font-size: 1.5rem;
+
+      color:
+        var(--rose-deep);
+
+    }
+
+
+    /* =====================================================
+       MOOD HISTORY
+       ===================================================== */
+
+    .history-section {
+
+      margin-bottom: 60px;
+
+    }
+
+
+    .history-heading {
+
+      align-items: center;
+
+    }
+
+
+    .history-tabs {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 7px;
+
+    }
+
+
+    .history-tab {
+
+      border:
+        1px solid
+        rgba(98,79,67,.13);
+
+      background:
+        rgba(255,253,248,.65);
+
+      padding:
+        9px
+        13px;
+
+      font-family:
+        var(--typewriter);
+
+      font-size:
+        .55rem;
+
+      letter-spacing:
+        .06em;
+
+      text-transform:
+        uppercase;
+
+      color:
+        var(--brown);
+
+      cursor: pointer;
+
+      transition:
+        background .25s ease,
+        transform .25s ease,
+        border-color .25s ease;
+
+    }
+
+
+    .history-tab:hover {
+
+      transform:
+        translateY(-2px);
+
+    }
+
+
+    .history-tab.active {
+
+      background:
+        var(--brown-dark);
+
+      color:
+        var(--paper);
+
+      border-color:
+        var(--brown-dark);
+
+    }
+
+
+    .history-card {
+
+      background:
+
+        linear-gradient(
+          135deg,
+          rgba(255,253,248,.96),
+          rgba(232,241,244,.82)
+        );
+
+      border:
+        1px solid
+        rgba(98,79,67,.1);
+
+      padding: 38px;
+
+      overflow: hidden;
+
+    }
+
+
+    .chart-scroll {
+
+      overflow-x: auto;
+
+      padding-bottom: 8px;
+
+    }
+
+
+    .mood-chart {
+
+      min-height: 340px;
+
+      display: flex;
+
+      align-items:
+        flex-end;
+
+      gap: 12px;
+
+      padding:
+        30px 8px
+        20px;
+
+      position: relative;
+
+    }
+
+
+    .mood-chart::before,
+    .mood-chart::after {
+
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      border-top:
+        1px dashed
+        rgba(98,79,67,.12);
+
+      pointer-events: none;
+
+    }
+
+
+    .mood-chart::before {
+      top: 33%;
+    }
+
+
+    .mood-chart::after {
+      top: 66%;
+    }
+
+
+    .chart-day {
+
+      flex: 1;
+
+      min-width: 48px;
+
+      height: 280px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content:
+        flex-end;
+
+      align-items:
+        center;
+
+      cursor: pointer;
+
+      position: relative;
+
+      z-index: 2;
+
+    }
+
+
+    .chart-line {
+
+      width: 2px;
+
+      min-height: 12px;
+
+      background:
+
+        linear-gradient(
+          to top,
+          var(--sky-deep),
+          rgba(145,182,197,.12)
+        );
+
+      transition:
+        height .35s ease,
+        transform .25s ease;
+
+    }
+
+
+    .chart-day:hover .chart-line {
+
+      transform:
+        scaleY(1.05);
+
+    }
+
+
+    .chart-point {
+
+      width: 50px;
+      height: 50px;
+
+      background:
+        var(--paper);
+
+      border:
+        1px solid
+        rgba(98,79,67,.1);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      box-shadow:
+        0 8px 20px
+        rgba(98,79,67,.08);
+
+      transition:
+        transform .25s ease,
+        background .25s ease;
+
+    }
+
+
+    .chart-day:hover .chart-point,
+    .chart-day.selected .chart-point {
+
+      transform:
+        translateY(-5px);
+
+      background:
+        var(--sky-light);
+
+    }
+
+
+    .chart-icon {
+
+      width: 30px;
+      height: 30px;
+
+      background-image:
+        url("assets/images/mood.png");
+
+      background-size:
+        300% 300%;
+
+      background-repeat:
+        no-repeat;
+
+    }
+
+
+    .chart-empty {
+
+      opacity: .28;
+
+      cursor: default;
+
+    }
+
+
+    .chart-empty .chart-line {
+
+      height: 12px !important;
+
+      background:
+        rgba(98,79,67,.2);
+
+    }
+
+
+    .chart-empty .chart-point {
+
+      width: 12px;
+      height: 12px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(98,79,67,.25);
+
+      box-shadow: none;
+
+    }
+
+
+    .chart-label {
+
+      margin-top: 12px;
+
+      font-family:
+        var(--typewriter);
+
+      font-size:
+        .46rem;
+
+      letter-spacing:
+        .04em;
+
+      color:
+        var(--brown);
+
+      white-space: nowrap;
+
+      text-align: center;
+
+    }
+
+
+    .chart-legend {
+
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      gap: 20px;
+
+      margin-top: 20px;
+
+      font-family:
+        var(--typewriter);
+
+      font-size:
+        .5rem;
+
+      letter-spacing:
+        .05em;
+
+      text-transform:
+        uppercase;
+
+      color:
+        var(--brown);
+
+    }
+
+
+    .legend-dot {
+
+      width: 8px;
+      height: 8px;
+
+      display:
+        inline-block;
+
+      margin-right: 5px;
+
+      border-radius: 50%;
+
+    }
+
+
+    .legend-dot.high {
+      background: var(--sage-deep);
+    }
+
+
+    .legend-dot.low {
+      background: var(--rose-deep);
+    }
+
+
+    .selected-day {
+
+      margin-top: 18px;
+
+      min-height: 60px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      font-family:
+        var(--script);
+
+      font-size:
+        1.25rem;
+
+      color:
+        var(--brown);
+
+      background:
+        rgba(255,253,248,.55);
+
+      border:
+        1px solid
+        rgba(98,79,67,.08);
+
+      padding:
+        10px 20px;
+
+    }
+
+
+    .no-history {
+
+      min-height: 280px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      font-family:
+        var(--script);
+
+      font-size: 1.5rem;
+
+      color:
+        var(--brown);
+
+    }
+
+
+    /* =====================================================
+       STATISTICS
+       ===================================================== */
 
     .stats {
 
       display: grid;
 
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:
+        repeat(3, 1fr);
 
       gap: 18px;
 
       margin-bottom: 60px;
+
     }
+
 
     .stat-card {
 
-      background: var(--paper);
+      background:
+        var(--paper);
 
-      border: 1px solid rgba(98,79,67,.1);
+      border:
+        1px solid
+        rgba(98,79,67,.1);
 
       padding: 30px;
 
       min-height: 180px;
 
       position: relative;
+
     }
+
 
     .stat-card:nth-child(2) {
       background: var(--sky-light);
     }
 
+
     .stat-card:nth-child(3) {
       background: #F2EAE5;
     }
 
+
     .stat-label {
 
-      font-family: var(--typewriter);
+      font-family:
+        var(--typewriter);
 
-      font-size: .58rem;
+      font-size:
+        .58rem;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
 
-      letter-spacing: .1em;
+      letter-spacing:
+        .1em;
 
-      color: var(--brown);
+      color:
+        var(--brown);
 
       margin-bottom: 22px;
+
     }
+
 
     .stat-value {
 
-      font-family: var(--serif);
+      font-family:
+        var(--serif);
 
-      font-size: 3rem;
+      font-size:
+        3rem;
 
-      font-weight: 400;
+      font-weight:
+        400;
 
       line-height: 1;
+
     }
+
 
     .stat-small {
 
-      font-family: var(--script);
+      font-family:
+        var(--script);
 
-      font-size: 1.15rem;
+      font-size:
+        1.15rem;
 
-      color: var(--rose-deep);
+      color:
+        var(--rose-deep);
 
       margin-top: 10px;
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        INSIGHT
-       ========================================================= */
+       ===================================================== */
 
     .insight {
 
       display: grid;
 
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns:
+        1fr 1fr;
 
       gap: 30px;
 
       margin-bottom: 70px;
+
     }
+
 
     .insight-card {
 
       padding: 40px;
 
-      background: var(--lavender);
+      background:
+        var(--lavender);
 
       min-height: 260px;
 
       position: relative;
 
       overflow: hidden;
+
     }
+
 
     .insight-card::after {
 
@@ -850,167 +1587,237 @@
 
       bottom: 0;
 
-      font-family: var(--serif);
+      font-family:
+        var(--serif);
 
-      font-size: 8rem;
+      font-size:
+        8rem;
 
-      color: rgba(255,255,255,.4);
+      color:
+        rgba(255,255,255,.4);
 
       line-height: .7;
+
     }
+
 
     .insight-card h3 {
 
-      margin: 0 0 15px;
+      margin:
+        0
+        0
+        15px;
 
-      font-family: var(--serif);
+      font-family:
+        var(--serif);
 
-      font-size: 2.2rem;
+      font-size:
+        2.2rem;
 
-      font-weight: 400;
+      font-weight:
+        400;
+
     }
+
 
     .insight-card p {
 
       max-width: 400px;
 
-      font-family: var(--serif);
+      font-family:
+        var(--serif);
 
-      font-size: 1.15rem;
+      font-size:
+        1.15rem;
 
       line-height: 1.5;
 
-      color: var(--brown-dark);
+      color:
+        var(--brown-dark);
 
       position: relative;
 
       z-index: 2;
+
     }
+
 
     .recommendation {
 
       padding: 40px;
 
-      background: var(--paper);
+      background:
+        var(--paper);
 
-      border: 1px solid rgba(98,79,67,.1);
+      border:
+        1px solid
+        rgba(98,79,67,.1);
+
     }
+
 
     .recommendation-label {
 
-      font-family: var(--typewriter);
+      font-family:
+        var(--typewriter);
 
-      font-size: .6rem;
+      font-size:
+        .6rem;
 
-      letter-spacing: .12em;
+      letter-spacing:
+        .12em;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
 
-      color: var(--brown);
+      color:
+        var(--brown);
 
       margin-bottom: 20px;
+
     }
+
 
     .recommendation h3 {
 
-      margin: 0 0 12px;
+      margin:
+        0
+        0
+        12px;
 
-      font-family: var(--serif);
+      font-family:
+        var(--serif);
 
-      font-size: 2.2rem;
+      font-size:
+        2.2rem;
 
-      font-weight: 400;
+      font-weight:
+        400;
+
     }
+
 
     .recommendation p {
 
-      font-family: var(--serif);
+      font-family:
+        var(--serif);
 
-      font-size: 1.1rem;
+      font-size:
+        1.1rem;
 
       line-height: 1.5;
 
-      color: var(--brown);
+      color:
+        var(--brown);
 
       margin-bottom: 25px;
+
     }
+
 
     .recommendation-link {
 
-      font-family: var(--typewriter);
+      font-family:
+        var(--typewriter);
 
-      font-size: .62rem;
+      font-size:
+        .62rem;
 
-      letter-spacing: .08em;
+      letter-spacing:
+        .08em;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
 
-      color: var(--rose-deep);
+      color:
+        var(--rose-deep);
 
       text-decoration: none;
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        FOOTER
-       ========================================================= */
+       ===================================================== */
 
     footer {
 
       text-align: center;
 
-      padding: 50px 20px 20px;
+      padding:
+        50px 20px
+        20px;
 
-      color: var(--brown);
+      color:
+        var(--brown);
+
     }
+
 
     footer .script {
 
-      font-family: var(--script);
+      font-family:
+        var(--script);
 
-      font-size: 1.6rem;
+      font-size:
+        1.7rem;
 
       margin-bottom: 10px;
+
     }
+
 
     footer p {
 
-      font-family: var(--typewriter);
+      font-family:
+        var(--typewriter);
 
-      font-size: .55rem;
+      font-size:
+        .55rem;
 
-      letter-spacing: .1em;
+      letter-spacing:
+        .1em;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
 
       opacity: .65;
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        ANIMATIONS
-       ========================================================= */
+       ===================================================== */
 
     .fade-up {
 
       opacity: 0;
 
-      transform: translateY(25px);
+      transform:
+        translateY(25px);
 
-      animation: fadeUp .8s ease forwards;
+      animation:
+        fadeUp .8s ease forwards;
+
     }
+
 
     .delay-1 {
       animation-delay: .1s;
     }
 
+
     .delay-2 {
       animation-delay: .2s;
     }
 
+
     .delay-3 {
       animation-delay: .3s;
     }
+
 
     @keyframes fadeUp {
 
@@ -1018,14 +1825,17 @@
 
         opacity: 1;
 
-        transform: translateY(0);
+        transform:
+          translateY(0);
+
       }
+
     }
 
 
-    /* =========================================================
+    /* =====================================================
        MOBILE
-       ========================================================= */
+       ===================================================== */
 
     @media (max-width: 800px) {
 
@@ -1033,90 +1843,203 @@
         padding: 18px 20px;
       }
 
+
       .nav-links {
         gap: 13px;
       }
+
 
       .nav-links a {
         font-size: .52rem;
       }
 
+
       .page {
-        width: min(100% - 30px, 600px);
+
+        width:
+          min(
+            100% - 30px,
+            600px
+          );
+
         padding-top: 55px;
+
       }
 
+
       .page-header {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
         gap: 25px;
+
       }
+
 
       h1 {
         font-size: 5rem;
       }
 
-      .mood-options {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 6px;
-      }
-
-      .mood-button {
-        min-height: 90px;
-      }
-
-      .mood-name {
-        font-size: .45rem;
-      }
-
-      .mood-number {
-        font-size: 1.15rem;
-      }
 
       .checkin {
         padding: 25px;
       }
 
-      .checkin-footer {
-        flex-direction: column;
-        align-items: stretch;
+
+      .mood-options {
+
+        grid-template-columns:
+          repeat(5, 1fr);
+
+        gap: 6px;
+
       }
+
+
+      .mood-button {
+
+        min-height: 110px;
+
+        padding: 10px 4px;
+
+        gap: 8px;
+
+      }
+
+
+      .mood-icon {
+
+        width: 48px;
+        height: 48px;
+
+      }
+
+
+      .mood-name {
+        font-size: .42rem;
+      }
+
+
+      .checkin-footer {
+
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
+
+      }
+
 
       .week-card {
         padding: 15px;
       }
 
+
       .day {
         padding: 12px 2px;
       }
 
-      .day-emoji {
-        font-size: 1.1rem;
+
+      .day-icon {
+
+        width: 29px;
+        height: 29px;
+
       }
+
 
       .day-name {
         font-size: .42rem;
       }
 
-      .stats {
-        grid-template-columns: 1fr;
+
+      .day-empty-symbol {
+        height: 29px;
       }
 
+
+      .history-heading {
+
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+        gap: 18px;
+
+      }
+
+
+      .history-tabs {
+        width: 100%;
+      }
+
+
+      .history-tab {
+
+        flex: 1;
+
+        padding:
+          10px
+          5px;
+
+        font-size:
+          .42rem;
+
+      }
+
+
+      .history-card {
+
+        padding:
+          20px
+          15px;
+
+      }
+
+
+      .mood-chart {
+        min-width: 560px;
+      }
+
+
+      .chart-legend {
+        font-size: .42rem;
+      }
+
+
+      .stats {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
       .insight {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
 
     }
 
+
   </style>
+
 </head>
 
 
 <body>
 
 
-  <!-- =======================================================
+  <!-- =====================================================
        NAVIGATION
-       ======================================================= -->
+       ===================================================== -->
 
   <nav class="top-nav">
 
@@ -1124,33 +2047,51 @@
       zenene
     </div>
 
-   <div class="nav-links">
 
-  <a href="index.html">home</a>
+    <div class="nav-links">
 
-  <a href="journal.html">journal</a>
+      <a href="index.html">
+        home
+      </a>
 
-  <a href="mood.html" class="active">mood</a>
+      <a href="journal.html">
+        journal
+      </a>
 
-  <a href="explore.html">explore</a>
+      <a
+        href="mood.html"
+        class="active"
+      >
+        mood
+      </a>
 
-  <a href="vera.html">vera</a>
+      <a href="explore.html">
+        explore
+      </a>
 
-  <a href="calm.html">calm</a>
+      <a href="vera.html">
+        vera
+      </a>
 
-</div>
+      <a href="calm.html">
+        calm
+      </a>
+
+    </div>
 
   </nav>
 
 
-  <!-- =======================================================
+  <!-- =====================================================
        PAGE
-       ======================================================= -->
+       ===================================================== -->
 
   <main class="page">
 
 
-    <!-- HEADER -->
+    <!-- ===================================================
+         HEADER
+         =================================================== -->
 
     <header class="page-header fade-up">
 
@@ -1166,41 +2107,57 @@
 
       </div>
 
+
       <p class="intro">
+
         A small place to notice how you're
         feeling — without judging it,
         fixing it, or needing to explain it.
+
       </p>
 
     </header>
 
 
-    <!-- =====================================================
-         MOOD LOG
-         ===================================================== -->
+    <!-- ===================================================
+         MOOD CHECK-IN
+         =================================================== -->
 
     <section class="checkin fade-up delay-1">
 
       <div class="checkin-label">
-        today · <span id="todayDate"></span>
+
+        today ·
+        <span id="todayDate"></span>
+
       </div>
+
 
       <h2 class="checkin-title">
         Log your mood.
       </h2>
 
+
       <p class="checkin-subtitle">
-        No explanation required. Just mark where you are today.
+
+        No explanation required.
+        Just mark where you are today.
+
       </p>
 
 
       <div class="mood-options">
 
-        <button class="mood-button" data-mood="very-happy">
 
-          <span class="mood-number">
-            05
-          </span>
+        <button
+          class="mood-button"
+          data-mood="very-happy"
+          type="button"
+        >
+
+          <span
+            class="mood-icon mood-icon-very-happy"
+          ></span>
 
           <span class="mood-name">
             very good
@@ -1209,11 +2166,15 @@
         </button>
 
 
-        <button class="mood-button" data-mood="good">
+        <button
+          class="mood-button"
+          data-mood="good"
+          type="button"
+        >
 
-          <span class="mood-number">
-            04
-          </span>
+          <span
+            class="mood-icon mood-icon-good"
+          ></span>
 
           <span class="mood-name">
             good
@@ -1222,11 +2183,15 @@
         </button>
 
 
-        <button class="mood-button" data-mood="okay">
+        <button
+          class="mood-button"
+          data-mood="okay"
+          type="button"
+        >
 
-          <span class="mood-number">
-            03
-          </span>
+          <span
+            class="mood-icon mood-icon-okay"
+          ></span>
 
           <span class="mood-name">
             okay
@@ -1235,11 +2200,15 @@
         </button>
 
 
-        <button class="mood-button" data-mood="low">
+        <button
+          class="mood-button"
+          data-mood="low"
+          type="button"
+        >
 
-          <span class="mood-number">
-            02
-          </span>
+          <span
+            class="mood-icon mood-icon-low"
+          ></span>
 
           <span class="mood-name">
             low
@@ -1248,11 +2217,15 @@
         </button>
 
 
-        <button class="mood-button" data-mood="difficult">
+        <button
+          class="mood-button"
+          data-mood="difficult"
+          type="button"
+        >
 
-          <span class="mood-number">
-            01
-          </span>
+          <span
+            class="mood-icon mood-icon-difficult"
+          ></span>
 
           <span class="mood-name">
             difficult
@@ -1260,17 +2233,31 @@
 
         </button>
 
+
       </div>
 
 
       <div class="checkin-footer">
 
-        <div class="checkin-note" id="checkinMessage">
-          Select one. You can add context later in your journal.
+        <div
+          class="checkin-note"
+          id="checkinMessage"
+        >
+
+          Select one.
+          You can add context later in your journal.
+
         </div>
 
-        <button class="save-button" id="saveMood">
+
+        <button
+          class="save-button"
+          id="saveMood"
+          type="button"
+        >
+
           save today's mood
+
         </button>
 
       </div>
@@ -1278,16 +2265,18 @@
     </section>
 
 
-
-    <!-- =====================================================
+    <!-- ===================================================
          YOUR WEEK
-         ===================================================== -->
+         =================================================== -->
 
     <section class="fade-up delay-2">
 
       <div class="section-heading">
 
-        <h2>Your week</h2>
+        <h2>
+          Your week
+        </h2>
+
 
         <span id="weekSummary">
           noticing, not judging.
@@ -1298,21 +2287,135 @@
 
       <div class="week-card">
 
-        <div class="week-grid" id="weekGrid">
-          <!-- generated by JS -->
-        </div>
+        <div
+          class="week-grid"
+          id="weekGrid"
+        ></div>
 
       </div>
 
     </section>
 
 
+    <!-- ===================================================
+         MOOD HISTORY
+         =================================================== -->
 
-    <!-- =====================================================
+    <section
+      class="history-section fade-up delay-2"
+    >
+
+      <div
+        class="section-heading history-heading"
+      >
+
+        <h2>
+          Your patterns
+        </h2>
+
+
+        <div class="history-tabs">
+
+          <button
+            class="history-tab active"
+            data-range="week"
+            type="button"
+          >
+            week
+          </button>
+
+
+          <button
+            class="history-tab"
+            data-range="month"
+            type="button"
+          >
+            month
+          </button>
+
+
+          <button
+            class="history-tab"
+            data-range="year"
+            type="button"
+          >
+            year
+          </button>
+
+
+          <button
+            class="history-tab"
+            data-range="all"
+            type="button"
+          >
+            all time
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="history-card">
+
+        <div class="chart-scroll">
+
+          <div
+            class="mood-chart"
+            id="moodChart"
+          ></div>
+
+        </div>
+
+
+        <div class="chart-legend">
+
+          <span>
+
+            <span
+              class="legend-dot high"
+            ></span>
+
+            lighter days
+
+          </span>
+
+
+          <span>
+
+            <span
+              class="legend-dot low"
+            ></span>
+
+            heavier days
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="selected-day"
+        id="selectedDay"
+      >
+
+        Select a day to look back at it.
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
          STATISTICS
-         ===================================================== -->
+         =================================================== -->
 
-    <section class="stats fade-up delay-2">
+    <section
+      class="stats fade-up delay-2"
+    >
+
 
       <div class="stat-card">
 
@@ -1320,9 +2423,14 @@
           average mood
         </div>
 
-        <div class="stat-value" id="averageMood">
+
+        <div
+          class="stat-value"
+          id="averageMood"
+        >
           —
         </div>
+
 
         <div class="stat-small">
           this week
@@ -1337,9 +2445,14 @@
           most common feeling
         </div>
 
-        <div class="stat-value" id="commonMood">
+
+        <div
+          class="stat-value"
+          id="commonMood"
+        >
           —
         </div>
+
 
         <div class="stat-small">
           you've been here most often
@@ -1354,12 +2467,17 @@
           check-ins
         </div>
 
+
         <div class="stat-value">
 
-          <span id="checkinCount">0</span>
+          <span id="checkinCount">
+            0
+          </span>
+
           / 7
 
         </div>
+
 
         <div class="stat-small">
           little moments of noticing
@@ -1370,29 +2488,34 @@
     </section>
 
 
+    <!-- ===================================================
+         INSIGHT
+         =================================================== -->
 
-    <!-- =====================================================
-         INSIGHTS
-         ===================================================== -->
-
-    <section class="insight fade-up delay-3">
+    <section
+      class="insight fade-up delay-3"
+    >
 
 
       <div class="insight-card">
 
         <h3>
+
           a little<br>
           observation.
+
         </h3>
 
+
         <p id="insightText">
+
           Once you have a few check-ins,
           Zenene will start noticing patterns
           with you.
+
         </p>
 
       </div>
-
 
 
       <div class="recommendation">
@@ -1401,17 +2524,27 @@
           something for you
         </div>
 
+
         <h3 id="recommendationTitle">
           Start by noticing.
         </h3>
 
+
         <p id="recommendationText">
-          There is no “right” mood to have.
+
+          There is no "right" mood to have.
           Checking in is already enough.
+
         </p>
 
-        <a href="journal.html" class="recommendation-link">
+
+        <a
+          href="journal.html"
+          class="recommendation-link"
+        >
+
           put it into words →
+
         </a>
 
       </div>
@@ -1422,16 +2555,16 @@
   </main>
 
 
-
-  <!-- =======================================================
+  <!-- =====================================================
        FOOTER
-       ======================================================= -->
+       ===================================================== -->
 
   <footer>
 
     <div class="script">
       be gentle with yourself.
     </div>
+
 
     <p>
       zenene · where your mind blooms
@@ -1440,43 +2573,71 @@
   </footer>
 
 
-
-  <!-- =======================================================
+  <!-- =====================================================
        JAVASCRIPT
-       ======================================================= -->
+       ===================================================== -->
 
   <script>
 
 
-    /* =======================================================
+    /* ===================================================
        MOOD DATA
-       ======================================================= */
+       =================================================== */
 
     const moodInfo = {
 
       "very-happy": {
+
         label: "very good",
-        value: 5
+
+        value: 5,
+
+        position: "0% 50%"
+
       },
+
 
       "good": {
+
         label: "good",
-        value: 4
+
+        value: 4,
+
+        position: "50% 0%"
+
       },
+
 
       "okay": {
+
         label: "okay",
-        value: 3
+
+        value: 3,
+
+        position: "50% 50%"
+
       },
+
 
       "low": {
+
         label: "low",
-        value: 2
+
+        value: 2,
+
+        position: "50% 100%"
+
       },
 
+
       "difficult": {
+
         label: "difficult",
-        value: 1
+
+        value: 1,
+
+        position: "0% 0%"
+
       }
 
     };
@@ -1484,29 +2645,183 @@
 
     let selectedMood = null;
 
-
-    /* =======================================================
-       DATE
-       ======================================================= */
-
-    const today = new Date();
-
-    document.getElementById("todayDate").textContent =
-      today.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric"
-      });
+    let activeRange = "week";
 
 
-    /* =======================================================
-       LOCAL STORAGE
-       ======================================================= */
+    /* ===================================================
+       DATE HELPERS
+
+       Uses LOCAL dates instead of toISOString().
+
+       This prevents timezone shifts from accidentally
+       saving a mood under the previous or next day.
+       =================================================== */
+
+    function getLocalDateKey(date) {
+
+      const year =
+        date.getFullYear();
+
+
+      const month =
+        String(
+          date.getMonth() + 1
+        ).padStart(2, "0");
+
+
+      const day =
+        String(
+          date.getDate()
+        ).padStart(2, "0");
+
+
+      return `${year}-${month}-${day}`;
+
+    }
+
+
+    function parseDateKey(key) {
+
+      const parts =
+        key.split("-").map(Number);
+
+
+      return new Date(
+
+        parts[0],
+
+        parts[1] - 1,
+
+        parts[2]
+
+      );
+
+    }
+
+
+    function formatLongDate(date) {
+
+      return date.toLocaleDateString(
+
+        "en-US",
+
+        {
+
+          weekday: "long",
+
+          month: "long",
+
+          day: "numeric",
+
+          year: "numeric"
+
+        }
+
+      );
+
+    }
+
+
+    function addDays(date, amount) {
+
+      const copy =
+        new Date(date);
+
+
+      copy.setDate(
+        copy.getDate() + amount
+      );
+
+
+      return copy;
+
+    }
+
+
+    function getToday() {
+
+      const date =
+        new Date();
+
+
+      date.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      return date;
+
+    }
+
+
+    /* ===================================================
+       TODAY
+       =================================================== */
+
+    function renderTodayDate() {
+
+      const today =
+        new Date();
+
+
+      document.getElementById(
+        "todayDate"
+      ).textContent =
+
+        today.toLocaleDateString(
+
+          "en-US",
+
+          {
+
+            month: "short",
+
+            day: "numeric"
+
+          }
+
+        );
+
+    }
+
+
+    /* ===================================================
+       STORAGE
+       =================================================== */
 
     function getMoods() {
 
-      return JSON.parse(
-        localStorage.getItem("zeneneMoods") || "{}"
-      );
+      try {
+
+        const stored =
+          localStorage.getItem(
+            "zeneneMoods"
+          );
+
+
+        if (!stored) {
+          return {};
+        }
+
+
+        return JSON.parse(stored);
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Could not read mood history:",
+          error
+        );
+
+
+        return {};
+
+      }
 
     }
 
@@ -1514,185 +2829,339 @@
     function saveMoods(data) {
 
       localStorage.setItem(
+
         "zeneneMoods",
+
         JSON.stringify(data)
+
       );
 
     }
 
 
-    /* =======================================================
+    /*
+      All moods are stored like:
+
+      {
+        "2026-08-25": "good",
+        "2026-08-26": "okay"
+      }
+
+      They are NOT deleted at the end of a week,
+      month, or year.
+    */
+
+
+    /* ===================================================
        MOOD SELECTION
-       ======================================================= */
+       =================================================== */
 
-    document.querySelectorAll(".mood-button")
-      .forEach(button => {
+    function clearMoodSelection() {
 
-        button.addEventListener("click", () => {
+      document
+        .querySelectorAll(".mood-button")
+        .forEach(button => {
 
-          document
-            .querySelectorAll(".mood-button")
-            .forEach(btn =>
-              btn.classList.remove("selected")
-            );
-
-          button.classList.add("selected");
-
-          selectedMood =
-            button.dataset.mood;
-
-          document.getElementById(
-            "checkinMessage"
-          ).textContent =
-            `You marked today as ${moodInfo[selectedMood].label}.`;
+          button.classList.remove(
+            "selected"
+          );
 
         });
 
-      });
+    }
 
-
-    /* =======================================================
-       SAVE TODAY
-       ======================================================= */
 
     document
-      .getElementById("saveMood")
-      .addEventListener("click", () => {
+      .querySelectorAll(".mood-button")
+      .forEach(button => {
 
-        if (!selectedMood) {
+        button.addEventListener(
 
-          document.getElementById(
-            "checkinMessage"
-          ).textContent =
-            "Select a mood before saving.";
+          "click",
 
-          return;
+          () => {
 
-        }
+            clearMoodSelection();
 
 
-        const moods = getMoods();
+            button.classList.add(
+              "selected"
+            );
 
-        const key =
-          today.toISOString().split("T")[0];
 
-        moods[key] = selectedMood;
+            selectedMood =
+              button.dataset.mood;
 
-        saveMoods(moods);
 
-        document.getElementById(
-          "checkinMessage"
-        ).textContent =
-          "Saved. Your check-in has been recorded.";
+            document.getElementById(
+              "checkinMessage"
+            ).textContent =
 
-        renderDashboard();
+              `You marked today as ${moodInfo[selectedMood].label}.`;
+
+          }
+
+        );
 
       });
 
 
+    /* ===================================================
+       LOAD TODAY'S EXISTING MOOD
+       =================================================== */
 
-    /* =======================================================
-       WEEK HELPERS
-       ======================================================= */
+    function loadTodayMood() {
 
-    function getDateKey(date) {
+      const moods =
+        getMoods();
 
-      return date.toISOString()
-        .split("T")[0];
+
+      const todayKey =
+        getLocalDateKey(
+          new Date()
+        );
+
+
+      const savedMood =
+        moods[todayKey];
+
+
+      if (!savedMood) {
+
+        selectedMood = null;
+
+        clearMoodSelection();
+
+        return;
+
+      }
+
+
+      selectedMood =
+        savedMood;
+
+
+      clearMoodSelection();
+
+
+      const button =
+        document.querySelector(
+
+          `[data-mood="${savedMood}"]`
+
+        );
+
+
+      if (button) {
+
+        button.classList.add(
+          "selected"
+        );
+
+      }
+
+
+      document.getElementById(
+        "checkinMessage"
+      ).textContent =
+
+        `Today is marked as ${moodInfo[savedMood].label}. You can change it anytime.`;
 
     }
 
 
-    function getWeekDays() {
+    /* ===================================================
+       SAVE MOOD
+       =================================================== */
 
-      const days = [];
+    document
+      .getElementById("saveMood")
+      .addEventListener(
 
-      const current = new Date();
+        "click",
 
-      const day =
-        current.getDay();
+        () => {
 
-      const mondayOffset =
-        day === 0 ? -6 : 1 - day;
+          if (!selectedMood) {
 
-      current.setDate(
-        current.getDate() + mondayOffset
+            document.getElementById(
+              "checkinMessage"
+            ).textContent =
+
+              "Select a mood before saving.";
+
+            return;
+
+          }
+
+
+          const moods =
+            getMoods();
+
+
+          const key =
+            getLocalDateKey(
+              new Date()
+            );
+
+
+          moods[key] =
+            selectedMood;
+
+
+          saveMoods(moods);
+
+
+          document.getElementById(
+            "checkinMessage"
+          ).textContent =
+
+            "Saved. Your check-in is now part of your history.";
+
+
+          renderDashboard();
+
+        }
+
       );
 
 
-      for (let i = 0; i < 7; i++) {
+    /* ===================================================
+       RECENT 7 DAYS
+       =================================================== */
 
-        const date =
-          new Date(current);
+    function getRecentWeekDays() {
 
-        date.setDate(
-          current.getDate() + i
+      const days = [];
+
+      const today =
+        getToday();
+
+
+      for (
+        let i = 6;
+        i >= 0;
+        i--
+      ) {
+
+        days.push(
+
+          addDays(
+            today,
+            -i
+          )
+
         );
 
-        days.push(date);
-
       }
+
 
       return days;
 
     }
 
 
-
-    /* =======================================================
-       RENDER WEEK
-       ======================================================= */
-
     function renderWeek() {
 
       const grid =
-        document.getElementById("weekGrid");
+        document.getElementById(
+          "weekGrid"
+        );
+
 
       grid.innerHTML = "";
 
-      const moods = getMoods();
+
+      const moods =
+        getMoods();
+
 
       const days =
-        getWeekDays();
+        getRecentWeekDays();
+
+
+      let count = 0;
 
 
       days.forEach(date => {
 
         const key =
-          getDateKey(date);
+          getLocalDateKey(date);
+
 
         const mood =
           moods[key];
 
+
+        if (mood) {
+          count++;
+        }
+
+
         const day =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         day.className =
-          "day" + (!mood ? " empty" : "");
+          "day" +
+          (!mood ? " empty" : "");
 
 
         const dayName =
           date.toLocaleDateString(
+
             "en-US",
-            { weekday: "short" }
+
+            {
+
+              weekday: "short"
+
+            }
+
           );
+
 
         const dateNumber =
           date.getDate();
 
 
+        const icon =
+          mood
+
+            ? `
+
+              <div
+                class="day-icon"
+                style="background-position:${moodInfo[mood].position}"
+              ></div>
+
+            `
+
+            : `
+
+              <div class="day-empty-symbol">
+                ·
+              </div>
+
+            `;
+
+
         day.innerHTML = `
 
           <div class="day-name">
+
             ${dayName}
+
           </div>
 
-          <div class="day-emoji">
-            ${mood ? moodInfo[mood].value : "·"}
-          </div>
+          ${icon}
 
           <div class="day-date">
+
             ${dateNumber}
+
           </div>
 
         `;
@@ -1702,26 +3171,712 @@
 
       });
 
+
+      const summary =
+        document.getElementById(
+          "weekSummary"
+        );
+
+
+      if (count === 0) {
+
+        summary.textContent =
+          "start wherever you are.";
+
+      }
+
+      else if (count === 1) {
+
+        summary.textContent =
+          "one day is a beginning.";
+
+      }
+
+      else {
+
+        summary.textContent =
+          `${count} little moments of noticing.`;
+
+      }
+
     }
 
 
+    /* ===================================================
+       HISTORY RANGE DATA
+       =================================================== */
 
-    /* =======================================================
+    function getHistoryEntries(range) {
+
+      const moods =
+        getMoods();
+
+
+      const today =
+        getToday();
+
+
+      /*
+        WEEK
+        Last 7 days
+      */
+
+      if (range === "week") {
+
+        return getRecentWeekDays()
+          .map(date => {
+
+            const key =
+              getLocalDateKey(date);
+
+
+            return {
+
+              date,
+
+              mood:
+                moods[key] || null,
+
+              label:
+                date.toLocaleDateString(
+
+                  "en-US",
+
+                  {
+
+                    weekday: "short"
+
+                  }
+
+                )
+
+            };
+
+          });
+
+      }
+
+
+      /*
+        MONTH
+        Last 30 days
+      */
+
+      if (range === "month") {
+
+        const entries = [];
+
+
+        for (
+          let i = 29;
+          i >= 0;
+          i--
+        ) {
+
+          const date =
+            addDays(
+              today,
+              -i
+            );
+
+
+          const key =
+            getLocalDateKey(date);
+
+
+          entries.push({
+
+            date,
+
+            mood:
+              moods[key] || null,
+
+            label:
+              date.toLocaleDateString(
+
+                "en-US",
+
+                {
+
+                  month: "short",
+
+                  day: "numeric"
+
+                }
+
+              )
+
+          });
+
+        }
+
+
+        return entries;
+
+      }
+
+
+      /*
+        YEAR
+        One point per month.
+
+        If multiple moods exist during that month,
+        the average is used to determine the
+        representative mood.
+      */
+
+      if (range === "year") {
+
+        const entries = [];
+
+
+        for (
+          let i = 11;
+          i >= 0;
+          i--
+        ) {
+
+          const date =
+            new Date(
+
+              today.getFullYear(),
+
+              today.getMonth() - i,
+
+              1
+
+            );
+
+
+          const year =
+            date.getFullYear();
+
+
+          const month =
+            date.getMonth();
+
+
+          const monthMoods =
+            Object.entries(moods)
+              .filter(([key]) => {
+
+                const moodDate =
+                  parseDateKey(key);
+
+
+                return (
+
+                  moodDate.getFullYear()
+                    === year
+
+                  &&
+
+                  moodDate.getMonth()
+                    === month
+
+                );
+
+              })
+              .map(
+                ([, mood]) =>
+                  mood
+              );
+
+
+          let mood = null;
+
+
+          if (
+            monthMoods.length
+          ) {
+
+            const average =
+
+              monthMoods
+                .reduce(
+
+                  (sum, item) =>
+
+                    sum +
+                    moodInfo[item].value,
+
+                  0
+
+                )
+
+              /
+
+              monthMoods.length;
+
+
+            const closestMood =
+              Object.keys(moodInfo)
+
+                .reduce(
+
+                  (closest, current) =>
+
+                    Math.abs(
+                      moodInfo[current].value -
+                      average
+                    )
+
+                    <
+
+                    Math.abs(
+                      moodInfo[closest].value -
+                      average
+                    )
+
+                      ? current
+                      : closest,
+
+                  "okay"
+
+                );
+
+
+            mood =
+              closestMood;
+
+          }
+
+
+          entries.push({
+
+            date,
+
+            mood,
+
+            label:
+              date.toLocaleDateString(
+
+                "en-US",
+
+                {
+
+                  month: "short"
+
+                }
+
+              ),
+
+            isAggregate: true,
+
+            count:
+              monthMoods.length
+
+          });
+
+        }
+
+
+        return entries;
+
+      }
+
+
+      /*
+        ALL TIME
+
+        Shows every day that actually has
+        a saved mood.
+
+        Nothing is deleted.
+      */
+
+      if (range === "all") {
+
+        return Object.entries(moods)
+
+          .sort(
+
+            ([a], [b]) =>
+              a.localeCompare(b)
+
+          )
+
+          .map(
+            ([key, mood]) => ({
+
+              date:
+                parseDateKey(key),
+
+              mood,
+
+              label:
+                parseDateKey(key)
+                  .toLocaleDateString(
+
+                    "en-US",
+
+                    {
+
+                      month: "short",
+
+                      day: "numeric"
+
+                    }
+
+                  )
+
+            })
+
+          );
+
+      }
+
+
+      return [];
+
+    }
+
+
+    /* ===================================================
+       HISTORY CHART
+       =================================================== */
+
+    function renderHistory() {
+
+      const chart =
+        document.getElementById(
+          "moodChart"
+        );
+
+
+      const selectedDay =
+        document.getElementById(
+          "selectedDay"
+        );
+
+
+      const entries =
+        getHistoryEntries(
+          activeRange
+        );
+
+
+      chart.innerHTML = "";
+
+
+      if (
+        activeRange === "all"
+        &&
+        entries.length === 0
+      ) {
+
+        chart.classList.add(
+          "no-history"
+        );
+
+
+        chart.textContent =
+          "Your history will begin with your first check-in.";
+
+
+        selectedDay.textContent =
+          "Every mood you save stays here.";
+
+        return;
+
+      }
+
+
+      chart.classList.remove(
+        "no-history"
+      );
+
+
+      /*
+        Wider chart for longer ranges.
+      */
+
+      if (
+        activeRange === "week"
+      ) {
+
+        chart.style.minWidth =
+          "650px";
+
+      }
+
+      else if (
+        activeRange === "month"
+      ) {
+
+        chart.style.minWidth =
+          "1800px";
+
+      }
+
+      else if (
+        activeRange === "year"
+      ) {
+
+        chart.style.minWidth =
+          "950px";
+
+      }
+
+      else {
+
+        chart.style.minWidth =
+          `${Math.max(
+            650,
+            entries.length * 70
+          )}px`;
+
+      }
+
+
+      let firstMoodSelected =
+        false;
+
+
+      entries.forEach(entry => {
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        const hasMood =
+          Boolean(entry.mood);
+
+
+        item.className =
+          "chart-day" +
+          (!hasMood
+            ? " chart-empty"
+            : "");
+
+
+        let height = 12;
+
+
+        if (hasMood) {
+
+          height =
+            35 +
+
+            (
+              moodInfo[
+                entry.mood
+              ].value
+              * 42
+            );
+
+        }
+
+
+        const icon =
+          hasMood
+
+            ? `
+
+              <div
+                class="chart-icon"
+                style="background-position:${moodInfo[entry.mood].position}"
+              ></div>
+
+            `
+
+            : "";
+
+
+        item.innerHTML = `
+
+          <div
+            class="chart-line"
+            style="height:${height}px"
+          ></div>
+
+          <div class="chart-point">
+
+            ${icon}
+
+          </div>
+
+          <div class="chart-label">
+
+            ${entry.label}
+
+          </div>
+
+        `;
+
+
+        if (hasMood) {
+
+          item.addEventListener(
+
+            "click",
+
+            () => {
+
+              document
+                .querySelectorAll(
+                  ".chart-day"
+                )
+                .forEach(day => {
+
+                  day.classList.remove(
+                    "selected"
+                  );
+
+                });
+
+
+              item.classList.add(
+                "selected"
+              );
+
+
+              if (
+                entry.isAggregate
+              ) {
+
+                selectedDay.textContent =
+
+                  `${entry.label} · ${entry.count} check-in${entry.count === 1 ? "" : "s"} · overall ${moodInfo[entry.mood].label}`;
+
+              }
+
+              else {
+
+                selectedDay.textContent =
+
+                  `${formatLongDate(entry.date)} · you felt ${moodInfo[entry.mood].label}.`;
+
+              }
+
+            }
+
+          );
+
+
+          /*
+            Automatically show the most recent
+            mood in the selected range.
+          */
+
+          if (!firstMoodSelected) {
+
+            firstMoodSelected = true;
+
+
+            if (
+              activeRange === "year"
+              &&
+              entry.isAggregate
+            ) {
+
+              selectedDay.textContent =
+
+                `${entry.label} · ${entry.count} check-in${entry.count === 1 ? "" : "s"} · overall ${moodInfo[entry.mood].label}`;
+
+            }
+
+            else {
+
+              selectedDay.textContent =
+
+                `${formatLongDate(entry.date)} · you felt ${moodInfo[entry.mood].label}.`;
+
+            }
+
+          }
+
+        }
+
+
+        chart.appendChild(item);
+
+      });
+
+
+      if (!firstMoodSelected) {
+
+        selectedDay.textContent =
+
+          "No check-ins in this period yet.";
+
+      }
+
+    }
+
+
+    /* ===================================================
+       HISTORY TABS
+       =================================================== */
+
+    document
+      .querySelectorAll(".history-tab")
+      .forEach(button => {
+
+        button.addEventListener(
+
+          "click",
+
+          () => {
+
+            activeRange =
+              button.dataset.range;
+
+
+            document
+              .querySelectorAll(
+                ".history-tab"
+              )
+              .forEach(tab => {
+
+                tab.classList.remove(
+                  "active"
+                );
+
+              });
+
+
+            button.classList.add(
+              "active"
+            );
+
+
+            renderHistory();
+
+          }
+
+        );
+
+      });
+
+
+    /* ===================================================
        STATISTICS
-       ======================================================= */
+       =================================================== */
 
     function renderStats() {
 
       const moods =
         getMoods();
 
+
       const days =
-        getWeekDays();
+        getRecentWeekDays();
 
 
       const weekMoods =
         days
-          .map(day => moods[getDateKey(day)])
+
+          .map(day =>
+
+            moods[
+              getLocalDateKey(day)
+            ]
+
+          )
+
           .filter(Boolean);
 
 
@@ -1731,18 +3886,23 @@
 
       document.getElementById(
         "checkinCount"
-      ).textContent = count;
+      ).textContent =
+        count;
 
 
       if (count === 0) {
 
         document.getElementById(
           "averageMood"
-        ).textContent = "—";
+        ).textContent =
+          "—";
+
 
         document.getElementById(
           "commonMood"
-        ).textContent = "—";
+        ).textContent =
+          "—";
+
 
         return;
 
@@ -1751,9 +3911,14 @@
 
       const total =
         weekMoods.reduce(
+
           (sum, mood) =>
-            sum + moodInfo[mood].value,
+
+            sum +
+            moodInfo[mood].value,
+
           0
+
         );
 
 
@@ -1765,15 +3930,38 @@
 
 
       if (average >= 4.5) {
-        averageLabel = "bright";
-      } else if (average >= 3.5) {
-        averageLabel = "good";
-      } else if (average >= 2.5) {
-        averageLabel = "steady";
-      } else if (average >= 1.5) {
-        averageLabel = "low";
-      } else {
-        averageLabel = "difficult";
+
+        averageLabel =
+          "bright";
+
+      }
+
+      else if (average >= 3.5) {
+
+        averageLabel =
+          "good";
+
+      }
+
+      else if (average >= 2.5) {
+
+        averageLabel =
+          "steady";
+
+      }
+
+      else if (average >= 1.5) {
+
+        averageLabel =
+          "low";
+
+      }
+
+      else {
+
+        averageLabel =
+          "difficult";
+
       }
 
 
@@ -1783,23 +3971,29 @@
         averageLabel;
 
 
-
       const frequency = {};
 
 
       weekMoods.forEach(mood => {
 
         frequency[mood] =
-          (frequency[mood] || 0) + 1;
+          (frequency[mood] || 0)
+          + 1;
 
       });
 
 
       const mostCommon =
         Object.keys(frequency)
+
           .sort(
-            (a,b) =>
-              frequency[b] - frequency[a]
+
+            (a, b) =>
+
+              frequency[b]
+              -
+              frequency[a]
+
           )[0];
 
 
@@ -1811,23 +4005,31 @@
     }
 
 
-
-    /* =======================================================
+    /* ===================================================
        INSIGHTS
-       ======================================================= */
+       =================================================== */
 
     function renderInsights() {
 
       const moods =
         getMoods();
 
+
       const days =
-        getWeekDays();
+        getRecentWeekDays();
 
 
       const weekMoods =
         days
-          .map(day => moods[getDateKey(day)])
+
+          .map(day =>
+
+            moods[
+              getLocalDateKey(day)
+            ]
+
+          )
+
           .filter(Boolean);
 
 
@@ -1849,26 +4051,46 @@
         );
 
 
-      if (weekMoods.length === 0) {
+      if (
+        weekMoods.length === 0
+      ) {
 
         insight.textContent =
+
           "Once you have a few check-ins, Zenene will start noticing patterns with you.";
+
+
+        recommendationTitle.textContent =
+          "Start by noticing.";
+
+
+        recommendationText.textContent =
+
+          "There is no right mood to have. Checking in is already enough.";
+
 
         return;
 
       }
 
 
-      if (weekMoods.length === 1) {
+      if (
+        weekMoods.length === 1
+      ) {
 
         insight.textContent =
+
           "One check-in is already a beginning. Come back tomorrow and see what changes.";
+
 
         recommendationTitle.textContent =
           "Keep noticing.";
 
+
         recommendationText.textContent =
+
           "You don't need to feel a certain way for your check-in to matter.";
+
 
         return;
 
@@ -1877,52 +4099,78 @@
 
       const values =
         weekMoods.map(
-          mood => moodInfo[mood].value
+
+          mood =>
+            moodInfo[mood].value
+
         );
 
 
       const average =
+
         values.reduce(
-          (a,b) => a+b,
+
+          (a, b) =>
+            a + b,
+
           0
-        ) / values.length;
+
+        )
+
+        /
+
+        values.length;
 
 
       if (average >= 4) {
 
         insight.textContent =
+
           "There seems to be a little more light in your week. Notice what has been helping.";
+
 
         recommendationTitle.textContent =
           "Hold onto what's working.";
 
+
         recommendationText.textContent =
+
           "Try writing down one small thing that made today feel easier.";
 
       }
 
+
       else if (average >= 3) {
 
         insight.textContent =
+
           "Your week looks fairly mixed. That's normal — moods don't move in straight lines.";
+
 
         recommendationTitle.textContent =
           "Give yourself some room.";
 
+
         recommendationText.textContent =
+
           "A mixed week doesn't need to be solved. You can simply notice it.";
 
       }
 
+
       else {
 
         insight.textContent =
+
           "It looks like you've had some heavier moments this week. You deserve a little extra gentleness.";
+
 
         recommendationTitle.textContent =
           "Maybe slow down.";
 
+
         recommendationText.textContent =
+
           "If you feel like it, put some of what's been on your mind into your journal.";
 
       }
@@ -1930,14 +4178,17 @@
     }
 
 
-
-    /* =======================================================
+    /* ===================================================
        RENDER EVERYTHING
-       ======================================================= */
+       =================================================== */
 
     function renderDashboard() {
 
+      loadTodayMood();
+
       renderWeek();
+
+      renderHistory();
 
       renderStats();
 
@@ -1945,6 +4196,12 @@
 
     }
 
+
+    /* ===================================================
+       INITIALIZE
+       =================================================== */
+
+    renderTodayDate();
 
     renderDashboard();
 

@@ -4,91 +4,137 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Zenene — Journal</title>
 
-<!-- Fonts -->
+
+<!-- =========================================================
+     FONTS
+========================================================= -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IM+Fell+DW+Pica:ital@0;1&family=Special+Elite&display=swap"
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IM+Fell+DW+Pica:ital@0;1&family=Special+Elite&display=swap"
     rel="stylesheet"
 >
 
+
 <style>
 
+
 /* =========================================================
-   ZENENE — JOURNAL
-   ========================================================= */
+   ROOT
+========================================================= */
 
 :root {
 
     --paper: #f7f1e7;
-    --paper-light: #fbf8f2;
+
+    --paper-light: #fcf9f3;
 
     --blue: #dcecf2;
-    --blue-light: #e8f3f6;
-    --blue-grid: rgba(91, 127, 140, 0.075);
 
-    --ink: #2F2B27;
-    --muted: #75685e;
+    --blue-light: #eaf4f7;
+
+    --ink: #2f2b27;
+
+    --muted: #82766c;
+
     --line: #ddd3c7;
 
-    --pink: #B97880;
-    --pink-soft: #ead3d1;
+    --pink: #b97880;
 
-    --brown: #624F43;
-    --brown-dark: #392D26;
+    --pink-soft: #efd9d8;
 
-    --cream: #F7F1E7;
-    --rose-deep: #B97880;
+    --pink-light: #f7e8e6;
 
-    --serif: "Cormorant Garamond", Georgia, serif;
-    --typewriter: "Special Elite", "Courier New", monospace;
-    --script: "IM Fell DW Pica", Georgia, serif;
+    --brown: #624f43;
 
-    --mono: "Special Elite", "Courier New", monospace;
+    --brown-dark: #392d26;
+
+    --cream: #f7f1e7;
+
+
+    --serif:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    --typewriter:
+        "Special Elite",
+        "Courier New",
+        monospace;
+
+    --script:
+        "IM Fell DW Pica",
+        Georgia,
+        serif;
+
 }
 
 
 /* =========================================================
    RESET
-   ========================================================= */
+========================================================= */
 
 * {
+
     margin: 0;
+
     padding: 0;
+
     box-sizing: border-box;
+
 }
 
+
 html {
+
     scroll-behavior: smooth;
+
 }
+
 
 body {
 
-    background-color: var(--blue);
+    background-color:
+        var(--blue);
 
     background-image:
+
         radial-gradient(
             circle,
             rgba(80, 110, 120, 0.11) 1px,
             transparent 1.2px
         );
 
-    background-size: 18px 18px;
+    background-size:
+        18px 18px;
 
-    color: var(--ink);
+    color:
+        var(--ink);
 
-    overflow-x: hidden;
+    overflow-x:
+        hidden;
+
 }
 
 
 /* =========================================================
    PAPER TEXTURE
-   ========================================================= */
+========================================================= */
 
 body::before {
 
@@ -100,23 +146,27 @@ body::before {
 
     pointer-events: none;
 
-    z-index: 999;
+    z-index: 9999;
 
     background-image:
+
         radial-gradient(
             rgba(80, 65, 55, 0.10) 0.6px,
             transparent 0.6px
         );
 
-    background-size: 5px 5px;
+    background-size:
+        5px 5px;
 
-    opacity: 0.10;
+    opacity:
+        0.09;
+
 }
 
 
 /* =========================================================
    NAVIGATION
-   ========================================================= */
+========================================================= */
 
 .top-nav {
 
@@ -132,63 +182,93 @@ body::before {
 
     justify-content: space-between;
 
-    padding: 20px 34px;
+    padding:
+        20px 34px;
 
-    background: rgba(247,241,231,.92);
+    background:
+        rgba(247, 241, 231, 0.92);
 
-    backdrop-filter: blur(18px);
+    backdrop-filter:
+        blur(18px);
 
-    border-bottom: 1px solid rgba(98,79,67,.08);
+    border-bottom:
+        1px solid rgba(98, 79, 67, 0.08);
+
 }
+
 
 .nav-wordmark {
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: .78rem;
+    font-size:
+        0.78rem;
 
-    letter-spacing: .16em;
+    letter-spacing:
+        0.16em;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
+
 }
+
 
 .nav-links {
 
     display: flex;
 
+    align-items: center;
+
     gap: 28px;
 
-    align-items: center;
 }
+
 
 .nav-links a {
 
-    color: var(--brown);
+    color:
+        var(--brown);
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: .65rem;
+    font-size:
+        0.65rem;
 
-    letter-spacing: .08em;
+    letter-spacing:
+        0.08em;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
-    transition: .3s ease;
+    transition:
+        color 0.25s ease;
+
 }
+
 
 .nav-links a:hover {
 
-    color: var(--rose-deep);
+    color:
+        var(--pink);
+
 }
+
 
 .nav-links .active {
 
-    color: var(--ink);
+    color:
+        var(--ink);
 
-    position: relative;
+    position:
+        relative;
+
 }
+
 
 .nav-links .active::after {
 
@@ -200,140 +280,202 @@ body::before {
 
     right: 0;
 
-    bottom: -7px;
+    bottom: -8px;
 
     height: 1px;
 
-    background: var(--rose-deep);
+    background:
+        var(--pink);
+
 }
 
 
 /* =========================================================
    HERO
-   ========================================================= */
+========================================================= */
 
 .hero {
 
-    min-height: 420px;
+    min-height:
+        430px;
 
     display: grid;
 
-    grid-template-columns: 1fr 0.9fr;
+    grid-template-columns:
+        1fr 0.9fr;
 
-    align-items: center;
+    align-items:
+        center;
 
-    padding: 85px 8% 65px;
+    gap:
+        60px;
 
-    position: relative;
+    padding:
+        90px 8% 70px;
+
+    position:
+        relative;
+
 }
+
 
 .hero-left {
 
-    animation: fadeUp 0.9s ease both;
+    animation:
+        fadeUp 0.8s ease both;
+
 }
+
 
 .eyebrow {
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 12px;
+    font-size:
+        11px;
 
-    letter-spacing: 2px;
+    letter-spacing:
+        2px;
 
-    margin-bottom: 78px;
+    margin-bottom:
+        78px;
+
 }
+
 
 .hero-title {
 
-    font-family: var(--serif);
+    font-family:
+        var(--serif);
 
-    font-size: clamp(90px, 9vw, 145px);
+    font-size:
+        clamp(85px, 9vw, 145px);
 
-    line-height: 0.68;
+    font-weight:
+        500;
 
-    font-weight: 500;
+    line-height:
+        0.68;
 
-    letter-spacing: -5px;
+    letter-spacing:
+        -5px;
+
 }
+
 
 .hero-title span {
 
-    font-family: var(--script);
+    font-family:
+        var(--script);
 
-    font-size: 0.55em;
+    font-size:
+        0.56em;
 
-    color: var(--pink);
+    color:
+        var(--pink);
 
-    display: inline-block;
+    display:
+        inline-block;
 
-    margin-left: 20px;
+    margin-left:
+        18px;
 
-    transform: rotate(-4deg);
+    transform:
+        rotate(-4deg);
 
-    letter-spacing: -2px;
+    letter-spacing:
+        -2px;
+
 }
+
 
 .hero-right {
 
-    max-width: 500px;
+    max-width:
+        510px;
 
-    padding-left: 40px;
+    animation:
+        fadeUp 1s 0.15s ease both;
 
-    animation: fadeUp 1s 0.15s ease both;
 }
+
 
 .hero-description {
 
-    font-size: 27px;
+    font-family:
+        var(--serif);
 
-    line-height: 1.45;
+    font-size:
+        28px;
 
-    color: #655950;
+    line-height:
+        1.45;
+
+    color:
+        #655950;
+
 }
+
 
 .hero-description em {
 
-    color: var(--pink);
+    color:
+        var(--pink);
 
-    font-family: var(--script);
+    font-family:
+        var(--script);
 
-    font-size: 1.12em;
+    font-size:
+        1.12em;
+
 }
 
 
 /* =========================================================
-   MAIN JOURNAL
-   ========================================================= */
+   MAIN WRAPPER
+========================================================= */
 
 .journal-wrapper {
 
-    width: 84%;
+    width:
+        84%;
 
-    max-width: 1220px;
+    max-width:
+        1240px;
 
-    margin: 0 auto 120px;
+    margin:
+        0 auto 120px;
+
 }
 
 
 /* =========================================================
-   JOURNAL PAPER
-   ========================================================= */
+   WRITE CARD
+========================================================= */
 
 .write-card {
 
-    background: var(--paper-light);
+    background:
+        var(--paper-light);
 
-    border: 1px solid #e3d9cd;
+    border:
+        1px solid #e3d9cd;
 
-    padding: 45px 48px 50px;
+    padding:
+        46px 50px 50px;
 
-    position: relative;
+    position:
+        relative;
 
     box-shadow:
         0 25px 60px rgba(76, 58, 43, 0.07);
 
-    animation: fadeUp 0.9s 0.2s ease both;
+    animation:
+        fadeUp 0.9s 0.15s ease both;
+
 }
+
 
 .write-card::before {
 
@@ -341,1282 +483,2033 @@ body::before {
 
     position: absolute;
 
-    width: 85px;
+    width:
+        90px;
 
-    height: 23px;
+    height:
+        24px;
 
-    top: -11px;
+    top:
+        -12px;
 
-    right: 70px;
+    right:
+        80px;
 
-    background: rgba(210, 153, 158, 0.30);
+    background:
+        rgba(210, 153, 158, 0.3);
 
-    transform: rotate(2deg);
+    transform:
+        rotate(2deg);
+
 }
 
 
 /* =========================================================
    WRITE HEADER
-   ========================================================= */
+========================================================= */
 
 .write-top {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: flex-end;
+    align-items:
+        flex-end;
 
-    margin-bottom: 28px;
+    margin-bottom:
+        30px;
+
 }
+
 
 .section-label {
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 11px;
+    font-size:
+        10px;
 
-    letter-spacing: 2px;
+    letter-spacing:
+        2px;
+
 }
+
 
 .date {
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 10px;
+    font-size:
+        9px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
+
 }
 
 
 /* =========================================================
-   TEXT AREA
-   ========================================================= */
+   JOURNAL TEXT AREA
+========================================================= */
 
 #journalText {
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 210px;
+    min-height:
+        220px;
 
-    resize: vertical;
+    resize:
+        vertical;
 
-    border: none;
+    border:
+        none;
 
-    outline: none;
+    outline:
+        none;
 
     background:
+
         repeating-linear-gradient(
             to bottom,
             transparent 0,
             transparent 30px,
-            rgba(120, 105, 94, 0.10) 31px
+            rgba(120, 105, 94, 0.11) 31px
         );
 
-    font-family: var(--serif);
+    font-family:
+        var(--serif);
 
-    /* smaller and better aligned with the writing lines */
+    font-size:
+        19px;
 
-    font-size: 18px;
+    line-height:
+        31px;
 
-    line-height: 31px;
+    color:
+        var(--ink);
 
-    color: var(--ink);
+    padding:
+        4px 3px;
 
-    padding: 5px 3px;
-
-    transition: background 0.3s ease;
 }
+
 
 #journalText::placeholder {
 
-    color: #a89b90;
+    color:
+        #a89b90;
 
-    font-style: italic;
+    font-style:
+        italic;
+
 }
 
 
 /* =========================================================
    WRITE BOTTOM
-   ========================================================= */
+========================================================= */
 
 .write-bottom {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: center;
+    align-items:
+        center;
 
-    margin-top: 25px;
+    margin-top:
+        25px;
 
-    border-top: 1px solid var(--line);
+    padding-top:
+        24px;
 
-    padding-top: 24px;
+    border-top:
+        1px solid var(--line);
+
 }
+
 
 .small-note {
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 10px;
+    font-size:
+        9px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
+
 }
 
 
 /* =========================================================
    BUTTON
-   ========================================================= */
+========================================================= */
 
 .primary-btn {
 
-    border: none;
+    border:
+        none;
 
-    background: var(--brown-dark);
+    background:
+        var(--brown-dark);
 
-    color: #fff;
+    color:
+        white;
 
-    padding: 14px 24px;
+    padding:
+        14px 24px;
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 10px;
+    font-size:
+        9px;
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     transition:
         transform 0.25s ease,
         background 0.25s ease;
+
 }
+
 
 .primary-btn:hover {
 
-    background: var(--pink);
+    background:
+        var(--pink);
 
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
+
 }
 
 
 /* =========================================================
    MOOD SECTION
-   ========================================================= */
+========================================================= */
 
 .mood-section {
 
-    margin-top: 80px;
+    margin-top:
+        85px;
+
 }
+
 
 .section-heading {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: baseline;
+    align-items:
+        baseline;
 
-    margin-bottom: 30px;
+    margin-bottom:
+        30px;
+
 }
+
 
 .section-heading h2 {
 
-    font-family: var(--serif);
+    font-family:
+        var(--serif);
 
-    font-size: 42px;
+    font-size:
+        44px;
 
-    font-weight: 500;
+    font-weight:
+        500;
+
 }
+
 
 .section-heading span {
 
-    font-family: var(--script);
+    font-family:
+        var(--script);
 
-    color: var(--pink);
+    font-size:
+        21px;
 
-    font-size: 20px;
+    color:
+        var(--pink);
+
 }
 
 
 /* =========================================================
    MOOD GRID
-   ========================================================= */
+========================================================= */
 
 .mood-grid {
 
     display: grid;
 
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns:
+        repeat(9, 1fr);
 
-    gap: 12px;
+    gap:
+        12px;
+
 }
+
 
 .mood-option {
 
-    border: 1px solid transparent;
+    border:
+        1px solid transparent;
 
-    background: transparent;
+    background:
+        transparent;
 
-    padding: 15px 7px;
+    padding:
+        15px 7px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     transition:
         transform 0.25s ease,
         background 0.25s ease,
         border 0.25s ease;
+
 }
+
 
 .mood-option:hover {
 
-    transform: translateY(-6px);
+    transform:
+        translateY(-6px);
+
 }
+
 
 .mood-option.selected {
 
-    background: rgba(255,255,255,0.55);
+    background:
+        rgba(255, 255, 255, 0.55);
 
-    border-color: var(--pink);
+    border-color:
+        var(--pink);
+
 }
 
-
-/* =========================================================
-   ACTUAL MOOD IMAGE ASSETS
-   ========================================================= */
 
 .face {
 
-    width: 76px;
+    width:
+        76px;
 
-    height: 76px;
+    height:
+        76px;
 
-    max-width: 100%;
+    max-width:
+        100%;
 
-    margin: 0 auto 10px;
+    margin:
+        0 auto 10px;
 
-    display: block;
+    display:
+        block;
 
-    object-fit: contain;
+    object-fit:
+        contain;
 
     transition:
         transform 0.25s ease;
+
 }
+
 
 .mood-option:hover .face {
 
-    transform: scale(1.06) rotate(-2deg);
+    transform:
+        scale(1.06) rotate(-2deg);
+
 }
 
 
-/* =========================================================
-   MOOD NAME
-   ========================================================= */
-
 .mood-name {
 
-    display: block;
+    display:
+        block;
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    letter-spacing: 0.7px;
+    letter-spacing:
+        0.7px;
 
-    text-align: center;
+    text-align:
+        center;
 
-    color: #655950;
+    color:
+        #655950;
+
 }
 
 
 /* =========================================================
    CALENDAR SECTION
-   ========================================================= */
+========================================================= */
 
 .calendar-section {
 
-    margin-top: 105px;
+    margin-top:
+        120px;
+
 }
+
 
 .calendar-heading {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: flex-end;
+    align-items:
+        flex-end;
 
-    margin-bottom: 30px;
+    margin-bottom:
+        35px;
+
 }
+
 
 .calendar-heading h2 {
 
-    font-family: var(--serif);
+    font-family:
+        var(--serif);
 
-    font-size: 42px;
+    font-size:
+        48px;
 
-    font-weight: 500;
+    font-weight:
+        500;
+
 }
+
 
 .calendar-heading span {
 
-    font-family: var(--script);
+    font-family:
+        var(--script);
 
-    color: var(--pink);
+    font-size:
+        21px;
 
-    font-size: 20px;
+    color:
+        var(--pink);
+
 }
 
 
 /* =========================================================
-   CALENDAR PAPER
-   ========================================================= */
+   PLANNER / CALENDAR
+========================================================= */
 
-.calendar-card {
+.calendar-planner {
 
-    background: var(--paper-light);
+    background:
+        var(--paper-light);
 
-    border: 1px solid #e3d9cd;
+    border:
+        1px solid #e0d6ca;
 
-    padding: 35px;
+    padding:
+        0;
 
-    position: relative;
+    position:
+        relative;
 
     box-shadow:
-        0 25px 60px rgba(76, 58, 43, 0.07);
+        0 28px 70px rgba(76, 58, 43, 0.08);
+
+    overflow:
+        hidden;
+
 }
 
-.calendar-card::before {
+
+/* PINK TAPE */
+
+.calendar-planner::before {
 
     content: "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 75px;
+    width:
+        105px;
 
-    height: 22px;
+    height:
+        25px;
 
-    top: -10px;
+    top:
+        -12px;
 
-    left: 75px;
+    left:
+        8%;
 
-    background: rgba(210, 153, 158, 0.28);
+    background:
+        rgba(210, 153, 158, 0.32);
 
-    transform: rotate(-3deg);
+    transform:
+        rotate(-3deg);
+
+    z-index:
+        2;
+
+}
+
+
+/* BLUE TAPE */
+
+.calendar-planner::after {
+
+    content: "";
+
+    position:
+        absolute;
+
+    width:
+        85px;
+
+    height:
+        23px;
+
+    bottom:
+        -10px;
+
+    right:
+        8%;
+
+    background:
+        rgba(173, 207, 218, 0.45);
+
+    transform:
+        rotate(3deg);
+
 }
 
 
 /* =========================================================
-   CALENDAR TOP
-   ========================================================= */
+   PLANNER HEADER
+========================================================= */
 
-.calendar-top {
+.planner-header {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items:
+        center;
+
+    padding:
+        38px 42px 30px;
+
+    border-bottom:
+        1px solid var(--line);
+
+}
+
+
+.planner-left {
 
     display: flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    gap:
+        15px;
 
-    padding-bottom: 25px;
-
-    border-bottom: 1px solid var(--line);
-
-    margin-bottom: 20px;
 }
+
+
+.planner-label {
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        1.8px;
+
+    color:
+        var(--muted);
+
+}
+
+
+.planner-dot {
+
+    width:
+        6px;
+
+    height:
+        6px;
+
+    background:
+        var(--pink);
+
+    border-radius:
+        50%;
+
+}
+
 
 .calendar-month {
 
-    font-family: var(--serif);
+    font-family:
+        var(--serif);
 
-    font-size: 36px;
+    font-size:
+        clamp(35px, 4vw, 56px);
 
-    font-weight: 500;
+    font-weight:
+        500;
+
+    text-align:
+        center;
+
+    line-height:
+        0.9;
+
 }
 
-.calendar-nav {
+
+.planner-right {
 
     display: flex;
 
-    gap: 8px;
+    justify-content:
+        flex-end;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
 }
 
-.calendar-nav button {
 
-    width: 38px;
+/* =========================================================
+   CALENDAR BUTTONS
+========================================================= */
 
-    height: 38px;
+.calendar-nav-btn {
 
-    border: 1px solid var(--line);
+    width:
+        38px;
 
-    background: transparent;
+    height:
+        38px;
 
-    color: var(--brown);
+    border:
+        1px solid var(--line);
 
-    font-family: var(--typewriter);
+    background:
+        transparent;
 
-    cursor: pointer;
+    color:
+        var(--brown);
 
-    transition: .25s ease;
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        12px;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
 }
 
-.calendar-nav button:hover {
 
-    background: var(--brown-dark);
+.calendar-nav-btn:hover {
 
-    color: white;
+    background:
+        var(--brown-dark);
+
+    color:
+        white;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.today-btn {
+
+    width:
+        auto;
+
+    padding:
+        0 13px;
+
+    font-size:
+        8px;
+
+}
+
+
+/* =========================================================
+   CALENDAR BODY
+========================================================= */
+
+.calendar-body {
+
+    padding:
+        28px 32px 35px;
+
 }
 
 
 /* =========================================================
    WEEKDAYS
-   ========================================================= */
+========================================================= */
 
 .calendar-weekdays {
 
     display: grid;
 
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns:
+        repeat(7, 1fr);
 
-    margin-bottom: 8px;
+    margin-bottom:
+        12px;
+
 }
+
 
 .calendar-weekday {
 
-    text-align: center;
+    text-align:
+        center;
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 9px;
+    font-size:
+        8px;
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    padding: 8px 0;
+    padding:
+        8px 0 12px;
+
 }
 
 
 /* =========================================================
    CALENDAR GRID
-   ========================================================= */
+========================================================= */
 
 .calendar-grid {
 
     display: grid;
 
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns:
+        repeat(7, 1fr);
 
-    gap: 8px;
-}
+    gap:
+        0;
 
-.calendar-day {
+    border-top:
+        1px solid rgba(221, 211, 199, 0.8);
 
-    min-height: 105px;
+    border-left:
+        1px solid rgba(221, 211, 199, 0.8);
 
-    background: rgba(255,255,255,0.42);
-
-    border: 1px solid rgba(221,211,199,0.75);
-
-    padding: 10px;
-
-    position: relative;
-
-    cursor: default;
-
-    transition:
-        background .25s ease,
-        transform .25s ease,
-        border .25s ease;
-}
-
-.calendar-day:hover {
-
-    background: rgba(255,255,255,0.75);
-
-    border-color: #d5c5b8;
-}
-
-.calendar-day.other-month {
-
-    opacity: .35;
-}
-
-.calendar-number {
-
-    font-family: var(--typewriter);
-
-    font-size: 10px;
-
-    color: var(--muted);
-
-    display: block;
-
-    margin-bottom: 9px;
-}
-
-.calendar-day.today {
-
-    border-color: var(--pink);
-}
-
-.calendar-day.today .calendar-number {
-
-    color: var(--pink);
 }
 
 
 /* =========================================================
-   JOURNAL ENTRY TAB INSIDE CALENDAR
-   ========================================================= */
+   CALENDAR DAY
+========================================================= */
+
+.calendar-day {
+
+    min-height:
+        120px;
+
+    background:
+        rgba(255, 255, 255, 0.28);
+
+    border-right:
+        1px solid rgba(221, 211, 199, 0.8);
+
+    border-bottom:
+        1px solid rgba(221, 211, 199, 0.8);
+
+    padding:
+        11px;
+
+    position:
+        relative;
+
+    transition:
+        background 0.25s ease;
+
+}
+
+
+.calendar-day:hover {
+
+    background:
+        rgba(255, 255, 255, 0.65);
+
+}
+
+
+.calendar-day.other-month {
+
+    background:
+        rgba(235, 229, 220, 0.22);
+
+}
+
+
+.calendar-day.other-month .calendar-number {
+
+    opacity:
+        0.25;
+
+}
+
+
+/* =========================================================
+   DATE NUMBER
+========================================================= */
+
+.calendar-number {
+
+    width:
+        24px;
+
+    height:
+        24px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        9px;
+
+    color:
+        var(--muted);
+
+    margin-bottom:
+        9px;
+
+}
+
+
+/* TODAY */
+
+.calendar-day.today .calendar-number {
+
+    background:
+        var(--pink);
+
+    color:
+        white;
+
+    border-radius:
+        50%;
+
+}
+
+
+/* =========================================================
+   ENTRY
+========================================================= */
 
 .calendar-entry {
 
-    width: 100%;
+    width:
+        100%;
 
-    border: none;
+    border:
+        none;
 
-    background: var(--pink-soft);
+    background:
+        var(--pink-soft);
 
-    padding: 6px 7px;
+    padding:
+        6px 7px 6px 10px;
 
-    text-align: left;
+    text-align:
+        left;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 7px;
+    font-size:
+        7px;
 
-    letter-spacing: .4px;
+    letter-spacing:
+        0.4px;
 
-    color: var(--brown-dark);
+    color:
+        var(--brown-dark);
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 
-    text-overflow: ellipsis;
+    text-overflow:
+        ellipsis;
 
-    position: relative;
+    position:
+        relative;
 
     transition:
-        transform .2s ease,
-        background .2s ease;
+        transform 0.2s ease,
+        background 0.2s ease;
+
 }
+
 
 .calendar-entry::before {
 
     content: "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 0;
+    left:
+        0;
 
-    top: 0;
+    top:
+        0;
 
-    bottom: 0;
+    bottom:
+        0;
 
-    width: 4px;
+    width:
+        3px;
 
-    background: var(--pink);
+    background:
+        var(--pink);
+
 }
+
 
 .calendar-entry:hover {
 
-    transform: translateX(2px);
+    background:
+        var(--pink-light);
 
-    background: #ead3d1;
+    transform:
+        translateX(3px);
+
 }
+
 
 .calendar-entry + .calendar-entry {
 
-    margin-top: 5px;
+    margin-top:
+        5px;
+
+}
+
+
+/* =========================================================
+   EMPTY MESSAGE
+========================================================= */
+
+.calendar-empty-note {
+
+    text-align:
+        center;
+
+    padding:
+        30px 20px 5px;
+
+    font-family:
+        var(--script);
+
+    font-size:
+        20px;
+
+    color:
+        var(--muted);
+
+}
+
+
+/* =========================================================
+   PLANNER FOOTER
+========================================================= */
+
+.planner-footer {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    padding:
+        17px 42px;
+
+    border-top:
+        1px solid var(--line);
+
+    background:
+        rgba(247, 241, 231, 0.55);
+
+}
+
+
+.planner-footer span {
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        1px;
+
+    color:
+        var(--muted);
+
 }
 
 
 /* =========================================================
    ENTRY MODAL
-   ========================================================= */
+========================================================= */
 
 .entry-modal {
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 2000;
+    z-index:
+        2000;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    padding: 30px;
+    padding:
+        30px;
 
-    background: rgba(49, 57, 59, 0.32);
+    background:
+        rgba(49, 57, 59, 0.32);
 
-    backdrop-filter: blur(8px);
+    backdrop-filter:
+        blur(8px);
 
-    opacity: 0;
+    opacity:
+        0;
 
-    visibility: hidden;
+    visibility:
+        hidden;
 
     transition:
-        opacity .3s ease,
-        visibility .3s ease;
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
 }
+
 
 .entry-modal.open {
 
-    opacity: 1;
+    opacity:
+        1;
 
-    visibility: visible;
+    visibility:
+        visible;
+
 }
+
 
 .entry-modal-paper {
 
-    width: min(650px, 92vw);
+    width:
+        min(650px, 92vw);
 
-    max-height: 82vh;
+    max-height:
+        82vh;
 
-    overflow-y: auto;
+    overflow-y:
+        auto;
 
-    background: var(--paper-light);
+    background:
+        var(--paper-light);
 
-    border: 1px solid #ded3c7;
+    border:
+        1px solid #ded3c7;
 
     box-shadow:
-        0 30px 80px rgba(45, 38, 32, .20);
+        0 30px 80px rgba(45, 38, 32, 0.2);
 
-    padding: 42px 45px;
+    padding:
+        45px;
 
-    position: relative;
+    position:
+        relative;
 
-    transform: translateY(35px) rotate(-1deg) scale(.96);
+    transform:
+        translateY(35px) rotate(-1deg) scale(0.96);
 
     transition:
-        transform .45s cubic-bezier(.2,.8,.2,1);
+        transform 0.45s cubic-bezier(.2,.8,.2,1);
+
 }
+
 
 .entry-modal.open .entry-modal-paper {
 
-    transform: translateY(0) rotate(-1deg) scale(1);
+    transform:
+        translateY(0) rotate(-1deg) scale(1);
+
 }
+
 
 .entry-modal-paper::before {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: -11px;
+    top:
+        -11px;
 
-    right: 80px;
+    right:
+        80px;
 
-    width: 95px;
+    width:
+        95px;
 
-    height: 23px;
+    height:
+        23px;
 
-    background: rgba(210, 153, 158, .3);
+    background:
+        rgba(210, 153, 158, 0.3);
 
-    transform: rotate(3deg);
+    transform:
+        rotate(3deg);
+
 }
+
 
 .modal-close {
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: 18px;
+    top:
+        18px;
 
-    right: 20px;
+    right:
+        20px;
 
-    border: none;
+    border:
+        none;
 
-    background: none;
+    background:
+        transparent;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 10px;
+    font-size:
+        9px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
+
 }
+
 
 .modal-close:hover {
 
-    color: var(--pink);
+    color:
+        var(--pink);
+
 }
+
 
 .modal-date {
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 10px;
+    font-size:
+        9px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
 
-    margin-bottom: 20px;
+    margin-bottom:
+        18px;
+
 }
+
 
 .modal-mood {
 
-    display: inline-block;
+    display:
+        inline-block;
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    color: var(--pink);
+    color:
+        var(--pink);
 
-    border: 1px solid var(--pink-soft);
+    border:
+        1px solid var(--pink-soft);
 
-    padding: 6px 9px;
+    padding:
+        6px 9px;
 
-    margin-bottom: 25px;
+    margin-bottom:
+        25px;
+
 }
+
 
 .modal-content {
 
-    font-family: var(--serif);
+    font-family:
+        var(--serif);
 
-    font-size: 22px;
+    font-size:
+        22px;
 
-    line-height: 1.65;
+    line-height:
+        1.65;
 
-    white-space: pre-wrap;
+    white-space:
+        pre-wrap;
 
-    color: var(--ink);
+    color:
+        var(--ink);
+
 }
+
 
 .modal-actions {
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: flex-end;
+    justify-content:
+        flex-end;
 
-    gap: 12px;
+    gap:
+        15px;
 
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 
-    margin-top: 30px;
+    margin-top:
+        30px;
 
-    padding-top: 20px;
+    padding-top:
+        20px;
+
 }
+
 
 .modal-actions button {
 
-    border: none;
+    border:
+        none;
 
-    background: transparent;
+    background:
+        transparent;
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 9px;
+    font-size:
+        8px;
 
-    letter-spacing: .8px;
+    letter-spacing:
+        0.8px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    padding: 8px 4px;
+    padding:
+        8px 4px;
+
 }
+
 
 .modal-actions button:hover {
 
-    color: var(--pink);
+    color:
+        var(--pink);
+
 }
 
-.modal-actions .delete-btn:hover {
 
-    color: #9d5757;
+.delete-btn:hover {
+
+    color:
+        #9d5757 !important;
+
 }
 
 
 /* =========================================================
-   EDIT MODE
-   ========================================================= */
+   EDIT
+========================================================= */
 
 .edit-area {
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 220px;
+    min-height:
+        220px;
 
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
 
-    outline: none;
+    outline:
+        none;
 
-    resize: vertical;
+    resize:
+        vertical;
 
-    padding: 15px;
+    padding:
+        15px;
 
-    background: #fffdf8;
+    background:
+        #fffdf8;
 
-    font-family: var(--serif);
+    font-family:
+        var(--serif);
 
-    font-size: 20px;
+    font-size:
+        20px;
 
-    line-height: 1.6;
+    line-height:
+        1.6;
 
-    color: var(--ink);
+    color:
+        var(--ink);
+
 }
+
 
 .edit-buttons {
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: flex-end;
+    justify-content:
+        flex-end;
 
-    gap: 15px;
+    gap:
+        12px;
 
-    margin-top: 15px;
+    margin-top:
+        15px;
+
 }
 
 
 /* =========================================================
    DELETE CONFIRMATION
-   ========================================================= */
+========================================================= */
 
 .confirm-overlay {
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 3000;
+    z-index:
+        3000;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    padding: 25px;
+    padding:
+        25px;
 
-    background: rgba(45, 38, 32, .25);
+    background:
+        rgba(45, 38, 32, 0.25);
 
-    backdrop-filter: blur(5px);
+    backdrop-filter:
+        blur(5px);
 
-    opacity: 0;
+    opacity:
+        0;
 
-    visibility: hidden;
+    visibility:
+        hidden;
 
-    transition: .25s ease;
+    transition:
+        0.25s ease;
+
 }
+
 
 .confirm-overlay.open {
 
-    opacity: 1;
+    opacity:
+        1;
 
-    visibility: visible;
+    visibility:
+        visible;
+
 }
+
 
 .confirm-box {
 
-    background: var(--paper-light);
+    background:
+        var(--paper-light);
 
-    border: 1px solid #ded3c7;
+    border:
+        1px solid #ded3c7;
 
-    padding: 35px;
+    padding:
+        38px;
 
-    width: min(390px, 90vw);
+    width:
+        min(390px, 90vw);
 
-    text-align: center;
+    text-align:
+        center;
 
     box-shadow:
-        0 25px 60px rgba(50,40,30,.18);
+        0 25px 60px rgba(50, 40, 30, 0.18);
 
-    transform: scale(.94);
+    transform:
+        scale(0.94);
 
-    transition: .3s ease;
+    transition:
+        0.3s ease;
+
 }
+
 
 .confirm-overlay.open .confirm-box {
 
-    transform: scale(1);
+    transform:
+        scale(1);
+
 }
+
 
 .confirm-box h3 {
 
-    font-family: var(--serif);
+    font-family:
+        var(--serif);
 
-    font-size: 28px;
+    font-size:
+        30px;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    margin-bottom: 10px;
+    margin-bottom:
+        12px;
+
 }
+
 
 .confirm-box p {
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 9px;
+    font-size:
+        8px;
 
-    color: var(--muted);
+    line-height:
+        1.7;
 
-    margin-bottom: 25px;
+    color:
+        var(--muted);
+
+    margin-bottom:
+        25px;
+
 }
+
 
 .confirm-buttons {
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 15px;
+    gap:
+        15px;
+
 }
+
 
 .confirm-buttons button {
 
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
 
-    background: transparent;
+    background:
+        transparent;
 
-    padding: 11px 20px;
+    padding:
+        11px 20px;
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 9px;
+    font-size:
+        8px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
+
 }
+
 
 .confirm-buttons .confirm-delete {
 
-    background: var(--brown-dark);
+    background:
+        var(--brown-dark);
 
-    color: white;
+    color:
+        white;
 
-    border-color: var(--brown-dark);
-}
+    border-color:
+        var(--brown-dark);
 
-
-/* =========================================================
-   EMPTY STATE
-   ========================================================= */
-
-.empty-calendar {
-
-    grid-column: 1 / -1;
-
-    text-align: center;
-
-    padding: 60px 20px;
-
-    color: var(--muted);
-
-    font-family: var(--serif);
-
-    font-size: 18px;
 }
 
 
 /* =========================================================
    FOOTER
-   ========================================================= */
+========================================================= */
 
 .journal-footer {
 
-    margin-top: 100px;
+    margin-top:
+        100px;
 
-    padding-top: 30px;
+    padding-top:
+        30px;
 
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
+
 }
+
 
 .journal-footer span {
 
-    font-family: var(--typewriter);
+    font-family:
+        var(--typewriter);
 
-    font-size: 9px;
+    font-size:
+        8px;
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
+
 }
 
 
 /* =========================================================
    ANIMATIONS
-   ========================================================= */
+========================================================= */
 
 @keyframes fadeUp {
 
     from {
 
-        opacity: 0;
+        opacity:
+            0;
 
-        transform: translateY(18px);
+        transform:
+            translateY(18px);
+
     }
 
     to {
 
-        opacity: 1;
+        opacity:
+            1;
 
-        transform: translateY(0);
+        transform:
+            translateY(0);
+
     }
+
 }
 
 
 /* =========================================================
-   RESPONSIVE
-   ========================================================= */
+   TABLET
+========================================================= */
 
 @media (max-width: 1000px) {
 
     .top-nav {
 
-        padding: 20px 25px;
+        padding:
+            20px 25px;
+
     }
 
     .nav-links {
 
-        gap: 17px;
+        gap:
+            17px;
+
     }
 
     .hero {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
-        gap: 50px;
+        gap:
+            50px;
 
-        padding: 70px 8%;
-    }
+        padding:
+            70px 8%;
 
-    .hero-right {
-
-        padding-left: 0;
     }
 
     .mood-grid {
 
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns:
+            repeat(5, 1fr);
+
     }
 
     .calendar-day {
 
-        min-height: 90px;
+        min-height:
+            95px;
+
     }
+
+    .planner-header {
+
+        padding:
+            32px 28px 25px;
+
+    }
+
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 650px) {
 
     .top-nav {
 
-        height: auto;
+        min-height:
+            70px;
 
-        min-height: 70px;
+        padding:
+            18px 20px;
 
-        padding: 18px 20px;
+        align-items:
+            flex-start;
 
-        align-items: flex-start;
     }
 
     .nav-links {
 
-        gap: 12px;
+        gap:
+            12px;
 
-        flex-wrap: wrap;
+        flex-wrap:
+            wrap;
 
-        justify-content: flex-end;
+        justify-content:
+            flex-end;
+
     }
 
     .nav-links a {
 
-        font-size: .52rem;
-    }
+        font-size:
+            0.52rem;
 
-    .nav-links .active::after {
-
-        bottom: -5px;
     }
 
     .nav-wordmark {
 
-        font-size: .65rem;
+        font-size:
+            0.65rem;
 
-        letter-spacing: .12em;
     }
 
     .hero {
 
-        padding: 65px 7% 50px;
+        padding:
+            65px 7% 50px;
 
-        min-height: 400px;
+        min-height:
+            400px;
+
     }
 
     .eyebrow {
 
-        margin-bottom: 50px;
+        margin-bottom:
+            50px;
+
     }
 
     .hero-title {
 
-        font-size: 75px;
+        font-size:
+            75px;
+
     }
 
     .hero-title span {
 
-        display: block;
+        display:
+            block;
 
-        margin-left: 25px;
+        margin-left:
+            25px;
 
-        margin-top: 20px;
+        margin-top:
+            20px;
+
     }
 
     .hero-description {
 
-        font-size: 22px;
+        font-size:
+            22px;
+
     }
 
     .journal-wrapper {
 
-        width: 90%;
+        width:
+            90%;
+
     }
 
     .write-card {
 
-        padding: 30px 25px;
+        padding:
+            30px 25px;
+
     }
 
     .write-bottom {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        gap: 20px;
+        gap:
+            20px;
 
-        align-items: flex-start;
+        align-items:
+            flex-start;
+
     }
 
     .mood-grid {
 
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns:
+            repeat(3, 1fr);
 
-        gap: 5px;
+        gap:
+            5px;
+
     }
 
     .face {
 
-        width: 65px;
+        width:
+            65px;
 
-        height: 65px;
+        height:
+            65px;
+
     }
 
     .section-heading {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        gap: 15px;
+        gap:
+            12px;
 
-        align-items: flex-start;
-    }
+        align-items:
+            flex-start;
 
-    /* Mobile calendar */
-
-    .calendar-card {
-
-        padding: 20px 12px;
     }
 
     .calendar-heading {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        align-items: flex-start;
+        align-items:
+            flex-start;
 
-        gap: 10px;
+        gap:
+            10px;
+
     }
 
-    .calendar-heading h2 {
+    .planner-header {
 
-        font-size: 36px;
+        grid-template-columns:
+            1fr;
+
+        gap:
+            18px;
+
+        text-align:
+            center;
+
+        padding:
+            30px 20px 24px;
+
     }
 
-    .calendar-top {
+    .planner-left {
 
-        padding-bottom: 18px;
+        justify-content:
+            center;
+
     }
 
-    .calendar-month {
+    .planner-right {
 
-        font-size: 28px;
+        justify-content:
+            center;
+
     }
 
-    .calendar-grid {
+    .calendar-body {
 
-        gap: 4px;
-    }
+        padding:
+            20px 8px 25px;
 
-    .calendar-day {
-
-        min-height: 72px;
-
-        padding: 6px;
-    }
-
-    .calendar-number {
-
-        font-size: 8px;
-
-        margin-bottom: 5px;
-    }
-
-    .calendar-entry {
-
-        padding: 5px 4px;
-
-        font-size: 6px;
     }
 
     .calendar-weekday {
 
-        font-size: 7px;
+        font-size:
+            6px;
+
     }
 
-    /* Mobile modal */
+    .calendar-grid {
+
+        gap:
+            0;
+
+    }
+
+    .calendar-day {
+
+        min-height:
+            76px;
+
+        padding:
+            5px;
+
+    }
+
+    .calendar-number {
+
+        width:
+            20px;
+
+        height:
+            20px;
+
+        font-size:
+            7px;
+
+        margin-bottom:
+            5px;
+
+    }
+
+    .calendar-entry {
+
+        padding:
+            4px 4px 4px 7px;
+
+        font-size:
+            5px;
+
+    }
+
+    .planner-footer {
+
+        padding:
+            15px 18px;
+
+    }
+
+    .planner-footer span {
+
+        font-size:
+            6px;
+
+    }
 
     .entry-modal {
 
-        padding: 18px;
+        padding:
+            18px;
+
     }
 
     .entry-modal-paper {
 
-        padding: 35px 25px;
+        padding:
+            35px 25px;
 
-        max-height: 88vh;
+        max-height:
+            88vh;
+
     }
 
     .modal-content {
 
-        font-size: 19px;
+        font-size:
+            19px;
 
-        line-height: 1.6;
     }
 
     .modal-actions {
 
-        justify-content: space-between;
+        justify-content:
+            space-between;
+
     }
 
     .journal-footer {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        gap: 10px;
+        gap:
+            10px;
+
     }
+
 }
 
 </style>
@@ -1637,19 +2530,35 @@ body::before {
         zenene
     </div>
 
+
     <div class="nav-links">
 
-        <a href="index.html">home</a>
+        <a href="index.html">
+            home
+        </a>
 
-        <a href="journal.html" class="active">journal</a>
+        <a
+            href="journal.html"
+            class="active"
+        >
+            journal
+        </a>
 
-        <a href="mood.html">mood</a>
+        <a href="mood.html">
+            mood
+        </a>
 
-        <a href="explore.html">explore</a>
+        <a href="explore.html">
+            explore
+        </a>
 
-        <a href="vera.html">vera</a>
+        <a href="vera.html">
+            vera
+        </a>
 
-        <a href="calm.html">calm</a>
+        <a href="calm.html">
+            calm
+        </a>
 
     </div>
 
@@ -1668,9 +2577,15 @@ body::before {
             A QUIET PLACE TO WRITE
         </div>
 
+
         <h1 class="hero-title">
+
             your
-            <span>journal</span>
+
+            <span>
+                journal
+            </span>
+
         </h1>
 
     </div>
@@ -1681,7 +2596,9 @@ body::before {
         <p class="hero-description">
 
             Some thoughts don't need to be
-            <em>fixed.</em><br>
+            <em>fixed.</em>
+
+            <br>
 
             They just need somewhere to exist.
 
@@ -1693,15 +2610,18 @@ body::before {
 
 
 <!-- =====================================================
-     JOURNAL
+     MAIN
 ===================================================== -->
 
 <main class="journal-wrapper">
 
 
-<!-- WRITE -->
+<!-- =====================================================
+     WRITE
+===================================================== -->
 
 <section class="write-card">
+
 
     <div class="write-top">
 
@@ -1709,7 +2629,12 @@ body::before {
             TODAY'S ENTRY
         </span>
 
-        <span class="date" id="todayDate"></span>
+
+        <span
+            class="date"
+            id="todayDate"
+        >
+        </span>
 
     </div>
 
@@ -1726,6 +2651,7 @@ body::before {
             Nothing has to sound perfect here.
         </span>
 
+
         <button
             class="primary-btn"
             onclick="saveEntry()"
@@ -1735,7 +2661,9 @@ body::before {
 
     </div>
 
+
 </section>
+
 
 
 <!-- =====================================================
@@ -1743,6 +2671,7 @@ body::before {
 ===================================================== -->
 
 <section class="mood-section">
+
 
     <div class="section-heading">
 
@@ -1760,7 +2689,10 @@ body::before {
     <div class="mood-grid">
 
 
-        <button class="mood-option" data-mood="Angry">
+        <button
+            class="mood-option"
+            data-mood="Angry"
+        >
 
             <img
                 class="face"
@@ -1775,7 +2707,11 @@ body::before {
         </button>
 
 
-        <button class="mood-option" data-mood="Happy">
+
+        <button
+            class="mood-option"
+            data-mood="Happy"
+        >
 
             <img
                 class="face"
@@ -1790,7 +2726,11 @@ body::before {
         </button>
 
 
-        <button class="mood-option" data-mood="Very Happy">
+
+        <button
+            class="mood-option"
+            data-mood="Very Happy"
+        >
 
             <img
                 class="face"
@@ -1805,7 +2745,11 @@ body::before {
         </button>
 
 
-        <button class="mood-option" data-mood="Loved">
+
+        <button
+            class="mood-option"
+            data-mood="Loved"
+        >
 
             <img
                 class="face"
@@ -1820,7 +2764,11 @@ body::before {
         </button>
 
 
-        <button class="mood-option" data-mood="Okay">
+
+        <button
+            class="mood-option"
+            data-mood="Okay"
+        >
 
             <img
                 class="face"
@@ -1835,7 +2783,11 @@ body::before {
         </button>
 
 
-        <button class="mood-option" data-mood="Excited">
+
+        <button
+            class="mood-option"
+            data-mood="Excited"
+        >
 
             <img
                 class="face"
@@ -1850,7 +2802,11 @@ body::before {
         </button>
 
 
-        <button class="mood-option" data-mood="Sad">
+
+        <button
+            class="mood-option"
+            data-mood="Sad"
+        >
 
             <img
                 class="face"
@@ -1865,7 +2821,11 @@ body::before {
         </button>
 
 
-        <button class="mood-option" data-mood="Crying">
+
+        <button
+            class="mood-option"
+            data-mood="Crying"
+        >
 
             <img
                 class="face"
@@ -1880,7 +2840,11 @@ body::before {
         </button>
 
 
-        <button class="mood-option" data-mood="Surprised">
+
+        <button
+            class="mood-option"
+            data-mood="Surprised"
+        >
 
             <img
                 class="face"
@@ -1900,11 +2864,13 @@ body::before {
 </section>
 
 
+
 <!-- =====================================================
      CALENDAR
 ===================================================== -->
 
 <section class="calendar-section">
+
 
     <div class="calendar-heading">
 
@@ -1919,9 +2885,29 @@ body::before {
     </div>
 
 
-    <div class="calendar-card">
 
-        <div class="calendar-top">
+    <!-- =================================================
+         PLANNER
+    ================================================== -->
+
+    <div class="calendar-planner">
+
+
+        <!-- HEADER -->
+
+        <div class="planner-header">
+
+
+            <div class="planner-left">
+
+                <div class="planner-dot"></div>
+
+                <span class="planner-label">
+                    YOUR MONTH
+                </span>
+
+            </div>
+
 
             <div
                 class="calendar-month"
@@ -1929,47 +2915,118 @@ body::before {
             >
             </div>
 
-            <div class="calendar-nav">
 
-                <button onclick="changeMonth(-1)">
+            <div class="planner-right">
+
+                <button
+                    class="calendar-nav-btn"
+                    onclick="changeMonth(-1)"
+                    aria-label="Previous month"
+                >
                     ←
                 </button>
 
-                <button onclick="goToToday()">
+
+                <button
+                    class="calendar-nav-btn today-btn"
+                    onclick="goToToday()"
+                >
                     TODAY
                 </button>
 
-                <button onclick="changeMonth(1)">
+
+                <button
+                    class="calendar-nav-btn"
+                    onclick="changeMonth(1)"
+                    aria-label="Next month"
+                >
                     →
                 </button>
 
             </div>
 
-        </div>
-
-
-        <div class="calendar-weekdays">
-
-            <div class="calendar-weekday">SUN</div>
-            <div class="calendar-weekday">MON</div>
-            <div class="calendar-weekday">TUE</div>
-            <div class="calendar-weekday">WED</div>
-            <div class="calendar-weekday">THU</div>
-            <div class="calendar-weekday">FRI</div>
-            <div class="calendar-weekday">SAT</div>
 
         </div>
 
 
-        <div
-            class="calendar-grid"
-            id="calendarGrid"
-        >
+
+        <!-- CALENDAR BODY -->
+
+        <div class="calendar-body">
+
+
+            <div class="calendar-weekdays">
+
+                <div class="calendar-weekday">
+                    SUN
+                </div>
+
+                <div class="calendar-weekday">
+                    MON
+                </div>
+
+                <div class="calendar-weekday">
+                    TUE
+                </div>
+
+                <div class="calendar-weekday">
+                    WED
+                </div>
+
+                <div class="calendar-weekday">
+                    THU
+                </div>
+
+                <div class="calendar-weekday">
+                    FRI
+                </div>
+
+                <div class="calendar-weekday">
+                    SAT
+                </div>
+
+            </div>
+
+
+
+            <div
+                class="calendar-grid"
+                id="calendarGrid"
+            >
+            </div>
+
+
+            <div
+                class="calendar-empty-note"
+                id="calendarEmptyNote"
+            >
+            </div>
+
+
         </div>
+
+
+
+        <!-- PLANNER FOOTER -->
+
+        <div class="planner-footer">
+
+            <span>
+                ONE DAY AT A TIME
+            </span>
+
+            <span id="entryCount">
+                0 ENTRIES
+            </span>
+
+        </div>
+
 
     </div>
 
+
 </section>
+
 
 
 <!-- =====================================================
@@ -1992,6 +3049,7 @@ body::before {
 </main>
 
 
+
 <!-- =====================================================
      ENTRY MODAL
 ===================================================== -->
@@ -2002,7 +3060,9 @@ body::before {
     onclick="handleModalBackground(event)"
 >
 
+
     <div class="entry-modal-paper">
+
 
         <button
             class="modal-close"
@@ -2041,6 +3101,7 @@ body::before {
                 EDIT
             </button>
 
+
             <button
                 class="delete-btn"
                 onclick="askDeleteCurrentEntry()"
@@ -2050,9 +3111,11 @@ body::before {
 
         </div>
 
+
     </div>
 
 </div>
+
 
 
 <!-- =====================================================
@@ -2064,11 +3127,14 @@ body::before {
     id="confirmOverlay"
 >
 
+
     <div class="confirm-box">
+
 
         <h3>
             Do you want to delete this?
         </h3>
+
 
         <p>
             This journal entry will be removed from your calendar.
@@ -2083,6 +3149,7 @@ body::before {
                 NO
             </button>
 
+
             <button
                 class="confirm-delete"
                 onclick="confirmDelete()"
@@ -2092,9 +3159,11 @@ body::before {
 
         </div>
 
+
     </div>
 
 </div>
+
 
 
 <script>
@@ -2106,23 +3175,26 @@ body::before {
 
 const today = new Date();
 
-const dateOptions = {
 
-    month: "short",
+document.getElementById(
+    "todayDate"
+).textContent =
 
-    day: "numeric",
-
-    year: "numeric"
-
-};
-
-document.getElementById("todayDate").textContent =
     today
         .toLocaleDateString(
             "en-US",
-            dateOptions
+            {
+
+                month: "short",
+
+                day: "numeric",
+
+                year: "numeric"
+
+            }
         )
         .toUpperCase();
+
 
 
 /* =========================================================
@@ -2131,26 +3203,41 @@ document.getElementById("todayDate").textContent =
 
 let selectedMood = null;
 
+
 const moodOptions =
-    document.querySelectorAll(".mood-option");
+    document.querySelectorAll(
+        ".mood-option"
+    );
 
 
 moodOptions.forEach(option => {
 
-    option.addEventListener("click", () => {
+    option.addEventListener(
+        "click",
+        () => {
 
-        moodOptions.forEach(item =>
-            item.classList.remove("selected")
-        );
+            moodOptions.forEach(item => {
 
-        option.classList.add("selected");
+                item.classList.remove(
+                    "selected"
+                );
 
-        selectedMood =
-            option.dataset.mood;
+            });
 
-    });
+
+            option.classList.add(
+                "selected"
+            );
+
+
+            selectedMood =
+                option.dataset.mood;
+
+        }
+    );
 
 });
+
 
 
 /* =========================================================
@@ -2160,12 +3247,29 @@ moodOptions.forEach(option => {
 function getEntries() {
 
     return JSON.parse(
+
         localStorage.getItem(
             "zeneneJournalEntries"
         )
+
     ) || [];
 
 }
+
+
+
+function saveEntries(entries) {
+
+    localStorage.setItem(
+
+        "zeneneJournalEntries",
+
+        JSON.stringify(entries)
+
+    );
+
+}
+
 
 
 /* =========================================================
@@ -2174,10 +3278,12 @@ function getEntries() {
 
 function saveEntry() {
 
+
     const textarea =
         document.getElementById(
             "journalText"
         );
+
 
     const text =
         textarea.value.trim();
@@ -2196,47 +3302,70 @@ function saveEntry() {
         getEntries();
 
 
+    const now =
+        new Date();
+
+
     const newEntry = {
 
-        id: Date.now(),
+        id:
+            Date.now(),
 
-        text: text,
+        text:
+            text,
 
         mood:
             selectedMood || "No mood",
 
+        timestamp:
+            now.getTime(),
+
         date:
-            new Date().toLocaleDateString(
+            now.toLocaleDateString(
                 "en-US",
                 {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric"
-                }
-            ),
 
-        timestamp: Date.now()
+                    month: "short",
+
+                    day: "numeric",
+
+                    year: "numeric"
+
+                }
+            )
 
     };
 
 
-    entries.unshift(newEntry);
-
-
-    localStorage.setItem(
-        "zeneneJournalEntries",
-        JSON.stringify(entries)
+    entries.unshift(
+        newEntry
     );
 
 
-    textarea.value = "";
-
-    selectedMood = null;
-
-
-    moodOptions.forEach(item =>
-        item.classList.remove("selected")
+    saveEntries(
+        entries
     );
+
+
+    textarea.value =
+        "";
+
+
+    selectedMood =
+        null;
+
+
+    moodOptions.forEach(item => {
+
+        item.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    calendarDate =
+        new Date();
 
 
     renderCalendar();
@@ -2244,11 +3373,14 @@ function saveEntry() {
 }
 
 
+
 /* =========================================================
    CALENDAR STATE
 ========================================================= */
 
-let calendarDate = new Date();
+let calendarDate =
+    new Date();
+
 
 
 /* =========================================================
@@ -2257,26 +3389,38 @@ let calendarDate = new Date();
 
 function changeMonth(direction) {
 
-    calendarDate.setMonth(
-        calendarDate.getMonth() + direction
-    );
+    calendarDate =
+        new Date(
+
+            calendarDate.getFullYear(),
+
+            calendarDate.getMonth() + direction,
+
+            1
+
+        );
+
 
     renderCalendar();
 
 }
 
 
+
 /* =========================================================
-   TODAY
+   GO TO TODAY
 ========================================================= */
 
 function goToToday() {
 
-    calendarDate = new Date();
+    calendarDate =
+        new Date();
+
 
     renderCalendar();
 
 }
+
 
 
 /* =========================================================
@@ -2288,19 +3432,29 @@ function getDateKey(date) {
     const year =
         date.getFullYear();
 
+
     const month =
         String(
             date.getMonth() + 1
-        ).padStart(2, "0");
+        ).padStart(
+            2,
+            "0"
+        );
+
 
     const day =
         String(
             date.getDate()
-        ).padStart(2, "0");
+        ).padStart(
+            2,
+            "0"
+        );
+
 
     return `${year}-${month}-${day}`;
 
 }
+
 
 
 /* =========================================================
@@ -2309,24 +3463,30 @@ function getDateKey(date) {
 
 function getEntryDateKey(entry) {
 
-    const date =
-        new Date(entry.timestamp);
+    return getDateKey(
 
-    return getDateKey(date);
+        new Date(
+            entry.timestamp
+        )
+
+    );
 
 }
 
 
+
 /* =========================================================
-   CALENDAR
+   RENDER CALENDAR
 ========================================================= */
 
 function renderCalendar() {
+
 
     const grid =
         document.getElementById(
             "calendarGrid"
         );
+
 
     const monthLabel =
         document.getElementById(
@@ -2334,29 +3494,60 @@ function renderCalendar() {
         );
 
 
+    const emptyNote =
+        document.getElementById(
+            "calendarEmptyNote"
+        );
+
+
+    const entryCount =
+        document.getElementById(
+            "entryCount"
+        );
+
+
     const year =
         calendarDate.getFullYear();
+
 
     const month =
         calendarDate.getMonth();
 
 
+
+    /* MONTH TITLE */
+
     monthLabel.textContent =
+
         new Date(
             year,
             month,
             1
-        ).toLocaleDateString(
+        )
+
+        .toLocaleDateString(
             "en-US",
             {
+
                 month: "long",
+
                 year: "numeric"
+
             }
         );
 
 
-    grid.innerHTML = "";
 
+    grid.innerHTML =
+        "";
+
+
+    emptyNote.textContent =
+        "";
+
+
+
+    /* MONTH INFO */
 
     const firstDay =
         new Date(
@@ -2386,85 +3577,175 @@ function renderCalendar() {
         getEntries();
 
 
-    /* Previous month */
+    const monthEntries =
+        entries.filter(entry => {
+
+            const entryDate =
+                new Date(
+                    entry.timestamp
+                );
+
+
+            return (
+
+                entryDate.getFullYear() === year &&
+
+                entryDate.getMonth() === month
+
+            );
+
+        });
+
+
+
+    /* ENTRY COUNT */
+
+    entryCount.textContent =
+
+        `${monthEntries.length} ${
+            monthEntries.length === 1
+                ? "ENTRY"
+                : "ENTRIES"
+        }`;
+
+
+
+    /* EMPTY NOTE */
+
+    if (monthEntries.length === 0) {
+
+        emptyNote.textContent =
+            "nothing written here yet...";
+
+    }
+
+
+
+    /* PREVIOUS MONTH */
 
     for (
+
         let i = firstDay - 1;
+
         i >= 0;
+
         i--
+
     ) {
+
 
         const day =
             daysInPreviousMonth - i;
 
+
         const cell =
             createCalendarDay(
+
                 day,
+
                 true
+
             );
 
-        grid.appendChild(cell);
+
+        grid.appendChild(
+            cell
+        );
 
     }
 
 
-    /* Current month */
+
+    /* CURRENT MONTH */
 
     for (
+
         let day = 1;
+
         day <= daysInMonth;
+
         day++
+
     ) {
+
 
         const date =
             new Date(
+
                 year,
+
                 month,
+
                 day
+
             );
+
 
         const cell =
             createCalendarDay(
+
                 day,
+
                 false,
+
                 date,
+
                 entries
+
             );
 
-        grid.appendChild(cell);
+
+        grid.appendChild(
+            cell
+        );
 
     }
 
 
-    /* Next month */
+
+    /* NEXT MONTH */
 
     const totalCells =
         42;
 
+
     const usedCells =
         firstDay + daysInMonth;
+
 
     const remaining =
         totalCells - usedCells;
 
 
     for (
+
         let day = 1;
+
         day <= remaining;
+
         day++
+
     ) {
+
 
         const cell =
             createCalendarDay(
+
                 day,
+
                 true
+
             );
 
-        grid.appendChild(cell);
+
+        grid.appendChild(
+            cell
+        );
 
     }
 
 }
+
 
 
 /* =========================================================
@@ -2472,19 +3753,27 @@ function renderCalendar() {
 ========================================================= */
 
 function createCalendarDay(
+
     day,
+
     otherMonth,
+
     date = null,
+
     entries = []
+
 ) {
+
 
     const cell =
         document.createElement(
             "div"
         );
 
+
     cell.className =
         "calendar-day";
+
 
 
     if (otherMonth) {
@@ -2496,12 +3785,17 @@ function createCalendarDay(
     }
 
 
+
+    /* TODAY */
+
     if (date) {
+
 
         const todayKey =
             getDateKey(
                 new Date()
             );
+
 
         const currentKey =
             getDateKey(
@@ -2522,58 +3816,89 @@ function createCalendarDay(
     }
 
 
+
+    /* DATE NUMBER */
+
     const number =
         document.createElement(
             "span"
         );
 
+
     number.className =
         "calendar-number";
+
 
     number.textContent =
         day;
 
 
-    cell.appendChild(number);
+    cell.appendChild(
+        number
+    );
 
+
+
+    /* ENTRIES */
 
     if (date) {
 
+
         const key =
-            getDateKey(date);
+            getDateKey(
+                date
+            );
 
 
         const dayEntries =
-            entries.filter(
-                entry =>
-                    getEntryDateKey(entry) === key
+            entries.filter(entry =>
+
+                getEntryDateKey(
+                    entry
+                ) === key
+
             );
 
 
         dayEntries.forEach(entry => {
+
 
             const tab =
                 document.createElement(
                     "button"
                 );
 
+
             tab.className =
                 "calendar-entry";
 
+
             tab.textContent =
                 entry.mood;
+
 
             tab.title =
                 "Open journal entry";
 
 
             tab.addEventListener(
+
                 "click",
-                () => openEntryModal(entry.id)
+
+                () => {
+
+                    openEntryModal(
+                        entry.id
+                    );
+
+                }
+
             );
 
 
-            cell.appendChild(tab);
+            cell.appendChild(
+                tab
+            );
 
         });
 
@@ -2585,14 +3910,18 @@ function createCalendarDay(
 }
 
 
+
 /* =========================================================
    ENTRY MODAL
 ========================================================= */
 
-let currentEntryId = null;
+let currentEntryId =
+    null;
+
 
 
 function openEntryModal(id) {
+
 
     const entries =
         getEntries();
@@ -2604,7 +3933,11 @@ function openEntryModal(id) {
         );
 
 
-    if (!entry) return;
+    if (!entry) {
+
+        return;
+
+    }
 
 
     currentEntryId =
@@ -2614,27 +3947,33 @@ function openEntryModal(id) {
     document.getElementById(
         "modalDate"
     ).textContent =
+
         entry.date.toUpperCase();
 
 
     document.getElementById(
         "modalMood"
     ).textContent =
+
         entry.mood.toUpperCase();
 
 
     document.getElementById(
         "modalBody"
     ).innerHTML = `
-        <div class="modal-content">
-            ${escapeHTML(entry.text)}
-        </div>
+
+        <div class="modal-content">${escapeHTML(
+            entry.text
+        )}</div>
+
     `;
 
 
     document.getElementById(
         "entryModal"
-    ).classList.add("open");
+    ).classList.add(
+        "open"
+    );
 
 
     document.body.style.overflow =
@@ -2643,28 +3982,34 @@ function openEntryModal(id) {
 }
 
 
+
 /* =========================================================
    CLOSE MODAL
 ========================================================= */
 
 function closeEntryModal() {
 
+
     document.getElementById(
         "entryModal"
-    ).classList.remove("open");
+    ).classList.remove(
+        "open"
+    );
 
 
     document.body.style.overflow =
         "";
 
 
-    currentEntryId = null;
+    currentEntryId =
+        null;
 
 }
 
 
+
 /* =========================================================
-   CLICK OUTSIDE MODAL
+   CLICK OUTSIDE
 ========================================================= */
 
 function handleModalBackground(event) {
@@ -2681,13 +4026,19 @@ function handleModalBackground(event) {
 }
 
 
+
 /* =========================================================
    EDIT ENTRY
 ========================================================= */
 
 function editCurrentEntry() {
 
-    if (!currentEntryId) return;
+
+    if (!currentEntryId) {
+
+        return;
+
+    }
 
 
     const entries =
@@ -2701,7 +4052,11 @@ function editCurrentEntry() {
         );
 
 
-    if (!entry) return;
+    if (!entry) {
+
+        return;
+
+    }
 
 
     document.getElementById(
@@ -2711,7 +4066,7 @@ function editCurrentEntry() {
         <textarea
             class="edit-area"
             id="editEntryText"
-        >${escapeHTML(entry.text)}</textarea>
+        ></textarea>
 
         <div class="edit-buttons">
 
@@ -2733,7 +4088,14 @@ function editCurrentEntry() {
 
     `;
 
+
+    document.getElementById(
+        "editEntryText"
+    ).value =
+        entry.text;
+
 }
+
 
 
 /* =========================================================
@@ -2742,10 +4104,17 @@ function editCurrentEntry() {
 
 function cancelEdit() {
 
-    if (!currentEntryId) return;
+
+    if (!currentEntryId) {
+
+        return;
+
+    }
+
 
     const entries =
         getEntries();
+
 
     const entry =
         entries.find(
@@ -2753,20 +4122,26 @@ function cancelEdit() {
                 item.id === currentEntryId
         );
 
-    if (!entry) return;
+
+    if (!entry) {
+
+        return;
+
+    }
 
 
     document.getElementById(
         "modalBody"
     ).innerHTML = `
 
-        <div class="modal-content">
-            ${escapeHTML(entry.text)}
-        </div>
+        <div class="modal-content">${escapeHTML(
+            entry.text
+        )}</div>
 
     `;
 
 }
+
 
 
 /* =========================================================
@@ -2775,7 +4150,12 @@ function cancelEdit() {
 
 function saveEditedEntry() {
 
-    if (!currentEntryId) return;
+
+    if (!currentEntryId) {
+
+        return;
+
+    }
 
 
     const textarea =
@@ -2788,7 +4168,13 @@ function saveEditedEntry() {
         textarea.value.trim();
 
 
-    if (!newText) return;
+    if (!newText) {
+
+        textarea.focus();
+
+        return;
+
+    }
 
 
     const entries =
@@ -2802,16 +4188,19 @@ function saveEditedEntry() {
         );
 
 
-    if (!entry) return;
+    if (!entry) {
+
+        return;
+
+    }
 
 
     entry.text =
         newText;
 
 
-    localStorage.setItem(
-        "zeneneJournalEntries",
-        JSON.stringify(entries)
+    saveEntries(
+        entries
     );
 
 
@@ -2825,75 +4214,88 @@ function saveEditedEntry() {
 }
 
 
+
 /* =========================================================
    DELETE CONFIRMATION
 ========================================================= */
 
 function askDeleteCurrentEntry() {
 
-    if (!currentEntryId) return;
+
+    if (!currentEntryId) {
+
+        return;
+
+    }
 
 
     document.getElementById(
         "confirmOverlay"
-    ).classList.add("open");
+    ).classList.add(
+        "open"
+    );
 
 }
 
 
-/* =========================================================
-   CLOSE DELETE CONFIRMATION
-========================================================= */
 
 function closeDeleteConfirmation() {
 
+
     document.getElementById(
         "confirmOverlay"
-    ).classList.remove("open");
+    ).classList.remove(
+        "open"
+    );
 
 }
 
 
-/* =========================================================
-   CONFIRM DELETE
-========================================================= */
 
 function confirmDelete() {
 
-    if (!currentEntryId) return;
+
+    if (!currentEntryId) {
+
+        return;
+
+    }
 
 
     const entries =
         getEntries();
 
 
-    const updated =
+    const updatedEntries =
         entries.filter(
             entry =>
                 entry.id !== currentEntryId
         );
 
 
-    localStorage.setItem(
-        "zeneneJournalEntries",
-        JSON.stringify(updated)
+    saveEntries(
+        updatedEntries
     );
 
 
     closeDeleteConfirmation();
 
+
     closeEntryModal();
+
 
     renderCalendar();
 
 }
 
 
+
 /* =========================================================
-   SECURITY
+   ESCAPE HTML
 ========================================================= */
 
 function escapeHTML(text) {
+
 
     const div =
         document.createElement(
@@ -2910,6 +4312,7 @@ function escapeHTML(text) {
 }
 
 
+
 /* =========================================================
    INITIAL LOAD
 ========================================================= */
@@ -2917,26 +4320,48 @@ function escapeHTML(text) {
 renderCalendar();
 
 
+
 /* =========================================================
    ESCAPE KEY
 ========================================================= */
 
 document.addEventListener(
+
     "keydown",
+
     event => {
+
 
         if (
             event.key === "Escape"
         ) {
 
-            closeDeleteConfirmation();
+
+            if (
+
+                document.getElementById(
+                    "confirmOverlay"
+                ).classList.contains(
+                    "open"
+                )
+
+            ) {
+
+                closeDeleteConfirmation();
+
+                return;
+
+            }
+
 
             closeEntryModal();
 
         }
 
     }
+
 );
+
 
 </script>
 

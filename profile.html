@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Zenene — Profile</title>
+
+
+<!-- =========================================================
+     FONTS
+========================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Special+Elite&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+    --paper: #f7f1e7;
+
+    --paper-light: #fcf9f3;
+
+    --blue: #dcecf2;
+
+    --blue-light: #eaf4f7;
+
+    --ink: #2f2b27;
+
+    --muted: #82766c;
+
+    --line: #ddd3c7;
+
+    --pink: #b97880;
+
+    --pink-soft: #efd9d8;
+
+    --pink-light: #f7e8e6;
+
+    --brown: #624f43;
+
+    --brown-dark: #392d26;
+
+    --sage-deep: #72866e;
+
+    --cream: #f7f1e7;
+
+
+    --serif:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    --typewriter:
+        "Special Elite",
+        "Courier New",
+        monospace;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    background-color:
+        var(--blue);
+
+    background-image:
+
+        radial-gradient(
+            circle,
+            rgba(80, 110, 120, 0.11) 1px,
+            transparent 1.2px
+        );
+
+    background-size:
+        18px 18px;
+
+    color:
+        var(--ink);
+
+    overflow-x:
+        hidden;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   NAVIGATION — SAME AS JOURNAL / MOOD / CALM
+========================================================= */
+
+.top-nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 500;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        20px 34px;
+
+    background:
+        rgba(247, 241, 231, 0.92);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid rgba(98, 79, 67, 0.08);
+
+}
+
+
+.nav-wordmark {
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        0.78rem;
+
+    letter-spacing:
+        0.16em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+
+}
+
+
+.nav-links a {
+
+    color:
+        var(--brown);
+
+    text-decoration:
+        none;
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        0.65rem;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        color 0.25s ease;
+
+}
+
+
+.nav-links a:hover {
+
+    color:
+        var(--pink);
+
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.profile-wrap {
+
+    display: flex;
+
+    justify-content: center;
+
+    padding: 70px 24px 100px;
+
+}
+
+.profile-card {
+
+    width: 100%;
+
+    max-width: 420px;
+
+    background: var(--paper-light);
+
+    border-radius: 18px;
+
+    padding: 40px 36px;
+
+    box-shadow: 0 20px 50px rgba(57,45,38,.12);
+
+}
+
+.profile-greeting {
+
+    font-family: var(--serif);
+
+    font-size: 1.7rem;
+
+    font-weight: 500;
+
+    margin-bottom: 4px;
+
+}
+
+.profile-email {
+
+    font-family: var(--typewriter);
+
+    font-size: .68rem;
+
+    letter-spacing: .04em;
+
+    color: var(--muted);
+
+    margin-bottom: 28px;
+
+}
+
+.profile-label {
+
+    display: block;
+
+    font-family: var(--typewriter);
+
+    font-size: .62rem;
+
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+
+    color: var(--muted);
+
+    margin-bottom: 8px;
+
+}
+
+.profile-input {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--line);
+
+    background: var(--paper);
+
+    font-family: var(--serif);
+
+    font-size: .95rem;
+
+    color: var(--ink);
+
+    margin-bottom: 16px;
+
+}
+
+.profile-input:focus {
+
+    outline: none;
+
+    border-color: var(--sage-deep);
+
+}
+
+.profile-save {
+
+    width: 100%;
+
+    padding: 12px 0;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: var(--brown);
+
+    color: var(--paper);
+
+    font-family: var(--typewriter);
+
+    font-size: .7rem;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: background .2s ease;
+
+}
+
+.profile-save:hover {
+
+    background: var(--brown-dark);
+
+}
+
+.profile-message {
+
+    min-height: 18px;
+
+    margin-top: 12px;
+
+    text-align: center;
+
+    font-family: var(--typewriter);
+
+    font-size: .65rem;
+
+    color: var(--pink);
+
+}
+
+.profile-message.success {
+
+    color: var(--sage-deep);
+
+}
+
+.profile-divider {
+
+    height: 1px;
+
+    background: var(--line);
+
+    margin: 28px 0 20px;
+
+}
+
+.profile-logout {
+
+    width: 100%;
+
+    padding: 11px 0;
+
+    border: 1px solid var(--pink);
+
+    border-radius: 10px;
+
+    background: none;
+
+    color: var(--pink);
+
+    font-family: var(--typewriter);
+
+    font-size: .68rem;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: background .2s ease, color .2s ease;
+
+}
+
+.profile-logout:hover {
+
+    background: var(--pink);
+
+    color: var(--paper-light);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="top-nav">
+
+    <div class="nav-wordmark">
+        zenene
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">
+            home
+        </a>
+
+        <a href="journal.html">
+            journal
+        </a>
+
+        <a href="mood.html">
+            mood
+        </a>
+
+        <a href="explore.html">
+            explore
+        </a>
+
+        <a href="vera.html">
+            vera
+        </a>
+
+        <a href="calm.html">
+            calm
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<div class="profile-wrap">
+
+    <div class="profile-card">
+
+        <div class="profile-greeting" id="profileGreeting">Hi there</div>
+        <div class="profile-email" id="profileEmail"></div>
+
+        <label class="profile-label" for="profileNameInput">Display name</label>
+        <input class="profile-input" id="profileNameInput" type="text" placeholder="What should we call you?">
+
+        <button class="profile-save" id="profileSaveBtn" type="button">Save changes</button>
+
+        <p class="profile-message" id="profileMessage"></p>
+
+        <div class="profile-divider"></div>
+
+        <button class="profile-logout" id="profileLogoutBtn" type="button">Log out</button>
+
+    </div>
+
+</div>
+
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+
+<script>
+
+(async function initProfile() {
+
+    const user = await getCurrentUser();
+
+    if (!user) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    document.getElementById("profileEmail").textContent = user.email;
+
+    const { data, error } = await supabaseClient
+        .from("profiles")
+        .select("display_name")
+        .eq("id", user.id)
+        .single();
+
+    if (!error && data && data.display_name) {
+        document.getElementById("profileNameInput").value = data.display_name;
+        document.getElementById("profileGreeting").textContent = "Hi, " + data.display_name;
+    } else {
+        document.getElementById("profileGreeting").textContent = "Hi there";
+    }
+
+})();
+
+document.getElementById("profileSaveBtn").addEventListener("click", async () => {
+
+    const user = await getCurrentUser();
+
+    if (!user) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    const name = document.getElementById("profileNameInput").value.trim();
+    const msg = document.getElementById("profileMessage");
+
+    msg.classList.remove("success");
+    msg.textContent = "";
+
+    const { error } = await supabaseClient
+        .from("profiles")
+        .upsert({ id: user.id, display_name: name });
+
+    if (error) {
+        msg.textContent = error.message;
+        return;
+    }
+
+    msg.classList.add("success");
+    msg.textContent = "Saved.";
+    document.getElementById("profileGreeting").textContent = name ? "Hi, " + name : "Hi there";
+
+});
+
+document.getElementById("profileLogoutBtn").addEventListener("click", async () => {
+    await supabaseClient.auth.signOut();
+    window.location.href = "index.html";
+});
+
+</script>
+
+</body>
+</html>

@@ -2246,6 +2246,10 @@ async function saveArticle() {
 
     if (error) {
       console.error(error);
+      button.textContent = "couldn't save — try again";
+      setTimeout(() => {
+        button.textContent = "saved ✓";
+      }, 1600);
       return;
     }
 
@@ -2268,6 +2272,10 @@ async function saveArticle() {
 
     if (error) {
       console.error(error);
+      button.textContent = "couldn't save — try again";
+      setTimeout(() => {
+        button.textContent = "save this piece";
+      }, 1600);
       return;
     }
 

@@ -3165,6 +3165,9 @@ body::before {
 </div>
 
 
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
 
 <script>
 
@@ -3244,29 +3247,122 @@ moodOptions.forEach(option => {
    STORAGE
 ========================================================= */
 
+let entriesCache = [];
+
 function getEntries() {
 
-    return JSON.parse(
-
-        localStorage.getItem(
-            "zeneneJournalEntries"
-        )
-
-    ) || [];
+    return entriesCache.map(
+        entry => ({ ...entry })
+    );
 
 }
 
 
 
-function saveEntries(entries) {
+async function saveEntries(entries) {
 
-    localStorage.setItem(
+    const previous = entriesCache;
 
-        "zeneneJournalEntries",
+    entriesCache = entries;
 
-        JSON.stringify(entries)
+    const user = await getCurrentUser();
 
+    if (!user) return;
+
+    const previousById = new Map(
+        previous.map(e => [e.id, e])
     );
+
+    const currentIds = new Set(
+        entries.map(e => e.id)
+    );
+
+    for (const old of previous) {
+
+        if (!currentIds.has(old.id)) {
+
+            const { error } = await supabaseClient
+                .from("journal_entries")
+                .delete()
+                .eq("id", old.id)
+                .eq("user_id", user.id);
+
+            if (error) console.error(error);
+
+        }
+
+    }
+
+    for (const entry of entries) {
+
+        const old = previousById.get(entry.id);
+
+        if (!old) {
+
+            const { error } = await supabaseClient
+                .from("journal_entries")
+                .insert({
+                    id: entry.id,
+                    user_id: user.id,
+                    text: entry.text,
+                    mood: entry.mood,
+                    date: entry.date,
+                    timestamp: entry.timestamp
+                });
+
+            if (error) console.error(error);
+
+        } else if (
+            old.text !== entry.text ||
+            old.mood !== entry.mood
+        ) {
+
+            const { error } = await supabaseClient
+                .from("journal_entries")
+                .update({
+                    text: entry.text,
+                    mood: entry.mood
+                })
+                .eq("id", entry.id)
+                .eq("user_id", user.id);
+
+            if (error) console.error(error);
+
+        }
+
+    }
+
+}
+
+
+
+async function loadEntriesFromSupabase() {
+
+    const user = await getCurrentUser();
+
+    if (!user) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    const { data, error } = await supabaseClient
+        .from("journal_entries")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("timestamp", { ascending: false });
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    entriesCache = data.map(row => ({
+        id: row.id,
+        text: row.text,
+        mood: row.mood,
+        date: row.date,
+        timestamp: row.timestamp
+    }));
 
 }
 
@@ -4317,7 +4413,13 @@ function escapeHTML(text) {
    INITIAL LOAD
 ========================================================= */
 
-renderCalendar();
+(async function initJournal() {
+
+    await loadEntriesFromSupabase();
+
+    renderCalendar();
+
+})();
 
 
 

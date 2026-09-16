@@ -4570,7 +4570,10 @@ authFormSignup.addEventListener("submit", async (e) => {
 
   const { data, error } = await supabaseClient.auth.signUp({
     email,
-    password
+    password,
+    options: {
+      data: { display_name: name }
+    }
   });
 
   submitBtn.disabled = false;
@@ -4578,21 +4581,6 @@ authFormSignup.addEventListener("submit", async (e) => {
   if (error) {
     authMessage.textContent = error.message;
     return;
-  }
-
-  const user = data.user;
-
-  if (user) {
-    const { error: profileError } = await supabaseClient
-      .from("profiles")
-      .insert({
-        id: user.id,
-        display_name: name
-      });
-
-    if (profileError) {
-      console.error(profileError);
-    }
   }
 
   authMessage.classList.add("success");

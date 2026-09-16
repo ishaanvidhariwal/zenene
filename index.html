@@ -159,6 +159,296 @@ body::before {
 
 }
 
+.nav-links {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 26px;
+
+}
+
+.nav-cta.nav-signup {
+
+  background: var(--sage-deep);
+
+  color: var(--paper);
+
+  padding: 9px 18px;
+
+  border-radius: 999px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: .68rem;
+
+}
+
+
+/* =========================================================
+   AUTH MODAL
+   ========================================================= */
+
+.auth-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(47,43,39,.45);
+
+  backdrop-filter: blur(4px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity .3s ease;
+
+}
+
+.auth-overlay.open {
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+}
+
+.auth-card {
+
+  position: relative;
+
+  width: 100%;
+  max-width: 380px;
+
+  background: var(--paper);
+
+  border-radius: 18px;
+
+  padding: 38px 32px 32px;
+
+  box-shadow: 0 30px 60px rgba(57,45,38,.25);
+
+  transform: translateY(16px);
+
+  transition: transform .3s ease;
+
+}
+
+.auth-overlay.open .auth-card {
+
+  transform: translateY(0);
+
+}
+
+.auth-close {
+
+  position: absolute;
+
+  top: 14px;
+  right: 16px;
+
+  background: none;
+  border: none;
+
+  font-size: 1.4rem;
+
+  line-height: 1;
+
+  color: var(--brown);
+
+  cursor: pointer;
+
+}
+
+.auth-title {
+
+  font-family: var(--serif);
+
+  font-size: 1.6rem;
+
+  font-weight: 500;
+
+  color: var(--ink);
+
+  margin: 0 0 6px;
+
+  text-align: center;
+
+}
+
+.auth-tabs {
+
+  display: flex;
+
+  gap: 6px;
+
+  margin: 22px 0 20px;
+
+  background: var(--cream);
+
+  border-radius: 999px;
+
+  padding: 4px;
+
+}
+
+.auth-tab {
+
+  flex: 1;
+
+  border: none;
+  background: none;
+
+  padding: 8px 0;
+
+  border-radius: 999px;
+
+  font-family: var(--typewriter);
+
+  font-size: .66rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+  cursor: pointer;
+
+  transition: background .2s ease, color .2s ease;
+
+}
+
+.auth-tab.active {
+
+  background: var(--sage-deep);
+
+  color: var(--paper);
+
+}
+
+.auth-form {
+
+  display: none;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+}
+
+.auth-form.active {
+
+  display: flex;
+
+}
+
+.auth-input {
+
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(98,79,67,.22);
+
+  background: var(--sky-light);
+
+  font-family: var(--serif);
+
+  font-size: .95rem;
+
+  color: var(--ink);
+
+}
+
+.auth-input:focus {
+
+  outline: none;
+
+  border-color: var(--sage-deep);
+
+}
+
+.auth-submit {
+
+  margin-top: 4px;
+
+  padding: 12px 0;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: var(--brown);
+
+  color: var(--paper);
+
+  font-family: var(--typewriter);
+
+  font-size: .72rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: background .2s ease;
+
+}
+
+.auth-submit:hover {
+
+  background: var(--brown-dark);
+
+}
+
+.auth-submit:disabled {
+
+  opacity: .6;
+
+  cursor: default;
+
+}
+
+.auth-message {
+
+  min-height: 18px;
+
+  margin-top: 12px;
+
+  text-align: center;
+
+  font-family: var(--typewriter);
+
+  font-size: .68rem;
+
+  color: var(--rose-deep);
+
+}
+
+.auth-message.success {
+
+  color: var(--sage-deep);
+
+}
+
 
 /* =========================================================
    GENERAL
@@ -3327,11 +3617,62 @@ body::before {
     ZENENE
   </div>
 
-  <a href="#story" class="nav-cta">
-    explore
-  </a>
+  <div class="nav-links">
+
+    <a href="#story" class="nav-cta">
+      explore
+    </a>
+
+    <button class="nav-cta nav-signup" id="authOpenBtn" type="button">
+      sign up
+    </button>
+
+  </div>
 
 </nav>
+
+
+<!-- ======================================================
+     AUTH MODAL
+     ====================================================== -->
+
+<div class="auth-overlay" id="authOverlay">
+
+  <div class="auth-card">
+
+    <button class="auth-close" id="authCloseBtn" aria-label="Close" type="button">&times;</button>
+
+    <h2 class="auth-title" id="authTitle">Welcome to Zenene</h2>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="authTabSignup" type="button">Sign Up</button>
+      <button class="auth-tab" id="authTabLogin" type="button">Log In</button>
+    </div>
+
+    <form class="auth-form active" id="authFormSignup">
+
+      <input class="auth-input" id="authSignupName" type="text" placeholder="What should we call you?" autocomplete="name">
+      <input class="auth-input" id="authSignupEmail" type="email" placeholder="Email" autocomplete="email" required>
+      <input class="auth-input" id="authSignupPassword" type="password" placeholder="Password" autocomplete="new-password" required>
+
+      <button class="auth-submit" id="authSignupSubmit" type="submit">Create account</button>
+
+    </form>
+
+    <form class="auth-form" id="authFormLogin">
+
+      <input class="auth-input" id="authLoginEmail" type="email" placeholder="Email" autocomplete="email" required>
+      <input class="auth-input" id="authLoginPassword" type="password" placeholder="Password" autocomplete="current-password" required>
+
+      <button class="auth-submit" id="authLoginSubmit" type="submit">Log in</button>
+
+    </form>
+
+    <p class="auth-message" id="authMessage"></p>
+
+  </div>
+
+</div>
 
 
 <!-- ======================================================
@@ -4131,7 +4472,142 @@ body::before {
 </div>
 
 
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
 <script>
+
+/* =========================================================
+   AUTH MODAL
+   ========================================================= */
+
+const authOverlay = document.getElementById("authOverlay");
+const authOpenBtn = document.getElementById("authOpenBtn");
+const authCloseBtn = document.getElementById("authCloseBtn");
+const authTitle = document.getElementById("authTitle");
+
+const authTabSignup = document.getElementById("authTabSignup");
+const authTabLogin = document.getElementById("authTabLogin");
+const authFormSignup = document.getElementById("authFormSignup");
+const authFormLogin = document.getElementById("authFormLogin");
+const authMessage = document.getElementById("authMessage");
+
+function openAuthModal() {
+  authOverlay.classList.add("open");
+}
+
+function closeAuthModal() {
+  authOverlay.classList.remove("open");
+  authMessage.textContent = "";
+  authMessage.classList.remove("success");
+}
+
+function showAuthTab(tab) {
+
+  const isSignup = tab === "signup";
+
+  authTabSignup.classList.toggle("active", isSignup);
+  authTabLogin.classList.toggle("active", !isSignup);
+
+  authFormSignup.classList.toggle("active", isSignup);
+  authFormLogin.classList.toggle("active", !isSignup);
+
+  authTitle.textContent = isSignup ? "Welcome to Zenene" : "Welcome back";
+
+  authMessage.textContent = "";
+  authMessage.classList.remove("success");
+
+}
+
+authOpenBtn.addEventListener("click", openAuthModal);
+authCloseBtn.addEventListener("click", closeAuthModal);
+
+authOverlay.addEventListener("click", (e) => {
+  if (e.target === authOverlay) closeAuthModal();
+});
+
+authTabSignup.addEventListener("click", () => showAuthTab("signup"));
+authTabLogin.addEventListener("click", () => showAuthTab("login"));
+
+authFormSignup.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const name = document.getElementById("authSignupName").value;
+  const email = document.getElementById("authSignupEmail").value;
+  const password = document.getElementById("authSignupPassword").value;
+
+  const submitBtn = document.getElementById("authSignupSubmit");
+  submitBtn.disabled = true;
+
+  authMessage.classList.remove("success");
+  authMessage.textContent = "";
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email,
+    password
+  });
+
+  submitBtn.disabled = false;
+
+  if (error) {
+    authMessage.textContent = error.message;
+    return;
+  }
+
+  const user = data.user;
+
+  if (user) {
+    const { error: profileError } = await supabaseClient
+      .from("profiles")
+      .insert({
+        id: user.id,
+        display_name: name
+      });
+
+    if (profileError) {
+      console.error(profileError);
+    }
+  }
+
+  authMessage.classList.add("success");
+  authMessage.textContent = "Your Zenene account has been created.";
+
+});
+
+authFormLogin.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const email = document.getElementById("authLoginEmail").value;
+  const password = document.getElementById("authLoginPassword").value;
+
+  const submitBtn = document.getElementById("authLoginSubmit");
+  submitBtn.disabled = true;
+
+  authMessage.classList.remove("success");
+
+  const { error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  submitBtn.disabled = false;
+
+  if (error) {
+    authMessage.textContent = error.message;
+    return;
+  }
+
+  authMessage.classList.add("success");
+  authMessage.textContent = "Logged in. Welcome back!";
+
+  window.setTimeout(() => {
+    window.location.href = "journal.html";
+  }, 600);
+
+});
+
 
 /* =========================================================
    NAV

@@ -105,20 +105,19 @@ async function initVeraAccount() {
         }
 
 
-        const heading =
+        const subtitle =
             document.querySelector(
-                "#veraWelcome h1"
+                ".vera-subtitle"
             );
 
         if (
-            heading &&
+            subtitle &&
             profile.display_name
         ) {
 
-            heading.textContent =
-                "Hi, " +
-                profile.display_name +
-                ". I'm Vera.";
+            subtitle.textContent =
+                "a space to understand yourself, " +
+                profile.display_name;
 
         }
 

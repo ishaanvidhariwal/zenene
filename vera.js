@@ -20,8 +20,9 @@ const veraSend =
 VERA BACKEND
 ==================================================
 
-WE WILL PUT YOUR CLOUDFLARE WORKER URL HERE
-AFTER WE CREATE IT.
+Deploy vera-worker.js as a Cloudflare Worker (see
+the instructions at the top of that file), then put
+its URL here.
 
 Example:
 
@@ -39,6 +40,99 @@ const VERA_API =
 let conversation = [];
 
 let isThinking = false;
+
+let accessToken = null;
+
+
+
+/*
+==================================================
+ACCOUNT AWARENESS
+
+Vera personalizes her responses using the user's
+journal/mood history when they're logged in. This
+only reads their name for the greeting client-side —
+the actual journal/mood context is fetched securely
+by the worker using their access token.
+==================================================
+*/
+
+async function initVeraAccount() {
+
+    if (
+        typeof supabaseClient ===
+        "undefined"
+    ) {
+
+        return;
+
+    }
+
+
+    const { data } =
+        await supabaseClient.auth.getSession();
+
+    if (
+        data &&
+        data.session
+    ) {
+
+        accessToken =
+            data.session.access_token;
+
+    }
+
+
+    const profile =
+        typeof getCurrentProfile ===
+        "function"
+            ? await getCurrentProfile()
+            : null;
+
+    const loginNote =
+        document.getElementById(
+            "veraLoginNote"
+        );
+
+
+    if (profile) {
+
+        if (loginNote) {
+
+            loginNote.style.display =
+                "none";
+
+        }
+
+
+        const heading =
+            document.querySelector(
+                "#veraWelcome h1"
+            );
+
+        if (
+            heading &&
+            profile.display_name
+        ) {
+
+            heading.textContent =
+                "Hi, " +
+                profile.display_name +
+                ". I'm Vera.";
+
+        }
+
+    } else if (loginNote) {
+
+        loginNote.style.display =
+            "block";
+
+    }
+
+}
+
+
+initVeraAccount();
 
 
 
@@ -308,7 +402,10 @@ async function sendMessage(message) {
                                 message,
 
                             history:
-                                conversation
+                                conversation,
+
+                            accessToken:
+                                accessToken
 
                         })
 

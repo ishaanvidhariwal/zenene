@@ -2813,7 +2813,7 @@
 
       const user = await getCurrentUser();
 
-      if (!user) return;
+      if (!user) return false;
 
       const changedDates = Object.keys(data).filter(
         date => data[date] !== previous[date]
@@ -2841,11 +2841,13 @@
           ).textContent =
             "Couldn't save — check your connection and try again.";
 
-          return;
+          return false;
 
         }
 
       }
+
+      return true;
 
     }
 
@@ -3025,7 +3027,7 @@
 
         "click",
 
-        () => {
+        async (event) => {
 
           if (!selectedMood) {
 
@@ -3054,14 +3056,23 @@
             selectedMood;
 
 
-          saveMoods(moods);
+          const button = event.currentTarget;
 
+          button.disabled = true;
 
-          document.getElementById(
-            "checkinMessage"
-          ).textContent =
+          const success = await saveMoods(moods);
 
-            "Saved. Your check-in is now part of your history.";
+          button.disabled = false;
+
+          if (success) {
+
+            document.getElementById(
+              "checkinMessage"
+            ).textContent =
+
+              "Saved. Your check-in is now part of your history.";
+
+          }
 
 
           renderDashboard();

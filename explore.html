@@ -1427,6 +1427,10 @@ onclick="backgroundClose(event)"
 </div>
 
 
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+
 <script>
 
 
@@ -1891,7 +1895,8 @@ const categories = [
   "All",
   ...new Set(
     ARTICLES.map(article => article.cat)
-  )
+  ),
+  "Saved"
 ];
 
 
@@ -1900,6 +1905,33 @@ const filterRow =
 
 
 let selectedCategory = null;
+
+let savedTitles = new Set();
+
+let currentArticleIndex = null;
+
+
+async function loadSavedArticles() {
+
+  const user = await getCurrentUser();
+
+  if (!user) return;
+
+  const { data, error } = await supabaseClient
+    .from("saved_resources")
+    .select("article_title")
+    .eq("user_id", user.id);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  savedTitles = new Set(
+    data.map(row => row.article_title)
+  );
+
+}
 
 
 categories.forEach(category => {
@@ -1951,7 +1983,12 @@ function renderArticles() {
 
 
   const filtered =
-    selectedCategory
+    selectedCategory === "Saved"
+      ? ARTICLES.filter(
+          article =>
+            savedTitles.has(article.title)
+        )
+      : selectedCategory
       ? ARTICLES.filter(
           article =>
             article.cat === selectedCategory
@@ -2032,6 +2069,20 @@ function openArticle(index) {
 
   const article =
     ARTICLES[index];
+
+  currentArticleIndex = index;
+
+  const saveButton =
+    document.querySelector(".sheet-save");
+
+  const isSaved =
+    savedTitles.has(article.title);
+
+  saveButton.textContent =
+    isSaved ? "saved ✓" : "save this piece";
+
+  saveButton.style.background =
+    isSaved ? "var(--rose)" : "var(--sage)";
 
 
   document.getElementById(
@@ -2149,23 +2200,56 @@ document.addEventListener(
    SAVE ARTICLE
    ========================================================= */
 
-function saveArticle() {
+async function saveArticle() {
 
   const button =
     document.querySelector(
       ".sheet-save"
     );
 
+  if (currentArticleIndex === null) return;
 
-  button.textContent =
-    "saved ✓";
+  const article =
+    ARTICLES[currentArticleIndex];
 
+  const user = await getCurrentUser();
 
-  button.style.background =
-    "var(--rose)";
+  if (!user) {
 
+    button.textContent =
+      "sign up to save";
 
-  setTimeout(() => {
+    setTimeout(() => {
+
+      const isSaved =
+        savedTitles.has(article.title);
+
+      button.textContent =
+        isSaved ? "saved ✓" : "save this piece";
+
+    }, 1600);
+
+    return;
+
+  }
+
+  const alreadySaved =
+    savedTitles.has(article.title);
+
+  if (alreadySaved) {
+
+    const { error } = await supabaseClient
+      .from("saved_resources")
+      .delete()
+      .eq("user_id", user.id)
+      .eq("article_title", article.title);
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    savedTitles.delete(article.title);
 
     button.textContent =
       "save this piece";
@@ -2173,7 +2257,33 @@ function saveArticle() {
     button.style.background =
       "var(--sage)";
 
-  }, 1600);
+  } else {
+
+    const { error } = await supabaseClient
+      .from("saved_resources")
+      .insert({
+        user_id: user.id,
+        article_title: article.title
+      });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    savedTitles.add(article.title);
+
+    button.textContent =
+      "saved ✓";
+
+    button.style.background =
+      "var(--rose)";
+
+  }
+
+  if (selectedCategory === "Saved") {
+    renderArticles();
+  }
 
 }
 
@@ -2183,6 +2293,8 @@ function saveArticle() {
    ========================================================= */
 
 renderArticles();
+
+loadSavedArticles().then(renderArticles);
 
 
 </script>

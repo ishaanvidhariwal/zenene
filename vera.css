@@ -5,16 +5,217 @@
 
 :root {
 
-    --vera-bg: #e7f1f3;
-    --vera-bg-two: #f5f1e9;
+    --brown: #624F43;
+    --brown-dark: #392D26;
+    --brown-darker: #2b211b;
 
-    --vera-text: #463f38;
-    --vera-muted: #756f68;
+    --ink: #2F2B27;
+    --paper: #F7F1E7;
+    --paper-light: #FCF9F3;
 
-    --vera-accent: #536f78;
+    --pink: #B97880;
+    --pink-soft: #EFD9D8;
 
-    --vera-card:
-        rgba(255, 255, 255, 0.65);
+    --muted-on-dark:
+        rgba(247, 241, 231, 0.6);
+
+    --line-on-dark:
+        rgba(247, 241, 231, 0.12);
+
+    --card-on-dark:
+        rgba(247, 241, 231, 0.07);
+
+    --serif:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    --typewriter:
+        "Special Elite",
+        "Courier New",
+        monospace;
+
+    --script:
+        "IM Fell DW Pica",
+        Georgia,
+        serif;
+
+}
+
+
+/* =========================================================
+   SHARED SITE NAVIGATION
+   (matches journal.html / mood.html / profile.html / calm.html / explore.html)
+========================================================= */
+
+.top-nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 500;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        20px 34px;
+
+    background:
+        rgba(247, 241, 231, 0.92);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid rgba(98, 79, 67, 0.08);
+
+}
+
+
+.nav-wordmark {
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        0.78rem;
+
+    letter-spacing:
+        0.16em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--ink);
+
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+
+}
+
+
+.nav-links a {
+
+    color:
+        var(--brown);
+
+    text-decoration:
+        none;
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        0.65rem;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        color 0.25s ease;
+
+}
+
+
+.nav-links a:hover {
+
+    color:
+        var(--pink);
+
+}
+
+
+.nav-links .active {
+
+    color:
+        var(--ink);
+
+    position:
+        relative;
+
+}
+
+
+.nav-links .active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: -8px;
+
+    height: 1px;
+
+    background:
+        var(--pink);
+
+}
+
+
+@media (max-width: 1000px) {
+
+    .top-nav {
+
+        padding:
+            20px 25px;
+
+    }
+
+    .nav-links {
+
+        gap:
+            17px;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .top-nav {
+
+        min-height:
+            70px;
+
+        padding:
+            18px 20px;
+
+        align-items:
+            flex-start;
+
+    }
+
+    .nav-links {
+
+        gap:
+            12px;
+
+        flex-wrap:
+            wrap;
+
+    }
 
 }
 
@@ -29,39 +230,38 @@ body {
 
     min-height: 100vh;
 
+    background:
+        var(--brown-dark);
+
 }
 
 
 .vera-page {
 
-    min-height: 100vh;
+    min-height:
+        calc(100vh - 73px);
 
     background:
 
         radial-gradient(
-            circle at 20% 10%,
-            rgba(255,255,255,0.72),
-            transparent 30%
+            circle at 15% 0%,
+            rgba(185, 120, 128, 0.14),
+            transparent 45%
         ),
 
         radial-gradient(
-            circle at 90% 85%,
-            rgba(255,255,255,0.35),
-            transparent 30%
+            circle at 90% 100%,
+            rgba(98, 79, 67, 0.5),
+            transparent 45%
         ),
 
-        linear-gradient(
-            135deg,
-            var(--vera-bg),
-            var(--vera-bg-two)
-        );
+        var(--brown-dark);
 
     color:
-        var(--vera-text);
+        var(--paper);
 
     font-family:
-        "DM Sans",
-        sans-serif;
+        var(--serif);
 
     padding: 24px;
 
@@ -78,10 +278,10 @@ body {
         min(1050px, 100%);
 
     height:
-        calc(100vh - 48px);
+        calc(100vh - 121px);
 
     min-height:
-        650px;
+        600px;
 
     display:
         flex;
@@ -118,14 +318,16 @@ body {
 .vera-name {
 
     font-family:
-        "Courier New",
-        monospace;
+        var(--typewriter);
 
     font-size:
-        1.7rem;
+        1.1rem;
 
     letter-spacing:
-        0.08em;
+        0.16em;
+
+    text-transform:
+        uppercase;
 
 }
 
@@ -133,13 +335,19 @@ body {
 .vera-subtitle {
 
     margin-top:
-        4px;
+        6px;
+
+    font-family:
+        var(--serif);
+
+    font-style:
+        italic;
 
     font-size:
-        0.75rem;
+        0.85rem;
 
-    opacity:
-        0.55;
+    color:
+        var(--muted-on-dark);
 
 }
 
@@ -150,19 +358,28 @@ body {
         block;
 
     margin-top:
-        6px;
+        8px;
+
+    font-family:
+        var(--typewriter);
 
     font-size:
-        0.72rem;
+        0.62rem;
+
+    letter-spacing:
+        0.04em;
+
+    text-transform:
+        uppercase;
 
     color:
-        var(--vera-accent);
+        var(--pink-soft);
 
     text-decoration:
         none;
 
     opacity:
-        0.85;
+        0.9;
 
 }
 
@@ -186,11 +403,20 @@ body {
     gap:
         7px;
 
-    font-size:
-        0.72rem;
+    font-family:
+        var(--typewriter);
 
-    opacity:
-        0.55;
+    font-size:
+        0.62rem;
+
+    letter-spacing:
+        0.04em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--muted-on-dark);
 
 }
 
@@ -207,7 +433,7 @@ body {
         50%;
 
     background:
-        #759b8c;
+        var(--pink);
 
 }
 
@@ -243,7 +469,7 @@ body {
         620px;
 
     margin:
-        10vh auto 0;
+        8vh auto 0;
 
     text-align:
         center;
@@ -275,22 +501,21 @@ body {
         center;
 
     background:
-        rgba(255,255,255,0.62);
+        var(--card-on-dark);
 
     border:
         1px solid
-        rgba(70,63,56,0.08);
+        var(--line-on-dark);
 
     font-family:
-        "Courier New",
-        monospace;
+        var(--typewriter);
 
     font-size:
-        1.4rem;
+        1.3rem;
 
     box-shadow:
         0 12px 40px
-        rgba(70,63,56,0.07);
+        rgba(0, 0, 0, 0.2);
 
 }
 
@@ -301,14 +526,30 @@ body {
         0;
 
     font-family:
-        "Playfair Display",
-        serif;
+        var(--serif);
 
     font-size:
-        clamp(2rem, 5vw, 3.4rem);
+        clamp(2.1rem, 5vw, 3.6rem);
 
     font-weight:
         400;
+
+    color:
+        var(--paper);
+
+}
+
+
+.vera-welcome h1 em {
+
+    font-family:
+        var(--script);
+
+    font-style:
+        normal;
+
+    color:
+        var(--pink-soft);
 
 }
 
@@ -324,8 +565,8 @@ body {
     line-height:
         1.7;
 
-    opacity:
-        0.7;
+    color:
+        var(--muted-on-dark);
 
 }
 
@@ -355,13 +596,13 @@ body {
 
     border:
         1px solid
-        rgba(70,63,56,0.12);
+        var(--line-on-dark);
 
     background:
-        rgba(255,255,255,0.48);
+        var(--card-on-dark);
 
     color:
-        inherit;
+        var(--paper);
 
     padding:
         10px 15px;
@@ -372,11 +613,11 @@ body {
     cursor:
         pointer;
 
-    font:
-        inherit;
+    font-family:
+        var(--serif);
 
     font-size:
-        0.78rem;
+        0.85rem;
 
     transition:
         transform 180ms ease,
@@ -391,7 +632,7 @@ body {
         translateY(-2px);
 
     background:
-        rgba(255,255,255,0.82);
+        rgba(247, 241, 231, 0.14);
 
 }
 
@@ -474,11 +715,10 @@ body {
         center;
 
     background:
-        rgba(255,255,255,0.62);
+        var(--card-on-dark);
 
     font-family:
-        "Courier New",
-        monospace;
+        var(--typewriter);
 
     font-size:
         0.72rem;
@@ -500,8 +740,11 @@ body {
     line-height:
         1.65;
 
+    font-family:
+        var(--serif);
+
     font-size:
-        0.93rem;
+        1.05rem;
 
     white-space:
         pre-wrap;
@@ -512,10 +755,10 @@ body {
 .vera-user-message {
 
     background:
-        var(--vera-accent);
+        var(--pink);
 
     color:
-        white;
+        var(--paper-light);
 
     border-bottom-right-radius:
         5px;
@@ -526,11 +769,11 @@ body {
 .vera-assistant-message {
 
     background:
-        var(--vera-card);
+        var(--card-on-dark);
 
     border:
         1px solid
-        rgba(70,63,56,0.06);
+        var(--line-on-dark);
 
     border-bottom-left-radius:
         5px;
@@ -571,7 +814,7 @@ body {
         50%;
 
     background:
-        #766f68;
+        var(--pink-soft);
 
     animation:
         vera-dot
@@ -653,15 +896,15 @@ body {
         22px;
 
     background:
-        rgba(255,255,255,0.68);
+        var(--card-on-dark);
 
     border:
         1px solid
-        rgba(70,63,56,0.1);
+        var(--line-on-dark);
 
     box-shadow:
         0 14px 40px
-        rgba(70,63,56,0.08);
+        rgba(0, 0, 0, 0.18);
 
 }
 
@@ -684,13 +927,16 @@ body {
         transparent;
 
     color:
-        var(--vera-text);
+        var(--paper);
 
     padding:
         10px 12px;
 
-    font:
-        inherit;
+    font-family:
+        var(--serif);
+
+    font-size:
+        1.05rem;
 
     line-height:
         1.5;
@@ -704,10 +950,7 @@ body {
 .vera-input-area textarea::placeholder {
 
     color:
-        var(--vera-muted);
-
-    opacity:
-        0.65;
+        var(--muted-on-dark);
 
 }
 
@@ -727,10 +970,10 @@ body {
         50%;
 
     background:
-        var(--vera-accent);
+        var(--pink);
 
     color:
-        white;
+        var(--paper-light);
 
     font-size:
         1.2rem;
@@ -776,11 +1019,20 @@ body {
     margin:
         10px auto 0;
 
+    font-family:
+        var(--typewriter);
+
     font-size:
-        0.62rem;
+        0.6rem;
+
+    letter-spacing:
+        0.02em;
+
+    color:
+        var(--muted-on-dark);
 
     opacity:
-        0.42;
+        0.75;
 
     max-width:
         600px;
@@ -805,7 +1057,7 @@ body {
     .vera-shell {
 
         height:
-            100vh;
+            calc(100vh - 143px);
 
         min-height:
             0;
@@ -838,6 +1090,9 @@ body {
 
 
     .vera-input-area {
+
+        width:
+            calc(100% - 24px);
 
         margin:
             12px;

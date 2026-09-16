@@ -1672,10 +1672,17 @@
 
           <button
             class="gg-save"
+            id="gratitudeSaveBtn"
             onclick="saveGratitude()"
           >
             plant in my garden 🌻
           </button>
+
+          <span
+            class="gg-sub"
+            id="gratitudeSyncError"
+            style="color:#B97880; display:none;"
+          ></span>
 
         </div>
 
@@ -1726,6 +1733,10 @@
   <!-- =======================================================
        JAVASCRIPT
        ======================================================= -->
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
 
   <script>
 
@@ -2296,7 +2307,9 @@
        GRATITUDE
        ======================================================= */
 
-    function saveGratitude() {
+    let gratitudeCache = [];
+
+    async function saveGratitude() {
 
       const vals = [
 
@@ -2320,14 +2333,20 @@
 
       if (!vals.some(v => v)) return;
 
+      const user = await getCurrentUser();
 
-      const saved =
-        JSON.parse(
-          localStorage.getItem(
-            "z_gratitude"
-          ) || "[]"
-        );
+      if (!user) {
 
+        const errorEl =
+          document.getElementById("gratitudeSyncError");
+
+        errorEl.textContent =
+          "Sign up to save your gratitude garden.";
+        errorEl.style.display = "block";
+
+        return;
+
+      }
 
       const d =
         new Date().toLocaleDateString(
@@ -2338,23 +2357,43 @@
           }
         );
 
-
-      saved.unshift({
-
+      const newEntry = {
+        id: Date.now(),
         date: d,
+        items: vals.filter(Boolean)
+      };
 
-        items:
-          vals.filter(Boolean)
+      const saveBtn =
+        document.getElementById("gratitudeSaveBtn");
 
-      });
+      const errorEl =
+        document.getElementById("gratitudeSyncError");
 
+      saveBtn.disabled = true;
+      saveBtn.textContent = "planting...";
+      errorEl.style.display = "none";
 
-      localStorage.setItem(
-        "z_gratitude",
-        JSON.stringify(
-          saved.slice(0, 30)
-        )
-      );
+      const { error } = await supabaseClient
+        .from("gratitude_entries")
+        .insert({
+          id: newEntry.id,
+          user_id: user.id,
+          date: newEntry.date,
+          items: newEntry.items
+        });
+
+      saveBtn.disabled = false;
+      saveBtn.textContent = "plant in my garden 🌻";
+
+      if (error) {
+        console.error(error);
+        errorEl.textContent =
+          "Couldn't save — check your connection and try again.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      gratitudeCache.unshift(newEntry);
 
 
       ["g1", "g2", "g3"]
@@ -2369,14 +2408,42 @@
     }
 
 
+    async function loadGratitudeFromSupabase() {
+
+      const user = await getCurrentUser();
+
+      if (!user) return;
+
+      const { data, error } = await supabaseClient
+        .from("gratitude_entries")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("id", { ascending: false });
+
+      if (error) {
+        console.error(error);
+        const errorEl =
+          document.getElementById("gratitudeSyncError");
+        if (errorEl) {
+          errorEl.textContent =
+            "Couldn't load your garden — check your connection and try again.";
+          errorEl.style.display = "block";
+        }
+        return;
+      }
+
+      gratitudeCache = data.map(row => ({
+        id: row.id,
+        date: row.date,
+        items: row.items
+      }));
+
+    }
+
+
     function renderGarden() {
 
-      const saved =
-        JSON.parse(
-          localStorage.getItem(
-            "z_gratitude"
-          ) || "[]"
-        );
+      const saved = gratitudeCache;
 
 
       const el =
@@ -2422,6 +2489,8 @@
        ======================================================= */
 
     renderGarden();
+
+    loadGratitudeFromSupabase().then(renderGarden);
 
   </script>
 

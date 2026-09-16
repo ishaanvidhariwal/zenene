@@ -3623,9 +3623,9 @@ body::before {
       explore
     </a>
 
-    <button class="nav-cta nav-signup" id="authOpenBtn" type="button">
+    <a class="nav-cta nav-signup" id="authOpenBtn" href="#authOpen">
       sign up
-    </button>
+    </a>
 
   </div>
 
@@ -4474,6 +4474,7 @@ body::before {
 
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
 
 <script>
 
@@ -4519,8 +4520,32 @@ function showAuthTab(tab) {
 
 }
 
-authOpenBtn.addEventListener("click", openAuthModal);
+async function refreshNavAuthState() {
+
+  const profile = await getCurrentProfile();
+
+  if (!profile) {
+    authOpenBtn.textContent = "sign up";
+    authOpenBtn.href = "#authOpen";
+    authOpenBtn.dataset.mode = "auth";
+    return;
+  }
+
+  authOpenBtn.textContent = profile.display_name || "my profile";
+  authOpenBtn.href = "profile.html";
+  authOpenBtn.dataset.mode = "profile";
+
+}
+
+authOpenBtn.addEventListener("click", (e) => {
+  if (authOpenBtn.dataset.mode === "profile") return;
+  e.preventDefault();
+  openAuthModal();
+});
+
 authCloseBtn.addEventListener("click", closeAuthModal);
+
+refreshNavAuthState();
 
 authOverlay.addEventListener("click", (e) => {
   if (e.target === authOverlay) closeAuthModal();
@@ -4572,6 +4597,11 @@ authFormSignup.addEventListener("submit", async (e) => {
 
   authMessage.classList.add("success");
   authMessage.textContent = "Your Zenene account has been created.";
+
+  if (data.session) {
+    await refreshNavAuthState();
+    window.setTimeout(closeAuthModal, 900);
+  }
 
 });
 

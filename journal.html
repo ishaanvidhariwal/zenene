@@ -2661,6 +2661,12 @@ body::before {
 
     </div>
 
+    <span
+        class="small-note"
+        id="journalSyncError"
+        style="color:#B97880; display:none;"
+    ></span>
+
 
 </section>
 
@@ -3259,6 +3265,17 @@ function getEntries() {
 
 
 
+function showJournalSyncError(message) {
+
+    const el = document.getElementById("journalSyncError");
+
+    if (!el) return;
+
+    el.textContent = message;
+    el.style.display = message ? "block" : "none";
+
+}
+
 async function saveEntries(entries) {
 
     const previous = entriesCache;
@@ -3268,6 +3285,8 @@ async function saveEntries(entries) {
     const user = await getCurrentUser();
 
     if (!user) return;
+
+    let hadError = false;
 
     const previousById = new Map(
         previous.map(e => [e.id, e])
@@ -3287,7 +3306,10 @@ async function saveEntries(entries) {
                 .eq("id", old.id)
                 .eq("user_id", user.id);
 
-            if (error) console.error(error);
+            if (error) {
+                console.error(error);
+                hadError = true;
+            }
 
         }
 
@@ -3310,7 +3332,10 @@ async function saveEntries(entries) {
                     timestamp: entry.timestamp
                 });
 
-            if (error) console.error(error);
+            if (error) {
+                console.error(error);
+                hadError = true;
+            }
 
         } else if (
             old.text !== entry.text ||
@@ -3326,11 +3351,20 @@ async function saveEntries(entries) {
                 .eq("id", entry.id)
                 .eq("user_id", user.id);
 
-            if (error) console.error(error);
+            if (error) {
+                console.error(error);
+                hadError = true;
+            }
 
         }
 
     }
+
+    showJournalSyncError(
+        hadError
+            ? "Couldn't save to your account — check your connection and try again."
+            : ""
+    );
 
 }
 
@@ -3353,6 +3387,9 @@ async function loadEntriesFromSupabase() {
 
     if (error) {
         console.error(error);
+        showJournalSyncError(
+            "Couldn't load your journal — check your connection and try again."
+        );
         return;
     }
 

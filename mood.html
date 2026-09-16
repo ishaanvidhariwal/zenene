@@ -2577,6 +2577,10 @@
        JAVASCRIPT
        ===================================================== -->
 
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+
   <script>
 
 
@@ -2792,49 +2796,73 @@
        STORAGE
        =================================================== */
 
+    let moodsCache = {};
+
     function getMoods() {
 
-      try {
+      return { ...moodsCache };
 
-        const stored =
-          localStorage.getItem(
-            "zeneneMoods"
+    }
+
+
+    async function saveMoods(data) {
+
+      const previous = moodsCache;
+
+      moodsCache = data;
+
+      const user = await getCurrentUser();
+
+      if (!user) return;
+
+      const changedDates = Object.keys(data).filter(
+        date => data[date] !== previous[date]
+      );
+
+      for (const date of changedDates) {
+
+        const { error } = await supabaseClient
+          .from("mood_entries")
+          .upsert(
+            {
+              user_id: user.id,
+              entry_date: date,
+              mood: data[date]
+            },
+            { onConflict: "user_id,entry_date" }
           );
 
-
-        if (!stored) {
-          return {};
-        }
-
-
-        return JSON.parse(stored);
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Could not read mood history:",
-          error
-        );
-
-
-        return {};
+        if (error) console.error(error);
 
       }
 
     }
 
 
-    function saveMoods(data) {
+    async function loadMoodsFromSupabase() {
 
-      localStorage.setItem(
+      const user = await getCurrentUser();
 
-        "zeneneMoods",
+      if (!user) {
+        window.location.href = "index.html";
+        return;
+      }
 
-        JSON.stringify(data)
+      const { data, error } = await supabaseClient
+        .from("mood_entries")
+        .select("entry_date, mood")
+        .eq("user_id", user.id);
 
-      );
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      moodsCache = {};
+
+      data.forEach(row => {
+        moodsCache[row.entry_date] = row.mood;
+      });
 
     }
 
@@ -4203,7 +4231,13 @@
 
     renderTodayDate();
 
-    renderDashboard();
+    (async function initMood() {
+
+      await loadMoodsFromSupabase();
+
+      renderDashboard();
+
+    })();
 
 
   </script>

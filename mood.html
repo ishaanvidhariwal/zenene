@@ -2832,7 +2832,18 @@
             { onConflict: "user_id,entry_date" }
           );
 
-        if (error) console.error(error);
+        if (error) {
+
+          console.error(error);
+
+          document.getElementById(
+            "checkinMessage"
+          ).textContent =
+            "Couldn't save — check your connection and try again.";
+
+          return;
+
+        }
 
       }
 
@@ -2855,6 +2866,12 @@
 
       if (error) {
         console.error(error);
+
+        document.getElementById(
+          "checkinMessage"
+        ).textContent =
+          "Couldn't load your mood history — check your connection and try again.";
+
         return;
       }
 

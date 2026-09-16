@@ -1,0 +1,62 @@
+<h1>Create your Zenene</h1>
+
+<input
+    id="name"
+    type="text"
+    placeholder="What should we call you?"
+>
+
+<input
+    id="email"
+    type="email"
+    placeholder="Email"
+>
+
+<input
+    id="password"
+    type="password"
+    placeholder="Password"
+>
+
+<button id="signupButton">
+    Create account
+</button>
+
+<p id="message"></p>
+
+<script>
+document.getElementById("signupButton").addEventListener("click", async () => {
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password
+    });
+
+    if (error) {
+        document.getElementById("message").textContent = error.message;
+        return;
+    }
+
+    const user = data.user;
+
+    if (user) {
+        const { error: profileError } = await supabaseClient
+            .from("profiles")
+            .insert({
+                id: user.id,
+                display_name: name
+            });
+
+        if (profileError) {
+            console.error(profileError);
+        }
+    }
+
+    document.getElementById("message").textContent =
+        "Your Zenene account has been created.";
+});
+</script>

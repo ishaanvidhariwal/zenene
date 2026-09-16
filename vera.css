@@ -144,6 +144,37 @@ body {
 }
 
 
+.vera-login-note {
+
+    display:
+        block;
+
+    margin-top:
+        6px;
+
+    font-size:
+        0.72rem;
+
+    color:
+        var(--vera-accent);
+
+    text-decoration:
+        none;
+
+    opacity:
+        0.85;
+
+}
+
+
+.vera-login-note:hover {
+
+    text-decoration:
+        underline;
+
+}
+
+
 .vera-status {
 
     display:

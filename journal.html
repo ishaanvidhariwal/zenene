@@ -2654,6 +2654,7 @@ body::before {
 
         <button
             class="primary-btn"
+            id="saveEntryBtn"
             onclick="saveEntry()"
         >
             SAVE ENTRY
@@ -3409,7 +3410,7 @@ async function loadEntriesFromSupabase() {
    SAVE ENTRY
 ========================================================= */
 
-function saveEntry() {
+async function saveEntry() {
 
 
     const textarea =
@@ -3475,9 +3476,20 @@ function saveEntry() {
     );
 
 
-    saveEntries(
+    const saveBtn =
+        document.getElementById("saveEntryBtn");
+
+    saveBtn.disabled = true;
+
+    saveBtn.textContent = "SAVING...";
+
+    await saveEntries(
         entries
     );
+
+    saveBtn.disabled = false;
+
+    saveBtn.textContent = "SAVE ENTRY";
 
 
     textarea.value =
@@ -4212,6 +4224,7 @@ function editCurrentEntry() {
 
             <button
                 class="primary-btn"
+                id="saveEditedEntryBtn"
                 onclick="saveEditedEntry()"
             >
                 SAVE CHANGES
@@ -4281,7 +4294,7 @@ function cancelEdit() {
    SAVE EDITED ENTRY
 ========================================================= */
 
-function saveEditedEntry() {
+async function saveEditedEntry() {
 
 
     if (!currentEntryId) {
@@ -4332,7 +4345,15 @@ function saveEditedEntry() {
         newText;
 
 
-    saveEntries(
+    const saveBtn =
+        document.getElementById("saveEditedEntryBtn");
+
+    if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.textContent = "SAVING...";
+    }
+
+    await saveEntries(
         entries
     );
 
@@ -4385,7 +4406,7 @@ function closeDeleteConfirmation() {
 
 
 
-function confirmDelete() {
+async function confirmDelete() {
 
 
     if (!currentEntryId) {
@@ -4406,7 +4427,7 @@ function confirmDelete() {
         );
 
 
-    saveEntries(
+    await saveEntries(
         updatedEntries
     );
 

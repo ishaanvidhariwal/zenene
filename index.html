@@ -185,6 +185,16 @@ body::before {
 
   font-size: .68rem;
 
+  opacity: 0;
+
+  transition: opacity .25s ease;
+
+}
+
+.nav-cta.nav-signup.ready {
+
+  opacity: 1;
+
 }
 
 
@@ -4528,12 +4538,14 @@ async function refreshNavAuthState() {
     authOpenBtn.textContent = "sign up";
     authOpenBtn.href = "#authOpen";
     authOpenBtn.dataset.mode = "auth";
+    authOpenBtn.classList.add("ready");
     return;
   }
 
   authOpenBtn.textContent = profile.display_name || "my profile";
   authOpenBtn.href = "profile.html";
   authOpenBtn.dataset.mode = "profile";
+  authOpenBtn.classList.add("ready");
 
 }
 

@@ -170,7 +170,7 @@
 
 
     .nav-links a:hover {
-      color: var(--rose-deep);
+      color: var(--ink);
     }
 
 
@@ -195,7 +195,9 @@
 
       height: 1px;
 
-      background: var(--rose-deep);
+      background: var(--brown);
+
+      opacity: .5;
     }
 
 
@@ -219,15 +221,79 @@
 
     .page-header {
 
-      display: grid;
-
-      grid-template-columns: 1.1fr .9fr;
-
-      gap: 60px;
-
-      align-items: end;
-
       margin-bottom: 55px;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+
+    .page-header::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 520px;
+      height: 520px;
+
+      top: -240px;
+      left: -140px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          var(--sage),
+          transparent 70%
+        );
+
+      filter: blur(10px);
+
+      pointer-events: none;
+
+      z-index: 0;
+    }
+
+
+    .page-header::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 380px;
+      height: 380px;
+
+      top: 30px;
+      right: 4%;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          var(--rose),
+          transparent 70%
+        );
+
+      opacity: .55;
+
+      filter: blur(10px);
+
+      pointer-events: none;
+
+      z-index: 0;
+    }
+
+
+    .page-header > * {
+
+      position: relative;
+
+      z-index: 1;
     }
 
 
@@ -253,11 +319,11 @@
 
       font-family: var(--serif);
 
-      font-size: clamp(4rem, 8vw, 7rem);
+      font-size: clamp(5.5rem, 14vw, 15rem);
 
       font-weight: 300;
 
-      line-height: .85;
+      line-height: .82;
 
       letter-spacing: -.04em;
     }
@@ -277,17 +343,23 @@
 
     .intro {
 
-      max-width: 400px;
+      max-width: 380px;
+
+      margin-left: auto;
+
+      margin-top: 60px;
+
+      padding-left: 26px;
+
+      border-left: 2px solid var(--rose-deep);
 
       font-family: var(--serif);
 
-      font-size: 1.25rem;
+      font-size: 1.15rem;
 
       line-height: 1.45;
 
       color: var(--brown);
-
-      margin: 0;
     }
 
 
@@ -295,25 +367,49 @@
        CALM TABS
        ========================================================= */
 
-    .calm-tabs {
+    .calm-shell {
 
       display: grid;
 
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 200px 1fr;
 
-      gap: 12px;
+      gap: 40px;
 
-      margin-bottom: 30px;
+      align-items: start;
+    }
+
+
+    .calm-tabs {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 6px;
+
+      position: sticky;
+
+      top: 90px;
+    }
+
+
+    .calm-content {
+
+      min-width: 0;
     }
 
 
     .c-tab {
 
-      border: 1px solid rgba(98,79,67,.12);
+      border: none;
 
-      background: var(--paper);
+      border-left: 2px solid transparent;
 
-      min-height: 80px;
+      background: none;
+
+      text-align: left;
+
+      padding: 10px 0 10px 16px;
 
       cursor: pointer;
 
@@ -328,34 +424,23 @@
       color: var(--brown);
 
       transition:
-        transform .3s ease,
-        background .3s ease,
-        box-shadow .3s ease,
+        color .3s ease,
         border-color .3s ease;
     }
 
 
     .c-tab:hover {
 
-      transform: translateY(-4px);
-
-      box-shadow:
-        0 12px 25px rgba(98,79,67,.08);
+      color: var(--ink);
     }
 
 
     .c-tab.active {
 
-      background: var(--sky-light);
-
-      border-color: var(--sky-deep);
+      border-left-color: var(--rose-deep);
 
       color: var(--ink);
-
-      transform: translateY(-4px);
-
-      box-shadow:
-        0 12px 25px rgba(98,79,67,.07);
+      font-weight: 700;
     }
 
 
@@ -415,6 +500,8 @@
 
       border: 1px solid rgba(98,79,67,.12);
 
+      border-radius: 16px;
+
       box-shadow:
         0 20px 60px rgba(98,79,67,.06);
 
@@ -426,24 +513,6 @@
     }
 
 
-    .breath-card::before {
-
-      content: "";
-
-      position: absolute;
-
-      top: -12px;
-
-      right: 35px;
-
-      width: 85px;
-
-      height: 20px;
-
-      background: rgba(231,201,205,.65);
-
-      transform: rotate(2deg);
-    }
 
 
     .breath-label {
@@ -543,9 +612,11 @@
 
     .breath-word {
 
-      font-family: var(--script);
+      font-family: var(--serif);
 
-      font-size: 1.5rem;
+      font-style: italic;
+
+      font-size: 1.4rem;
 
       color: var(--paper);
     }
@@ -655,11 +726,13 @@
 
     .cycles-left {
 
-      font-family: var(--script);
+      font-family: var(--serif);
+
+      font-style: italic;
 
       color: var(--rose-deep);
 
-      font-size: 1.15rem;
+      font-size: 1.05rem;
 
       margin-top: 18px;
     }
@@ -674,6 +747,8 @@
       background: var(--sage);
 
       border: 1px solid rgba(98,79,67,.08);
+
+      border-radius: 16px;
 
       padding: 38px;
     }
@@ -866,6 +941,8 @@
 
       border: 1px solid rgba(98,79,67,.1);
 
+      border-radius: 16px;
+
       padding: 40px;
     }
 
@@ -920,6 +997,8 @@
 
       border: 1px solid rgba(98,79,67,.08);
 
+      border-radius: 8px;
+
       padding: 14px 16px;
 
       transition: .3s ease;
@@ -936,9 +1015,11 @@
 
     .gg-num {
 
-      font-family: var(--script);
+      font-family: var(--serif);
 
-      font-size: 1.35rem;
+      font-style: italic;
+
+      font-size: 1.2rem;
 
       color: var(--rose-deep);
 
@@ -980,7 +1061,9 @@
 
       border: none;
 
-      background: var(--brown-dark);
+      border-radius: 8px;
+
+      background: var(--rose-deep);
 
       color: var(--paper);
 
@@ -1002,7 +1085,7 @@
 
     .gg-save:hover {
 
-      background: var(--rose-deep);
+      background: var(--brown-dark);
 
       transform: translateY(-2px);
     }
@@ -1011,6 +1094,8 @@
     .garden-side {
 
       background: var(--lavender);
+
+      border-radius: 16px;
 
       padding: 40px;
 
@@ -1056,11 +1141,13 @@
 
     .garden-note {
 
-      font-family: var(--script);
+      font-family: var(--serif);
+
+      font-style: italic;
 
       color: var(--rose-deep);
 
-      font-size: 1.3rem;
+      font-size: 1.2rem;
 
       margin-bottom: 25px;
     }
@@ -1085,6 +1172,8 @@
       background: rgba(255,253,248,.72);
 
       border-left: 3px solid var(--sage-deep);
+
+      border-radius: 0 8px 8px 0;
 
       padding: 13px 15px;
 
@@ -1130,9 +1219,11 @@
 
     footer .script {
 
-      font-family: var(--script);
+      font-family: var(--serif);
 
-      font-size: 1.6rem;
+      font-style: italic;
+
+      font-size: 1.4rem;
 
       margin-bottom: 10px;
     }
@@ -1204,18 +1295,44 @@
       }
 
 
-      .calm-tabs {
+      .calm-shell {
 
         grid-template-columns: 1fr;
 
-        gap: 8px;
+        gap: 20px;
+
+      }
+
+
+      .calm-tabs {
+
+        flex-direction: row;
+
+        position: static;
+
+        border-bottom: 1px solid rgba(98,79,67,.12);
+
+        padding-bottom: 4px;
 
       }
 
 
       .c-tab {
 
-        min-height: 62px;
+        border-left: none;
+
+        border-bottom: 2px solid transparent;
+
+        padding: 8px 10px;
+
+      }
+
+
+      .c-tab.active {
+
+        border-left-color: transparent;
+
+        border-bottom-color: var(--rose-deep);
 
       }
 
@@ -1377,8 +1494,10 @@
 
 
     <!-- =====================================================
-         CALM TABS
+         CALM SHELL (sidebar + content)
          ===================================================== -->
+
+    <div class="calm-shell">
 
     <div class="calm-tabs fade-up">
 
@@ -1386,7 +1505,6 @@
         class="c-tab active"
         onclick="switchTab('breath',this)"
       >
-        <span class="tab-icon">🫁</span>
         breathe
       </button>
 
@@ -1395,7 +1513,6 @@
         class="c-tab"
         onclick="switchTab('color',this)"
       >
-        <span class="tab-icon">🎨</span>
         color flow
       </button>
 
@@ -1404,11 +1521,13 @@
         class="c-tab"
         onclick="switchTab('garden',this)"
       >
-        <span class="tab-icon">🌱</span>
         gratitude
       </button>
 
     </div>
+
+
+    <div class="calm-content">
 
 
     <!-- =====================================================
@@ -1519,7 +1638,7 @@
 
           <div class="cf-desc">
             Paint freely. No rules, no mistakes.
-            Just colour and calm. 🎨
+            Just colour and calm.
           </div>
 
 
@@ -1675,7 +1794,7 @@
             id="gratitudeSaveBtn"
             onclick="saveGratitude()"
           >
-            plant in my garden 🌻
+            plant in my garden
           </button>
 
           <span
@@ -1706,6 +1825,11 @@
         </div>
 
       </div>
+
+    </div>
+
+
+    </div>
 
     </div>
 
@@ -1958,7 +2082,7 @@
       document.getElementById("bphase")
         .textContent =
           done
-            ? "Well done 🌿 4-7-8 Breathing"
+            ? "Well done — 4-7-8 Breathing"
             : "4-7-8 Breathing";
 
 
@@ -2383,7 +2507,7 @@
         });
 
       saveBtn.disabled = false;
-      saveBtn.textContent = "plant in my garden 🌻";
+      saveBtn.textContent = "plant in my garden";
 
       if (error) {
         console.error(error);
@@ -2459,7 +2583,7 @@
             <div class="gg-card">
 
               <div class="gg-card-date">
-                🌿 ${e.date}
+                ${e.date}
               </div>
 
               ${e.items

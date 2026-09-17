@@ -26,7 +26,7 @@
 >
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IM+Fell+DW+Pica:ital@0;1&family=Special+Elite&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
     rel="stylesheet"
 >
 
@@ -42,11 +42,11 @@
 
     --paper: #f7f1e7;
 
-    --paper-light: #fcf9f3;
+    --paper-light: #fffdf8;
 
-    --blue: #dcecf2;
+    --blue: #c9dfea;
 
-    --blue-light: #eaf4f7;
+    --blue-light: #e8f2f5;
 
     --ink: #2f2b27;
 
@@ -56,7 +56,7 @@
 
     --pink: #b97880;
 
-    --pink-soft: #efd9d8;
+    --pink-soft: #e7c9cd;
 
     --pink-light: #f7e8e6;
 
@@ -65,6 +65,10 @@
     --brown-dark: #392d26;
 
     --cream: #f7f1e7;
+
+    --sage: #d8e4d7;
+
+    --sage-deep: #72866e;
 
 
     --serif:
@@ -78,9 +82,8 @@
         monospace;
 
     --script:
-        "IM Fell DW Pica",
-        Georgia,
-        serif;
+        "Dancing Script",
+        cursive;
 
 }
 
@@ -110,18 +113,7 @@ html {
 body {
 
     background-color:
-        var(--blue);
-
-    background-image:
-
-        radial-gradient(
-            circle,
-            rgba(80, 110, 120, 0.11) 1px,
-            transparent 1.2px
-        );
-
-    background-size:
-        18px 18px;
+        var(--cream);
 
     color:
         var(--ink);
@@ -186,7 +178,7 @@ body::before {
         20px 34px;
 
     background:
-        rgba(247, 241, 231, 0.92);
+        rgba(247, 241, 231, 0.78);
 
     backdrop-filter:
         blur(18px);
@@ -254,7 +246,7 @@ body::before {
 .nav-links a:hover {
 
     color:
-        var(--pink);
+        var(--ink);
 
 }
 
@@ -285,7 +277,9 @@ body::before {
     height: 1px;
 
     background:
-        var(--pink);
+        var(--brown);
+
+    opacity: .5;
 
 }
 
@@ -296,25 +290,86 @@ body::before {
 
 .hero {
 
-    min-height:
-        430px;
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 0.9fr;
-
-    align-items:
-        center;
-
-    gap:
-        60px;
-
     padding:
-        90px 8% 70px;
+        70px 6% 0;
 
     position:
         relative;
+
+    overflow:
+        hidden;
+
+}
+
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    top: -220px;
+    left: -120px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            var(--blue-light),
+            transparent 70%
+        );
+
+    filter: blur(10px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+}
+
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    top: 40px;
+    right: 4%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            var(--pink-soft),
+            transparent 70%
+        );
+
+    opacity: .6;
+
+    filter: blur(10px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+}
+
+
+.hero-left,
+.hero-right {
+
+    position: relative;
+
+    z-index: 1;
 
 }
 
@@ -350,16 +405,16 @@ body::before {
         var(--serif);
 
     font-size:
-        clamp(85px, 9vw, 145px);
+        clamp(110px, 15vw, 260px);
 
     font-weight:
         500;
 
     line-height:
-        0.68;
+        0.78;
 
     letter-spacing:
-        -5px;
+        -6px;
 
 }
 
@@ -381,9 +436,6 @@ body::before {
     margin-left:
         18px;
 
-    transform:
-        rotate(-4deg);
-
     letter-spacing:
         -2px;
 
@@ -393,7 +445,19 @@ body::before {
 .hero-right {
 
     max-width:
-        510px;
+        380px;
+
+    margin-left:
+        auto;
+
+    margin-top:
+        60px;
+
+    padding-left:
+        26px;
+
+    border-left:
+        2px solid var(--pink);
 
     animation:
         fadeUp 1s 0.15s ease both;
@@ -407,7 +471,7 @@ body::before {
         var(--serif);
 
     font-size:
-        28px;
+        22px;
 
     line-height:
         1.45;
@@ -424,10 +488,13 @@ body::before {
         var(--pink);
 
     font-family:
-        var(--script);
+        var(--serif);
+
+    font-style:
+        italic;
 
     font-size:
-        1.12em;
+        1em;
 
 }
 
@@ -445,7 +512,13 @@ body::before {
         1240px;
 
     margin:
-        0 auto 120px;
+        60px auto 120px;
+
+    position:
+        relative;
+
+    z-index:
+        2;
 
 }
 
@@ -454,6 +527,23 @@ body::before {
    WRITE CARD
 ========================================================= */
 
+.journal-main-shell {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 300px;
+
+    gap:
+        40px;
+
+    align-items:
+        start;
+
+}
+
+
 .write-card {
 
     background:
@@ -461,6 +551,9 @@ body::before {
 
     border:
         1px solid #e3d9cd;
+
+    border-radius:
+        14px;
 
     padding:
         46px 50px 50px;
@@ -477,31 +570,6 @@ body::before {
 }
 
 
-.write-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    width:
-        90px;
-
-    height:
-        24px;
-
-    top:
-        -12px;
-
-    right:
-        80px;
-
-    background:
-        rgba(210, 153, 158, 0.3);
-
-    transform:
-        rotate(2deg);
-
-}
 
 
 /* =========================================================
@@ -660,8 +728,11 @@ body::before {
     border:
         none;
 
+    border-radius:
+        8px;
+
     background:
-        var(--brown-dark);
+        var(--pink);
 
     color:
         white;
@@ -691,7 +762,7 @@ body::before {
 .primary-btn:hover {
 
     background:
-        var(--pink);
+        var(--brown-dark);
 
     transform:
         translateY(-2px);
@@ -705,24 +776,34 @@ body::before {
 
 .mood-section {
 
-    margin-top:
-        85px;
+    background:
+        var(--paper-light);
+
+    border:
+        1px solid #e3d9cd;
+
+    border-radius:
+        14px;
+
+    box-shadow:
+        0 25px 60px rgba(76, 58, 43, 0.06);
+
+    padding:
+        30px 26px;
+
+    position:
+        sticky;
+
+    top:
+        90px;
 
 }
 
 
 .section-heading {
 
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        baseline;
-
     margin-bottom:
-        30px;
+        22px;
 
 }
 
@@ -733,10 +814,13 @@ body::before {
         var(--serif);
 
     font-size:
-        44px;
+        26px;
 
     font-weight:
         500;
+
+    margin-bottom:
+        4px;
 
 }
 
@@ -744,7 +828,10 @@ body::before {
 .section-heading span {
 
     font-family:
-        var(--script);
+        var(--serif);
+
+    font-style:
+        italic;
 
     font-size:
         21px;
@@ -764,10 +851,10 @@ body::before {
     display: grid;
 
     grid-template-columns:
-        repeat(9, 1fr);
+        repeat(3, 1fr);
 
     gap:
-        12px;
+        10px;
 
 }
 
@@ -776,6 +863,9 @@ body::before {
 
     border:
         1px solid transparent;
+
+    border-radius:
+        10px;
 
     background:
         transparent;
@@ -842,7 +932,7 @@ body::before {
 .mood-option:hover .face {
 
     transform:
-        scale(1.06) rotate(-2deg);
+        scale(1.06);
 
 }
 
@@ -915,7 +1005,10 @@ body::before {
 .calendar-heading span {
 
     font-family:
-        var(--script);
+        var(--serif);
+
+    font-style:
+        italic;
 
     font-size:
         21px;
@@ -938,6 +1031,9 @@ body::before {
     border:
         1px solid #e0d6ca;
 
+    border-radius:
+        16px;
+
     padding:
         0;
 
@@ -953,67 +1049,6 @@ body::before {
 }
 
 
-/* PINK TAPE */
-
-.calendar-planner::before {
-
-    content: "";
-
-    position:
-        absolute;
-
-    width:
-        105px;
-
-    height:
-        25px;
-
-    top:
-        -12px;
-
-    left:
-        8%;
-
-    background:
-        rgba(210, 153, 158, 0.32);
-
-    transform:
-        rotate(-3deg);
-
-    z-index:
-        2;
-
-}
-
-
-/* BLUE TAPE */
-
-.calendar-planner::after {
-
-    content: "";
-
-    position:
-        absolute;
-
-    width:
-        85px;
-
-    height:
-        23px;
-
-    bottom:
-        -10px;
-
-    right:
-        8%;
-
-    background:
-        rgba(173, 207, 218, 0.45);
-
-    transform:
-        rotate(3deg);
-
-}
 
 
 /* =========================================================
@@ -1481,10 +1516,13 @@ body::before {
         30px 20px 5px;
 
     font-family:
-        var(--script);
+        var(--serif);
+
+    font-style:
+        italic;
 
     font-size:
-        20px;
+        18px;
 
     color:
         var(--muted);
@@ -1619,7 +1657,7 @@ body::before {
         relative;
 
     transform:
-        translateY(35px) rotate(-1deg) scale(0.96);
+        translateY(35px) scale(0.96);
 
     transition:
         transform 0.45s cubic-bezier(.2,.8,.2,1);
@@ -1630,38 +1668,11 @@ body::before {
 .entry-modal.open .entry-modal-paper {
 
     transform:
-        translateY(0) rotate(-1deg) scale(1);
+        translateY(0) scale(1);
 
 }
 
 
-.entry-modal-paper::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    top:
-        -11px;
-
-    right:
-        80px;
-
-    width:
-        95px;
-
-    height:
-        23px;
-
-    background:
-        rgba(210, 153, 158, 0.3);
-
-    transform:
-        rotate(3deg);
-
-}
 
 
 .modal-close {
@@ -2181,6 +2192,20 @@ body::before {
 
     }
 
+    .journal-main-shell {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .mood-section {
+
+        position:
+            static;
+
+    }
+
     .mood-grid {
 
         grid-template-columns:
@@ -2616,6 +2641,9 @@ body::before {
 <main class="journal-wrapper">
 
 
+<div class="journal-main-shell">
+
+
 <!-- =====================================================
      WRITE
 ===================================================== -->
@@ -2870,6 +2898,8 @@ body::before {
 
 </section>
 
+
+</div>
 
 
 <!-- =====================================================

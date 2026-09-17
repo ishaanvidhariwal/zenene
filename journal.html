@@ -26,7 +26,7 @@
 >
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Special+Elite&display=swap"
     rel="stylesheet"
 >
 
@@ -81,9 +81,12 @@
         "Courier New",
         monospace;
 
+    --heading:
+        "Bricolage Grotesque",
+        sans-serif;
+
     --script:
-        "Dancing Script",
-        cursive;
+        var(--heading);
 
 }
 
@@ -296,70 +299,8 @@ body::before {
     position:
         relative;
 
-    overflow:
-        hidden;
-
-}
-
-
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 520px;
-    height: 520px;
-
-    top: -220px;
-    left: -120px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            var(--blue-light),
-            transparent 70%
-        );
-
-    filter: blur(10px);
-
-    pointer-events: none;
-
-    z-index: 0;
-
-}
-
-
-.hero::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 380px;
-    height: 380px;
-
-    top: 40px;
-    right: 4%;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            var(--pink-soft),
-            transparent 70%
-        );
-
-    opacity: .6;
-
-    filter: blur(10px);
-
-    pointer-events: none;
-
-    z-index: 0;
+    border-bottom:
+        1px solid rgba(98, 79, 67, .12);
 
 }
 
@@ -402,42 +343,30 @@ body::before {
 .hero-title {
 
     font-family:
-        var(--serif);
+        var(--heading);
 
     font-size:
-        clamp(110px, 15vw, 260px);
+        clamp(64px, 8.5vw, 128px);
 
     font-weight:
-        500;
+        700;
 
     line-height:
-        0.78;
+        0.92;
 
     letter-spacing:
-        -6px;
+        -0.03em;
+
+    max-width:
+        14ch;
 
 }
 
 
 .hero-title span {
 
-    font-family:
-        var(--script);
-
-    font-size:
-        0.56em;
-
     color:
         var(--pink);
-
-    display:
-        inline-block;
-
-    margin-left:
-        18px;
-
-    letter-spacing:
-        -2px;
 
 }
 
@@ -445,19 +374,10 @@ body::before {
 .hero-right {
 
     max-width:
-        380px;
-
-    margin-left:
-        auto;
+        420px;
 
     margin-top:
-        60px;
-
-    padding-left:
-        26px;
-
-    border-left:
-        2px solid var(--pink);
+        24px;
 
     animation:
         fadeUp 1s 0.15s ease both;
@@ -811,13 +731,16 @@ body::before {
 .section-heading h2 {
 
     font-family:
-        var(--serif);
+        var(--heading);
 
     font-size:
-        26px;
+        24px;
 
     font-weight:
-        500;
+        700;
+
+    letter-spacing:
+        -.01em;
 
     margin-bottom:
         4px;
@@ -886,8 +809,8 @@ body::before {
 
 .mood-option:hover {
 
-    transform:
-        translateY(-6px);
+    background:
+        rgba(255, 255, 255, 0.4);
 
 }
 
@@ -929,12 +852,6 @@ body::before {
 }
 
 
-.mood-option:hover .face {
-
-    transform:
-        scale(1.06);
-
-}
 
 
 .mood-name {
@@ -991,13 +908,16 @@ body::before {
 .calendar-heading h2 {
 
     font-family:
-        var(--serif);
+        var(--heading);
 
     font-size:
-        48px;
+        40px;
 
     font-weight:
-        500;
+        700;
+
+    letter-spacing:
+        -.02em;
 
 }
 
@@ -2095,34 +2015,51 @@ body::before {
 
 .journal-footer {
 
+    text-align:
+        center;
+
     margin-top:
         100px;
 
-    padding-top:
-        30px;
+    padding:
+        30px 20px 10px;
 
-    border-top:
-        1px solid var(--line);
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
+    color:
+        var(--brown);
 
 }
 
 
-.journal-footer span {
+.journal-footer .script {
+
+    font-family:
+        var(--serif);
+
+    font-style:
+        italic;
+
+    font-size:
+        1.4rem;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.journal-footer p {
 
     font-family:
         var(--typewriter);
 
     font-size:
-        8px;
+        .55rem;
 
     letter-spacing:
-        1px;
+        .1em;
+
+    text-transform:
+        uppercase;
 
     color:
         var(--muted);
@@ -2522,16 +2459,6 @@ body::before {
 
         justify-content:
             space-between;
-
-    }
-
-    .journal-footer {
-
-        flex-direction:
-            column;
-
-        gap:
-            10px;
 
     }
 
@@ -3072,13 +2999,13 @@ body::before {
 
 <footer class="journal-footer">
 
-    <span>
-        ZENENE
-    </span>
+    <div class="script">
+        be gentle with yourself.
+    </div>
 
-    <span>
-        A LITTLE SPACE FOR YOURSELF.
-    </span>
+    <p>
+        zenene · where your mind blooms
+    </p>
 
 </footer>
 

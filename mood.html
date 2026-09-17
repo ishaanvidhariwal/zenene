@@ -24,7 +24,7 @@
   >
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IM+Fell+DW+Pica:ital@0;1&family=Special+Elite&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
     rel="stylesheet"
   >
 
@@ -38,11 +38,11 @@
 
     :root {
 
-      --sky: #BFD8E4;
-      --sky-light: #E8F1F4;
-      --sky-deep: #91B6C5;
+      --sky: #C9DFEA;
+      --sky-light: #E8F2F5;
+      --sky-deep: #9EBFCC;
 
-      --cream: #F4F0E8;
+      --cream: #F7F1E7;
       --paper: #FFFDF8;
 
       --sage: #D9E3D5;
@@ -71,9 +71,8 @@
         serif;
 
       --script:
-        "IM Fell DW Pica",
-        Georgia,
-        serif;
+        "Dancing Script",
+        cursive;
 
     }
 
@@ -101,37 +100,6 @@
       overflow-x: hidden;
 
       background-color: var(--cream);
-
-      background-image:
-
-        radial-gradient(
-          circle,
-          rgba(98, 79, 67, .055) 1px,
-          transparent 1.5px
-        ),
-
-        linear-gradient(
-          rgba(98, 79, 67, .025) 1px,
-          transparent 1px
-        ),
-
-        linear-gradient(
-          90deg,
-          rgba(98, 79, 67, .025) 1px,
-          transparent 1px
-        );
-
-      background-size:
-        26px 26px,
-        52px 52px,
-        52px 52px;
-
-      background-position:
-        0 0,
-        0 0,
-        0 0;
-
-      background-attachment: fixed;
 
     }
 
@@ -235,7 +203,7 @@
 
 
     .nav-links a:hover {
-      color: var(--rose-deep);
+      color: var(--ink);
     }
 
 
@@ -261,7 +229,9 @@
 
       height: 1px;
 
-      background: var(--rose-deep);
+      background: var(--brown);
+
+      opacity: .5;
 
     }
 
@@ -293,16 +263,82 @@
 
     .page-header {
 
-      display: grid;
-
-      grid-template-columns:
-        1.1fr .9fr;
-
-      gap: 60px;
-
-      align-items: end;
-
       margin-bottom: 70px;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+    .page-header::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 520px;
+      height: 520px;
+
+      top: -240px;
+      left: -140px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          var(--sky-light),
+          transparent 70%
+        );
+
+      filter: blur(10px);
+
+      pointer-events: none;
+
+      z-index: 0;
+
+    }
+
+
+    .page-header::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 380px;
+      height: 380px;
+
+      top: 30px;
+      right: 4%;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          var(--rose),
+          transparent 70%
+        );
+
+      opacity: .55;
+
+      filter: blur(10px);
+
+      pointer-events: none;
+
+      z-index: 0;
+
+    }
+
+
+    .page-header > * {
+
+      position: relative;
+
+      z-index: 1;
 
     }
 
@@ -332,14 +368,14 @@
 
       font-size:
         clamp(
-          4rem,
-          8vw,
-          7rem
+          5.5rem,
+          14vw,
+          15rem
         );
 
       font-weight: 400;
 
-      line-height: .85;
+      line-height: .82;
 
       letter-spacing: -.04em;
 
@@ -361,11 +397,19 @@
 
     .intro {
 
-      max-width: 400px;
+      max-width: 380px;
+
+      margin-left: auto;
+
+      margin-top: 60px;
+
+      padding-left: 26px;
+
+      border-left: 2px solid var(--rose-deep);
 
       font-family: var(--serif);
 
-      font-size: 1.25rem;
+      font-size: 1.15rem;
 
       line-height: 1.45;
 
@@ -378,7 +422,24 @@
        MOOD CHECK-IN
        ===================================================== */
 
+    .mood-shell {
+
+      display: grid;
+
+      grid-template-columns: 1fr 340px;
+
+      gap: 40px;
+
+      align-items: start;
+
+    }
+
+
     .checkin {
+
+      grid-column: 1;
+
+      order: 1;
 
       position: relative;
 
@@ -395,6 +456,8 @@
       border:
         1px solid
         rgba(98,79,67,.11);
+
+      border-radius: 16px;
 
       box-shadow:
         0 24px 70px
@@ -436,28 +499,6 @@
     }
 
 
-    .checkin::before {
-
-      content: "";
-
-      position: absolute;
-
-      top: -10px;
-
-      right: 30px;
-
-      width: 80px;
-      height: 20px;
-
-      background:
-        rgba(231,201,205,.65);
-
-      transform:
-        rotate(2deg);
-
-      z-index: 2;
-
-    }
 
 
     .checkin-label {
@@ -547,6 +588,8 @@
         1px solid
         rgba(98,79,67,.12);
 
+      border-radius: 10px;
+
       background:
         rgba(247,241,231,.72);
 
@@ -627,7 +670,7 @@
 
     /* =====================================================
        MOOD SPRITE
-       assets/images/mood.png
+       assets/images/moods.png
        ===================================================== */
 
     .mood-icon {
@@ -637,7 +680,7 @@
       height: 66px;
 
       background-image:
-        url("assets/images/mood.png");
+        url("assets/images/moods.png");
 
       background-size:
         300% 300%;
@@ -722,8 +765,10 @@
 
       border: none;
 
+      border-radius: 8px;
+
       background:
-        var(--brown-dark);
+        var(--rose-deep);
 
       color:
         var(--paper);
@@ -753,7 +798,7 @@
     .save-button:hover {
 
       background:
-        var(--rose-deep);
+        var(--brown-dark);
 
       transform:
         translateY(-2px);
@@ -801,13 +846,16 @@
     .section-heading span {
 
       font-family:
-        var(--script);
+        var(--serif);
+
+      font-style:
+        italic;
 
       color:
         var(--rose-deep);
 
       font-size:
-        1.4rem;
+        1.3rem;
 
     }
 
@@ -825,6 +873,8 @@
           rgba(217,227,213,.92),
           rgba(232,241,244,.88)
         );
+
+      border-radius: 14px;
 
       padding: 38px;
 
@@ -939,7 +989,7 @@
         10px;
 
       background-image:
-        url("assets/images/mood.png");
+        url("assets/images/moods.png");
 
       background-size:
         300% 300%;
@@ -997,7 +1047,20 @@
 
     .history-section {
 
+      grid-column: 1;
+
+      order: 2;
+
       margin-bottom: 60px;
+
+    }
+
+
+    .week-section {
+
+      grid-column: 2;
+
+      order: 1;
 
     }
 
@@ -1262,7 +1325,7 @@
       height: 30px;
 
       background-image:
-        url("assets/images/mood.png");
+        url("assets/images/moods.png");
 
       background-size:
         300% 300%;
@@ -1399,10 +1462,13 @@
       text-align: center;
 
       font-family:
-        var(--script);
+        var(--serif);
+
+      font-style:
+        italic;
 
       font-size:
-        1.25rem;
+        1.15rem;
 
       color:
         var(--brown);
@@ -1433,9 +1499,12 @@
       text-align: center;
 
       font-family:
-        var(--script);
+        var(--serif);
 
-      font-size: 1.5rem;
+      font-style:
+        italic;
+
+      font-size: 1.4rem;
 
       color:
         var(--brown);
@@ -1449,14 +1518,18 @@
 
     .stats {
 
+      grid-column: 2;
+
+      order: 2;
+
       display: grid;
 
       grid-template-columns:
-        repeat(3, 1fr);
+        1fr;
 
-      gap: 18px;
+      gap: 14px;
 
-      margin-bottom: 60px;
+      margin-bottom: 0;
 
     }
 
@@ -1469,6 +1542,8 @@
       border:
         1px solid
         rgba(98,79,67,.1);
+
+      border-radius: 14px;
 
       padding: 30px;
 
@@ -1530,10 +1605,13 @@
     .stat-small {
 
       font-family:
-        var(--script);
+        var(--serif);
+
+      font-style:
+        italic;
 
       font-size:
-        1.15rem;
+        1.05rem;
 
       color:
         var(--rose-deep);
@@ -1549,14 +1627,20 @@
 
     .insight {
 
+      grid-column: 2;
+
+      order: 3;
+
       display: grid;
 
       grid-template-columns:
-        1fr 1fr;
+        1fr;
 
-      gap: 30px;
+      gap: 20px;
 
-      margin-bottom: 70px;
+      margin-top: 20px;
+
+      margin-bottom: 0;
 
     }
 
@@ -1567,6 +1651,8 @@
 
       background:
         var(--lavender);
+
+      border-radius: 14px;
 
       min-height: 260px;
 
@@ -1652,6 +1738,8 @@
       border:
         1px solid
         rgba(98,79,67,.1);
+
+      border-radius: 14px;
 
     }
 
@@ -1758,10 +1846,13 @@
     footer .script {
 
       font-family:
-        var(--script);
+        var(--serif);
+
+      font-style:
+        italic;
 
       font-size:
-        1.7rem;
+        1.4rem;
 
       margin-bottom: 10px;
 
@@ -1863,6 +1954,13 @@
           );
 
         padding-top: 55px;
+
+      }
+
+
+      .mood-shell {
+
+        grid-template-columns: 1fr;
 
       }
 
@@ -2119,6 +2217,8 @@
     </header>
 
 
+    <div class="mood-shell">
+
     <!-- ===================================================
          MOOD CHECK-IN
          =================================================== -->
@@ -2269,7 +2369,7 @@
          YOUR WEEK
          =================================================== -->
 
-    <section class="fade-up delay-2">
+    <section class="week-section fade-up delay-2">
 
       <div class="section-heading">
 
@@ -2550,6 +2650,8 @@
       </div>
 
     </section>
+
+    </div>
 
 
   </main>

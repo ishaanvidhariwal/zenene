@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Special+Elite&display=swap"
 rel="stylesheet"
 >
 
@@ -47,7 +47,8 @@ rel="stylesheet"
 
   --typewriter: "Special Elite", "Courier New", monospace;
   --serif: "Cormorant Garamond", Georgia, serif;
-  --script: "Dancing Script", cursive;
+  --heading: "Bricolage Grotesque", sans-serif;
+  --script: var(--heading);
 
 }
 
@@ -234,80 +235,9 @@ body::before {
 
   margin-bottom: 55px;
 
-  position: relative;
+  padding-bottom: 40px;
 
-  overflow: hidden;
-
-}
-
-
-.page-header::before {
-
-  content: "";
-
-  position: absolute;
-
-  width: 520px;
-  height: 520px;
-
-  top: -240px;
-  left: -140px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      var(--rose),
-      transparent 70%
-    );
-
-  filter: blur(10px);
-
-  pointer-events: none;
-
-  z-index: 0;
-
-}
-
-
-.page-header::after {
-
-  content: "";
-
-  position: absolute;
-
-  width: 380px;
-  height: 380px;
-
-  top: 30px;
-  right: 4%;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      var(--sage),
-      transparent 70%
-    );
-
-  opacity: .55;
-
-  filter: blur(10px);
-
-  pointer-events: none;
-
-  z-index: 0;
-
-}
-
-
-.page-header > * {
-
-  position: relative;
-
-  z-index: 1;
+  border-bottom: 1px solid rgba(98,79,67,.12);
 
 }
 
@@ -333,26 +263,24 @@ h1 {
 
   margin: 0;
 
-  font-family: var(--serif);
+  font-family: var(--heading);
 
-  font-size: clamp(5.5rem, 14vw, 15rem);
+  font-size: clamp(3.6rem, 8vw, 7rem);
 
-  font-weight: 300;
+  font-weight: 700;
 
-  line-height: .82;
+  line-height: .95;
 
-  letter-spacing: -.04em;
+  letter-spacing: -.03em;
+
+  max-width: 14ch;
 
 }
 
 
 h1 em {
 
-  font-family: var(--script);
-
-  font-size: .7em;
-
-  font-weight: 500;
+  font-style: normal;
 
   color: var(--rose-deep);
 
@@ -361,17 +289,13 @@ h1 em {
 
 .intro {
 
-  max-width: 380px;
+  max-width: 420px;
 
-  margin-left: auto;
-
-  margin-top: 60px;
-
-  padding-left: 26px;
-
-  border-left: 2px solid var(--rose-deep);
+  margin-top: 22px;
 
   font-family: var(--serif);
+
+  font-style: italic;
 
   font-size: 1.15rem;
 
@@ -474,13 +398,15 @@ h1 em {
 
   margin: 0 0 15px;
 
-  font-family: var(--serif);
+  font-family: var(--heading);
 
-  font-size: clamp(2.3rem, 5vw, 4rem);
+  font-size: clamp(1.9rem, 4vw, 3rem);
 
-  line-height: .95;
+  line-height: 1.02;
 
-  font-weight: 300;
+  font-weight: 700;
+
+  letter-spacing: -.02em;
 
 }
 
@@ -747,13 +673,15 @@ h1 em {
 
 .article-title {
 
-  font-family: var(--serif);
+  font-family: var(--heading);
 
-  font-size: 1.55rem;
+  font-size: 1.25rem;
 
-  line-height: 1.05;
+  line-height: 1.15;
 
-  font-weight: 400;
+  font-weight: 700;
+
+  letter-spacing: -.01em;
 
   margin-bottom: 14px;
 
@@ -946,13 +874,15 @@ h1 em {
 
   max-width: 620px;
 
-  font-family: var(--serif);
+  font-family: var(--heading);
 
-  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
 
-  line-height: .95;
+  line-height: 1.05;
 
-  font-weight: 300;
+  font-weight: 700;
+
+  letter-spacing: -.02em;
 
   margin-bottom: 14px;
 
@@ -1144,6 +1074,46 @@ h1 em {
 
   }
 
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+
+  text-align: center;
+
+  padding: 20px 20px 30px;
+
+  color: var(--brown);
+}
+
+
+footer .script {
+
+  font-family: var(--serif);
+
+  font-style: italic;
+
+  font-size: 1.4rem;
+
+  margin-bottom: 10px;
+}
+
+
+footer p {
+
+  font-family: var(--typewriter);
+
+  font-size: .55rem;
+
+  letter-spacing: .1em;
+
+  text-transform: uppercase;
+
+  color: var(--muted, var(--brown));
 }
 
 
@@ -1513,6 +1483,23 @@ id="articleGrid"
 
 
 </main>
+
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
+<footer>
+
+    <div class="script">
+        be gentle with yourself.
+    </div>
+
+    <p>
+        zenene · where your mind blooms
+    </p>
+
+</footer>
 
 
 <!-- =======================================================

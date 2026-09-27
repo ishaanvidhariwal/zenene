@@ -4334,7 +4334,7 @@ body::before {
             Mood
           </a>
 
-          <a href="chat.html">
+          <a href="vera.html">
             Vera
           </a>
 
@@ -4381,11 +4381,11 @@ body::before {
           © 2026 Zenene
         </span>
 
-        <a href="#">
+        <a href="privacy.html">
           Privacy
         </a>
 
-        <a href="#">
+        <a href="terms.html">
           Terms
         </a>
 
@@ -4413,7 +4413,7 @@ body::before {
 
     <a href="explore.html" class="dock-item">explore</a>
 
-    <a href="chat.html" class="dock-item">vera</a>
+    <a href="vera.html" class="dock-item">vera</a>
 
     <a href="calm.html" class="dock-item">calm</a>
 
@@ -4558,6 +4558,14 @@ authOpenBtn.addEventListener("click", (e) => {
 authCloseBtn.addEventListener("click", closeAuthModal);
 
 refreshNavAuthState();
+
+// Lets other pages' "sign in" nav link deep-link here, e.g. index.html?auth=login
+const authDeepLink = new URLSearchParams(window.location.search).get("auth");
+
+if (authDeepLink === "login" || authDeepLink === "signup") {
+  showAuthTab(authDeepLink);
+  openAuthModal();
+}
 
 authOverlay.addEventListener("click", (e) => {
   if (e.target === authOverlay) closeAuthModal();

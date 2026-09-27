@@ -2064,6 +2064,81 @@
     }
 
 
+    /* =========================================================
+       CRISIS
+       ========================================================= */
+
+    .crisis-fab {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.8rem;
+      z-index: 200;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 16px 16px 16px 4px;
+      background: var(--sky);
+      color: var(--brown-dark);
+      font-family: var(--typewriter);
+      font-size: .62rem;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(47,43,39,.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .overlay.open { display: flex; }
+
+    .overlay .modal {
+      width: min(420px, 100%);
+      padding: 30px;
+      background: var(--cream);
+      border-radius: 20px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.2);
+    }
+
+    .overlay .m-close {
+      float: right;
+      border: none;
+      background: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .overlay .m-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+    }
+
+    .overlay .m-sub {
+      font-family: var(--typewriter);
+      font-size: .65rem;
+      line-height: 1.7;
+      color: var(--brown);
+      margin: 8px 0 20px;
+    }
+
+    .overlay .c-link {
+      display: block;
+      padding: 13px;
+      margin-top: 8px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.65);
+      text-decoration: none;
+      color: var(--brown-dark);
+      font-family: var(--typewriter);
+      font-size: .65rem;
+    }
+
+
   </style>
 
 </head>
@@ -2110,6 +2185,10 @@
 
       <a href="calm.html">
         calm
+      </a>
+
+      <a href="profile.html" id="navAuthLink">
+        sign in
       </a>
 
     </div>
@@ -2613,12 +2692,35 @@
 
 
   <!-- =====================================================
+       CRISIS
+       ===================================================== -->
+
+  <button class="crisis-fab" onclick="document.getElementById('cm').classList.add('open')">
+    💙 need help?
+  </button>
+
+  <div class="overlay" id="cm" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="m-close" onclick="document.getElementById('cm').classList.remove('open')">×</button>
+      <div class="m-title">You're not alone.</div>
+      <div class="m-sub">
+        If you need immediate support,
+        please reach out to a trusted adult
+        or an appropriate local emergency/crisis service.
+      </div>
+      <a class="c-link" href="tel:112">📞 Local emergency support</a>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
        JAVASCRIPT
        ===================================================== -->
 
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/nav-auth.js"></script>
 
   <script>
 

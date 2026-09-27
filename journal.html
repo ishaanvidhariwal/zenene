@@ -841,15 +841,44 @@ body::before {
         0 auto 10px;
 
     display:
-        block;
+        flex;
 
-    object-fit:
-        contain;
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    font-size:
+        34px;
+
+    line-height:
+        1;
+
+    box-shadow:
+        inset 0 0 12px rgba(255,255,255,0.35);
 
     transition:
         transform 0.25s ease;
 
 }
+
+.mood-option:hover .face {
+    transform: scale(1.05);
+}
+
+.face-angry      { background: #e7aaa0; }
+.face-happy      { background: #f5c982; }
+.face-veryhappy  { background: #f1e38e; }
+.face-loved      { background: #e9b6bc; }
+.face-okay       { background: #e9ddc7; }
+.face-excited    { background: #d8e68e; }
+.face-sad        { background: #d6cbe3; }
+.face-upset      { background: #b9cee4; }
+.face-surprised  { background: #bddcae; }
 
 
 
@@ -2302,6 +2331,9 @@ body::before {
         height:
             65px;
 
+        font-size:
+            28px;
+
     }
 
     .section-heading {
@@ -2464,6 +2496,81 @@ body::before {
 
 }
 
+
+/* =========================================================
+   CRISIS
+   ========================================================= */
+
+.crisis-fab {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.8rem;
+  z-index: 200;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 16px 16px 16px 4px;
+  background: var(--blue);
+  color: var(--brown-dark);
+  font-family: var(--typewriter);
+  font-size: .62rem;
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(47,43,39,.4);
+  backdrop-filter: blur(10px);
+}
+
+.overlay.open { display: flex; }
+
+.overlay .modal {
+  width: min(420px, 100%);
+  padding: 30px;
+  background: var(--cream);
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.2);
+}
+
+.overlay .m-close {
+  float: right;
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.overlay .m-title {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+}
+
+.overlay .m-sub {
+  font-family: var(--typewriter);
+  font-size: .65rem;
+  line-height: 1.7;
+  color: var(--brown);
+  margin: 8px 0 20px;
+}
+
+.overlay .c-link {
+  display: block;
+  padding: 13px;
+  margin-top: 8px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.65);
+  text-decoration: none;
+  color: var(--brown-dark);
+  font-family: var(--typewriter);
+  font-size: .65rem;
+}
+
 </style>
 
 </head>
@@ -2510,6 +2617,10 @@ body::before {
 
         <a href="calm.html">
             calm
+        </a>
+
+        <a href="profile.html" id="navAuthLink">
+            sign in
         </a>
 
     </div>
@@ -2656,11 +2767,7 @@ body::before {
             data-mood="Angry"
         >
 
-            <img
-                class="face"
-                src="assets/moods/angry.png"
-                alt="Angry"
-            >
+            <div class="face face-angry">😠</div>
 
             <span class="mood-name">
                 ANGRY
@@ -2675,11 +2782,7 @@ body::before {
             data-mood="Happy"
         >
 
-            <img
-                class="face"
-                src="assets/moods/happy.png"
-                alt="Happy"
-            >
+            <div class="face face-happy">🙂</div>
 
             <span class="mood-name">
                 HAPPY
@@ -2694,11 +2797,7 @@ body::before {
             data-mood="Very Happy"
         >
 
-            <img
-                class="face"
-                src="assets/moods/joyful.png"
-                alt="Joyful"
-            >
+            <div class="face face-veryhappy">😄</div>
 
             <span class="mood-name">
                 JOYFUL
@@ -2713,11 +2812,7 @@ body::before {
             data-mood="Loved"
         >
 
-            <img
-                class="face"
-                src="assets/moods/loved.png"
-                alt="Loved"
-            >
+            <div class="face face-loved">🥰</div>
 
             <span class="mood-name">
                 LOVED
@@ -2732,11 +2827,7 @@ body::before {
             data-mood="Okay"
         >
 
-            <img
-                class="face"
-                src="assets/moods/okay.png"
-                alt="Okay"
-            >
+            <div class="face face-okay">😐</div>
 
             <span class="mood-name">
                 OKAY
@@ -2751,11 +2842,7 @@ body::before {
             data-mood="Excited"
         >
 
-            <img
-                class="face"
-                src="assets/moods/excited.png"
-                alt="Excited"
-            >
+            <div class="face face-excited">🤩</div>
 
             <span class="mood-name">
                 EXCITED
@@ -2770,11 +2857,7 @@ body::before {
             data-mood="Sad"
         >
 
-            <img
-                class="face"
-                src="assets/moods/sad.png"
-                alt="Sad"
-            >
+            <div class="face face-sad">😔</div>
 
             <span class="mood-name">
                 SAD
@@ -2789,11 +2872,7 @@ body::before {
             data-mood="Crying"
         >
 
-            <img
-                class="face"
-                src="assets/moods/upset.png"
-                alt="Upset"
-            >
+            <div class="face face-upset">😢</div>
 
             <span class="mood-name">
                 UPSET
@@ -2808,11 +2887,7 @@ body::before {
             data-mood="Surprised"
         >
 
-            <img
-                class="face"
-                src="assets/moods/surprised.png"
-                alt="Surprised"
-            >
+            <div class="face face-surprised">😲</div>
 
             <span class="mood-name">
                 SURPRISED
@@ -3129,9 +3204,32 @@ body::before {
 </div>
 
 
+<!-- ======================================================
+     CRISIS
+     ====================================================== -->
+
+<button class="crisis-fab" onclick="document.getElementById('cm').classList.add('open')">
+  💙 need help?
+</button>
+
+<div class="overlay" id="cm" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <button class="m-close" onclick="document.getElementById('cm').classList.remove('open')">×</button>
+    <div class="m-title">You're not alone.</div>
+    <div class="m-sub">
+      If you need immediate support,
+      please reach out to a trusted adult
+      or an appropriate local emergency/crisis service.
+    </div>
+    <a class="c-link" href="tel:112">📞 Local emergency support</a>
+  </div>
+</div>
+
+
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script src="js/supabase.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/nav-auth.js"></script>
 
 <script>
 

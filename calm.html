@@ -1,1894 +1,1226 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="theme-color" content="#E8F2F5">
   <title>Zenene — Calm</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Special+Elite&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Special+Elite&family=Pinyon+Script&display=swap" rel="stylesheet">
 
   <style>
-
-    /* =========================================================
-       ZENENE — CALM
-       ========================================================= */
-
     :root {
-
       --sky: #C9DFEA;
       --sky-light: #E8F2F5;
       --sky-deep: #9EBFCC;
-
       --cream: #F7F1E7;
       --paper: #FFFDF8;
-
       --sage: #D8E4D7;
       --sage-deep: #72866E;
-
       --rose: #E7C9CD;
       --rose-deep: #B97880;
-
       --lavender: #DCD8E8;
-
       --peach: #EED9C8;
-      --peach-deep: #C99576;
-
       --brown: #624F43;
       --brown-dark: #392D26;
       --ink: #2F2B27;
-
       --typewriter: "Special Elite", "Courier New", monospace;
       --serif: "Cormorant Garamond", Georgia, serif;
       --heading: "Bricolage Grotesque", sans-serif;
-      --script: var(--heading);
+      --script: "Pinyon Script", cursive;
+      --line: rgba(98, 79, 67, .15);
+      --shadow: 0 12px 35px rgba(57, 45, 38, .055);
     }
 
-
-    /* =========================================================
-       RESET
-       ========================================================= */
-
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 90px;
     }
 
     body {
-
       margin: 0;
-
-      background: var(--cream);
-
+      background: var(--sky-light);
       color: var(--ink);
-
+      font-family: var(--serif);
       overflow-x: hidden;
-
-      padding-bottom: 60px;
+      min-height: 100vh;
     }
 
-
-    /* =========================================================
-       PAPER GRAIN
-       ========================================================= */
-
-    body::before {
-
-      content: "";
-
-      position: fixed;
-
-      inset: 0;
-
-      pointer-events: none;
-
-      z-index: 9999;
-
-      opacity: .045;
-
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    button, input { font: inherit; }
+    button { color: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 2px solid var(--sage-deep);
+      outline-offset: 4px;
     }
 
-
-    /* =========================================================
-       NAVIGATION — SAME AS MOOD / JOURNAL
-       ========================================================= */
+    /* NAVIGATION */
 
     .top-nav {
-
       position: sticky;
-
       top: 0;
-
       z-index: 500;
-
+      min-height: 70px;
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
-      padding: 20px 34px;
-
-      background: rgba(247,241,231,.78);
-
-      backdrop-filter: blur(18px);
-
-      border-bottom: 1px solid rgba(98,79,67,.08);
+      gap: 24px;
+      padding: 14px max(28px, calc((100vw - 1200px) / 2));
+      background: rgba(232, 242, 245, .92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(98, 79, 67, .1);
     }
-
 
     .nav-wordmark {
-
-      font-family: var(--typewriter);
-
-      font-size: .78rem;
-
+      flex-shrink: 0;
+      font: .8rem var(--typewriter);
       letter-spacing: .16em;
-
       text-transform: uppercase;
     }
-
 
     .nav-links {
-
       display: flex;
-
-      gap: 28px;
-
       align-items: center;
+      gap: clamp(12px, 2vw, 27px);
     }
-
 
     .nav-links a {
-
-      color: var(--brown);
-
-      text-decoration: none;
-
-      font-family: var(--typewriter);
-
-      font-size: .65rem;
-
-      letter-spacing: .08em;
-
-      text-transform: uppercase;
-
-      transition: .3s ease;
-    }
-
-
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-
-
-    .nav-links .active {
-
-      color: var(--ink);
-
       position: relative;
+      color: var(--brown);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .055em;
+      font: .62rem var(--typewriter);
+      white-space: nowrap;
+      transition: color .2s ease;
     }
 
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--ink); }
 
-    .nav-links .active::after {
-
+    .nav-links a.active::after {
       content: "";
-
       position: absolute;
-
+      bottom: -8px;
       left: 0;
-      right: 0;
-
-      bottom: -7px;
-
+      width: 100%;
       height: 1px;
-
       background: var(--brown);
-
-      opacity: .5;
     }
 
-
-    /* =========================================================
-       PAGE
-       ========================================================= */
+    /* PAGE LAYOUT */
 
     .page {
-
-      width: min(1180px, calc(100% - 48px));
-
-      margin: auto;
-
-      padding: 70px 0 100px;
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 48px 0 52px;
     }
-
-
-    /* =========================================================
-       HEADER
-       ========================================================= */
 
     .page-header {
-
-      margin-bottom: 55px;
-
-      padding-bottom: 40px;
-
-      border-bottom: 1px solid rgba(98,79,67,.12);
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: end;
+      gap: 38px;
+      padding: 10px 0 30px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      animation: rise .5s ease both;
     }
 
-
-    .eyebrow {
-
-      font-family: var(--typewriter);
-
-      font-size: .65rem;
-
-      letter-spacing: .17em;
-
-      text-transform: uppercase;
-
+    .eyebrow, .section-kicker {
+      margin: 0 0 13px;
       color: var(--brown);
-
-      margin-bottom: 18px;
+      font: .62rem var(--typewriter);
+      letter-spacing: .15em;
+      text-transform: uppercase;
     }
-
 
     h1 {
-
       margin: 0;
-
-      font-family: var(--heading);
-
-      font-size: clamp(3.6rem, 8vw, 7rem);
-
-      font-weight: 700;
-
-      line-height: .95;
-
-      letter-spacing: -.03em;
-
-      max-width: 14ch;
+      max-width: 700px;
+      font: 700 clamp(3.7rem, 8vw, 6.8rem)/.83 var(--heading);
+      letter-spacing: -.065em;
     }
-
 
     h1 em {
-
-      font-style: normal;
-
       color: var(--rose-deep);
+      font-style: normal;
     }
-
 
     .intro {
-
-      max-width: 420px;
-
-      margin-top: 22px;
-
-      font-family: var(--serif);
-
-      font-style: italic;
-
-      font-size: 1.15rem;
-
-      line-height: 1.45;
-
+      max-width: 355px;
+      margin: 0 0 4px auto;
       color: var(--brown);
+      font: italic 1.25rem/1.45 var(--serif);
     }
 
+    .intro-script {
+      display: block;
+      margin-top: 8px;
+      color: var(--sage-deep);
+      font: 2rem var(--script);
+    }
 
-    /* =========================================================
-       CALM TABS
-       ========================================================= */
+    /* TOOL NAVIGATION */
 
     .calm-shell {
-
       display: grid;
-
-      grid-template-columns: 200px 1fr;
-
-      gap: 40px;
-
+      grid-template-columns: 178px minmax(0, 1fr);
       align-items: start;
+      gap: 24px;
     }
 
+    .calm-sidebar {
+      position: sticky;
+      top: 92px;
+      padding: 20px 14px;
+      background: rgba(255, 253, 248, .56);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .sidebar-label {
+      margin: 0 0 15px 8px;
+      font: .56rem var(--typewriter);
+      color: var(--brown);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
 
     .calm-tabs {
-
       display: flex;
-
       flex-direction: column;
-
-      gap: 6px;
-
-      position: sticky;
-
-      top: 90px;
+      gap: 5px;
     }
-
-
-    .calm-content {
-
-      min-width: 0;
-    }
-
 
     .c-tab {
-
-      border: none;
-
-      border-left: 2px solid transparent;
-
-      background: none;
-
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 12px 10px;
+      border: 1px solid transparent;
+      border-radius: 7px;
+      background: transparent;
       text-align: left;
-
-      padding: 10px 0 10px 16px;
-
-      cursor: pointer;
-
-      font-family: var(--typewriter);
-
-      font-size: .62rem;
-
-      letter-spacing: .06em;
-
-      text-transform: uppercase;
-
       color: var(--brown);
-
-      transition:
-        color .3s ease,
-        border-color .3s ease;
+      font: .66rem var(--typewriter);
+      cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
     }
-
 
     .c-tab:hover {
-
+      background: rgba(255, 253, 248, .8);
       color: var(--ink);
     }
-
 
     .c-tab.active {
-
-      border-left-color: var(--rose-deep);
-
+      background: var(--paper);
       color: var(--ink);
-      font-weight: 700;
+      border-color: var(--line);
+      box-shadow: 0 3px 12px rgba(57, 45, 38, .035);
     }
-
 
     .tab-icon {
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 7px;
+      background: var(--sky-light);
+      font-size: 1rem;
+    }
 
+    .c-tab:nth-child(2) .tab-icon { background: #F5E5E5; }
+    .c-tab:nth-child(3) .tab-icon { background: #E6EBDD; }
+
+    .sidebar-note {
+      margin: 24px 6px 0;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+      color: var(--brown);
+      font: italic 1.05rem/1.4 var(--serif);
+    }
+
+    .sidebar-note span {
       display: block;
-
-      font-size: 1.45rem;
-
-      margin-bottom: 7px;
+      margin-top: 7px;
+      color: var(--sage-deep);
+      font: 1.5rem var(--script);
     }
 
+    .calm-content { min-width: 0; }
 
-    /* =========================================================
-       PANELS
-       ========================================================= */
-
-    .panel {
-
-      display: none;
-    }
-
+    .panel { display: none; }
 
     .panel.active {
-
       display: block;
-
-      animation: fadeUp .5s ease forwards;
+      animation: rise .3s ease both;
     }
 
-
-    @keyframes fadeUp {
-
-      from {
-
-        opacity: 0;
-
-        transform: translateY(20px);
-      }
-
-      to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-      }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(9px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
+    /* SHARED SECTION HEADING */
 
-    /* =========================================================
-       BREATHING
-       ========================================================= */
+    .tool-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 0 0 16px;
+    }
+
+    .tool-heading h2 {
+      margin: 0;
+      font: 600 clamp(1.8rem, 3vw, 2.5rem)/1 var(--heading);
+      letter-spacing: -.045em;
+    }
+
+    .tool-heading p {
+      max-width: 260px;
+      margin: 0;
+      color: var(--brown);
+      text-align: right;
+      font: italic 1rem/1.35 var(--serif);
+    }
+
+    /* BREATHING */
 
     .breath-card {
-
+      padding: 27px 30px 25px;
       background: var(--paper);
-
-      border: 1px solid rgba(98,79,67,.12);
-
-      border-radius: 16px;
-
-      box-shadow:
-        0 20px 60px rgba(98,79,67,.06);
-
-      padding: 50px;
-
-      position: relative;
-
-      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
     }
 
-
-
+    .breath-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding-bottom: 17px;
+      border-bottom: 1px solid var(--line);
+    }
 
     .breath-label {
-
-      font-family: var(--typewriter);
-
-      font-size: .62rem;
-
-      text-transform: uppercase;
-
-      letter-spacing: .12em;
-
       color: var(--brown);
-
-      margin-bottom: 35px;
-
-      text-align: center;
+      font: .59rem var(--typewriter);
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
+    .breath-method {
+      padding: 6px 9px;
+      border-radius: 5px;
+      background: var(--sky-light);
+      color: var(--brown);
+      font: .56rem var(--typewriter);
+    }
 
     .breath-area {
-
       display: flex;
-
       flex-direction: column;
-
       align-items: center;
+      padding-top: 28px;
     }
-
 
     .breath-ring {
-
       position: relative;
-
-      width: 230px;
-
-      height: 230px;
-
-      margin-bottom: 30px;
+      width: 210px;
+      height: 210px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 22px;
     }
 
+    .breath-outer, .breath-mid, .breath-circle {
+      position: absolute;
+      border-radius: 50%;
+    }
 
     .breath-outer {
-
-      position: absolute;
-
       inset: 0;
-
-      border-radius: 50%;
-
-      border: 1px solid rgba(114,134,110,.3);
+      border: 1px solid rgba(114, 134, 110, .35);
     }
-
 
     .breath-mid {
-
-      position: absolute;
-
-      inset: 18px;
-
-      border-radius: 50%;
-
-      border: 1px solid rgba(114,134,110,.22);
+      inset: 15px;
+      border: 1px solid rgba(114, 134, 110, .23);
     }
-
 
     .breath-circle {
-
-      position: absolute;
-
-      inset: 38px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle at 40% 35%,
-          var(--sky),
-          var(--rose)
-        );
-
+      inset: 34px;
       display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
       flex-direction: column;
-
-      gap: 3px;
-
-      transition:
-        transform .6s ease,
-        box-shadow .6s ease;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background: var(--sky);
+      transition: transform 1s ease-in-out, box-shadow 1s ease-in-out;
+      will-change: transform;
     }
-
 
     .breath-word {
-
-      font-family: var(--serif);
-
-      font-style: italic;
-
-      font-size: 1.4rem;
-
-      color: var(--paper);
+      color: var(--brown-dark);
+      font: italic 1.5rem var(--serif);
     }
-
 
     .breath-count {
-
-      font-family: var(--typewriter);
-
-      font-size: .55rem;
-
-      color: rgba(255,255,255,.85);
-
+      color: var(--brown);
+      font: .6rem var(--typewriter);
       letter-spacing: .08em;
     }
-
 
     .breath-phase {
-
-      font-family: var(--heading);
-
-      font-size: 1.6rem;
-
-      font-weight: 700;
-
-      letter-spacing: -.01em;
-
-      margin-bottom: 10px;
+      margin: 0 0 9px;
+      text-align: center;
+      font: 600 1.55rem var(--heading);
+      letter-spacing: -.035em;
     }
-
 
     .breath-desc {
-
-      font-family: var(--serif);
-
-      font-size: 1.1rem;
-
-      line-height: 1.5;
-
+      max-width: 390px;
+      margin: 0 0 21px;
       color: var(--brown);
-
       text-align: center;
-
-      max-width: 500px;
-
-      margin-bottom: 28px;
+      font: 1.12rem/1.45 var(--serif);
     }
-
 
     .breath-btns {
-
       display: flex;
-
-      gap: 12px;
+      justify-content: center;
+      gap: 9px;
     }
-
 
     .b-btn {
-
-      border: none;
-
-      padding: 14px 28px;
-
-      font-family: var(--typewriter);
-
-      font-size: .62rem;
-
-      letter-spacing: .08em;
-
-      text-transform: uppercase;
-
+      min-width: 112px;
+      padding: 12px 20px;
+      border: 1px solid transparent;
+      border-radius: 5px;
       cursor: pointer;
-
-      transition: .3s ease;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      font: .6rem var(--typewriter);
+      transition: transform .2s, background .2s;
     }
 
+    .b-btn:hover { transform: translateY(-2px); }
 
     .b-start {
-
       background: var(--brown-dark);
-
       color: var(--paper);
     }
 
-
-    .b-start:hover {
-
-      background: var(--rose-deep);
-
-      transform: translateY(-2px);
-    }
-
+    .b-start:hover { background: var(--sage-deep); }
 
     .b-stop {
-
       background: var(--cream);
-
       color: var(--brown);
-
-      border: 1px solid rgba(98,79,67,.12);
+      border-color: var(--line);
     }
 
-
-    .b-stop:hover {
-
-      background: var(--rose);
-    }
-
+    .b-stop:hover { background: var(--rose); }
 
     .cycles-left {
-
-      font-family: var(--serif);
-
-      font-style: italic;
-
+      min-height: 20px;
+      margin-top: 14px;
       color: var(--rose-deep);
-
-      font-size: 1.05rem;
-
-      margin-top: 18px;
+      text-align: center;
+      font: italic 1rem var(--serif);
     }
 
+    .breath-reminder {
+      margin: 18px 0 0;
+      padding: 13px 15px;
+      border-radius: 6px;
+      background: var(--sky-light);
+      color: var(--brown);
+      font: italic 1rem/1.4 var(--serif);
+      text-align: center;
+    }
 
-    /* =========================================================
-       COLOR FLOW
-       ========================================================= */
+    /* COLOR FLOW */
 
     .color-card {
-
+      padding: 24px;
       background: var(--sage);
-
-      border: 1px solid rgba(98,79,67,.08);
-
-      border-radius: 16px;
-
-      padding: 38px;
+      border: 1px solid rgba(98, 79, 67, .1);
+      border-radius: 12px;
     }
-
-
-    .cf-area {
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-    }
-
 
     .cf-desc {
-
-      font-family: var(--serif);
-
-      font-size: 1.2rem;
-
+      margin: 0 0 18px;
       color: var(--brown-dark);
-
-      text-align: center;
-
-      margin-bottom: 25px;
+      font: italic 1.2rem/1.4 var(--serif);
     }
 
-
-    .cf-colors {
-
+    .cf-toolbar {
       display: flex;
-
-      gap: 12px;
-
-      justify-content: center;
-
-      margin-bottom: 20px;
-
       flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
     }
 
+    .toolbar-label {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--brown);
+      font: .54rem var(--typewriter);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .cf-colors, .cf-sizes {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
 
     .cc {
-
-      width: 31px;
-
-      height: 31px;
-
+      width: 25px;
+      height: 25px;
+      flex-shrink: 0;
+      border: 2px solid transparent;
       border-radius: 50%;
-
       cursor: pointer;
-
-      border: 3px solid transparent;
-
-      transition:
-        transform .2s ease,
-        border-color .2s ease;
+      transition: transform .15s, outline .15s;
     }
-
 
     .cc.sel {
-
-      transform: scale(1.2);
-
-      border-color: var(--paper);
+      outline: 2px solid var(--brown-dark);
+      outline-offset: 3px;
+      transform: scale(.88);
     }
-
-
-    .cf-sizes {
-
-      display: flex;
-
-      gap: 15px;
-
-      justify-content: center;
-
-      align-items: center;
-
-      margin-bottom: 10px;
-    }
-
 
     .cf-sz {
-
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      padding: 0;
+      border: 1px solid transparent;
       border-radius: 50%;
-
-      background: var(--brown);
-
+      background: transparent;
       cursor: pointer;
-
-      opacity: .35;
-
-      transition:
-        opacity .2s ease,
-        transform .2s ease;
     }
 
+    .cf-sz span {
+      display: block;
+      border-radius: 50%;
+      background: var(--brown);
+    }
 
     .cf-sz.sel {
-
-      opacity: 1;
-
-      transform: scale(1.15);
+      border-color: var(--brown);
+      background: rgba(255, 253, 248, .5);
     }
-
 
     canvas#cf {
-
-      border-radius: 0;
-
+      display: block;
       width: 100%;
-
-      max-width: 650px;
-
       height: auto;
-
-      touch-action: none;
-
-      cursor: crosshair;
-
+      aspect-ratio: 650 / 420;
+      margin: 15px 0;
       background: var(--paper);
-
-      border: 1px solid rgba(98,79,67,.1);
-
-      box-shadow:
-        0 15px 40px rgba(98,79,67,.08);
-
-      margin: 20px 0;
+      border: 1px solid rgba(98, 79, 67, .15);
+      border-radius: 5px;
+      cursor: crosshair;
+      touch-action: none;
     }
-
 
     .cf-actions {
-
       display: flex;
-
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-
 
     .cf-btn {
-
-      border: 1px solid rgba(98,79,67,.12);
-
+      padding: 11px 15px;
+      border: 1px solid rgba(98, 79, 67, .18);
+      border-radius: 5px;
       background: var(--paper);
-
       color: var(--brown);
-
-      padding: 12px 20px;
-
-      font-family: var(--typewriter);
-
-      font-size: .6rem;
-
-      letter-spacing: .06em;
-
-      text-transform: uppercase;
-
       cursor: pointer;
-
-      transition: .3s ease;
+      font: .58rem var(--typewriter);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: background .2s, transform .2s;
     }
-
 
     .cf-btn:hover {
-
-      background: var(--rose);
-
-      transform: translateY(-2px);
+      background: var(--cream);
+      transform: translateY(-1px);
     }
 
+    .cf-hint {
+      margin: 13px 0 0;
+      color: var(--brown);
+      font: italic .95rem var(--serif);
+    }
 
-    /* =========================================================
-       GRATITUDE
-       ========================================================= */
+    /* GRATITUDE */
 
     .gratitude {
-
       display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 30px;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+      align-items: stretch;
+      gap: 16px;
     }
 
-
-    .gg-card-main {
-
-      background: var(--paper);
-
-      border: 1px solid rgba(98,79,67,.1);
-
-      border-radius: 16px;
-
-      padding: 40px;
+    .gg-card-main, .garden-side {
+      min-width: 0;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
     }
 
+    .gg-card-main { background: var(--paper); }
 
     .gg-prompt {
-
-      font-family: var(--heading);
-
-      font-size: 1.7rem;
-
-      font-weight: 700;
-
-      letter-spacing: -.01em;
-
-      margin-bottom: 8px;
+      margin: 0 0 9px;
+      font: 600 1.8rem/1.05 var(--heading);
+      letter-spacing: -.04em;
     }
-
 
     .gg-sub {
-
-      font-family: var(--serif);
-
-      font-size: 1rem;
-
+      display: block;
+      margin: 0 0 22px;
       color: var(--brown);
-
-      line-height: 1.45;
-
-      margin-bottom: 30px;
+      font: 1.05rem/1.4 var(--serif);
     }
-
 
     .gg-items {
-
       display: flex;
-
       flex-direction: column;
-
-      gap: 12px;
-
-      margin-bottom: 25px;
+      gap: 9px;
+      margin-bottom: 16px;
     }
-
 
     .gg-inp-wrap {
-
       display: flex;
-
       align-items: center;
-
-      gap: 12px;
-
+      gap: 11px;
+      padding: 12px;
+      border: 1px solid rgba(98, 79, 67, .12);
+      border-radius: 6px;
       background: var(--cream);
-
-      border: 1px solid rgba(98,79,67,.08);
-
-      border-radius: 8px;
-
-      padding: 14px 16px;
-
-      transition: .3s ease;
+      transition: border-color .2s, background .2s;
     }
 
-
     .gg-inp-wrap:focus-within {
-
       border-color: var(--sky-deep);
-
       background: var(--sky-light);
     }
 
-
     .gg-num {
-
-      font-family: var(--serif);
-
-      font-style: italic;
-
-      font-size: 1.2rem;
-
       color: var(--rose-deep);
-
-      flex-shrink: 0;
+      font: italic 1.2rem var(--serif);
     }
-
 
     .gg-inp {
-
-      flex: 1;
-
-      border: none;
-
-      background: none;
-
-      font-family: var(--serif);
-
-      font-size: 1.1rem;
-
-      color: var(--ink);
-
+      width: 100%;
+      min-width: 0;
+      padding: 0;
+      border: 0;
       outline: none;
+      background: transparent;
+      color: var(--ink);
+      font: 1.05rem var(--serif);
     }
-
 
     .gg-inp::placeholder {
-
       color: var(--brown);
-
-      opacity: .5;
-
+      opacity: .58;
       font-style: italic;
     }
-
 
     .gg-save {
-
       width: 100%;
-
-      border: none;
-
-      border-radius: 8px;
-
+      padding: 13px 16px;
+      border: 0;
+      border-radius: 5px;
       background: var(--rose-deep);
-
       color: var(--paper);
-
-      padding: 15px 20px;
-
-      font-family: var(--typewriter);
-
-      font-size: .62rem;
-
-      letter-spacing: .08em;
-
-      text-transform: uppercase;
-
       cursor: pointer;
-
-      transition: .3s ease;
+      font: .59rem var(--typewriter);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      transition: background .2s;
     }
 
+    .gg-save:hover { background: var(--brown-dark); }
 
-    .gg-save:hover {
-
-      background: var(--brown-dark);
-
-      transform: translateY(-2px);
+    .gg-save:disabled {
+      cursor: wait;
+      opacity: .7;
     }
 
+    .sync-message {
+      display: block;
+      margin-top: 12px;
+      color: var(--rose-deep);
+      font: .95rem/1.4 var(--serif);
+    }
 
     .garden-side {
-
       background: var(--lavender);
-
-      border-radius: 16px;
-
-      padding: 40px;
-
-      min-height: 350px;
-
-      position: relative;
-
-      overflow: hidden;
     }
 
-
-    .garden-side::after {
-
-      content: "✽";
-
-      position: absolute;
-
-      right: 15px;
-
-      bottom: -5px;
-
-      font-family: var(--serif);
-
-      font-size: 8rem;
-
-      line-height: .7;
-
-      color: rgba(255,255,255,.4);
+    .garden-heading {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 17px;
+      margin-bottom: 17px;
+      border-bottom: 1px solid rgba(98, 79, 67, .16);
     }
-
 
     .garden-title {
-
-      font-family: var(--heading);
-
-      font-size: 1.7rem;
-
-      font-weight: 700;
-
-      letter-spacing: -.01em;
-
-      margin-bottom: 10px;
+      margin: 0;
+      font: 600 1.65rem/1 var(--heading);
+      letter-spacing: -.04em;
     }
-
 
     .garden-note {
-
-      font-family: var(--serif);
-
-      font-style: italic;
-
+      margin: 8px 0 0;
       color: var(--rose-deep);
-
-      font-size: 1.2rem;
-
-      margin-bottom: 25px;
+      font: italic 1.15rem var(--serif);
     }
 
+    .garden-flower {
+      color: rgba(98, 79, 67, .5);
+      font-size: 1.8rem;
+    }
 
     .gg-garden {
-
       display: flex;
-
       flex-direction: column;
-
-      gap: 10px;
-
-      position: relative;
-
-      z-index: 2;
+      gap: 9px;
     }
-
 
     .gg-card {
-
-      background: rgba(255,253,248,.72);
-
+      padding: 13px 14px;
       border-left: 3px solid var(--sage-deep);
-
-      border-radius: 0 8px 8px 0;
-
-      padding: 13px 15px;
-
-      font-family: var(--serif);
-
-      font-size: 1rem;
-
+      border-radius: 0 6px 6px 0;
+      background: rgba(255, 253, 248, .75);
       color: var(--brown-dark);
-
-      line-height: 1.45;
+      font: 1rem/1.45 var(--serif);
+      overflow-wrap: anywhere;
     }
-
 
     .gg-card-date {
-
-      font-family: var(--typewriter);
-
-      font-size: .52rem;
-
-      text-transform: uppercase;
-
-      letter-spacing: .08em;
-
-      color: var(--brown);
-
       margin-bottom: 6px;
+      color: var(--brown);
+      font: .52rem var(--typewriter);
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
+    .garden-empty {
+      padding: 19px 14px;
+      border: 1px dashed rgba(98, 79, 67, .28);
+      border-radius: 6px;
+      color: var(--brown);
+      font: italic 1.05rem/1.45 var(--serif);
+    }
 
-    /* =========================================================
-       FOOTER
-       ========================================================= */
+    /* FOOTER */
 
     footer {
-
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 24px 0 28px;
+      border-top: 1px solid var(--line);
       text-align: center;
-
-      padding: 20px 20px 30px;
-
-      color: var(--brown);
     }
-
 
     footer .script {
-
-      font-family: var(--serif);
-
-      font-style: italic;
-
-      font-size: 1.4rem;
-
-      margin-bottom: 10px;
+      margin-bottom: 6px;
+      color: var(--brown-dark);
+      font: 2rem var(--script);
     }
-
 
     footer p {
-
-      font-family: var(--typewriter);
-
-      font-size: .55rem;
-
+      margin: 0;
+      color: var(--brown);
+      font: .53rem var(--typewriter);
       letter-spacing: .1em;
-
       text-transform: uppercase;
-
-      opacity: .65;
+      opacity: .8;
     }
 
-
-    /* =========================================================
-       MOBILE
-       ========================================================= */
-
-    @media (max-width: 800px) {
-
-      .top-nav {
-
-        padding: 18px 20px;
-
-      }
-
-
-      .nav-links {
-
-        gap: 13px;
-
-      }
-
-
-      .nav-links a {
-
-        font-size: .52rem;
-
-      }
-
-
-      .page {
-
-        width: min(100% - 30px, 600px);
-
-        padding-top: 55px;
-
-      }
-
-
-      .page-header {
-
-        grid-template-columns: 1fr;
-
-        gap: 25px;
-
-      }
-
-
-      h1 {
-
-        font-size: 5rem;
-
-      }
-
-
-      .calm-shell {
-
-        grid-template-columns: 1fr;
-
-        gap: 20px;
-
-      }
-
-
-      .calm-tabs {
-
-        flex-direction: row;
-
-        position: static;
-
-        border-bottom: 1px solid rgba(98,79,67,.12);
-
-        padding-bottom: 4px;
-
-      }
-
-
-      .c-tab {
-
-        border-left: none;
-
-        border-bottom: 2px solid transparent;
-
-        padding: 8px 10px;
-
-      }
-
-
-      .c-tab.active {
-
-        border-left-color: transparent;
-
-        border-bottom-color: var(--rose-deep);
-
-      }
-
-
-      .tab-icon {
-
-        display: inline;
-
-        margin-right: 7px;
-
-      }
-
-
-      .breath-card {
-
-        padding: 30px 20px;
-
-      }
-
-
-      .breath-ring {
-
-        width: 190px;
-
-        height: 190px;
-
-      }
-
-
-      .breath-phase {
-
-        font-size: 1.7rem;
-
-      }
-
-
-      .breath-desc {
-
-        font-size: 1rem;
-
-      }
-
-
-      .color-card {
-
-        padding: 20px 15px;
-
-      }
-
-
-      .gratitude {
-
-        grid-template-columns: 1fr;
-
-      }
-
-
-      .gg-card-main {
-
-        padding: 25px;
-
-      }
-
-
-      .garden-side {
-
-        padding: 30px;
-
-      }
-
-
-      .gg-prompt {
-
-        font-size: 1.9rem;
-
-      }
-
-
-      .cf-actions {
-
-        flex-wrap: wrap;
-
-        justify-content: center;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       CRISIS
-       ========================================================= */
+    /* CRISIS SUPPORT */
 
     .crisis-fab {
       position: fixed;
-      right: 1.5rem;
-      bottom: 1.8rem;
-      z-index: 200;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 16px 16px 16px 4px;
-      background: var(--sky);
+      right: 22px;
+      bottom: 20px;
+      z-index: 700;
+      padding: 12px 16px;
+      border: 1px solid rgba(98, 79, 67, .14);
+      border-radius: 7px;
+      background: var(--paper);
       color: var(--brown-dark);
-      font-family: var(--typewriter);
-      font-size: .62rem;
+      box-shadow: 0 5px 20px rgba(57, 45, 38, .1);
       cursor: pointer;
+      font: .61rem var(--typewriter);
+      transition: transform .2s, background .2s;
+    }
+
+    .crisis-fab:hover {
+      transform: translateY(-2px);
+      background: var(--rose);
     }
 
     .overlay {
       position: fixed;
       inset: 0;
-      z-index: 900;
+      z-index: 1000;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(47,43,39,.4);
-      backdrop-filter: blur(10px);
+      background: rgba(47, 43, 39, .42);
+      backdrop-filter: blur(7px);
     }
 
     .overlay.open { display: flex; }
 
     .overlay .modal {
-      width: min(420px, 100%);
-      padding: 30px;
-      background: var(--cream);
-      border-radius: 20px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.2);
+      width: min(410px, 100%);
+      padding: 27px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .16);
+      animation: rise .2s ease both;
     }
 
-    .overlay .m-close {
-      float: right;
-      border: none;
-      background: none;
-      font-size: 1.4rem;
-      cursor: pointer;
+    .m-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 15px;
     }
 
     .overlay .m-title {
-      font-family: var(--serif);
-      font-size: 1.8rem;
+      font: 600 2rem/1.05 var(--heading);
+      letter-spacing: -.04em;
+    }
+
+    .overlay .m-close {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.2rem;
     }
 
     .overlay .m-sub {
-      font-family: var(--typewriter);
-      font-size: .65rem;
-      line-height: 1.7;
+      margin: 15px 0 20px;
       color: var(--brown);
-      margin: 8px 0 20px;
+      font: 1.05rem/1.5 var(--serif);
     }
 
     .overlay .c-link {
       display: block;
-      padding: 13px;
       margin-top: 8px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.65);
-      text-decoration: none;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--sky-light);
       color: var(--brown-dark);
-      font-family: var(--typewriter);
-      font-size: .65rem;
+      text-decoration: none;
+      font: .62rem var(--typewriter);
     }
 
-  </style>
+    .overlay .c-link:hover { background: var(--sky); }
 
+    /* RESPONSIVE */
+
+    @media (max-width: 850px) {
+      .top-nav {
+        padding: 15px 20px;
+        gap: 18px;
+      }
+
+      .nav-links {
+        gap: 13px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: .55rem; }
+
+      .page {
+        width: min(100% - 36px, 680px);
+        padding-top: 35px;
+      }
+
+      .page-header {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding-bottom: 24px;
+      }
+
+      h1 { font-size: clamp(4rem, 12vw, 6rem); }
+
+      .intro {
+        max-width: 430px;
+        margin: 0;
+      }
+
+      .calm-shell {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .calm-sidebar {
+        position: static;
+        padding: 12px;
+      }
+
+      .sidebar-label { margin-bottom: 9px; }
+
+      .calm-tabs {
+        flex-direction: row;
+        gap: 7px;
+      }
+
+      .c-tab {
+        flex: 1;
+        justify-content: center;
+        padding: 9px 7px;
+        gap: 7px;
+        font-size: .59rem;
+      }
+
+      .tab-icon {
+        width: 25px;
+        height: 25px;
+        font-size: .9rem;
+      }
+
+      .sidebar-note { display: none; }
+
+      .gratitude { grid-template-columns: 1fr; }
+
+      footer { width: calc(100% - 36px); }
+    }
+
+    @media (max-width: 520px) {
+      .top-nav {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+        padding: 13px 17px;
+      }
+
+      .nav-links {
+        width: 100%;
+        padding: 0 0 3px;
+        gap: 18px;
+      }
+
+      .nav-links a { font-size: .56rem; }
+
+      .page {
+        width: calc(100% - 28px);
+        padding: 27px 0 30px;
+      }
+
+      h1 { font-size: clamp(3.7rem, 16vw, 5rem); }
+
+      .intro { font-size: 1.12rem; }
+
+      .calm-tabs { gap: 5px; }
+
+      .c-tab {
+        flex-direction: column;
+        gap: 5px;
+        padding: 9px 3px;
+        font-size: .51rem;
+      }
+
+      .tab-icon {
+        width: 27px;
+        height: 27px;
+      }
+
+      .tool-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .tool-heading p { text-align: left; }
+
+      .breath-card { padding: 18px 14px; }
+
+      .breath-topline { align-items: start; }
+
+      .breath-ring {
+        width: 190px;
+        height: 190px;
+      }
+
+      .breath-phase { font-size: 1.4rem; }
+      .breath-desc { font-size: 1.04rem; }
+
+      .color-card { padding: 16px 12px; }
+
+      .cf-toolbar { align-items: start; }
+
+      .cf-colors { gap: 10px; }
+
+      .cc { width: 23px; height: 23px; }
+
+      .gg-card-main, .garden-side { padding: 18px; }
+
+      .gg-prompt { font-size: 1.65rem; }
+
+      .crisis-fab {
+        right: 12px;
+        bottom: 12px;
+        padding: 10px 12px;
+      }
+
+      footer { padding-bottom: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
-
 <body>
-
-
-  <!-- =======================================================
-       NAVIGATION
-       ======================================================= -->
-
-  <nav class="top-nav">
-
-    <div class="nav-wordmark">
-      zenene
-    </div>
-
+  <nav class="top-nav" aria-label="Main navigation">
+    <div class="nav-wordmark">zenene</div>
     <div class="nav-links">
-
       <a href="index.html">home</a>
-
       <a href="journal.html">journal</a>
-
       <a href="mood.html">mood</a>
-
       <a href="explore.html">explore</a>
-
       <a href="vera.html">vera</a>
-
-      <a href="calm.html" class="active">calm</a>
-
+      <a href="calm.html" class="active" aria-current="page">calm</a>
       <a href="profile.html" id="navAuthLink">sign in</a>
-
     </div>
-
   </nav>
 
-
-  <!-- =======================================================
-       PAGE
-       ======================================================= -->
-
   <main class="page">
-
-
-    <!-- =====================================================
-         HEADER
-         ===================================================== -->
-
-    <header class="page-header fade-up">
-
+    <header class="page-header">
       <div>
-
-        <div class="eyebrow">
-          slow down
-        </div>
-
-        <h1>
-          your <em>calm.</em>
-        </h1>
-
+        <p class="eyebrow">a little space for yourself</p>
+        <h1>your <em>calm.</em></h1>
       </div>
-
       <p class="intro">
-        A small place to pause, breathe,
-        make something, and remember that
-        you don't have to rush through
-        every moment.
+        You don't have to figure everything out right now.
+        Take a breath, make something, or notice one small thing
+        that made today a little easier.
+        <span class="intro-script">one moment at a time.</span>
       </p>
-
     </header>
 
-
-    <!-- =====================================================
-         CALM SHELL (sidebar + content)
-         ===================================================== -->
-
     <div class="calm-shell">
-
-    <div class="calm-tabs fade-up">
-
-      <button
-        class="c-tab active"
-        onclick="switchTab('breath',this)"
-      >
-        breathe
-      </button>
-
-
-      <button
-        class="c-tab"
-        onclick="switchTab('color',this)"
-      >
-        color flow
-      </button>
-
-
-      <button
-        class="c-tab"
-        onclick="switchTab('garden',this)"
-      >
-        gratitude
-      </button>
-
-    </div>
-
-
-    <div class="calm-content">
-
-
-    <!-- =====================================================
-         BREATHING
-         ===================================================== -->
-
-    <div class="panel active" id="panel-breath">
-
-      <div class="breath-card">
-
-        <div class="breath-label">
-          a moment to breathe
-        </div>
-
-        <div class="breath-area">
-
-          <div class="breath-ring">
-
-            <div class="breath-outer"></div>
-
-            <div class="breath-mid"></div>
-
-            <div
-              class="breath-circle"
-              id="bc"
-            >
-
-              <div
-                class="breath-word"
-                id="bw"
-              >
-                breathe
-              </div>
-
-              <div
-                class="breath-count"
-                id="bcnt"
-              ></div>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="breath-phase"
-            id="bphase"
-          >
-            4-7-8 Breathing
-          </div>
-
-
-          <div class="breath-desc">
-
-            Inhale for 4 · Hold for 7 ·
-            Exhale for 8. This pattern
-            activates your parasympathetic
-            nervous system, creating a
-            little more room to breathe.
-
-          </div>
-
-
-          <div class="breath-btns">
-
-            <button
-              class="b-btn b-start"
-              id="bstart"
-              onclick="startBreath()"
-            >
-              begin
-            </button>
-
-
-            <button
-              class="b-btn b-stop"
-              id="bstop"
-              onclick="stopBreath()"
-              style="display:none"
-            >
-              stop
-            </button>
-
-          </div>
-
-
-          <div
-            class="cycles-left"
-            id="cycleInfo"
-          ></div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         COLOR FLOW
-         ===================================================== -->
-
-    <div class="panel" id="panel-color">
-
-      <div class="color-card">
-
-        <div class="cf-area">
-
-          <div class="cf-desc">
-            Paint freely. No rules, no mistakes.
-            Just colour and calm.
-          </div>
-
-
-          <div
-            class="cf-colors"
-            id="cfColors"
-          ></div>
-
-
-          <div
-            class="cf-sizes"
-            id="cfSizes"
-          >
-
-            <div
-              class="cf-sz sel"
-              data-s="6"
-              style="width:10px;height:10px;"
-            ></div>
-
-            <div
-              class="cf-sz"
-              data-s="14"
-              style="width:16px;height:16px;"
-            ></div>
-
-            <div
-              class="cf-sz"
-              data-s="26"
-              style="width:24px;height:24px;"
-            ></div>
-
-            <div
-              class="cf-sz"
-              data-s="44"
-              style="width:34px;height:34px;"
-            ></div>
-
-          </div>
-
-
-          <canvas
-            id="cf"
-            width="650"
-            height="420"
-          ></canvas>
-
-
-          <div class="cf-actions">
-
-            <button
-              class="cf-btn"
-              onclick="cfUndo()"
-            >
-              ↩ undo
-            </button>
-
-            <button
-              class="cf-btn"
-              onclick="cfClear()"
-            >
-              clear
-            </button>
-
-            <button
-              class="cf-btn"
-              onclick="cfSave()"
-            >
-              save ↓
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         GRATITUDE
-         ===================================================== -->
-
-    <div class="panel" id="panel-garden">
-
-      <div class="gratitude">
-
-
-        <div class="gg-card-main">
-
-          <div class="gg-prompt">
-            Plant three seeds of gratitude.
-          </div>
-
-          <div class="gg-sub">
-            What are three small things
-            you appreciate right now?
-          </div>
-
-
-          <div class="gg-items">
-
-            <div class="gg-inp-wrap">
-
-              <div class="gg-num">
-                ①
-              </div>
-
-              <input
-                class="gg-inp"
-                id="g1"
-                placeholder="I'm grateful for..."
-              >
-
-            </div>
-
-
-            <div class="gg-inp-wrap">
-
-              <div class="gg-num">
-                ②
-              </div>
-
-              <input
-                class="gg-inp"
-                id="g2"
-                placeholder="Something small that helped..."
-              >
-
-            </div>
-
-
-            <div class="gg-inp-wrap">
-
-              <div class="gg-num">
-                ③
-              </div>
-
-              <input
-                class="gg-inp"
-                id="g3"
-                placeholder="A moment I want to remember..."
-              >
-
-            </div>
-
-          </div>
-
-
-          <button
-            class="gg-save"
-            id="gratitudeSaveBtn"
-            onclick="saveGratitude()"
-          >
-            plant in my garden
+      <aside class="calm-sidebar">
+        <p class="sidebar-label">choose your pause</p>
+        <div class="calm-tabs" role="tablist" aria-label="Calm activities">
+          <button class="c-tab active" id="tab-breath" role="tab" aria-selected="true" aria-controls="panel-breath" onclick="switchTab('breath',this)">
+            <span class="tab-icon" aria-hidden="true">◌</span>
+            breathe
           </button>
-
-          <span
-            class="gg-sub"
-            id="gratitudeSyncError"
-            style="color:#B97880; display:none;"
-          ></span>
-
+          <button class="c-tab" id="tab-color" role="tab" aria-selected="false" aria-controls="panel-color" onclick="switchTab('color',this)">
+            <span class="tab-icon" aria-hidden="true">✳</span>
+            color flow
+          </button>
+          <button class="c-tab" id="tab-garden" role="tab" aria-selected="false" aria-controls="panel-garden" onclick="switchTab('garden',this)">
+            <span class="tab-icon" aria-hidden="true">❋</span>
+            gratitude
+          </button>
         </div>
+        <p class="sidebar-note">
+          You are allowed to pause.
+          <span>there is no rush.</span>
+        </p>
+      </aside>
 
-
-        <div class="garden-side">
-
-          <div class="garden-title">
-            your little garden.
+      <div class="calm-content">
+        <!-- BREATHING -->
+        <section class="panel active" id="panel-breath" role="tabpanel" aria-labelledby="tab-breath">
+          <div class="tool-heading">
+            <div>
+              <p class="section-kicker">01 / find your rhythm</p>
+              <h2>A moment to breathe.</h2>
+            </div>
+            <p>Nothing to achieve. Just be here.</p>
           </div>
 
-          <div class="garden-note">
-            small things still count.
+          <div class="breath-card">
+            <div class="breath-topline">
+              <span class="breath-label">guided breathing</span>
+              <span class="breath-method">4 — 7 — 8 pattern</span>
+            </div>
+
+            <div class="breath-area">
+              <div class="breath-ring" aria-hidden="true">
+                <div class="breath-outer"></div>
+                <div class="breath-mid"></div>
+                <div class="breath-circle" id="bc">
+                  <div class="breath-word" id="bw">breathe</div>
+                  <div class="breath-count" id="bcnt"></div>
+                </div>
+              </div>
+
+              <h3 class="breath-phase" id="bphase" aria-live="polite">4-7-8 Breathing</h3>
+              <p class="breath-desc">
+                Breathe in for 4, hold for 7, and breathe out for 8.
+                Follow a comfortable pace, and stop whenever you need to.
+                You never need to force a breath.
+              </p>
+
+              <div class="breath-btns">
+                <button class="b-btn b-start" id="bstart" onclick="startBreath()">begin</button>
+                <button class="b-btn b-stop" id="bstop" onclick="stopBreath()" hidden>stop</button>
+              </div>
+              <div class="cycles-left" id="cycleInfo" aria-live="polite"></div>
+            </div>
+          </div>
+          <p class="breath-reminder">If counting or breath-holding feels uncomfortable, return to your natural breathing instead.</p>
+        </section>
+
+        <!-- COLOR FLOW -->
+        <section class="panel" id="panel-color" role="tabpanel" aria-labelledby="tab-color" hidden>
+          <div class="tool-heading">
+            <div>
+              <p class="section-kicker">02 / make without thinking</p>
+              <h2>Let the colors flow.</h2>
+            </div>
+            <p>No rules. No right or wrong.</p>
           </div>
 
+          <div class="color-card">
+            <p class="cf-desc">Draw a little, scribble a lot, or simply explore a color.</p>
 
-          <div
-            class="gg-garden"
-            id="ggarden"
-          ></div>
+            <div class="cf-toolbar">
+              <div>
+                <span class="toolbar-label">choose a color</span>
+                <div class="cf-colors" id="cfColors" aria-label="Drawing colors"></div>
+              </div>
+              <div>
+                <span class="toolbar-label">brush size</span>
+                <div class="cf-sizes" id="cfSizes" aria-label="Brush size">
+                  <button class="cf-sz sel" type="button" data-s="6" aria-label="Small brush" aria-pressed="true"><span style="width:5px;height:5px"></span></button>
+                  <button class="cf-sz" type="button" data-s="14" aria-label="Medium brush" aria-pressed="false"><span style="width:10px;height:10px"></span></button>
+                  <button class="cf-sz" type="button" data-s="26" aria-label="Large brush" aria-pressed="false"><span style="width:16px;height:16px"></span></button>
+                  <button class="cf-sz" type="button" data-s="44" aria-label="Extra large brush" aria-pressed="false"><span style="width:22px;height:22px"></span></button>
+                </div>
+              </div>
+            </div>
 
-        </div>
+            <canvas id="cf" width="650" height="420" aria-label="Drawing canvas. Use a mouse or touch to draw."></canvas>
 
+            <div class="cf-actions">
+              <button class="cf-btn" type="button" onclick="cfUndo()">↩ undo</button>
+              <button class="cf-btn" type="button" onclick="cfClear()">clear canvas</button>
+              <button class="cf-btn" type="button" onclick="cfSave()">save drawing ↓</button>
+            </div>
+            <p class="cf-hint">Your canvas is yours. There is no need to make anything beautiful.</p>
+          </div>
+        </section>
+
+        <!-- GRATITUDE -->
+        <section class="panel" id="panel-garden" role="tabpanel" aria-labelledby="tab-garden" hidden>
+          <div class="tool-heading">
+            <div>
+              <p class="section-kicker">03 / notice the little things</p>
+              <h2>Plant a little gratitude.</h2>
+            </div>
+            <p>Small things still count.</p>
+          </div>
+
+          <div class="gratitude">
+            <div class="gg-card-main">
+              <h3 class="gg-prompt">Three little things.</h3>
+              <p class="gg-sub">What are three things you appreciate right now? They don't have to be extraordinary.</p>
+
+              <div class="gg-items">
+                <label class="gg-inp-wrap">
+                  <span class="gg-num">①</span>
+                  <input class="gg-inp" id="g1" maxlength="500" placeholder="I'm grateful for..." autocomplete="off">
+                </label>
+                <label class="gg-inp-wrap">
+                  <span class="gg-num">②</span>
+                  <input class="gg-inp" id="g2" maxlength="500" placeholder="Something small that helped..." autocomplete="off">
+                </label>
+                <label class="gg-inp-wrap">
+                  <span class="gg-num">③</span>
+                  <input class="gg-inp" id="g3" maxlength="500" placeholder="A moment I want to remember..." autocomplete="off">
+                </label>
+              </div>
+
+              <button class="gg-save" id="gratitudeSaveBtn" type="button" onclick="saveGratitude()">plant in my garden</button>
+              <p class="sync-message" id="gratitudeSyncError" role="status" hidden></p>
+            </div>
+
+            <div class="garden-side">
+              <div class="garden-heading">
+                <div>
+                  <h3 class="garden-title">your little garden.</h3>
+                  <p class="garden-note">Look how far you've come.</p>
+                </div>
+                <span class="garden-flower" aria-hidden="true">✳</span>
+              </div>
+              <div class="gg-garden" id="ggarden" aria-live="polite">
+                <div class="garden-empty">Your garden is waiting for its first seed.</div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-
     </div>
-
-
-    </div>
-
-    </div>
-
-
   </main>
 
-
-  <!-- =======================================================
-       FOOTER
-       ======================================================= -->
-
   <footer>
-
-    <div class="script">
-      be gentle with yourself.
-    </div>
-
-    <p>
-      zenene · where your mind blooms
-    </p>
-
+    <div class="script">be gentle with yourself.</div>
+    <p>zenene · where your mind blooms</p>
   </footer>
 
+  <button class="crisis-fab" type="button" onclick="openCrisis()" aria-haspopup="dialog">♡ need help?</button>
 
-  <!-- =======================================================
-       CRISIS
-       ======================================================= -->
-
-  <button class="crisis-fab" onclick="document.getElementById('cm').classList.add('open')">
-    💙 need help?
-  </button>
-
-  <div class="overlay" id="cm" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="overlay" id="cm" role="dialog" aria-modal="true" aria-labelledby="crisisTitle" aria-hidden="true" onclick="if(event.target===this)closeCrisis()">
     <div class="modal">
-      <button class="m-close" onclick="document.getElementById('cm').classList.remove('open')">×</button>
-      <div class="m-title">You're not alone.</div>
-      <div class="m-sub">
-        If you need immediate support,
-        please reach out to a trusted adult
-        or an appropriate local emergency/crisis service.
+      <div class="m-top">
+        <div class="m-title" id="crisisTitle">You're not alone.</div>
+        <button class="m-close" type="button" onclick="closeCrisis()" aria-label="Close support dialog">×</button>
       </div>
-      <a class="c-link" href="tel:112">📞 Local emergency support</a>
+      <p class="m-sub">
+        If you feel unsafe or need immediate support, please reach out to a trusted adult or an appropriate local emergency or crisis service. You deserve support from a real person.
+      </p>
+      <a class="c-link" href="tel:112">☎ Call emergency services (112 in India)</a>
     </div>
   </div>
-
-
-  <!-- =======================================================
-       JAVASCRIPT
-       ======================================================= -->
 
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>
@@ -1896,762 +1228,418 @@
   <script src="js/nav-auth.js"></script>
 
   <script>
-
-
-    /* =======================================================
-       TAB SWITCHING
-       ======================================================= */
-
+    /* TAB SWITCHING */
     function switchTab(id, btn) {
+      document.querySelectorAll(".panel").forEach(panel => {
+        const active = panel.id === "panel-" + id;
+        panel.classList.toggle("active", active);
+        panel.hidden = !active;
+      });
 
-      document
-        .querySelectorAll(".panel")
-        .forEach(panel =>
-          panel.classList.remove("active")
-        );
-
-
-      document
-        .querySelectorAll(".c-tab")
-        .forEach(button =>
-          button.classList.remove("active")
-        );
-
-
-      document
-        .getElementById("panel-" + id)
-        .classList.add("active");
-
-
-      btn.classList.add("active");
-
+      document.querySelectorAll(".c-tab").forEach(button => {
+        const active = button === btn;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", String(active));
+        button.tabIndex = active ? 0 : -1;
+      });
     }
 
+    document.querySelectorAll(".c-tab").forEach((btn, index, buttons) => {
+      btn.addEventListener("keydown", e => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+        e.preventDefault();
+        let next = index;
+        if (e.key === "ArrowRight") next = (index + 1) % buttons.length;
+        if (e.key === "ArrowLeft") next = (index - 1 + buttons.length) % buttons.length;
+        if (e.key === "Home") next = 0;
+        if (e.key === "End") next = buttons.length - 1;
+        buttons[next].click();
+        buttons[next].focus();
+      });
+    });
 
-    /* =======================================================
-       BREATHING
-       ======================================================= */
-
+    /* BREATHING */
     let bTimer = null;
-
     let bCycle = 0;
-
     let bPhase = 0;
-
+    let breathRunning = false;
 
     const PHASES = [
-
-      {
-        name: "Inhale",
-        dur: 4,
-        scale: 1.32,
-        shadow:
-          "0 0 0 24px rgba(245,201,160,.18)"
-      },
-
-      {
-        name: "Hold",
-        dur: 7,
-        scale: 1.32,
-        shadow:
-          "0 0 0 28px rgba(245,201,160,.12)"
-      },
-
-      {
-        name: "Exhale",
-        dur: 8,
-        scale: 1,
-        shadow:
-          "0 0 0 0 rgba(245,201,160,0)"
-      }
-
+      { name: "Inhale", dur: 4, scale: 1.28, shadow: "0 0 0 18px rgba(158,191,204,.24)" },
+      { name: "Hold", dur: 7, scale: 1.28, shadow: "0 0 0 23px rgba(158,191,204,.15)" },
+      { name: "Exhale", dur: 8, scale: 1, shadow: "0 0 0 0 rgba(158,191,204,0)" }
     ];
-
 
     const MAX_CYCLES = 4;
 
-
     function startBreath() {
-
-      document
-        .getElementById("bstart")
-        .style.display = "none";
-
-
-      document
-        .getElementById("bstop")
-        .style.display = "";
-
-
+      clearTimeout(bTimer);
+      breathRunning = true;
       bCycle = 0;
-
       bPhase = 0;
-
+      document.getElementById("bstart").hidden = true;
+      document.getElementById("bstop").hidden = false;
       runPhase();
-
     }
-
 
     function runPhase() {
+      if (!breathRunning) return;
 
       if (bCycle >= MAX_CYCLES) {
-
         stopBreath(true);
-
         return;
       }
-
 
       const p = PHASES[bPhase];
+      const circle = document.getElementById("bc");
+      circle.style.transform = "scale(" + p.scale + ")";
+      circle.style.boxShadow = p.shadow;
+      circle.style.transitionDuration = p.dur + "s";
 
-      const bc =
-        document.getElementById("bc");
+      document.getElementById("bw").textContent = p.name;
+      document.getElementById("bphase").textContent = p.name + " for " + p.dur + " seconds";
+      document.getElementById("cycleInfo").textContent = "Cycle " + (bCycle + 1) + " of " + MAX_CYCLES;
 
+      let remaining = p.dur;
+      document.getElementById("bcnt").textContent = remaining;
 
-      bc.style.transform =
-        "scale(" + p.scale + ")";
+      function tick() {
+        if (!breathRunning) return;
+        remaining--;
+        document.getElementById("bcnt").textContent = remaining > 0 ? remaining : "";
 
-
-      bc.style.boxShadow =
-        p.shadow;
-
-
-      document.getElementById("bw")
-        .textContent = p.name;
-
-
-      document.getElementById("bphase")
-        .textContent =
-          p.name + " for " + p.dur + "s";
-
-
-      document.getElementById("cycleInfo")
-        .textContent =
-          "Cycle " +
-          (bCycle + 1) +
-          " of " +
-          MAX_CYCLES;
-
-
-      let cnt = p.dur;
-
-
-      document.getElementById("bcnt")
-        .textContent = cnt;
-
-
-      const tick = () => {
-
-        cnt--;
-
-        document.getElementById("bcnt")
-          .textContent =
-            cnt > 0 ? cnt : "";
-
-
-        if (cnt <= 0) {
-
-          nextPhase();
-
+        if (remaining <= 0) {
+          bPhase++;
+          if (bPhase >= PHASES.length) {
+            bPhase = 0;
+            bCycle++;
+          }
+          runPhase();
         } else {
-
-          bTimer =
-            setTimeout(tick, 1000);
-
+          bTimer = setTimeout(tick, 1000);
         }
-
-      };
-
-
-      bTimer =
-        setTimeout(tick, 1000);
-
-    }
-
-
-    function nextPhase() {
-
-      bPhase++;
-
-
-      if (bPhase >= PHASES.length) {
-
-        bPhase = 0;
-
-        bCycle++;
-
       }
 
-
-      runPhase();
-
+      bTimer = setTimeout(tick, 1000);
     }
-
 
     function stopBreath(done = false) {
-
       clearTimeout(bTimer);
+      breathRunning = false;
 
+      const circle = document.getElementById("bc");
+      circle.style.transitionDuration = ".6s";
+      circle.style.transform = "scale(1)";
+      circle.style.boxShadow = "";
 
-      const bc =
-        document.getElementById("bc");
+      document.getElementById("bw").textContent = "breathe";
+      document.getElementById("bcnt").textContent = "";
+      document.getElementById("bphase").textContent = done
+        ? "You made space for yourself."
+        : "4-7-8 Breathing";
+      document.getElementById("cycleInfo").textContent = done
+        ? "You completed " + MAX_CYCLES + " cycles. Take a moment before moving on."
+        : "";
 
-
-      bc.style.transform =
-        "scale(1)";
-
-
-      bc.style.boxShadow = "";
-
-
-      document.getElementById("bw")
-        .textContent = "breathe";
-
-
-      document.getElementById("bcnt")
-        .textContent = "";
-
-
-      document.getElementById("bphase")
-        .textContent =
-          done
-            ? "Well done — 4-7-8 Breathing"
-            : "4-7-8 Breathing";
-
-
-      document.getElementById("cycleInfo")
-        .textContent =
-          done
-            ? "You completed " +
-              MAX_CYCLES +
-              " cycles. How do you feel?"
-            : "";
-
-
-      document.getElementById("bstart")
-        .style.display = "";
-
-
-      document.getElementById("bstop")
-        .style.display = "none";
-
+      document.getElementById("bstart").hidden = false;
+      document.getElementById("bstop").hidden = true;
     }
 
-
-    /* =======================================================
-       COLOR FLOW
-       ======================================================= */
-
+    /* COLOR FLOW */
     const COLORS = [
-
-      "#C5DCF0",
-      "#F2BFC8",
-      "#F5C9A0",
-      "#A8C4A2",
-      "#D4C5E8",
-      "#E8909F",
-      "#7AB075",
-      "#2A1C12",
-      "#FFFFFF"
-
+      "#C5DCF0", "#F2BFC8", "#F5C9A0", "#A8C4A2",
+      "#D4C5E8", "#E8909F", "#7AB075", "#2A1C12", "#FFFFFF"
     ];
 
-
     let cfColor = COLORS[0];
-
     let cfSize = 6;
-
     let cfDrawing = false;
-
     let cfSnaps = [];
+    let cfLastPoint = null;
 
-
-    const ccWrap =
-      document.getElementById("cfColors");
-
-
-    COLORS.forEach((c, i) => {
-
-      const d =
-        document.createElement("div");
-
-
-      d.className =
-        "cc" +
-        (i === 0 ? " sel" : "");
-
-
-      d.style.background = c;
-
-
-      if (c === "#FFFFFF") {
-
-        d.style.border =
-          "2px solid #ddd";
-
-      }
-
-
-      d.onclick = () => {
-
-        document
-          .querySelectorAll(".cc")
-          .forEach(x =>
-            x.classList.remove("sel")
-          );
-
-
-        d.classList.add("sel");
-
-
-        cfColor = c;
-
-      };
-
-
-      ccWrap.appendChild(d);
-
-    });
-
-
-    document
-      .querySelectorAll(".cf-sz")
-      .forEach(s => {
-
-        s.onclick = () => {
-
-          document
-            .querySelectorAll(".cf-sz")
-            .forEach(x =>
-              x.classList.remove("sel")
-            );
-
-
-          s.classList.add("sel");
-
-
-          cfSize =
-            +s.dataset.s;
-
-        };
-
-      });
-
-
-    const canvas =
-      document.getElementById("cf");
-
-
-    const ctx =
-      canvas.getContext("2d");
-
+    const canvas = document.getElementById("cf");
+    const ctx = canvas.getContext("2d");
+    const ccWrap = document.getElementById("cfColors");
 
     ctx.lineJoin = "round";
-
     ctx.lineCap = "round";
 
+    COLORS.forEach((color, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "cc" + (index === 0 ? " sel" : "");
+      button.style.background = color;
+      if (color === "#FFFFFF") button.style.borderColor = "#b8b1a8";
+      button.setAttribute("aria-label", "Choose color " + color);
+      button.setAttribute("aria-pressed", String(index === 0));
 
-    function pos(e) {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".cc").forEach(item => {
+          item.classList.remove("sel");
+          item.setAttribute("aria-pressed", "false");
+        });
+        button.classList.add("sel");
+        button.setAttribute("aria-pressed", "true");
+        cfColor = color;
+      });
 
-      const r =
-        canvas.getBoundingClientRect();
+      ccWrap.appendChild(button);
+    });
 
+    document.querySelectorAll(".cf-sz").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".cf-sz").forEach(item => {
+          item.classList.remove("sel");
+          item.setAttribute("aria-pressed", "false");
+        });
+        button.classList.add("sel");
+        button.setAttribute("aria-pressed", "true");
+        cfSize = Number(button.dataset.s);
+      });
+    });
 
-      const cx =
-        canvas.width / r.width;
-
-
-      const cy =
-        canvas.height / r.height;
-
-
-      const src =
-        e.touches
-          ? e.touches[0]
-          : e;
-
-
+    function canvasPoint(event) {
+      const rect = canvas.getBoundingClientRect();
       return {
-
-        x:
-          (src.clientX - r.left) * cx,
-
-        y:
-          (src.clientY - r.top) * cy
-
+        x: (event.clientX - rect.left) * (canvas.width / rect.width),
+        y: (event.clientY - rect.top) * (canvas.height / rect.height)
       };
-
     }
 
+    function saveSnapshot() {
+      cfSnaps.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+      if (cfSnaps.length > 100) cfSnaps.shift();
+    }
 
-    canvas.addEventListener(
-      "mousedown",
-      e => {
-
-        cfSnaps.push(
-          ctx.getImageData(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          )
-        );
-
-
-        cfDrawing = true;
-
-
-        const p = pos(e);
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(p.x, p.y);
-
+    function startDrawing(event) {
+      if (event.button !== undefined && event.button !== 0) return;
+      event.preventDefault();
+      saveSnapshot();
+      cfDrawing = true;
+      cfLastPoint = canvasPoint(event);
+      ctx.beginPath();
+      ctx.moveTo(cfLastPoint.x, cfLastPoint.y);
+      ctx.lineTo(cfLastPoint.x + .01, cfLastPoint.y + .01);
+      ctx.strokeStyle = cfColor;
+      ctx.lineWidth = cfSize;
+      ctx.stroke();
+      if (canvas.setPointerCapture && event.pointerId !== undefined) {
+        try { canvas.setPointerCapture(event.pointerId); } catch (_) {}
       }
-    );
+    }
 
+    function draw(event) {
+      if (!cfDrawing) return;
+      event.preventDefault();
+      const point = canvasPoint(event);
+      ctx.beginPath();
+      ctx.moveTo(cfLastPoint.x, cfLastPoint.y);
+      ctx.lineTo(point.x, point.y);
+      ctx.strokeStyle = cfColor;
+      ctx.lineWidth = cfSize;
+      ctx.stroke();
+      cfLastPoint = point;
+    }
 
-    canvas.addEventListener(
-      "mousemove",
-      e => {
+    function stopDrawing() {
+      cfDrawing = false;
+      cfLastPoint = null;
+    }
 
-        if (!cfDrawing) return;
-
-
-        const p = pos(e);
-
-
-        ctx.lineTo(p.x, p.y);
-
-
-        ctx.strokeStyle = cfColor;
-
-        ctx.lineWidth = cfSize;
-
-        ctx.stroke();
-
-      }
-    );
-
-
-    canvas.addEventListener(
-      "mouseup",
-      () => cfDrawing = false
-    );
-
-
-    canvas.addEventListener(
-      "mouseleave",
-      () => cfDrawing = false
-    );
-
-
-    canvas.addEventListener(
-      "touchstart",
-      e => {
-
-        e.preventDefault();
-
-
-        cfSnaps.push(
-          ctx.getImageData(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          )
-        );
-
-
-        cfDrawing = true;
-
-
-        const p = pos(e);
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(p.x, p.y);
-
-      },
-      { passive: false }
-    );
-
-
-    canvas.addEventListener(
-      "touchmove",
-      e => {
-
-        e.preventDefault();
-
-
-        if (!cfDrawing) return;
-
-
-        const p = pos(e);
-
-
-        ctx.lineTo(p.x, p.y);
-
-
-        ctx.strokeStyle = cfColor;
-
-        ctx.lineWidth = cfSize;
-
-        ctx.stroke();
-
-      },
-      { passive: false }
-    );
-
-
-    canvas.addEventListener(
-      "touchend",
-      () => cfDrawing = false
-    );
-
+    canvas.addEventListener("pointerdown", startDrawing);
+    canvas.addEventListener("pointermove", draw);
+    canvas.addEventListener("pointerup", stopDrawing);
+    canvas.addEventListener("pointercancel", stopDrawing);
+    canvas.addEventListener("lostpointercapture", stopDrawing);
 
     function cfUndo() {
-
       if (cfSnaps.length) {
-
-        ctx.putImageData(
-          cfSnaps.pop(),
-          0,
-          0
-        );
-
+        ctx.putImageData(cfSnaps.pop(), 0, 0);
       }
-
     }
-
 
     function cfClear() {
-
-      ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-      cfSnaps = [];
-
+      saveSnapshot();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-
 
     function cfSave() {
-
-      const a =
-        document.createElement("a");
-
-
-      a.download =
-        "zenene-color-flow.png";
-
-
-      a.href =
-        canvas.toDataURL();
-
-
-      a.click();
-
+      const link = document.createElement("a");
+      link.download = "zenene-color-flow.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
     }
 
-
-    /* =======================================================
-       GRATITUDE
-       ======================================================= */
-
+    /* GRATITUDE GARDEN */
     let gratitudeCache = [];
 
+    function showGratitudeMessage(message) {
+      const errorEl = document.getElementById("gratitudeSyncError");
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
     async function saveGratitude() {
+      const values = ["g1", "g2", "g3"].map(id =>
+        document.getElementById(id).value.trim()
+      );
 
-      const vals = [
-
-        document
-          .getElementById("g1")
-          .value
-          .trim(),
-
-        document
-          .getElementById("g2")
-          .value
-          .trim(),
-
-        document
-          .getElementById("g3")
-          .value
-          .trim()
-
-      ];
-
-
-      if (!vals.some(v => v)) return;
-
-      const user = await getCurrentUser();
-
-      if (!user) {
-
-        const errorEl =
-          document.getElementById("gratitudeSyncError");
-
-        errorEl.textContent =
-          "Sign up to save your gratitude garden.";
-        errorEl.style.display = "block";
-
+      if (!values.some(Boolean)) {
+        showGratitudeMessage("Add at least one small thing before planting it in your garden.");
         return;
-
       }
 
-      const d =
-        new Date().toLocaleDateString(
-          "en-US",
-          {
-            month: "short",
-            day: "numeric"
-          }
-        );
-
-      const newEntry = {
-        id: Date.now(),
-        date: d,
-        items: vals.filter(Boolean)
-      };
-
-      const saveBtn =
-        document.getElementById("gratitudeSaveBtn");
-
-      const errorEl =
-        document.getElementById("gratitudeSyncError");
-
+      const saveBtn = document.getElementById("gratitudeSaveBtn");
       saveBtn.disabled = true;
       saveBtn.textContent = "planting...";
-      errorEl.style.display = "none";
+      showGratitudeMessage("");
 
-      const { error } = await supabaseClient
-        .from("gratitude_entries")
-        .insert({
-          id: newEntry.id,
-          user_id: user.id,
-          date: newEntry.date,
-          items: newEntry.items
+      try {
+        const user = await getCurrentUser();
+
+        if (!user) {
+          showGratitudeMessage("Sign in to save your gratitude garden across sessions.");
+          return;
+        }
+
+        if (typeof supabaseClient === "undefined" || !supabaseClient) {
+          showGratitudeMessage("Your garden couldn't connect. Please try again.");
+          return;
+        }
+
+        const entry = {
+          id: Date.now(),
+          date: new Date().toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+          }),
+          items: values.filter(Boolean)
+        };
+
+        const { error } = await supabaseClient
+          .from("gratitude_entries")
+          .insert({
+            id: entry.id,
+            user_id: user.id,
+            date: entry.date,
+            items: entry.items
+          });
+
+        if (error) {
+          console.error("Could not save gratitude entry:", error);
+          showGratitudeMessage("Couldn't save your entry. Please check your connection and try again.");
+          return;
+        }
+
+        gratitudeCache.unshift(entry);
+        ["g1", "g2", "g3"].forEach(id => {
+          document.getElementById(id).value = "";
         });
-
-      saveBtn.disabled = false;
-      saveBtn.textContent = "plant in my garden";
-
-      if (error) {
-        console.error(error);
-        errorEl.textContent =
-          "Couldn't save — check your connection and try again.";
-        errorEl.style.display = "block";
-        return;
+        renderGarden();
+        showGratitudeMessage("Your little seed has been planted.");
+      } catch (error) {
+        console.error("Gratitude save error:", error);
+        showGratitudeMessage("Something went wrong. Please try again.");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = "plant in my garden";
       }
-
-      gratitudeCache.unshift(newEntry);
-
-
-      ["g1", "g2", "g3"]
-        .forEach(id =>
-          document.getElementById(id)
-            .value = ""
-        );
-
-
-      renderGarden();
-
     }
-
 
     async function loadGratitudeFromSupabase() {
-
-      const user = await getCurrentUser();
-
-      if (!user) return;
-
-      const { data, error } = await supabaseClient
-        .from("gratitude_entries")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("id", { ascending: false });
-
-      if (error) {
-        console.error(error);
-        const errorEl =
-          document.getElementById("gratitudeSyncError");
-        if (errorEl) {
-          errorEl.textContent =
-            "Couldn't load your garden — check your connection and try again.";
-          errorEl.style.display = "block";
+      try {
+        const user = await getCurrentUser();
+        if (!user || typeof supabaseClient === "undefined" || !supabaseClient) {
+          renderGarden();
+          return;
         }
+
+        const { data, error } = await supabaseClient
+          .from("gratitude_entries")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("id", { ascending: false });
+
+        if (error) {
+          console.error("Could not load gratitude entries:", error);
+          showGratitudeMessage("Couldn't load your saved garden. Check your connection and try again.");
+          return;
+        }
+
+        gratitudeCache = (data || []).map(row => ({
+          id: row.id,
+          date: row.date,
+          items: Array.isArray(row.items) ? row.items : []
+        }));
+
+        renderGarden();
+      } catch (error) {
+        console.error("Gratitude loading error:", error);
+        showGratitudeMessage("Your garden couldn't load just now. Please try again later.");
+      }
+    }
+
+    function renderGarden() {
+      const garden = document.getElementById("ggarden");
+      garden.replaceChildren();
+
+      if (!gratitudeCache.length) {
+        const empty = document.createElement("div");
+        empty.className = "garden-empty";
+        empty.textContent = "Your garden is waiting for its first seed. Save a small moment you appreciate to see it bloom here.";
+        garden.appendChild(empty);
         return;
       }
 
-      gratitudeCache = data.map(row => ({
-        id: row.id,
-        date: row.date,
-        items: row.items
-      }));
+      gratitudeCache.forEach(entry => {
+        const card = document.createElement("article");
+        card.className = "gg-card";
 
+        const date = document.createElement("div");
+        date.className = "gg-card-date";
+        date.textContent = entry.date || "";
+        card.appendChild(date);
+
+        entry.items.forEach(item => {
+          const line = document.createElement("div");
+          line.textContent = "• " + String(item);
+          card.appendChild(line);
+        });
+
+        garden.appendChild(card);
+      });
     }
 
+    /* CRISIS SUPPORT */
+    let previousFocus = null;
 
-    function renderGarden() {
-
-      const saved = gratitudeCache;
-
-
-      const el =
-        document.getElementById(
-          "ggarden"
-        );
-
-
-      el.innerHTML =
-        saved
-          .map(e => `
-
-            <div class="gg-card">
-
-              <div class="gg-card-date">
-                ${e.date}
-              </div>
-
-              ${e.items
-                .map(i =>
-                  `<div>• ${escH(i)}</div>`
-                )
-                .join("")}
-
-            </div>
-
-          `)
-          .join("");
-
+    function openCrisis() {
+      const modal = document.getElementById("cm");
+      previousFocus = document.activeElement;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      modal.querySelector(".m-close").focus();
     }
 
-
-    function escH(s) {
-
-      return s
-        .replace(/</g, "&lt;");
-
+    function closeCrisis() {
+      const modal = document.getElementById("cm");
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (previousFocus) previousFocus.focus();
     }
 
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && document.getElementById("cm").classList.contains("open")) {
+        closeCrisis();
+      }
+    });
 
-    /* =======================================================
-       INITIALIZE
-       ======================================================= */
-
+    /* INITIALIZE */
     renderGarden();
-
-    loadGratitudeFromSupabase().then(renderGarden);
-
+    loadGratitudeFromSupabase();
   </script>
-
-
 </body>
-
 </html>

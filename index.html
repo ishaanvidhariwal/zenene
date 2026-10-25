@@ -145,7 +145,17 @@ body::before {
 
 }
 
+.nav-wordmark {
+
+  color: var(--ink);
+
+  text-decoration: none;
+
+}
+
 .nav-cta {
+
+  position: relative;
 
   color: var(--brown);
 
@@ -156,6 +166,38 @@ body::before {
   font-size: .7rem;
 
   letter-spacing: .08em;
+
+  transition: color .25s ease;
+
+}
+
+.nav-cta:not(.nav-signup)::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -6px;
+
+  height: 1px;
+
+  background: currentColor;
+
+  opacity: .5;
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition: transform .3s ease;
+
+}
+
+.nav-cta:not(.nav-signup):hover::after {
+
+  transform: scaleX(1);
 
 }
 
@@ -187,7 +229,13 @@ body::before {
 
   opacity: 0;
 
-  transition: opacity .25s ease;
+  transition: opacity .25s ease, transform .25s ease, background .25s ease;
+
+}
+
+.nav-cta.nav-signup.ready:hover {
+
+  transform: translateY(-1px);
 
 }
 
@@ -453,6 +501,66 @@ body::before {
 
 }
 
+.auth-link {
+
+  align-self: center;
+
+  margin-top: 2px;
+
+  padding: 4px 2px;
+
+  border: none;
+
+  background: none;
+
+  color: var(--brown);
+
+  font-family: var(--typewriter);
+
+  font-size: .64rem;
+
+  letter-spacing: .04em;
+
+  text-decoration: underline;
+
+  text-underline-offset: 3px;
+
+  text-decoration-color: rgba(98,79,67,.35);
+
+  cursor: pointer;
+
+  transition: color .2s ease;
+
+}
+
+.auth-link:hover {
+
+  color: var(--ink);
+
+}
+
+.auth-note {
+
+  margin: 0 0 4px;
+
+  color: var(--brown);
+
+  font-family: var(--serif);
+
+  font-size: 1rem;
+
+  line-height: 1.45;
+
+  text-align: center;
+
+}
+
+.auth-tabs.hidden {
+
+  display: none;
+
+}
+
 .auth-message.success {
 
   color: var(--sage-deep);
@@ -511,15 +619,7 @@ body::before {
 
   overflow: hidden;
 
-  background:
-
-    radial-gradient(
-      circle at 50% 35%,
-      rgba(255,255,255,.65),
-      transparent 35%
-    ),
-
-    var(--sky);
+  background: var(--sky);
 
   display: flex;
 
@@ -1463,12 +1563,7 @@ body::before {
 
   border-radius: 50%;
 
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #fff,
-      var(--sky-deep)
-    );
+  background: var(--sky-light);
 
   border:
     1px solid rgba(98,79,67,.18);
@@ -1766,12 +1861,7 @@ body::before {
 
   border-radius: 50%;
 
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      white,
-      var(--sky-deep)
-    );
+  background: var(--sky-light);
 
   box-shadow:
 
@@ -1814,7 +1904,7 @@ body::before {
 
   background: var(--sky);
 
-  overflow: hidden;
+  overflow: clip;
 
   cursor: crosshair;
 
@@ -1929,13 +2019,7 @@ body::before {
 
   height: 240vh;
 
-  background:
-    linear-gradient(
-      180deg,
-      #dcecf3 0%,
-      #e7f1f3 55%,
-      #dcecf3 100%
-    );
+  background: #e1eef3;
 
   overflow: clip;
 
@@ -1972,19 +2056,7 @@ body::before {
 
   inset: 0;
 
-  background:
-
-    radial-gradient(
-      circle at 25% 25%,
-      rgba(255,255,255,.6),
-      transparent 28%
-    ),
-
-    radial-gradient(
-      circle at 75% 70%,
-      rgba(255,255,255,.4),
-      transparent 30%
-    );
+  background: none;
 
   pointer-events: none;
 
@@ -2083,12 +2155,7 @@ body::before {
 
   transform-origin: left center;
 
-  background:
-    linear-gradient(
-      135deg,
-      #76594d,
-      #8b6b5d
-    );
+  background: #7d5f52;
 
   transform:
     rotateY(
@@ -2200,12 +2267,7 @@ body::before {
 
   pointer-events: none;
 
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(220,205,185,.2),
-      transparent 30%
-    );
+  background: none;
 
 }
 
@@ -2873,9 +2935,9 @@ body::before {
 
   position: absolute;
 
-  right: 7vw;
+  right: 8vw;
 
-  top: 55px;
+  bottom: 150px;
 
   font-size: 80px;
 
@@ -3623,11 +3685,15 @@ body::before {
 
 <nav class="top-nav" id="tnav">
 
-  <div class="nav-wordmark">
+  <a class="nav-wordmark" href="index.html">
     ZENENE
-  </div>
+  </a>
 
   <div class="nav-links">
+
+    <a href="vera.html" class="nav-cta">
+      vera
+    </a>
 
     <a href="#story" class="nav-cta">
       explore
@@ -3675,6 +3741,23 @@ body::before {
       <input class="auth-input" id="authLoginPassword" type="password" placeholder="Password" autocomplete="current-password" required>
 
       <button class="auth-submit" id="authLoginSubmit" type="submit">Log in</button>
+
+      <button class="auth-link" id="authForgotLink" type="button">forgot password?</button>
+
+    </form>
+
+    <!-- FORGOT PASSWORD: emails a reset link that opens reset-password.html -->
+    <form class="auth-form" id="authFormForgot">
+
+      <p class="auth-note">
+        Enter the email you signed up with and we'll send you a link to set a new password.
+      </p>
+
+      <input class="auth-input" id="authForgotEmail" type="email" placeholder="Email" autocomplete="email" required>
+
+      <button class="auth-submit" id="authForgotSubmit" type="submit">Send reset link</button>
+
+      <button class="auth-link" id="authBackToLogin" type="button">&larr; back to log in</button>
 
     </form>
 
@@ -4334,10 +4417,6 @@ body::before {
             Mood
           </a>
 
-          <a href="vera.html">
-            Vera
-          </a>
-
           <a href="calm.html">
             Calm
           </a>
@@ -4350,6 +4429,10 @@ body::before {
           <div class="footer-column-title">
             discover
           </div>
+
+          <a href="vera.html">
+            Vera
+          </a>
 
           <a href="explore.html">
             Explore
@@ -4411,9 +4494,9 @@ body::before {
 
     <a href="mood.html" class="dock-item">mood</a>
 
-    <a href="explore.html" class="dock-item">explore</a>
-
     <a href="vera.html" class="dock-item">vera</a>
+
+    <a href="explore.html" class="dock-item">explore</a>
 
     <a href="calm.html" class="dock-item">calm</a>
 
@@ -4470,12 +4553,11 @@ body::before {
       or an appropriate local emergency/crisis service.
     </div>
 
-    <a
-      class="c-link"
-      href="tel:112"
-    >
-      📞 Local emergency support
-    </a>
+    <a class="c-link" href="tel:988">📞 US: call or text 988</a>
+    <a class="c-link" href="sms:741741?body=HOME">💬 US/Canada: text HOME to 741741</a>
+    <a class="c-link" href="tel:116123">📞 UK/ROI: Samaritans 116 123</a>
+    <a class="c-link" href="https://findahelpline.com" target="_blank" rel="noopener">🌍 Elsewhere: findahelpline.com</a>
+    <a class="c-link" href="tel:112">📞 Local emergency support · 112</a>
 
   </div>
 
@@ -4501,6 +4583,8 @@ const authTabSignup = document.getElementById("authTabSignup");
 const authTabLogin = document.getElementById("authTabLogin");
 const authFormSignup = document.getElementById("authFormSignup");
 const authFormLogin = document.getElementById("authFormLogin");
+const authFormForgot = document.getElementById("authFormForgot");
+const authTabs = document.querySelector(".auth-tabs");
 const authMessage = document.getElementById("authMessage");
 
 function openAuthModal() {
@@ -4513,17 +4597,25 @@ function closeAuthModal() {
   authMessage.classList.remove("success");
 }
 
+// tab is "signup", "login" or "forgot"
 function showAuthTab(tab) {
 
   const isSignup = tab === "signup";
+  const isForgot = tab === "forgot";
+
+  authTabs.classList.toggle("hidden", isForgot);
 
   authTabSignup.classList.toggle("active", isSignup);
-  authTabLogin.classList.toggle("active", !isSignup);
+  authTabLogin.classList.toggle("active", !isSignup && !isForgot);
 
   authFormSignup.classList.toggle("active", isSignup);
-  authFormLogin.classList.toggle("active", !isSignup);
+  authFormLogin.classList.toggle("active", tab === "login");
+  authFormForgot.classList.toggle("active", isForgot);
 
-  authTitle.textContent = isSignup ? "Welcome to Zenene" : "Welcome back";
+  authTitle.textContent =
+    isSignup ? "Welcome to Zenene" :
+    isForgot ? "Reset your password" :
+    "Welcome back";
 
   authMessage.textContent = "";
   authMessage.classList.remove("success");
@@ -4562,7 +4654,7 @@ refreshNavAuthState();
 // Lets other pages' "sign in" nav link deep-link here, e.g. index.html?auth=login
 const authDeepLink = new URLSearchParams(window.location.search).get("auth");
 
-if (authDeepLink === "login" || authDeepLink === "signup") {
+if (["login", "signup", "forgot"].includes(authDeepLink)) {
   showAuthTab(authDeepLink);
   openAuthModal();
 }
@@ -4573,6 +4665,58 @@ authOverlay.addEventListener("click", (e) => {
 
 authTabSignup.addEventListener("click", () => showAuthTab("signup"));
 authTabLogin.addEventListener("click", () => showAuthTab("login"));
+
+document.getElementById("authForgotLink").addEventListener("click", () => {
+  // Carry over whatever email they already typed.
+  document.getElementById("authForgotEmail").value =
+    document.getElementById("authLoginEmail").value;
+  showAuthTab("forgot");
+});
+
+document.getElementById("authBackToLogin").addEventListener("click", () => {
+  showAuthTab("login");
+});
+
+/* =========================================================
+   FORGOT PASSWORD
+   Supabase emails a one-time link. Clicking it opens
+   reset-password.html, where the new password is saved.
+   That page's URL must be listed in Supabase ->
+   Authentication -> URL Configuration -> Redirect URLs.
+   ========================================================= */
+
+authFormForgot.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const email = document.getElementById("authForgotEmail").value.trim();
+  const submitBtn = document.getElementById("authForgotSubmit");
+
+  submitBtn.disabled = true;
+  authMessage.classList.remove("success");
+  authMessage.textContent = "";
+
+  const redirectTo =
+    new URL("reset-password.html", window.location.href).href;
+
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo
+  });
+
+  submitBtn.disabled = false;
+
+  if (error) {
+    authMessage.textContent = error.message;
+    return;
+  }
+
+  // Same message whether or not the email has an account,
+  // so the form can't be used to check who has signed up.
+  authMessage.classList.add("success");
+  authMessage.textContent =
+    "If that email has a Zenene account, a reset link is on its way. Check your inbox (and spam).";
+
+});
 
 authFormSignup.addEventListener("submit", async (e) => {
 
@@ -4816,11 +4960,14 @@ garden.addEventListener(
     flower.className =
       "garden-flower";
 
+    const gardenRect =
+      garden.getBoundingClientRect();
+
     flower.style.left =
-      `${event.clientX}px`;
+      `${event.clientX - gardenRect.left}px`;
 
     flower.style.top =
-      `${event.clientY}px`;
+      `${event.clientY - gardenRect.top}px`;
 
     flower.style.setProperty(
       "--rotation",

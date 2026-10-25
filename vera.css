@@ -6,7 +6,7 @@
 :root {
 
     --brown: #624F43;
-    --brown-dark: #392D26;
+    --brown-dark: #3b2d25;
     --brown-darker: #2b211b;
 
     --ink: #2F2B27;
@@ -242,18 +242,6 @@ body {
         calc(100vh - 73px);
 
     background:
-
-        radial-gradient(
-            circle at 15% 0%,
-            rgba(185, 120, 128, 0.14),
-            transparent 45%
-        ),
-
-        radial-gradient(
-            circle at 90% 100%,
-            rgba(98, 79, 67, 0.5),
-            transparent 45%
-        ),
 
         var(--brown-dark);
 

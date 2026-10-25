@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -1095,19 +1095,238 @@
         transition-duration: .01ms !important;
       }
     }
+    /* =====================================================
+       LIBRARY: search, paging, credits
+       ===================================================== */
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .resource-search-wrap {
+      display: block;
+      margin: 0 0 18px;
+    }
+
+    .resource-search {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--type);
+      font-size: .7rem;
+      letter-spacing: .03em;
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .resource-search::placeholder {
+      color: var(--muted);
+    }
+
+    .resource-search:focus {
+      outline: none;
+      border-color: var(--blue-dark);
+      background: var(--white);
+    }
+
+    .article-subtitle {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .article-card {
+      transition: border-color .2s ease, background .2s ease, transform .25s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .show-more {
+      display: block;
+      margin: 22px auto 0;
+      padding: 12px 22px;
+      border: 1px solid var(--blue-ink);
+      background: transparent;
+      color: var(--blue-ink);
+      font-family: var(--type);
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .show-more:hover {
+      background: var(--blue-ink);
+      color: var(--white);
+    }
+
+    .library-credit {
+      max-width: 560px;
+      margin: 26px auto 0;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* =====================================================
+       FULL-PAGE READING SHEET
+       Same slide-up as before, now taking the whole page.
+       ===================================================== */
+
+    .article-overlay {
+      align-items: stretch;
+    }
+
+    .article-sheet {
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      padding: 74px 0 56px;
+      border: none;
+      transform: translateY(40px);
+      transition: transform .45s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .article-overlay.open .article-sheet {
+      transform: none;
+    }
+
+    .article-sheet > * {
+      width: min(680px, calc(100% - 40px));
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .sheet-handle {
+      display: none;
+    }
+
+    .article-sheet > .sheet-title {
+      max-width: none;
+    }
+
+    .sheet-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .sheet-category {
+      margin-top: 0;
+    }
+
+    .sheet-body {
+      max-width: none;
+    }
+
+    .sheet-lead {
+      font-size: 1.4rem !important;
+      line-height: 1.6 !important;
+      color: var(--ink) !important;
+    }
+
+    .sheet-inside {
+      margin: 0 0 8px;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .sheet-inside li {
+      padding: 13px 0 13px 26px;
+      border-bottom: 1px solid var(--line);
+      color: #4e5c54;
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      line-height: 1.45;
+      position: relative;
+    }
+
+    .sheet-inside li::before {
+      content: "✦";
+      position: absolute;
+      left: 2px;
+      top: 14px;
+      color: var(--blue-dark);
+      font-size: .7rem;
+    }
+
+    .sheet-credit {
+      margin-top: 30px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .sheet-credit p {
+      margin: 0 0 16px !important;
+      font-size: 1.05rem !important;
+      font-style: italic;
+    }
+
+    .sheet-source-link {
+      display: inline-block;
+      padding: 12px 18px;
+      background: var(--blue-ink);
+      color: var(--white);
+      font-family: var(--type);
+      font-size: .6rem;
+      letter-spacing: .06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .sheet-source-link:hover {
+      background: #304b56;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-sheet {
+        padding-top: 66px;
+      }
+
+      .sheet-close {
+        top: 14px;
+        right: 14px;
+      }
+
+      .sheet-lead {
+        font-size: 1.25rem !important;
+      }
+    }
   </style>
+<link rel="stylesheet" href="zenene.css">
 </head>
 
-<body>
+<body class="zn zn-explore">
   <nav class="top-nav">
-    <div class="nav-wordmark">zenene</div>
-
+    <a class="nav-wordmark" href="index.html">zenene</a>
     <div class="nav-links">
       <a href="index.html">home</a>
       <a href="journal.html">journal</a>
       <a href="mood.html">mood</a>
-      <a href="explore.html" class="active">explore</a>
       <a href="vera.html">vera</a>
+      <a href="explore.html" class="active">explore</a>
       <a href="calm.html">calm</a>
       <a href="profile.html" id="navAuthLink">sign in</a>
     </div>
@@ -1159,14 +1378,36 @@
           <span class="resource-count" id="resourceCount" aria-live="polite"></span>
         </div>
 
+        <label class="resource-search-wrap">
+          <span class="visually-hidden">Search pieces</span>
+          <input
+            class="resource-search"
+            id="resourceSearch"
+            type="search"
+            placeholder="search 230+ pieces, e.g. sleep, exams, friends"
+            autocomplete="off"
+          >
+        </label>
+
         <div class="article-grid" id="articleGrid"></div>
+
+        <button class="show-more" id="showMoreButton" type="button" hidden>show more</button>
+
+        <p class="library-credit">
+          Pieces marked with a source are hand-picked from YoungMinds, TeensHealth, Kids Help Phone,
+          The Jed Foundation, the NHS and Greater Good. Summaries are ours; every piece links to its original.
+        </p>
       </section>
     </div>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <div class="script">be gentle with yourself.</div>
     <p>zenene · where your mind blooms</p>
+    <div class="site-footer-links">
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+    </div>
   </footer>
 
   <button
@@ -1176,7 +1417,7 @@
     aria-controls="cm"
     id="openSupport"
   >
-    need help?
+    💙 need help?
   </button>
 
   <div
@@ -1230,6 +1471,7 @@
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/nav-auth.js"></script>
+  <script src="js/explore-library.js"></script>
 
   <script>
     /* ARTICLE DATA */
@@ -1295,7 +1537,7 @@
         `
       },
       {
-        cat: "Yoga",
+        cat: "Yoga & movement",
         title: "Poses That Release Emotional Tension",
         subtitle: "Gentle movement, on your own terms.",
         read: "6 min",
@@ -1387,20 +1629,63 @@
 
     /* CATEGORY COLOURS */
 
-    const CATEGORY_COLORS = {
-      "Journaling": "#a76e73",
-      "Anxiety": "#3f5d69",
-      "Yoga": "#71866e",
-      "Friendship": "#887b9d",
-      "Self-care": "#9b765d",
-      "Growth": "#71866e"
+    const CATEGORY_ORDER = [
+      "Anxiety",
+      "Stress",
+      "Low mood",
+      "Loneliness",
+      "Sleep",
+      "Mindfulness",
+      "Yoga & movement",
+      "Journaling",
+      "Self-care",
+      "Friendship",
+      "Relationships & family",
+      "School & burnout",
+      "Body image",
+      "Grief",
+      "Growth"
+    ];
+
+    // [label ink, flat card tint, card symbol]
+    const CATEGORY_STYLE = {
+      "Anxiety": ["#3f5d69", "#dce8ed", "〰"],
+      "Stress": ["#566b77", "#e2eaee", "◌"],
+      "Low mood": ["#5d6a86", "#e2e6f0", "∿"],
+      "Loneliness": ["#7a6b8f", "#e8e3ef", "◐"],
+      "Sleep": ["#4f5f7d", "#dfe4ee", "☾"],
+      "Mindfulness": ["#5f7d6a", "#dfe9e1", "❋"],
+      "Yoga & movement": ["#71866e", "#e3ebdf", "✺"],
+      "Journaling": ["#a76e73", "#f1e4e2", "✎"],
+      "Self-care": ["#9b765d", "#f2e8dd", "✿"],
+      "Friendship": ["#887b9d", "#ebe6f1", "♡"],
+      "Relationships & family": ["#8c6a5c", "#f0e5de", "⌂"],
+      "School & burnout": ["#7a7150", "#f1edd9", "✐"],
+      "Body image": ["#a0707b", "#f3e3e6", "◍"],
+      "Grief": ["#6b6f7a", "#e7e7ea", "❀"],
+      "Growth": ["#6d8a5f", "#e5eedd", "✳"]
     };
 
-    const categories = [
-      "All",
-      ...new Set(ARTICLES.map(article => article.cat)),
-      "Saved"
-    ];
+    const CATEGORY_COLORS = Object.fromEntries(
+      Object.entries(CATEGORY_STYLE).map(([category, [ink]]) => [category, ink])
+    );
+
+    // Library pieces sit alongside Zenene's own, credited and linked to the original.
+    LIBRARY.forEach(piece => {
+      const [, bg, symbol] = CATEGORY_STYLE[piece.cat];
+      ARTICLES.push({ ...piece, subtitle: piece.summary, bg, symbol, external: true });
+    });
+
+    // Zenene's own pieces are saved by title, library pieces by their link.
+    function saveKey(article) {
+      return article.external ? article.url : article.title;
+    }
+
+    const categories = ["All", ...CATEGORY_ORDER, "Saved"];
+
+    const PAGE_SIZE = 12;
+    let visibleCount = PAGE_SIZE;
+    let searchQuery = "";
 
     const filterRow = document.getElementById("filterRow");
     const articleGrid = document.getElementById("articleGrid");
@@ -1470,7 +1755,7 @@
           count.textContent = ARTICLES.length;
         } else if (category === "Saved") {
           count.textContent = ARTICLES.filter(
-            article => savedTitles.has(article.title)
+            article => savedTitles.has(saveKey(article))
           ).length;
         } else {
           count.textContent = ARTICLES.filter(
@@ -1482,6 +1767,7 @@
 
         button.addEventListener("click", () => {
           selectedCategory = category;
+          visibleCount = PAGE_SIZE;
           renderFilters();
           renderArticles();
         });
@@ -1492,22 +1778,38 @@
 
     /* RESOURCE COUNTS AND EMPTY STATES */
 
+    function matchesSearch(article) {
+      if (!searchQuery) return true;
+
+      const haystack = [
+        article.title,
+        article.subtitle,
+        article.cat,
+        article.source || "Zenene"
+      ].join(" ").toLowerCase();
+
+      return searchQuery
+        .split(/\s+/)
+        .every(word => haystack.includes(word));
+    }
+
     function getFilteredArticles() {
+      let list = ARTICLES;
+
       if (selectedCategory === "Saved") {
-        return ARTICLES.filter(article => savedTitles.has(article.title));
+        list = ARTICLES.filter(article => savedTitles.has(saveKey(article)));
+      } else if (selectedCategory !== "All") {
+        list = ARTICLES.filter(article => article.cat === selectedCategory);
       }
 
-      if (selectedCategory !== "All") {
-        return ARTICLES.filter(article => article.cat === selectedCategory);
-      }
-
-      return ARTICLES;
+      return list.filter(matchesSearch);
     }
 
     function renderArticles() {
       const filtered = getFilteredArticles();
 
       articleGrid.innerHTML = "";
+      showMoreButton.hidden = true;
 
       resourceHeading.textContent =
         selectedCategory === "All"
@@ -1525,22 +1827,26 @@
 
         const title = document.createElement("h3");
         title.textContent =
-          selectedCategory === "Saved"
-            ? "Nothing saved just yet."
-            : "Nothing here just yet.";
+          searchQuery
+            ? "No pieces match that search."
+            : selectedCategory === "Saved"
+              ? "Nothing saved just yet."
+              : "Nothing here just yet.";
 
         const description = document.createElement("p");
         description.textContent =
-          selectedCategory === "Saved"
-            ? "Open a piece that speaks to you and save it for another day."
-            : "Try another category and see what you find.";
+          searchQuery
+            ? "Try a different word, or browse by feeling instead."
+            : selectedCategory === "Saved"
+              ? "Open a piece that speaks to you and save it for another day."
+              : "Try another category and see what you find.";
 
         empty.append(title, description);
         articleGrid.appendChild(empty);
         return;
       }
 
-      filtered.forEach((article, index) => {
+      filtered.slice(0, visibleCount).forEach((article, index) => {
         const originalIndex = ARTICLES.indexOf(article);
         const card = document.createElement("article");
 
@@ -1548,7 +1854,7 @@
         card.tabIndex = 0;
         card.setAttribute("role", "button");
         card.setAttribute("aria-label", `Read ${article.title}`);
-        card.style.animationDelay = `${Math.min(index * .04, .28)}s`;
+        card.style.animationDelay = `${Math.min((index % PAGE_SIZE) * .04, .28)}s`;
 
         const visual = document.createElement("div");
         visual.className = "article-visual";
@@ -1589,11 +1895,11 @@
         dot.setAttribute("aria-hidden", "true");
 
         const readingTime = document.createElement("span");
-        readingTime.textContent = `${article.read} read`;
+        readingTime.textContent = `${article.source || "Zenene"} · ${article.read} ${verbFor(article)}`;
 
         meta.append(dot, readingTime);
 
-        if (savedTitles.has(article.title)) {
+        if (savedTitles.has(saveKey(article))) {
           const savedMark = document.createElement("span");
           savedMark.className = "saved-mark";
           savedMark.textContent = "✓";
@@ -1616,7 +1922,40 @@
 
         articleGrid.appendChild(card);
       });
+
+      const remaining = filtered.length - visibleCount;
+
+      if (remaining > 0) {
+        showMoreButton.hidden = false;
+        showMoreButton.textContent =
+          `show ${Math.min(remaining, PAGE_SIZE)} more · ${remaining} left`;
+      }
     }
+
+    function verbFor(article) {
+      if (article.kind === "video") return "watch";
+      if (article.kind === "tool") return "activity";
+      return "read";
+    }
+
+    const showMoreButton = document.getElementById("showMoreButton");
+
+    showMoreButton.addEventListener("click", () => {
+      visibleCount += PAGE_SIZE;
+      renderArticles();
+    });
+
+    let searchTimer = null;
+
+    document.getElementById("resourceSearch").addEventListener("input", event => {
+      window.clearTimeout(searchTimer);
+
+      searchTimer = window.setTimeout(() => {
+        searchQuery = event.target.value.trim().toLowerCase();
+        visibleCount = PAGE_SIZE;
+        renderArticles();
+      }, 120);
+    });
 
     /* FEATURED ARTICLE */
 
@@ -1646,8 +1985,15 @@
         CATEGORY_COLORS[article.cat] || "var(--blue-ink)";
 
       document.getElementById("sheetTitle").textContent = article.title;
-      document.getElementById("sheetSubtitle").textContent = article.subtitle;
-      document.getElementById("sheetBody").innerHTML = article.body;
+
+      if (article.external) {
+        document.getElementById("sheetSubtitle").textContent =
+          `from ${article.source} · ${article.read} ${verbFor(article)}`;
+        renderLibraryPiece(article);
+      } else {
+        document.getElementById("sheetSubtitle").textContent = article.subtitle;
+        document.getElementById("sheetBody").innerHTML = article.body;
+      }
 
       updateSaveButton();
 
@@ -1657,6 +2003,52 @@
       document.body.classList.add("modal-open");
 
       document.getElementById("closeArticleButton").focus();
+    }
+
+    /* LIBRARY PIECE: Zenene's summary + credit + link to the original */
+
+    function renderLibraryPiece(article) {
+      const body = document.getElementById("sheetBody");
+      body.replaceChildren();
+
+      const lead = document.createElement("p");
+      lead.className = "sheet-lead";
+      lead.textContent = article.summary;
+      body.appendChild(lead);
+
+      if (article.inside.length) {
+        const heading = document.createElement("h3");
+        heading.textContent = "Inside this piece";
+
+        const list = document.createElement("ul");
+        list.className = "sheet-inside";
+
+        article.inside.forEach(section => {
+          const item = document.createElement("li");
+          item.textContent = section;
+          list.appendChild(item);
+        });
+
+        body.append(heading, list);
+      }
+
+      const credit = document.createElement("div");
+      credit.className = "sheet-credit";
+
+      const note = document.createElement("p");
+      note.textContent =
+        `This is Zenene's short summary. The full piece, and all credit for it, belongs to ${article.source}.`;
+
+      const link = document.createElement("a");
+      link.className = "sheet-source-link";
+      link.href = article.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent =
+        `${article.kind === "video" ? "Watch" : article.kind === "tool" ? "Open" : "Read"} the full piece on ${article.source} ↗`;
+
+      credit.append(note, link);
+      body.appendChild(credit);
     }
 
     /* CLOSE ARTICLE */
@@ -1688,7 +2080,7 @@
       if (currentArticleIndex === null) return;
 
       const article = ARTICLES[currentArticleIndex];
-      const isSaved = savedTitles.has(article.title);
+      const isSaved = savedTitles.has(saveKey(article));
 
       saveButton.textContent = isSaved ? "saved ✓ · remove" : "save this piece";
       saveButton.style.background = isSaved ? "var(--sage)" : "var(--blue-ink)";
@@ -1721,29 +2113,29 @@
           return;
         }
 
-        const alreadySaved = savedTitles.has(article.title);
+        const alreadySaved = savedTitles.has(saveKey(article));
 
         if (alreadySaved) {
           const { error } = await supabaseClient
             .from("saved_resources")
             .delete()
             .eq("user_id", user.id)
-            .eq("article_title", article.title);
+            .eq("article_title", saveKey(article));
 
           if (error) throw error;
 
-          savedTitles.delete(article.title);
+          savedTitles.delete(saveKey(article));
         } else {
           const { error } = await supabaseClient
             .from("saved_resources")
             .insert({
               user_id: user.id,
-              article_title: article.title
+              article_title: saveKey(article)
             });
 
           if (error) throw error;
 
-          savedTitles.add(article.title);
+          savedTitles.add(saveKey(article));
         }
 
         renderFilters();
@@ -1856,5 +2248,6 @@
       renderArticles();
     });
   </script>
+<script src="js/zenene-ui.js"></script>
 </body>
 </html>

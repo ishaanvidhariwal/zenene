@@ -26,7 +26,7 @@
 >
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Special+Elite&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&family=Special+Elite&display=swap"
     rel="stylesheet"
 >
 
@@ -236,7 +236,7 @@ body {
 
     justify-content: center;
 
-    padding: 70px 24px 100px;
+    padding: 10px 0 0;
 
 }
 
@@ -533,9 +533,10 @@ footer p {
 
 </style>
 
+<link rel="stylesheet" href="zenene.css">
 </head>
 
-<body>
+<body class="zn zn-plain">
 
 
 <!-- =====================================================
@@ -543,50 +544,35 @@ footer p {
 ===================================================== -->
 
 <nav class="top-nav">
-
-    <div class="nav-wordmark">
-        zenene
-    </div>
-
-
-    <div class="nav-links">
-
-        <a href="index.html">
-            home
-        </a>
-
-        <a href="journal.html">
-            journal
-        </a>
-
-        <a href="mood.html">
-            mood
-        </a>
-
-        <a href="explore.html">
-            explore
-        </a>
-
-        <a href="vera.html">
-            vera
-        </a>
-
-        <a href="calm.html">
-            calm
-        </a>
-
-        <a href="profile.html" class="active" id="navAuthLink">
-            profile
-        </a>
-
-    </div>
-
+  <a class="nav-wordmark" href="index.html">zenene</a>
+  <div class="nav-links">
+    <a href="index.html">home</a>
+    <a href="journal.html">journal</a>
+    <a href="mood.html">mood</a>
+    <a href="vera.html">vera</a>
+    <a href="explore.html">explore</a>
+    <a href="calm.html">calm</a>
+    <a href="profile.html" class="active" id="navAuthLink">profile</a>
+  </div>
 </nav>
 
 
 <!-- =====================================================
      PROFILE
 ===================================================== -->
+
+<main class="page">
+
+    <header class="page-header">
+        <div>
+            <p class="eyebrow">your little corner</p>
+            <h1>your <em>profile.</em></h1>
+        </div>
+
+        <p class="intro">
+            The name Zenene greets you with, and a quiet way out when you need it.
+        </p>
+    </header>
 
 <div class="profile-wrap">
 
@@ -610,10 +596,16 @@ footer p {
 
 </div>
 
+</main>
 
-<footer>
-    <div class="script">be gentle with yourself.</div>
-    <p>zenene · where your mind blooms</p>
+
+<footer class="site-footer">
+  <div class="script">be gentle with yourself.</div>
+  <p>zenene · where your mind blooms</p>
+  <div class="site-footer-links">
+    <a href="privacy.html">privacy</a>
+    <a href="terms.html">terms</a>
+  </div>
 </footer>
 
 
@@ -648,24 +640,18 @@ footer p {
 
 (async function initProfile() {
 
-    const user = await getCurrentUser();
+    const profile = await getCurrentProfile();
 
-    if (!user) {
-        window.location.href = "index.html";
+    if (!profile) {
+        window.location.href = "index.html?auth=login";
         return;
     }
 
-    document.getElementById("profileEmail").textContent = user.email;
+    document.getElementById("profileEmail").textContent = profile.email;
 
-    const { data, error } = await supabaseClient
-        .from("profiles")
-        .select("display_name")
-        .eq("id", user.id)
-        .single();
-
-    if (!error && data && data.display_name) {
-        document.getElementById("profileNameInput").value = data.display_name;
-        document.getElementById("profileGreeting").textContent = "Hi, " + data.display_name;
+    if (profile.display_name) {
+        document.getElementById("profileNameInput").value = profile.display_name;
+        document.getElementById("profileGreeting").textContent = "Hi, " + profile.display_name;
     } else {
         document.getElementById("profileGreeting").textContent = "Hi there";
     }
@@ -677,7 +663,7 @@ document.getElementById("profileSaveBtn").addEventListener("click", async () => 
     const user = await getCurrentUser();
 
     if (!user) {
-        window.location.href = "index.html";
+        window.location.href = "index.html?auth=login";
         return;
     }
 
@@ -709,5 +695,6 @@ document.getElementById("profileLogoutBtn").addEventListener("click", async () =
 
 </script>
 
+<script src="js/zenene-ui.js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -487,15 +487,27 @@
 
     .step-number {
       display: grid;
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       flex-shrink: 0;
       place-items: center;
       border: 1px solid #dce1d5;
+      border-radius: 50%;
       background: var(--sage);
-      color: #626b5b;
-      font-family: var(--serif);
-      font-size: 1.1rem;
+      color: #4f5a49;
+      font-family: var(--type);
+      font-size: .72rem;
+      line-height: 1;
+      font-variant-numeric: lining-nums;
+    }
+
+    /* beats the generic ".step span" description style below */
+    .step .step-number {
+      display: grid;
+      color: #4f5a49;
+      font-family: var(--type);
+      font-size: .72rem;
+      line-height: 1;
     }
 
     .step:nth-child(2) .step-number {
@@ -1211,25 +1223,20 @@
       }
     }
   </style>
+<link rel="stylesheet" href="zenene.css">
 </head>
 
-<body>
+<body class="zn zn-calm">
   <nav class="top-nav">
     <a class="nav-wordmark" href="index.html">zenene</a>
-
     <div class="nav-links">
       <a href="index.html">home</a>
       <a href="journal.html">journal</a>
       <a href="mood.html">mood</a>
-      <a href="explore.html">explore</a>
       <a href="vera.html">vera</a>
+      <a href="explore.html">explore</a>
       <a href="calm.html" class="active">calm</a>
       <a href="profile.html" id="navAuthLink">sign in</a>
-    </div>
-
-    <div class="nav-user">
-      <span class="user-name" id="userName">your little corner</span>
-      <button class="small-button" id="authButton" type="button">sign in</button>
     </div>
   </nav>
 
@@ -1240,7 +1247,7 @@
         <h1>come back to <em>yourself.</em></h1>
       </div>
 
-      <p class="header-intro">
+      <p class="intro">
         Nothing to solve right now. Nothing to prove.
         Just a little space to breathe, create, and notice the quieter things.
       </p>
@@ -1469,9 +1476,13 @@
     <p class="footer-note">You don't have to bloom every day.</p>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <div class="script">be gentle with yourself.</div>
-    <p>zenene · where your mind blooms · a space for reflection</p>
+    <p>zenene · where your mind blooms</p>
+    <div class="site-footer-links">
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+    </div>
   </footer>
 
   <!-- Sign-in reminder -->
@@ -1865,9 +1876,11 @@
         }
       }
 
-      authButton.addEventListener("click", () => {
-        window.location.href = "profile.html";
-      });
+      if (authButton) {
+        authButton.addEventListener("click", () => {
+          window.location.href = "profile.html";
+        });
+      }
 
       $("#closeAuthModal").addEventListener("click", closeAuthModal);
 
@@ -2047,21 +2060,8 @@
           const { data, error } = await client.auth.getUser();
 
           if (error || !data?.user) {
-            $("#userName").textContent = "your little corner";
-            authButton.textContent = "sign in";
             return;
           }
-
-          const user = data.user;
-
-          const displayName =
-            user.user_metadata?.full_name ||
-            user.user_metadata?.name ||
-            user.email?.split("@")[0] ||
-            "your little corner";
-
-          $("#userName").textContent = displayName;
-          authButton.textContent = "account";
 
           await loadGratitudeEntries();
         } catch (error) {
@@ -2113,5 +2113,6 @@
       });
     })();
   </script>
+<script src="js/zenene-ui.js"></script>
 </body>
 </html>

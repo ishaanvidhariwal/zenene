@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -1180,18 +1180,18 @@
       }
     }
   </style>
+<link rel="stylesheet" href="zenene.css">
 </head>
 
-<body>
+<body class="zn zn-mood">
   <nav class="top-nav">
-    <div class="nav-wordmark">zenene</div>
-
+    <a class="nav-wordmark" href="index.html">zenene</a>
     <div class="nav-links">
       <a href="index.html">home</a>
       <a href="journal.html">journal</a>
       <a href="mood.html" class="active">mood</a>
-      <a href="explore.html">explore</a>
       <a href="vera.html">vera</a>
+      <a href="explore.html">explore</a>
       <a href="calm.html">calm</a>
       <a href="profile.html" id="navAuthLink">sign in</a>
     </div>
@@ -1330,9 +1330,13 @@
     </div>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <div class="script">be gentle with yourself.</div>
     <p>zenene · where your mind blooms</p>
+    <div class="site-footer-links">
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+    </div>
   </footer>
 
   <button
@@ -1342,7 +1346,7 @@
     aria-controls="cm"
     onclick="document.getElementById('cm').classList.add('open')"
   >
-    need help?
+    💙 need help?
   </button>
 
   <div
@@ -1477,7 +1481,7 @@
       const user = await getCurrentUser();
 
       if (!user) {
-        window.location.href = "index.html";
+        window.location.href = "index.html?auth=login";
         return false;
       }
 
@@ -2050,5 +2054,6 @@
       }
     });
   </script>
+<script src="js/zenene-ui.js"></script>
 </body>
 </html>

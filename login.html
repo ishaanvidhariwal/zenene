@@ -1,41 +1,13 @@
-<h1>Welcome back</h1>
-
-<input
-    id="email"
-    type="email"
-    placeholder="Email"
->
-
-<input
-    id="password"
-    type="password"
-    placeholder="Password"
->
-
-<button id="loginButton">
-    Log in
-</button>
-
-<p id="message"></p>
-
-<script>
-document.getElementById("loginButton").addEventListener("click", async () => {
-
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-        });
-
-    if (error) {
-        document.getElementById("message").textContent =
-            error.message;
-        return;
-    }
-
-    window.location.href = "index.html";
-});
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zenene</title>
+<!-- Log in, sign up and forgot password all live in the popup on the home page. -->
+<meta http-equiv="refresh" content="0; url=index.html?auth=login">
+<script>window.location.replace("index.html?auth=login");</script>
+</head>
+<body>
+<p><a href="index.html?auth=login">Continue to Zenene</a></p>
+</body>
+</html>

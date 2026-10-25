@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Vera — Zenene</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&family=Special+Elite&family=IM+Fell+DW+Pica:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="vera.css">
+
+<link rel="stylesheet" href="zenene.css">
+</head>
+
+
+<body class="zn zn-vera">
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="top-nav">
+  <a class="nav-wordmark" href="index.html">zenene</a>
+  <div class="nav-links">
+    <a href="index.html">home</a>
+    <a href="journal.html">journal</a>
+    <a href="mood.html">mood</a>
+    <a href="vera.html" class="active">vera</a>
+    <a href="explore.html">explore</a>
+    <a href="calm.html">calm</a>
+    <a href="profile.html" id="navAuthLink">sign in</a>
+  </div>
+</nav>
+
+
+<main class="vera-page">
+
+    <div class="vera-shell">
+
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="vera-header">
+
+            <div class="vera-brand">
+
+                <div class="vera-name">
+                    vera
+                </div>
+
+                <div class="vera-subtitle">
+                    a space to understand yourself
+                </div>
+
+                <a
+                    href="index.html"
+                    id="veraLoginNote"
+                    class="vera-login-note"
+                    style="display: none;"
+                >
+                    Log in for personalized support →
+                </a>
+
+            </div>
+
+
+            <div class="vera-status">
+
+                <span class="vera-status-dot"></span>
+
+                here to listen
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             CHAT AREA
+        ========================== -->
+
+        <section
+            class="vera-chat"
+            id="veraChat"
+        >
+
+
+            <!-- WELCOME -->
+
+            <div
+                class="vera-welcome"
+                id="veraWelcome"
+            >
+
+                <div class="vera-symbol">
+                    V
+                </div>
+
+
+                <h1>
+                    Hi, I'm <em>Vera.</em>
+                </h1>
+
+
+                <p>
+                    You don't need to have the right words.
+                    Just tell me what's on your mind.
+                </p>
+
+
+                <div class="vera-suggestions">
+
+                    <button
+                        type="button"
+                        data-message="I don't really understand what I'm feeling."
+                    >
+                        I don't understand what I'm feeling
+                    </button>
+
+
+                    <button
+                        type="button"
+                        data-message="I just need someone to listen."
+                    >
+                        I just need someone to listen
+                    </button>
+
+
+                    <button
+                        type="button"
+                        data-message="Something happened today."
+                    >
+                        Something happened today
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MESSAGES -->
+
+            <div
+                class="vera-messages"
+                id="veraMessages"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             MESSAGE INPUT
+        ========================== -->
+
+        <form
+            class="vera-input-area"
+            id="veraForm"
+        >
+
+            <textarea
+                id="veraInput"
+                rows="1"
+                maxlength="8000"
+                placeholder="What's on your mind?"
+            ></textarea>
+
+
+            <button
+                type="submit"
+                id="veraSend"
+                aria-label="Send message"
+            >
+                ↑
+            </button>
+
+        </form>
+
+
+
+        <!-- =========================
+             DISCLAIMER
+        ========================== -->
+
+        <p class="vera-disclaimer">
+
+            Vera is an AI. She's a pause, not a cure,
+            and she isn't a replacement for a
+            mental-health professional.
+
+        </p>
+
+
+    </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="script">be gentle with yourself.</div>
+  <p>zenene · where your mind blooms</p>
+  <div class="site-footer-links">
+    <a href="privacy.html">privacy</a>
+    <a href="terms.html">terms</a>
+  </div>
+</footer>
+
+
+<!-- =========================
+     CRISIS
+========================== -->
+
+<button class="crisis-fab" onclick="document.getElementById('cm').classList.add('open')">
+    💙 need help?
+</button>
+
+<div class="overlay" id="cm" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+        <button class="m-close" onclick="document.getElementById('cm').classList.remove('open')">×</button>
+        <div class="m-title">You're not alone.</div>
+        <div class="m-sub">
+            If you need immediate support,
+            please reach out to a trusted adult
+            or an appropriate local emergency/crisis service.
+        </div>
+        <a class="c-link" href="tel:988">📞 US: call or text 988</a>
+        <a class="c-link" href="sms:741741?body=HOME">💬 US/Canada: text HOME to 741741</a>
+        <a class="c-link" href="tel:116123">📞 UK/ROI: Samaritans 116 123</a>
+        <a class="c-link" href="https://findahelpline.com" target="_blank" rel="noopener">🌍 Elsewhere: findahelpline.com</a>
+        <a class="c-link" href="tel:112">📞 Local emergency support</a>
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/nav-auth.js"></script>
+<script src="vera.js"></script>
+
+<script src="js/zenene-ui.js"></script>
+</body>
+
+</html>

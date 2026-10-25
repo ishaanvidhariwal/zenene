@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f4ed">
+<title>Journal | Zenene</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&family=Special+Elite&family=Caveat:wght@400;500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --paper: #f7f4ed;
+    --surface: #fffdf8;
+    --ink: #35372f;
+    --secondary: #77766c;
+    --faint: #a6a194;
+    --line: #dfdbd0;
+
+    --rose: #ad7478;
+    --rose-light: #f0e4e1;
+    --rose-deep: #80585d;
+
+    --sage: #e3e9dd;
+    --sage-ink: #596d55;
+
+    --yellow: #eee5c8;
+
+    --blue: #e2ebed;
+    --blue-ink: #526d75;
+
+    --type: "Special Elite", "Courier Prime", monospace;
+    --mono: "Courier Prime", monospace;
+    --hand: "Caveat", cursive;
+
+    --radius: 3px;
+    --transition: 180ms ease;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+body {
+    margin: 0;
+    overflow-x: clip;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+button,
+textarea {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--rose);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: #ead5d3;
+    color: var(--ink);
+}
+
+/* NAVIGATION — ORIGINAL STYLING PRESERVED */
+
+.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 34px;
+    background: rgba(247, 241, 231, 0.78);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(98, 79, 67, 0.08);
+}
+
+.nav-wordmark {
+    font-family: var(--type);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #624f43;
+    text-decoration: none;
+    font-family: var(--type);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: var(--ink);
+}
+
+.nav-links .active {
+    color: var(--ink);
+    position: relative;
+}
+
+.nav-links .active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background: #624f43;
+    opacity: .5;
+}
+
+/* PAGE */
+
+.page {
+    width: min(1060px, calc(100% - 64px));
+    margin: 0 auto;
+    min-width: 0;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    padding: 64px 0 30px;
+    border-bottom: 1px solid var(--line);
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    color: var(--secondary);
+    font: 11px/1.5 var(--type);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.page-heading h1 {
+    margin: 0;
+    font: 400 clamp(42px, 7vw, 67px)/1.08 var(--type);
+    letter-spacing: -2px;
+}
+
+.heading-note {
+    max-width: 240px;
+    margin: 0 0 4px;
+    color: var(--blue-ink);
+    font: 21px/1.35 var(--hand);
+    text-align: right;
+}
+
+.heading-date {
+    display: block;
+    margin-top: 8px;
+    color: var(--rose);
+    font: 11px/1.7 var(--type);
+}
+
+/* WRITING */
+
+.write-section {
+    min-width: 0;
+    padding-top: 42px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font: 400 17px/1.5 var(--type);
+}
+
+.section-note {
+    color: var(--faint);
+    font-size: 11px;
+}
+
+.write-panel {
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.write-panel-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 17px 22px;
+    border-bottom: 1px solid var(--line);
+}
+
+.write-panel-label {
+    color: var(--secondary);
+    font: 10px/1.5 var(--type);
+    letter-spacing: .6px;
+    text-transform: uppercase;
+}
+
+.write-date {
+    color: var(--rose);
+    font: 11px/1.5 var(--type);
+    text-align: right;
+}
+
+#journalText {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-height: 275px;
+    padding: 24px 25px;
+    resize: vertical;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    color: var(--ink);
+    font: 15px/2 var(--mono);
+    overflow-wrap: anywhere;
+}
+
+#journalText::placeholder {
+    color: #aaa597;
+    opacity: 1;
+}
+
+#journalText:focus-visible {
+    outline: 2px solid var(--rose);
+    outline-offset: -4px;
+}
+
+.write-panel-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 15px 22px;
+    border-top: 1px solid var(--line);
+}
+
+.word-count {
+    color: var(--secondary);
+    font: 11px/1.6 var(--mono);
+}
+
+.save-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 42px;
+    padding: 0 18px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    background: var(--ink);
+    color: var(--surface);
+    font: 10px/1.5 var(--type);
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.save-btn:hover {
+    background: transparent;
+    color: var(--ink);
+}
+
+.save-btn:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+#journalStatus {
+    min-height: 20px;
+    margin: 12px 0 0;
+    color: var(--sage-ink);
+    font-size: 11px;
+}
+
+#journalSyncError {
+    display: none;
+    margin: 8px 0 0;
+    color: #a24f52;
+    font-size: 11px;
+}
+
+/* MOOD SELECTOR */
+
+.mood-section {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 25px;
+    align-items: start;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    min-width: 0;
+}
+
+.mood-heading h2 {
+    margin: 0;
+    font: 400 16px/1.6 var(--type);
+}
+
+.mood-heading p {
+    margin: 5px 0 0;
+    color: var(--secondary);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.mood-options {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+}
+
+.mood-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 36px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--secondary);
+    font: 11px/1.4 var(--mono);
+    cursor: pointer;
+    transition:
+        border-color var(--transition),
+        background var(--transition),
+        color var(--transition);
+}
+
+.mood-option:hover {
+    border-color: #c7a3a3;
+    color: var(--ink);
+}
+
+.mood-option.selected {
+    border-color: var(--rose);
+    background: var(--rose-light);
+    color: var(--rose-deep);
+}
+
+.mood-option[data-mood="Happy"].selected,
+.mood-option[data-mood="Very Happy"].selected,
+.mood-option[data-mood="Excited"].selected {
+    border-color: #a8b9a1;
+    background: var(--sage);
+    color: var(--sage-ink);
+}
+
+.mood-option[data-mood="Sad"].selected,
+.mood-option[data-mood="Crying"].selected {
+    border-color: #b7cbd0;
+    background: var(--blue);
+    color: var(--blue-ink);
+}
+
+.mood-option[data-mood="Loved"].selected {
+    border-color: var(--rose);
+    background: var(--rose-light);
+    color: var(--rose-deep);
+}
+
+.mood-emoji {
+    font-size: 15px;
+    line-height: 1;
+}
+
+.mood-footnote {
+    grid-column: 2;
+    margin: -12px 0 0;
+    color: var(--rose-deep);
+    font: 19px/1.4 var(--hand);
+}
+
+/* CALENDAR / ARCHIVE */
+
+.archive-section {
+    min-width: 0;
+    padding-top: 67px;
+}
+
+.archive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 22px;
+}
+
+.archive-header h2 {
+    margin: 0;
+    font: 400 clamp(27px, 4vw, 35px)/1.35 var(--type);
+}
+
+.archive-header p {
+    max-width: 260px;
+    margin: 0;
+    color: var(--secondary);
+    font-size: 11px;
+    line-height: 1.8;
+    text-align: right;
+}
+
+.calendar {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    min-width: 0;
+}
+
+.calendar-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 19px 22px;
+    border-bottom: 1px solid var(--line);
+}
+
+.calendar-month {
+    font: 400 18px/1.5 var(--type);
+}
+
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.calendar-control {
+    display: grid;
+    place-items: center;
+    min-width: 33px;
+    height: 33px;
+    padding: 0 9px;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font: 11px var(--mono);
+    cursor: pointer;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.calendar-control:hover {
+    background: var(--ink);
+    color: var(--surface);
+}
+
+.calendar-control.today-control {
+    font: 9px var(--type);
+}
+
+.calendar-content {
+    padding: 14px;
+}
+
+.weekdays,
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.weekday {
+    padding: 10px 0;
+    color: var(--faint);
+    font: 9px/1.5 var(--type);
+    text-align: center;
+}
+
+.calendar-day {
+    position: relative;
+    min-width: 0;
+    min-height: 95px;
+    padding: 9px;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.calendar-day:nth-child(7n) {
+    border-right: 1px solid var(--line);
+}
+
+.calendar-day:nth-last-child(-n + 7) {
+    border-bottom: 1px solid var(--line);
+}
+
+.calendar-day.other-month {
+    background: #f5f2eb;
+}
+
+.calendar-day.other-month .day-number {
+    color: #c5c0b5;
+}
+
+.day-number {
+    display: grid;
+    place-items: center;
+    width: 25px;
+    height: 25px;
+    color: var(--secondary);
+    font: 10px var(--mono);
+}
+
+.calendar-day.today .day-number {
+    border-radius: 50%;
+    background: var(--ink);
+    color: white;
+}
+
+.calendar-day.has-entry {
+    background: #faf8f1;
+}
+
+.calendar-day.has-entry::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: 7px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--rose);
+}
+
+.calendar-entry {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding: 5px 6px;
+    overflow: hidden;
+    border: 0;
+    border-left: 2px solid var(--rose);
+    border-radius: 2px;
+    background: var(--rose-light);
+    color: #674d4e;
+    font: 9px/1.5 var(--mono);
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.calendar-entry:nth-of-type(even) {
+    border-left-color: #91a58a;
+    background: var(--sage);
+    color: var(--sage-ink);
+}
+
+.calendar-entry:hover {
+    filter: brightness(.97);
+}
+
+.calendar-more {
+    display: block;
+    margin-top: 4px;
+    color: var(--secondary);
+    font: 9px var(--mono);
+}
+
+.calendar-empty-note {
+    padding: 20px 10px;
+    color: var(--secondary);
+    font: 11px/1.8 var(--mono);
+    text-align: center;
+}
+
+.calendar-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 13px 22px;
+    border-top: 1px solid var(--line);
+    color: var(--secondary);
+    font: 9px/1.6 var(--type);
+    letter-spacing: .4px;
+}
+
+/* ENTRY VIEW / EDIT */
+
+.entry-modal,
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(39, 39, 33, .45);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .2s, visibility .2s;
+}
+
+.entry-modal.open,
+.confirm-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.entry-paper {
+    position: relative;
+    width: min(620px, 100%);
+    max-height: 85vh;
+    max-height: 85dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+    padding: 35px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.modal-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+}
+
+.modal-date {
+    margin: 0;
+    color: var(--secondary);
+    font: 10px/1.8 var(--type);
+}
+
+.modal-mood {
+    margin: 6px 0 0;
+    color: var(--rose);
+    font: 10px/1.8 var(--type);
+}
+
+.modal-close {
+    flex-shrink: 0;
+    padding: 5px;
+    border: 0;
+    background: transparent;
+    color: var(--secondary);
+    font: 10px var(--type);
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: var(--rose);
+}
+
+.modal-content {
+    margin-top: 24px;
+    color: var(--ink);
+    font: 14px/2 var(--mono);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+}
+
+.modal-action {
+    padding: 5px 0;
+    border: 0;
+    background: transparent;
+    color: var(--secondary);
+    font: 10px var(--type);
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.modal-action:hover {
+    color: var(--rose);
+}
+
+.modal-action.delete-btn:hover {
+    color: #a24f52;
+}
+
+.edit-area {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-height: 230px;
+    margin-top: 24px;
+    padding: 12px;
+    resize: vertical;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: var(--surface);
+    color: var(--ink);
+    font: 14px/2 var(--mono);
+    overflow-wrap: anywhere;
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.confirm-box {
+    width: min(390px, 100%);
+    padding: 30px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.confirm-box h3 {
+    margin: 0;
+    font: 400 23px/1.6 var(--type);
+}
+
+.confirm-box p {
+    margin: 12px 0 22px;
+    color: var(--secondary);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.confirm-buttons button {
+    min-height: 38px;
+    padding: 0 13px;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    font: 10px var(--type);
+    cursor: pointer;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.confirm-buttons .confirm-delete {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: white;
+}
+
+.confirm-buttons .confirm-delete:hover {
+    border-color: var(--rose-deep);
+    background: var(--rose-deep);
+}
+
+/* SUPPORT */
+
+.crisis-fab {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 500;
+    padding: 10px 13px;
+    border: 1px solid #c8d4d6;
+    border-radius: 0;
+    background: var(--blue);
+    color: var(--ink);
+    font: 10px var(--type);
+    cursor: pointer;
+    transition:
+        background var(--transition),
+        border-color var(--transition);
+}
+
+.crisis-fab:hover {
+    border-color: #a8c0c6;
+    background: #d5e4e7;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(39, 39, 33, .45);
+}
+
+.overlay.open {
+    display: flex;
+}
+
+.overlay .modal {
+    width: min(420px, 100%);
+    padding: 28px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.overlay .m-close {
+    float: right;
+    border: 0;
+    background: transparent;
+    font: 18px var(--mono);
+    cursor: pointer;
+}
+
+.overlay .m-title {
+    font: 400 24px/1.6 var(--type);
+}
+
+.overlay .m-sub {
+    margin: 12px 0 20px;
+    color: var(--secondary);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.overlay .c-link {
+    display: block;
+    margin-top: 8px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font: 11px/1.6 var(--mono);
+    text-decoration: none;
+    transition: border-color var(--transition);
+}
+
+.overlay .c-link:hover {
+    border-color: var(--rose);
+}
+
+/* FOOTER */
+
+.page-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 60px;
+    padding: 20px 0 30px;
+    border-top: 1px solid var(--line);
+    color: var(--secondary);
+    font: 10px/1.8 var(--type);
+}
+
+.page-footer span:last-child {
+    color: var(--rose);
+    text-align: right;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 760px) {
+    .page {
+        width: calc(100% - 36px);
+    }
+
+    .page-heading {
+        align-items: start;
+        flex-direction: column;
+        padding-top: 45px;
+    }
+
+    .heading-note {
+        max-width: none;
+        text-align: left;
+    }
+
+    .mood-section {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .mood-footnote {
+        grid-column: 1;
+        margin-top: -6px;
+    }
+
+    .archive-header {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .archive-header p {
+        max-width: 380px;
+        text-align: left;
+    }
+
+    .calendar-day {
+        min-height: 75px;
+        padding: 5px;
+    }
+
+    .calendar-content {
+        padding: 7px;
+    }
+
+    .calendar-entry {
+        padding: 4px 3px;
+        font-size: 8px;
+    }
+
+    .entry-paper {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 440px) {
+    .page {
+        width: calc(100% - 28px);
+    }
+
+    .page-heading h1 {
+        font-size: 43px;
+    }
+
+    .write-panel-top,
+    .write-panel-bottom {
+        padding-inline: 13px;
+    }
+
+    #journalText {
+        min-height: 240px;
+        padding: 19px 14px;
+        font-size: 13px;
+    }
+
+    .save-btn {
+        padding-inline: 12px;
+    }
+
+    .mood-options {
+        gap: 6px;
+    }
+
+    .mood-option {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+
+    .calendar-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .calendar-controls {
+        align-self: stretch;
+    }
+
+    .calendar-control.today-control {
+        flex: 1;
+    }
+
+    .calendar-day {
+        min-height: 58px;
+        padding: 3px;
+    }
+
+    .day-number {
+        width: 21px;
+        height: 21px;
+        font-size: 9px;
+    }
+
+    .calendar-day.has-entry::after {
+        top: 4px;
+        right: 4px;
+    }
+
+    .calendar-entry {
+        font-size: 7px;
+        padding: 3px 2px;
+    }
+
+    .calendar-footer {
+        padding-inline: 12px;
+        font-size: 8px;
+    }
+
+    .page-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .page-footer span:last-child {
+        text-align: left;
+    }
+
+    .crisis-fab {
+        right: 12px;
+        bottom: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+<link rel="stylesheet" href="zenene.css">
+</head>
+
+<body class="zn zn-journal">
+
+<!-- NAVIGATION — UNCHANGED -->
+<nav class="top-nav">
+  <a class="nav-wordmark" href="index.html">zenene</a>
+  <div class="nav-links">
+    <a href="index.html">home</a>
+    <a href="journal.html" class="active">journal</a>
+    <a href="mood.html">mood</a>
+    <a href="vera.html">vera</a>
+    <a href="explore.html">explore</a>
+    <a href="calm.html">calm</a>
+    <a href="profile.html" id="navAuthLink">sign in</a>
+  </div>
+</nav>
+
+<main class="page">
+
+    <header class="page-header">
+        <div>
+            <p class="eyebrow">a place for your words</p>
+            <h1>my <em>journal.</em></h1>
+            <span class="heading-date" id="todayDate"></span>
+        </div>
+
+        <p class="intro">
+            A place to put things into words.
+            No rules. No right way to do it.
+        </p>
+    </header>
+
+    <section class="write-section" aria-labelledby="writeTitle">
+        <div class="section-heading">
+            <h2 id="writeTitle">A new entry</h2>
+            <span class="section-note">01 / WRITE</span>
+        </div>
+
+        <div class="write-panel">
+            <div class="write-panel-top">
+                <span class="write-panel-label">TODAY'S PAGE</span>
+                <span class="write-date" id="writeDate"></span>
+            </div>
+
+            <textarea
+                id="journalText"
+                maxlength="20000"
+                placeholder="Start writing here..."
+                aria-label="Write your journal entry"
+            ></textarea>
+
+            <div class="write-panel-bottom">
+                <span class="word-count" id="wordCount">0 words</span>
+
+                <button class="save-btn" id="saveEntryBtn" type="button">
+                    <span>SAVE ENTRY</span>
+                    <span aria-hidden="true">↗</span>
+                </button>
+            </div>
+        </div>
+
+        <p id="journalStatus" role="status" aria-live="polite"></p>
+        <p id="journalSyncError" role="alert"></p>
+    </section>
+
+    <section class="mood-section" aria-labelledby="moodTitle">
+        <div class="mood-heading">
+            <h2 id="moodTitle">How are you feeling?</h2>
+            <p>Choose what feels closest. Or leave it blank.</p>
+        </div>
+
+        <div class="mood-options">
+            <button class="mood-option" type="button" data-mood="Angry" aria-pressed="false">
+                <span class="mood-emoji">😠</span> Angry
+            </button>
+            <button class="mood-option" type="button" data-mood="Happy" aria-pressed="false">
+                <span class="mood-emoji">🙂</span> Happy
+            </button>
+            <button class="mood-option" type="button" data-mood="Very Happy" aria-pressed="false">
+                <span class="mood-emoji">😄</span> Very happy
+            </button>
+            <button class="mood-option" type="button" data-mood="Loved" aria-pressed="false">
+                <span class="mood-emoji">🥰</span> Loved
+            </button>
+            <button class="mood-option" type="button" data-mood="Okay" aria-pressed="false">
+                <span class="mood-emoji">😐</span> Okay
+            </button>
+            <button class="mood-option" type="button" data-mood="Excited" aria-pressed="false">
+                <span class="mood-emoji">🤩</span> Excited
+            </button>
+            <button class="mood-option" type="button" data-mood="Sad" aria-pressed="false">
+                <span class="mood-emoji">😔</span> Sad
+            </button>
+            <button class="mood-option" type="button" data-mood="Crying" aria-pressed="false">
+                <span class="mood-emoji">😢</span> Crying
+            </button>
+            <button class="mood-option" type="button" data-mood="Surprised" aria-pressed="false">
+                <span class="mood-emoji">😲</span> Surprised
+            </button>
+        </div>
+
+        <p class="mood-footnote" id="moodCaption" aria-live="polite">
+            Your mood doesn't have to explain your whole day.
+        </p>
+    </section>
+
+    <section class="archive-section" aria-labelledby="archiveTitle">
+        <div class="archive-header">
+            <div>
+                <p class="eyebrow">02 / LOOK BACK</p>
+                <h2 id="archiveTitle">Your entries</h2>
+            </div>
+
+            <p>
+                Each marked day has something you've written.
+                Select an entry to read, edit, or delete it.
+            </p>
+        </div>
+
+        <div class="calendar">
+            <div class="calendar-toolbar">
+                <div class="calendar-month" id="calendarMonth" aria-live="polite"></div>
+
+                <div class="calendar-controls">
+                    <button class="calendar-control" id="prevMonthBtn" type="button" aria-label="Previous month">←</button>
+                    <button class="calendar-control today-control" id="todayBtn" type="button">TODAY</button>
+                    <button class="calendar-control" id="nextMonthBtn" type="button" aria-label="Next month">→</button>
+                </div>
+            </div>
+
+            <div class="calendar-content">
+                <div class="weekdays" aria-hidden="true">
+                    <div class="weekday">SUN</div>
+                    <div class="weekday">MON</div>
+                    <div class="weekday">TUE</div>
+                    <div class="weekday">WED</div>
+                    <div class="weekday">THU</div>
+                    <div class="weekday">FRI</div>
+                    <div class="weekday">SAT</div>
+                </div>
+
+                <div class="calendar-grid" id="calendarGrid" aria-label="Journal calendar"></div>
+                <div class="calendar-empty-note" id="calendarEmptyNote"></div>
+            </div>
+
+            <div class="calendar-footer">
+                <span>YOUR PERSONAL ARCHIVE</span>
+                <span id="entryCount">0 ENTRIES</span>
+            </div>
+        </div>
+    </section>
+
+
+</main>
+
+<footer class="site-footer">
+  <div class="script">be gentle with yourself.</div>
+  <p>zenene · where your mind blooms</p>
+  <div class="site-footer-links">
+    <a href="privacy.html">privacy</a>
+    <a href="terms.html">terms</a>
+  </div>
+</footer>
+
+<!-- ENTRY VIEW -->
+<div class="entry-modal" id="entryModal" role="dialog" aria-modal="true" aria-label="Journal entry" aria-hidden="true">
+    <div class="entry-paper">
+        <div class="modal-top">
+            <div>
+                <p class="modal-date" id="modalDate"></p>
+                <p class="modal-mood" id="modalMood"></p>
+            </div>
+            <button class="modal-close" id="closeEntryBtn" type="button">CLOSE ×</button>
+        </div>
+
+        <div id="modalBody"></div>
+
+        <div class="modal-actions" id="modalActions">
+            <button class="modal-action" id="editEntryBtn" type="button">EDIT</button>
+            <button class="modal-action delete-btn" id="deleteEntryBtn" type="button">DELETE</button>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE CONFIRMATION -->
+<div class="confirm-overlay" id="confirmOverlay" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" aria-hidden="true">
+    <div class="confirm-box">
+        <h3 id="confirmTitle">Delete this entry?</h3>
+        <p>This will permanently remove this entry from your journal.</p>
+
+        <div class="confirm-buttons">
+            <button id="cancelDeleteBtn" type="button">CANCEL</button>
+            <button class="confirm-delete" id="confirmDeleteBtn" type="button">DELETE</button>
+        </div>
+    </div>
+</div>
+
+<!-- SUPPORT -->
+<button class="crisis-fab" id="crisisOpenBtn" type="button">💙 need help?</button>
+
+<div class="overlay" id="cm">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="crisisTitle">
+        <button class="m-close" id="crisisCloseBtn" type="button" aria-label="Close help">×</button>
+        <div class="m-title" id="crisisTitle">You're not alone.</div>
+        <div class="m-sub">
+            If you need immediate support, reach out to a trusted adult or an appropriate local emergency or crisis service.
+        </div>
+        <a class="c-link" href="tel:112">Emergency support in India — 112</a>
+    </div>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/nav-auth.js"></script>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const today = new Date();
+let calendarDate = new Date(today.getFullYear(), today.getMonth(), 1);
+let selectedMood = null;
+let currentEntryId = null;
+let pendingDeleteId = null;
+let entriesCache = [];
+let isLoading = true;
+let isSaving = false;
+
+const moodButtons = [...document.querySelectorAll(".mood-option")];
+
+const moodDescriptions = {
+    "Angry": "It's okay to make space for frustration.",
+    "Happy": "Let yourself enjoy the good things.",
+    "Very Happy": "Remember this little moment of joy.",
+    "Loved": "You deserve care and connection.",
+    "Okay": "Okay is a perfectly valid place to be.",
+    "Excited": "There's something nice about looking forward.",
+    "Sad": "You don't have to rush through sadness.",
+    "Crying": "You can be gentle with yourself.",
+    "Surprised": "Life can still surprise you."
+};
+
+function formatDate(date, options = {}) {
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+}
+
+function getDateKey(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+function getEntryDate(entry) {
+    const date = new Date(Number(entry.timestamp));
+    return Number.isNaN(date.getTime()) ? new Date() : date;
+}
+
+function normalizeEntry(row) {
+    const timestamp = Number(row.timestamp) || Date.now();
+
+    return {
+        id: row.id,
+        text: String(row.text ?? ""),
+        mood: String(row.mood || "No mood"),
+        date: String(row.date || formatDate(new Date(timestamp), {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        })),
+        timestamp
+    };
+}
+
+function getEntries() {
+    return entriesCache.map(entry => ({ ...entry }));
+}
+
+function setStatus(message) {
+    $("journalStatus").textContent = message || "";
+}
+
+function showSyncError(message) {
+    $("journalSyncError").textContent = message || "";
+    $("journalSyncError").style.display = message ? "block" : "none";
+}
+
+function updateDates() {
+    const longDate = formatDate(today, {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+    });
+
+    $("todayDate").textContent = longDate;
+
+    $("writeDate").textContent = formatDate(today, {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+    }).toUpperCase();
+}
+
+function updateWordCount() {
+    const text = $("journalText").value.trim();
+    const count = text ? text.split(/\s+/).length : 0;
+
+    $("wordCount").textContent =
+        `${count} ${count === 1 ? "word" : "words"}`;
+}
+
+$("journalText").addEventListener("input", updateWordCount);
+
+function selectMood(mood) {
+    selectedMood = mood || null;
+
+    moodButtons.forEach(button => {
+        const selected = button.dataset.mood === selectedMood;
+
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
+    });
+
+    $("moodCaption").textContent = selectedMood
+        ? moodDescriptions[selectedMood]
+        : "Your mood doesn't have to explain your whole day.";
+}
+
+moodButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const mood = button.dataset.mood;
+        selectMood(selectedMood === mood ? null : mood);
+    });
+});
+
+/* SUPABASE */
+
+async function getAuthenticatedUser() {
+    if (typeof getCurrentUser !== "function") {
+        throw new Error("getCurrentUser() was not found in js/auth.js.");
+    }
+
+    if (typeof supabaseClient === "undefined" || !supabaseClient) {
+        throw new Error("Supabase is not configured in js/supabase.js.");
+    }
+
+    return await getCurrentUser();
+}
+
+async function loadEntriesFromSupabase() {
+    const user = await getAuthenticatedUser();
+
+    if (!user) {
+        window.location.href = "index.html?auth=login";
+        return false;
+    }
+
+    const { data, error } = await supabaseClient
+        .from("journal_entries")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("timestamp", { ascending: false });
+
+    if (error) throw error;
+
+    entriesCache = (data || []).map(normalizeEntry);
+    showSyncError("");
+    return true;
+}
+
+async function saveEntries(nextEntries) {
+    const user = await getAuthenticatedUser();
+
+    if (!user) {
+        window.location.href = "index.html?auth=login";
+        throw new Error("You must be signed in to save entries.");
+    }
+
+    const previous = getEntries();
+    const previousById = new Map(
+        previous.map(entry => [String(entry.id), entry])
+    );
+    const nextById = new Map(
+        nextEntries.map(entry => [String(entry.id), entry])
+    );
+
+    for (const oldEntry of previous) {
+        if (!nextById.has(String(oldEntry.id))) {
+            const { error } = await supabaseClient
+                .from("journal_entries")
+                .delete()
+                .eq("id", oldEntry.id)
+                .eq("user_id", user.id);
+
+            if (error) throw error;
+        }
+    }
+
+    for (const entry of nextEntries) {
+        const oldEntry = previousById.get(String(entry.id));
+
+        if (!oldEntry) {
+            const { error } = await supabaseClient
+                .from("journal_entries")
+                .insert({
+                    id: entry.id,
+                    user_id: user.id,
+                    text: entry.text,
+                    mood: entry.mood,
+                    date: entry.date,
+                    timestamp: entry.timestamp
+                });
+
+            if (error) throw error;
+        } else {
+            const changed =
+                oldEntry.text !== entry.text ||
+                oldEntry.mood !== entry.mood ||
+                oldEntry.date !== entry.date ||
+                oldEntry.timestamp !== entry.timestamp;
+
+            if (changed) {
+                const { error } = await supabaseClient
+                    .from("journal_entries")
+                    .update({
+                        text: entry.text,
+                        mood: entry.mood,
+                        date: entry.date,
+                        timestamp: entry.timestamp
+                    })
+                    .eq("id", entry.id)
+                    .eq("user_id", user.id);
+
+                if (error) throw error;
+            }
+        }
+    }
+
+    entriesCache = nextEntries.map(entry => ({ ...entry }));
+    showSyncError("");
+}
+
+/* CREATE */
+
+async function saveEntry() {
+    if (isLoading || isSaving) return;
+
+    const text = $("journalText").value.trim();
+
+    if (!text) {
+        setStatus("Write something before saving your entry.");
+        $("journalText").focus();
+        return;
+    }
+
+    isSaving = true;
+
+    const button = $("saveEntryBtn");
+    button.disabled = true;
+    button.querySelector("span:first-child").textContent = "SAVING...";
+
+    const timestamp = Date.now();
+
+    const newEntry = {
+        id: timestamp,
+        text,
+        mood: selectedMood || "No mood",
+        date: formatDate(new Date(timestamp), {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        }),
+        timestamp
+    };
+
+    try {
+        await saveEntries([newEntry, ...getEntries()]);
+
+        $("journalText").value = "";
+        updateWordCount();
+        selectMood(null);
+
+        calendarDate = new Date(today.getFullYear(), today.getMonth(), 1);
+        renderCalendar();
+
+        setStatus("Entry saved.");
+    } catch (error) {
+        console.error("Journal save failed:", error);
+        showSyncError("Your entry could not be saved. Your text is still here; please try again.");
+        setStatus("");
+    } finally {
+        isSaving = false;
+        button.disabled = false;
+        button.querySelector("span:first-child").textContent = "SAVE ENTRY";
+    }
+}
+
+$("saveEntryBtn").addEventListener("click", saveEntry);
+
+/* CALENDAR */
+
+function changeMonth(amount) {
+    calendarDate = new Date(
+        calendarDate.getFullYear(),
+        calendarDate.getMonth() + amount,
+        1
+    );
+
+    renderCalendar();
+}
+
+function goToToday() {
+    calendarDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    renderCalendar();
+}
+
+$("prevMonthBtn").addEventListener("click", () => changeMonth(-1));
+$("nextMonthBtn").addEventListener("click", () => changeMonth(1));
+$("todayBtn").addEventListener("click", goToToday);
+
+function renderCalendar() {
+    const grid = $("calendarGrid");
+    const year = calendarDate.getFullYear();
+    const month = calendarDate.getMonth();
+
+    $("calendarMonth").textContent = formatDate(calendarDate, {
+        month: "long",
+        year: "numeric"
+    });
+
+    grid.replaceChildren();
+
+    const firstWeekday = new Date(year, month, 1).getDay();
+    const daysThisMonth = new Date(year, month + 1, 0).getDate();
+    const daysLastMonth = new Date(year, month, 0).getDate();
+
+    const entries = getEntries();
+    const entriesByDate = new Map();
+
+    entries.forEach(entry => {
+        const key = getDateKey(getEntryDate(entry));
+
+        if (!entriesByDate.has(key)) {
+            entriesByDate.set(key, []);
+        }
+
+        entriesByDate.get(key).push(entry);
+    });
+
+    const monthEntries = entries.filter(entry => {
+        const date = getEntryDate(entry);
+        return date.getFullYear() === year && date.getMonth() === month;
+    });
+
+    $("entryCount").textContent =
+        `${monthEntries.length} ${monthEntries.length === 1 ? "ENTRY" : "ENTRIES"}`;
+
+    $("calendarEmptyNote").textContent = monthEntries.length
+        ? ""
+        : "No entries this month.";
+
+    for (let i = firstWeekday - 1; i >= 0; i--) {
+        grid.appendChild(createCalendarDay(daysLastMonth - i, true));
+    }
+
+    for (let day = 1; day <= daysThisMonth; day++) {
+        const date = new Date(year, month, day);
+        const key = getDateKey(date);
+        const entriesForDay = entriesByDate.get(key) || [];
+
+        grid.appendChild(createCalendarDay(day, false, date, entriesForDay));
+    }
+
+    const usedCells = firstWeekday + daysThisMonth;
+    const remaining = 42 - usedCells;
+
+    for (let day = 1; day <= remaining; day++) {
+        grid.appendChild(createCalendarDay(day, true));
+    }
+}
+
+function createCalendarDay(day, otherMonth, date = null, entries = []) {
+    const cell = document.createElement("div");
+    cell.className = "calendar-day";
+
+    if (otherMonth) {
+        cell.classList.add("other-month");
+    }
+
+    if (date) {
+        if (getDateKey(date) === getDateKey(today)) {
+            cell.classList.add("today");
+        }
+
+        if (entries.length) {
+            cell.classList.add("has-entry");
+        }
+    }
+
+    const number = document.createElement("span");
+    number.className = "day-number";
+    number.textContent = String(day);
+    cell.appendChild(number);
+
+    entries.slice(0, 2).forEach(entry => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "calendar-entry";
+        button.textContent =
+            entry.mood === "No mood" ? "Entry" : entry.mood;
+        button.title = `Read entry from ${entry.date}`;
+        button.setAttribute("aria-label", `Read journal entry from ${entry.date}`);
+        button.addEventListener("click", () => openEntryModal(entry.id));
+
+        cell.appendChild(button);
+    });
+
+    if (entries.length > 2) {
+        const more = document.createElement("span");
+        more.className = "calendar-more";
+        more.textContent = `+${entries.length - 2} more`;
+        cell.appendChild(more);
+    }
+
+    return cell;
+}
+
+/* READ */
+
+function findCurrentEntry() {
+    return getEntries().find(
+        entry => String(entry.id) === String(currentEntryId)
+    );
+}
+
+function openEntryModal(id) {
+    const entry = getEntries().find(
+        item => String(item.id) === String(id)
+    );
+
+    if (!entry) return;
+
+    currentEntryId = entry.id;
+
+    $("modalDate").textContent = entry.date.toUpperCase();
+    $("modalMood").textContent =
+        entry.mood === "No mood" ? "" : `MOOD: ${entry.mood.toUpperCase()}`;
+
+    const body = $("modalBody");
+    body.replaceChildren();
+
+    const content = document.createElement("div");
+    content.className = "modal-content";
+    content.textContent = entry.text;
+    body.appendChild(content);
+
+    $("modalActions").style.display = "flex";
+
+    $("entryModal").classList.add("open");
+    $("entryModal").setAttribute("aria-hidden", "false");
+
+    $("confirmOverlay").classList.remove("open");
+    $("confirmOverlay").setAttribute("aria-hidden", "true");
+
+    document.body.style.overflow = "hidden";
+    $("closeEntryBtn").focus();
+}
+
+function closeEntryModal() {
+    $("entryModal").classList.remove("open");
+    $("entryModal").setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    currentEntryId = null;
+}
+
+$("closeEntryBtn").addEventListener("click", closeEntryModal);
+
+$("entryModal").addEventListener("click", event => {
+    if (event.target === $("entryModal")) {
+        closeEntryModal();
+    }
+});
+
+/* EDIT */
+
+function editCurrentEntry() {
+    const entry = findCurrentEntry();
+    if (!entry) return;
+
+    const body = $("modalBody");
+    body.replaceChildren();
+
+    const textarea = document.createElement("textarea");
+    textarea.className = "edit-area";
+    textarea.id = "editEntryText";
+    textarea.maxLength = 20000;
+    textarea.setAttribute("aria-label", "Edit journal entry");
+    textarea.value = entry.text;
+
+    body.appendChild(textarea);
+
+    const buttons = document.createElement("div");
+    buttons.className = "edit-buttons";
+
+    const cancel = document.createElement("button");
+    cancel.type = "button";
+    cancel.className = "save-btn";
+    cancel.textContent = "CANCEL";
+    cancel.addEventListener("click", () => openEntryModal(entry.id));
+
+    const save = document.createElement("button");
+    save.type = "button";
+    save.className = "save-btn";
+    save.id = "saveEditedEntryBtn";
+    save.textContent = "SAVE CHANGES";
+    save.addEventListener("click", saveEditedEntry);
+
+    buttons.append(cancel, save);
+    body.appendChild(buttons);
+
+    textarea.focus();
+}
+
+$("editEntryBtn").addEventListener("click", editCurrentEntry);
+
+async function saveEditedEntry() {
+    if (isSaving) return;
+
+    const entry = findCurrentEntry();
+    const textarea = $("editEntryText");
+
+    if (!entry || !textarea) return;
+
+    const text = textarea.value.trim();
+
+    if (!text) {
+        textarea.focus();
+        return;
+    }
+
+    isSaving = true;
+
+    const button = $("saveEditedEntryBtn");
+    button.disabled = true;
+    button.textContent = "SAVING...";
+
+    const updated = getEntries().map(item =>
+        String(item.id) === String(currentEntryId)
+            ? { ...item, text }
+            : item
+    );
+
+    try {
+        await saveEntries(updated);
+        renderCalendar();
+        openEntryModal(currentEntryId);
+        setStatus("Changes saved.");
+    } catch (error) {
+        console.error("Journal edit failed:", error);
+        showSyncError("Your changes could not be saved. Please try again.");
+
+        button.disabled = false;
+        button.textContent = "SAVE CHANGES";
+    } finally {
+        isSaving = false;
+    }
+}
+
+/* DELETE */
+
+$("deleteEntryBtn").addEventListener("click", () => {
+    if (currentEntryId === null) return;
+
+    pendingDeleteId = currentEntryId;
+
+    $("confirmOverlay").classList.add("open");
+    $("confirmOverlay").setAttribute("aria-hidden", "false");
+
+    $("cancelDeleteBtn").focus();
+});
+
+function closeDeleteConfirmation() {
+    $("confirmOverlay").classList.remove("open");
+    $("confirmOverlay").setAttribute("aria-hidden", "true");
+    pendingDeleteId = null;
+}
+
+$("cancelDeleteBtn").addEventListener("click", closeDeleteConfirmation);
+
+$("confirmOverlay").addEventListener("click", event => {
+    if (event.target === $("confirmOverlay")) {
+        closeDeleteConfirmation();
+    }
+});
+
+async function confirmDelete() {
+    if (pendingDeleteId === null || isSaving) return;
+
+    isSaving = true;
+
+    const button = $("confirmDeleteBtn");
+    button.disabled = true;
+    button.textContent = "DELETING...";
+
+    const deletedId = pendingDeleteId;
+    const updated = getEntries().filter(
+        entry => String(entry.id) !== String(deletedId)
+    );
+
+    try {
+        await saveEntries(updated);
+
+        closeDeleteConfirmation();
+        closeEntryModal();
+        renderCalendar();
+
+        setStatus("Entry deleted.");
+    } catch (error) {
+        console.error("Journal deletion failed:", error);
+        showSyncError("This entry could not be deleted. Please try again.");
+    } finally {
+        isSaving = false;
+        button.disabled = false;
+        button.textContent = "DELETE";
+    }
+}
+
+$("confirmDeleteBtn").addEventListener("click", confirmDelete);
+
+/* SUPPORT POPUP */
+
+$("crisisOpenBtn").addEventListener("click", () => {
+    $("cm").classList.add("open");
+    $("crisisCloseBtn").focus();
+});
+
+$("crisisCloseBtn").addEventListener("click", () => {
+    $("cm").classList.remove("open");
+});
+
+$("cm").addEventListener("click", event => {
+    if (event.target === $("cm")) {
+        $("cm").classList.remove("open");
+    }
+});
+
+/* KEYBOARD */
+
+document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+
+    if ($("confirmOverlay").classList.contains("open")) {
+        closeDeleteConfirmation();
+    } else if ($("entryModal").classList.contains("open")) {
+        closeEntryModal();
+    } else if ($("cm").classList.contains("open")) {
+        $("cm").classList.remove("open");
+    }
+});
+
+/* INITIALIZE */
+
+async function initJournal() {
+    updateDates();
+    updateWordCount();
+    selectMood(null);
+
+    try {
+        const loaded = await loadEntriesFromSupabase();
+
+        if (loaded) {
+            setStatus("");
+        }
+    } catch (error) {
+        console.error("Journal initialization failed:", error);
+        showSyncError(
+            "Couldn't load your entries. Check your connection and sign-in status, then refresh."
+        );
+    } finally {
+        isLoading = false;
+        renderCalendar();
+    }
+}
+
+initJournal();
+</script>
+
+<script src="js/zenene-ui.js"></script>
+</body>
+</html>

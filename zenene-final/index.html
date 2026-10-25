@@ -1,0 +1,5194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zenene — where your mind blooms</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600&family=Special+Elite&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   ZENENE — ART-DIRECTED HOMEPAGE
+   ========================================================= */
+
+:root {
+
+  --sky: #C9DFEA;
+  --sky-light: #E8F2F5;
+  --sky-deep: #9EBFCC;
+
+  --cream: #F7F1E7;
+  --paper: #FFFDF8;
+
+  --sage: #D8E4D7;
+  --sage-deep: #72866E;
+
+  --rose: #E7C9CD;
+  --rose-deep: #B97880;
+
+  --lavender: #DCD8E8;
+
+  --brown: #624F43;
+  --brown-dark: #392D26;
+  --ink: #2F2B27;
+
+  --typewriter: "Special Elite", "Courier New", monospace;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --script: "Dancing Script", cursive;
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   PAPER GRAIN
+   ========================================================= */
+
+body::before {
+
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 9999;
+
+  opacity: .045;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.top-nav {
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 500;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 22px 34px;
+
+  transition:
+    background .5s ease,
+    backdrop-filter .5s ease;
+
+}
+
+.top-nav.scrolled {
+
+  background: rgba(247,241,231,.75);
+
+  backdrop-filter: blur(18px);
+
+  border-bottom:
+    1px solid rgba(98,79,67,.08);
+
+}
+
+.nav-wordmark {
+
+  font-family: var(--typewriter);
+
+  font-size: .78rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+}
+
+.nav-wordmark {
+
+  color: var(--ink);
+
+  text-decoration: none;
+
+}
+
+.nav-cta {
+
+  position: relative;
+
+  color: var(--brown);
+
+  text-decoration: none;
+
+  font-family: var(--typewriter);
+
+  font-size: .7rem;
+
+  letter-spacing: .08em;
+
+  transition: color .25s ease;
+
+}
+
+.nav-cta:not(.nav-signup)::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -6px;
+
+  height: 1px;
+
+  background: currentColor;
+
+  opacity: .5;
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition: transform .3s ease;
+
+}
+
+.nav-cta:not(.nav-signup):hover::after {
+
+  transform: scaleX(1);
+
+}
+
+.nav-links {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 26px;
+
+}
+
+.nav-cta.nav-signup {
+
+  background: var(--sage-deep);
+
+  color: var(--paper);
+
+  padding: 9px 18px;
+
+  border-radius: 999px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: .68rem;
+
+  opacity: 0;
+
+  transition: opacity .25s ease, transform .25s ease, background .25s ease;
+
+}
+
+.nav-cta.nav-signup.ready:hover {
+
+  transform: translateY(-1px);
+
+}
+
+.nav-cta.nav-signup.ready {
+
+  opacity: 1;
+
+}
+
+
+/* =========================================================
+   AUTH MODAL
+   ========================================================= */
+
+.auth-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(47,43,39,.45);
+
+  backdrop-filter: blur(4px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity .3s ease;
+
+}
+
+.auth-overlay.open {
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+}
+
+.auth-card {
+
+  position: relative;
+
+  width: 100%;
+  max-width: 380px;
+
+  background: var(--paper);
+
+  border-radius: 18px;
+
+  padding: 38px 32px 32px;
+
+  box-shadow: 0 30px 60px rgba(57,45,38,.25);
+
+  transform: translateY(16px);
+
+  transition: transform .3s ease;
+
+}
+
+.auth-overlay.open .auth-card {
+
+  transform: translateY(0);
+
+}
+
+.auth-close {
+
+  position: absolute;
+
+  top: 14px;
+  right: 16px;
+
+  background: none;
+  border: none;
+
+  font-size: 1.4rem;
+
+  line-height: 1;
+
+  color: var(--brown);
+
+  cursor: pointer;
+
+}
+
+.auth-title {
+
+  font-family: var(--serif);
+
+  font-size: 1.6rem;
+
+  font-weight: 500;
+
+  color: var(--ink);
+
+  margin: 0 0 6px;
+
+  text-align: center;
+
+}
+
+.auth-tabs {
+
+  display: flex;
+
+  gap: 6px;
+
+  margin: 22px 0 20px;
+
+  background: var(--cream);
+
+  border-radius: 999px;
+
+  padding: 4px;
+
+}
+
+.auth-tab {
+
+  flex: 1;
+
+  border: none;
+  background: none;
+
+  padding: 8px 0;
+
+  border-radius: 999px;
+
+  font-family: var(--typewriter);
+
+  font-size: .66rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+  cursor: pointer;
+
+  transition: background .2s ease, color .2s ease;
+
+}
+
+.auth-tab.active {
+
+  background: var(--sage-deep);
+
+  color: var(--paper);
+
+}
+
+.auth-form {
+
+  display: none;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+}
+
+.auth-form.active {
+
+  display: flex;
+
+}
+
+.auth-input {
+
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(98,79,67,.22);
+
+  background: var(--sky-light);
+
+  font-family: var(--serif);
+
+  font-size: .95rem;
+
+  color: var(--ink);
+
+}
+
+.auth-input:focus {
+
+  outline: none;
+
+  border-color: var(--sage-deep);
+
+}
+
+.auth-submit {
+
+  margin-top: 4px;
+
+  padding: 12px 0;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: var(--brown);
+
+  color: var(--paper);
+
+  font-family: var(--typewriter);
+
+  font-size: .72rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: background .2s ease;
+
+}
+
+.auth-submit:hover {
+
+  background: var(--brown-dark);
+
+}
+
+.auth-submit:disabled {
+
+  opacity: .6;
+
+  cursor: default;
+
+}
+
+.auth-message {
+
+  min-height: 18px;
+
+  margin-top: 12px;
+
+  text-align: center;
+
+  font-family: var(--typewriter);
+
+  font-size: .68rem;
+
+  color: var(--rose-deep);
+
+}
+
+.auth-link {
+
+  align-self: center;
+
+  margin-top: 2px;
+
+  padding: 4px 2px;
+
+  border: none;
+
+  background: none;
+
+  color: var(--brown);
+
+  font-family: var(--typewriter);
+
+  font-size: .64rem;
+
+  letter-spacing: .04em;
+
+  text-decoration: underline;
+
+  text-underline-offset: 3px;
+
+  text-decoration-color: rgba(98,79,67,.35);
+
+  cursor: pointer;
+
+  transition: color .2s ease;
+
+}
+
+.auth-link:hover {
+
+  color: var(--ink);
+
+}
+
+.auth-note {
+
+  margin: 0 0 4px;
+
+  color: var(--brown);
+
+  font-family: var(--serif);
+
+  font-size: 1rem;
+
+  line-height: 1.45;
+
+  text-align: center;
+
+}
+
+.auth-tabs.hidden {
+
+  display: none;
+
+}
+
+.auth-message.success {
+
+  color: var(--sage-deep);
+
+}
+
+
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
+.story {
+
+  position: relative;
+
+}
+
+.section-label {
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+}
+
+.script {
+
+  font-family: var(--script);
+
+}
+
+.serif {
+
+  font-family: var(--serif);
+
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+
+  height: 100svh;
+
+  min-height: 700px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: var(--sky);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+}
+
+.hero::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.7) 2px,
+      transparent 2.5px
+    );
+
+  background-size: 32px 32px;
+
+  opacity: .45;
+
+}
+
+
+.cloud {
+
+  position: absolute;
+
+  width: 180px;
+  height: 60px;
+
+  border-radius: 100px;
+
+  background: rgba(255,255,255,.28);
+
+  filter: blur(2px);
+
+  animation:
+    cloudMove 30s linear infinite,
+    cloudFloat 6s ease-in-out infinite;
+
+}
+
+.cloud::before,
+.cloud::after {
+
+  content: "";
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  background: inherit;
+
+}
+
+.cloud::before {
+
+  width: 90px;
+  height: 90px;
+
+  left: 35px;
+  bottom: 10px;
+
+}
+
+.cloud::after {
+
+  width: 65px;
+  height: 65px;
+
+  left: 95px;
+  bottom: 5px;
+
+}
+
+.cloud-one {
+
+  top: 22%;
+  left: -200px;
+
+}
+
+.cloud-two {
+
+  top: 65%;
+  right: -220px;
+
+  transform: scale(.7);
+
+  animation-delay: -12s;
+
+}
+
+@keyframes cloudFloat {
+
+  0%,100% {
+    margin-top: 0;
+  }
+
+  50% {
+    margin-top: -10px;
+  }
+
+}
+
+@keyframes cloudMove {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(100vw + 450px));
+  }
+
+}
+
+
+.hero-inner {
+
+  position: relative;
+
+  z-index: 5;
+
+  width: min(1000px, 90vw);
+
+}
+
+.hero-eyebrow {
+
+  font-family: var(--script);
+
+  font-size: 1.25rem;
+
+  color: var(--brown);
+
+  opacity: 0;
+
+  animation:
+    heroFade 1s .3s forwards;
+
+}
+
+.hero-title {
+
+  margin: 34px 0 0;
+
+  font-family: var(--typewriter);
+
+  font-weight: normal;
+
+  font-size:
+    clamp(4rem, 12vw, 10rem);
+
+  letter-spacing: 0;
+  word-spacing: 0;
+
+  color: var(--brown-dark);
+
+  line-height: .9;
+
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  animation:
+    heroTitleIn 1.1s cubic-bezier(.16,1,.3,1) .45s forwards;
+
+}
+
+@keyframes heroTitleIn {
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+.hero-tag {
+
+  font-family: var(--serif);
+
+  font-style: italic;
+
+  font-size: clamp(1.2rem, 3vw, 2rem);
+
+  color: var(--brown);
+
+  margin-top: 28px;
+
+  opacity: 0;
+
+  animation:
+    heroFade 1s 1.25s forwards;
+
+}
+
+.hero::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  top: 18%;
+  right: 12%;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.18);
+
+  filter: blur(18px);
+
+  animation: heroGlow 7s ease-in-out infinite;
+
+  pointer-events: none;
+
+}
+
+@keyframes heroGlow {
+
+  0%,100% {
+    transform: translate3d(0,0,0) scale(1);
+    opacity: .45;
+  }
+
+  50% {
+    transform: translate3d(-25px,18px,0) scale(1.12);
+    opacity: .7;
+  }
+
+}
+
+@keyframes heroFade {
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+.scroll-indicator {
+
+  position: absolute;
+
+  bottom: 35px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 9px;
+
+  font-family: var(--typewriter);
+
+  font-size: .58rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+}
+
+.scroll-line {
+
+  width: 1px;
+
+  height: 45px;
+
+  background: var(--brown);
+
+  transform-origin: top;
+
+  animation: scrollLine 2s ease-in-out infinite;
+
+}
+
+@keyframes scrollLine {
+
+  0%,100% {
+    transform: scaleY(.2);
+    opacity: .25;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: .8;
+  }
+
+}
+
+
+/* =========================================================
+   STICKY FEATURE STORY
+   ========================================================= */
+
+.feature-story {
+
+  height: 500vh;
+
+  position: relative;
+
+  background: var(--cream);
+
+}
+
+.feature-stage {
+
+  position: sticky;
+
+  top: 0;
+
+  height: 100svh;
+
+  min-height: 700px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: var(--cream);
+
+}
+
+.feature-stage::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(98,79,67,.10) 2px,
+      transparent 2.5px
+    );
+
+  background-size: 34px 34px;
+
+  opacity: .5;
+
+}
+
+.story-title {
+
+  position: absolute;
+
+  top: 12%;
+
+  left: 7%;
+
+  z-index: 10;
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  color: var(--brown);
+
+}
+
+.story-progress {
+
+  position: absolute;
+
+  right: 7%;
+
+  bottom: 9%;
+
+  z-index: 20;
+
+  display: flex;
+
+  gap: 8px;
+
+}
+
+.story-dot {
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: rgba(98,79,67,.25);
+
+  transition: .4s ease;
+
+}
+
+.story-dot.active {
+
+  width: 30px;
+
+  border-radius: 10px;
+
+  background: var(--brown);
+
+}
+
+.feature-slide {
+
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  opacity: 0;
+
+  transform: scale(.92);
+
+  pointer-events: none;
+
+  transition:
+    opacity .7s ease,
+    transform 1s cubic-bezier(.16,1,.3,1);
+
+}
+
+.feature-slide.active {
+
+  opacity: 1;
+
+  transform: scale(1);
+
+}
+
+.slide-inner {
+
+  width: min(1100px, 86vw);
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8vw;
+
+  align-items: center;
+
+}
+
+.slide-copy {
+
+  max-width: 500px;
+
+}
+
+.slide-kicker {
+
+  position: absolute;
+
+  top: calc(12% + 32px);
+  left: 7%;
+
+  margin: 0;
+
+  font-family: var(--script);
+  font-size: 1.2rem;
+  line-height: 1;
+
+  color: var(--rose-deep);
+
+  z-index: 15;
+
+  transform: none;
+
+  text-align: left;
+  white-space: nowrap;
+
+  pointer-events: none;
+
+}
+
+.slide-heading {
+
+  font-family: var(--serif);
+
+  font-size: clamp(4rem, 8vw, 8rem);
+
+  line-height: .83;
+
+  font-weight: 300;
+
+  color: var(--brown-dark);
+
+}
+
+.slide-heading em {
+
+  font-family: var(--script);
+
+  font-size: .65em;
+
+  color: var(--sage-deep);
+
+}
+
+.slide-description {
+
+  margin-top: 28px;
+
+  max-width: 380px;
+
+  font-family: var(--typewriter);
+
+  font-size: .72rem;
+
+  line-height: 1.9;
+
+  color: var(--brown);
+
+}
+
+.slide-visual {
+
+  position: relative;
+
+  height: 500px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+
+/* =========================================================
+   SLIDE 1 — BRAIN
+   ========================================================= */
+
+.brain-composition {
+
+  width: min(440px, 75vw);
+
+  position: relative;
+
+}
+
+.brain-composition img {
+
+  width: 100%;
+
+  mix-blend-mode: multiply;
+
+  filter: saturate(.75);
+
+}
+
+.neural-dot {
+
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--rose-deep);
+
+  box-shadow:
+    0 0 0 8px rgba(185,120,128,.1);
+
+  animation: neuralPulse 2.5s infinite;
+
+}
+
+.nd1 { top: 23%; left: 48%; }
+.nd2 { top: 42%; left: 64%; animation-delay: .7s; }
+.nd3 { top: 61%; left: 42%; animation-delay: 1.3s; }
+
+@keyframes neuralPulse {
+
+  0%,100% {
+    transform: scale(.7);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+
+}
+
+
+/* =========================================================
+   SLIDE 2 — JOURNAL
+   ========================================================= */
+
+.journal-visual {
+
+  width: 100%;
+  height: 500px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.journal-backdrop {
+
+  position: absolute;
+
+  width: 390px;
+  height: 470px;
+
+  background: #f7f2e9;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-46%,-50%)
+    rotate(3deg)
+    scale(.94);
+
+  border-radius: 4px;
+
+  box-shadow:
+    0 30px 70px rgba(75,58,47,.10);
+
+  opacity: 0;
+
+  transition:
+    opacity 1s ease .15s,
+    transform 1.2s cubic-bezier(.16,1,.3,1);
+
+}
+
+.journal-asset-wrap {
+
+  position: relative;
+
+  width: min(390px, 75vw);
+
+  transform:
+    translate3d(70px,30px,0)
+    rotate(7deg)
+    scale(.88);
+
+  opacity: 0;
+
+  filter:
+    drop-shadow(
+      0 35px 35px rgba(55,39,31,.20)
+    );
+
+  transition:
+    opacity .9s ease,
+    transform 1.25s cubic-bezier(.16,1,.3,1);
+
+  z-index: 2;
+
+}
+
+.journal-asset {
+
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  border-radius: 3px;
+
+  object-fit: cover;
+
+}
+
+.journal-scribble {
+
+  position: absolute;
+
+  right: 0;
+  bottom: 38px;
+
+  font-family: var(--script);
+
+  font-size: 1.55rem;
+
+  line-height: 1.05;
+
+  color: var(--sage-deep);
+
+  transform:
+    rotate(-7deg)
+    translateY(15px);
+
+  opacity: 0;
+
+  transition:
+    opacity .8s ease .55s,
+    transform .9s cubic-bezier(.16,1,.3,1);
+
+  z-index: 4;
+
+  pointer-events: none;
+
+}
+
+.feature-slide.active .journal-backdrop {
+
+  opacity: 1;
+
+  transform:
+    translate(-50%,-50%)
+    rotate(2deg)
+    scale(1);
+
+}
+
+.feature-slide.active .journal-asset-wrap {
+
+  opacity: 1;
+
+  transform:
+    translate3d(0,0,0)
+    rotate(-3deg)
+    scale(1);
+
+}
+
+.feature-slide.active .journal-scribble {
+
+  opacity: 1;
+
+  transform:
+    rotate(-7deg)
+    translateY(0);
+
+}
+
+@keyframes journalSettle {
+
+  0%,100% {
+    transform:
+      translate3d(0,0,0)
+      rotate(-3deg);
+  }
+
+  50% {
+    transform:
+      translate3d(0,-5px,0)
+      rotate(-2.4deg);
+  }
+
+}
+
+.feature-slide.active .journal-asset-wrap {
+
+  animation:
+    journalSettle 5s ease-in-out 1.3s infinite;
+
+}
+
+
+/* =========================================================
+   SLIDE 3 — MOOD
+   ========================================================= */
+
+.mood-art {
+
+  width: 430px;
+
+  height: 380px;
+
+  position: relative;
+
+}
+
+.mood-dots {
+
+  position: absolute;
+
+  inset: 0;
+
+}
+
+.mood-point {
+
+  position: absolute;
+
+  width: 15px;
+  height: 15px;
+
+  border-radius: 50%;
+
+  background: var(--rose-deep);
+
+  box-shadow:
+    0 0 0 10px rgba(185,120,128,.08);
+
+  animation:
+    moodFloat 4s ease-in-out infinite;
+
+}
+
+.mp1 { left: 8%; top: 65%; }
+.mp2 { left: 22%; top: 45%; animation-delay: -.8s; }
+.mp3 { left: 39%; top: 57%; animation-delay: -1.4s; }
+.mp4 { left: 56%; top: 25%; animation-delay: -2s; }
+.mp5 { left: 73%; top: 42%; animation-delay: -2.7s; }
+.mp6 { left: 89%; top: 18%; animation-delay: -3.2s; }
+
+.mood-svg {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+}
+
+.mood-path {
+
+  fill: none;
+
+  stroke: var(--brown);
+
+  stroke-width: 2;
+
+  stroke-dasharray: 800;
+
+  stroke-dashoffset: 800;
+
+  transition:
+    stroke-dashoffset 1.6s ease;
+
+}
+
+.feature-slide.active .mood-path {
+
+  stroke-dashoffset: 0;
+
+}
+
+@keyframes moodFloat {
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+}
+
+
+/* =========================================================
+   SLIDE 4 — VERA
+   ========================================================= */
+
+.vera-art {
+
+  width: 450px;
+  height: 450px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+}
+
+.vera-system {
+
+  width: 400px;
+  height: 400px;
+
+  position: relative;
+
+  transform: scale(.55);
+
+  opacity: 0;
+
+  transition:
+    transform 1.25s cubic-bezier(.16,1,.3,1),
+    opacity .7s ease;
+
+}
+
+.feature-slide.active .vera-system {
+
+  transform: scale(1);
+
+  opacity: 1;
+
+}
+
+.vera-core {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 112px;
+  height: 112px;
+
+  transform:
+    translate(-50%,-50%);
+
+  border-radius: 50%;
+
+  background: var(--sky-light);
+
+  border:
+    1px solid rgba(98,79,67,.18);
+
+  box-shadow:
+    0 0 0 16px rgba(201,223,234,.28),
+    0 0 0 42px rgba(201,223,234,.13),
+    0 25px 60px rgba(62,45,35,.13);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 5;
+
+}
+
+.vera-core-glow {
+
+  position: absolute;
+
+  inset: -18px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(185,120,128,.22);
+
+  animation:
+    veraPulse 3.5s ease-in-out infinite;
+
+}
+
+.vera-core-label {
+
+  font-family: var(--typewriter);
+
+  font-size: .78rem;
+
+  letter-spacing: .16em;
+
+  color: var(--brown-dark);
+
+  z-index: 2;
+
+}
+
+.vera-orbit {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  border:
+    1px solid rgba(98,79,67,.18);
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.3);
+
+  opacity: 0;
+
+  transition:
+    transform 1.2s cubic-bezier(.16,1,.3,1),
+    opacity .8s ease;
+
+}
+
+.orbit-one {
+  width: 190px;
+  height: 190px;
+}
+
+.orbit-two {
+  width: 285px;
+  height: 285px;
+}
+
+.orbit-three {
+
+  width: 380px;
+  height: 380px;
+
+  border-style: dashed;
+
+  opacity: .5;
+
+}
+
+.feature-slide.active .vera-orbit {
+
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+
+  opacity: 1;
+
+}
+
+.feature-slide.active .orbit-one {
+  transition-delay: .15s;
+}
+
+.feature-slide.active .orbit-two {
+  transition-delay: .32s;
+}
+
+.feature-slide.active .orbit-three {
+  transition-delay: .5s;
+}
+
+.vera-system-node {
+
+  position: absolute;
+
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  background: var(--rose-deep);
+
+  box-shadow:
+    0 0 0 9px rgba(185,120,128,.10);
+
+  transform: scale(0);
+
+  transition:
+    transform .65s cubic-bezier(.16,1,.3,1);
+
+}
+
+.node-one {
+  left: 50%;
+  top: 5%;
+}
+
+.node-two {
+  right: 8%;
+  top: 28%;
+}
+
+.node-three {
+  right: 18%;
+  bottom: 12%;
+}
+
+.node-four {
+  left: 18%;
+  bottom: 12%;
+}
+
+.node-five {
+  left: 8%;
+  top: 28%;
+}
+
+.node-six {
+
+  left: 50%;
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  background: var(--sage-deep);
+
+}
+
+.feature-slide.active .vera-system-node {
+  transform: scale(1);
+}
+
+.feature-slide.active .node-one {
+  transition-delay: .65s;
+}
+
+.feature-slide.active .node-two {
+  transition-delay: .8s;
+}
+
+.feature-slide.active .node-three {
+  transition-delay: .95s;
+}
+
+.feature-slide.active .node-four {
+  transition-delay: 1.1s;
+}
+
+.feature-slide.active .node-five {
+  transition-delay: 1.25s;
+}
+
+.feature-slide.active .node-six {
+  transition-delay: .55s;
+}
+
+.vera-system-label {
+
+  position: absolute;
+
+  font-family: var(--script);
+
+  font-size: 1rem;
+
+  color: var(--brown);
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
+
+}
+
+.label-one {
+  left: 4%;
+  top: 20%;
+}
+
+.label-two {
+  right: 2%;
+  top: 52%;
+}
+
+.label-three {
+  left: 4%;
+  bottom: 19%;
+}
+
+.feature-slide.active .vera-system-label {
+
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+}
+
+.feature-slide.active .label-one {
+  transition-delay: 1.15s;
+}
+
+.feature-slide.active .label-two {
+  transition-delay: 1.35s;
+}
+
+.feature-slide.active .label-three {
+  transition-delay: 1.55s;
+}
+
+@keyframes veraPulse {
+
+  0%,100% {
+    transform: scale(.92);
+    opacity: .45;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: .85;
+  }
+
+}
+
+
+/* =========================================================
+   SLIDE 5 — CALM
+   ========================================================= */
+
+.calm-art {
+
+  width: 400px;
+  height: 400px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+}
+
+.calm-circle {
+
+  width: 170px;
+  height: 170px;
+
+  border-radius: 50%;
+
+  background: var(--sky-light);
+
+  box-shadow:
+
+    0 0 0 20px rgba(201,223,234,.3),
+
+    0 0 0 45px rgba(201,223,234,.16),
+
+    0 30px 70px rgba(98,79,67,.12);
+
+  transform:
+    scale(.75);
+
+  transition:
+    transform .25s linear;
+
+}
+
+.calm-word {
+
+  position: absolute;
+
+  font-family: var(--script);
+
+  font-size: 1.3rem;
+
+  color: white;
+
+}
+
+
+/* =========================================================
+   FLOWER GARDEN
+   ========================================================= */
+
+.garden {
+
+  height: 150vh;
+
+  position: relative;
+
+  background: var(--sky);
+
+  overflow: clip;
+
+  cursor: crosshair;
+
+}
+
+.garden-inner {
+
+  position: sticky;
+
+  top: 0;
+
+  height: 100svh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+}
+
+.garden-title {
+
+  position: relative;
+
+  z-index: 10;
+
+  pointer-events: none;
+
+}
+
+.garden-title h2 {
+
+  font-family: var(--serif);
+
+  font-weight: 300;
+
+  font-size: clamp(3rem, 7vw, 7rem);
+
+  line-height: .9;
+
+  color: var(--brown-dark);
+
+}
+
+.garden-title h2 em {
+
+  font-family: var(--script);
+
+  color: var(--sage-deep);
+
+}
+
+.garden-title p {
+
+  margin-top: 18px;
+
+  font-family: var(--script);
+
+  font-size: 1.3rem;
+
+  color: var(--brown);
+
+}
+
+.garden-flower {
+
+  position: absolute;
+
+  pointer-events: none;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  animation:
+    flowerAppear .8s cubic-bezier(.16,1,.3,1) forwards;
+
+}
+
+.garden-flower span {
+
+  display: block;
+
+  font-size: 28px;
+
+}
+
+@keyframes flowerAppear {
+
+  to {
+
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(var(--rotation));
+
+  }
+
+}
+
+
+/* =========================================================
+   JOURNAL — SCROLL OPENING
+   ========================================================= */
+
+.journal-story {
+
+  position: relative;
+
+  height: 240vh;
+
+  background: #e1eef3;
+
+  overflow: clip;
+
+}
+
+.journal-stage {
+
+  position: sticky;
+
+  top: 0;
+
+  height: 100svh;
+
+  min-height: 650px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+}
+
+
+/* soft atmosphere */
+
+.journal-stage::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: none;
+
+  pointer-events: none;
+
+}
+
+
+/* little background dots */
+
+.journal-stage::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(98,79,67,.07) 1.5px,
+      transparent 2px
+    );
+
+  background-size: 34px 34px;
+
+  opacity: .45;
+
+  pointer-events: none;
+
+}
+
+
+/* =========================================================
+   JOURNAL OBJECT
+   ========================================================= */
+
+.journal-object {
+
+  position: relative;
+
+  width: min(430px, 70vw);
+
+  height: min(560px, 72vh);
+
+  perspective: 1800px;
+
+  z-index: 5;
+
+  transform:
+    translate3d(
+      calc(var(--journal-progress, 0) * -13vw),
+      calc(var(--journal-progress, 0) * -3vh),
+      0
+    )
+    scale(
+      calc(
+        1 -
+        var(--journal-progress, 0) * .05
+      )
+    );
+
+  transition:
+    transform .08s linear;
+
+}
+
+
+/* =========================================================
+   JOURNAL PAGES
+   ========================================================= */
+
+.journal-page {
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 35px 90px rgba(55,75,80,.18),
+    0 8px 25px rgba(55,75,80,.08);
+
+}
+
+
+/* =========================================================
+   CLOSED COVER
+   ========================================================= */
+
+.journal-page.left {
+
+  z-index: 3;
+
+  transform-origin: left center;
+
+  background: #7d5f52;
+
+  transform:
+    rotateY(
+      calc(
+        var(--journal-progress, 0) * -168deg
+      )
+    );
+
+  transition:
+    transform .08s linear;
+
+  backface-visibility: hidden;
+
+}
+
+
+/* cover texture */
+
+.journal-page.left::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity: .18;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 3px,
+      rgba(255,255,255,.22) 4px
+    );
+
+}
+
+
+/* cover decoration */
+
+.journal-page.left::after {
+
+  content: "ZENENE";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%,-50%)
+    rotate(-4deg);
+
+  color:
+    rgba(255,248,239,.82);
+
+  font-family:
+    var(--typewriter);
+
+  font-size:
+    clamp(.7rem, 1.4vw, .9rem);
+
+  letter-spacing:
+    .28em;
+
+}
+
+
+/* =========================================================
+   INSIDE PAGE
+   ========================================================= */
+
+.journal-page.right {
+
+  z-index: 2;
+
+  background: #fffdf8;
+
+  padding:
+    clamp(42px, 7vw, 70px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  background-image:
+
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 34px,
+      rgba(130,150,155,.13) 35px
+    );
+
+}
+
+
+/* subtle paper edge */
+
+.journal-page.right::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background: none;
+
+}
+
+
+/* =========================================================
+   JOURNAL WRITING
+   ========================================================= */
+
+.journal-writing {
+
+  position: relative;
+
+  z-index: 2;
+
+  color: #5c4639;
+
+  font-family:
+    var(--typewriter);
+
+  font-size:
+    clamp(.62rem, 1vw, .76rem);
+
+  line-height: 2;
+
+  max-width: 330px;
+
+  opacity:
+    calc(
+      .05 +
+      var(--journal-progress, 0) * .95
+    );
+
+  transform:
+    translateY(
+      calc(
+        35px -
+        var(--journal-progress, 0) * 35px
+      )
+    );
+
+  transition:
+    opacity .12s linear,
+    transform .12s linear;
+
+}
+
+
+.journal-writing h3 {
+
+  margin:
+    0 0 28px;
+
+  color: #4a3529;
+
+  font-family:
+    var(--script);
+
+  font-size:
+    clamp(2rem, 4vw, 2.7rem);
+
+  font-weight: 600;
+
+}
+
+
+.journal-writing p {
+
+  margin:
+    0 0 22px;
+
+}
+
+
+/* =========================================================
+   SMALL HANDWRITTEN NOTE
+   ========================================================= */
+
+.journal-note {
+
+  position: absolute;
+
+  right: -80px;
+
+  bottom: 65px;
+
+  font-family:
+    var(--script);
+
+  font-size: 1.35rem;
+
+  line-height: 1;
+
+  color:
+    var(--rose-deep);
+
+  transform:
+    rotate(-8deg)
+    translateY(12px);
+
+  opacity: 0;
+
+  transition:
+    opacity .7s ease .45s,
+    transform .8s cubic-bezier(.16,1,.3,1);
+
+  white-space: nowrap;
+
+  z-index: 8;
+
+}
+
+.journal-story.open .journal-note {
+
+  opacity: 1;
+
+  transform:
+    rotate(-8deg)
+    translateY(0);
+
+}
+
+
+.journal-side-note {
+
+  position: absolute;
+
+  right: -14vw;
+  top: 50%;
+
+  width: min(230px, 20vw);
+
+  transform: translateY(18px) rotate(-3deg);
+
+  font-family: var(--script);
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  line-height: 1.15;
+  text-align: left;
+  color: var(--sage-deep);
+
+  opacity: 0;
+
+  transition:
+    opacity .8s ease .55s,
+    transform .9s cubic-bezier(.16,1,.3,1);
+
+  pointer-events: none;
+  z-index: 6;
+}
+
+.journal-story.open .journal-side-note {
+
+  opacity: .9;
+
+  transform: translateY(0) rotate(-3deg);
+}
+.journal-story.open .journal-side-note {
+
+  opacity: .9;
+
+  transform: translateY(0) rotate(3deg);
+}
+
+
+/* =========================================================
+   JOURNAL TITLE
+   ========================================================= */
+
+.journal-title {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 12%;
+
+  transform:
+    translateX(-50%)
+    translateY(20px);
+
+  z-index: 20;
+
+  font-family:
+    var(--typewriter);
+
+  font-size: .65rem;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  color: #5d493d;
+
+  opacity: 0;
+
+  transition:
+    opacity .5s ease,
+    transform .7s cubic-bezier(.16,1,.3,1);
+
+  pointer-events: none;
+
+}
+
+.journal-story.open .journal-title {
+
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+
+/* =========================================================
+   JOURNAL LINK
+   ========================================================= */
+
+.journal-link {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 6%;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 25;
+
+  font-family:
+    var(--typewriter);
+
+  font-size: .65rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: #5c4639;
+
+  text-decoration: none;
+
+  opacity: 0;
+
+  transition:
+    opacity .5s ease .15s;
+
+  white-space: nowrap;
+
+}
+
+.journal-story.open .journal-link {
+
+  opacity: 1;
+
+}
+
+.journal-link:hover {
+
+  color:
+    var(--sage-deep);
+
+}
+
+
+/* =========================================================
+   JOURNAL SHADOW
+   ========================================================= */
+
+.journal-shadow {
+
+  position: absolute;
+
+  width: min(450px, 70vw);
+
+  height: 42px;
+
+  bottom: 13%;
+
+  background:
+    rgba(65,85,90,.12);
+
+  filter:
+    blur(25px);
+
+  border-radius: 50%;
+
+  transform:
+    translateX(
+      calc(
+        var(--journal-progress, 0) * -6vw
+      )
+    )
+    scaleX(
+      calc(
+        1 -
+        var(--journal-progress, 0) * .18
+      )
+    );
+
+  pointer-events: none;
+
+  z-index: 1;
+
+}
+
+
+/* =========================================================
+   EDITORIAL END
+   ========================================================= */
+
+.editorial {
+
+  min-height: 100vh;
+
+  padding: 13vh 7vw;
+
+  background: var(--paper);
+
+}
+
+.editorial-header {
+
+  max-width: 900px;
+
+  margin-bottom: 80px;
+
+}
+
+.editorial-header h2 {
+
+  font-family: var(--serif);
+
+  font-size: clamp(4rem, 9vw, 9rem);
+
+  font-weight: 300;
+
+  line-height: .82;
+
+  color: var(--brown-dark);
+
+}
+
+.editorial-header em {
+
+  font-family: var(--script);
+
+  color: var(--sage-deep);
+
+  font-size: .7em;
+
+}
+
+.editorial-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    1.4fr
+    .8fr
+    .8fr;
+
+  gap: 25px;
+
+}
+
+.editorial-card {
+
+  min-height: 400px;
+
+  padding: 35px;
+
+  border-radius: 5px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  background: var(--sky-light);
+
+  transition:
+    transform .5s cubic-bezier(.16,1,.3,1);
+
+}
+
+.editorial-card:hover {
+
+  transform:
+    translateY(-10px)
+    rotate(-.5deg);
+
+}
+
+.editorial-card:nth-child(2) {
+
+  background: var(--sage);
+
+  transform: rotate(1deg);
+
+}
+
+.editorial-card:nth-child(3) {
+
+  background: var(--rose);
+
+  transform: rotate(-1deg);
+
+}
+
+.editorial-card h3 {
+
+  font-family: var(--serif);
+
+  font-size: 2.8rem;
+
+  font-weight: 300;
+
+  line-height: .95;
+
+}
+
+.editorial-card p {
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  line-height: 1.8;
+
+  color: var(--brown);
+
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+
+  position: relative;
+
+  min-height: 72vh;
+
+  padding: 90px 7vw 35px;
+
+  background: var(--brown-dark);
+
+  color: var(--cream);
+
+  overflow: hidden;
+
+}
+
+.footer::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.06) 1.5px,
+      transparent 2px
+    );
+
+  background-size: 34px 34px;
+
+  opacity: .45;
+
+  pointer-events: none;
+
+}
+
+.footer-ghost {
+  position: absolute;
+
+  right: -2.5vw;
+  bottom: -3.0vh;
+
+  font-family: var(--typewriter);
+  font-size: clamp(4rem, 12vw, 10rem);
+  letter-spacing: .02em;
+  line-height: .8;
+
+  color: rgba(247,241,231,.055);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+  
+.footer-inner {
+
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1200px;
+
+  margin: auto;
+
+}
+
+
+/* FOOTER TOP */
+
+.footer-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 60px;
+
+  padding-bottom: 90px;
+
+}
+
+.footer-brand {
+
+  max-width: 520px;
+
+}
+
+.footer-label {
+
+  font-family: var(--typewriter);
+
+  font-size: .62rem;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  color: var(--sky);
+
+  margin-bottom: 25px;
+
+}
+
+.footer-brand h2 {
+
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-size: clamp(3.8rem, 8vw, 8rem);
+
+  font-weight: 300;
+
+  line-height: .8;
+
+  letter-spacing: -.03em;
+
+}
+
+.footer-brand h2 em {
+
+  font-family: var(--script);
+
+  color: var(--rose);
+
+  font-size: .72em;
+
+}
+
+.footer-tagline {
+
+  margin-top: 32px;
+
+  max-width: 370px;
+
+  font-family: var(--typewriter);
+
+  font-size: .68rem;
+
+  line-height: 1.9;
+
+  color: rgba(247,241,231,.65);
+
+}
+
+
+/* FOOTER LINKS */
+
+.footer-links {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(110px, 1fr));
+
+  gap: 55px;
+
+  min-width: 300px;
+
+}
+
+.footer-column {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+}
+
+.footer-column-title {
+
+  margin-bottom: 10px;
+
+  font-family: var(--typewriter);
+
+  font-size: .58rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+  color: var(--sky);
+
+}
+
+.footer-column a {
+
+  width: fit-content;
+
+  color: rgba(247,241,231,.72);
+
+  text-decoration: none;
+
+  font-family: var(--serif);
+
+  font-size: 1.15rem;
+
+  transition:
+    color .3s ease,
+    transform .3s ease;
+
+}
+
+.footer-column a:hover {
+
+  color: var(--cream);
+
+  transform: translateX(5px);
+
+}
+
+
+/* FLOATING FLOWER */
+
+.footer-flower {
+
+  position: absolute;
+
+  right: 8vw;
+
+  bottom: 150px;
+
+  font-size: 80px;
+
+  line-height: 1;
+
+  color: var(--rose);
+
+  opacity: .35;
+
+  transform: rotate(-12deg);
+
+  animation:
+    footerFlowerFloat 6s ease-in-out infinite;
+
+}
+
+@keyframes footerFlowerFloat {
+
+  0%,100% {
+
+    transform:
+      rotate(-12deg)
+      translateY(0);
+
+  }
+
+  50% {
+
+    transform:
+      rotate(-5deg)
+      translateY(-10px);
+
+  }
+
+}
+
+
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  font-family: var(--typewriter);
+
+  font-size: .55rem;
+
+  letter-spacing: .08em;
+
+  color:
+    rgba(247,241,231,.45);
+
+}
+
+.footer-bottom-left {
+
+  display: flex;
+
+  gap: 25px;
+
+}
+
+.footer-bottom a {
+
+  color: inherit;
+
+  text-decoration: none;
+
+  transition:
+    color .3s ease;
+
+}
+
+.footer-bottom a:hover {
+
+  color: var(--cream);
+
+}
+
+.footer-made {
+
+  font-family: var(--script);
+
+  font-size: 1rem;
+
+  color:
+    rgba(247,241,231,.65);
+
+}
+
+
+/* =========================================================
+   EXISTING DOCK
+   ========================================================= */
+
+.dock-wrap {
+
+  position: fixed;
+
+  bottom: 1.8rem;
+
+  left: 50%;
+
+  transform: none;
+
+  left: calc(50% - 29px);
+
+  z-index: 300;
+
+}
+
+.dock-items {
+
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 90px 24px 120px;
+
+  background: rgba(247,241,231,.46);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity .45s ease,
+    visibility 0s linear .45s;
+}
+
+.dock-item {
+
+  width: min(520px, 82vw);
+  height: auto;
+  margin: 0;
+  padding: 10px 20px;
+
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--brown-dark);
+  text-decoration: none;
+  font-family: var(--typewriter);
+  font-size: clamp(1.45rem, 4vw, 2.6rem);
+  letter-spacing: .08em;
+  text-transform: lowercase;
+
+  opacity: 0;
+  transform: translateX(-80px) translateY(12px);
+
+  transition:
+    opacity .65s ease,
+    transform .8s cubic-bezier(.16,1,.3,1);
+
+  pointer-events: none;
+}
+
+.dock-wrap.open .dock-items {
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity .45s ease;
+}
+
+.dock-wrap.open .dock-item {
+
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+  pointer-events: auto;
+}
+
+.dock-item:nth-child(1) {
+  transform: translateX(-90px) translateY(12px);
+  transition-delay: .05s;
+}
+
+.dock-item:nth-child(2) {
+  transform: translateX(90px) translateY(12px);
+  transition-delay: .12s;
+}
+
+.dock-item:nth-child(3) {
+  transform: translateX(-90px) translateY(12px);
+  transition-delay: .19s;
+}
+
+.dock-item:nth-child(4) {
+  transform: translateX(90px) translateY(12px);
+  transition-delay: .26s;
+}
+
+.dock-item:nth-child(5) {
+  transform: translateX(-90px) translateY(12px);
+  transition-delay: .33s;
+}
+
+.dock-item:hover {
+  color: var(--rose-deep);
+  transform: scale(1.04) !important;
+}
+
+.dock-btn {
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(98,79,67,.2);
+
+  background: rgba(247,241,231,.94);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 5px 25px rgba(62,45,35,.18);
+
+  cursor: pointer;
+
+  font-size: 1.15rem;
+
+}
+
+.dock-btn .close {
+
+  display: none;
+
+}
+
+.dock-wrap.open .dock-btn .menu {
+
+  display: none;
+
+}
+
+.dock-wrap.open .dock-btn .close {
+
+  display: inline;
+
+}
+
+
+/* =========================================================
+   CRISIS BUTTON
+   ========================================================= */
+
+.crisis-fab {
+
+  position: fixed;
+
+  right: 1.5rem;
+
+  bottom: 1.8rem;
+
+  z-index: 200;
+
+  border: none;
+
+  padding: 10px 15px;
+
+  border-radius:
+    16px 16px 16px 4px;
+
+  background: var(--sky);
+
+  color: var(--brown-dark);
+
+  font-family: var(--typewriter);
+
+  font-size: .62rem;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 900;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(47,43,39,.4);
+
+  backdrop-filter: blur(10px);
+
+}
+
+.overlay.open {
+
+  display: flex;
+
+}
+
+.modal {
+
+  width: min(420px, 100%);
+
+  padding: 30px;
+
+  background: var(--cream);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.2);
+
+}
+
+.m-close {
+
+  float: right;
+
+  border: none;
+
+  background: none;
+
+  font-size: 1.4rem;
+
+  cursor: pointer;
+
+}
+
+.m-title {
+
+  font-family: var(--serif);
+
+  font-size: 1.8rem;
+
+}
+
+.m-sub {
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+  line-height: 1.7;
+
+  color: var(--brown);
+
+  margin: 8px 0 20px;
+
+}
+
+.c-link {
+
+  display: block;
+
+  padding: 13px;
+
+  margin-top: 8px;
+
+  border-radius: 12px;
+
+  background: rgba(255,255,255,.65);
+
+  text-decoration: none;
+
+  color: var(--brown-dark);
+
+  font-family: var(--typewriter);
+
+  font-size: .65rem;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .top-nav {
+
+    padding:
+      18px 20px;
+
+  }
+
+  .hero {
+
+    min-height: 100svh;
+
+  }
+
+  .feature-story {
+
+    height: 550vh;
+
+  }
+
+  .feature-stage {
+
+    min-height: 0;
+
+    align-items: stretch;
+
+  }
+
+  .feature-slide {
+
+    overflow: hidden;
+    padding: 76px 0 78px;
+  }
+
+  .slide-inner {
+
+    width: 88vw;
+    min-height: calc(100svh - 154px);
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    text-align: center;
+    align-content: center;
+    gap: 8px;
+
+  }
+
+  .slide-copy {
+
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+
+  }
+
+  .slide-heading {
+
+    margin: 0;
+    font-size: clamp(2.65rem, 13vw, 4.8rem);
+    line-height: .86;
+
+  }
+
+  .slide-description {
+
+    max-width: 330px;
+    margin: 16px auto 0;
+    font-size: .64rem;
+    line-height: 1.65;
+
+  }
+
+  .slide-visual {
+
+    height: 245px;
+    min-height: 245px;
+    margin-top: 4px;
+
+  }
+
+  .brain-composition {
+
+    width: 280px;
+
+  }
+
+  .mood-art,
+  .vera-art {
+
+    transform: scale(.7);
+
+  }
+
+  .garden {
+
+    height: 130vh;
+
+  }
+
+  .journal-story {
+
+    height: 210vh;
+
+  }
+
+  .journal-object {
+
+    width: 290px;
+
+    height: 400px;
+
+  }
+
+  .journal-note {
+
+    right: 0;
+    bottom: 10px;
+    font-size: .9rem;
+
+  }
+
+  .journal-side-note {
+
+    display: none;
+
+  }
+
+  .editorial {
+
+    padding:
+      100px 6vw;
+
+  }
+
+  .editorial-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .editorial-card,
+  .editorial-card:nth-child(2),
+  .editorial-card:nth-child(3) {
+
+    transform: none;
+
+  }
+
+  .crisis-fab {
+
+    right: 1rem;
+
+  }
+
+  /* FOOTER MOBILE */
+
+  .footer {
+
+    min-height: auto;
+
+    padding:
+      80px 7vw 30px;
+
+  }
+
+  .footer-top {
+
+    flex-direction: column;
+
+    padding-bottom: 60px;
+
+    gap: 55px;
+
+  }
+
+  .footer-brand h2 {
+
+    font-size:
+      clamp(4rem, 18vw, 7rem);
+
+  }
+
+  .footer-links {
+
+    width: 100%;
+
+    min-width: 0;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 35px;
+
+  }
+
+  .footer-flower {
+
+    right: 5vw;
+
+    top: 35px;
+
+    font-size: 55px;
+
+  }
+
+  .footer-ghost {
+
+    right: 4vw;
+    bottom: 3vh;
+    font-size: clamp(3.2rem, 18vw, 6rem);
+
+  }
+
+  .footer-bottom {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+
+    animation-duration:
+      .01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      .01ms !important;
+
+    scroll-behavior:
+      auto !important;
+
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE REFINEMENTS
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .slide-kicker {
+
+    top: 38px;
+
+    left: 7vw;
+
+  }
+
+  .journal-visual {
+
+    height: 270px;
+    min-height: 270px;
+
+  }
+
+  .journal-asset-wrap {
+
+    width:
+      min(285px, 72vw);
+
+  }
+
+  .journal-backdrop {
+
+    width:
+      min(285px, 72vw);
+
+    height: 260px;
+
+  }
+
+  .journal-scribble {
+
+    right: 3vw;
+
+    bottom: 18px;
+
+    font-size: 1.2rem;
+
+  }
+
+  .vera-art {
+
+    width:
+      min(380px, 85vw);
+
+    height:
+      min(380px, 85vw);
+
+  }
+
+  .vera-system {
+
+    transform: scale(.72);
+
+  }
+
+  .feature-slide.active .vera-system {
+
+    transform: scale(.72);
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     NAVIGATION
+     ====================================================== -->
+
+<nav class="top-nav" id="tnav">
+
+  <a class="nav-wordmark" href="index.html">
+    ZENENE
+  </a>
+
+  <div class="nav-links">
+
+    <a href="vera.html" class="nav-cta">
+      vera
+    </a>
+
+    <a href="#story" class="nav-cta">
+      explore
+    </a>
+
+    <a class="nav-cta nav-signup" id="authOpenBtn" href="#authOpen">
+      sign up
+    </a>
+
+  </div>
+
+</nav>
+
+
+<!-- ======================================================
+     AUTH MODAL
+     ====================================================== -->
+
+<div class="auth-overlay" id="authOverlay">
+
+  <div class="auth-card">
+
+    <button class="auth-close" id="authCloseBtn" aria-label="Close" type="button">&times;</button>
+
+    <h2 class="auth-title" id="authTitle">Welcome to Zenene</h2>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="authTabSignup" type="button">Sign Up</button>
+      <button class="auth-tab" id="authTabLogin" type="button">Log In</button>
+    </div>
+
+    <form class="auth-form active" id="authFormSignup">
+
+      <input class="auth-input" id="authSignupName" type="text" placeholder="What should we call you?" autocomplete="name">
+      <input class="auth-input" id="authSignupEmail" type="email" placeholder="Email" autocomplete="email" required>
+      <input class="auth-input" id="authSignupPassword" type="password" placeholder="Password" autocomplete="new-password" required>
+
+      <button class="auth-submit" id="authSignupSubmit" type="submit">Create account</button>
+
+    </form>
+
+    <form class="auth-form" id="authFormLogin">
+
+      <input class="auth-input" id="authLoginEmail" type="email" placeholder="Email" autocomplete="email" required>
+      <input class="auth-input" id="authLoginPassword" type="password" placeholder="Password" autocomplete="current-password" required>
+
+      <button class="auth-submit" id="authLoginSubmit" type="submit">Log in</button>
+
+      <button class="auth-link" id="authForgotLink" type="button">forgot password?</button>
+
+    </form>
+
+    <!-- FORGOT PASSWORD: emails a reset link that opens reset-password.html -->
+    <form class="auth-form" id="authFormForgot">
+
+      <p class="auth-note">
+        Enter the email you signed up with and we'll send you a link to set a new password.
+      </p>
+
+      <input class="auth-input" id="authForgotEmail" type="email" placeholder="Email" autocomplete="email" required>
+
+      <button class="auth-submit" id="authForgotSubmit" type="submit">Send reset link</button>
+
+      <button class="auth-link" id="authBackToLogin" type="button">&larr; back to log in</button>
+
+    </form>
+
+    <p class="auth-message" id="authMessage"></p>
+
+  </div>
+
+</div>
+
+
+<!-- ======================================================
+     HERO
+     ====================================================== -->
+
+<section class="hero" id="home">
+
+  <div class="cloud cloud-one"></div>
+  <div class="cloud cloud-two"></div>
+
+  <div class="hero-inner">
+
+    <div class="hero-eyebrow">
+      a space made for your mind
+    </div>
+
+    <h1 class="hero-title">
+      ZENENE
+    </h1>
+
+    <div class="hero-tag">
+      where your mind blooms
+    </div>
+
+  </div>
+
+  <div class="scroll-indicator">
+
+    <span>scroll</span>
+
+    <div class="scroll-line"></div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     APPLE-STYLE FEATURE STORY
+     ====================================================== -->
+
+<section
+  class="feature-story"
+  id="story"
+>
+
+  <div class="feature-stage">
+
+    <div class="story-title">
+      a little space for you
+    </div>
+
+
+    <!-- SLIDE 1 -->
+
+    <article class="feature-slide active">
+
+      <div class="slide-inner">
+
+        <div class="slide-copy">
+
+          <div class="slide-kicker">
+            understand
+          </div>
+
+          <h2 class="slide-heading">
+
+            Where your<br>
+            <em>mind</em> blooms.
+
+          </h2>
+
+          <p class="slide-description">
+
+            Zenene brings reflection,
+            conversation, creativity and
+            calm into one gentle space.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual">
+
+          <div class="brain-composition">
+
+            <img
+              src="assets/images/floral-brain.jpg"
+              alt=""
+            >
+
+            <span class="neural-dot nd1"></span>
+            <span class="neural-dot nd2"></span>
+            <span class="neural-dot nd3"></span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- SLIDE 2 — JOURNAL -->
+
+    <article class="feature-slide">
+
+      <div class="slide-inner">
+
+        <div class="slide-copy">
+
+          <div class="slide-kicker">
+            reflect
+          </div>
+
+          <h2 class="slide-heading">
+
+            Put your<br>
+            thoughts<br>
+            <em>somewhere.</em>
+
+          </h2>
+
+          <p class="slide-description">
+
+            A private place to write,
+            notice and understand what
+            is happening inside your mind.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual journal-visual">
+
+          <div class="journal-backdrop"></div>
+
+          <div class="journal-asset-wrap">
+
+            <img
+              src="assets/images/journal.png"
+              alt="A decorated personal journal"
+              class="journal-asset"
+            >
+
+          </div>
+
+          <div class="journal-scribble">
+
+            a place to put<br>
+            your thoughts
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- SLIDE 3 — MOOD -->
+
+    <article class="feature-slide">
+
+      <div class="slide-inner">
+
+        <div class="slide-copy">
+
+          <div class="slide-kicker">
+            notice
+          </div>
+
+          <h2 class="slide-heading">
+
+            How are<br>
+            you <em>today?</em>
+
+          </h2>
+
+          <p class="slide-description">
+
+            Track how you're feeling
+            without judging it.
+
+            Sometimes noticing is enough.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual">
+
+          <div class="mood-art">
+
+            <svg
+              class="mood-svg"
+              viewBox="0 0 430 380"
+            >
+
+              <path
+                class="mood-path"
+                d="
+                  M 20 290
+                  C 70 245,
+                    90 275,
+                    125 215
+                  S 190 245,
+                    225 185
+                  S 290 90,
+                    330 145
+                  S 380 105,
+                    415 50
+                "
+              />
+
+            </svg>
+
+            <div class="mood-dots">
+
+              <span class="mood-point mp1"></span>
+              <span class="mood-point mp2"></span>
+              <span class="mood-point mp3"></span>
+              <span class="mood-point mp4"></span>
+              <span class="mood-point mp5"></span>
+              <span class="mood-point mp6"></span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- SLIDE 4 — VERA -->
+
+    <article class="feature-slide">
+
+      <div class="slide-inner">
+
+        <div class="slide-copy">
+
+          <div class="slide-kicker">
+            talk
+          </div>
+
+          <h2 class="slide-heading">
+
+            Someone<br>
+            to <em>talk</em> to.
+
+          </h2>
+
+          <p class="slide-description">
+
+            Vera gives you somewhere
+            to put the thoughts that are
+            difficult to say out loud.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual">
+
+          <div class="vera-art">
+
+            <div class="vera-system">
+
+              <div class="vera-orbit orbit-one"></div>
+              <div class="vera-orbit orbit-two"></div>
+              <div class="vera-orbit orbit-three"></div>
+
+              <div class="vera-core">
+
+                <span class="vera-core-glow"></span>
+
+                <span class="vera-core-label">
+                  VERA
+                </span>
+
+              </div>
+
+              <span class="vera-system-node node-one"></span>
+              <span class="vera-system-node node-two"></span>
+              <span class="vera-system-node node-three"></span>
+              <span class="vera-system-node node-four"></span>
+              <span class="vera-system-node node-five"></span>
+              <span class="vera-system-node node-six"></span>
+
+              <span class="vera-system-label label-one">
+                listen
+              </span>
+
+              <span class="vera-system-label label-two">
+                notice
+              </span>
+
+              <span class="vera-system-label label-three">
+                understand
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- SLIDE 5 — CALM -->
+
+    <article class="feature-slide">
+
+      <div class="slide-inner">
+
+        <div class="slide-copy">
+
+          <div class="slide-kicker">
+            breathe
+          </div>
+
+          <h2 class="slide-heading">
+
+            Stay here<br>
+            for a <em>moment.</em>
+
+          </h2>
+
+          <p class="slide-description">
+
+            Slow down.
+
+            There is nowhere else
+            you need to be right now.
+
+          </p>
+
+        </div>
+
+
+        <div class="slide-visual">
+
+          <div class="calm-art">
+
+            <div
+              class="calm-circle"
+              id="calmCircle"
+            ></div>
+
+            <div class="calm-word">
+              breathe
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <div class="story-progress">
+
+      <span class="story-dot active"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     FLOWER CURSOR GARDEN
+     ====================================================== -->
+
+<section class="garden" id="garden">
+
+  <div class="garden-inner">
+
+    <div class="garden-title">
+
+      <h2>
+        let your thoughts<br>
+        <em class="script">wander.</em>
+      </h2>
+
+      <p>
+        move through the garden
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     JOURNAL TRANSFORMATION
+     ====================================================== -->
+
+<section
+  class="journal-story"
+  id="journalStory"
+>
+
+  <div class="journal-stage">
+
+    <div class="journal-shadow"></div>
+
+    <div class="journal-object">
+
+      <!-- FRONT COVER -->
+
+      <div class="journal-page left"></div>
+
+
+      <!-- INSIDE PAGE -->
+
+      <div class="journal-page right">
+
+        <div class="journal-writing">
+
+          <h3>
+            dear me,
+          </h3>
+
+          <p>
+            Today felt a little strange.
+          </p>
+
+          <p>
+            I don't think I have to
+            understand everything yet.
+          </p>
+
+          <p>
+            Maybe writing it down
+            is enough for tonight.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="journal-note">
+        it's okay to take your time.
+      </div>
+
+      <div class="journal-side-note">
+        you don't have to make sense of everything at once.
+      </div>
+
+    </div>
+
+
+    <div class="journal-title">
+      a place to put your thoughts
+    </div>
+
+
+    <a
+      href="journal.html"
+      class="journal-link"
+    >
+      open your journal →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     EDITORIAL / EXPLORE
+     ====================================================== -->
+
+<section class="editorial">
+
+  <div class="editorial-header">
+
+    <div class="section-label">
+      explore
+    </div>
+
+    <h2>
+
+      Things worth<br>
+      <em>thinking about.</em>
+
+    </h2>
+
+  </div>
+
+
+  <div class="editorial-grid">
+
+
+    <a
+      href="explore.html"
+      class="editorial-card"
+      style="text-decoration:none;color:inherit;"
+    >
+
+      <div class="section-label">
+        featured
+      </div>
+
+      <h3>
+        Understanding
+        the things we
+        feel.
+      </h3>
+
+      <p>
+        gentle reads about emotions,
+        identity, school and life.
+      </p>
+
+    </a>
+
+
+    <a
+      href="calm.html"
+      class="editorial-card"
+      style="text-decoration:none;color:inherit;"
+    >
+
+      <div class="section-label">
+        calm
+      </div>
+
+      <h3>
+        A little
+        room to
+        breathe.
+      </h3>
+
+      <p>
+        gentle moments to slow down,
+        breathe and simply be here.
+      </p>
+
+    </a>
+
+
+    <a
+      href="mood.html"
+      class="editorial-card"
+      style="text-decoration:none;color:inherit;"
+    >
+
+      <div class="section-label">
+        notice
+      </div>
+
+      <h3>
+        Your feelings
+        are worth
+        noticing.
+      </h3>
+
+      <p>
+        Explore your emotional patterns
+        with compassion.
+      </p>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     FOOTER
+     ====================================================== -->
+
+<footer class="footer">
+
+  <div class="footer-ghost" aria-hidden="true">ZENENE</div>
+
+  <div class="footer-flower">
+    ✿
+  </div>
+
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+
+      <!-- BRAND -->
+
+      <div class="footer-brand">
+
+        <div class="footer-label">
+          zenene
+        </div>
+
+        <h2>
+          where your<br>
+          <em>mind blooms.</em>
+        </h2>
+
+        <p class="footer-tagline">
+          A softer space for reflection,
+          conversation, creativity and calm.
+        </p>
+
+      </div>
+
+
+      <!-- LINKS -->
+
+      <div class="footer-links">
+
+
+        <div class="footer-column">
+
+          <div class="footer-column-title">
+            explore
+          </div>
+
+          <a href="journal.html">
+            Journal
+          </a>
+
+          <a href="mood.html">
+            Mood
+          </a>
+
+          <a href="calm.html">
+            Calm
+          </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <div class="footer-column-title">
+            discover
+          </div>
+
+          <a href="vera.html">
+            Vera
+          </a>
+
+          <a href="explore.html">
+            Explore
+          </a>
+
+          <a href="#home">
+            Home
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- DIVIDER -->
+
+    <div class="footer-divider"></div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+      <div class="footer-bottom-left">
+
+        <span>
+          © 2026 Zenene
+        </span>
+
+        <a href="privacy.html">
+          Privacy
+        </a>
+
+        <a href="terms.html">
+          Terms
+        </a>
+
+      </div>
+
+      
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- ======================================================
+     EXISTING DOCK
+     ====================================================== -->
+
+<div class="dock-wrap" id="dock">
+
+  <div class="dock-items" aria-label="Zenene navigation">
+
+    <a href="journal.html" class="dock-item">journal</a>
+
+    <a href="mood.html" class="dock-item">mood</a>
+
+    <a href="vera.html" class="dock-item">vera</a>
+
+    <a href="explore.html" class="dock-item">explore</a>
+
+    <a href="calm.html" class="dock-item">calm</a>
+
+  </div>
+
+  <button
+    class="dock-btn"
+    id="dockBtn"
+    aria-label="Open navigation"
+  >
+
+    <span class="menu">☰</span>
+    <span class="close">✕</span>
+
+  </button>
+
+</div>
+
+
+<!-- ======================================================
+     CRISIS
+     ====================================================== -->
+
+<button
+  class="crisis-fab"
+  onclick="document.getElementById('cm').classList.add('open')"
+>
+  💙 need help?
+</button>
+
+
+<div
+  class="overlay"
+  id="cm"
+  onclick="if(event.target===this)this.classList.remove('open')"
+>
+
+  <div class="modal">
+
+    <button
+      class="m-close"
+      onclick="document.getElementById('cm').classList.remove('open')"
+    >
+      ×
+    </button>
+
+    <div class="m-title">
+      You're not alone.
+    </div>
+
+    <div class="m-sub">
+      If you need immediate support,
+      please reach out to a trusted adult
+      or an appropriate local emergency/crisis service.
+    </div>
+
+    <a class="c-link" href="tel:988">📞 US: call or text 988</a>
+    <a class="c-link" href="sms:741741?body=HOME">💬 US/Canada: text HOME to 741741</a>
+    <a class="c-link" href="tel:116123">📞 UK/ROI: Samaritans 116 123</a>
+    <a class="c-link" href="https://findahelpline.com" target="_blank" rel="noopener">🌍 Elsewhere: findahelpline.com</a>
+    <a class="c-link" href="tel:112">📞 Local emergency support · 112</a>
+
+  </div>
+
+</div>
+
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+
+<script>
+
+/* =========================================================
+   AUTH MODAL
+   ========================================================= */
+
+const authOverlay = document.getElementById("authOverlay");
+const authOpenBtn = document.getElementById("authOpenBtn");
+const authCloseBtn = document.getElementById("authCloseBtn");
+const authTitle = document.getElementById("authTitle");
+
+const authTabSignup = document.getElementById("authTabSignup");
+const authTabLogin = document.getElementById("authTabLogin");
+const authFormSignup = document.getElementById("authFormSignup");
+const authFormLogin = document.getElementById("authFormLogin");
+const authFormForgot = document.getElementById("authFormForgot");
+const authTabs = document.querySelector(".auth-tabs");
+const authMessage = document.getElementById("authMessage");
+
+function openAuthModal() {
+  authOverlay.classList.add("open");
+}
+
+function closeAuthModal() {
+  authOverlay.classList.remove("open");
+  authMessage.textContent = "";
+  authMessage.classList.remove("success");
+}
+
+// tab is "signup", "login" or "forgot"
+function showAuthTab(tab) {
+
+  const isSignup = tab === "signup";
+  const isForgot = tab === "forgot";
+
+  authTabs.classList.toggle("hidden", isForgot);
+
+  authTabSignup.classList.toggle("active", isSignup);
+  authTabLogin.classList.toggle("active", !isSignup && !isForgot);
+
+  authFormSignup.classList.toggle("active", isSignup);
+  authFormLogin.classList.toggle("active", tab === "login");
+  authFormForgot.classList.toggle("active", isForgot);
+
+  authTitle.textContent =
+    isSignup ? "Welcome to Zenene" :
+    isForgot ? "Reset your password" :
+    "Welcome back";
+
+  authMessage.textContent = "";
+  authMessage.classList.remove("success");
+
+}
+
+async function refreshNavAuthState() {
+
+  const profile = await getCurrentProfile();
+
+  if (!profile) {
+    authOpenBtn.textContent = "sign up";
+    authOpenBtn.href = "#authOpen";
+    authOpenBtn.dataset.mode = "auth";
+    authOpenBtn.classList.add("ready");
+    return;
+  }
+
+  authOpenBtn.textContent = profile.display_name || "my profile";
+  authOpenBtn.href = "profile.html";
+  authOpenBtn.dataset.mode = "profile";
+  authOpenBtn.classList.add("ready");
+
+}
+
+authOpenBtn.addEventListener("click", (e) => {
+  if (authOpenBtn.dataset.mode === "profile") return;
+  e.preventDefault();
+  openAuthModal();
+});
+
+authCloseBtn.addEventListener("click", closeAuthModal);
+
+refreshNavAuthState();
+
+// Lets other pages' "sign in" nav link deep-link here, e.g. index.html?auth=login
+const authDeepLink = new URLSearchParams(window.location.search).get("auth");
+
+if (["login", "signup", "forgot"].includes(authDeepLink)) {
+  showAuthTab(authDeepLink);
+  openAuthModal();
+}
+
+authOverlay.addEventListener("click", (e) => {
+  if (e.target === authOverlay) closeAuthModal();
+});
+
+authTabSignup.addEventListener("click", () => showAuthTab("signup"));
+authTabLogin.addEventListener("click", () => showAuthTab("login"));
+
+document.getElementById("authForgotLink").addEventListener("click", () => {
+  // Carry over whatever email they already typed.
+  document.getElementById("authForgotEmail").value =
+    document.getElementById("authLoginEmail").value;
+  showAuthTab("forgot");
+});
+
+document.getElementById("authBackToLogin").addEventListener("click", () => {
+  showAuthTab("login");
+});
+
+/* =========================================================
+   FORGOT PASSWORD
+   Supabase emails a one-time link. Clicking it opens
+   reset-password.html, where the new password is saved.
+   That page's URL must be listed in Supabase ->
+   Authentication -> URL Configuration -> Redirect URLs.
+   ========================================================= */
+
+authFormForgot.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const email = document.getElementById("authForgotEmail").value.trim();
+  const submitBtn = document.getElementById("authForgotSubmit");
+
+  submitBtn.disabled = true;
+  authMessage.classList.remove("success");
+  authMessage.textContent = "";
+
+  const redirectTo =
+    new URL("reset-password.html", window.location.href).href;
+
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo
+  });
+
+  submitBtn.disabled = false;
+
+  if (error) {
+    authMessage.textContent = error.message;
+    return;
+  }
+
+  // Same message whether or not the email has an account,
+  // so the form can't be used to check who has signed up.
+  authMessage.classList.add("success");
+  authMessage.textContent =
+    "If that email has a Zenene account, a reset link is on its way. Check your inbox (and spam).";
+
+});
+
+authFormSignup.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const name = document.getElementById("authSignupName").value;
+  const email = document.getElementById("authSignupEmail").value;
+  const password = document.getElementById("authSignupPassword").value;
+
+  const submitBtn = document.getElementById("authSignupSubmit");
+  submitBtn.disabled = true;
+
+  authMessage.classList.remove("success");
+  authMessage.textContent = "";
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { display_name: name }
+    }
+  });
+
+  submitBtn.disabled = false;
+
+  if (error) {
+    authMessage.textContent = error.message;
+    return;
+  }
+
+  authMessage.classList.add("success");
+  authMessage.textContent = "Your Zenene account has been created.";
+
+  if (data.session) {
+    await refreshNavAuthState();
+    window.setTimeout(closeAuthModal, 900);
+  }
+
+});
+
+authFormLogin.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const email = document.getElementById("authLoginEmail").value;
+  const password = document.getElementById("authLoginPassword").value;
+
+  const submitBtn = document.getElementById("authLoginSubmit");
+  submitBtn.disabled = true;
+
+  authMessage.classList.remove("success");
+
+  const { error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  submitBtn.disabled = false;
+
+  if (error) {
+    authMessage.textContent = error.message;
+    return;
+  }
+
+  authMessage.classList.add("success");
+  authMessage.textContent = "Logged in. Welcome back!";
+
+  window.setTimeout(() => {
+    window.location.href = "journal.html";
+  }, 600);
+
+});
+
+
+/* =========================================================
+   NAV
+   ========================================================= */
+
+const nav =
+  document.getElementById("tnav");
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    nav.classList.toggle(
+      "scrolled",
+      window.scrollY > 60
+    );
+
+  },
+  { passive: true }
+);
+
+
+/* =========================================================
+   FEATURE STORY
+   ========================================================= */
+
+const featureStory =
+  document.querySelector(".feature-story");
+
+const slides =
+  document.querySelectorAll(".feature-slide");
+
+const dots =
+  document.querySelectorAll(".story-dot");
+
+const calmCircle =
+  document.getElementById("calmCircle");
+
+
+function clamp(value, min, max) {
+
+  return Math.max(
+    min,
+    Math.min(max, value)
+  );
+
+}
+
+
+function updateFeatureStory() {
+
+  if (!featureStory) return;
+
+  const rect =
+    featureStory.getBoundingClientRect();
+
+  const total =
+    featureStory.offsetHeight -
+    window.innerHeight;
+
+  const progress =
+    clamp(
+      -rect.top / total,
+      0,
+      1
+    );
+
+  const slideCount =
+    slides.length;
+
+  const raw =
+    progress * slideCount;
+
+  const index =
+    Math.min(
+      slideCount - 1,
+      Math.floor(raw)
+    );
+
+  slides.forEach(
+    (slide, i) => {
+
+      slide.classList.toggle(
+        "active",
+        i === index
+      );
+
+    }
+  );
+
+  dots.forEach(
+    (dot, i) => {
+
+      dot.classList.toggle(
+        "active",
+        i === index
+      );
+
+    }
+  );
+
+  if (calmCircle && index === 4) {
+
+    const local =
+      raw - 4;
+
+    const breathe =
+      Math.sin(
+        local * Math.PI
+      );
+
+    calmCircle.style.transform =
+      `scale(${.75 + breathe * .35})`;
+
+  }
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateFeatureStory,
+  { passive: true }
+);
+
+window.addEventListener(
+  "resize",
+  updateFeatureStory
+);
+
+updateFeatureStory();
+
+
+/* =========================================================
+   FLOWER CURSOR GARDEN
+   ========================================================= */
+
+const garden =
+  document.getElementById("garden");
+
+let lastFlower = 0;
+
+const flowers = [
+  "🌸",
+  "🌼",
+  "✿",
+  "❀",
+  "🌷"
+];
+
+
+garden.addEventListener(
+  "pointermove",
+  event => {
+
+    const now =
+      performance.now();
+
+    if (now - lastFlower < 90) {
+      return;
+    }
+
+    lastFlower = now;
+
+    const flower =
+      document.createElement("div");
+
+    flower.className =
+      "garden-flower";
+
+    const gardenRect =
+      garden.getBoundingClientRect();
+
+    flower.style.left =
+      `${event.clientX - gardenRect.left}px`;
+
+    flower.style.top =
+      `${event.clientY - gardenRect.top}px`;
+
+    flower.style.setProperty(
+      "--rotation",
+      `${Math.random() * 50 - 25}deg`
+    );
+
+    const span =
+      document.createElement("span");
+
+    span.textContent =
+      flowers[
+        Math.floor(
+          Math.random() *
+          flowers.length
+        )
+      ];
+
+    flower.appendChild(span);
+
+    garden.appendChild(flower);
+
+    setTimeout(
+      () => {
+
+        flower.style.transition =
+          "opacity 1.5s ease, transform 1.5s ease";
+
+        flower.style.opacity =
+          "0";
+
+        flower.style.transform =
+          "translate(-50%,-50%) scale(.7)";
+
+      },
+      3500
+    );
+
+    setTimeout(
+      () => {
+
+        flower.remove();
+
+      },
+      5200
+    );
+
+  }
+);
+
+
+/* =========================================================
+   JOURNAL SCROLL TRANSFORMATION
+   ========================================================= */
+
+const journalStory =
+  document.getElementById(
+    "journalStory"
+  );
+
+
+function updateJournal() {
+
+  if (!journalStory) return;
+
+  const rect =
+    journalStory.getBoundingClientRect();
+
+  const total =
+    journalStory.offsetHeight -
+    window.innerHeight;
+
+  const progress =
+    clamp(
+      -rect.top / total,
+      0,
+      1
+    );
+
+  journalStory.style.setProperty(
+    "--journal-progress",
+    progress
+  );
+
+  journalStory.classList.toggle(
+    "open",
+    progress > .42
+  );
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateJournal,
+  { passive: true }
+);
+
+window.addEventListener(
+  "resize",
+  updateJournal
+);
+
+updateJournal();
+
+
+/* =========================================================
+   DOCK
+   ========================================================= */
+
+const dock =
+  document.getElementById("dock");
+
+const dockBtn =
+  document.getElementById("dockBtn");
+
+
+dockBtn.addEventListener(
+  "click",
+  () => {
+
+    dock.classList.toggle(
+      "open"
+    );
+
+  }
+);
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    if (!dock.contains(event.target)) {
+
+      dock.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SMOOTH INTERNAL LINKS
+   ========================================================= */
+
+document
+  .querySelectorAll(
+    'a[href^="#"]'
+  )
+  .forEach(
+    link => {
+
+      link.addEventListener(
+        "click",
+        event => {
+
+          const target =
+            document.querySelector(
+              link.getAttribute("href")
+            );
+
+          if (!target) return;
+
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior: "smooth"
+          });
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   PARALLAX HERO
+   ========================================================= */
+
+const heroArt =
+  document.querySelector(
+    ".hero-art"
+  );
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!heroArt) return;
+
+    const y =
+      window.scrollY;
+
+    if (
+      y <
+      window.innerHeight
+    ) {
+
+      heroArt.style.marginTop =
+        `${y * .08}px`;
+
+      heroArt.style.opacity =
+        `${Math.max(
+          0,
+          .72 -
+          y /
+          window.innerHeight
+        )}`;
+
+    }
+
+  },
+  { passive: true }
+);
+
+</script>
+
+</body>
+</html>

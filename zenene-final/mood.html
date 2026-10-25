@@ -1,0 +1,2059 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf2ef">
+  <title>Mood | Zenene</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background: #edf2ef;
+      --paper: #f9faf6;
+      --white: #ffffff;
+
+      --blue: #dce8ed;
+      --blue-dark: #6e8d9a;
+      --blue-ink: #3f5d69;
+
+      --sage: #dce5d9;
+      --sage-dark: #71866e;
+
+      --rose: #e8d7d5;
+      --rose-dark: #a76e73;
+
+      --ink: #292e2b;
+      --muted: #737c75;
+      --line: #d9e0db;
+
+      --type: "Special Elite", "Courier New", monospace;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --script: "Pinyon Script", cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-gutter: stable;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font-family: var(--type);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      animation: pageEnter 0.3s ease both;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--blue-dark);
+      outline-offset: 4px;
+    }
+
+    /* Navigation */
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 34px;
+      background: var(--background);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-wordmark {
+      flex-shrink: 0;
+      font-family: var(--type);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: #52645b;
+      text-decoration: none;
+      font-family: var(--type);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-links .active {
+      position: relative;
+      color: var(--ink);
+    }
+
+    .nav-links .active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+      height: 1px;
+      background: var(--blue-dark);
+    }
+
+    /* Page layout */
+
+    .page {
+      width: min(1200px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: 54px 0 0;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow,
+    .checkin-label,
+    .stat-label,
+    .recommendation-label {
+      color: var(--muted);
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      line-height: 1.7;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin-bottom: 17px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--type);
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-weight: 400;
+      letter-spacing: -0.065em;
+      line-height: 1.02;
+    }
+
+    h1 em {
+      color: var(--blue-ink);
+      font-style: normal;
+    }
+
+    .intro {
+      width: min(340px, 100%);
+      margin: 0 0 4px;
+      color: #56665e;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.45;
+    }
+
+    /* Dashboard */
+
+    .mood-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.8fr);
+      grid-template-areas:
+        "checkin week"
+        "history stats"
+        "history insight";
+      align-items: start;
+      gap: 24px;
+    }
+
+    .checkin {
+      grid-area: checkin;
+      min-width: 0;
+      padding: 30px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .week-section {
+      grid-area: week;
+      min-width: 0;
+    }
+
+    .history-section {
+      grid-area: history;
+      min-width: 0;
+    }
+
+    .stats {
+      grid-area: stats;
+      min-width: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .insight {
+      grid-area: insight;
+      min-width: 0;
+      display: grid;
+      align-content: start;
+      gap: 0;
+    }
+
+    /* Mood check-in */
+
+    .checkin-label {
+      margin-bottom: 13px;
+    }
+
+    .checkin-title {
+      margin: 0;
+      font-family: var(--type);
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 400;
+      letter-spacing: -0.035em;
+      line-height: 1.3;
+    }
+
+    .checkin-subtitle {
+      margin: 9px 0 27px;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      line-height: 1.4;
+    }
+
+    .mood-options {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .mood-button {
+      display: flex;
+      min-width: 0;
+      min-height: 115px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 12px 5px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .mood-button:hover {
+      border-color: #a9c0c8;
+      background: #f1f6f7;
+      transform: translateY(-2px);
+    }
+
+    .mood-button.selected {
+      border-color: var(--blue-dark);
+      background: var(--blue);
+    }
+
+    .mood-button.selected .mood-name {
+      color: var(--blue-ink);
+    }
+
+    .mood-name {
+      font-family: var(--type);
+      font-size: 0.55rem;
+      letter-spacing: 0.035em;
+      line-height: 1.5;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .mood-icon {
+      width: 54px;
+      height: 54px;
+      flex-shrink: 0;
+      background-image: url("assets/images/moods.png");
+      background-size: 300% 300%;
+      background-repeat: no-repeat;
+    }
+
+    .mood-icon-difficult {
+      background-position: 0% 0%;
+    }
+
+    .mood-icon-good {
+      background-position: 50% 0%;
+    }
+
+    .mood-icon-very-happy {
+      background-position: 0% 50%;
+    }
+
+    .mood-icon-okay {
+      background-position: 50% 50%;
+    }
+
+    .mood-icon-low {
+      background-position: 50% 100%;
+    }
+
+    .checkin-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .checkin-note {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .save-button {
+      flex-shrink: 0;
+      padding: 13px 17px;
+      border: 1px solid var(--blue-ink);
+      border-radius: 2px;
+      background: var(--blue-ink);
+      color: var(--white);
+      font-family: var(--type);
+      font-size: 0.59rem;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .save-button:hover {
+      background: #304b56;
+      transform: translateY(-1px);
+    }
+
+    .save-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+      transform: none;
+    }
+
+    /* Section headings */
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: var(--type);
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: -0.035em;
+    }
+
+    .section-heading > span {
+      color: var(--blue-ink);
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      text-align: right;
+    }
+
+    /* Weekly overview */
+
+    .week-card {
+      padding: 18px 14px;
+      border: 1px solid #d0dbcd;
+      background: var(--sage);
+    }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 5px;
+    }
+
+    .day {
+      min-width: 0;
+      padding: 12px 2px 10px;
+      background: #f2f5ef;
+      text-align: center;
+      transition: background 0.2s ease;
+    }
+
+    .day:hover {
+      background: var(--paper);
+    }
+
+    .day-name {
+      margin-bottom: 10px;
+      color: #64735f;
+      font-size: 0.47rem;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+    }
+
+    .day-icon {
+      width: 31px;
+      height: 31px;
+      margin: 0 auto 9px;
+      background-image: url("assets/images/moods.png");
+      background-size: 300% 300%;
+      background-repeat: no-repeat;
+    }
+
+    .day-date {
+      color: #455247;
+      font-family: var(--serif);
+      font-size: 1rem;
+    }
+
+    .day.empty {
+      background: #e7ede3;
+    }
+
+    .day-empty-symbol {
+      display: flex;
+      height: 31px;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 9px;
+      color: var(--sage-dark);
+      font-family: var(--serif);
+      font-size: 1.3rem;
+    }
+
+    /* Mood history */
+
+    .history-heading {
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .history-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .history-tab {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: var(--paper);
+      color: var(--muted);
+      font-family: var(--type);
+      font-size: 0.52rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .history-tab:hover {
+      border-color: var(--blue-dark);
+      color: var(--blue-ink);
+    }
+
+    .history-tab.active {
+      border-color: var(--blue-ink);
+      background: var(--blue-ink);
+      color: var(--white);
+    }
+
+    .history-card {
+      padding: 24px 18px 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .chart-scroll {
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-color: #b9c8c3 transparent;
+      scrollbar-width: thin;
+    }
+
+    .mood-chart {
+      position: relative;
+      display: flex;
+      min-height: 285px;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 20px 6px 15px;
+    }
+
+    .mood-chart::before,
+    .mood-chart::after {
+      position: absolute;
+      right: 0;
+      left: 0;
+      border-top: 1px solid #e1e7e3;
+      content: "";
+      pointer-events: none;
+    }
+
+    .mood-chart::before {
+      top: 34%;
+    }
+
+    .mood-chart::after {
+      top: 67%;
+    }
+
+    .chart-day {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      min-width: 45px;
+      height: 245px;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      cursor: pointer;
+    }
+
+    .chart-line {
+      width: 2px;
+      min-height: 12px;
+      background: var(--blue-dark);
+      transition: height 0.25s ease;
+    }
+
+    .chart-point {
+      display: flex;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      background: var(--white);
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .chart-day:hover .chart-point,
+    .chart-day.selected .chart-point {
+      border-color: #9eb9c3;
+      background: var(--blue);
+    }
+
+    .chart-icon {
+      width: 29px;
+      height: 29px;
+      background-image: url("assets/images/moods.png");
+      background-size: 300% 300%;
+      background-repeat: no-repeat;
+    }
+
+    .chart-empty {
+      cursor: default;
+    }
+
+    .chart-empty .chart-line {
+      height: 12px !important;
+      background: #cbd4cf;
+    }
+
+    .chart-empty .chart-point {
+      width: 10px;
+      height: 10px;
+      border: none;
+      border-radius: 50%;
+      background: #cbd4cf;
+    }
+
+    .chart-label {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.46rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .chart-legend {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.51rem;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 6px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.high {
+      background: var(--sage-dark);
+    }
+
+    .legend-dot.low {
+      background: var(--rose-dark);
+    }
+
+    .selected-day {
+      display: flex;
+      min-height: 58px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: #f4f7f4;
+      color: #53645a;
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .no-history {
+      display: flex;
+      min-height: 240px;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Statistics */
+
+    .stat-card {
+      min-height: 140px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .stat-card:nth-child(2) {
+      border-color: #d3e0e7;
+      background: #e1eaf0;
+    }
+
+    .stat-card:nth-child(3) {
+      border-color: #d4dfd0;
+      background: #e2e9df;
+    }
+
+    .stat-label {
+      margin-bottom: 17px;
+      font-size: 0.56rem;
+    }
+
+    .stat-value {
+      overflow-wrap: anywhere;
+      font-family: var(--type);
+      font-size: clamp(1.5rem, 3vw, 2.15rem);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: 1.2;
+    }
+
+    .stat-small {
+      margin-top: 8px;
+      color: #6c786e;
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    /* Insight — recommendation box removed */
+
+    .insight-card {
+      padding: 24px;
+      border: 1px solid #d1dfe5;
+      background: var(--blue);
+    }
+
+    .insight-card h3 {
+      margin: 0 0 12px;
+      font-family: var(--type);
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: -0.035em;
+      line-height: 1.4;
+    }
+
+    .insight-card p {
+      margin: 0;
+      color: #53645d;
+      font-family: var(--serif);
+      font-size: 1.13rem;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 24px 20px 18px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    footer .script {
+      margin-bottom: 4px;
+      color: var(--blue-ink);
+      font-family: var(--script);
+      font-size: 2.1rem;
+      font-weight: 400;
+      line-height: 1.25;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.53rem;
+      letter-spacing: 0.09em;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    /* Support popup */
+
+    .crisis-fab {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 800;
+      padding: 12px 16px;
+      border: 1px solid #c8d9df;
+      border-radius: 2px;
+      background: #e1ebef;
+      color: var(--blue-ink);
+      font-family: var(--type);
+      font-size: 0.59rem;
+      letter-spacing: 0.025em;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .crisis-fab:hover {
+      background: #d3e2e8;
+      transform: translateY(-2px);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(37, 47, 43, 0.42);
+      backdrop-filter: blur(5px);
+    }
+
+    .overlay.open {
+      display: flex;
+      animation: overlayEnter 0.2s ease both;
+    }
+
+    .overlay .modal {
+      width: min(430px, 100%);
+      padding: 30px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      animation: modalEnter 0.22s ease both;
+    }
+
+    .overlay .m-close {
+      float: right;
+      padding: 2px 6px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .overlay .m-title {
+      margin: 15px 0 10px;
+      font-family: var(--type);
+      font-size: 1.55rem;
+      line-height: 1.4;
+    }
+
+    .overlay .m-sub {
+      margin: 10px 0 20px;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      line-height: 1.55;
+    }
+
+    .overlay .c-link {
+      display: block;
+      margin-top: 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--blue-ink);
+      font-family: var(--type);
+      font-size: 0.62rem;
+      line-height: 1.6;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .overlay .c-link:hover {
+      background: var(--blue);
+    }
+
+    /* Page transitions */
+
+    @keyframes pageEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pageLeave {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    @keyframes overlayEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalEnter {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    body.is-leaving {
+      animation: pageLeave 0.16s ease forwards;
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Responsive */
+
+    @media (max-width: 1000px) {
+      .page {
+        width: calc(100% - 44px);
+      }
+
+      .mood-shell {
+        grid-template-columns: minmax(0, 1.35fr) minmax(235px, 0.8fr);
+        gap: 18px;
+      }
+
+      .checkin {
+        padding: 25px;
+      }
+
+      .mood-icon {
+        width: 44px;
+        height: 44px;
+      }
+
+      .mood-button {
+        min-height: 105px;
+      }
+
+      .week-card {
+        padding: 12px 8px;
+      }
+
+      .day-icon {
+        width: 26px;
+        height: 26px;
+      }
+
+      .day-name {
+        font-size: 0.42rem;
+      }
+
+      .day-empty-symbol {
+        height: 26px;
+      }
+
+      .history-card {
+        padding: 18px 12px;
+      }
+
+      .history-tabs {
+        gap: 4px;
+      }
+
+      .history-tab {
+        padding: 8px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .top-nav {
+        padding: 17px 20px;
+        gap: 20px;
+      }
+
+      .nav-links {
+        gap: 13px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .nav-links a {
+        font-size: 0.52rem;
+      }
+
+      .page {
+        width: calc(100% - 36px);
+        padding-top: 40px;
+      }
+
+      .page-header {
+        display: block;
+        margin-bottom: 25px;
+        padding-bottom: 23px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 12vw, 4.8rem);
+      }
+
+      .intro {
+        margin-top: 19px;
+        font-size: 1.2rem;
+      }
+
+      .mood-shell {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+          "checkin"
+          "week"
+          "history"
+          "stats"
+          "insight";
+        gap: 25px;
+      }
+
+      .checkin {
+        padding: 23px 17px;
+      }
+
+      .checkin-title {
+        font-size: 1.65rem;
+      }
+
+      .checkin-subtitle {
+        margin-bottom: 21px;
+        font-size: 1.1rem;
+      }
+
+      .mood-options {
+        gap: 5px;
+      }
+
+      .mood-button {
+        min-height: 95px;
+        gap: 8px;
+        padding: 9px 2px;
+      }
+
+      .mood-icon {
+        width: 39px;
+        height: 39px;
+      }
+
+      .mood-name {
+        font-size: 0.43rem;
+        letter-spacing: 0;
+      }
+
+      .checkin-footer {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .save-button {
+        width: 100%;
+        min-height: 44px;
+      }
+
+      .section-heading {
+        gap: 10px;
+      }
+
+      .section-heading h2 {
+        font-size: 1.25rem;
+      }
+
+      .week-card {
+        padding: 15px 9px;
+      }
+
+      .day {
+        padding: 12px 1px 10px;
+      }
+
+      .day-name {
+        font-size: 0.45rem;
+      }
+
+      .day-icon {
+        width: 31px;
+        height: 31px;
+      }
+
+      .day-empty-symbol {
+        height: 31px;
+      }
+
+      .history-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .history-tabs {
+        width: 100%;
+      }
+
+      .history-tab {
+        flex: 1;
+        padding: 10px 4px;
+        font-size: 0.48rem;
+      }
+
+      .history-card {
+        padding: 15px 10px;
+      }
+
+      .mood-chart {
+        min-height: 265px;
+      }
+
+      .chart-day {
+        height: 225px;
+      }
+
+      .chart-legend {
+        font-size: 0.46rem;
+      }
+
+      .selected-day {
+        font-size: 1.05rem;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stat-card {
+        min-height: 130px;
+        padding: 17px;
+      }
+
+      .stat-card:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+
+      .stat-value {
+        font-size: 1.7rem;
+      }
+
+      .insight-card {
+        padding: 22px;
+      }
+
+      footer {
+        padding-top: 20px;
+        padding-bottom: 16px;
+      }
+
+      footer .script {
+        font-size: 2rem;
+      }
+
+      .crisis-fab {
+        right: 12px;
+        bottom: 12px;
+        padding: 11px 13px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .top-nav {
+        padding: 15px 12px;
+        gap: 10px;
+      }
+
+      .nav-wordmark {
+        font-size: 0.68rem;
+      }
+
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-links a {
+        font-size: 0.46rem;
+      }
+
+      .page {
+        width: calc(100% - 26px);
+      }
+
+      .mood-icon {
+        width: 33px;
+        height: 33px;
+      }
+
+      .mood-name {
+        font-size: 0.39rem;
+      }
+
+      .checkin {
+        padding: 20px 12px;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="zenene.css">
+</head>
+
+<body class="zn zn-mood">
+  <nav class="top-nav">
+    <a class="nav-wordmark" href="index.html">zenene</a>
+    <div class="nav-links">
+      <a href="index.html">home</a>
+      <a href="journal.html">journal</a>
+      <a href="mood.html" class="active">mood</a>
+      <a href="vera.html">vera</a>
+      <a href="explore.html">explore</a>
+      <a href="calm.html">calm</a>
+      <a href="profile.html" id="navAuthLink">sign in</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <div class="eyebrow">a moment to check in</div>
+        <h1>your <em>mood.</em></h1>
+      </div>
+
+      <p class="intro">
+        A place to notice how you're feeling, without judging it,
+        fixing it, or needing to explain it.
+      </p>
+    </header>
+
+    <div class="mood-shell">
+      <section class="checkin">
+        <div class="checkin-label">
+          today · <span id="todayDate"></span>
+        </div>
+
+        <h2 class="checkin-title">How are you feeling?</h2>
+
+        <p class="checkin-subtitle">
+          Choose what feels closest. You don't have to explain.
+        </p>
+
+        <div class="mood-options">
+          <button class="mood-button" data-mood="very-happy" type="button" aria-label="Very good">
+            <span class="mood-icon mood-icon-very-happy" aria-hidden="true"></span>
+            <span class="mood-name">very good</span>
+          </button>
+
+          <button class="mood-button" data-mood="good" type="button" aria-label="Good">
+            <span class="mood-icon mood-icon-good" aria-hidden="true"></span>
+            <span class="mood-name">good</span>
+          </button>
+
+          <button class="mood-button" data-mood="okay" type="button" aria-label="Okay">
+            <span class="mood-icon mood-icon-okay" aria-hidden="true"></span>
+            <span class="mood-name">okay</span>
+          </button>
+
+          <button class="mood-button" data-mood="low" type="button" aria-label="Low">
+            <span class="mood-icon mood-icon-low" aria-hidden="true"></span>
+            <span class="mood-name">low</span>
+          </button>
+
+          <button class="mood-button" data-mood="difficult" type="button" aria-label="Difficult">
+            <span class="mood-icon mood-icon-difficult" aria-hidden="true"></span>
+            <span class="mood-name">difficult</span>
+          </button>
+        </div>
+
+        <div class="checkin-footer">
+          <div class="checkin-note" id="checkinMessage" aria-live="polite">
+            Select one. You can add context later in your journal.
+          </div>
+
+          <button class="save-button" id="saveMood" type="button">
+            save today's mood
+          </button>
+        </div>
+      </section>
+
+      <section class="week-section">
+        <div class="section-heading">
+          <h2>Your week</h2>
+          <span id="weekSummary">one day at a time.</span>
+        </div>
+
+        <div class="week-card">
+          <div class="week-grid" id="weekGrid"></div>
+        </div>
+      </section>
+
+      <section class="history-section">
+        <div class="section-heading history-heading">
+          <h2>Your patterns</h2>
+
+          <div class="history-tabs">
+            <button class="history-tab active" data-range="week" type="button">week</button>
+            <button class="history-tab" data-range="month" type="button">month</button>
+            <button class="history-tab" data-range="year" type="button">year</button>
+            <button class="history-tab" data-range="all" type="button">all time</button>
+          </div>
+        </div>
+
+        <div class="history-card">
+          <div class="chart-scroll">
+            <div class="mood-chart" id="moodChart"></div>
+          </div>
+
+          <div class="chart-legend">
+            <span><span class="legend-dot high"></span>lighter days</span>
+            <span><span class="legend-dot low"></span>heavier days</span>
+          </div>
+        </div>
+
+        <div class="selected-day" id="selectedDay" aria-live="polite">
+          Select a day to look back at it.
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat-card">
+          <div class="stat-label">average mood</div>
+          <div class="stat-value" id="averageMood">—</div>
+          <div class="stat-small">this week</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">most common feeling</div>
+          <div class="stat-value" id="commonMood">—</div>
+          <div class="stat-small">among this week's check-ins</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">check-ins</div>
+          <div class="stat-value"><span id="checkinCount">0</span> / 7</div>
+          <div class="stat-small">moments of noticing</div>
+        </div>
+      </section>
+
+      <section class="insight">
+        <div class="insight-card">
+          <h3>A little observation.</h3>
+          <p id="insightText">
+            Once you have a few check-ins, Zenene can help you look for patterns.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="script">be gentle with yourself.</div>
+    <p>zenene · where your mind blooms</p>
+    <div class="site-footer-links">
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+    </div>
+  </footer>
+
+  <button
+    class="crisis-fab"
+    type="button"
+    aria-haspopup="dialog"
+    aria-controls="cm"
+    onclick="document.getElementById('cm').classList.add('open')"
+  >
+    💙 need help?
+  </button>
+
+  <div
+    class="overlay"
+    id="cm"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="crisisTitle"
+    onclick="if(event.target===this)this.classList.remove('open')"
+  >
+    <div class="modal">
+      <button
+        class="m-close"
+        type="button"
+        aria-label="Close support window"
+        onclick="document.getElementById('cm').classList.remove('open')"
+      >×</button>
+
+      <div class="m-title" id="crisisTitle">You're not alone.</div>
+
+      <div class="m-sub">
+        If you need immediate support, please reach out to a trusted adult
+        or an appropriate local emergency or crisis service.
+      </div>
+
+      <a class="c-link" href="tel:112">Call local emergency support · 112</a>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav-auth.js"></script>
+
+  <script>
+    /* Mood definitions */
+
+    const moodInfo = {
+      "very-happy": { label: "very good", value: 5, position: "0% 50%" },
+      "good":       { label: "good",      value: 4, position: "50% 0%" },
+      "okay":       { label: "okay",      value: 3, position: "50% 50%" },
+      "low":        { label: "low",       value: 2, position: "50% 100%" },
+      "difficult":  { label: "difficult", value: 1, position: "0% 0%" }
+    };
+
+    let selectedMood = null;
+    let activeRange = "week";
+    let moodsCache = {};
+
+    function getLocalDateKey(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function parseDateKey(key) {
+      const parts = key.split("-").map(Number);
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+
+    function formatLongDate(date) {
+      return date.toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+      });
+    }
+
+    function addDays(date, amount) {
+      const copy = new Date(date);
+      copy.setDate(copy.getDate() + amount);
+      return copy;
+    }
+
+    function getToday() {
+      const date = new Date();
+      date.setHours(0, 0, 0, 0);
+      return date;
+    }
+
+    function renderTodayDate() {
+      document.getElementById("todayDate").textContent =
+        new Date().toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric"
+        });
+    }
+
+    function getMoods() {
+      return { ...moodsCache };
+    }
+
+    /* Supabase */
+
+    async function saveMoods(data) {
+      const previous = { ...moodsCache };
+      const user = await getCurrentUser();
+
+      if (!user) return false;
+
+      const changedDates = Object.keys(data).filter(
+        date => data[date] !== previous[date]
+      );
+
+      for (const date of changedDates) {
+        const { error } = await supabaseClient
+          .from("mood_entries")
+          .upsert(
+            {
+              user_id: user.id,
+              entry_date: date,
+              mood: data[date]
+            },
+            { onConflict: "user_id,entry_date" }
+          );
+
+        if (error) {
+          console.error(error);
+          document.getElementById("checkinMessage").textContent =
+            "Couldn't save — check your connection and try again.";
+          return false;
+        }
+      }
+
+      moodsCache = { ...data };
+      return true;
+    }
+
+    async function loadMoodsFromSupabase() {
+      const user = await getCurrentUser();
+
+      if (!user) {
+        window.location.href = "index.html?auth=login";
+        return false;
+      }
+
+      const { data, error } = await supabaseClient
+        .from("mood_entries")
+        .select("entry_date, mood")
+        .eq("user_id", user.id);
+
+      if (error) {
+        console.error(error);
+        document.getElementById("checkinMessage").textContent =
+          "Couldn't load your mood history — check your connection and try again.";
+        return false;
+      }
+
+      moodsCache = {};
+
+      (data || []).forEach(row => {
+        moodsCache[row.entry_date] = row.mood;
+      });
+
+      return true;
+    }
+
+    /* Mood selection */
+
+    function clearMoodSelection() {
+      document.querySelectorAll(".mood-button").forEach(button => {
+        button.classList.remove("selected");
+        button.setAttribute("aria-pressed", "false");
+      });
+    }
+
+    document.querySelectorAll(".mood-button").forEach(button => {
+      button.setAttribute("aria-pressed", "false");
+
+      button.addEventListener("click", () => {
+        clearMoodSelection();
+        button.classList.add("selected");
+        button.setAttribute("aria-pressed", "true");
+
+        selectedMood = button.dataset.mood;
+
+        document.getElementById("checkinMessage").textContent =
+          `You marked today as ${moodInfo[selectedMood].label}.`;
+      });
+    });
+
+    function loadTodayMood() {
+      const moods = getMoods();
+      const todayKey = getLocalDateKey(new Date());
+      const savedMood = moods[todayKey];
+
+      clearMoodSelection();
+
+      if (!savedMood || !moodInfo[savedMood]) {
+        selectedMood = null;
+        return;
+      }
+
+      selectedMood = savedMood;
+
+      const button = document.querySelector(
+        `[data-mood="${savedMood}"]`
+      );
+
+      if (button) {
+        button.classList.add("selected");
+        button.setAttribute("aria-pressed", "true");
+      }
+
+      document.getElementById("checkinMessage").textContent =
+        `Today is marked as ${moodInfo[savedMood].label}. You can change it anytime.`;
+    }
+
+    /* Save today's mood */
+
+    document.getElementById("saveMood").addEventListener("click", async event => {
+      if (!selectedMood || !moodInfo[selectedMood]) {
+        document.getElementById("checkinMessage").textContent =
+          "Select a mood before saving.";
+        return;
+      }
+
+      const moods = getMoods();
+      const key = getLocalDateKey(new Date());
+      moods[key] = selectedMood;
+
+      const button = event.currentTarget;
+      button.disabled = true;
+      button.textContent = "saving...";
+
+      try {
+        const success = await saveMoods(moods);
+
+        if (success) {
+          document.getElementById("checkinMessage").textContent =
+            "Saved. Your check-in is now part of your history.";
+        }
+      } catch (error) {
+        console.error(error);
+        document.getElementById("checkinMessage").textContent =
+          "Something went wrong. Please try again.";
+      } finally {
+        button.disabled = false;
+        button.textContent = "save today's mood";
+      }
+
+      renderDashboard();
+    });
+
+    /* Recent seven days */
+
+    function getRecentWeekDays() {
+      const days = [];
+      const today = getToday();
+
+      for (let i = 6; i >= 0; i--) {
+        days.push(addDays(today, -i));
+      }
+
+      return days;
+    }
+
+    function renderWeek() {
+      const grid = document.getElementById("weekGrid");
+      grid.innerHTML = "";
+
+      const moods = getMoods();
+      const days = getRecentWeekDays();
+      let count = 0;
+
+      days.forEach(date => {
+        const key = getLocalDateKey(date);
+        const mood = moods[key];
+
+        if (mood && moodInfo[mood]) count++;
+
+        const day = document.createElement("div");
+        day.className = "day" + (!mood ? " empty" : "");
+
+        const dayName = date.toLocaleDateString("en-US", {
+          weekday: "short"
+        });
+
+        const icon = mood && moodInfo[mood]
+          ? `<div class="day-icon" style="background-position:${moodInfo[mood].position}" aria-label="${moodInfo[mood].label}"></div>`
+          : `<div class="day-empty-symbol" aria-hidden="true">·</div>`;
+
+        day.innerHTML = `
+          <div class="day-name">${dayName}</div>
+          ${icon}
+          <div class="day-date">${date.getDate()}</div>
+        `;
+
+        grid.appendChild(day);
+      });
+
+      const summary = document.getElementById("weekSummary");
+
+      if (count === 0) {
+        summary.textContent = "start wherever you are.";
+      } else if (count === 1) {
+        summary.textContent = "one day is a beginning.";
+      } else {
+        summary.textContent = `${count} moments of noticing.`;
+      }
+    }
+
+    /* History range data */
+
+    function getHistoryEntries(range) {
+      const moods = getMoods();
+      const today = getToday();
+
+      if (range === "week") {
+        return getRecentWeekDays().map(date => {
+          const key = getLocalDateKey(date);
+
+          return {
+            date,
+            mood: moods[key] || null,
+            label: date.toLocaleDateString("en-US", {
+              weekday: "short"
+            })
+          };
+        });
+      }
+
+      if (range === "month") {
+        const entries = [];
+
+        for (let i = 29; i >= 0; i--) {
+          const date = addDays(today, -i);
+          const key = getLocalDateKey(date);
+
+          entries.push({
+            date,
+            mood: moods[key] || null,
+            label: date.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric"
+            })
+          });
+        }
+
+        return entries;
+      }
+
+      if (range === "year") {
+        const entries = [];
+
+        for (let i = 11; i >= 0; i--) {
+          const date = new Date(
+            today.getFullYear(),
+            today.getMonth() - i,
+            1
+          );
+
+          const year = date.getFullYear();
+          const month = date.getMonth();
+
+          const monthMoods = Object.entries(moods)
+            .filter(([key]) => {
+              const moodDate = parseDateKey(key);
+
+              return (
+                moodDate.getFullYear() === year &&
+                moodDate.getMonth() === month
+              );
+            })
+            .map(([, mood]) => mood)
+            .filter(mood => moodInfo[mood]);
+
+          let mood = null;
+
+          if (monthMoods.length) {
+            const average = monthMoods.reduce(
+              (sum, item) => sum + moodInfo[item].value,
+              0
+            ) / monthMoods.length;
+
+            mood = Object.keys(moodInfo).reduce((closest, current) => {
+              return Math.abs(moodInfo[current].value - average) <
+                Math.abs(moodInfo[closest].value - average)
+                ? current
+                : closest;
+            }, "okay");
+          }
+
+          entries.push({
+            date,
+            mood,
+            label: date.toLocaleDateString("en-US", {
+              month: "short",
+              year: "2-digit"
+            }),
+            isAggregate: true,
+            count: monthMoods.length
+          });
+        }
+
+        return entries;
+      }
+
+      if (range === "all") {
+        return Object.entries(moods)
+          .filter(([, mood]) => moodInfo[mood])
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([key, mood]) => ({
+            date: parseDateKey(key),
+            mood,
+            label: parseDateKey(key).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric"
+            })
+          }));
+      }
+
+      return [];
+    }
+
+    /* History chart */
+
+    function renderHistory() {
+      const chart = document.getElementById("moodChart");
+      const selectedDay = document.getElementById("selectedDay");
+      const entries = getHistoryEntries(activeRange);
+
+      chart.innerHTML = "";
+      chart.classList.remove("no-history");
+
+      if (activeRange === "all" && entries.length === 0) {
+        chart.classList.add("no-history");
+        chart.style.minWidth = "0";
+        chart.textContent =
+          "Your history will begin with your first check-in.";
+        selectedDay.textContent =
+          "Every mood you save stays here.";
+        return;
+      }
+
+      if (activeRange === "week") {
+        chart.style.minWidth = "480px";
+      } else if (activeRange === "month") {
+        chart.style.minWidth = "1500px";
+      } else if (activeRange === "year") {
+        chart.style.minWidth = "720px";
+      } else {
+        chart.style.minWidth = `${Math.max(480, entries.length * 58)}px`;
+      }
+
+      let firstMoodSelected = false;
+
+      entries.forEach(entry => {
+        const item = document.createElement("div");
+        const hasMood = Boolean(entry.mood && moodInfo[entry.mood]);
+
+        item.className = "chart-day" + (!hasMood ? " chart-empty" : "");
+
+        const height = hasMood
+          ? 35 + moodInfo[entry.mood].value * 34
+          : 12;
+
+        const icon = hasMood
+          ? `<div class="chart-icon" style="background-position:${moodInfo[entry.mood].position}"></div>`
+          : "";
+
+        item.innerHTML = `
+          <div class="chart-line" style="height:${height}px"></div>
+          <div class="chart-point">${icon}</div>
+          <div class="chart-label">${entry.label}</div>
+        `;
+
+        if (hasMood) {
+          item.setAttribute("role", "button");
+          item.setAttribute("tabindex", "0");
+          item.setAttribute(
+            "aria-label",
+            `${entry.label}: ${moodInfo[entry.mood].label}`
+          );
+
+          const selectEntry = () => {
+            chart.querySelectorAll(".chart-day").forEach(day => {
+              day.classList.remove("selected");
+            });
+
+            item.classList.add("selected");
+
+            if (entry.isAggregate) {
+              selectedDay.textContent =
+                `${entry.label} · ${entry.count} check-in${entry.count === 1 ? "" : "s"} · overall ${moodInfo[entry.mood].label}`;
+            } else {
+              selectedDay.textContent =
+                `${formatLongDate(entry.date)} · you felt ${moodInfo[entry.mood].label}.`;
+            }
+          };
+
+          item.addEventListener("click", selectEntry);
+
+          item.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              selectEntry();
+            }
+          });
+
+          if (!firstMoodSelected) {
+            firstMoodSelected = true;
+
+            if (entry.isAggregate) {
+              selectedDay.textContent =
+                `${entry.label} · ${entry.count} check-in${entry.count === 1 ? "" : "s"} · overall ${moodInfo[entry.mood].label}`;
+            } else {
+              selectedDay.textContent =
+                `${formatLongDate(entry.date)} · you felt ${moodInfo[entry.mood].label}.`;
+            }
+
+            item.classList.add("selected");
+          }
+        }
+
+        chart.appendChild(item);
+      });
+
+      if (!firstMoodSelected) {
+        selectedDay.textContent = "No check-ins in this period yet.";
+      }
+    }
+
+    /* History tabs */
+
+    document.querySelectorAll(".history-tab").forEach(button => {
+      button.addEventListener("click", () => {
+        activeRange = button.dataset.range;
+
+        document.querySelectorAll(".history-tab").forEach(tab => {
+          tab.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        renderHistory();
+      });
+    });
+
+    /* Statistics */
+
+    function renderStats() {
+      const moods = getMoods();
+      const days = getRecentWeekDays();
+
+      const weekMoods = days
+        .map(day => moods[getLocalDateKey(day)])
+        .filter(mood => mood && moodInfo[mood]);
+
+      const count = weekMoods.length;
+      document.getElementById("checkinCount").textContent = count;
+
+      if (count === 0) {
+        document.getElementById("averageMood").textContent = "—";
+        document.getElementById("commonMood").textContent = "—";
+        return;
+      }
+
+      const total = weekMoods.reduce(
+        (sum, mood) => sum + moodInfo[mood].value,
+        0
+      );
+
+      const average = total / count;
+
+      let averageLabel;
+
+      if (average >= 4.5) {
+        averageLabel = "bright";
+      } else if (average >= 3.5) {
+        averageLabel = "good";
+      } else if (average >= 2.5) {
+        averageLabel = "steady";
+      } else if (average >= 1.5) {
+        averageLabel = "low";
+      } else {
+        averageLabel = "difficult";
+      }
+
+      document.getElementById("averageMood").textContent = averageLabel;
+
+      const frequency = {};
+
+      weekMoods.forEach(mood => {
+        frequency[mood] = (frequency[mood] || 0) + 1;
+      });
+
+      const mostCommon = Object.keys(frequency).sort(
+        (a, b) => frequency[b] - frequency[a]
+      )[0];
+
+      document.getElementById("commonMood").textContent =
+        moodInfo[mostCommon].label;
+    }
+
+    /* Insights */
+
+    function renderInsights() {
+      const moods = getMoods();
+      const days = getRecentWeekDays();
+
+      const weekMoods = days
+        .map(day => moods[getLocalDateKey(day)])
+        .filter(mood => mood && moodInfo[mood]);
+
+      const insight = document.getElementById("insightText");
+
+      if (weekMoods.length === 0) {
+        insight.textContent =
+          "Once you have a few check-ins, you can begin looking back at how your days have felt.";
+        return;
+      }
+
+      if (weekMoods.length === 1) {
+        insight.textContent =
+          "One check-in is a beginning. Over time, you may notice what changes and what stays the same.";
+        return;
+      }
+
+      const values = weekMoods.map(mood => moodInfo[mood].value);
+      const average = values.reduce((a, b) => a + b, 0) / values.length;
+
+      if (average >= 4) {
+        insight.textContent =
+          "Your check-ins have leaned toward lighter feelings this week. You might notice what has been helping, if anything comes to mind.";
+      } else if (average >= 3) {
+        insight.textContent =
+          "Your check-ins include a mix of feelings. Moods can change from day to day, and a mixed week doesn't have to mean anything more.";
+      } else {
+        insight.textContent =
+          "Your check-ins have leaned toward more difficult feelings this week. These entries can't tell the whole story, but you deserve care and support.";
+      }
+    }
+
+    /* Render dashboard */
+
+    function renderDashboard() {
+      loadTodayMood();
+      renderWeek();
+      renderHistory();
+      renderStats();
+      renderInsights();
+    }
+
+    /* Smooth navigation between Zenene pages */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", event => {
+        if (
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey ||
+          link.target === "_blank"
+        ) {
+          return;
+        }
+
+        const destination = new URL(link.href, window.location.href);
+
+        if (
+          destination.origin !== window.location.origin ||
+          destination.pathname === window.location.pathname ||
+          !["http:", "https:"].includes(destination.protocol)
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        document.body.classList.add("is-leaving");
+
+        window.setTimeout(() => {
+          window.location.href = destination.href;
+        }, 150);
+      });
+    });
+
+    /* Initialize */
+
+    renderTodayDate();
+
+    (async function initMood() {
+      try {
+        const loaded = await loadMoodsFromSupabase();
+
+        if (loaded) {
+          renderDashboard();
+        }
+      } catch (error) {
+        console.error("Could not initialize mood dashboard:", error);
+
+        document.getElementById("checkinMessage").textContent =
+          "Couldn't load your mood history. Please refresh and try again.";
+      }
+    })();
+
+    /* Close the support popup with Escape */
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        document.getElementById("cm").classList.remove("open");
+      }
+    });
+  </script>
+<script src="js/zenene-ui.js"></script>
+</body>
+</html>

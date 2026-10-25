@@ -1,0 +1,2253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf2ef">
+  <meta name="description" content="A thoughtful collection of resources for reflection, emotional wellbeing, and personal growth.">
+  <title>Explore | Zenene</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background: #edf2ef;
+      --paper: #f9faf6;
+      --white: #ffffff;
+
+      --blue: #dce8ed;
+      --blue-dark: #6e8d9a;
+      --blue-ink: #3f5d69;
+
+      --sage: #dce5d9;
+      --sage-dark: #71866e;
+
+      --rose: #e8d7d5;
+      --rose-dark: #a76e73;
+
+      --lavender: #e6e2ed;
+      --peach: #eee1d5;
+
+      --ink: #292e2b;
+      --muted: #737c75;
+      --line: #d9e0db;
+
+      --type: "Special Elite", "Courier New", monospace;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --script: "Pinyon Script", cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-gutter: stable;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font-family: var(--type);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      animation: pageEnter .3s ease both;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    [role="button"]:focus-visible {
+      outline: 2px solid var(--blue-dark);
+      outline-offset: 4px;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    /* Navigation */
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 34px;
+      background: var(--background);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-wordmark {
+      flex-shrink: 0;
+      font-size: .78rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: #52645b;
+      text-decoration: none;
+      font-size: .65rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-links .active {
+      position: relative;
+      color: var(--ink);
+    }
+
+    .nav-links .active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+      height: 1px;
+      background: var(--blue-dark);
+    }
+
+    /* Page */
+
+    .page {
+      width: min(1200px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: 54px 0 0;
+    }
+
+    .eyebrow,
+    .section-label,
+    .featured-label,
+    .article-category,
+    .article-meta,
+    .filter-label {
+      font-size: .62rem;
+      letter-spacing: .12em;
+      line-height: 1.7;
+      text-transform: uppercase;
+    }
+
+    .eyebrow,
+    .section-label,
+    .filter-label {
+      color: var(--muted);
+    }
+
+    /* Page heading */
+
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin-bottom: 17px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--type);
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-weight: 400;
+      letter-spacing: -.065em;
+      line-height: 1.02;
+    }
+
+    h1 em {
+      color: var(--blue-ink);
+      font-style: normal;
+    }
+
+    .intro {
+      width: min(350px, 100%);
+      margin: 0 0 4px;
+      color: #56665e;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.45;
+    }
+
+    /* Featured resource */
+
+    .featured {
+      position: relative;
+      display: flex;
+      min-height: 280px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 35px 38px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      border: 1px solid #cbd8d1;
+      background: var(--sage);
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .featured:hover {
+      border-color: #aebfb1;
+      background: #d6e1d3;
+    }
+
+    .featured::after {
+      content: "✳";
+      position: absolute;
+      right: 35px;
+      bottom: -35px;
+      color: rgba(255,255,255,.45);
+      font-family: var(--serif);
+      font-size: 14rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .featured-content {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+    }
+
+    .featured-label {
+      margin-bottom: 17px;
+      color: #64735f;
+    }
+
+    .featured-title {
+      margin: 0 0 15px;
+      font-family: var(--type);
+      font-size: clamp(1.7rem, 3.5vw, 2.65rem);
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: 1.22;
+    }
+
+    .featured-text {
+      max-width: 520px;
+      margin: 0;
+      color: #53645a;
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .featured-read {
+      display: inline-block;
+      margin-top: 23px;
+      color: var(--blue-ink);
+      font-size: .61rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* Resource section */
+
+    .explore-shell {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      align-items: start;
+      gap: 30px;
+    }
+
+    .filter-section {
+      position: sticky;
+      top: 90px;
+      min-width: 0;
+    }
+
+    .filter-label {
+      margin-bottom: 15px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .filter-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 10px 10px 13px;
+      border: 1px solid transparent;
+      border-left: 2px solid transparent;
+      background: transparent;
+      color: #52645b;
+      font-size: .59rem;
+      letter-spacing: .045em;
+      text-align: left;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .filter-button:hover {
+      color: var(--ink);
+      background: rgba(249,250,246,.65);
+    }
+
+    .filter-button.active {
+      border-color: var(--line);
+      border-left-color: var(--blue-dark);
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .filter-count {
+      color: var(--muted);
+      font-size: .53rem;
+    }
+
+    /* Article area */
+
+    .resource-content {
+      min-width: 0;
+    }
+
+    .resource-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 17px;
+    }
+
+    .resource-heading h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: -.025em;
+    }
+
+    .resource-count {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      text-align: right;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+      gap: 16px;
+    }
+
+    .article-card {
+      display: flex;
+      min-width: 0;
+      min-height: 300px;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+      animation: cardIn .35s ease both;
+    }
+
+    .article-card:hover {
+      border-color: #b7c9c2;
+      background: var(--white);
+    }
+
+    .article-visual {
+      position: relative;
+      display: flex;
+      min-height: 112px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 20px 23px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(41,46,43,.06);
+    }
+
+    .article-visual-letter {
+      position: relative;
+      z-index: 1;
+      font-family: var(--serif);
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .article-visual-symbol {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(41,46,43,.16);
+      border-radius: 50%;
+      font-family: var(--serif);
+      font-size: 1.55rem;
+    }
+
+    .article-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 22px 22px;
+    }
+
+    .article-category {
+      margin-bottom: 11px;
+      font-size: .55rem;
+    }
+
+    .article-title {
+      margin: 0 0 13px;
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: 1.4;
+    }
+
+    .article-subtitle {
+      margin: 0 0 18px;
+      color: #657168;
+      font-family: var(--serif);
+      font-size: 1.12rem;
+      line-height: 1.4;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 10px;
+      color: var(--muted);
+      font-size: .5rem;
+      letter-spacing: .07em;
+    }
+
+    .meta-dot {
+      width: 4px;
+      height: 4px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--blue-dark);
+    }
+
+    .saved-mark {
+      margin-left: auto;
+      color: var(--blue-ink);
+      font-size: .95rem;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      display: flex;
+      min-height: 220px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      text-align: center;
+    }
+
+    .empty-state h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+
+    .empty-state p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+
+    /* Article reading sheet */
+
+    .article-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 800;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+      background: rgba(37,47,43,.42);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+
+    .article-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .article-sheet {
+      position: relative;
+      width: min(760px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 23px 35px 30px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      transform: translateY(25px);
+      transition: transform .3s ease;
+    }
+
+    .article-overlay.open .article-sheet {
+      transform: translateY(0);
+    }
+
+    .article-sheet::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .article-sheet::-webkit-scrollbar-thumb {
+      background: #b9c8c3;
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 3px;
+      margin: 0 auto 23px;
+      background: #cbd5cf;
+    }
+
+    .sheet-close {
+      position: absolute;
+      top: 17px;
+      right: 20px;
+      display: flex;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      font-size: 1.35rem;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .sheet-close:hover {
+      background: var(--blue);
+    }
+
+    .sheet-category {
+      margin: 16px 45px 14px 0;
+      font-size: .59rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .sheet-title {
+      max-width: 620px;
+      margin: 0 0 13px;
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+      font-weight: 400;
+      letter-spacing: -.04em;
+      line-height: 1.2;
+    }
+
+    .sheet-subtitle {
+      margin-bottom: 26px;
+      color: var(--blue-ink);
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-style: italic;
+      line-height: 1.45;
+    }
+
+    .sheet-body {
+      max-width: 650px;
+    }
+
+    .sheet-body p {
+      margin: 0 0 19px;
+      color: #4e5c54;
+      font-family: var(--serif);
+      font-size: 1.22rem;
+      line-height: 1.7;
+    }
+
+    .sheet-body h3 {
+      margin: 29px 0 11px;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: -.02em;
+      line-height: 1.4;
+    }
+
+    .sheet-body strong {
+      color: var(--ink);
+    }
+
+    .sheet-body em {
+      color: var(--blue-ink);
+    }
+
+    .sheet-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .sheet-footer-text {
+      color: var(--blue-ink);
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+
+    .sheet-save {
+      flex-shrink: 0;
+      min-height: 42px;
+      padding: 11px 15px;
+      border: 1px solid var(--blue-ink);
+      background: var(--blue-ink);
+      color: var(--white);
+      font-size: .57rem;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .sheet-save:hover {
+      background: #304b56;
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 23px 20px 17px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer .script {
+      margin-bottom: 4px;
+      color: var(--blue-ink);
+      font-family: var(--script);
+      font-size: 2.1rem;
+      font-weight: 400;
+      line-height: 1.25;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: .53rem;
+      letter-spacing: .09em;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    /* Support button and modal */
+
+    .crisis-fab {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 700;
+      padding: 12px 16px;
+      border: 1px solid #c8d9df;
+      background: #e1ebef;
+      color: var(--blue-ink);
+      font-size: .59rem;
+      letter-spacing: .025em;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .crisis-fab:hover {
+      background: #d3e2e8;
+      transform: translateY(-2px);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(37,47,43,.42);
+      backdrop-filter: blur(5px);
+    }
+
+    .overlay.open {
+      display: flex;
+      animation: overlayEnter .2s ease both;
+    }
+
+    .overlay .modal {
+      width: min(430px, 100%);
+      padding: 30px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      animation: modalEnter .22s ease both;
+    }
+
+    .overlay .m-close {
+      float: right;
+      padding: 2px 6px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .overlay .m-title {
+      margin: 15px 0 10px;
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .overlay .m-sub {
+      margin: 10px 0 20px;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .overlay .c-link {
+      display: block;
+      margin-top: 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--blue-ink);
+      font-size: .62rem;
+      line-height: 1.6;
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+
+    .overlay .c-link:hover {
+      background: var(--blue);
+    }
+
+    /* Animations */
+
+    @keyframes pageEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pageLeave {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes overlayEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalEnter {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    body.is-leaving {
+      animation: pageLeave .16s ease forwards;
+      pointer-events: none;
+    }
+
+    /* Tablet */
+
+    @media (max-width: 1000px) {
+      .page {
+        width: calc(100% - 44px);
+      }
+
+      .explore-shell {
+        grid-template-columns: 160px minmax(0, 1fr);
+        gap: 22px;
+      }
+
+      .article-grid {
+        gap: 12px;
+      }
+
+      .article-body {
+        padding: 17px;
+      }
+
+      .article-title {
+        font-size: 1.05rem;
+      }
+
+      .article-visual {
+        padding: 17px;
+      }
+    }
+
+    /* Mobile and small tablets */
+
+    @media (max-width: 760px) {
+      .top-nav {
+        padding: 17px 20px;
+        gap: 20px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 13px;
+      }
+
+      .nav-links a {
+        font-size: .52rem;
+      }
+
+      .page {
+        width: calc(100% - 36px);
+        padding-top: 40px;
+      }
+
+      .page-header {
+        display: block;
+        padding-bottom: 23px;
+        margin-bottom: 25px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 12vw, 4.8rem);
+      }
+
+      .intro {
+        margin-top: 19px;
+        font-size: 1.2rem;
+      }
+
+      .featured {
+        min-height: 245px;
+        padding: 25px 22px;
+        margin-bottom: 29px;
+      }
+
+      .featured::after {
+        right: 12px;
+        bottom: -15px;
+        font-size: 9rem;
+      }
+
+      .featured-title {
+        max-width: 500px;
+        font-size: 1.7rem;
+      }
+
+      .featured-text {
+        font-size: 1.15rem;
+      }
+
+      .explore-shell {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 23px;
+      }
+
+      .filter-section {
+        position: static;
+      }
+
+      .filter-label {
+        margin-bottom: 10px;
+      }
+
+      .filter-row {
+        flex-direction: row;
+        gap: 5px;
+        padding-bottom: 6px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .filter-row::-webkit-scrollbar {
+        display: none;
+      }
+
+      .filter-button {
+        width: auto;
+        flex-shrink: 0;
+        justify-content: center;
+        padding: 9px 12px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        white-space: nowrap;
+        font-size: .52rem;
+      }
+
+      .filter-button.active {
+        border: 1px solid var(--blue-ink);
+        background: var(--blue-ink);
+        color: var(--white);
+      }
+
+      .filter-button.active .filter-count {
+        color: #e0eaed;
+      }
+
+      .resource-heading {
+        margin-bottom: 13px;
+      }
+
+      .article-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .article-card {
+        min-height: 265px;
+      }
+
+      .article-visual {
+        min-height: 95px;
+        padding: 14px;
+      }
+
+      .article-visual-letter {
+        font-size: 2.7rem;
+      }
+
+      .article-visual-symbol {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+      }
+
+      .article-body {
+        padding: 14px;
+      }
+
+      .article-category {
+        font-size: .49rem;
+      }
+
+      .article-title {
+        font-size: .98rem;
+        line-height: 1.4;
+      }
+
+      .article-subtitle {
+        font-size: 1.02rem;
+      }
+
+      .article-meta {
+        flex-wrap: wrap;
+        font-size: .46rem;
+      }
+
+      .article-sheet {
+        max-height: 91vh;
+        padding: 20px 23px 25px;
+      }
+
+      .sheet-title {
+        font-size: 1.8rem;
+      }
+
+      .sheet-body p {
+        font-size: 1.13rem;
+      }
+
+      footer {
+        padding-top: 20px;
+        padding-bottom: 16px;
+      }
+
+      footer .script {
+        font-size: 2rem;
+      }
+
+      .crisis-fab {
+        right: 12px;
+        bottom: 12px;
+        padding: 11px 13px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .top-nav {
+        padding: 15px 12px;
+        gap: 10px;
+      }
+
+      .nav-wordmark {
+        font-size: .68rem;
+      }
+
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-links a {
+        font-size: .46rem;
+      }
+
+      .page {
+        width: calc(100% - 26px);
+      }
+
+      .article-grid {
+        gap: 8px;
+      }
+
+      .article-visual {
+        min-height: 80px;
+        padding: 10px;
+      }
+
+      .article-body {
+        padding: 12px;
+      }
+
+      .article-title {
+        font-size: .91rem;
+      }
+
+      .article-subtitle {
+        font-size: .98rem;
+      }
+
+      .featured {
+        padding: 22px 17px;
+      }
+
+      .sheet-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .sheet-save {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+    /* =====================================================
+       LIBRARY: search, paging, credits
+       ===================================================== */
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .resource-search-wrap {
+      display: block;
+      margin: 0 0 18px;
+    }
+
+    .resource-search {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--type);
+      font-size: .7rem;
+      letter-spacing: .03em;
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .resource-search::placeholder {
+      color: var(--muted);
+    }
+
+    .resource-search:focus {
+      outline: none;
+      border-color: var(--blue-dark);
+      background: var(--white);
+    }
+
+    .article-subtitle {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .article-card {
+      transition: border-color .2s ease, background .2s ease, transform .25s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .show-more {
+      display: block;
+      margin: 22px auto 0;
+      padding: 12px 22px;
+      border: 1px solid var(--blue-ink);
+      background: transparent;
+      color: var(--blue-ink);
+      font-family: var(--type);
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .show-more:hover {
+      background: var(--blue-ink);
+      color: var(--white);
+    }
+
+    .library-credit {
+      max-width: 560px;
+      margin: 26px auto 0;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* =====================================================
+       FULL-PAGE READING SHEET
+       Same slide-up as before, now taking the whole page.
+       ===================================================== */
+
+    .article-overlay {
+      align-items: stretch;
+    }
+
+    .article-sheet {
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      padding: 74px 0 56px;
+      border: none;
+      transform: translateY(40px);
+      transition: transform .45s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .article-overlay.open .article-sheet {
+      transform: none;
+    }
+
+    .article-sheet > * {
+      width: min(680px, calc(100% - 40px));
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .sheet-handle {
+      display: none;
+    }
+
+    .article-sheet > .sheet-title {
+      max-width: none;
+    }
+
+    .sheet-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .sheet-category {
+      margin-top: 0;
+    }
+
+    .sheet-body {
+      max-width: none;
+    }
+
+    .sheet-lead {
+      font-size: 1.4rem !important;
+      line-height: 1.6 !important;
+      color: var(--ink) !important;
+    }
+
+    .sheet-inside {
+      margin: 0 0 8px;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .sheet-inside li {
+      padding: 13px 0 13px 26px;
+      border-bottom: 1px solid var(--line);
+      color: #4e5c54;
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      line-height: 1.45;
+      position: relative;
+    }
+
+    .sheet-inside li::before {
+      content: "✦";
+      position: absolute;
+      left: 2px;
+      top: 14px;
+      color: var(--blue-dark);
+      font-size: .7rem;
+    }
+
+    .sheet-credit {
+      margin-top: 30px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .sheet-credit p {
+      margin: 0 0 16px !important;
+      font-size: 1.05rem !important;
+      font-style: italic;
+    }
+
+    .sheet-source-link {
+      display: inline-block;
+      padding: 12px 18px;
+      background: var(--blue-ink);
+      color: var(--white);
+      font-family: var(--type);
+      font-size: .6rem;
+      letter-spacing: .06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .sheet-source-link:hover {
+      background: #304b56;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-sheet {
+        padding-top: 66px;
+      }
+
+      .sheet-close {
+        top: 14px;
+        right: 14px;
+      }
+
+      .sheet-lead {
+        font-size: 1.25rem !important;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="zenene.css">
+</head>
+
+<body class="zn zn-explore">
+  <nav class="top-nav">
+    <a class="nav-wordmark" href="index.html">zenene</a>
+    <div class="nav-links">
+      <a href="index.html">home</a>
+      <a href="journal.html">journal</a>
+      <a href="mood.html">mood</a>
+      <a href="vera.html">vera</a>
+      <a href="explore.html" class="active">explore</a>
+      <a href="calm.html">calm</a>
+      <a href="profile.html" id="navAuthLink">sign in</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <div class="eyebrow">a little space to discover</div>
+        <h1>let's <em>explore.</em></h1>
+      </div>
+
+      <p class="intro">
+        A collection of things to read, reflect on, and return to
+        whenever you need a little perspective.
+      </p>
+    </header>
+
+    <section
+      class="featured"
+      id="featuredArticle"
+      role="button"
+      tabindex="0"
+      aria-label="Read featured article: You Are Allowed to Take Up Space"
+    >
+      <div class="featured-content">
+        <div class="featured-label">Editor's pick · a gentle reminder</div>
+
+        <h2 class="featured-title">You Are Allowed to Take Up Space</h2>
+
+        <p class="featured-text">
+          Your needs, feelings, and presence matter. You don't have to
+          make yourself smaller to make the world more comfortable.
+        </p>
+
+        <span class="featured-read">read the piece →</span>
+      </div>
+    </section>
+
+    <div class="explore-shell">
+      <aside class="filter-section">
+        <div class="filter-label">browse by feeling</div>
+        <div class="filter-row" id="filterRow" aria-label="Filter resources by category"></div>
+      </aside>
+
+      <section class="resource-content" aria-label="Explore articles">
+        <div class="resource-heading">
+          <h2 id="resourceHeading">A little something for you</h2>
+          <span class="resource-count" id="resourceCount" aria-live="polite"></span>
+        </div>
+
+        <label class="resource-search-wrap">
+          <span class="visually-hidden">Search pieces</span>
+          <input
+            class="resource-search"
+            id="resourceSearch"
+            type="search"
+            placeholder="search 230+ pieces, e.g. sleep, exams, friends"
+            autocomplete="off"
+          >
+        </label>
+
+        <div class="article-grid" id="articleGrid"></div>
+
+        <button class="show-more" id="showMoreButton" type="button" hidden>show more</button>
+
+        <p class="library-credit">
+          Pieces marked with a source are hand-picked from YoungMinds, TeensHealth, Kids Help Phone,
+          The Jed Foundation, the NHS and Greater Good. Summaries are ours; every piece links to its original.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="script">be gentle with yourself.</div>
+    <p>zenene · where your mind blooms</p>
+    <div class="site-footer-links">
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+    </div>
+  </footer>
+
+  <button
+    class="crisis-fab"
+    type="button"
+    aria-haspopup="dialog"
+    aria-controls="cm"
+    id="openSupport"
+  >
+    💙 need help?
+  </button>
+
+  <div
+    class="overlay"
+    id="cm"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="crisisTitle"
+    aria-hidden="true"
+  >
+    <div class="modal">
+      <button class="m-close" type="button" aria-label="Close support window" id="closeSupport">×</button>
+
+      <div class="m-title" id="crisisTitle">You're not alone.</div>
+
+      <p class="m-sub">
+        If you need immediate support, please reach out to a trusted adult
+        or an appropriate local emergency or crisis service.
+      </p>
+
+      <a class="c-link" href="tel:112">Call local emergency support · 112</a>
+    </div>
+  </div>
+
+  <div
+    class="article-overlay"
+    id="articleOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="sheetTitle"
+    aria-hidden="true"
+  >
+    <article class="article-sheet" id="articleSheet">
+      <div class="sheet-handle" aria-hidden="true"></div>
+
+      <button class="sheet-close" id="closeArticleButton" type="button" aria-label="Close article">×</button>
+
+      <div class="sheet-category" id="sheetCategory"></div>
+      <h2 class="sheet-title" id="sheetTitle"></h2>
+      <div class="sheet-subtitle" id="sheetSubtitle"></div>
+      <div class="sheet-body" id="sheetBody"></div>
+
+      <div class="sheet-footer">
+        <div class="sheet-footer-text">take what you need.</div>
+        <button class="sheet-save" id="saveArticleButton" type="button">save this piece</button>
+      </div>
+    </article>
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav-auth.js"></script>
+  <script src="js/explore-library.js"></script>
+
+  <script>
+    /* ARTICLE DATA */
+
+    const ARTICLES = [
+      {
+        cat: "Growth",
+        title: "You Are Allowed to Take Up Space",
+        subtitle: "A reminder that your presence matters.",
+        read: "3 min",
+        bg: "#e8d7d5",
+        symbol: "✳",
+        body: `
+          <p>From a very young age, many of us are taught — subtly or directly — to make ourselves small. To not be too loud, too emotional, too much.</p>
+          <p>This piece is a gentle counter-message: <em>you are allowed to take up space.</em></p>
+          <h3>What it means</h3>
+          <p>Taking up space doesn't mean being inconsiderate. It means allowing your needs to exist. Saying "I'm struggling" when you are. Asking for what you need. Occupying your life fully.</p>
+          <h3>A practice</h3>
+          <p>This week, try one thing that feels like taking up space. Ask for help with something. Share a feeling you'd normally keep inside. Let yourself be seen — even just a little.</p>
+          <p>You are not too much. You are exactly enough.</p>
+        `
+      },
+      {
+        cat: "Journaling",
+        title: "10 Prompts for When You Feel Empty",
+        subtitle: "Writing your way back to yourself.",
+        read: "4 min",
+        bg: "#eee1d5",
+        symbol: "✎",
+        body: `
+          <p>There are days when words feel far away and numbness moves in. These prompts are designed to gently start the conversation between you and yourself.</p>
+          <h3>The prompts</h3>
+          <p>1. What does this emptiness feel like physically in my body?</p>
+          <p>2. When did I last feel truly present?</p>
+          <p>3. What would I tell a friend feeling this way?</p>
+          <p>4. What am I avoiding?</p>
+          <p>5. What would make today 1% easier?</p>
+          <p>6. Who made me feel safe recently — and how?</p>
+          <p>7. What colour is my mood right now?</p>
+          <p>8. What do I wish someone would ask me?</p>
+          <p>9. If this feeling could speak, what would it say?</p>
+          <p>10. What would my most compassionate self do today?</p>
+          <p>You don't have to answer all of them. One is enough to begin.</p>
+        `
+      },
+      {
+        cat: "Anxiety",
+        title: "Understanding Your Anxiety: A Gentle Guide",
+        subtitle: "What's happening — and what helps.",
+        read: "5 min",
+        bg: "#dce8ed",
+        symbol: "〰",
+        body: `
+          <p>Anxiety is one of the most common experiences among teenagers — and one of the most misunderstood. Here's what's happening, and what may help.</p>
+          <h3>What anxiety actually is</h3>
+          <p>Anxiety is your nervous system trying to protect you. It's an alarm system — and sometimes it reacts more strongly than the situation requires.</p>
+          <p>The thoughts are not facts. The fear is real, but the threat isn't always as certain as it feels.</p>
+          <h3>Techniques that may help</h3>
+          <p><strong>Slow breathing</strong> — Take a comfortable breath in and make your exhale slightly longer than your inhale, if that feels comfortable.</p>
+          <p><strong>Name it</strong> — Say "I'm feeling anxious right now." Putting a feeling into words can create some distance from it.</p>
+          <p><strong>Grounding</strong> — Notice things you can see, hear, and physically feel around you.</p>
+          <p>Anxiety does not mean something is wrong with you. If it is interfering with daily life, a trusted adult or mental-health professional can help.</p>
+        `
+      },
+      {
+        cat: "Yoga & movement",
+        title: "Poses That Release Emotional Tension",
+        subtitle: "Gentle movement, on your own terms.",
+        read: "6 min",
+        bg: "#dce5d9",
+        symbol: "⌁",
+        body: `
+          <p>Gentle movement can sometimes help us reconnect with our bodies when our minds feel overwhelmed. You don't have to push yourself or do anything that feels uncomfortable.</p>
+          <h3>Child's pose</h3>
+          <p>Kneel and gently lower your torso forward, resting your arms wherever feels comfortable. Breathe naturally and change position whenever you want.</p>
+          <h3>Legs up the wall</h3>
+          <p>Lie comfortably on your back and rest your legs against a wall, if that feels good for your body. Let your breathing settle naturally.</p>
+          <h3>A gentle chest opener</h3>
+          <p>Lie back over a folded blanket or pillow, if comfortable. Let your arms rest naturally at your sides.</p>
+          <p>You don't need experience. Resting or choosing not to do a pose is perfectly fine, too.</p>
+        `
+      },
+      {
+        cat: "Friendship",
+        title: "What to Do When You Feel Alone",
+        subtitle: "You are more connected than you think.",
+        read: "4 min",
+        bg: "#e6e2ed",
+        symbol: "○",
+        body: `
+          <p>Loneliness can arrive even in a room full of people. It's not always about how many friends you have — it's about how seen and understood you feel.</p>
+          <h3>Reach out imperfectly</h3>
+          <p>Send the text. Even "hey, I've been thinking about you" can be a place to start.</p>
+          <h3>Choose depth over breadth</h3>
+          <p>One honest conversation can mean more than ten surface-level ones.</p>
+          <h3>Create your own ritual</h3>
+          <p>A weekly walk, a shared playlist, a standing dinner. Friendship can grow through repeated small moments.</p>
+          <p>You deserve relationships in which you can feel safe, respected, and truly known.</p>
+        `
+      },
+      {
+        cat: "Self-care",
+        title: "The Art of Doing Nothing",
+        subtitle: "Rest is not laziness.",
+        read: "3 min",
+        bg: "#eee1d5",
+        symbol: "☁",
+        body: `
+          <p>In a world that glorifies productivity, choosing to rest can feel strangely difficult.</p>
+          <p>But rest is part of taking care of yourself. Your brain and body need periods without constant demands.</p>
+          <h3>What real rest looks like</h3>
+          <p>It can mean sleep, creative play, boredom, nature, silence, or simply spending time without needing to accomplish anything.</p>
+          <h3>A permission slip</h3>
+          <p>You are allowed to have a slow morning. You are allowed to take a break. You are allowed to not be productive every moment.</p>
+          <p>Rest is one way to care for yourself, not something you need to earn.</p>
+        `
+      },
+      {
+        cat: "Growth",
+        title: "Tiny Habits That Can Support Your Wellbeing",
+        subtitle: "Small shifts, without the pressure to be perfect.",
+        read: "4 min",
+        bg: "#dce5d9",
+        symbol: "✳",
+        body: `
+          <p>You don't need to overhaul your entire life. Small habits, repeated when they work for you, can help create a little more space in your day.</p>
+          <h3>Morning</h3>
+          <p>Try doing one thing before immediately reaching for your phone. Drink water, stretch, or write one sentence.</p>
+          <h3>During the day</h3>
+          <p>Pause and ask: how am I actually feeling? Naming a feeling can be a useful first step in noticing it.</p>
+          <h3>Evening</h3>
+          <p>Write one thing you're proud of, one thing you're grateful for, or one thing you'd like to approach differently tomorrow. Choose whichever feels useful.</p>
+          <p>These aren't magic solutions. They're small ways to check in with yourself.</p>
+        `
+      },
+      {
+        cat: "Anxiety",
+        title: "Why Your Sleep Matters More Than You Think",
+        subtitle: "The connection between rest and emotional wellbeing.",
+        read: "4 min",
+        bg: "#dce8ed",
+        symbol: "☾",
+        body: `
+          <p>Sleep plays an important role in mental health, learning, memory, and emotional regulation.</p>
+          <h3>What happens when you sleep</h3>
+          <p>Your brain processes memories, supports learning, and helps regulate emotions while you sleep.</p>
+          <h3>When you don't get enough</h3>
+          <p>Too little sleep can make it harder to concentrate, manage emotions, and cope with everyday stress.</p>
+          <h3>One thing to try tonight</h3>
+          <p>If possible, give yourself a little quiet time before bed. A comfortable routine can help signal that the day is winding down.</p>
+          <p>Sometimes the gentlest thing you can do is give yourself permission to rest.</p>
+        `
+      }
+    ];
+
+    /* CATEGORY COLOURS */
+
+    const CATEGORY_ORDER = [
+      "Anxiety",
+      "Stress",
+      "Low mood",
+      "Loneliness",
+      "Sleep",
+      "Mindfulness",
+      "Yoga & movement",
+      "Journaling",
+      "Self-care",
+      "Friendship",
+      "Relationships & family",
+      "School & burnout",
+      "Body image",
+      "Grief",
+      "Growth"
+    ];
+
+    // [label ink, flat card tint, card symbol]
+    const CATEGORY_STYLE = {
+      "Anxiety": ["#3f5d69", "#dce8ed", "〰"],
+      "Stress": ["#566b77", "#e2eaee", "◌"],
+      "Low mood": ["#5d6a86", "#e2e6f0", "∿"],
+      "Loneliness": ["#7a6b8f", "#e8e3ef", "◐"],
+      "Sleep": ["#4f5f7d", "#dfe4ee", "☾"],
+      "Mindfulness": ["#5f7d6a", "#dfe9e1", "❋"],
+      "Yoga & movement": ["#71866e", "#e3ebdf", "✺"],
+      "Journaling": ["#a76e73", "#f1e4e2", "✎"],
+      "Self-care": ["#9b765d", "#f2e8dd", "✿"],
+      "Friendship": ["#887b9d", "#ebe6f1", "♡"],
+      "Relationships & family": ["#8c6a5c", "#f0e5de", "⌂"],
+      "School & burnout": ["#7a7150", "#f1edd9", "✐"],
+      "Body image": ["#a0707b", "#f3e3e6", "◍"],
+      "Grief": ["#6b6f7a", "#e7e7ea", "❀"],
+      "Growth": ["#6d8a5f", "#e5eedd", "✳"]
+    };
+
+    const CATEGORY_COLORS = Object.fromEntries(
+      Object.entries(CATEGORY_STYLE).map(([category, [ink]]) => [category, ink])
+    );
+
+    // Library pieces sit alongside Zenene's own, credited and linked to the original.
+    LIBRARY.forEach(piece => {
+      const [, bg, symbol] = CATEGORY_STYLE[piece.cat];
+      ARTICLES.push({ ...piece, subtitle: piece.summary, bg, symbol, external: true });
+    });
+
+    // Zenene's own pieces are saved by title, library pieces by their link.
+    function saveKey(article) {
+      return article.external ? article.url : article.title;
+    }
+
+    const categories = ["All", ...CATEGORY_ORDER, "Saved"];
+
+    const PAGE_SIZE = 12;
+    let visibleCount = PAGE_SIZE;
+    let searchQuery = "";
+
+    const filterRow = document.getElementById("filterRow");
+    const articleGrid = document.getElementById("articleGrid");
+    const resourceHeading = document.getElementById("resourceHeading");
+    const resourceCount = document.getElementById("resourceCount");
+    const articleOverlay = document.getElementById("articleOverlay");
+    const articleSheet = document.getElementById("articleSheet");
+    const supportOverlay = document.getElementById("cm");
+    const saveButton = document.getElementById("saveArticleButton");
+
+    let selectedCategory = "All";
+    let savedTitles = new Set();
+    let currentArticleIndex = null;
+    let lastFocusedElement = null;
+    let saveRequestInProgress = false;
+
+    /* LOAD SAVED RESOURCES */
+
+    async function loadSavedArticles() {
+      try {
+        const user = await getCurrentUser();
+
+        if (!user) {
+          savedTitles = new Set();
+          return;
+        }
+
+        const { data, error } = await supabaseClient
+          .from("saved_resources")
+          .select("article_title")
+          .eq("user_id", user.id);
+
+        if (error) throw error;
+
+        savedTitles = new Set(
+          (data || []).map(row => row.article_title)
+        );
+      } catch (error) {
+        console.error("Could not load saved resources:", error);
+      }
+    }
+
+    /* CATEGORY FILTERS */
+
+    function renderFilters() {
+      filterRow.innerHTML = "";
+
+      categories.forEach(category => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className =
+          "filter-button" +
+          (category === selectedCategory ? " active" : "");
+
+        button.setAttribute(
+          "aria-pressed",
+          String(category === selectedCategory)
+        );
+
+        const label = document.createElement("span");
+        label.textContent = category;
+
+        const count = document.createElement("span");
+        count.className = "filter-count";
+
+        if (category === "All") {
+          count.textContent = ARTICLES.length;
+        } else if (category === "Saved") {
+          count.textContent = ARTICLES.filter(
+            article => savedTitles.has(saveKey(article))
+          ).length;
+        } else {
+          count.textContent = ARTICLES.filter(
+            article => article.cat === category
+          ).length;
+        }
+
+        button.append(label, count);
+
+        button.addEventListener("click", () => {
+          selectedCategory = category;
+          visibleCount = PAGE_SIZE;
+          renderFilters();
+          renderArticles();
+        });
+
+        filterRow.appendChild(button);
+      });
+    }
+
+    /* RESOURCE COUNTS AND EMPTY STATES */
+
+    function matchesSearch(article) {
+      if (!searchQuery) return true;
+
+      const haystack = [
+        article.title,
+        article.subtitle,
+        article.cat,
+        article.source || "Zenene"
+      ].join(" ").toLowerCase();
+
+      return searchQuery
+        .split(/\s+/)
+        .every(word => haystack.includes(word));
+    }
+
+    function getFilteredArticles() {
+      let list = ARTICLES;
+
+      if (selectedCategory === "Saved") {
+        list = ARTICLES.filter(article => savedTitles.has(saveKey(article)));
+      } else if (selectedCategory !== "All") {
+        list = ARTICLES.filter(article => article.cat === selectedCategory);
+      }
+
+      return list.filter(matchesSearch);
+    }
+
+    function renderArticles() {
+      const filtered = getFilteredArticles();
+
+      articleGrid.innerHTML = "";
+      showMoreButton.hidden = true;
+
+      resourceHeading.textContent =
+        selectedCategory === "All"
+          ? "A little something for you"
+          : selectedCategory === "Saved"
+            ? "Your saved pieces"
+            : selectedCategory;
+
+      resourceCount.textContent =
+        `${filtered.length} ${filtered.length === 1 ? "piece" : "pieces"}`;
+
+      if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+
+        const title = document.createElement("h3");
+        title.textContent =
+          searchQuery
+            ? "No pieces match that search."
+            : selectedCategory === "Saved"
+              ? "Nothing saved just yet."
+              : "Nothing here just yet.";
+
+        const description = document.createElement("p");
+        description.textContent =
+          searchQuery
+            ? "Try a different word, or browse by feeling instead."
+            : selectedCategory === "Saved"
+              ? "Open a piece that speaks to you and save it for another day."
+              : "Try another category and see what you find.";
+
+        empty.append(title, description);
+        articleGrid.appendChild(empty);
+        return;
+      }
+
+      filtered.slice(0, visibleCount).forEach((article, index) => {
+        const originalIndex = ARTICLES.indexOf(article);
+        const card = document.createElement("article");
+
+        card.className = "article-card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Read ${article.title}`);
+        card.style.animationDelay = `${Math.min((index % PAGE_SIZE) * .04, .28)}s`;
+
+        const visual = document.createElement("div");
+        visual.className = "article-visual";
+        visual.style.background = article.bg;
+
+        const letter = document.createElement("span");
+        letter.className = "article-visual-letter";
+        letter.textContent = article.cat.charAt(0);
+
+        const symbol = document.createElement("span");
+        symbol.className = "article-visual-symbol";
+        symbol.setAttribute("aria-hidden", "true");
+        symbol.textContent = article.symbol;
+
+        visual.append(letter, symbol);
+
+        const body = document.createElement("div");
+        body.className = "article-body";
+
+        const category = document.createElement("div");
+        category.className = "article-category";
+        category.style.color = CATEGORY_COLORS[article.cat] || "var(--blue-ink)";
+        category.textContent = article.cat;
+
+        const title = document.createElement("h3");
+        title.className = "article-title";
+        title.textContent = article.title;
+
+        const subtitle = document.createElement("p");
+        subtitle.className = "article-subtitle";
+        subtitle.textContent = article.subtitle;
+
+        const meta = document.createElement("div");
+        meta.className = "article-meta";
+
+        const dot = document.createElement("span");
+        dot.className = "meta-dot";
+        dot.setAttribute("aria-hidden", "true");
+
+        const readingTime = document.createElement("span");
+        readingTime.textContent = `${article.source || "Zenene"} · ${article.read} ${verbFor(article)}`;
+
+        meta.append(dot, readingTime);
+
+        if (savedTitles.has(saveKey(article))) {
+          const savedMark = document.createElement("span");
+          savedMark.className = "saved-mark";
+          savedMark.textContent = "✓";
+          savedMark.title = "Saved";
+          savedMark.setAttribute("aria-label", "Saved");
+          meta.appendChild(savedMark);
+        }
+
+        body.append(category, title, subtitle, meta);
+        card.append(visual, body);
+
+        card.addEventListener("click", () => openArticle(originalIndex));
+
+        card.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openArticle(originalIndex);
+          }
+        });
+
+        articleGrid.appendChild(card);
+      });
+
+      const remaining = filtered.length - visibleCount;
+
+      if (remaining > 0) {
+        showMoreButton.hidden = false;
+        showMoreButton.textContent =
+          `show ${Math.min(remaining, PAGE_SIZE)} more · ${remaining} left`;
+      }
+    }
+
+    function verbFor(article) {
+      if (article.kind === "video") return "watch";
+      if (article.kind === "tool") return "activity";
+      return "read";
+    }
+
+    const showMoreButton = document.getElementById("showMoreButton");
+
+    showMoreButton.addEventListener("click", () => {
+      visibleCount += PAGE_SIZE;
+      renderArticles();
+    });
+
+    let searchTimer = null;
+
+    document.getElementById("resourceSearch").addEventListener("input", event => {
+      window.clearTimeout(searchTimer);
+
+      searchTimer = window.setTimeout(() => {
+        searchQuery = event.target.value.trim().toLowerCase();
+        visibleCount = PAGE_SIZE;
+        renderArticles();
+      }, 120);
+    });
+
+    /* FEATURED ARTICLE */
+
+    document.getElementById("featuredArticle").addEventListener("click", () => {
+      openArticle(0);
+    });
+
+    document.getElementById("featuredArticle").addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openArticle(0);
+      }
+    });
+
+    /* OPEN ARTICLE */
+
+    function openArticle(index) {
+      const article = ARTICLES[index];
+
+      if (!article) return;
+
+      currentArticleIndex = index;
+      lastFocusedElement = document.activeElement;
+
+      document.getElementById("sheetCategory").textContent = article.cat;
+      document.getElementById("sheetCategory").style.color =
+        CATEGORY_COLORS[article.cat] || "var(--blue-ink)";
+
+      document.getElementById("sheetTitle").textContent = article.title;
+
+      if (article.external) {
+        document.getElementById("sheetSubtitle").textContent =
+          `from ${article.source} · ${article.read} ${verbFor(article)}`;
+        renderLibraryPiece(article);
+      } else {
+        document.getElementById("sheetSubtitle").textContent = article.subtitle;
+        document.getElementById("sheetBody").innerHTML = article.body;
+      }
+
+      updateSaveButton();
+
+      articleSheet.scrollTop = 0;
+      articleOverlay.classList.add("open");
+      articleOverlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+
+      document.getElementById("closeArticleButton").focus();
+    }
+
+    /* LIBRARY PIECE: Zenene's summary + credit + link to the original */
+
+    function renderLibraryPiece(article) {
+      const body = document.getElementById("sheetBody");
+      body.replaceChildren();
+
+      const lead = document.createElement("p");
+      lead.className = "sheet-lead";
+      lead.textContent = article.summary;
+      body.appendChild(lead);
+
+      if (article.inside.length) {
+        const heading = document.createElement("h3");
+        heading.textContent = "Inside this piece";
+
+        const list = document.createElement("ul");
+        list.className = "sheet-inside";
+
+        article.inside.forEach(section => {
+          const item = document.createElement("li");
+          item.textContent = section;
+          list.appendChild(item);
+        });
+
+        body.append(heading, list);
+      }
+
+      const credit = document.createElement("div");
+      credit.className = "sheet-credit";
+
+      const note = document.createElement("p");
+      note.textContent =
+        `This is Zenene's short summary. The full piece, and all credit for it, belongs to ${article.source}.`;
+
+      const link = document.createElement("a");
+      link.className = "sheet-source-link";
+      link.href = article.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent =
+        `${article.kind === "video" ? "Watch" : article.kind === "tool" ? "Open" : "Read"} the full piece on ${article.source} ↗`;
+
+      credit.append(note, link);
+      body.appendChild(credit);
+    }
+
+    /* CLOSE ARTICLE */
+
+    function closeArticle() {
+      articleOverlay.classList.remove("open");
+      articleOverlay.setAttribute("aria-hidden", "true");
+
+      if (!supportOverlay.classList.contains("open")) {
+        document.body.classList.remove("modal-open");
+      }
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+
+      currentArticleIndex = null;
+    }
+
+    document.getElementById("closeArticleButton").addEventListener("click", closeArticle);
+
+    articleOverlay.addEventListener("click", event => {
+      if (event.target === articleOverlay) closeArticle();
+    });
+
+    /* SAVE BUTTON STATE */
+
+    function updateSaveButton() {
+      if (currentArticleIndex === null) return;
+
+      const article = ARTICLES[currentArticleIndex];
+      const isSaved = savedTitles.has(saveKey(article));
+
+      saveButton.textContent = isSaved ? "saved ✓ · remove" : "save this piece";
+      saveButton.style.background = isSaved ? "var(--sage)" : "var(--blue-ink)";
+      saveButton.style.color = isSaved ? "var(--ink)" : "var(--white)";
+      saveButton.style.borderColor = isSaved ? "var(--sage-dark)" : "var(--blue-ink)";
+    }
+
+    /* SAVE OR REMOVE ARTICLE */
+
+    async function saveArticle() {
+      if (currentArticleIndex === null || saveRequestInProgress) return;
+
+      const article = ARTICLES[currentArticleIndex];
+      const originalText = saveButton.textContent;
+
+      saveRequestInProgress = true;
+      saveButton.disabled = true;
+      saveButton.textContent = "saving...";
+
+      try {
+        const user = await getCurrentUser();
+
+        if (!user) {
+          saveButton.textContent = "sign in to save";
+
+          window.setTimeout(() => {
+            if (currentArticleIndex !== null) updateSaveButton();
+          }, 1600);
+
+          return;
+        }
+
+        const alreadySaved = savedTitles.has(saveKey(article));
+
+        if (alreadySaved) {
+          const { error } = await supabaseClient
+            .from("saved_resources")
+            .delete()
+            .eq("user_id", user.id)
+            .eq("article_title", saveKey(article));
+
+          if (error) throw error;
+
+          savedTitles.delete(saveKey(article));
+        } else {
+          const { error } = await supabaseClient
+            .from("saved_resources")
+            .insert({
+              user_id: user.id,
+              article_title: saveKey(article)
+            });
+
+          if (error) throw error;
+
+          savedTitles.add(saveKey(article));
+        }
+
+        renderFilters();
+        renderArticles();
+        updateSaveButton();
+      } catch (error) {
+        console.error("Could not update saved resource:", error);
+
+        saveButton.textContent = "couldn't save — try again";
+
+        window.setTimeout(() => {
+          if (currentArticleIndex !== null) updateSaveButton();
+        }, 1800);
+      } finally {
+        saveRequestInProgress = false;
+        saveButton.disabled = false;
+
+        if (currentArticleIndex !== null && saveButton.textContent === "saving...") {
+          saveButton.textContent = originalText;
+        }
+      }
+    }
+
+    saveButton.addEventListener("click", saveArticle);
+
+    /* SUPPORT MODAL */
+
+    function openSupport() {
+      lastFocusedElement = document.activeElement;
+      supportOverlay.classList.add("open");
+      supportOverlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      document.getElementById("closeSupport").focus();
+    }
+
+    function closeSupport() {
+      supportOverlay.classList.remove("open");
+      supportOverlay.setAttribute("aria-hidden", "true");
+
+      if (!articleOverlay.classList.contains("open")) {
+        document.body.classList.remove("modal-open");
+      }
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+    }
+
+    document.getElementById("openSupport").addEventListener("click", openSupport);
+    document.getElementById("closeSupport").addEventListener("click", closeSupport);
+
+    supportOverlay.addEventListener("click", event => {
+      if (event.target === supportOverlay) closeSupport();
+    });
+
+    /* ESCAPE KEY */
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        if (articleOverlay.classList.contains("open")) {
+          closeArticle();
+        } else if (supportOverlay.classList.contains("open")) {
+          closeSupport();
+        }
+      }
+    });
+
+    /* SMOOTH NAVIGATION BETWEEN ZENENE PAGES */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", event => {
+        if (
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey ||
+          link.target === "_blank"
+        ) {
+          return;
+        }
+
+        const destination = new URL(link.href, window.location.href);
+
+        if (
+          destination.origin !== window.location.origin ||
+          destination.pathname === window.location.pathname ||
+          !["http:", "https:"].includes(destination.protocol)
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        document.body.classList.add("is-leaving");
+
+        window.setTimeout(() => {
+          window.location.href = destination.href;
+        }, 150);
+      });
+    });
+
+    /* INITIALISE */
+
+    renderFilters();
+    renderArticles();
+
+    loadSavedArticles().then(() => {
+      renderFilters();
+      renderArticles();
+    });
+  </script>
+<script src="js/zenene-ui.js"></script>
+</body>
+</html>

@@ -2,1644 +2,1782 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#E8F2F5">
-  <title>Zenene — Calm</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calm | Zenene</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Special+Elite&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Special+Elite&family=Bricolage+Grotesque:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --sky: #C9DFEA;
-      --sky-light: #E8F2F5;
-      --sky-deep: #9EBFCC;
-      --cream: #F7F1E7;
-      --paper: #FFFDF8;
-      --sage: #D8E4D7;
-      --sage-deep: #72866E;
-      --rose: #E7C9CD;
-      --rose-deep: #B97880;
-      --lavender: #DCD8E8;
-      --peach: #EED9C8;
-      --brown: #624F43;
-      --brown-dark: #392D26;
-      --ink: #2F2B27;
-      --typewriter: "Special Elite", "Courier New", monospace;
+      --background: #F7F3E9;
+      --paper: #FFFCF6;
+      --cream: #F5EFE3;
+      --pink: #EADBDC;
+      --pink-deep: #B99194;
+      --pink-light: #F4EAEA;
+      --sage: #E5E8DE;
+      --sage-deep: #858B79;
+      --lavender: #EAE5E8;
+      --peach: #F0E4D7;
+      --butter: #F1E8CF;
+      --brown: #76665B;
+      --brown-dark: #51443C;
+      --ink: #39332F;
+      --muted: #91857C;
+      --line: rgba(81, 68, 60, 0.14);
+      --shadow: 0 8px 28px rgba(81, 68, 60, 0.055);
+
       --serif: "Cormorant Garamond", Georgia, serif;
+      --typewriter: "Special Elite", "Courier New", monospace;
       --heading: "Bricolage Grotesque", sans-serif;
       --script: "Pinyon Script", cursive;
-      --line: rgba(98, 79, 67, .15);
-      --shadow: 0 12px 35px rgba(57, 45, 38, .055);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 90px;
     }
 
     body {
       margin: 0;
-      background: var(--sky-light);
+      background: var(--background);
       color: var(--ink);
-      font-family: var(--serif);
-      overflow-x: hidden;
-      min-height: 100vh;
+      font-family: var(--heading);
+      font-size: 14px;
+      line-height: 1.6;
+      transition: background 0.25s ease;
     }
 
-    button, input { font: inherit; }
-    button { color: inherit; }
-    button:focus-visible, a:focus-visible, input:focus-visible {
-      outline: 2px solid var(--sage-deep);
-      outline-offset: 4px;
+    button,
+    input,
+    textarea {
+      font: inherit;
     }
 
-    /* NAVIGATION */
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--pink-deep);
+      outline-offset: 3px;
+    }
 
     .top-nav {
       position: sticky;
       top: 0;
-      z-index: 500;
-      min-height: 70px;
+      z-index: 20;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      padding: 14px max(28px, calc((100vw - 1200px) / 2));
-      background: rgba(232, 242, 245, .92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(98, 79, 67, .1);
+      align-items: center;
+      gap: 20px;
+      padding: 13px 6%;
+      background: rgba(247, 243, 233, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
     }
 
-    .nav-wordmark {
-      flex-shrink: 0;
-      font: .8rem var(--typewriter);
-      letter-spacing: .16em;
-      text-transform: uppercase;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--brown-dark);
+      text-decoration: none;
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-flower {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--pink);
+      font-size: 16px;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: clamp(12px, 2vw, 27px);
+      gap: 24px;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
-      position: relative;
       color: var(--brown);
       text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: .055em;
-      font: .62rem var(--typewriter);
-      white-space: nowrap;
-      transition: color .2s ease;
+      font-size: 12px;
+      transition: color 0.2s ease;
     }
 
     .nav-links a:hover,
-    .nav-links a.active { color: var(--ink); }
-
-    .nav-links a.active::after {
-      content: "";
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: var(--brown);
+    .nav-links a.active {
+      color: var(--pink-deep);
     }
 
-    /* PAGE LAYOUT */
-
-    .page {
-      width: min(1120px, calc(100% - 48px));
-      margin: 0 auto;
-      padding: 48px 0 52px;
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .page-header {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: end;
-      gap: 38px;
-      padding: 10px 0 30px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid var(--line);
-      animation: rise .5s ease both;
-    }
-
-    .eyebrow, .section-kicker {
-      margin: 0 0 13px;
+    .user-name {
       color: var(--brown);
-      font: .62rem var(--typewriter);
-      letter-spacing: .15em;
+      font-size: 12px;
+    }
+
+    .small-button {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--paper);
+      color: var(--brown);
+      padding: 7px 13px;
+      font-size: 11px;
+    }
+
+    .small-button:hover {
+      background: var(--pink-light);
+    }
+
+    main {
+      width: min(1080px, 90%);
+      margin: 0 auto;
+      padding: 42px 0 65px;
+    }
+
+    .page-heading {
+      text-align: center;
+      margin: 0 auto 30px;
+      max-width: 600px;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: var(--pink-deep);
+      font-family: var(--typewriter);
+      font-size: 10px;
+      letter-spacing: 2px;
       text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
     }
 
     h1 {
-      margin: 0;
-      max-width: 700px;
-      font: 700 clamp(3.7rem, 8vw, 6.8rem)/.83 var(--heading);
-      letter-spacing: -.065em;
+      margin-bottom: 6px;
+      color: var(--brown-dark);
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 62px);
+      font-weight: 500;
+      line-height: 1.05;
     }
 
-    h1 em {
-      color: var(--rose-deep);
-      font-style: normal;
+    .script-subtitle {
+      margin: 0 0 10px;
+      color: var(--pink-deep);
+      font-family: var(--script);
+      font-size: 31px;
     }
 
-    .intro {
-      max-width: 355px;
-      margin: 0 0 4px auto;
+    .page-description {
+      max-width: 430px;
+      margin: 0 auto;
       color: var(--brown);
-      font: italic 1.25rem/1.45 var(--serif);
-    }
-
-    .intro-script {
-      display: block;
-      margin-top: 8px;
-      color: var(--sage-deep);
-      font: 2rem var(--script);
-    }
-
-    /* TOOL NAVIGATION */
-
-    .calm-shell {
-      display: grid;
-      grid-template-columns: 178px minmax(0, 1fr);
-      align-items: start;
-      gap: 24px;
-    }
-
-    .calm-sidebar {
-      position: sticky;
-      top: 92px;
-      padding: 20px 14px;
-      background: rgba(255, 253, 248, .56);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-    }
-
-    .sidebar-label {
-      margin: 0 0 15px 8px;
-      font: .56rem var(--typewriter);
-      color: var(--brown);
-      letter-spacing: .12em;
-      text-transform: uppercase;
+      font-size: 13px;
+      line-height: 1.8;
     }
 
     .calm-tabs {
       display: flex;
-      flex-direction: column;
-      gap: 5px;
+      justify-content: center;
+      gap: 9px;
+      margin: 0 auto 26px;
+      flex-wrap: wrap;
     }
 
     .c-tab {
-      width: 100%;
       display: flex;
       align-items: center;
-      gap: 11px;
-      padding: 12px 10px;
-      border: 1px solid transparent;
-      border-radius: 7px;
-      background: transparent;
-      text-align: left;
+      gap: 9px;
+      padding: 8px 15px 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--paper);
       color: var(--brown);
-      font: .66rem var(--typewriter);
-      cursor: pointer;
-      transition: background .2s, color .2s, border-color .2s;
+      font-size: 12px;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     .c-tab:hover {
-      background: rgba(255, 253, 248, .8);
-      color: var(--ink);
+      border-color: var(--pink-deep);
     }
 
     .c-tab.active {
-      background: var(--paper);
-      color: var(--ink);
-      border-color: var(--line);
-      box-shadow: 0 3px 12px rgba(57, 45, 38, .035);
+      background: var(--pink-light);
+      border-color: #D9C2C3;
+      color: var(--brown-dark);
     }
 
     .tab-icon {
-      width: 29px;
-      height: 29px;
       display: grid;
       place-items: center;
-      flex-shrink: 0;
-      border-radius: 7px;
-      background: var(--sky-light);
-      font-size: 1rem;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: var(--butter);
+      font-size: 14px;
     }
 
-    .c-tab:nth-child(2) .tab-icon { background: #F5E5E5; }
-    .c-tab:nth-child(3) .tab-icon { background: #E6EBDD; }
-
-    .sidebar-note {
-      margin: 24px 6px 0;
-      padding-top: 17px;
-      border-top: 1px solid var(--line);
-      color: var(--brown);
-      font: italic 1.05rem/1.4 var(--serif);
+    .c-tab:nth-child(2) .tab-icon {
+      background: var(--pink);
     }
 
-    .sidebar-note span {
+    .c-tab:nth-child(3) .tab-icon {
+      background: var(--sage);
+    }
+
+    .calm-panel {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .calm-panel.active {
       display: block;
-      margin-top: 7px;
-      color: var(--sage-deep);
-      font: 1.5rem var(--script);
     }
 
-    .calm-content { min-width: 0; }
-
-    .panel { display: none; }
-
-    .panel.active {
-      display: block;
-      animation: rise .3s ease both;
-    }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(9px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* SHARED SECTION HEADING */
-
-    .tool-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
-      margin: 0 0 16px;
-    }
-
-    .tool-heading h2 {
-      margin: 0;
-      font: 600 clamp(1.8rem, 3vw, 2.5rem)/1 var(--heading);
-      letter-spacing: -.045em;
-    }
-
-    .tool-heading p {
-      max-width: 260px;
-      margin: 0;
-      color: var(--brown);
-      text-align: right;
-      font: italic 1rem/1.35 var(--serif);
-    }
-
-    /* BREATHING */
-
-    .breath-card {
-      padding: 27px 30px 25px;
-      background: var(--paper);
+    .panel-card {
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 18px;
+      background: var(--paper);
       box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 36px);
     }
 
-    .breath-topline {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      padding-bottom: 17px;
-      border-bottom: 1px solid var(--line);
+    .section-heading {
+      margin-bottom: 5px;
+      color: var(--brown-dark);
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.2;
     }
 
-    .breath-label {
-      color: var(--brown);
-      font: .59rem var(--typewriter);
-      letter-spacing: .12em;
-      text-transform: uppercase;
+    .section-description {
+      margin-bottom: 23px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
     }
 
-    .breath-method {
-      padding: 6px 9px;
-      border-radius: 5px;
-      background: var(--sky-light);
-      color: var(--brown);
-      font: .56rem var(--typewriter);
-    }
-
-    .breath-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 28px;
-    }
-
-    .breath-ring {
-      position: relative;
-      width: 210px;
-      height: 210px;
+    .breathing-layout {
       display: grid;
-      place-items: center;
-      margin: 0 auto 22px;
+      grid-template-columns: minmax(0, 1fr) minmax(230px, 0.8fr);
+      align-items: center;
+      gap: 30px;
     }
 
-    .breath-outer, .breath-mid, .breath-circle {
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    .breath-outer {
-      inset: 0;
-      border: 1px solid rgba(114, 134, 110, .35);
-    }
-
-    .breath-mid {
-      inset: 15px;
-      border: 1px solid rgba(114, 134, 110, .23);
-    }
-
-    .breath-circle {
-      inset: 34px;
+    .breathing-visual {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      background: var(--sky);
-      transition: transform 1s ease-in-out, box-shadow 1s ease-in-out;
-      will-change: transform;
+      min-height: 350px;
+      border-radius: 15px;
+      background: var(--cream);
+      padding: 25px 15px;
+    }
+
+    .breath-circle-wrap {
+      display: grid;
+      place-items: center;
+      width: 220px;
+      height: 220px;
+      margin: 12px 0 16px;
+    }
+
+    .breath-circle {
+      display: grid;
+      place-items: center;
+      width: 155px;
+      height: 155px;
+      border: 1px solid #C8C9B9;
+      border-radius: 50%;
+      background: #E4E3D5;
+      box-shadow: 0 0 0 12px rgba(228, 227, 213, 0.42);
+      transition: transform 4s ease-in-out, background 1s ease;
+    }
+
+    .breath-circle.inhale {
+      transform: scale(1.28);
+      background: #D8DDD0;
+    }
+
+    .breath-circle.hold {
+      transform: scale(1.28);
+      background: #E8DDDB;
+    }
+
+    .breath-circle.exhale {
+      transform: scale(0.84);
+      background: #E4E3D5;
     }
 
     .breath-word {
       color: var(--brown-dark);
-      font: italic 1.5rem var(--serif);
-    }
-
-    .breath-count {
-      color: var(--brown);
-      font: .6rem var(--typewriter);
-      letter-spacing: .08em;
-    }
-
-    .breath-phase {
-      margin: 0 0 9px;
-      text-align: center;
-      font: 600 1.55rem var(--heading);
-      letter-spacing: -.035em;
-    }
-
-    .breath-desc {
-      max-width: 390px;
-      margin: 0 0 21px;
-      color: var(--brown);
-      text-align: center;
-      font: 1.12rem/1.45 var(--serif);
-    }
-
-    .breath-btns {
-      display: flex;
-      justify-content: center;
-      gap: 9px;
-    }
-
-    .b-btn {
-      min-width: 112px;
-      padding: 12px 20px;
-      border: 1px solid transparent;
-      border-radius: 5px;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      font: .6rem var(--typewriter);
-      transition: transform .2s, background .2s;
-    }
-
-    .b-btn:hover { transform: translateY(-2px); }
-
-    .b-start {
-      background: var(--brown-dark);
-      color: var(--paper);
-    }
-
-    .b-start:hover { background: var(--sage-deep); }
-
-    .b-stop {
-      background: var(--cream);
-      color: var(--brown);
-      border-color: var(--line);
-    }
-
-    .b-stop:hover { background: var(--rose); }
-
-    .cycles-left {
-      min-height: 20px;
-      margin-top: 14px;
-      color: var(--rose-deep);
-      text-align: center;
-      font: italic 1rem var(--serif);
+      font-family: var(--serif);
+      font-size: 25px;
     }
 
     .breath-reminder {
-      margin: 18px 0 0;
-      padding: 13px 15px;
-      border-radius: 6px;
-      background: var(--sky-light);
+      width: min(100%, 280px);
+      padding: 11px 15px;
+      border-radius: 12px;
+      background: #F8F3E8;
       color: var(--brown);
-      font: italic 1rem/1.4 var(--serif);
+      font-size: 11px;
       text-align: center;
     }
 
-    /* COLOR FLOW */
-
-    .color-card {
-      padding: 24px;
-      background: var(--sage);
-      border: 1px solid rgba(98, 79, 67, .1);
-      border-radius: 12px;
-    }
-
-    .cf-desc {
-      margin: 0 0 18px;
-      color: var(--brown-dark);
-      font: italic 1.2rem/1.4 var(--serif);
-    }
-
-    .cf-toolbar {
+    .breathing-controls {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 12px;
-    }
-
-    .toolbar-label {
-      display: block;
-      margin-bottom: 9px;
-      color: var(--brown);
-      font: .54rem var(--typewriter);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .cf-colors, .cf-sizes {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
+      justify-content: center;
       gap: 9px;
+      margin-top: 16px;
     }
 
-    .cc {
-      width: 25px;
-      height: 25px;
-      flex-shrink: 0;
-      border: 2px solid transparent;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: transform .15s, outline .15s;
+    .primary-button {
+      border: 1px solid var(--pink-deep);
+      border-radius: 24px;
+      background: var(--pink);
+      color: var(--brown-dark);
+      padding: 10px 19px;
+      font-size: 12px;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
 
-    .cc.sel {
-      outline: 2px solid var(--brown-dark);
-      outline-offset: 3px;
-      transform: scale(.88);
-    }
-
-    .cf-sz {
-      display: grid;
-      place-items: center;
-      width: 29px;
-      height: 29px;
-      padding: 0;
-      border: 1px solid transparent;
-      border-radius: 50%;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .cf-sz span {
-      display: block;
-      border-radius: 50%;
-      background: var(--brown);
-    }
-
-    .cf-sz.sel {
-      border-color: var(--brown);
-      background: rgba(255, 253, 248, .5);
-    }
-
-    canvas#cf {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 650 / 420;
-      margin: 15px 0;
-      background: var(--paper);
-      border: 1px solid rgba(98, 79, 67, .15);
-      border-radius: 5px;
-      cursor: crosshair;
-      touch-action: none;
-    }
-
-    .cf-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .cf-btn {
-      padding: 11px 15px;
-      border: 1px solid rgba(98, 79, 67, .18);
-      border-radius: 5px;
-      background: var(--paper);
-      color: var(--brown);
-      cursor: pointer;
-      font: .58rem var(--typewriter);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      transition: background .2s, transform .2s;
-    }
-
-    .cf-btn:hover {
-      background: var(--cream);
+    .primary-button:hover {
+      background: #E1CECF;
       transform: translateY(-1px);
     }
 
-    .cf-hint {
-      margin: 13px 0 0;
-      color: var(--brown);
-      font: italic .95rem var(--serif);
-    }
-
-    /* GRATITUDE */
-
-    .gratitude {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
-      align-items: stretch;
-      gap: 16px;
-    }
-
-    .gg-card-main, .garden-side {
-      min-width: 0;
-      padding: 24px;
+    .secondary-button {
       border: 1px solid var(--line);
-      border-radius: 12px;
-    }
-
-    .gg-card-main { background: var(--paper); }
-
-    .gg-prompt {
-      margin: 0 0 9px;
-      font: 600 1.8rem/1.05 var(--heading);
-      letter-spacing: -.04em;
-    }
-
-    .gg-sub {
-      display: block;
-      margin: 0 0 22px;
+      border-radius: 24px;
+      background: var(--paper);
       color: var(--brown);
-      font: 1.05rem/1.4 var(--serif);
+      padding: 10px 19px;
+      font-size: 12px;
     }
 
-    .gg-items {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-bottom: 16px;
+    .secondary-button:hover {
+      background: var(--cream);
     }
 
-    .gg-inp-wrap {
+    .breathing-info {
+      padding: 6px 4px;
+    }
+
+    .breathing-info h3 {
+      margin-bottom: 8px;
+      color: var(--brown-dark);
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 500;
+    }
+
+    .breathing-info > p {
+      color: var(--brown);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .steps {
+      display: grid;
+      gap: 11px;
+      margin: 20px 0;
+    }
+
+    .step {
       display: flex;
       align-items: center;
-      gap: 11px;
-      padding: 12px;
-      border: 1px solid rgba(98, 79, 67, .12);
-      border-radius: 6px;
-      background: var(--cream);
-      transition: border-color .2s, background .2s;
+      gap: 12px;
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
     }
 
-    .gg-inp-wrap:focus-within {
-      border-color: var(--sky-deep);
-      background: var(--sky-light);
+    .step-number {
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: var(--sage);
+      color: var(--brown-dark);
+      font-family: var(--serif);
+      font-size: 16px;
     }
 
-    .gg-num {
-      color: var(--rose-deep);
-      font: italic 1.2rem var(--serif);
+    .step:nth-child(2) .step-number {
+      background: var(--pink);
     }
 
-    .gg-inp {
-      width: 100%;
-      min-width: 0;
-      padding: 0;
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: var(--ink);
-      font: 1.05rem var(--serif);
+    .step:nth-child(3) .step-number {
+      background: var(--butter);
     }
 
-    .gg-inp::placeholder {
-      color: var(--brown);
-      opacity: .58;
-      font-style: italic;
-    }
-
-    .gg-save {
-      width: 100%;
-      padding: 13px 16px;
-      border: 0;
-      border-radius: 5px;
-      background: var(--rose-deep);
-      color: var(--paper);
-      cursor: pointer;
-      font: .59rem var(--typewriter);
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      transition: background .2s;
-    }
-
-    .gg-save:hover { background: var(--brown-dark); }
-
-    .gg-save:disabled {
-      cursor: wait;
-      opacity: .7;
-    }
-
-    .sync-message {
+    .step strong {
       display: block;
-      margin-top: 12px;
-      color: var(--rose-deep);
-      font: .95rem/1.4 var(--serif);
+      color: var(--brown-dark);
+      font-size: 12px;
+      font-weight: 500;
     }
 
-    .garden-side {
-      background: var(--lavender);
+    .step span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
     }
 
-    .garden-heading {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 10px;
-      padding-bottom: 17px;
-      margin-bottom: 17px;
-      border-bottom: 1px solid rgba(98, 79, 67, .16);
+    .note {
+      padding: 13px 15px;
+      border-left: 2px solid var(--sage-deep);
+      border-radius: 0 9px 9px 0;
+      background: #F0F1E9;
+      color: var(--brown);
+      font-size: 11px;
+      line-height: 1.8;
     }
 
-    .garden-title {
-      margin: 0;
-      font: 600 1.65rem/1 var(--heading);
-      letter-spacing: -.04em;
+    .color-flow-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 210px;
+      gap: 20px;
     }
 
-    .garden-note {
-      margin: 8px 0 0;
-      color: var(--rose-deep);
-      font: italic 1.15rem var(--serif);
+    .canvas-wrap {
+      overflow: hidden;
+      min-height: 320px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #F3EDE2;
     }
 
-    .garden-flower {
-      color: rgba(98, 79, 67, .5);
-      font-size: 1.8rem;
+    #colorCanvas {
+      display: block;
+      width: 100%;
+      height: 320px;
+      touch-action: none;
+      cursor: crosshair;
     }
 
-    .gg-garden {
+    .flow-controls {
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 14px;
     }
 
-    .gg-card {
-      padding: 13px 14px;
-      border-left: 3px solid var(--sage-deep);
-      border-radius: 0 6px 6px 0;
-      background: rgba(255, 253, 248, .75);
+    .control-box {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--cream);
+    }
+
+    .control-box h3 {
+      margin-bottom: 10px;
       color: var(--brown-dark);
-      font: 1rem/1.45 var(--serif);
-      overflow-wrap: anywhere;
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 500;
     }
 
-    .gg-card-date {
-      margin-bottom: 6px;
+    .color-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .color-choice {
+      width: 100%;
+      aspect-ratio: 1;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(81, 68, 60, 0.12);
+    }
+
+    .color-choice.selected {
+      outline: 2px solid var(--brown);
+      outline-offset: 3px;
+    }
+
+    .color-choice[data-color="#EADBDC"] { background: #EADBDC; }
+    .color-choice[data-color="#E5E8DE"] { background: #E5E8DE; }
+    .color-choice[data-color="#F1E8CF"] { background: #F1E8CF; }
+    .color-choice[data-color="#EAE5E8"] { background: #EAE5E8; }
+    .color-choice[data-color="#F0E4D7"] { background: #F0E4D7; }
+    .color-choice[data-color="#DCDCCF"] { background: #DCDCCF; }
+
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 7px;
       color: var(--brown);
-      font: .52rem var(--typewriter);
-      letter-spacing: .08em;
-      text-transform: uppercase;
+      font-size: 11px;
     }
 
-    .garden-empty {
-      padding: 19px 14px;
-      border: 1px dashed rgba(98, 79, 67, .28);
-      border-radius: 6px;
-      color: var(--brown);
-      font: italic 1.05rem/1.45 var(--serif);
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--pink-deep);
     }
 
-    /* FOOTER */
+    .control-hint {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.7;
+    }
 
-    footer {
-      width: min(1120px, calc(100% - 48px));
-      margin: 0 auto;
-      padding: 24px 0 28px;
-      border-top: 1px solid var(--line);
+    .flow-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .flow-actions button {
+      flex: 1;
+      padding: 9px 8px;
+      font-size: 11px;
+    }
+
+    .gratitude-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(230px, 0.75fr);
+      gap: 25px;
+    }
+
+    .gratitude-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gratitude-form label {
+      color: var(--brown-dark);
+      font-size: 12px;
+    }
+
+    .gratitude-form textarea {
+      width: 100%;
+      min-height: 115px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #FFFCF7;
+      padding: 13px;
+      color: var(--ink);
+      font-family: var(--heading);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .gratitude-form textarea::placeholder {
+      color: #B2A69B;
+    }
+
+    .gratitude-form input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #FFFCF7;
+      padding: 11px 12px;
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    .gratitude-garden {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 270px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--sage);
       text-align: center;
     }
 
-    footer .script {
-      margin-bottom: 6px;
-      color: var(--brown-dark);
-      font: 2rem var(--script);
+    .garden-illustration {
+      margin-bottom: 10px;
+      font-size: 43px;
+      line-height: 1.3;
     }
 
-    footer p {
-      margin: 0;
+    .gratitude-garden h3 {
+      margin-bottom: 5px;
+      color: var(--brown-dark);
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    .gratitude-garden p {
+      max-width: 210px;
+      margin-bottom: 12px;
       color: var(--brown);
-      font: .53rem var(--typewriter);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      opacity: .8;
+      font-size: 11px;
+      line-height: 1.8;
     }
 
-    /* CRISIS SUPPORT */
+    .garden-count {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255, 252, 246, 0.75);
+      color: var(--brown);
+      font-size: 10px;
+    }
 
-    .crisis-fab {
-      position: fixed;
-      right: 22px;
-      bottom: 20px;
-      z-index: 700;
-      padding: 12px 16px;
-      border: 1px solid rgba(98, 79, 67, .14);
-      border-radius: 7px;
-      background: var(--paper);
+    .entries-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 27px 0 12px;
+    }
+
+    .entries-heading h3 {
+      margin: 0;
       color: var(--brown-dark);
-      box-shadow: 0 5px 20px rgba(57, 45, 38, .1);
-      cursor: pointer;
-      font: .61rem var(--typewriter);
-      transition: transform .2s, background .2s;
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 500;
     }
 
-    .crisis-fab:hover {
-      transform: translateY(-2px);
-      background: var(--rose);
+    .entries-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
-    .overlay {
+    .gratitude-entry {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+    }
+
+    .gratitude-entry p {
+      margin-bottom: 9px;
+      color: var(--brown-dark);
+      font-family: var(--serif);
+      font-size: 19px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .entry-date {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .entry-empty {
+      grid-column: 1 / -1;
+      padding: 22px;
+      border: 1px dashed #D7CEC2;
+      border-radius: 12px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .status-message {
+      min-height: 18px;
+      margin: 0;
+      color: var(--sage-deep);
+      font-size: 11px;
+    }
+
+    .footer-note {
+      max-width: 470px;
+      margin: 28px auto 0;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 19px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    footer {
+      padding: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10px;
+      text-align: center;
+    }
+
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      z-index: 1000;
+      z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(47, 43, 39, .42);
-      backdrop-filter: blur(7px);
+      background: rgba(57, 51, 47, 0.35);
     }
 
-    .overlay.open { display: flex; }
-
-    .overlay .modal {
-      width: min(410px, 100%);
-      padding: 27px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--paper);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, .16);
-      animation: rise .2s ease both;
-    }
-
-    .m-top {
+    .modal-backdrop.open {
       display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 15px;
     }
 
-    .overlay .m-title {
-      font: 600 2rem/1.05 var(--heading);
-      letter-spacing: -.04em;
-    }
-
-    .overlay .m-close {
-      width: 30px;
-      height: 30px;
-      flex-shrink: 0;
+    .modal-card {
+      width: min(440px, 100%);
+      padding: 26px;
       border: 1px solid var(--line);
-      border-radius: 50%;
-      background: transparent;
-      cursor: pointer;
-      font-size: 1.2rem;
+      border-radius: 17px;
+      background: var(--paper);
+      box-shadow: 0 20px 60px rgba(57, 51, 47, 0.15);
     }
 
-    .overlay .m-sub {
-      margin: 15px 0 20px;
-      color: var(--brown);
-      font: 1.05rem/1.5 var(--serif);
-    }
-
-    .overlay .c-link {
-      display: block;
-      margin-top: 8px;
-      padding: 13px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: var(--sky-light);
+    .modal-card h2 {
+      margin-bottom: 9px;
       color: var(--brown-dark);
-      text-decoration: none;
-      font: .62rem var(--typewriter);
+      font-family: var(--serif);
+      font-size: 31px;
+      font-weight: 500;
     }
 
-    .overlay .c-link:hover { background: var(--sky); }
+    .modal-card p,
+    .modal-card li {
+      color: var(--brown);
+      font-size: 12px;
+      line-height: 1.8;
+    }
 
-    /* RESPONSIVE */
+    .modal-card ul {
+      padding-left: 19px;
+    }
 
-    @media (max-width: 850px) {
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 760px) {
       .top-nav {
-        padding: 15px 20px;
-        gap: 18px;
+        padding: 12px 5%;
+        align-items: flex-start;
       }
 
       .nav-links {
-        gap: 13px;
-        overflow-x: auto;
-        scrollbar-width: none;
+        justify-content: flex-end;
+        gap: 10px 15px;
       }
 
-      .nav-links::-webkit-scrollbar { display: none; }
-      .nav-links a { font-size: .55rem; }
-
-      .page {
-        width: min(100% - 36px, 680px);
-        padding-top: 35px;
+      .nav-user {
+        display: none;
       }
 
-      .page-header {
+      main {
+        width: 92%;
+        padding-top: 30px;
+      }
+
+      .breathing-layout,
+      .gratitude-layout {
         grid-template-columns: 1fr;
-        gap: 18px;
-        padding-bottom: 24px;
       }
 
-      h1 { font-size: clamp(4rem, 12vw, 6rem); }
-
-      .intro {
-        max-width: 430px;
-        margin: 0;
+      .breathing-visual {
+        min-height: 310px;
       }
 
-      .calm-shell {
+      .color-flow-layout {
         grid-template-columns: 1fr;
-        gap: 16px;
       }
 
-      .calm-sidebar {
-        position: static;
-        padding: 12px;
+      .flow-controls {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .sidebar-label { margin-bottom: 9px; }
+      .control-box:last-child {
+        grid-column: 1 / -1;
+      }
+    }
 
-      .calm-tabs {
-        flex-direction: row;
-        gap: 7px;
+    @media (max-width: 480px) {
+      .top-nav {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .brand {
+        font-size: 25px;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .page-heading {
+        margin-bottom: 22px;
       }
 
       .c-tab {
-        flex: 1;
-        justify-content: center;
-        padding: 9px 7px;
-        gap: 7px;
-        font-size: .59rem;
+        padding: 7px 11px 7px 7px;
+        font-size: 11px;
       }
 
       .tab-icon {
         width: 25px;
         height: 25px;
-        font-size: .9rem;
       }
 
-      .sidebar-note { display: none; }
-
-      .gratitude { grid-template-columns: 1fr; }
-
-      footer { width: calc(100% - 36px); }
-    }
-
-    @media (max-width: 520px) {
-      .top-nav {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 13px;
-        padding: 13px 17px;
+      .panel-card {
+        padding: 17px;
       }
 
-      .nav-links {
-        width: 100%;
-        padding: 0 0 3px;
-        gap: 18px;
-      }
-
-      .nav-links a { font-size: .56rem; }
-
-      .page {
-        width: calc(100% - 28px);
-        padding: 27px 0 30px;
-      }
-
-      h1 { font-size: clamp(3.7rem, 16vw, 5rem); }
-
-      .intro { font-size: 1.12rem; }
-
-      .calm-tabs { gap: 5px; }
-
-      .c-tab {
-        flex-direction: column;
-        gap: 5px;
-        padding: 9px 3px;
-        font-size: .51rem;
-      }
-
-      .tab-icon {
-        width: 27px;
-        height: 27px;
-      }
-
-      .tool-heading {
-        align-items: start;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .tool-heading p { text-align: left; }
-
-      .breath-card { padding: 18px 14px; }
-
-      .breath-topline { align-items: start; }
-
-      .breath-ring {
+      .breath-circle-wrap {
         width: 190px;
         height: 190px;
       }
 
-      .breath-phase { font-size: 1.4rem; }
-      .breath-desc { font-size: 1.04rem; }
-
-      .color-card { padding: 16px 12px; }
-
-      .cf-toolbar { align-items: start; }
-
-      .cf-colors { gap: 10px; }
-
-      .cc { width: 23px; height: 23px; }
-
-      .gg-card-main, .garden-side { padding: 18px; }
-
-      .gg-prompt { font-size: 1.65rem; }
-
-      .crisis-fab {
-        right: 12px;
-        bottom: 12px;
-        padding: 10px 12px;
+      .breath-circle {
+        width: 135px;
+        height: 135px;
       }
 
-      footer { padding-bottom: 24px; }
+      .entries-list {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .control-box:last-child {
+        grid-column: auto;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <nav class="top-nav" aria-label="Main navigation">
-    <div class="nav-wordmark">zenene</div>
+  <nav class="top-nav">
+    <a class="brand" href="index.html">
+      <span class="brand-flower">✿</span>
+      zenene
+    </a>
+
     <div class="nav-links">
-      <a href="index.html">home</a>
-      <a href="journal.html">journal</a>
-      <a href="mood.html">mood</a>
-      <a href="explore.html">explore</a>
-      <a href="vera.html">vera</a>
-      <a href="calm.html" class="active" aria-current="page">calm</a>
-      <a href="profile.html" id="navAuthLink">sign in</a>
+      <a href="index.html">Home</a>
+      <a href="journal.html">Journal</a>
+      <a href="mood.html">Mood</a>
+      <a href="explore.html">Explore</a>
+      <a href="calm.html" class="active">Calm</a>
+    </div>
+
+    <div class="nav-user">
+      <span class="user-name" id="userName">your little corner</span>
+      <button class="small-button" id="authButton" type="button">Sign in</button>
     </div>
   </nav>
 
-  <main class="page">
-    <header class="page-header">
-      <div>
-        <p class="eyebrow">a little space for yourself</p>
-        <h1>your <em>calm.</em></h1>
-      </div>
-      <p class="intro">
-        You don't have to figure everything out right now.
-        Take a breath, make something, or notice one small thing
-        that made today a little easier.
-        <span class="intro-script">one moment at a time.</span>
+  <main>
+    <header class="page-heading">
+      <p class="eyebrow">a softer moment</p>
+      <h1>Come back to yourself.</h1>
+      <p class="script-subtitle">you can take your time</p>
+      <p class="page-description">
+        Nothing to solve right now. Nothing to prove.
+        Just a little space to breathe, make something, and notice what is good.
       </p>
     </header>
 
-    <div class="calm-shell">
-      <aside class="calm-sidebar">
-        <p class="sidebar-label">choose your pause</p>
-        <div class="calm-tabs" role="tablist" aria-label="Calm activities">
-          <button class="c-tab active" id="tab-breath" role="tab" aria-selected="true" aria-controls="panel-breath" onclick="switchTab('breath',this)">
-            <span class="tab-icon" aria-hidden="true">◌</span>
-            breathe
-          </button>
-          <button class="c-tab" id="tab-color" role="tab" aria-selected="false" aria-controls="panel-color" onclick="switchTab('color',this)">
-            <span class="tab-icon" aria-hidden="true">✳</span>
-            color flow
-          </button>
-          <button class="c-tab" id="tab-garden" role="tab" aria-selected="false" aria-controls="panel-garden" onclick="switchTab('garden',this)">
-            <span class="tab-icon" aria-hidden="true">❋</span>
-            gratitude
-          </button>
-        </div>
-        <p class="sidebar-note">
-          You are allowed to pause.
-          <span>there is no rush.</span>
-        </p>
-      </aside>
-
-      <div class="calm-content">
-        <!-- BREATHING -->
-        <section class="panel active" id="panel-breath" role="tabpanel" aria-labelledby="tab-breath">
-          <div class="tool-heading">
-            <div>
-              <p class="section-kicker">01 / find your rhythm</p>
-              <h2>A moment to breathe.</h2>
-            </div>
-            <p>Nothing to achieve. Just be here.</p>
-          </div>
-
-          <div class="breath-card">
-            <div class="breath-topline">
-              <span class="breath-label">guided breathing</span>
-              <span class="breath-method">4 — 7 — 8 pattern</span>
-            </div>
-
-            <div class="breath-area">
-              <div class="breath-ring" aria-hidden="true">
-                <div class="breath-outer"></div>
-                <div class="breath-mid"></div>
-                <div class="breath-circle" id="bc">
-                  <div class="breath-word" id="bw">breathe</div>
-                  <div class="breath-count" id="bcnt"></div>
-                </div>
-              </div>
-
-              <h3 class="breath-phase" id="bphase" aria-live="polite">4-7-8 Breathing</h3>
-              <p class="breath-desc">
-                Breathe in for 4, hold for 7, and breathe out for 8.
-                Follow a comfortable pace, and stop whenever you need to.
-                You never need to force a breath.
-              </p>
-
-              <div class="breath-btns">
-                <button class="b-btn b-start" id="bstart" onclick="startBreath()">begin</button>
-                <button class="b-btn b-stop" id="bstop" onclick="stopBreath()" hidden>stop</button>
-              </div>
-              <div class="cycles-left" id="cycleInfo" aria-live="polite"></div>
-            </div>
-          </div>
-          <p class="breath-reminder">If counting or breath-holding feels uncomfortable, return to your natural breathing instead.</p>
-        </section>
-
-        <!-- COLOR FLOW -->
-        <section class="panel" id="panel-color" role="tabpanel" aria-labelledby="tab-color" hidden>
-          <div class="tool-heading">
-            <div>
-              <p class="section-kicker">02 / make without thinking</p>
-              <h2>Let the colors flow.</h2>
-            </div>
-            <p>No rules. No right or wrong.</p>
-          </div>
-
-          <div class="color-card">
-            <p class="cf-desc">Draw a little, scribble a lot, or simply explore a color.</p>
-
-            <div class="cf-toolbar">
-              <div>
-                <span class="toolbar-label">choose a color</span>
-                <div class="cf-colors" id="cfColors" aria-label="Drawing colors"></div>
-              </div>
-              <div>
-                <span class="toolbar-label">brush size</span>
-                <div class="cf-sizes" id="cfSizes" aria-label="Brush size">
-                  <button class="cf-sz sel" type="button" data-s="6" aria-label="Small brush" aria-pressed="true"><span style="width:5px;height:5px"></span></button>
-                  <button class="cf-sz" type="button" data-s="14" aria-label="Medium brush" aria-pressed="false"><span style="width:10px;height:10px"></span></button>
-                  <button class="cf-sz" type="button" data-s="26" aria-label="Large brush" aria-pressed="false"><span style="width:16px;height:16px"></span></button>
-                  <button class="cf-sz" type="button" data-s="44" aria-label="Extra large brush" aria-pressed="false"><span style="width:22px;height:22px"></span></button>
-                </div>
-              </div>
-            </div>
-
-            <canvas id="cf" width="650" height="420" aria-label="Drawing canvas. Use a mouse or touch to draw."></canvas>
-
-            <div class="cf-actions">
-              <button class="cf-btn" type="button" onclick="cfUndo()">↩ undo</button>
-              <button class="cf-btn" type="button" onclick="cfClear()">clear canvas</button>
-              <button class="cf-btn" type="button" onclick="cfSave()">save drawing ↓</button>
-            </div>
-            <p class="cf-hint">Your canvas is yours. There is no need to make anything beautiful.</p>
-          </div>
-        </section>
-
-        <!-- GRATITUDE -->
-        <section class="panel" id="panel-garden" role="tabpanel" aria-labelledby="tab-garden" hidden>
-          <div class="tool-heading">
-            <div>
-              <p class="section-kicker">03 / notice the little things</p>
-              <h2>Plant a little gratitude.</h2>
-            </div>
-            <p>Small things still count.</p>
-          </div>
-
-          <div class="gratitude">
-            <div class="gg-card-main">
-              <h3 class="gg-prompt">Three little things.</h3>
-              <p class="gg-sub">What are three things you appreciate right now? They don't have to be extraordinary.</p>
-
-              <div class="gg-items">
-                <label class="gg-inp-wrap">
-                  <span class="gg-num">①</span>
-                  <input class="gg-inp" id="g1" maxlength="500" placeholder="I'm grateful for..." autocomplete="off">
-                </label>
-                <label class="gg-inp-wrap">
-                  <span class="gg-num">②</span>
-                  <input class="gg-inp" id="g2" maxlength="500" placeholder="Something small that helped..." autocomplete="off">
-                </label>
-                <label class="gg-inp-wrap">
-                  <span class="gg-num">③</span>
-                  <input class="gg-inp" id="g3" maxlength="500" placeholder="A moment I want to remember..." autocomplete="off">
-                </label>
-              </div>
-
-              <button class="gg-save" id="gratitudeSaveBtn" type="button" onclick="saveGratitude()">plant in my garden</button>
-              <p class="sync-message" id="gratitudeSyncError" role="status" hidden></p>
-            </div>
-
-            <div class="garden-side">
-              <div class="garden-heading">
-                <div>
-                  <h3 class="garden-title">your little garden.</h3>
-                  <p class="garden-note">Look how far you've come.</p>
-                </div>
-                <span class="garden-flower" aria-hidden="true">✳</span>
-              </div>
-              <div class="gg-garden" id="ggarden" aria-live="polite">
-                <div class="garden-empty">Your garden is waiting for its first seed.</div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+    <div class="calm-tabs" role="tablist" aria-label="Calm activities">
+      <button class="c-tab active" type="button" role="tab" aria-selected="true" data-tab="breathing">
+        <span class="tab-icon">☁</span>
+        Breathe
+      </button>
+      <button class="c-tab" type="button" role="tab" aria-selected="false" data-tab="flow">
+        <span class="tab-icon">〰</span>
+        Color flow
+      </button>
+      <button class="c-tab" type="button" role="tab" aria-selected="false" data-tab="gratitude">
+        <span class="tab-icon">✿</span>
+        Gratitude garden
+      </button>
     </div>
+
+    <!-- BREATHING -->
+    <section class="calm-panel active" id="panel-breathing" role="tabpanel">
+      <div class="panel-card">
+        <div class="breathing-layout">
+          <div class="breathing-visual">
+            <p class="eyebrow" id="breathStatus">whenever you're ready</p>
+
+            <div class="breath-circle-wrap">
+              <div class="breath-circle" id="breathCircle">
+                <span class="breath-word" id="breathWord">breathe</span>
+              </div>
+            </div>
+
+            <div class="breath-reminder" id="breathReminder" aria-live="polite">
+              Let your shoulders soften. There is no rush.
+            </div>
+
+            <div class="breathing-controls">
+              <button class="primary-button" id="breathStart" type="button">Begin breathing</button>
+              <button class="secondary-button" id="breathReset" type="button">Reset</button>
+            </div>
+          </div>
+
+          <div class="breathing-info">
+            <p class="eyebrow">a moment for you</p>
+            <h3>Let the day get a little quieter.</h3>
+            <p>
+              Follow the circle if it feels comfortable. You don't need to take
+              unusually deep breaths or hold your breath. Let your breathing
+              remain gentle and natural.
+            </p>
+
+            <div class="steps">
+              <div class="step">
+                <span class="step-number">1</span>
+                <div>
+                  <strong>Breathe in gently</strong>
+                  <span>Let the circle grow at its own pace.</span>
+                </div>
+              </div>
+
+              <div class="step">
+                <span class="step-number">2</span>
+                <div>
+                  <strong>Pause if comfortable</strong>
+                  <span>You can skip the pause whenever you like.</span>
+                </div>
+              </div>
+
+              <div class="step">
+                <span class="step-number">3</span>
+                <div>
+                  <strong>Breathe out slowly</strong>
+                  <span>Let your body choose a comfortable rhythm.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="note">
+              A gentle reminder: if focusing on your breathing makes you
+              uncomfortable or light-headed, stop the exercise and return
+              to your usual breathing. You can simply look around and notice
+              the room instead.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOR FLOW -->
+    <section class="calm-panel" id="panel-flow" role="tabpanel">
+      <div class="panel-card">
+        <p class="eyebrow">make without a plan</p>
+        <h2 class="section-heading">A little color, a little quiet.</h2>
+        <p class="section-description">
+          Move your pointer or finger across the canvas. There is no right
+          way to make something here.
+        </p>
+
+        <div class="color-flow-layout">
+          <div class="canvas-wrap">
+            <canvas id="colorCanvas" aria-label="A drawing canvas for freeform color exploration"></canvas>
+          </div>
+
+          <div class="flow-controls">
+            <div class="control-box">
+              <h3>Choose a shade</h3>
+              <div class="color-options" id="colorOptions">
+                <button class="color-choice selected" data-color="#EADBDC" type="button" aria-label="Dusty pink" aria-pressed="true"></button>
+                <button class="color-choice" data-color="#E5E8DE" type="button" aria-label="Soft sage" aria-pressed="false"></button>
+                <button class="color-choice" data-color="#F1E8CF" type="button" aria-label="Butter yellow" aria-pressed="false"></button>
+                <button class="color-choice" data-color="#EAE5E8" type="button" aria-label="Muted lavender" aria-pressed="false"></button>
+                <button class="color-choice" data-color="#F0E4D7" type="button" aria-label="Soft peach" aria-pressed="false"></button>
+                <button class="color-choice" data-color="#DCDCCF" type="button" aria-label="Muted olive" aria-pressed="false"></button>
+              </div>
+              <p class="control-hint">Choose whatever feels right today.</p>
+            </div>
+
+            <div class="control-box">
+              <h3>Your brush</h3>
+              <label class="control-label" for="brushSize">
+                <span>Brush size</span>
+                <span id="brushSizeValue">12</span>
+              </label>
+              <input id="brushSize" type="range" min="2" max="32" value="12">
+
+              <label class="control-label" for="brushOpacity" style="margin-top:15px;">
+                <span>Softness</span>
+                <span id="brushOpacityValue">65%</span>
+              </label>
+              <input id="brushOpacity" type="range" min="15" max="100" value="65">
+            </div>
+
+            <div class="control-box">
+              <h3>Make some space</h3>
+              <div class="flow-actions">
+                <button class="secondary-button" id="undoDrawing" type="button">Undo</button>
+                <button class="secondary-button" id="clearDrawing" type="button">Clear</button>
+              </div>
+              <p class="control-hint">You can begin again as many times as you need.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRATITUDE GARDEN -->
+    <section class="calm-panel" id="panel-gratitude" role="tabpanel">
+      <div class="panel-card">
+        <p class="eyebrow">small things count, too</p>
+        <h2 class="section-heading">What helped today?</h2>
+        <p class="section-description">
+          It doesn't have to be a big thing. A warm drink, a funny message,
+          a few minutes of rest. You can write about anything that felt
+          meaningful to you.
+        </p>
+
+        <div class="gratitude-layout">
+          <form class="gratitude-form" id="gratitudeForm">
+            <label for="gratitudeText">Today, I'm grateful for…</label>
+            <textarea
+              id="gratitudeText"
+              maxlength="1000"
+              placeholder="A little thing I want to remember..."
+              required
+            ></textarea>
+
+            <label for="gratitudeDate">Date</label>
+            <input id="gratitudeDate" type="date" required>
+
+            <button class="primary-button" type="submit">Plant this thought ✿</button>
+            <p class="status-message" id="gratitudeStatus" aria-live="polite"></p>
+          </form>
+
+          <div class="gratitude-garden">
+            <div class="garden-illustration" aria-hidden="true">🌱</div>
+            <h3>Your little garden</h3>
+            <p>
+              Every thought you choose to keep is a little seed.
+              Let this space grow at your own pace.
+            </p>
+            <span class="garden-count" id="gardenCount">0 thoughts planted</span>
+          </div>
+        </div>
+
+        <div class="entries-heading">
+          <h3>Things worth keeping</h3>
+          <button class="small-button" id="refreshGratitude" type="button">Refresh</button>
+        </div>
+
+        <div class="entries-list" id="gratitudeEntries">
+          <div class="entry-empty">Your garden is waiting for its first seed.</div>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">You don't have to bloom every day.</p>
   </main>
 
   <footer>
-    <div class="script">be gentle with yourself.</div>
-    <p>zenene · where your mind blooms</p>
+    Zenene · a gentle space for reflection · not a substitute for professional mental-health care
   </footer>
 
-  <button class="crisis-fab" type="button" onclick="openCrisis()" aria-haspopup="dialog">♡ need help?</button>
-
-  <div class="overlay" id="cm" role="dialog" aria-modal="true" aria-labelledby="crisisTitle" aria-hidden="true" onclick="if(event.target===this)closeCrisis()">
-    <div class="modal">
-      <div class="m-top">
-        <div class="m-title" id="crisisTitle">You're not alone.</div>
-        <button class="m-close" type="button" onclick="closeCrisis()" aria-label="Close support dialog">×</button>
-      </div>
-      <p class="m-sub">
-        If you feel unsafe or need immediate support, please reach out to a trusted adult or an appropriate local emergency or crisis service. You deserve support from a real person.
+  <!-- Sign-in reminder -->
+  <div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="modal-card">
+      <p class="eyebrow">your little corner</p>
+      <h2 id="authModalTitle">A note about saving</h2>
+      <p>
+        You can use the breathing and color activities without signing in.
+        Saving gratitude thoughts to your account requires authentication.
       </p>
-      <a class="c-link" href="tel:112">☎ Call emergency services (112 in India)</a>
+      <p id="authModalMessage">
+        Sign in through the account flow configured for your Zenene website
+        to access your saved thoughts.
+      </p>
+      <div class="modal-actions">
+        <button class="primary-button" id="closeAuthModal" type="button">Okay</button>
+      </div>
     </div>
   </div>
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  <script src="js/supabase.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/nav-auth.js"></script>
-
   <script>
-    /* TAB SWITCHING */
-    function switchTab(id, btn) {
-      document.querySelectorAll(".panel").forEach(panel => {
-        const active = panel.id === "panel-" + id;
-        panel.classList.toggle("active", active);
-        panel.hidden = !active;
-      });
+    /*
+      ZENENE CALM PAGE
 
-      document.querySelectorAll(".c-tab").forEach(button => {
-        const active = button === btn;
-        button.classList.toggle("active", active);
-        button.setAttribute("aria-selected", String(active));
-        button.tabIndex = active ? 0 : -1;
-      });
-    }
+      Optional Supabase setup:
+      1. Load your Supabase JS client before this script.
+      2. Configure window.supabaseClient with your existing client.
+      3. Use a gratitude_entries table with:
+         id, user_id, entry_text, entry_date, created_at
+      4. Enable Row Level Security and policies that restrict records
+         to the authenticated user.
 
-    document.querySelectorAll(".c-tab").forEach((btn, index, buttons) => {
-      btn.addEventListener("keydown", e => {
-        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
-        e.preventDefault();
-        let next = index;
-        if (e.key === "ArrowRight") next = (index + 1) % buttons.length;
-        if (e.key === "ArrowLeft") next = (index - 1 + buttons.length) % buttons.length;
-        if (e.key === "Home") next = 0;
-        if (e.key === "End") next = buttons.length - 1;
-        buttons[next].click();
-        buttons[next].focus();
-      });
-    });
+      If Supabase is not configured, the breathing and drawing activities
+      still work. Gratitude saving will explain that sign-in is unavailable.
+    */
 
-    /* BREATHING */
-    let bTimer = null;
-    let bCycle = 0;
-    let bPhase = 0;
-    let breathRunning = false;
+    (() => {
+      "use strict";
 
-    const PHASES = [
-      { name: "Inhale", dur: 4, scale: 1.28, shadow: "0 0 0 18px rgba(158,191,204,.24)" },
-      { name: "Hold", dur: 7, scale: 1.28, shadow: "0 0 0 23px rgba(158,191,204,.15)" },
-      { name: "Exhale", dur: 8, scale: 1, shadow: "0 0 0 0 rgba(158,191,204,0)" }
-    ];
+      const $ = (selector) => document.querySelector(selector);
+      const $$ = (selector) => [...document.querySelectorAll(selector)];
 
-    const MAX_CYCLES = 4;
+      // ---------------------------
+      // Tab navigation
+      // ---------------------------
 
-    function startBreath() {
-      clearTimeout(bTimer);
-      breathRunning = true;
-      bCycle = 0;
-      bPhase = 0;
-      document.getElementById("bstart").hidden = true;
-      document.getElementById("bstop").hidden = false;
-      runPhase();
-    }
+      const tabs = $$(".c-tab");
+      const panels = $$(".calm-panel");
 
-    function runPhase() {
-      if (!breathRunning) return;
+      function activateTab(tabName) {
+        tabs.forEach((tab) => {
+          const selected = tab.dataset.tab === tabName;
+          tab.classList.toggle("active", selected);
+          tab.setAttribute("aria-selected", String(selected));
+        });
 
-      if (bCycle >= MAX_CYCLES) {
-        stopBreath(true);
-        return;
+        panels.forEach((panel) => {
+          panel.classList.toggle("active", panel.id === `panel-${tabName}`);
+        });
+
+        if (tabName === "flow") {
+          requestAnimationFrame(resizeCanvas);
+        }
       }
 
-      const p = PHASES[bPhase];
-      const circle = document.getElementById("bc");
-      circle.style.transform = "scale(" + p.scale + ")";
-      circle.style.boxShadow = p.shadow;
-      circle.style.transitionDuration = p.dur + "s";
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => activateTab(tab.dataset.tab));
+      });
 
-      document.getElementById("bw").textContent = p.name;
-      document.getElementById("bphase").textContent = p.name + " for " + p.dur + " seconds";
-      document.getElementById("cycleInfo").textContent = "Cycle " + (bCycle + 1) + " of " + MAX_CYCLES;
+      // ---------------------------
+      // Gentle breathing exercise
+      // ---------------------------
 
-      let remaining = p.dur;
-      document.getElementById("bcnt").textContent = remaining;
+      const breathCircle = $("#breathCircle");
+      const breathWord = $("#breathWord");
+      const breathStatus = $("#breathStatus");
+      const breathReminder = $("#breathReminder");
+      const breathStart = $("#breathStart");
+      const breathReset = $("#breathReset");
 
-      function tick() {
-        if (!breathRunning) return;
-        remaining--;
-        document.getElementById("bcnt").textContent = remaining > 0 ? remaining : "";
+      let breathing = false;
+      let breathingTimer = null;
+      let breathingPhaseIndex = 0;
+      let breathingTimeouts = [];
 
-        if (remaining <= 0) {
-          bPhase++;
-          if (bPhase >= PHASES.length) {
-            bPhase = 0;
-            bCycle++;
+      const breathingPhases = [
+        {
+          name: "Breathe in",
+          word: "in...",
+          className: "inhale",
+          duration: 4000,
+          reminder: "Breathe in gently, only as much as feels comfortable."
+        },
+        {
+          name: "A soft pause",
+          word: "pause",
+          className: "hold",
+          duration: 1500,
+          reminder: "You can pause here, or skip straight to breathing out."
+        },
+        {
+          name: "Breathe out",
+          word: "out...",
+          className: "exhale",
+          duration: 5000,
+          reminder: "Let your breath out without forcing it."
+        }
+      ];
+
+      function clearBreathingTimers() {
+        if (breathingTimer !== null) {
+          clearTimeout(breathingTimer);
+          breathingTimer = null;
+        }
+
+        breathingTimeouts.forEach(clearTimeout);
+        breathingTimeouts = [];
+      }
+
+      function setBreathingPhase(index) {
+        if (!breathing) return;
+
+        const phase = breathingPhases[index];
+        breathCircle.classList.remove("inhale", "hold", "exhale");
+        breathCircle.classList.add(phase.className);
+
+        breathWord.textContent = phase.word;
+        breathStatus.textContent = phase.name;
+        breathReminder.textContent = phase.reminder;
+
+        breathingPhaseIndex = index;
+
+        breathingTimer = setTimeout(() => {
+          if (!breathing) return;
+          const nextIndex = (breathingPhaseIndex + 1) % breathingPhases.length;
+          setBreathingPhase(nextIndex);
+        }, phase.duration);
+      }
+
+      function startBreathing() {
+        if (breathing) {
+          stopBreathing();
+          return;
+        }
+
+        breathing = true;
+        breathStart.textContent = "Pause exercise";
+        setBreathingPhase(0);
+      }
+
+      function stopBreathing() {
+        breathing = false;
+        clearBreathingTimers();
+
+        breathCircle.classList.remove("inhale", "hold", "exhale");
+        breathWord.textContent = "breathe";
+        breathStatus.textContent = "whenever you're ready";
+        breathReminder.textContent =
+          "Let your shoulders soften. There is no rush.";
+        breathStart.textContent = "Begin breathing";
+      }
+
+      breathStart.addEventListener("click", startBreathing);
+      breathReset.addEventListener("click", stopBreathing);
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && breathing) stopBreathing();
+      });
+
+      // ---------------------------
+      // Color Flow canvas
+      // ---------------------------
+
+      const canvas = $("#colorCanvas");
+      const ctx = canvas.getContext("2d", { alpha: false });
+
+      let selectedColor = "#EADBDC";
+      let brushSize = 12;
+      let brushOpacity = 0.65;
+      let drawing = false;
+      let previousPoint = null;
+      let drawingHistory = [];
+      let activeStroke = null;
+
+      function getCanvasBackground() {
+        return "#F3EDE2";
+      }
+
+      function resizeCanvas() {
+        if (!canvas || !ctx) return;
+
+        const rect = canvas.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
+
+        let oldImage = null;
+        if (oldWidth && oldHeight) {
+          try {
+            oldImage = ctx.getImageData(0, 0, oldWidth, oldHeight);
+          } catch (_) {
+            oldImage = null;
           }
-          runPhase();
+        }
+
+        canvas.width = Math.round(rect.width * pixelRatio);
+        canvas.height = Math.round(rect.height * pixelRatio);
+
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        ctx.fillStyle = getCanvasBackground();
+        ctx.fillRect(0, 0, rect.width, rect.height);
+
+        if (oldImage && oldWidth && oldHeight) {
+          const temporary = document.createElement("canvas");
+          temporary.width = oldWidth;
+          temporary.height = oldHeight;
+          const temporaryContext = temporary.getContext("2d");
+
+          if (temporaryContext) {
+            temporaryContext.putImageData(oldImage, 0, 0);
+            ctx.drawImage(
+              temporary,
+              0,
+              0,
+              oldWidth,
+              oldHeight,
+              0,
+              0,
+              rect.width,
+              rect.height
+            );
+          }
+        }
+
+        if (drawingHistory.length) {
+          redrawHistory();
+        }
+      }
+
+      function redrawHistory() {
+        const rect = canvas.getBoundingClientRect();
+        ctx.fillStyle = getCanvasBackground();
+        ctx.fillRect(0, 0, rect.width, rect.height);
+
+        drawingHistory.forEach((stroke) => drawStroke(stroke));
+        if (activeStroke) drawStroke(activeStroke);
+      }
+
+      function drawStroke(stroke) {
+        if (!stroke || !stroke.points || !stroke.points.length) return;
+
+        ctx.save();
+        ctx.strokeStyle = stroke.color;
+        ctx.fillStyle = stroke.color;
+        ctx.globalAlpha = stroke.opacity;
+        ctx.lineWidth = stroke.size;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        const points = stroke.points;
+
+        if (points.length === 1) {
+          ctx.beginPath();
+          ctx.arc(
+            points[0].x,
+            points[0].y,
+            stroke.size / 2,
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
         } else {
-          bTimer = setTimeout(tick, 1000);
-        }
-      }
+          ctx.beginPath();
+          ctx.moveTo(points[0].x, points[0].y);
 
-      bTimer = setTimeout(tick, 1000);
-    }
+          for (let i = 1; i < points.length; i++) {
+            const previous = points[i - 1];
+            const current = points[i];
+            const middleX = (previous.x + current.x) / 2;
+            const middleY = (previous.y + current.y) / 2;
 
-    function stopBreath(done = false) {
-      clearTimeout(bTimer);
-      breathRunning = false;
+            ctx.quadraticCurveTo(
+              previous.x,
+              previous.y,
+              middleX,
+              middleY
+            );
+          }
 
-      const circle = document.getElementById("bc");
-      circle.style.transitionDuration = ".6s";
-      circle.style.transform = "scale(1)";
-      circle.style.boxShadow = "";
-
-      document.getElementById("bw").textContent = "breathe";
-      document.getElementById("bcnt").textContent = "";
-      document.getElementById("bphase").textContent = done
-        ? "You made space for yourself."
-        : "4-7-8 Breathing";
-      document.getElementById("cycleInfo").textContent = done
-        ? "You completed " + MAX_CYCLES + " cycles. Take a moment before moving on."
-        : "";
-
-      document.getElementById("bstart").hidden = false;
-      document.getElementById("bstop").hidden = true;
-    }
-
-    /* COLOR FLOW */
-    const COLORS = [
-      "#C5DCF0", "#F2BFC8", "#F5C9A0", "#A8C4A2",
-      "#D4C5E8", "#E8909F", "#7AB075", "#2A1C12", "#FFFFFF"
-    ];
-
-    let cfColor = COLORS[0];
-    let cfSize = 6;
-    let cfDrawing = false;
-    let cfSnaps = [];
-    let cfLastPoint = null;
-
-    const canvas = document.getElementById("cf");
-    const ctx = canvas.getContext("2d");
-    const ccWrap = document.getElementById("cfColors");
-
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
-
-    COLORS.forEach((color, index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "cc" + (index === 0 ? " sel" : "");
-      button.style.background = color;
-      if (color === "#FFFFFF") button.style.borderColor = "#b8b1a8";
-      button.setAttribute("aria-label", "Choose color " + color);
-      button.setAttribute("aria-pressed", String(index === 0));
-
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".cc").forEach(item => {
-          item.classList.remove("sel");
-          item.setAttribute("aria-pressed", "false");
-        });
-        button.classList.add("sel");
-        button.setAttribute("aria-pressed", "true");
-        cfColor = color;
-      });
-
-      ccWrap.appendChild(button);
-    });
-
-    document.querySelectorAll(".cf-sz").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".cf-sz").forEach(item => {
-          item.classList.remove("sel");
-          item.setAttribute("aria-pressed", "false");
-        });
-        button.classList.add("sel");
-        button.setAttribute("aria-pressed", "true");
-        cfSize = Number(button.dataset.s);
-      });
-    });
-
-    function canvasPoint(event) {
-      const rect = canvas.getBoundingClientRect();
-      return {
-        x: (event.clientX - rect.left) * (canvas.width / rect.width),
-        y: (event.clientY - rect.top) * (canvas.height / rect.height)
-      };
-    }
-
-    function saveSnapshot() {
-      cfSnaps.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-      if (cfSnaps.length > 100) cfSnaps.shift();
-    }
-
-    function startDrawing(event) {
-      if (event.button !== undefined && event.button !== 0) return;
-      event.preventDefault();
-      saveSnapshot();
-      cfDrawing = true;
-      cfLastPoint = canvasPoint(event);
-      ctx.beginPath();
-      ctx.moveTo(cfLastPoint.x, cfLastPoint.y);
-      ctx.lineTo(cfLastPoint.x + .01, cfLastPoint.y + .01);
-      ctx.strokeStyle = cfColor;
-      ctx.lineWidth = cfSize;
-      ctx.stroke();
-      if (canvas.setPointerCapture && event.pointerId !== undefined) {
-        try { canvas.setPointerCapture(event.pointerId); } catch (_) {}
-      }
-    }
-
-    function draw(event) {
-      if (!cfDrawing) return;
-      event.preventDefault();
-      const point = canvasPoint(event);
-      ctx.beginPath();
-      ctx.moveTo(cfLastPoint.x, cfLastPoint.y);
-      ctx.lineTo(point.x, point.y);
-      ctx.strokeStyle = cfColor;
-      ctx.lineWidth = cfSize;
-      ctx.stroke();
-      cfLastPoint = point;
-    }
-
-    function stopDrawing() {
-      cfDrawing = false;
-      cfLastPoint = null;
-    }
-
-    canvas.addEventListener("pointerdown", startDrawing);
-    canvas.addEventListener("pointermove", draw);
-    canvas.addEventListener("pointerup", stopDrawing);
-    canvas.addEventListener("pointercancel", stopDrawing);
-    canvas.addEventListener("lostpointercapture", stopDrawing);
-
-    function cfUndo() {
-      if (cfSnaps.length) {
-        ctx.putImageData(cfSnaps.pop(), 0, 0);
-      }
-    }
-
-    function cfClear() {
-      saveSnapshot();
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    function cfSave() {
-      const link = document.createElement("a");
-      link.download = "zenene-color-flow.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    }
-
-    /* GRATITUDE GARDEN */
-    let gratitudeCache = [];
-
-    function showGratitudeMessage(message) {
-      const errorEl = document.getElementById("gratitudeSyncError");
-      errorEl.textContent = message;
-      errorEl.hidden = !message;
-    }
-
-    async function saveGratitude() {
-      const values = ["g1", "g2", "g3"].map(id =>
-        document.getElementById(id).value.trim()
-      );
-
-      if (!values.some(Boolean)) {
-        showGratitudeMessage("Add at least one small thing before planting it in your garden.");
-        return;
-      }
-
-      const saveBtn = document.getElementById("gratitudeSaveBtn");
-      saveBtn.disabled = true;
-      saveBtn.textContent = "planting...";
-      showGratitudeMessage("");
-
-      try {
-        const user = await getCurrentUser();
-
-        if (!user) {
-          showGratitudeMessage("Sign in to save your gratitude garden across sessions.");
-          return;
+          const last = points[points.length - 1];
+          ctx.lineTo(last.x, last.y);
+          ctx.stroke();
         }
 
-        if (typeof supabaseClient === "undefined" || !supabaseClient) {
-          showGratitudeMessage("Your garden couldn't connect. Please try again.");
-          return;
-        }
+        ctx.restore();
+      }
 
-        const entry = {
-          id: Date.now(),
-          date: new Date().toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric"
-          }),
-          items: values.filter(Boolean)
+      function getCanvasPoint(event) {
+        const rect = canvas.getBoundingClientRect();
+
+        return {
+          x: Math.max(0, Math.min(rect.width, event.clientX - rect.left)),
+          y: Math.max(0, Math.min(rect.height, event.clientY - rect.top))
+        };
+      }
+
+      canvas.addEventListener("pointerdown", (event) => {
+        if (!$("#panel-flow").classList.contains("active")) return;
+
+        drawing = true;
+        previousPoint = getCanvasPoint(event);
+        activeStroke = {
+          color: selectedColor,
+          size: brushSize,
+          opacity: brushOpacity,
+          points: [previousPoint]
         };
 
-        const { error } = await supabaseClient
-          .from("gratitude_entries")
-          .insert({
-            id: entry.id,
-            user_id: user.id,
-            date: entry.date,
-            items: entry.items
-          });
+        try {
+          canvas.setPointerCapture(event.pointerId);
+        } catch (_) {}
 
-        if (error) {
-          console.error("Could not save gratitude entry:", error);
-          showGratitudeMessage("Couldn't save your entry. Please check your connection and try again.");
-          return;
-        }
-
-        gratitudeCache.unshift(entry);
-        ["g1", "g2", "g3"].forEach(id => {
-          document.getElementById(id).value = "";
-        });
-        renderGarden();
-        showGratitudeMessage("Your little seed has been planted.");
-      } catch (error) {
-        console.error("Gratitude save error:", error);
-        showGratitudeMessage("Something went wrong. Please try again.");
-      } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = "plant in my garden";
-      }
-    }
-
-    async function loadGratitudeFromSupabase() {
-      try {
-        const user = await getCurrentUser();
-        if (!user || typeof supabaseClient === "undefined" || !supabaseClient) {
-          renderGarden();
-          return;
-        }
-
-        const { data, error } = await supabaseClient
-          .from("gratitude_entries")
-          .select("*")
-          .eq("user_id", user.id)
-          .order("id", { ascending: false });
-
-        if (error) {
-          console.error("Could not load gratitude entries:", error);
-          showGratitudeMessage("Couldn't load your saved garden. Check your connection and try again.");
-          return;
-        }
-
-        gratitudeCache = (data || []).map(row => ({
-          id: row.id,
-          date: row.date,
-          items: Array.isArray(row.items) ? row.items : []
-        }));
-
-        renderGarden();
-      } catch (error) {
-        console.error("Gratitude loading error:", error);
-        showGratitudeMessage("Your garden couldn't load just now. Please try again later.");
-      }
-    }
-
-    function renderGarden() {
-      const garden = document.getElementById("ggarden");
-      garden.replaceChildren();
-
-      if (!gratitudeCache.length) {
-        const empty = document.createElement("div");
-        empty.className = "garden-empty";
-        empty.textContent = "Your garden is waiting for its first seed. Save a small moment you appreciate to see it bloom here.";
-        garden.appendChild(empty);
-        return;
-      }
-
-      gratitudeCache.forEach(entry => {
-        const card = document.createElement("article");
-        card.className = "gg-card";
-
-        const date = document.createElement("div");
-        date.className = "gg-card-date";
-        date.textContent = entry.date || "";
-        card.appendChild(date);
-
-        entry.items.forEach(item => {
-          const line = document.createElement("div");
-          line.textContent = "• " + String(item);
-          card.appendChild(line);
-        });
-
-        garden.appendChild(card);
+        drawStroke(activeStroke);
+        event.preventDefault();
       });
-    }
 
-    /* CRISIS SUPPORT */
-    let previousFocus = null;
+      canvas.addEventListener("pointermove", (event) => {
+        if (!drawing || !activeStroke) return;
 
-    function openCrisis() {
-      const modal = document.getElementById("cm");
-      previousFocus = document.activeElement;
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      modal.querySelector(".m-close").focus();
-    }
+        const point = getCanvasPoint(event);
+        activeStroke.points.push(point);
 
-    function closeCrisis() {
-      const modal = document.getElementById("cm");
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      if (previousFocus) previousFocus.focus();
-    }
+        const points = activeStroke.points;
+        if (points.length >= 2) {
+          const previous = points[points.length - 2];
 
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && document.getElementById("cm").classList.contains("open")) {
-        closeCrisis();
+          ctx.save();
+          ctx.strokeStyle = activeStroke.color;
+          ctx.globalAlpha = activeStroke.opacity;
+          ctx.lineWidth = activeStroke.size;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          ctx.beginPath();
+          ctx.moveTo(previous.x, previous.y);
+          ctx.lineTo(point.x, point.y);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        previousPoint = point;
+      });
+
+      function finishStroke() {
+        if (!drawing) return;
+
+        drawing = false;
+        previousPoint = null;
+
+        if (activeStroke) {
+          drawingHistory.push(activeStroke);
+          activeStroke = null;
+
+          if (drawingHistory.length > 100) {
+            drawingHistory.shift();
+          }
+        }
       }
-    });
 
-    /* INITIALIZE */
-    renderGarden();
-    loadGratitudeFromSupabase();
+      canvas.addEventListener("pointerup", finishStroke);
+      canvas.addEventListener("pointercancel", finishStroke);
+      canvas.addEventListener("lostpointercapture", finishStroke);
+
+      $$(".color-choice").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedColor = button.dataset.color;
+
+          $$(".color-choice").forEach((choice) => {
+            const selected = choice === button;
+            choice.classList.toggle("selected", selected);
+            choice.setAttribute("aria-pressed", String(selected));
+          });
+        });
+      });
+
+      $("#brushSize").addEventListener("input", (event) => {
+        brushSize = Number(event.target.value);
+        $("#brushSizeValue").textContent = String(brushSize);
+      });
+
+      $("#brushOpacity").addEventListener("input", (event) => {
+        brushOpacity = Number(event.target.value) / 100;
+        $("#brushOpacityValue").textContent = `${event.target.value}%`;
+      });
+
+      $("#undoDrawing").addEventListener("click", () => {
+        drawingHistory.pop();
+        redrawHistory();
+      });
+
+      $("#clearDrawing").addEventListener("click", () => {
+        drawingHistory = [];
+        activeStroke = null;
+
+        const rect = canvas.getBoundingClientRect();
+        ctx.fillStyle = getCanvasBackground();
+        ctx.fillRect(0, 0, rect.width, rect.height);
+      });
+
+      let resizeFrame = null;
+      window.addEventListener("resize", () => {
+        if (resizeFrame !== null) cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(() => {
+          resizeCanvas();
+          resizeFrame = null;
+        });
+      });
+
+      resizeCanvas();
+
+      // ---------------------------
+      // Account and modal handling
+      // ---------------------------
+
+      const authModal = $("#authModal");
+      const authButton = $("#authButton");
+
+      function openAuthModal(message) {
+        if (message) $("#authModalMessage").textContent = message;
+        authModal.classList.add("open");
+        $("#closeAuthModal").focus();
+      }
+
+      function closeAuthModal() {
+        authModal.classList.remove("open");
+        authButton.focus();
+      }
+
+      authButton.addEventListener("click", () => {
+        /*
+          Replace this with your existing Zenene sign-in route if one exists.
+          For example, you might navigate to login.html.
+        */
+        openAuthModal(
+          "Connect your existing sign-in page to enable account-based saving. Your gratitude entries should only be accessible to you."
+        );
+      });
+
+      $("#closeAuthModal").addEventListener("click", closeAuthModal);
+
+      authModal.addEventListener("click", (event) => {
+        if (event.target === authModal) closeAuthModal();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && authModal.classList.contains("open")) {
+          closeAuthModal();
+        }
+      });
+
+      // ---------------------------
+      // Gratitude garden + Supabase
+      // ---------------------------
+
+      const gratitudeForm = $("#gratitudeForm");
+      const gratitudeText = $("#gratitudeText");
+      const gratitudeDate = $("#gratitudeDate");
+      const gratitudeStatus = $("#gratitudeStatus");
+      const gratitudeEntries = $("#gratitudeEntries");
+      const gardenCount = $("#gardenCount");
+
+      function localDateString(date = new Date()) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      gratitudeDate.value = localDateString();
+
+      function getSupabaseClient() {
+        return window.supabaseClient || window.zeneneSupabase || null;
+      }
+
+      function showGratitudeEntries(entries) {
+        gratitudeEntries.replaceChildren();
+
+        if (!entries.length) {
+          const empty = document.createElement("div");
+          empty.className = "entry-empty";
+          empty.textContent = "Your garden is waiting for its first seed.";
+          gratitudeEntries.appendChild(empty);
+        } else {
+          entries.forEach((entry) => {
+            const card = document.createElement("article");
+            card.className = "gratitude-entry";
+
+            const text = document.createElement("p");
+            text.textContent = entry.entry_text ?? entry.text ?? "";
+
+            const date = document.createElement("div");
+            date.className = "entry-date";
+            date.textContent = entry.entry_date || entry.date || "";
+
+            card.append(text, date);
+            gratitudeEntries.appendChild(card);
+          });
+        }
+
+        gardenCount.textContent =
+          `${entries.length} ${entries.length === 1 ? "thought" : "thoughts"} planted`;
+      }
+
+      async function loadGratitudeEntries() {
+        const client = getSupabaseClient();
+
+        if (!client) {
+          showGratitudeEntries([]);
+          gratitudeStatus.textContent =
+            "Sign-in and cloud saving aren't connected on this page yet.";
+          return;
+        }
+
+        try {
+          const { data: authData, error: authError } =
+            await client.auth.getUser();
+
+          if (authError || !authData?.user) {
+            showGratitudeEntries([]);
+            gratitudeStatus.textContent = "Sign in to view your saved thoughts.";
+            return;
+          }
+
+          const { data, error } = await client
+            .from("gratitude_entries")
+            .select("id, entry_text, entry_date, created_at")
+            .eq("user_id", authData.user.id)
+            .order("entry_date", { ascending: false })
+            .limit(50);
+
+          if (error) throw error;
+
+          showGratitudeEntries(data || []);
+          gratitudeStatus.textContent = "";
+        } catch (error) {
+          console.error("Unable to load gratitude entries:", error);
+          gratitudeStatus.textContent =
+            "Your saved thoughts couldn't be loaded. Please try again.";
+        }
+      }
+
+      gratitudeForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const text = gratitudeText.value.trim();
+        const date = gratitudeDate.value;
+
+        if (!text || !date) {
+          gratitudeStatus.textContent = "Add a thought and choose a date first.";
+          return;
+        }
+
+        const client = getSupabaseClient();
+
+        if (!client) {
+          gratitudeStatus.textContent =
+            "Cloud saving isn't connected yet. Your thought hasn't been saved.";
+          openAuthModal(
+            "To save gratitude entries, connect your Supabase client and authentication. This page does not store your thoughts in a private account unless that connection is configured."
+          );
+          return;
+        }
+
+        const submitButton = gratitudeForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = "Planting...";
+
+        try {
+          const { data: authData, error: authError } =
+            await client.auth.getUser();
+
+          if (authError || !authData?.user) {
+            gratitudeStatus.textContent = "Please sign in before saving a thought.";
+            openAuthModal("Sign in to save and revisit your gratitude entries.");
+            return;
+          }
+
+          const { error } = await client
+            .from("gratitude_entries")
+            .insert({
+              user_id: authData.user.id,
+              entry_text: text,
+              entry_date: date
+            });
+
+          if (error) throw error;
+
+          gratitudeText.value = "";
+          gratitudeStatus.textContent = "Your thought has been planted. ✿";
+          await loadGratitudeEntries();
+        } catch (error) {
+          console.error("Unable to save gratitude entry:", error);
+          gratitudeStatus.textContent =
+            "Your thought couldn't be saved. Please try again.";
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Plant this thought ✿";
+        }
+      });
+
+      $("#refreshGratitude").addEventListener("click", loadGratitudeEntries);
+
+      // ---------------------------
+      // Reflect the existing session
+      // ---------------------------
+
+      async function updateUserDisplay() {
+        const client = getSupabaseClient();
+        if (!client) return;
+
+        try {
+          const { data, error } = await client.auth.getUser();
+          if (error || !data?.user) return;
+
+          const user = data.user;
+          const displayName =
+            user.user_metadata?.full_name ||
+            user.user_metadata?.name ||
+            user.email?.split("@")[0] ||
+            "your little corner";
+
+          $("#userName").textContent = displayName;
+          authButton.textContent = "Account";
+          await loadGratitudeEntries();
+        } catch (error) {
+          console.error("Unable to read the current user:", error);
+        }
+      }
+
+      updateUserDisplay();
+
+      if (getSupabaseClient()?.auth?.onAuthStateChange) {
+        getSupabaseClient().auth.onAuthStateChange(() => {
+          updateUserDisplay();
+        });
+      }
+    })();
   </script>
 </body>
 </html>

@@ -1,0 +1,11 @@
+# Deploys vera-worker.js only (the static site is hosted separately).
+#   npx wrangler login
+#   npx wrangler secret put ANTHROPIC_API_KEY
+#   npx wrangler deploy
+name = "vera-api"
+main = "vera-worker.js"
+compatibility_date = "2026-10-01"
+
+# Free fallback model when Claude is unavailable.
+[ai]
+binding = "AI"

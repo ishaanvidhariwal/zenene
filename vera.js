@@ -33,7 +33,35 @@ const VERA_API =
 */
 
 const VERA_API =
-    "YOUR_CLOUDFLARE_WORKER_URL";
+    "https://vera-api.zenene.workers.dev";
+
+
+
+const VERA_CONFIGURED =
+    VERA_API.startsWith("https://");
+
+
+
+/*
+==================================================
+CRISIS FALLBACK
+
+The worker appends crisis resources to its reply.
+This copy only shows when the worker can't be
+reached, so nobody in crisis gets a dead end.
+==================================================
+*/
+
+const CRISIS_PATTERN =
+    /kill myself|killing myself|want to die|wanna die|end my life|ending my life|ending it all|no reason to live|better off dead|suicid|self[- ]?harm|hurt(ing)? myself|cutting myself|can'?t go on|not worth living|overdose|unalive|\bkms\b|don'?t want to (be here|live)|take my own life/i;
+
+const CRISIS_FALLBACK =
+    "I can't reach my full self right now, but what you said matters, and I don't want you to sit with it alone.\n\n" +
+    "• US: call or text 988 (Suicide & Crisis Lifeline)\n" +
+    "• US/Canada: text HOME to 741741 (Crisis Text Line)\n" +
+    "• UK/ROI: call Samaritans at 116 123\n" +
+    "• Elsewhere: findahelpline.com\n" +
+    "If you're in immediate danger, please contact local emergency services.";
 
 
 
@@ -379,6 +407,15 @@ async function sendMessage(message) {
 
     try {
 
+        if (!VERA_CONFIGURED) {
+
+            throw new Error(
+                "VERA_API is not set"
+            );
+
+        }
+
+
         const response =
             await fetch(
                 VERA_API,
@@ -415,7 +452,8 @@ async function sendMessage(message) {
         if (!response.ok) {
 
             throw new Error(
-                "Vera server error"
+                "Vera server error " +
+                response.status
             );
 
         }
@@ -464,9 +502,22 @@ async function sendMessage(message) {
         hideThinking();
 
 
+        // Drop the unanswered message so the next try
+        // doesn't send two user turns in a row.
+        conversation.pop();
+
+
+        const fallback =
+            CRISIS_PATTERN.test(message)
+                ? CRISIS_FALLBACK
+                : String(error.message).includes("429")
+                    ? "Let's take a breath. Try again in a minute."
+                    : "I can't connect right now. Please try again in a moment.";
+
+
         addMessage(
             "assistant",
-            "I can't connect to Vera right now. Please try again in a moment."
+            fallback
         );
 
     }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,26 +9,31 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --background: #edf2ef;
       --paper: #f9faf6;
       --white: #ffffff;
+
       --blue: #dce8ed;
       --blue-dark: #6e8d9a;
       --blue-ink: #3f5d69;
+
       --sage: #dce5d9;
       --sage-dark: #71866e;
+
       --rose: #e8d7d5;
       --rose-dark: #a76e73;
+
       --ink: #292e2b;
       --muted: #737c75;
       --line: #d9e0db;
 
       --type: "Special Elite", "Courier New", monospace;
       --serif: "Cormorant Garamond", Georgia, serif;
+      --script: "Pinyon Script", cursive;
     }
 
     * {
@@ -46,7 +52,7 @@
       font-family: var(--type);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      animation: pageEnter 0.35s ease both;
+      animation: pageEnter 0.3s ease both;
     }
 
     button,
@@ -73,13 +79,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 24px;
       padding: 20px 34px;
-      background: rgba(237, 242, 239, 0.94);
-      backdrop-filter: blur(14px);
+      background: var(--background);
       border-bottom: 1px solid var(--line);
     }
 
     .nav-wordmark {
+      flex-shrink: 0;
       font-family: var(--type);
       font-size: 0.78rem;
       letter-spacing: 0.16em;
@@ -107,16 +114,16 @@
     }
 
     .nav-links .active {
-      color: var(--ink);
       position: relative;
+      color: var(--ink);
     }
 
     .nav-links .active::after {
       content: "";
       position: absolute;
-      left: 0;
       right: 0;
       bottom: -8px;
+      left: 0;
       height: 1px;
       background: var(--blue-dark);
     }
@@ -126,7 +133,7 @@
     .page {
       width: min(1200px, calc(100% - 64px));
       margin: 0 auto;
-      padding: 66px 0 90px;
+      padding: 54px 0 0;
     }
 
     .page-header {
@@ -134,8 +141,8 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 40px;
-      padding-bottom: 36px;
-      margin-bottom: 36px;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -143,11 +150,11 @@
     .checkin-label,
     .stat-label,
     .recommendation-label {
+      color: var(--muted);
       font-size: 0.64rem;
       letter-spacing: 0.12em;
       line-height: 1.7;
       text-transform: uppercase;
-      color: var(--muted);
     }
 
     .eyebrow {
@@ -177,7 +184,7 @@
       line-height: 1.45;
     }
 
-    /* Main dashboard grid */
+    /* Dashboard */
 
     .mood-shell {
       display: grid;
@@ -187,13 +194,13 @@
         "history stats"
         "history insight";
       align-items: start;
-      gap: 26px;
+      gap: 24px;
     }
 
     .checkin {
       grid-area: checkin;
       min-width: 0;
-      padding: 34px;
+      padding: 30px;
       background: var(--paper);
       border: 1px solid var(--line);
     }
@@ -219,11 +226,11 @@
       grid-area: insight;
       min-width: 0;
       display: grid;
-      gap: 14px;
       align-content: start;
+      gap: 0;
     }
 
-    /* Check-in */
+    /* Mood check-in */
 
     .checkin-label {
       margin-bottom: 13px;
@@ -266,10 +273,7 @@
       background: var(--white);
       color: var(--ink);
       cursor: pointer;
-      transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
 
     .mood-button:hover {
@@ -291,9 +295,9 @@
       font-family: var(--type);
       font-size: 0.55rem;
       letter-spacing: 0.035em;
+      line-height: 1.5;
       text-align: center;
       text-transform: uppercase;
-      line-height: 1.5;
     }
 
     .mood-icon {
@@ -330,8 +334,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      margin-top: 25px;
-      padding-top: 22px;
+      margin-top: 24px;
+      padding-top: 20px;
       border-top: 1px solid var(--line);
     }
 
@@ -348,7 +352,7 @@
       border: 1px solid var(--blue-ink);
       border-radius: 2px;
       background: var(--blue-ink);
-      color: white;
+      color: var(--white);
       font-family: var(--type);
       font-size: 0.59rem;
       letter-spacing: 0.055em;
@@ -398,8 +402,8 @@
 
     .week-card {
       padding: 18px 14px;
-      background: var(--sage);
       border: 1px solid #d0dbcd;
+      background: var(--sage);
     }
 
     .week-grid {
@@ -411,7 +415,7 @@
     .day {
       min-width: 0;
       padding: 12px 2px 10px;
-      background: rgba(249, 250, 246, 0.75);
+      background: #f2f5ef;
       text-align: center;
       transition: background 0.2s ease;
     }
@@ -444,7 +448,7 @@
     }
 
     .day.empty {
-      background: rgba(249, 250, 246, 0.35);
+      background: #e7ede3;
     }
 
     .day-empty-symbol {
@@ -493,7 +497,7 @@
     .history-tab.active {
       border-color: var(--blue-ink);
       background: var(--blue-ink);
-      color: white;
+      color: var(--white);
     }
 
     .history-card {
@@ -524,7 +528,7 @@
       position: absolute;
       right: 0;
       left: 0;
-      border-top: 1px dashed #dce3df;
+      border-top: 1px solid #e1e7e3;
       content: "";
       pointer-events: none;
     }
@@ -638,11 +642,11 @@
 
     .selected-day {
       display: flex;
-      min-height: 66px;
+      min-height: 58px;
       align-items: center;
       justify-content: center;
-      margin-top: 12px;
-      padding: 15px;
+      margin-top: 10px;
+      padding: 12px;
       border: 1px solid var(--line);
       background: #f4f7f4;
       color: #53645a;
@@ -675,13 +679,13 @@
     }
 
     .stat-card:nth-child(2) {
-      background: #e1eaf0;
       border-color: #d3e0e7;
+      background: #e1eaf0;
     }
 
     .stat-card:nth-child(3) {
-      background: #e2e9df;
       border-color: #d4dfd0;
+      background: #e2e9df;
     }
 
     .stat-label {
@@ -707,16 +711,15 @@
       line-height: 1.35;
     }
 
-    /* Insight and recommendation */
+    /* Insight — recommendation box removed */
 
     .insight-card {
-      padding: 25px;
+      padding: 24px;
       border: 1px solid #d1dfe5;
       background: var(--blue);
     }
 
-    .insight-card h3,
-    .recommendation h3 {
+    .insight-card h3 {
       margin: 0 0 12px;
       font-family: var(--type);
       font-size: 1.25rem;
@@ -725,8 +728,7 @@
       line-height: 1.4;
     }
 
-    .insight-card p,
-    .recommendation p {
+    .insight-card p {
       margin: 0;
       color: #53645d;
       font-family: var(--serif);
@@ -734,55 +736,25 @@
       line-height: 1.5;
     }
 
-    .recommendation {
-      padding: 25px;
-      border: 1px solid var(--line);
-      background: var(--paper);
-    }
-
-    .recommendation-label {
-      margin-bottom: 17px;
-      font-size: 0.56rem;
-    }
-
-    .recommendation p {
-      margin-bottom: 19px;
-    }
-
-    .recommendation-link {
-      display: inline-block;
-      color: var(--blue-ink);
-      font-size: 0.59rem;
-      letter-spacing: 0.045em;
-      line-height: 1.8;
-      text-decoration: none;
-      text-transform: uppercase;
-      border-bottom: 1px solid #a8bec5;
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
-
-    .recommendation-link:hover {
-      color: var(--ink);
-      border-color: var(--ink);
-    }
-
     /* Footer */
 
     footer {
-      padding: 45px 20px 26px;
+      padding: 24px 20px 18px;
       text-align: center;
       color: var(--muted);
     }
 
     footer .script {
-      margin-bottom: 10px;
+      margin-bottom: 4px;
       color: var(--blue-ink);
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-style: italic;
+      font-family: var(--script);
+      font-size: 2.1rem;
+      font-weight: 400;
+      line-height: 1.25;
     }
 
     footer p {
+      margin: 0;
       font-size: 0.53rem;
       letter-spacing: 0.09em;
       line-height: 1.8;
@@ -998,13 +970,13 @@
 
       .page {
         width: calc(100% - 36px);
-        padding: 46px 0 60px;
+        padding-top: 40px;
       }
 
       .page-header {
         display: block;
-        margin-bottom: 27px;
-        padding-bottom: 25px;
+        margin-bottom: 25px;
+        padding-bottom: 23px;
       }
 
       h1 {
@@ -1024,7 +996,7 @@
           "history"
           "stats"
           "insight";
-        gap: 28px;
+        gap: 25px;
       }
 
       .checkin {
@@ -1152,13 +1124,17 @@
         font-size: 1.7rem;
       }
 
-      .insight {
-        grid-template-columns: 1fr;
+      .insight-card {
+        padding: 22px;
       }
 
-      .insight-card,
-      .recommendation {
-        padding: 22px;
+      footer {
+        padding-top: 20px;
+        padding-bottom: 16px;
+      }
+
+      footer .script {
+        font-size: 2rem;
       }
 
       .crisis-fab {
@@ -1349,15 +1325,6 @@
           <p id="insightText">
             Once you have a few check-ins, Zenene can help you look for patterns.
           </p>
-        </div>
-
-        <div class="recommendation">
-          <div class="recommendation-label">something for you</div>
-          <h3 id="recommendationTitle">Start by noticing.</h3>
-          <p id="recommendationText">
-            There is no right mood to have. Checking in is already enough.
-          </p>
-          <a href="journal.html" class="recommendation-link">put it into words →</a>
         </div>
       </section>
     </div>
@@ -1983,63 +1950,31 @@
         .filter(mood => mood && moodInfo[mood]);
 
       const insight = document.getElementById("insightText");
-      const recommendationTitle =
-        document.getElementById("recommendationTitle");
-      const recommendationText =
-        document.getElementById("recommendationText");
 
       if (weekMoods.length === 0) {
         insight.textContent =
           "Once you have a few check-ins, you can begin looking back at how your days have felt.";
-
-        recommendationTitle.textContent = "Start by noticing.";
-
-        recommendationText.textContent =
-          "There is no right mood to have. Checking in is already enough.";
-
         return;
       }
 
       if (weekMoods.length === 1) {
         insight.textContent =
           "One check-in is a beginning. Over time, you may notice what changes and what stays the same.";
-
-        recommendationTitle.textContent = "Keep noticing.";
-
-        recommendationText.textContent =
-          "You don't need to feel a certain way for your check-in to matter.";
-
         return;
       }
 
       const values = weekMoods.map(mood => moodInfo[mood].value);
-
       const average = values.reduce((a, b) => a + b, 0) / values.length;
 
       if (average >= 4) {
         insight.textContent =
           "Your check-ins have leaned toward lighter feelings this week. You might notice what has been helping, if anything comes to mind.";
-
-        recommendationTitle.textContent = "Notice what's working.";
-
-        recommendationText.textContent =
-          "If you feel like it, write down one small thing that made a day easier.";
       } else if (average >= 3) {
         insight.textContent =
           "Your check-ins include a mix of feelings. Moods can change from day to day, and a mixed week doesn't have to mean anything more.";
-
-        recommendationTitle.textContent = "Give yourself room.";
-
-        recommendationText.textContent =
-          "You don't need to turn every feeling into a problem to solve.";
       } else {
         insight.textContent =
           "Your check-ins have leaned toward more difficult feelings this week. These entries can't tell the whole story, but you deserve care and support.";
-
-        recommendationTitle.textContent = "Take things gently.";
-
-        recommendationText.textContent =
-          "Consider talking with someone you trust, or writing down what has been on your mind.";
       }
     }
 
@@ -2055,7 +1990,7 @@
 
     /* Smooth navigation between Zenene pages */
 
-    document.querySelectorAll(".nav-links a, .recommendation-link").forEach(link => {
+    document.querySelectorAll(".nav-links a").forEach(link => {
       link.addEventListener("click", event => {
         if (
           event.defaultPrevented ||
@@ -2074,7 +2009,7 @@
         if (
           destination.origin !== window.location.origin ||
           destination.pathname === window.location.pathname ||
-          destination.protocol !== "http:" && destination.protocol !== "https:"
+          !["http:", "https:"].includes(destination.protocol)
         ) {
           return;
         }

@@ -1,2568 +1,1860 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Zenene — Explore</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Special+Elite&display=swap"
-rel="stylesheet"
->
-
-<style>
-
-/* =========================================================
-   ZENENE — EXPLORE
-   ========================================================= */
-
-:root {
-
-  --sky: #C9DFEA;
-  --sky-light: #E8F2F5;
-  --sky-deep: #9EBFCC;
-
-  --cream: #F7F1E7;
-  --paper: #FFFDF8;
-
-  --sage: #D8E4D7;
-  --sage-deep: #72866E;
-
-  --rose: #E7C9CD;
-  --rose-deep: #B97880;
-
-  --lavender: #DCD8E8;
-
-  --peach: #EFD4C2;
-
-  --brown: #624F43;
-  --brown-dark: #392D26;
-  --ink: #2F2B27;
-
-  --typewriter: "Special Elite", "Courier New", monospace;
-  --serif: "Cormorant Garamond", Georgia, serif;
-  --heading: "Bricolage Grotesque", sans-serif;
-  --script: var(--heading);
-
-}
-
-
-/* =========================================================
-   RESET
-   ========================================================= */
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-
-  margin: 0;
-
-  background: var(--cream);
-
-  color: var(--ink);
-
-  overflow-x: hidden;
-
-}
-
-
-/* =========================================================
-   PAPER GRAIN
-   ========================================================= */
-
-body::before {
-
-  content: "";
-
-  position: fixed;
-
-  inset: 0;
-
-  pointer-events: none;
-
-  z-index: 9999;
-
-  opacity: .045;
-
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-.top-nav {
-
-  position: sticky;
-
-  top: 0;
-
-  z-index: 500;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  padding: 20px 34px;
-
-  background: rgba(247,241,231,.78);
-
-  backdrop-filter: blur(18px);
-
-  border-bottom:
-    1px solid rgba(98,79,67,.08);
-
-}
-
-
-.nav-wordmark {
-
-  font-family: var(--typewriter);
-
-  font-size: .78rem;
-
-  letter-spacing: .16em;
-
-  text-transform: uppercase;
-
-}
-
-
-.nav-links {
-
-  display: flex;
-
-  gap: 28px;
-
-  align-items: center;
-
-}
-
-
-.nav-links a {
-
-  color: var(--brown);
-
-  text-decoration: none;
-
-  font-family: var(--typewriter);
-
-  font-size: .65rem;
-
-  letter-spacing: .08em;
-
-  text-transform: uppercase;
-
-  transition: .3s ease;
-
-}
-
-
-.nav-links a:hover {
-
-  color: var(--ink);
-
-}
-
-
-.nav-links .active {
-
-  color: var(--ink);
-
-  position: relative;
-
-}
-
-
-.nav-links .active::after {
-
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-
-  right: 0;
-
-  bottom: -7px;
-
-  height: 1px;
-
-  background: var(--brown);
-
-  opacity: .5;
-
-}
-
-
-/* =========================================================
-   PAGE
-   ========================================================= */
-
-.page {
-
-  width: min(1180px, calc(100% - 48px));
-
-  margin: auto;
-
-  padding: 80px 0 120px;
-
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.page-header {
-
-  margin-bottom: 55px;
-
-  padding-bottom: 40px;
-
-  border-bottom: 1px solid rgba(98,79,67,.12);
-
-}
-
-
-.eyebrow {
-
-  font-family: var(--typewriter);
-
-  font-size: .65rem;
-
-  letter-spacing: .17em;
-
-  text-transform: uppercase;
-
-  color: var(--brown);
-
-  margin-bottom: 18px;
-
-}
-
-
-h1 {
-
-  margin: 0;
-
-  font-family: var(--heading);
-
-  font-size: clamp(3.6rem, 8vw, 7rem);
-
-  font-weight: 700;
-
-  line-height: .95;
-
-  letter-spacing: -.03em;
-
-  max-width: 14ch;
-
-}
-
-
-h1 em {
-
-  font-style: normal;
-
-  color: var(--rose-deep);
-
-}
-
-
-.intro {
-
-  max-width: 420px;
-
-  margin-top: 22px;
-
-  font-family: var(--serif);
-
-  font-style: italic;
-
-  font-size: 1.15rem;
-
-  line-height: 1.45;
-
-  color: var(--brown);
-
-}
-
-
-/* =========================================================
-   FEATURED ARTICLE
-   ========================================================= */
-
-.featured {
-
-  position: relative;
-
-  border-radius: 16px;
-
-  padding: 42px;
-
-  margin-bottom: 45px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--peach),
-      var(--rose)
-    );
-
-  border: 1px solid rgba(98,79,67,.08);
-
-  overflow: hidden;
-
-  cursor: pointer;
-
-  transition:
-    transform .35s ease,
-    box-shadow .35s ease;
-
-}
-
-
-.featured:hover {
-
-  transform: translateY(-5px);
-
-  box-shadow:
-    0 20px 50px rgba(98,79,67,.1);
-
-}
-
-
-.featured::before {
-
-  content: "✽";
-
-  position: absolute;
-
-  right: 25px;
-
-  bottom: -15px;
-
-  font-family: var(--serif);
-
-  font-size: 10rem;
-
-  color: rgba(255,255,255,.25);
-
-  line-height: 1;
-
-}
-
-
-.featured-label {
-
-  font-family: var(--typewriter);
-
-  font-size: .6rem;
-
-  letter-spacing: .13em;
-
-  text-transform: uppercase;
-
-  color: rgba(57,45,38,.7);
-
-  margin-bottom: 18px;
-
-}
-
-
-.featured-title {
-
-  position: relative;
-
-  z-index: 2;
-
-  max-width: 700px;
-
-  margin: 0 0 15px;
-
-  font-family: var(--heading);
-
-  font-size: clamp(1.9rem, 4vw, 3rem);
-
-  line-height: 1.02;
-
-  font-weight: 700;
-
-  letter-spacing: -.02em;
-
-}
-
-
-.featured-text {
-
-  position: relative;
-
-  z-index: 2;
-
-  max-width: 550px;
-
-  font-family: var(--serif);
-
-  font-size: 1.15rem;
-
-  line-height: 1.5;
-
-  color: var(--brown-dark);
-
-}
-
-
-.featured-read {
-
-  position: relative;
-
-  z-index: 2;
-
-  display: inline-block;
-
-  margin-top: 25px;
-
-  font-family: var(--typewriter);
-
-  font-size: .6rem;
-
-  letter-spacing: .1em;
-
-  text-transform: uppercase;
-
-  color: var(--brown-dark);
-
-}
-
-
-/* =========================================================
-   FILTERS
-   ========================================================= */
-
-.explore-shell {
-
-  display: grid;
-
-  grid-template-columns: 180px 1fr;
-
-  gap: 40px;
-
-  align-items: start;
-
-}
-
-
-.filter-section {
-
-  position: sticky;
-
-  top: 90px;
-
-}
-
-
-.filter-label {
-
-  font-family: var(--typewriter);
-
-  font-size: .58rem;
-
-  letter-spacing: .12em;
-
-  text-transform: uppercase;
-
-  color: var(--brown);
-
-  margin-bottom: 14px;
-
-}
-
-
-.filter-row {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 4px;
-
-}
-
-
-.filter-row::-webkit-scrollbar {
-
-  display: none;
-
-}
-
-
-.filter-button {
-
-  border: none;
-
-  border-left: 2px solid transparent;
-
-  background: none;
-
-  text-align: left;
-
-  color: var(--brown);
-
-  padding: 8px 0 8px 14px;
-
-  font-family: var(--typewriter);
-
-  font-size: .58rem;
-
-  letter-spacing: .05em;
-
-  text-transform: uppercase;
-
-  cursor: pointer;
-
-  transition: .3s ease;
-
-}
-
-
-.filter-button:hover {
-
-  color: var(--ink);
-
-}
-
-
-.filter-button.active {
-
-  border-left-color: var(--rose-deep);
-
-  color: var(--ink);
-  font-weight: 700;
-
-}
-
-
-/* =========================================================
-   ARTICLE GRID
-   ========================================================= */
-
-.article-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 18px;
-
-}
-
-
-.article-card {
-
-  position: relative;
-
-  background: var(--paper);
-
-  border: 1px solid rgba(98,79,67,.09);
-
-  border-radius: 14px;
-
-  min-height: 310px;
-
-  cursor: pointer;
-
-  overflow: hidden;
-
-  transition:
-    transform .35s ease,
-    box-shadow .35s ease;
-
-}
-
-
-.article-card:hover {
-
-  transform: translateY(-6px);
-
-  box-shadow:
-    0 18px 35px rgba(98,79,67,.09);
-
-}
-
-
-.article-visual {
-
-  height: 135px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-family: var(--serif);
-
-  font-size: 2.2rem;
-
-  font-style: italic;
-
-  color: rgba(47,43,39,.5);
-
-  position: relative;
-
-}
-
-
-.article-visual::after {
-
-  content: "";
-
-  position: absolute;
-
-  width: 70px;
-
-  height: 70px;
-
-  border: 1px solid rgba(255,255,255,.45);
-
-  border-radius: 50%;
-
-}
-
-
-.article-body {
-
-  padding: 22px;
-
-}
-
-
-.article-category {
-
-  font-family: var(--typewriter);
-
-  font-size: .55rem;
-
-  letter-spacing: .1em;
-
-  text-transform: uppercase;
-
-  margin-bottom: 12px;
-
-}
-
-
-.article-title {
-
-  font-family: var(--heading);
-
-  font-size: 1.25rem;
-
-  line-height: 1.15;
-
-  font-weight: 700;
-
-  letter-spacing: -.01em;
-
-  margin-bottom: 14px;
-
-}
-
-
-.article-meta {
-
-  font-family: var(--typewriter);
-
-  font-size: .52rem;
-
-  letter-spacing: .06em;
-
-  color: var(--brown);
-
-  text-transform: uppercase;
-
-}
-
-
-/* =========================================================
-   ARTICLE SHEET / SOCIAL MEDIA STYLE
-   ========================================================= */
-
-.article-overlay {
-
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 800;
-
-  background:
-    rgba(47,43,39,.28);
-
-  backdrop-filter: blur(5px);
-
-  display: flex;
-
-  align-items: flex-end;
-
-  justify-content: center;
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  transition:
-    opacity .35s ease,
-    visibility .35s ease;
-
-}
-
-
-.article-overlay.open {
-
-  opacity: 1;
-
-  visibility: visible;
-
-}
-
-
-.article-sheet {
-
-  position: relative;
-
-  width: min(760px, 100%);
-
-  max-height: 88vh;
-
-  overflow-y: auto;
-
-  background: var(--paper);
-
-  border-radius: 26px 26px 0 0;
-
-  padding: 25px 35px 70px;
-
-  transform: translateY(100%);
-
-  transition:
-    transform .5s cubic-bezier(.22,1,.36,1);
-
-  box-shadow:
-    0 -20px 70px rgba(47,43,39,.18);
-
-}
-
-
-.article-overlay.open .article-sheet {
-
-  transform: translateY(0);
-
-}
-
-
-.article-sheet::-webkit-scrollbar {
-
-  width: 5px;
-
-}
-
-
-.article-sheet::-webkit-scrollbar-thumb {
-
-  background: var(--rose);
-
-  border-radius: 10px;
-
-}
-
-
-/* DRAG HANDLE */
-
-.sheet-handle {
-
-  width: 42px;
-
-  height: 4px;
-
-  background: rgba(98,79,67,.2);
-
-  border-radius: 10px;
-
-  margin: 0 auto 25px;
-
-}
-
-
-/* CLOSE */
-
-.sheet-close {
-
-  position: absolute;
-
-  top: 22px;
-
-  right: 25px;
-
-  width: 38px;
-
-  height: 38px;
-
-  border: 1px solid rgba(98,79,67,.1);
-
-  border-radius: 50%;
-
-  background: rgba(247,241,231,.9);
-
-  color: var(--brown-dark);
-
-  font-size: 1.2rem;
-
-  cursor: pointer;
-
-  transition: .3s ease;
-
-}
-
-
-.sheet-close:hover {
-
-  background: var(--rose);
-
-  transform: rotate(90deg);
-
-}
-
-
-/* SHEET CONTENT */
-
-.sheet-category {
-
-  font-family: var(--typewriter);
-
-  font-size: .58rem;
-
-  letter-spacing: .12em;
-
-  text-transform: uppercase;
-
-  margin-bottom: 15px;
-
-}
-
-
-.sheet-title {
-
-  max-width: 620px;
-
-  font-family: var(--heading);
-
-  font-size: clamp(1.9rem, 4.5vw, 3rem);
-
-  line-height: 1.05;
-
-  font-weight: 700;
-
-  letter-spacing: -.02em;
-
-  margin-bottom: 14px;
-
-}
-
-
-.sheet-subtitle {
-
-  font-family: var(--serif);
-
-  font-style: italic;
-
-  font-size: 1.3rem;
-
-  color: var(--rose-deep);
-
-  margin-bottom: 35px;
-
-}
-
-
-.sheet-body {
-
-  max-width: 650px;
-
-}
-
-
-.sheet-body p {
-
-  font-family: var(--serif);
-
-  font-size: 1.2rem;
-
-  line-height: 1.6;
-
-  color: var(--brown);
-
-  margin-bottom: 20px;
-
-}
-
-
-.sheet-body h3 {
-
-  font-family: var(--serif);
-
-  font-size: 2rem;
-
-  font-weight: 300;
-
-  margin: 30px 0 10px;
-
-}
-
-
-.sheet-body strong {
-
-  color: var(--brown-dark);
-
-}
-
-
-/* =========================================================
-   SHARE / FOOTER AREA OF ARTICLE
-   ========================================================= */
-
-.sheet-footer {
-
-  margin-top: 35px;
-
-  padding-top: 20px;
-
-  border-top:
-    1px solid rgba(98,79,67,.1);
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-}
-
-
-.sheet-footer-text {
-
-  font-family: var(--serif);
-
-  font-style: italic;
-
-  font-size: 1.1rem;
-
-  color: var(--rose-deep);
-
-}
-
-
-.sheet-save {
-
-  border: 1px solid rgba(98,79,67,.2);
-
-  border-radius: 8px;
-
-  background: var(--paper);
-
-  color: var(--ink);
-
-  padding: 10px 15px;
-
-  font-family: var(--typewriter);
-
-  font-size: .55rem;
-
-  letter-spacing: .07em;
-
-  text-transform: uppercase;
-
-  cursor: pointer;
-
-}
-
-
-/* =========================================================
-   ANIMATIONS
-   ========================================================= */
-
-.fade-up {
-
-  opacity: 0;
-
-  transform: translateY(25px);
-
-  animation:
-    fadeUp .8s ease forwards;
-
-}
-
-
-.delay-1 {
-
-  animation-delay: .1s;
-
-}
-
-
-.delay-2 {
-
-  animation-delay: .2s;
-
-}
-
-
-.delay-3 {
-
-  animation-delay: .3s;
-
-}
-
-
-@keyframes fadeUp {
-
-  to {
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-  }
-
-}
-
-
-@keyframes cardIn {
-
-  from {
-
-    opacity: 0;
-
-    transform: translateY(18px);
-
-  }
-
-  to {
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-  }
-
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-footer {
-
-  text-align: center;
-
-  padding: 20px 20px 30px;
-
-  color: var(--brown);
-}
-
-
-footer .script {
-
-  font-family: var(--serif);
-
-  font-style: italic;
-
-  font-size: 1.4rem;
-
-  margin-bottom: 10px;
-}
-
-
-footer p {
-
-  font-family: var(--typewriter);
-
-  font-size: .55rem;
-
-  letter-spacing: .1em;
-
-  text-transform: uppercase;
-
-  color: var(--muted, var(--brown));
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-  .article-grid {
-
-    grid-template-columns:
-      repeat(2, 1fr);
-
-  }
-
-}
-
-
-@media (max-width: 800px) {
-
-  .top-nav {
-
-    padding: 18px 20px;
-
-  }
-
-  .nav-links {
-
-    gap: 13px;
-
-  }
-
-  .nav-links a {
-
-    font-size: .52rem;
-
-  }
-
-  .page {
-
-    width:
-      min(100% - 30px, 600px);
-
-    padding-top: 55px;
-
-  }
-
-  .page-header {
-
-    grid-template-columns: 1fr;
-
-    gap: 25px;
-
-  }
-
-  h1 {
-
-    font-size: 5rem;
-
-  }
-
-  .featured {
-
-    padding: 30px;
-
-  }
-
-  .explore-shell {
-
-    grid-template-columns: 1fr;
-
-    gap: 20px;
-
-  }
-
-  .filter-section {
-
-    position: static;
-
-  }
-
-  .filter-row {
-
-    flex-direction: row;
-
-    overflow-x: auto;
-
-    scrollbar-width: none;
-
-    padding-bottom: 5px;
-
-  }
-
-  .filter-button {
-
-    flex-shrink: 0;
-
-    border-left: none;
-
-    border-bottom: 2px solid transparent;
-
-    padding: 8px 12px;
-
-  }
-
-  .filter-button.active {
-
-    border-left-color: transparent;
-
-    border-bottom-color: var(--rose-deep);
-
-  }
-
-  .article-grid {
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 12px;
-
-  }
-
-  .article-card {
-
-    min-height: 270px;
-
-  }
-
-  .article-visual {
-
-    height: 105px;
-
-  }
-
-  .article-body {
-
-    padding: 16px;
-
-  }
-
-  .article-title {
-
-    font-size: 1.3rem;
-
-  }
-
-  .article-sheet {
-
-    padding:
-      20px
-      24px
-      60px;
-
-    max-height: 90vh;
-
-  }
-
-}
-
-
-@media (max-width: 500px) {
-
-  .article-grid {
-
-    grid-template-columns: 1fr;
-
-  }
-
-  .article-card {
-
-    min-height: auto;
-
-  }
-
-  .article-visual {
-
-    height: 125px;
-
-  }
-
-  .featured-title {
-
-    font-size: 2.4rem;
-
-  }
-
-  .sheet-title {
-
-    font-size: 2.8rem;
-
-  }
-
-  .sheet-body p {
-
-    font-size: 1.1rem;
-
-  }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  * {
-
-    animation-duration: .01ms !important;
-
-    transition-duration: .01ms !important;
-
-  }
-
-}
-
-
-/* =========================================================
-   CRISIS
-   ========================================================= */
-
-.crisis-fab {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.8rem;
-  z-index: 200;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 16px 16px 16px 4px;
-  background: var(--sky);
-  color: var(--brown-dark);
-  font-family: var(--typewriter);
-  font-size: .62rem;
-  cursor: pointer;
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 900;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(47,43,39,.4);
-  backdrop-filter: blur(10px);
-}
-
-.overlay.open { display: flex; }
-
-.overlay .modal {
-  width: min(420px, 100%);
-  padding: 30px;
-  background: var(--cream);
-  border-radius: 20px;
-  box-shadow: 0 30px 80px rgba(0,0,0,.2);
-}
-
-.overlay .m-close {
-  float: right;
-  border: none;
-  background: none;
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-.overlay .m-title {
-  font-family: var(--serif);
-  font-size: 1.8rem;
-}
-
-.overlay .m-sub {
-  font-family: var(--typewriter);
-  font-size: .65rem;
-  line-height: 1.7;
-  color: var(--brown);
-  margin: 8px 0 20px;
-}
-
-.overlay .c-link {
-  display: block;
-  padding: 13px;
-  margin-top: 8px;
-  border-radius: 12px;
-  background: rgba(255,255,255,.65);
-  text-decoration: none;
-  color: var(--brown-dark);
-  font-family: var(--typewriter);
-  font-size: .65rem;
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf2ef">
+  <meta name="description" content="A thoughtful collection of resources for reflection, emotional wellbeing, and personal growth.">
+  <title>Explore | Zenene</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background: #edf2ef;
+      --paper: #f9faf6;
+      --white: #ffffff;
+
+      --blue: #dce8ed;
+      --blue-dark: #6e8d9a;
+      --blue-ink: #3f5d69;
+
+      --sage: #dce5d9;
+      --sage-dark: #71866e;
+
+      --rose: #e8d7d5;
+      --rose-dark: #a76e73;
+
+      --lavender: #e6e2ed;
+      --peach: #eee1d5;
+
+      --ink: #292e2b;
+      --muted: #737c75;
+      --line: #d9e0db;
+
+      --type: "Special Elite", "Courier New", monospace;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --script: "Pinyon Script", cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-gutter: stable;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font-family: var(--type);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      animation: pageEnter .3s ease both;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    [role="button"]:focus-visible {
+      outline: 2px solid var(--blue-dark);
+      outline-offset: 4px;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    /* Navigation */
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 34px;
+      background: var(--background);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-wordmark {
+      flex-shrink: 0;
+      font-size: .78rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: #52645b;
+      text-decoration: none;
+      font-size: .65rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-links .active {
+      position: relative;
+      color: var(--ink);
+    }
+
+    .nav-links .active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+      height: 1px;
+      background: var(--blue-dark);
+    }
+
+    /* Page */
+
+    .page {
+      width: min(1200px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: 54px 0 0;
+    }
+
+    .eyebrow,
+    .section-label,
+    .featured-label,
+    .article-category,
+    .article-meta,
+    .filter-label {
+      font-size: .62rem;
+      letter-spacing: .12em;
+      line-height: 1.7;
+      text-transform: uppercase;
+    }
+
+    .eyebrow,
+    .section-label,
+    .filter-label {
+      color: var(--muted);
+    }
+
+    /* Page heading */
+
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin-bottom: 17px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--type);
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-weight: 400;
+      letter-spacing: -.065em;
+      line-height: 1.02;
+    }
+
+    h1 em {
+      color: var(--blue-ink);
+      font-style: normal;
+    }
+
+    .intro {
+      width: min(350px, 100%);
+      margin: 0 0 4px;
+      color: #56665e;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.45;
+    }
+
+    /* Featured resource */
+
+    .featured {
+      position: relative;
+      display: flex;
+      min-height: 280px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 35px 38px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      border: 1px solid #cbd8d1;
+      background: var(--sage);
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .featured:hover {
+      border-color: #aebfb1;
+      background: #d6e1d3;
+    }
+
+    .featured::after {
+      content: "✳";
+      position: absolute;
+      right: 35px;
+      bottom: -35px;
+      color: rgba(255,255,255,.45);
+      font-family: var(--serif);
+      font-size: 14rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .featured-content {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+    }
+
+    .featured-label {
+      margin-bottom: 17px;
+      color: #64735f;
+    }
+
+    .featured-title {
+      margin: 0 0 15px;
+      font-family: var(--type);
+      font-size: clamp(1.7rem, 3.5vw, 2.65rem);
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: 1.22;
+    }
+
+    .featured-text {
+      max-width: 520px;
+      margin: 0;
+      color: #53645a;
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .featured-read {
+      display: inline-block;
+      margin-top: 23px;
+      color: var(--blue-ink);
+      font-size: .61rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* Resource section */
+
+    .explore-shell {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      align-items: start;
+      gap: 30px;
+    }
+
+    .filter-section {
+      position: sticky;
+      top: 90px;
+      min-width: 0;
+    }
+
+    .filter-label {
+      margin-bottom: 15px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .filter-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 10px 10px 13px;
+      border: 1px solid transparent;
+      border-left: 2px solid transparent;
+      background: transparent;
+      color: #52645b;
+      font-size: .59rem;
+      letter-spacing: .045em;
+      text-align: left;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .filter-button:hover {
+      color: var(--ink);
+      background: rgba(249,250,246,.65);
+    }
+
+    .filter-button.active {
+      border-color: var(--line);
+      border-left-color: var(--blue-dark);
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .filter-count {
+      color: var(--muted);
+      font-size: .53rem;
+    }
+
+    /* Article area */
+
+    .resource-content {
+      min-width: 0;
+    }
+
+    .resource-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 17px;
+    }
+
+    .resource-heading h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: -.025em;
+    }
+
+    .resource-count {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      text-align: right;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+      gap: 16px;
+    }
+
+    .article-card {
+      display: flex;
+      min-width: 0;
+      min-height: 300px;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+      animation: cardIn .35s ease both;
+    }
+
+    .article-card:hover {
+      border-color: #b7c9c2;
+      background: var(--white);
+    }
+
+    .article-visual {
+      position: relative;
+      display: flex;
+      min-height: 112px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 20px 23px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(41,46,43,.06);
+    }
+
+    .article-visual-letter {
+      position: relative;
+      z-index: 1;
+      font-family: var(--serif);
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .article-visual-symbol {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(41,46,43,.16);
+      border-radius: 50%;
+      font-family: var(--serif);
+      font-size: 1.55rem;
+    }
+
+    .article-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 22px 22px;
+    }
+
+    .article-category {
+      margin-bottom: 11px;
+      font-size: .55rem;
+    }
+
+    .article-title {
+      margin: 0 0 13px;
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: 1.4;
+    }
+
+    .article-subtitle {
+      margin: 0 0 18px;
+      color: #657168;
+      font-family: var(--serif);
+      font-size: 1.12rem;
+      line-height: 1.4;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 10px;
+      color: var(--muted);
+      font-size: .5rem;
+      letter-spacing: .07em;
+    }
+
+    .meta-dot {
+      width: 4px;
+      height: 4px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--blue-dark);
+    }
+
+    .saved-mark {
+      margin-left: auto;
+      color: var(--blue-ink);
+      font-size: .95rem;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      display: flex;
+      min-height: 220px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      text-align: center;
+    }
+
+    .empty-state h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+
+    .empty-state p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+
+    /* Article reading sheet */
+
+    .article-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 800;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+      background: rgba(37,47,43,.42);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+
+    .article-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .article-sheet {
+      position: relative;
+      width: min(760px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 23px 35px 30px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      transform: translateY(25px);
+      transition: transform .3s ease;
+    }
+
+    .article-overlay.open .article-sheet {
+      transform: translateY(0);
+    }
+
+    .article-sheet::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .article-sheet::-webkit-scrollbar-thumb {
+      background: #b9c8c3;
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 3px;
+      margin: 0 auto 23px;
+      background: #cbd5cf;
+    }
+
+    .sheet-close {
+      position: absolute;
+      top: 17px;
+      right: 20px;
+      display: flex;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      font-size: 1.35rem;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .sheet-close:hover {
+      background: var(--blue);
+    }
+
+    .sheet-category {
+      margin: 16px 45px 14px 0;
+      font-size: .59rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .sheet-title {
+      max-width: 620px;
+      margin: 0 0 13px;
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+      font-weight: 400;
+      letter-spacing: -.04em;
+      line-height: 1.2;
+    }
+
+    .sheet-subtitle {
+      margin-bottom: 26px;
+      color: var(--blue-ink);
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-style: italic;
+      line-height: 1.45;
+    }
+
+    .sheet-body {
+      max-width: 650px;
+    }
+
+    .sheet-body p {
+      margin: 0 0 19px;
+      color: #4e5c54;
+      font-family: var(--serif);
+      font-size: 1.22rem;
+      line-height: 1.7;
+    }
+
+    .sheet-body h3 {
+      margin: 29px 0 11px;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: -.02em;
+      line-height: 1.4;
+    }
+
+    .sheet-body strong {
+      color: var(--ink);
+    }
+
+    .sheet-body em {
+      color: var(--blue-ink);
+    }
+
+    .sheet-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .sheet-footer-text {
+      color: var(--blue-ink);
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+
+    .sheet-save {
+      flex-shrink: 0;
+      min-height: 42px;
+      padding: 11px 15px;
+      border: 1px solid var(--blue-ink);
+      background: var(--blue-ink);
+      color: var(--white);
+      font-size: .57rem;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .sheet-save:hover {
+      background: #304b56;
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 23px 20px 17px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer .script {
+      margin-bottom: 4px;
+      color: var(--blue-ink);
+      font-family: var(--script);
+      font-size: 2.1rem;
+      font-weight: 400;
+      line-height: 1.25;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: .53rem;
+      letter-spacing: .09em;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    /* Support button and modal */
+
+    .crisis-fab {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 700;
+      padding: 12px 16px;
+      border: 1px solid #c8d9df;
+      background: #e1ebef;
+      color: var(--blue-ink);
+      font-size: .59rem;
+      letter-spacing: .025em;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .crisis-fab:hover {
+      background: #d3e2e8;
+      transform: translateY(-2px);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(37,47,43,.42);
+      backdrop-filter: blur(5px);
+    }
+
+    .overlay.open {
+      display: flex;
+      animation: overlayEnter .2s ease both;
+    }
+
+    .overlay .modal {
+      width: min(430px, 100%);
+      padding: 30px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      animation: modalEnter .22s ease both;
+    }
+
+    .overlay .m-close {
+      float: right;
+      padding: 2px 6px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .overlay .m-title {
+      margin: 15px 0 10px;
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .overlay .m-sub {
+      margin: 10px 0 20px;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .overlay .c-link {
+      display: block;
+      margin-top: 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--blue-ink);
+      font-size: .62rem;
+      line-height: 1.6;
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+
+    .overlay .c-link:hover {
+      background: var(--blue);
+    }
+
+    /* Animations */
+
+    @keyframes pageEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pageLeave {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes overlayEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalEnter {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    body.is-leaving {
+      animation: pageLeave .16s ease forwards;
+      pointer-events: none;
+    }
+
+    /* Tablet */
+
+    @media (max-width: 1000px) {
+      .page {
+        width: calc(100% - 44px);
+      }
+
+      .explore-shell {
+        grid-template-columns: 160px minmax(0, 1fr);
+        gap: 22px;
+      }
+
+      .article-grid {
+        gap: 12px;
+      }
+
+      .article-body {
+        padding: 17px;
+      }
+
+      .article-title {
+        font-size: 1.05rem;
+      }
+
+      .article-visual {
+        padding: 17px;
+      }
+    }
+
+    /* Mobile and small tablets */
+
+    @media (max-width: 760px) {
+      .top-nav {
+        padding: 17px 20px;
+        gap: 20px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 13px;
+      }
+
+      .nav-links a {
+        font-size: .52rem;
+      }
+
+      .page {
+        width: calc(100% - 36px);
+        padding-top: 40px;
+      }
+
+      .page-header {
+        display: block;
+        padding-bottom: 23px;
+        margin-bottom: 25px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 12vw, 4.8rem);
+      }
+
+      .intro {
+        margin-top: 19px;
+        font-size: 1.2rem;
+      }
+
+      .featured {
+        min-height: 245px;
+        padding: 25px 22px;
+        margin-bottom: 29px;
+      }
+
+      .featured::after {
+        right: 12px;
+        bottom: -15px;
+        font-size: 9rem;
+      }
+
+      .featured-title {
+        max-width: 500px;
+        font-size: 1.7rem;
+      }
+
+      .featured-text {
+        font-size: 1.15rem;
+      }
+
+      .explore-shell {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 23px;
+      }
+
+      .filter-section {
+        position: static;
+      }
+
+      .filter-label {
+        margin-bottom: 10px;
+      }
+
+      .filter-row {
+        flex-direction: row;
+        gap: 5px;
+        padding-bottom: 6px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .filter-row::-webkit-scrollbar {
+        display: none;
+      }
+
+      .filter-button {
+        width: auto;
+        flex-shrink: 0;
+        justify-content: center;
+        padding: 9px 12px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        white-space: nowrap;
+        font-size: .52rem;
+      }
+
+      .filter-button.active {
+        border: 1px solid var(--blue-ink);
+        background: var(--blue-ink);
+        color: var(--white);
+      }
+
+      .filter-button.active .filter-count {
+        color: #e0eaed;
+      }
+
+      .resource-heading {
+        margin-bottom: 13px;
+      }
+
+      .article-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .article-card {
+        min-height: 265px;
+      }
+
+      .article-visual {
+        min-height: 95px;
+        padding: 14px;
+      }
+
+      .article-visual-letter {
+        font-size: 2.7rem;
+      }
+
+      .article-visual-symbol {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+      }
+
+      .article-body {
+        padding: 14px;
+      }
+
+      .article-category {
+        font-size: .49rem;
+      }
+
+      .article-title {
+        font-size: .98rem;
+        line-height: 1.4;
+      }
+
+      .article-subtitle {
+        font-size: 1.02rem;
+      }
+
+      .article-meta {
+        flex-wrap: wrap;
+        font-size: .46rem;
+      }
+
+      .article-sheet {
+        max-height: 91vh;
+        padding: 20px 23px 25px;
+      }
+
+      .sheet-title {
+        font-size: 1.8rem;
+      }
+
+      .sheet-body p {
+        font-size: 1.13rem;
+      }
+
+      footer {
+        padding-top: 20px;
+        padding-bottom: 16px;
+      }
+
+      footer .script {
+        font-size: 2rem;
+      }
+
+      .crisis-fab {
+        right: 12px;
+        bottom: 12px;
+        padding: 11px 13px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .top-nav {
+        padding: 15px 12px;
+        gap: 10px;
+      }
+
+      .nav-wordmark {
+        font-size: .68rem;
+      }
+
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-links a {
+        font-size: .46rem;
+      }
+
+      .page {
+        width: calc(100% - 26px);
+      }
+
+      .article-grid {
+        gap: 8px;
+      }
+
+      .article-visual {
+        min-height: 80px;
+        padding: 10px;
+      }
+
+      .article-body {
+        padding: 12px;
+      }
+
+      .article-title {
+        font-size: .91rem;
+      }
+
+      .article-subtitle {
+        font-size: .98rem;
+      }
+
+      .featured {
+        padding: 22px 17px;
+      }
+
+      .sheet-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .sheet-save {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
-
 <body>
+  <nav class="top-nav">
+    <div class="nav-wordmark">zenene</div>
 
-
-<!-- =======================================================
-     NAVIGATION
-     ======================================================= -->
-
-<nav class="top-nav">
-
-  <div class="nav-wordmark">
-    zenene
-  </div>
-
-  <div class="nav-links">
-
-    <a href="index.html">
-      home
-    </a>
-
-    <a href="journal.html">
-      journal
-    </a>
-
-    <a href="mood.html">
-      mood
-    </a>
-
-    <a href="explore.html" class="active">
-      explore
-    </a>
-
-    <a href="vera.html">
-      vera
-    </a>
-
-       <a href="calm.html">
-          calm
-       </a>
-
-    <a href="profile.html" id="navAuthLink">
-      sign in
-    </a>
-
-  </div>
-
-</nav>
-
-
-<!-- =======================================================
-     PAGE
-     ======================================================= -->
-
-<main class="page">
-
-
-<!-- HEADER -->
-
-<header class="page-header fade-up">
-
-  <div>
-
-    <div class="eyebrow">
-      wander a little
+    <div class="nav-links">
+      <a href="index.html">home</a>
+      <a href="journal.html">journal</a>
+      <a href="mood.html">mood</a>
+      <a href="explore.html" class="active">explore</a>
+      <a href="vera.html">vera</a>
+      <a href="calm.html">calm</a>
+      <a href="profile.html" id="navAuthLink">sign in</a>
     </div>
+  </nav>
 
-    <h1>
-      <em>explore.</em>
-    </h1>
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <div class="eyebrow">a little space to discover</div>
+        <h1>let's <em>explore.</em></h1>
+      </div>
 
-  </div>
+      <p class="intro">
+        A collection of things to read, reflect on, and return to
+        whenever you need a little perspective.
+      </p>
+    </header>
 
-  <p class="intro">
+    <section
+      class="featured"
+      id="featuredArticle"
+      role="button"
+      tabindex="0"
+      aria-label="Read featured article: You Are Allowed to Take Up Space"
+    >
+      <div class="featured-content">
+        <div class="featured-label">Editor's pick · a gentle reminder</div>
 
-    A collection of little things
-    to read, think about, and
-    carry with you.
+        <h2 class="featured-title">You Are Allowed to Take Up Space</h2>
 
-  </p>
+        <p class="featured-text">
+          Your needs, feelings, and presence matter. You don't have to
+          make yourself smaller to make the world more comfortable.
+        </p>
 
-</header>
+        <span class="featured-read">read the piece →</span>
+      </div>
+    </section>
 
+    <div class="explore-shell">
+      <aside class="filter-section">
+        <div class="filter-label">browse by feeling</div>
+        <div class="filter-row" id="filterRow" aria-label="Filter resources by category"></div>
+      </aside>
 
-<!-- =======================================================
-     FEATURED
-     ======================================================= -->
+      <section class="resource-content" aria-label="Explore articles">
+        <div class="resource-heading">
+          <h2 id="resourceHeading">A little something for you</h2>
+          <span class="resource-count" id="resourceCount" aria-live="polite"></span>
+        </div>
 
-<section
-class="featured fade-up delay-1"
-onclick="openArticle(0)"
->
-
-  <div class="featured-label">
-    ✦ editor's pick · this week
-  </div>
-
-  <h2 class="featured-title">
-    You Are Allowed to Take Up Space
-  </h2>
-
-  <p class="featured-text">
-
-    A gentle reminder that your
-    needs, feelings, and presence
-    matter — more than you realise.
-
-  </p>
-
-  <span class="featured-read">
-    read the piece →
-  </span>
-
-</section>
-
-
-<!-- =======================================================
-     EXPLORE SHELL (sidebar filters + article grid)
-     ======================================================= -->
-
-<div class="explore-shell">
-
-<!-- =======================================================
-     FILTERS
-     ======================================================= -->
-
-<section class="filter-section fade-up delay-2">
-
-  <div class="filter-label">
-    browse by feeling
-  </div>
-
-  <div
-    class="filter-row"
-    id="filterRow"
-  ></div>
-
-</section>
-
-
-<!-- =======================================================
-     ARTICLES
-     ======================================================= -->
-
-<section
-class="article-grid fade-up delay-3"
-id="articleGrid"
-></section>
-
-</div>
-
-
-</main>
-
-
-<!-- =======================================================
-     FOOTER
-     ======================================================= -->
-
-<footer>
-
-    <div class="script">
-        be gentle with yourself.
+        <div class="article-grid" id="articleGrid"></div>
+      </section>
     </div>
+  </main>
 
-    <p>
-        zenene · where your mind blooms
-    </p>
-
-</footer>
-
-
-<!-- =======================================================
-     CRISIS
-     ======================================================= -->
-
-<button class="crisis-fab" onclick="document.getElementById('cm').classList.add('open')">
-  💙 need help?
-</button>
-
-<div class="overlay" id="cm" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="modal">
-    <button class="m-close" onclick="document.getElementById('cm').classList.remove('open')">×</button>
-    <div class="m-title">You're not alone.</div>
-    <div class="m-sub">
-      If you need immediate support,
-      please reach out to a trusted adult
-      or an appropriate local emergency/crisis service.
-    </div>
-    <a class="c-link" href="tel:112">📞 Local emergency support</a>
-  </div>
-</div>
-
-
-<!-- =======================================================
-     ARTICLE OVERLAY
-     ======================================================= -->
-
-<div
-class="article-overlay"
-id="articleOverlay"
-onclick="backgroundClose(event)"
->
-
-
-<div class="article-sheet" id="articleSheet">
-
-
-  <div class="sheet-handle"></div>
-
+  <footer>
+    <div class="script">be gentle with yourself.</div>
+    <p>zenene · where your mind blooms</p>
+  </footer>
 
   <button
-    class="sheet-close"
-    onclick="closeArticle()"
-    aria-label="Close article"
+    class="crisis-fab"
+    type="button"
+    aria-haspopup="dialog"
+    aria-controls="cm"
+    id="openSupport"
   >
-    ×
+    need help?
   </button>
 
-
   <div
-    class="sheet-category"
-    id="sheetCategory"
-  ></div>
+    class="overlay"
+    id="cm"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="crisisTitle"
+    aria-hidden="true"
+  >
+    <div class="modal">
+      <button class="m-close" type="button" aria-label="Close support window" id="closeSupport">×</button>
 
+      <div class="m-title" id="crisisTitle">You're not alone.</div>
 
-  <h2
-    class="sheet-title"
-    id="sheetTitle"
-  ></h2>
+      <p class="m-sub">
+        If you need immediate support, please reach out to a trusted adult
+        or an appropriate local emergency or crisis service.
+      </p>
 
-
-  <div
-    class="sheet-subtitle"
-    id="sheetSubtitle"
-  ></div>
-
-
-  <div
-    class="sheet-body"
-    id="sheetBody"
-  ></div>
-
-
-  <div class="sheet-footer">
-
-    <div class="sheet-footer-text">
-      take what you need.
+      <a class="c-link" href="tel:112">Call local emergency support · 112</a>
     </div>
-
-    <button
-      class="sheet-save"
-      onclick="saveArticle()"
-    >
-      save this piece
-    </button>
-
   </div>
 
-
-</div>
-
-</div>
-
-
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script src="js/supabase.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/nav-auth.js"></script>
-
-<script>
-
-
-/* =========================================================
-   ARTICLE DATA
-   ========================================================= */
-
-const ARTICLES = [
-
-  {
-    cat: "Growth",
-    emoji: "🌸",
-    title: "You Are Allowed to Take Up Space",
-    subtitle: "A reminder that your presence matters.",
-    read: "3 min",
-    bg: "#F4DFE2",
-
-    body: `
-      <p>
-        From a very young age, many of us are taught —
-        subtly or directly — to make ourselves small.
-        To not be too loud, too emotional, too much.
-      </p>
-
-      <p>
-        This piece is a gentle counter-message:
-        <em>you are allowed to take up space.</em>
-      </p>
-
-      <h3>
-        What it means
-      </h3>
-
-      <p>
-        Taking up space doesn't mean being inconsiderate.
-        It means allowing your needs to exist.
-        Saying "I'm struggling" when you are.
-        Asking for what you need.
-        Occupying your life fully.
-      </p>
-
-      <h3>
-        A practice
-      </h3>
-
-      <p>
-        This week, try one thing that feels like taking
-        up space. Ask for help with something.
-        Share a feeling you'd normally keep inside.
-        Let yourself be seen — even just a little.
-      </p>
-
-      <p>
-        You are not too much.
-        You are exactly enough.
-      </p>
-    `
-  },
-
-
-  {
-    cat: "Journaling",
-    emoji: "📓",
-    title: "10 Prompts for When You Feel Empty",
-    subtitle: "Writing your way back to yourself.",
-    read: "4 min",
-    bg: "#F5EAE2",
-
-    body: `
-      <p>
-        There are days when words feel far away and
-        numbness moves in. These prompts are designed
-        to gently start the conversation between you
-        and yourself.
-      </p>
-
-      <h3>
-        The prompts
-      </h3>
-
-      <p>
-        1. What does this emptiness feel like physically
-        in my body?
-        <br><br>
-
-        2. When did I last feel truly present?
-        <br><br>
-
-        3. What would I tell a friend feeling this way?
-        <br><br>
-
-        4. What am I avoiding?
-        <br><br>
-
-        5. What would make today 1% easier?
-        <br><br>
-
-        6. Who made me feel safe recently — and how?
-        <br><br>
-
-        7. What colour is my mood right now?
-        <br><br>
-
-        8. What do I wish someone would ask me?
-        <br><br>
-
-        9. If this feeling could speak, what would it say?
-        <br><br>
-
-        10. What would my most compassionate self do today?
-      </p>
-
-      <p>
-        You don't have to answer all of them.
-        One is enough to begin.
-      </p>
-    `
-  },
-
-
-  {
-    cat: "Anxiety",
-    emoji: "🌀",
-    title: "Understanding Your Anxiety: A Gentle Guide",
-    subtitle: "What's happening — and what helps.",
-    read: "5 min",
-    bg: "#E5F0F5",
-
-    body: `
-      <p>
-        Anxiety is one of the most common experiences
-        among teenagers — and one of the most misunderstood.
-        Here's what's actually happening, and what can help.
-      </p>
-
-      <h3>
-        What anxiety actually is
-      </h3>
-
-      <p>
-        Anxiety is your nervous system trying to protect you.
-        It's an ancient alarm system — and sometimes it reacts
-        more strongly than the situation requires.
-      </p>
-
-      <p>
-        The thoughts are not facts.
-        The fear is real, but the threat usually isn't as
-        certain as it feels.
-      </p>
-
-      <h3>
-        Techniques that help
-      </h3>
-
-      <p>
-        <strong>Slow breathing</strong> —
-        Take a comfortable breath in and make your exhale
-        slightly longer than your inhale.
-      </p>
-
-      <p>
-        <strong>Name it to tame it</strong> —
-        Say "I'm feeling anxious right now."
-        Putting a feeling into words can create some distance
-        from it.
-      </p>
-
-      <p>
-        <strong>Grounding</strong> —
-        Notice things you can see, hear and physically feel
-        around you.
-      </p>
-
-      <p>
-        Anxiety does not mean something is wrong with you.
-      </p>
-    `
-  },
-
-
-  {
-    cat: "Yoga",
-    emoji: "🧘",
-    title: "Poses That Release Emotional Tension",
-    subtitle: "Your body holds what your mind carries.",
-    read: "6 min",
-    bg: "#E7F0E5",
-
-    body: `
-      <p>
-        Gentle movement can sometimes help us reconnect
-        with our bodies when our minds feel overwhelmed.
-      </p>
-
-      <h3>
-        Child's Pose
-      </h3>
-
-      <p>
-        Kneel and gently lower your torso forward,
-        resting your arms wherever feels comfortable.
-        Breathe slowly and stay for as long as feels good.
-      </p>
-
-      <h3>
-        Legs Up the Wall
-      </h3>
-
-      <p>
-        Lie comfortably on your back and rest your legs
-        against a wall. Let your breathing settle naturally.
-      </p>
-
-      <h3>
-        Heart Opener
-      </h3>
-
-      <p>
-        Lie back over a folded blanket or pillow.
-        Let your arms rest comfortably at your sides.
-      </p>
-
-      <p>
-        You don't need experience.
-        Gentle movement is enough.
-      </p>
-    `
-  },
-
-
-  {
-    cat: "Friendship",
-    emoji: "🤍",
-    title: "What to Do When You Feel Alone",
-    subtitle: "You are more connected than you think.",
-    read: "4 min",
-    bg: "#EAE4F1",
-
-    body: `
-      <p>
-        Loneliness can arrive even in a room full of people.
-        It's not always about how many friends you have —
-        it's about how seen and understood you feel.
-      </p>
-
-      <h3>
-        Reach out imperfectly
-      </h3>
-
-      <p>
-        Send the text.
-        Even "hey, I've been thinking about you"
-        is enough.
-      </p>
-
-      <h3>
-        Choose depth over breadth
-      </h3>
-
-      <p>
-        One honest conversation can mean more than
-        ten surface-level ones.
-      </p>
-
-      <h3>
-        Create your own ritual
-      </h3>
-
-      <p>
-        A weekly walk, a shared playlist, a standing dinner.
-        Friendship grows through repeated small moments.
-      </p>
-
-      <p>
-        You deserve to be truly known by someone.
-      </p>
-    `
-  },
-
-
-  {
-    cat: "Self-care",
-    emoji: "🛁",
-    title: "The Art of Doing Nothing",
-    subtitle: "Rest is not laziness.",
-    read: "3 min",
-    bg: "#F3E8DF",
-
-    body: `
-      <p>
-        In a world that glorifies productivity,
-        choosing to rest can feel strangely difficult.
-      </p>
-
-      <p>
-        But rest is part of taking care of yourself.
-        Your brain and body need periods without constant
-        demands.
-      </p>
-
-      <h3>
-        What real rest looks like
-      </h3>
-
-      <p>
-        It can mean sleep, creative play, boredom,
-        nature, silence, or simply spending time without
-        needing to accomplish anything.
-      </p>
-
-      <h3>
-        A permission slip
-      </h3>
-
-      <p>
-        You are allowed to have a slow morning.
-        You are allowed to take a break.
-        You are allowed to not be productive every moment.
-      </p>
-
-      <p>
-        Rest is an act of self-respect.
-      </p>
-    `
-  },
-
-
-  {
-    cat: "Growth",
-    emoji: "🌱",
-    title: "Tiny Habits That Changed My Mental Health",
-    subtitle: "Small shifts. Real difference.",
-    read: "4 min",
-    bg: "#E7F0E5",
-
-    body: `
-      <p>
-        You don't need to overhaul your entire life.
-        Small habits, repeated consistently,
-        can create meaningful changes.
-      </p>
-
-      <h3>
-        Morning
-      </h3>
-
-      <p>
-        Try doing one thing before immediately reaching
-        for your phone. Drink water. Stretch.
-        Write one sentence.
-      </p>
-
-      <h3>
-        During the day
-      </h3>
-
-      <p>
-        Stop for a moment and ask:
-        how am I actually feeling?
-        Naming the feeling is the whole exercise.
-      </p>
-
-      <h3>
-        Evening
-      </h3>
-
-      <p>
-        Write three things:
-        one you're proud of,
-        one you're grateful for,
-        and one thing you're ready to release.
-      </p>
-
-      <p>
-        These aren't magic.
-        They're small acts of kindness toward yourself.
-      </p>
-    `
-  },
-
-
-  {
-    cat: "Anxiety",
-    emoji: "💤",
-    title: "Why Your Sleep Matters More Than You Think",
-    subtitle: "The connection between rest and mental health.",
-    read: "4 min",
-    bg: "#E5F0F5",
-
-    body: `
-      <p>
-        Sleep plays an important role in mental health,
-        learning, memory, and emotional regulation.
-      </p>
-
-      <h3>
-        What happens when you sleep
-      </h3>
-
-      <p>
-        Your brain processes memories, supports learning,
-        and helps regulate emotions while you sleep.
-      </p>
-
-      <h3>
-        When you don't get enough
-      </h3>
-
-      <p>
-        Too little sleep can make it harder to concentrate,
-        manage emotions, and cope with everyday stress.
-      </p>
-
-      <h3>
-        One thing to try tonight
-      </h3>
-
-      <p>
-        Give yourself a little quiet time before bed.
-        Put away stimulating screens and let your mind
-        gradually slow down.
-      </p>
-
-      <p>
-        Sometimes the gentlest thing you can do
-        is let yourself rest.
-      </p>
-    `
-  }
-
-];
-
-
-/* =========================================================
-   CATEGORY COLOURS
-   ========================================================= */
-
-const CATEGORY_COLORS = {
-
-  Journaling: "#B97880",
-
-  Anxiety: "#728FA0",
-
-  Yoga: "#72866E",
-
-  Friendship: "#887B9D",
-
-  "Self-care": "#B17E62",
-
-  Growth: "#72866E"
-
-};
-
-
-/* =========================================================
-   FILTERS
-   ========================================================= */
-
-const categories = [
-  "All",
-  ...new Set(
-    ARTICLES.map(article => article.cat)
-  ),
-  "Saved"
-];
-
-
-const filterRow =
-  document.getElementById("filterRow");
-
-
-let selectedCategory = null;
-
-let savedTitles = new Set();
-
-let currentArticleIndex = null;
-
-
-async function loadSavedArticles() {
-
-  const user = await getCurrentUser();
-
-  if (!user) return;
-
-  const { data, error } = await supabaseClient
-    .from("saved_resources")
-    .select("article_title")
-    .eq("user_id", user.id);
-
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  savedTitles = new Set(
-    data.map(row => row.article_title)
-  );
-
-}
-
-
-categories.forEach(category => {
-
-  const button =
-    document.createElement("button");
-
-  button.className =
-    "filter-button" +
-    (category === "All" ? " active" : "");
-
-  button.textContent =
-    category;
-
-
-  button.addEventListener("click", () => {
-
-    document
-      .querySelectorAll(".filter-button")
-      .forEach(button =>
-        button.classList.remove("active")
-      );
-
-    button.classList.add("active");
-
-    selectedCategory =
-      category === "All"
-        ? null
-        : category;
-
-    renderArticles();
-
-  });
-
-
-  filterRow.appendChild(button);
-
-});
-
-
-/* =========================================================
-   RENDER ARTICLES
-   ========================================================= */
-
-function renderArticles() {
-
-  const grid =
-    document.getElementById("articleGrid");
-
-
-  const filtered =
-    selectedCategory === "Saved"
-      ? ARTICLES.filter(
-          article =>
-            savedTitles.has(article.title)
-        )
-      : selectedCategory
-      ? ARTICLES.filter(
-          article =>
-            article.cat === selectedCategory
-        )
-      : ARTICLES;
-
-
-  grid.innerHTML = "";
-
-
-  filtered.forEach((article, index) => {
-
-    const originalIndex =
-      ARTICLES.indexOf(article);
-
-
-    const card =
-      document.createElement("article");
-
-
-    card.className =
-      "article-card";
-
-
-    card.style.animation =
-      `cardIn .5s ease ${index * .06}s both`;
-
-
-    card.innerHTML = `
-
-      <div
-        class="article-visual"
-        style="background:${article.bg}"
-      >
-        ${article.cat.charAt(0)}
+  <div
+    class="article-overlay"
+    id="articleOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="sheetTitle"
+    aria-hidden="true"
+  >
+    <article class="article-sheet" id="articleSheet">
+      <div class="sheet-handle" aria-hidden="true"></div>
+
+      <button class="sheet-close" id="closeArticleButton" type="button" aria-label="Close article">×</button>
+
+      <div class="sheet-category" id="sheetCategory"></div>
+      <h2 class="sheet-title" id="sheetTitle"></h2>
+      <div class="sheet-subtitle" id="sheetSubtitle"></div>
+      <div class="sheet-body" id="sheetBody"></div>
+
+      <div class="sheet-footer">
+        <div class="sheet-footer-text">take what you need.</div>
+        <button class="sheet-save" id="saveArticleButton" type="button">save this piece</button>
       </div>
+    </article>
+  </div>
 
-      <div class="article-body">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav-auth.js"></script>
 
-        <div
-          class="article-category"
-          style="color:${CATEGORY_COLORS[article.cat]}"
-        >
-          ${article.cat}
-        </div>
+  <script>
+    /* ARTICLE DATA */
 
-        <div class="article-title">
-          ${article.title}
-        </div>
+    const ARTICLES = [
+      {
+        cat: "Growth",
+        title: "You Are Allowed to Take Up Space",
+        subtitle: "A reminder that your presence matters.",
+        read: "3 min",
+        bg: "#e8d7d5",
+        symbol: "✳",
+        body: `
+          <p>From a very young age, many of us are taught — subtly or directly — to make ourselves small. To not be too loud, too emotional, too much.</p>
+          <p>This piece is a gentle counter-message: <em>you are allowed to take up space.</em></p>
+          <h3>What it means</h3>
+          <p>Taking up space doesn't mean being inconsiderate. It means allowing your needs to exist. Saying "I'm struggling" when you are. Asking for what you need. Occupying your life fully.</p>
+          <h3>A practice</h3>
+          <p>This week, try one thing that feels like taking up space. Ask for help with something. Share a feeling you'd normally keep inside. Let yourself be seen — even just a little.</p>
+          <p>You are not too much. You are exactly enough.</p>
+        `
+      },
+      {
+        cat: "Journaling",
+        title: "10 Prompts for When You Feel Empty",
+        subtitle: "Writing your way back to yourself.",
+        read: "4 min",
+        bg: "#eee1d5",
+        symbol: "✎",
+        body: `
+          <p>There are days when words feel far away and numbness moves in. These prompts are designed to gently start the conversation between you and yourself.</p>
+          <h3>The prompts</h3>
+          <p>1. What does this emptiness feel like physically in my body?</p>
+          <p>2. When did I last feel truly present?</p>
+          <p>3. What would I tell a friend feeling this way?</p>
+          <p>4. What am I avoiding?</p>
+          <p>5. What would make today 1% easier?</p>
+          <p>6. Who made me feel safe recently — and how?</p>
+          <p>7. What colour is my mood right now?</p>
+          <p>8. What do I wish someone would ask me?</p>
+          <p>9. If this feeling could speak, what would it say?</p>
+          <p>10. What would my most compassionate self do today?</p>
+          <p>You don't have to answer all of them. One is enough to begin.</p>
+        `
+      },
+      {
+        cat: "Anxiety",
+        title: "Understanding Your Anxiety: A Gentle Guide",
+        subtitle: "What's happening — and what helps.",
+        read: "5 min",
+        bg: "#dce8ed",
+        symbol: "〰",
+        body: `
+          <p>Anxiety is one of the most common experiences among teenagers — and one of the most misunderstood. Here's what's happening, and what may help.</p>
+          <h3>What anxiety actually is</h3>
+          <p>Anxiety is your nervous system trying to protect you. It's an alarm system — and sometimes it reacts more strongly than the situation requires.</p>
+          <p>The thoughts are not facts. The fear is real, but the threat isn't always as certain as it feels.</p>
+          <h3>Techniques that may help</h3>
+          <p><strong>Slow breathing</strong> — Take a comfortable breath in and make your exhale slightly longer than your inhale, if that feels comfortable.</p>
+          <p><strong>Name it</strong> — Say "I'm feeling anxious right now." Putting a feeling into words can create some distance from it.</p>
+          <p><strong>Grounding</strong> — Notice things you can see, hear, and physically feel around you.</p>
+          <p>Anxiety does not mean something is wrong with you. If it is interfering with daily life, a trusted adult or mental-health professional can help.</p>
+        `
+      },
+      {
+        cat: "Yoga",
+        title: "Poses That Release Emotional Tension",
+        subtitle: "Gentle movement, on your own terms.",
+        read: "6 min",
+        bg: "#dce5d9",
+        symbol: "⌁",
+        body: `
+          <p>Gentle movement can sometimes help us reconnect with our bodies when our minds feel overwhelmed. You don't have to push yourself or do anything that feels uncomfortable.</p>
+          <h3>Child's pose</h3>
+          <p>Kneel and gently lower your torso forward, resting your arms wherever feels comfortable. Breathe naturally and change position whenever you want.</p>
+          <h3>Legs up the wall</h3>
+          <p>Lie comfortably on your back and rest your legs against a wall, if that feels good for your body. Let your breathing settle naturally.</p>
+          <h3>A gentle chest opener</h3>
+          <p>Lie back over a folded blanket or pillow, if comfortable. Let your arms rest naturally at your sides.</p>
+          <p>You don't need experience. Resting or choosing not to do a pose is perfectly fine, too.</p>
+        `
+      },
+      {
+        cat: "Friendship",
+        title: "What to Do When You Feel Alone",
+        subtitle: "You are more connected than you think.",
+        read: "4 min",
+        bg: "#e6e2ed",
+        symbol: "○",
+        body: `
+          <p>Loneliness can arrive even in a room full of people. It's not always about how many friends you have — it's about how seen and understood you feel.</p>
+          <h3>Reach out imperfectly</h3>
+          <p>Send the text. Even "hey, I've been thinking about you" can be a place to start.</p>
+          <h3>Choose depth over breadth</h3>
+          <p>One honest conversation can mean more than ten surface-level ones.</p>
+          <h3>Create your own ritual</h3>
+          <p>A weekly walk, a shared playlist, a standing dinner. Friendship can grow through repeated small moments.</p>
+          <p>You deserve relationships in which you can feel safe, respected, and truly known.</p>
+        `
+      },
+      {
+        cat: "Self-care",
+        title: "The Art of Doing Nothing",
+        subtitle: "Rest is not laziness.",
+        read: "3 min",
+        bg: "#eee1d5",
+        symbol: "☁",
+        body: `
+          <p>In a world that glorifies productivity, choosing to rest can feel strangely difficult.</p>
+          <p>But rest is part of taking care of yourself. Your brain and body need periods without constant demands.</p>
+          <h3>What real rest looks like</h3>
+          <p>It can mean sleep, creative play, boredom, nature, silence, or simply spending time without needing to accomplish anything.</p>
+          <h3>A permission slip</h3>
+          <p>You are allowed to have a slow morning. You are allowed to take a break. You are allowed to not be productive every moment.</p>
+          <p>Rest is one way to care for yourself, not something you need to earn.</p>
+        `
+      },
+      {
+        cat: "Growth",
+        title: "Tiny Habits That Can Support Your Wellbeing",
+        subtitle: "Small shifts, without the pressure to be perfect.",
+        read: "4 min",
+        bg: "#dce5d9",
+        symbol: "✳",
+        body: `
+          <p>You don't need to overhaul your entire life. Small habits, repeated when they work for you, can help create a little more space in your day.</p>
+          <h3>Morning</h3>
+          <p>Try doing one thing before immediately reaching for your phone. Drink water, stretch, or write one sentence.</p>
+          <h3>During the day</h3>
+          <p>Pause and ask: how am I actually feeling? Naming a feeling can be a useful first step in noticing it.</p>
+          <h3>Evening</h3>
+          <p>Write one thing you're proud of, one thing you're grateful for, or one thing you'd like to approach differently tomorrow. Choose whichever feels useful.</p>
+          <p>These aren't magic solutions. They're small ways to check in with yourself.</p>
+        `
+      },
+      {
+        cat: "Anxiety",
+        title: "Why Your Sleep Matters More Than You Think",
+        subtitle: "The connection between rest and emotional wellbeing.",
+        read: "4 min",
+        bg: "#dce8ed",
+        symbol: "☾",
+        body: `
+          <p>Sleep plays an important role in mental health, learning, memory, and emotional regulation.</p>
+          <h3>What happens when you sleep</h3>
+          <p>Your brain processes memories, supports learning, and helps regulate emotions while you sleep.</p>
+          <h3>When you don't get enough</h3>
+          <p>Too little sleep can make it harder to concentrate, manage emotions, and cope with everyday stress.</p>
+          <h3>One thing to try tonight</h3>
+          <p>If possible, give yourself a little quiet time before bed. A comfortable routine can help signal that the day is winding down.</p>
+          <p>Sometimes the gentlest thing you can do is give yourself permission to rest.</p>
+        `
+      }
+    ];
 
-        <div class="article-meta">
-          ${article.read} · read
-        </div>
+    /* CATEGORY COLOURS */
 
-      </div>
+    const CATEGORY_COLORS = {
+      "Journaling": "#a76e73",
+      "Anxiety": "#3f5d69",
+      "Yoga": "#71866e",
+      "Friendship": "#887b9d",
+      "Self-care": "#9b765d",
+      "Growth": "#71866e"
+    };
 
-    `;
+    const categories = [
+      "All",
+      ...new Set(ARTICLES.map(article => article.cat)),
+      "Saved"
+    ];
 
+    const filterRow = document.getElementById("filterRow");
+    const articleGrid = document.getElementById("articleGrid");
+    const resourceHeading = document.getElementById("resourceHeading");
+    const resourceCount = document.getElementById("resourceCount");
+    const articleOverlay = document.getElementById("articleOverlay");
+    const articleSheet = document.getElementById("articleSheet");
+    const supportOverlay = document.getElementById("cm");
+    const saveButton = document.getElementById("saveArticleButton");
 
-    card.addEventListener(
-      "click",
-      () => openArticle(originalIndex)
-    );
+    let selectedCategory = "All";
+    let savedTitles = new Set();
+    let currentArticleIndex = null;
+    let lastFocusedElement = null;
+    let saveRequestInProgress = false;
 
+    /* LOAD SAVED RESOURCES */
 
-    grid.appendChild(card);
+    async function loadSavedArticles() {
+      try {
+        const user = await getCurrentUser();
 
-  });
+        if (!user) {
+          savedTitles = new Set();
+          return;
+        }
 
-}
+        const { data, error } = await supabaseClient
+          .from("saved_resources")
+          .select("article_title")
+          .eq("user_id", user.id);
 
+        if (error) throw error;
 
-/* =========================================================
-   OPEN ARTICLE
-   ========================================================= */
-
-function openArticle(index) {
-
-  const article =
-    ARTICLES[index];
-
-  currentArticleIndex = index;
-
-  const saveButton =
-    document.querySelector(".sheet-save");
-
-  const isSaved =
-    savedTitles.has(article.title);
-
-  saveButton.textContent =
-    isSaved ? "saved ✓" : "save this piece";
-
-  saveButton.style.background =
-    isSaved ? "var(--rose-deep)" : "var(--paper)";
-
-  saveButton.style.color =
-    isSaved ? "white" : "var(--ink)";
-
-
-  document.getElementById(
-    "sheetCategory"
-  ).textContent =
-    article.cat;
-
-
-  document.getElementById(
-    "sheetCategory"
-  ).style.color =
-    CATEGORY_COLORS[article.cat];
-
-
-  document.getElementById(
-    "sheetTitle"
-  ).textContent =
-    article.title;
-
-
-  document.getElementById(
-    "sheetSubtitle"
-  ).textContent =
-    article.subtitle;
-
-
-  document.getElementById(
-    "sheetBody"
-  ).innerHTML =
-    article.body;
-
-
-  const overlay =
-    document.getElementById(
-      "articleOverlay"
-    );
-
-
-  const sheet =
-    document.getElementById(
-      "articleSheet"
-    );
-
-
-  sheet.scrollTop = 0;
-
-
-  overlay.classList.add("open");
-
-
-  document.body.style.overflow =
-    "hidden";
-
-}
-
-
-/* =========================================================
-   CLOSE ARTICLE
-   ========================================================= */
-
-function closeArticle() {
-
-  document
-    .getElementById("articleOverlay")
-    .classList.remove("open");
-
-
-  document.body.style.overflow =
-    "";
-
-}
-
-
-/* =========================================================
-   CLOSE BY CLICKING BACKGROUND
-   ========================================================= */
-
-function backgroundClose(event) {
-
-  if (
-    event.target ===
-    document.getElementById(
-      "articleOverlay"
-    )
-  ) {
-
-    closeArticle();
-
-  }
-
-}
-
-
-/* =========================================================
-   ESCAPE KEY
-   ========================================================= */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      event.key === "Escape"
-    ) {
-
-      closeArticle();
-
+        savedTitles = new Set(
+          (data || []).map(row => row.article_title)
+        );
+      } catch (error) {
+        console.error("Could not load saved resources:", error);
+      }
     }
 
-  }
-);
+    /* CATEGORY FILTERS */
 
+    function renderFilters() {
+      filterRow.innerHTML = "";
 
-/* =========================================================
-   SAVE ARTICLE
-   ========================================================= */
+      categories.forEach(category => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className =
+          "filter-button" +
+          (category === selectedCategory ? " active" : "");
 
-async function saveArticle() {
+        button.setAttribute(
+          "aria-pressed",
+          String(category === selectedCategory)
+        );
 
-  const button =
-    document.querySelector(
-      ".sheet-save"
-    );
+        const label = document.createElement("span");
+        label.textContent = category;
 
-  if (currentArticleIndex === null) return;
+        const count = document.createElement("span");
+        count.className = "filter-count";
 
-  const article =
-    ARTICLES[currentArticleIndex];
+        if (category === "All") {
+          count.textContent = ARTICLES.length;
+        } else if (category === "Saved") {
+          count.textContent = ARTICLES.filter(
+            article => savedTitles.has(article.title)
+          ).length;
+        } else {
+          count.textContent = ARTICLES.filter(
+            article => article.cat === category
+          ).length;
+        }
 
-  const user = await getCurrentUser();
+        button.append(label, count);
 
-  if (!user) {
+        button.addEventListener("click", () => {
+          selectedCategory = category;
+          renderFilters();
+          renderArticles();
+        });
 
-    button.textContent =
-      "sign up to save";
-
-    setTimeout(() => {
-
-      const isSaved =
-        savedTitles.has(article.title);
-
-      button.textContent =
-        isSaved ? "saved ✓" : "save this piece";
-
-    }, 1600);
-
-    return;
-
-  }
-
-  const alreadySaved =
-    savedTitles.has(article.title);
-
-  if (alreadySaved) {
-
-    const { error } = await supabaseClient
-      .from("saved_resources")
-      .delete()
-      .eq("user_id", user.id)
-      .eq("article_title", article.title);
-
-    if (error) {
-      console.error(error);
-      button.textContent = "couldn't save — try again";
-      setTimeout(() => {
-        button.textContent = "saved ✓";
-      }, 1600);
-      return;
-    }
-
-    savedTitles.delete(article.title);
-
-    button.textContent =
-      "save this piece";
-
-    button.style.background =
-      "var(--paper)";
-
-    button.style.color =
-      "var(--ink)";
-
-  } else {
-
-    const { error } = await supabaseClient
-      .from("saved_resources")
-      .insert({
-        user_id: user.id,
-        article_title: article.title
+        filterRow.appendChild(button);
       });
-
-    if (error) {
-      console.error(error);
-      button.textContent = "couldn't save — try again";
-      setTimeout(() => {
-        button.textContent = "save this piece";
-      }, 1600);
-      return;
     }
 
-    savedTitles.add(article.title);
+    /* RESOURCE COUNTS AND EMPTY STATES */
 
-    button.textContent =
-      "saved ✓";
+    function getFilteredArticles() {
+      if (selectedCategory === "Saved") {
+        return ARTICLES.filter(article => savedTitles.has(article.title));
+      }
 
-    button.style.background =
-      "var(--rose-deep)";
+      if (selectedCategory !== "All") {
+        return ARTICLES.filter(article => article.cat === selectedCategory);
+      }
 
-    button.style.color =
-      "white";
+      return ARTICLES;
+    }
 
-  }
+    function renderArticles() {
+      const filtered = getFilteredArticles();
 
-  if (selectedCategory === "Saved") {
+      articleGrid.innerHTML = "";
+
+      resourceHeading.textContent =
+        selectedCategory === "All"
+          ? "A little something for you"
+          : selectedCategory === "Saved"
+            ? "Your saved pieces"
+            : selectedCategory;
+
+      resourceCount.textContent =
+        `${filtered.length} ${filtered.length === 1 ? "piece" : "pieces"}`;
+
+      if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+
+        const title = document.createElement("h3");
+        title.textContent =
+          selectedCategory === "Saved"
+            ? "Nothing saved just yet."
+            : "Nothing here just yet.";
+
+        const description = document.createElement("p");
+        description.textContent =
+          selectedCategory === "Saved"
+            ? "Open a piece that speaks to you and save it for another day."
+            : "Try another category and see what you find.";
+
+        empty.append(title, description);
+        articleGrid.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach((article, index) => {
+        const originalIndex = ARTICLES.indexOf(article);
+        const card = document.createElement("article");
+
+        card.className = "article-card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Read ${article.title}`);
+        card.style.animationDelay = `${Math.min(index * .04, .28)}s`;
+
+        const visual = document.createElement("div");
+        visual.className = "article-visual";
+        visual.style.background = article.bg;
+
+        const letter = document.createElement("span");
+        letter.className = "article-visual-letter";
+        letter.textContent = article.cat.charAt(0);
+
+        const symbol = document.createElement("span");
+        symbol.className = "article-visual-symbol";
+        symbol.setAttribute("aria-hidden", "true");
+        symbol.textContent = article.symbol;
+
+        visual.append(letter, symbol);
+
+        const body = document.createElement("div");
+        body.className = "article-body";
+
+        const category = document.createElement("div");
+        category.className = "article-category";
+        category.style.color = CATEGORY_COLORS[article.cat] || "var(--blue-ink)";
+        category.textContent = article.cat;
+
+        const title = document.createElement("h3");
+        title.className = "article-title";
+        title.textContent = article.title;
+
+        const subtitle = document.createElement("p");
+        subtitle.className = "article-subtitle";
+        subtitle.textContent = article.subtitle;
+
+        const meta = document.createElement("div");
+        meta.className = "article-meta";
+
+        const dot = document.createElement("span");
+        dot.className = "meta-dot";
+        dot.setAttribute("aria-hidden", "true");
+
+        const readingTime = document.createElement("span");
+        readingTime.textContent = `${article.read} read`;
+
+        meta.append(dot, readingTime);
+
+        if (savedTitles.has(article.title)) {
+          const savedMark = document.createElement("span");
+          savedMark.className = "saved-mark";
+          savedMark.textContent = "✓";
+          savedMark.title = "Saved";
+          savedMark.setAttribute("aria-label", "Saved");
+          meta.appendChild(savedMark);
+        }
+
+        body.append(category, title, subtitle, meta);
+        card.append(visual, body);
+
+        card.addEventListener("click", () => openArticle(originalIndex));
+
+        card.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openArticle(originalIndex);
+          }
+        });
+
+        articleGrid.appendChild(card);
+      });
+    }
+
+    /* FEATURED ARTICLE */
+
+    document.getElementById("featuredArticle").addEventListener("click", () => {
+      openArticle(0);
+    });
+
+    document.getElementById("featuredArticle").addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openArticle(0);
+      }
+    });
+
+    /* OPEN ARTICLE */
+
+    function openArticle(index) {
+      const article = ARTICLES[index];
+
+      if (!article) return;
+
+      currentArticleIndex = index;
+      lastFocusedElement = document.activeElement;
+
+      document.getElementById("sheetCategory").textContent = article.cat;
+      document.getElementById("sheetCategory").style.color =
+        CATEGORY_COLORS[article.cat] || "var(--blue-ink)";
+
+      document.getElementById("sheetTitle").textContent = article.title;
+      document.getElementById("sheetSubtitle").textContent = article.subtitle;
+      document.getElementById("sheetBody").innerHTML = article.body;
+
+      updateSaveButton();
+
+      articleSheet.scrollTop = 0;
+      articleOverlay.classList.add("open");
+      articleOverlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+
+      document.getElementById("closeArticleButton").focus();
+    }
+
+    /* CLOSE ARTICLE */
+
+    function closeArticle() {
+      articleOverlay.classList.remove("open");
+      articleOverlay.setAttribute("aria-hidden", "true");
+
+      if (!supportOverlay.classList.contains("open")) {
+        document.body.classList.remove("modal-open");
+      }
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+
+      currentArticleIndex = null;
+    }
+
+    document.getElementById("closeArticleButton").addEventListener("click", closeArticle);
+
+    articleOverlay.addEventListener("click", event => {
+      if (event.target === articleOverlay) closeArticle();
+    });
+
+    /* SAVE BUTTON STATE */
+
+    function updateSaveButton() {
+      if (currentArticleIndex === null) return;
+
+      const article = ARTICLES[currentArticleIndex];
+      const isSaved = savedTitles.has(article.title);
+
+      saveButton.textContent = isSaved ? "saved ✓ · remove" : "save this piece";
+      saveButton.style.background = isSaved ? "var(--sage)" : "var(--blue-ink)";
+      saveButton.style.color = isSaved ? "var(--ink)" : "var(--white)";
+      saveButton.style.borderColor = isSaved ? "var(--sage-dark)" : "var(--blue-ink)";
+    }
+
+    /* SAVE OR REMOVE ARTICLE */
+
+    async function saveArticle() {
+      if (currentArticleIndex === null || saveRequestInProgress) return;
+
+      const article = ARTICLES[currentArticleIndex];
+      const originalText = saveButton.textContent;
+
+      saveRequestInProgress = true;
+      saveButton.disabled = true;
+      saveButton.textContent = "saving...";
+
+      try {
+        const user = await getCurrentUser();
+
+        if (!user) {
+          saveButton.textContent = "sign in to save";
+
+          window.setTimeout(() => {
+            if (currentArticleIndex !== null) updateSaveButton();
+          }, 1600);
+
+          return;
+        }
+
+        const alreadySaved = savedTitles.has(article.title);
+
+        if (alreadySaved) {
+          const { error } = await supabaseClient
+            .from("saved_resources")
+            .delete()
+            .eq("user_id", user.id)
+            .eq("article_title", article.title);
+
+          if (error) throw error;
+
+          savedTitles.delete(article.title);
+        } else {
+          const { error } = await supabaseClient
+            .from("saved_resources")
+            .insert({
+              user_id: user.id,
+              article_title: article.title
+            });
+
+          if (error) throw error;
+
+          savedTitles.add(article.title);
+        }
+
+        renderFilters();
+        renderArticles();
+        updateSaveButton();
+      } catch (error) {
+        console.error("Could not update saved resource:", error);
+
+        saveButton.textContent = "couldn't save — try again";
+
+        window.setTimeout(() => {
+          if (currentArticleIndex !== null) updateSaveButton();
+        }, 1800);
+      } finally {
+        saveRequestInProgress = false;
+        saveButton.disabled = false;
+
+        if (currentArticleIndex !== null && saveButton.textContent === "saving...") {
+          saveButton.textContent = originalText;
+        }
+      }
+    }
+
+    saveButton.addEventListener("click", saveArticle);
+
+    /* SUPPORT MODAL */
+
+    function openSupport() {
+      lastFocusedElement = document.activeElement;
+      supportOverlay.classList.add("open");
+      supportOverlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      document.getElementById("closeSupport").focus();
+    }
+
+    function closeSupport() {
+      supportOverlay.classList.remove("open");
+      supportOverlay.setAttribute("aria-hidden", "true");
+
+      if (!articleOverlay.classList.contains("open")) {
+        document.body.classList.remove("modal-open");
+      }
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+    }
+
+    document.getElementById("openSupport").addEventListener("click", openSupport);
+    document.getElementById("closeSupport").addEventListener("click", closeSupport);
+
+    supportOverlay.addEventListener("click", event => {
+      if (event.target === supportOverlay) closeSupport();
+    });
+
+    /* ESCAPE KEY */
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        if (articleOverlay.classList.contains("open")) {
+          closeArticle();
+        } else if (supportOverlay.classList.contains("open")) {
+          closeSupport();
+        }
+      }
+    });
+
+    /* SMOOTH NAVIGATION BETWEEN ZENENE PAGES */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", event => {
+        if (
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey ||
+          link.target === "_blank"
+        ) {
+          return;
+        }
+
+        const destination = new URL(link.href, window.location.href);
+
+        if (
+          destination.origin !== window.location.origin ||
+          destination.pathname === window.location.pathname ||
+          !["http:", "https:"].includes(destination.protocol)
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        document.body.classList.add("is-leaving");
+
+        window.setTimeout(() => {
+          window.location.href = destination.href;
+        }, 150);
+      });
+    });
+
+    /* INITIALISE */
+
+    renderFilters();
     renderArticles();
-  }
 
-}
-
-
-/* =========================================================
-   INITIALISE
-   ========================================================= */
-
-renderArticles();
-
-loadSavedArticles().then(renderArticles);
-
-
-</script>
-
+    loadSavedArticles().then(() => {
+      renderFilters();
+      renderArticles();
+    });
+  </script>
 </body>
-
 </html>

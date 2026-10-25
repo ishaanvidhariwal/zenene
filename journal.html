@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -19,14 +19,25 @@
     --secondary: #77766c;
     --faint: #a6a194;
     --line: #dfdbd0;
+
     --rose: #ad7478;
     --rose-light: #f0e4e1;
-    --sage: #dce3d6;
+    --rose-deep: #80585d;
+
+    --sage: #e3e9dd;
     --sage-ink: #596d55;
+
     --yellow: #eee5c8;
-    --blue: #dce5e8;
+
+    --blue: #e2ebed;
+    --blue-ink: #526d75;
+
     --type: "Special Elite", "Courier Prime", monospace;
     --mono: "Courier Prime", monospace;
+    --hand: "Caveat", cursive;
+
+    --radius: 3px;
+    --transition: 180ms ease;
 }
 
 * {
@@ -35,10 +46,12 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
 }
 
 body {
     margin: 0;
+    overflow-x: clip;
     background: var(--paper);
     color: var(--ink);
     font-family: var(--mono);
@@ -53,6 +66,7 @@ textarea {
 
 button {
     color: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible,
@@ -130,6 +144,7 @@ a:focus-visible {
 .page {
     width: min(1060px, calc(100% - 64px));
     margin: 0 auto;
+    min-width: 0;
 }
 
 .page-heading {
@@ -158,8 +173,8 @@ a:focus-visible {
 .heading-note {
     max-width: 240px;
     margin: 0 0 4px;
-    color: var(--secondary);
-    font: 12px/1.9 var(--mono);
+    color: var(--blue-ink);
+    font: 21px/1.35 var(--hand);
     text-align: right;
 }
 
@@ -173,6 +188,7 @@ a:focus-visible {
 /* WRITING */
 
 .write-section {
+    min-width: 0;
     padding-top: 42px;
 }
 
@@ -224,6 +240,7 @@ a:focus-visible {
 #journalText {
     display: block;
     width: 100%;
+    max-width: 100%;
     min-height: 275px;
     padding: 24px 25px;
     resize: vertical;
@@ -233,6 +250,7 @@ a:focus-visible {
     background: transparent;
     color: var(--ink);
     font: 15px/2 var(--mono);
+    overflow-wrap: anywhere;
 }
 
 #journalText::placeholder {
@@ -274,7 +292,10 @@ a:focus-visible {
     font: 10px/1.5 var(--type);
     letter-spacing: .5px;
     cursor: pointer;
-    transition: background .18s, color .18s;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
 }
 
 .save-btn:hover {
@@ -310,6 +331,7 @@ a:focus-visible {
     align-items: start;
     padding: 24px 0;
     border-bottom: 1px solid var(--line);
+    min-width: 0;
 }
 
 .mood-heading h2 {
@@ -329,6 +351,7 @@ a:focus-visible {
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
+    min-width: 0;
 }
 
 .mood-option {
@@ -338,12 +361,15 @@ a:focus-visible {
     min-height: 36px;
     padding: 6px 10px;
     border: 1px solid var(--line);
-    border-radius: 0;
+    border-radius: var(--radius);
     background: var(--surface);
     color: var(--secondary);
     font: 11px/1.4 var(--mono);
     cursor: pointer;
-    transition: border-color .18s, background .18s, color .18s;
+    transition:
+        border-color var(--transition),
+        background var(--transition),
+        color var(--transition);
 }
 
 .mood-option:hover {
@@ -354,7 +380,28 @@ a:focus-visible {
 .mood-option.selected {
     border-color: var(--rose);
     background: var(--rose-light);
-    color: #654749;
+    color: var(--rose-deep);
+}
+
+.mood-option[data-mood="Happy"].selected,
+.mood-option[data-mood="Very Happy"].selected,
+.mood-option[data-mood="Excited"].selected {
+    border-color: #a8b9a1;
+    background: var(--sage);
+    color: var(--sage-ink);
+}
+
+.mood-option[data-mood="Sad"].selected,
+.mood-option[data-mood="Crying"].selected {
+    border-color: #b7cbd0;
+    background: var(--blue);
+    color: var(--blue-ink);
+}
+
+.mood-option[data-mood="Loved"].selected {
+    border-color: var(--rose);
+    background: var(--rose-light);
+    color: var(--rose-deep);
 }
 
 .mood-emoji {
@@ -365,13 +412,14 @@ a:focus-visible {
 .mood-footnote {
     grid-column: 2;
     margin: -12px 0 0;
-    color: var(--secondary);
-    font-size: 11px;
+    color: var(--rose-deep);
+    font: 19px/1.4 var(--hand);
 }
 
 /* CALENDAR / ARCHIVE */
 
 .archive-section {
+    min-width: 0;
     padding-top: 67px;
 }
 
@@ -400,6 +448,7 @@ a:focus-visible {
 .calendar {
     border: 1px solid var(--line);
     background: var(--surface);
+    min-width: 0;
 }
 
 .calendar-toolbar {
@@ -433,7 +482,10 @@ a:focus-visible {
     color: var(--ink);
     font: 11px var(--mono);
     cursor: pointer;
-    transition: background .18s, color .18s;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
 }
 
 .calendar-control:hover {
@@ -498,6 +550,7 @@ a:focus-visible {
 }
 
 .calendar-day.today .day-number {
+    border-radius: 50%;
     background: var(--ink);
     color: white;
 }
@@ -525,7 +578,7 @@ a:focus-visible {
     overflow: hidden;
     border: 0;
     border-left: 2px solid var(--rose);
-    border-radius: 0;
+    border-radius: 2px;
     background: var(--rose-light);
     color: #674d4e;
     font: 9px/1.5 var(--mono);
@@ -536,13 +589,13 @@ a:focus-visible {
 }
 
 .calendar-entry:nth-of-type(even) {
-    border-left-color: var(--sage-ink);
-    background: #e7ece2;
-    color: #4d6049;
+    border-left-color: #91a58a;
+    background: var(--sage);
+    color: var(--sage-ink);
 }
 
 .calendar-entry:hover {
-    filter: brightness(.96);
+    filter: brightness(.97);
 }
 
 .calendar-more {
@@ -599,7 +652,11 @@ a:focus-visible {
     position: relative;
     width: min(620px, 100%);
     max-height: 85vh;
+    max-height: 85dvh;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
     padding: 35px;
     border: 1px solid var(--line);
     background: var(--surface);
@@ -665,6 +722,7 @@ a:focus-visible {
     color: var(--secondary);
     font: 10px var(--type);
     cursor: pointer;
+    transition: color var(--transition);
 }
 
 .modal-action:hover {
@@ -678,6 +736,7 @@ a:focus-visible {
 .edit-area {
     display: block;
     width: 100%;
+    max-width: 100%;
     min-height: 230px;
     margin-top: 24px;
     padding: 12px;
@@ -687,11 +746,13 @@ a:focus-visible {
     background: var(--surface);
     color: var(--ink);
     font: 14px/2 var(--mono);
+    overflow-wrap: anywhere;
 }
 
 .edit-buttons {
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 15px;
 }
@@ -729,12 +790,21 @@ a:focus-visible {
     background: transparent;
     font: 10px var(--type);
     cursor: pointer;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
 }
 
 .confirm-buttons .confirm-delete {
     border-color: var(--ink);
     background: var(--ink);
     color: white;
+}
+
+.confirm-buttons .confirm-delete:hover {
+    border-color: var(--rose-deep);
+    background: var(--rose-deep);
 }
 
 /* SUPPORT */
@@ -751,6 +821,14 @@ a:focus-visible {
     color: var(--ink);
     font: 10px var(--type);
     cursor: pointer;
+    transition:
+        background var(--transition),
+        border-color var(--transition);
+}
+
+.crisis-fab:hover {
+    border-color: #a8c0c6;
+    background: #d5e4e7;
 }
 
 .overlay {
@@ -803,6 +881,7 @@ a:focus-visible {
     color: var(--ink);
     font: 11px/1.6 var(--mono);
     text-decoration: none;
+    transition: border-color var(--transition);
 }
 
 .overlay .c-link:hover {
@@ -972,6 +1051,20 @@ a:focus-visible {
     .crisis-fab {
         right: 12px;
         bottom: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 </style>
@@ -1270,6 +1363,7 @@ function updateDates() {
     });
 
     $("todayDate").textContent = longDate;
+
     $("writeDate").textContent = formatDate(today, {
         month: "short",
         day: "numeric",
@@ -1360,7 +1454,6 @@ async function saveEntries(nextEntries) {
         nextEntries.map(entry => [String(entry.id), entry])
     );
 
-    // Delete entries removed from the requested list.
     for (const oldEntry of previous) {
         if (!nextById.has(String(oldEntry.id))) {
             const { error } = await supabaseClient
@@ -1373,7 +1466,6 @@ async function saveEntries(nextEntries) {
         }
     }
 
-    // Insert new entries or update changed entries.
     for (const entry of nextEntries) {
         const oldEntry = previousById.get(String(entry.id));
 
@@ -1866,3 +1958,4 @@ initJournal();
 
 </body>
 </html>
+```

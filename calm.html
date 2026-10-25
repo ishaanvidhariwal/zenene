@@ -2,37 +2,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f2f2">
+  <meta name="description" content="A gentle space to breathe, create, and find small moments of calm.">
   <title>Calm | Zenene</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Special+Elite&family=Bricolage+Grotesque:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --background: #F7F3E9;
-      --paper: #FFFCF6;
-      --cream: #F5EFE3;
-      --pink: #EADBDC;
-      --pink-deep: #B99194;
-      --pink-light: #F4EAEA;
-      --sage: #E5E8DE;
-      --sage-deep: #858B79;
-      --lavender: #EAE5E8;
-      --peach: #F0E4D7;
-      --butter: #F1E8CF;
-      --brown: #76665B;
-      --brown-dark: #51443C;
-      --ink: #39332F;
-      --muted: #91857C;
-      --line: rgba(81, 68, 60, 0.14);
-      --shadow: 0 8px 28px rgba(81, 68, 60, 0.055);
+      /* Background: extremely muted baby pink */
+      --background: #f8f2f2;
+      --paper: #fcfaf7;
+      --white: #fffdfb;
+      --cream: #f8f3ed;
+
+      --rose: #f0e2e2;
+      --rose-light: #f6eded;
+      --rose-dark: #ad8589;
+      --rose-ink: #846469;
+
+      --sage: #e5e9df;
+      --sage-dark: #7e8b76;
+
+      --blue: #e5ebed;
+      --blue-dark: #7d969d;
+      --blue-ink: #526d74;
+
+      --butter: #f2ecd9;
+      --lavender: #ece7ec;
+      --peach: #f1e6dd;
+
+      --ink: #302d2b;
+      --muted: #858079;
+      --line: #e5dedd;
 
       --serif: "Cormorant Garamond", Georgia, serif;
-      --typewriter: "Special Elite", "Courier New", monospace;
-      --heading: "Bricolage Grotesque", sans-serif;
+      --type: "Special Elite", "Courier New", monospace;
       --script: "Pinyon Script", cursive;
     }
 
@@ -42,22 +51,28 @@
 
     html {
       scroll-behavior: smooth;
+      scrollbar-gutter: stable;
     }
 
     body {
       margin: 0;
       background: var(--background);
       color: var(--ink);
-      font-family: var(--heading);
+      font-family: var(--type);
       font-size: 14px;
       line-height: 1.6;
-      transition: background 0.25s ease;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      animation: pageEnter .3s ease both;
     }
 
-    button,
-    input,
-    textarea {
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    button, input, textarea {
       font: inherit;
+      -webkit-tap-highlight-color: transparent;
     }
 
     button {
@@ -65,328 +80,371 @@
     }
 
     button:focus-visible,
+    a:focus-visible,
     input:focus-visible,
-    textarea:focus-visible {
-      outline: 2px solid var(--pink-deep);
-      outline-offset: 3px;
+    textarea:focus-visible,
+    [role="button"]:focus-visible {
+      outline: 2px solid var(--rose-dark);
+      outline-offset: 4px;
     }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    /* Navigation — matching Explore */
 
     .top-nav {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 500;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      padding: 13px 6%;
-      background: rgba(247, 243, 233, 0.96);
+      gap: 24px;
+      padding: 20px 34px;
+      background: var(--background);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(12px);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--brown-dark);
+    .nav-wordmark {
+      flex-shrink: 0;
+      color: var(--ink);
+      font-size: .78rem;
+      letter-spacing: .16em;
       text-decoration: none;
-      font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-    }
-
-    .brand-flower {
-      display: grid;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--pink);
-      font-size: 16px;
+      text-transform: uppercase;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
       flex-wrap: wrap;
+      gap: 28px;
     }
 
     .nav-links a {
-      color: var(--brown);
+      position: relative;
+      color: #706761;
+      font-size: .65rem;
+      letter-spacing: .08em;
       text-decoration: none;
-      font-size: 12px;
-      transition: color 0.2s ease;
+      text-transform: uppercase;
+      transition: color .2s ease;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
-      color: var(--pink-deep);
+      color: var(--ink);
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+      height: 1px;
+      background: var(--rose-dark);
     }
 
     .nav-user {
       display: flex;
+      flex-shrink: 0;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .user-name {
-      color: var(--brown);
-      font-size: 12px;
+      max-width: 140px;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: .58rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .small-button {
+      padding: 9px 12px;
       border: 1px solid var(--line);
-      border-radius: 20px;
+      border-radius: 0;
       background: var(--paper);
-      color: var(--brown);
-      padding: 7px 13px;
-      font-size: 11px;
+      color: var(--ink);
+      font-size: .57rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: background .2s ease;
     }
 
     .small-button:hover {
-      background: var(--pink-light);
+      background: var(--rose-light);
     }
 
-    main {
-      width: min(1080px, 90%);
+    /* Page structure */
+
+    .page {
+      width: min(1200px, calc(100% - 64px));
       margin: 0 auto;
-      padding: 42px 0 65px;
+      padding: 54px 0 0;
     }
 
-    .page-heading {
-      text-align: center;
-      margin: 0 auto 30px;
-      max-width: 600px;
-    }
-
-    .eyebrow {
-      margin: 0 0 7px;
-      color: var(--pink-deep);
-      font-family: var(--typewriter);
-      font-size: 10px;
-      letter-spacing: 2px;
+    .eyebrow,
+    .section-label,
+    .filter-label,
+    .article-category {
+      font-size: .62rem;
+      letter-spacing: .12em;
+      line-height: 1.7;
       text-transform: uppercase;
     }
 
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
+    .eyebrow,
+    .section-label,
+    .filter-label {
+      color: var(--muted);
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin-bottom: 17px;
     }
 
     h1 {
-      margin-bottom: 6px;
-      color: var(--brown-dark);
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-weight: 400;
+      letter-spacing: -.065em;
+      line-height: 1.02;
+    }
+
+    h1 em {
+      color: var(--rose-ink);
+      font-style: normal;
+    }
+
+    .header-intro {
+      width: min(350px, 100%);
+      margin: 0 0 4px;
+      color: #746b65;
       font-family: var(--serif);
-      font-size: clamp(42px, 6vw, 62px);
-      font-weight: 500;
-      line-height: 1.05;
+      font-size: 1.35rem;
+      line-height: 1.45;
     }
 
-    .script-subtitle {
-      margin: 0 0 10px;
-      color: var(--pink-deep);
-      font-family: var(--script);
-      font-size: 31px;
-    }
-
-    .page-description {
-      max-width: 430px;
-      margin: 0 auto;
-      color: var(--brown);
-      font-size: 13px;
-      line-height: 1.8;
-    }
+    /* Activity navigation */
 
     .calm-tabs {
       display: flex;
-      justify-content: center;
-      gap: 9px;
-      margin: 0 auto 26px;
       flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 30px;
     }
 
     .c-tab {
       display: flex;
       align-items: center;
-      gap: 9px;
-      padding: 8px 15px 8px 9px;
+      gap: 10px;
+      padding: 10px 15px 10px 10px;
       border: 1px solid var(--line);
-      border-radius: 30px;
+      border-radius: 0;
       background: var(--paper);
-      color: var(--brown);
-      font-size: 12px;
-      transition: background 0.2s ease, border-color 0.2s ease;
+      color: #6e655f;
+      font-size: .62rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: background .2s ease, border-color .2s ease;
     }
 
     .c-tab:hover {
-      border-color: var(--pink-deep);
+      border-color: #d2babb;
     }
 
     .c-tab.active {
-      background: var(--pink-light);
-      border-color: #D9C2C3;
-      color: var(--brown-dark);
+      border-color: #d4babb;
+      background: var(--rose-light);
+      color: var(--ink);
     }
 
     .tab-icon {
       display: grid;
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
       place-items: center;
-      width: 29px;
-      height: 29px;
-      border-radius: 50%;
       background: var(--butter);
-      font-size: 14px;
+      color: #73695c;
+      font-family: var(--serif);
+      font-size: 1.2rem;
     }
 
     .c-tab:nth-child(2) .tab-icon {
-      background: var(--pink);
-    }
-
-    .c-tab:nth-child(3) .tab-icon {
       background: var(--sage);
     }
 
+    .c-tab:nth-child(3) .tab-icon {
+      background: var(--rose);
+    }
+
+    /* Panels */
+
     .calm-panel {
       display: none;
-      animation: fadeIn 0.35s ease;
+      animation: cardIn .3s ease both;
     }
 
     .calm-panel.active {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .panel-card {
+      padding: clamp(22px, 4vw, 38px);
       border: 1px solid var(--line);
-      border-radius: 18px;
       background: var(--paper);
-      box-shadow: var(--shadow);
-      padding: clamp(20px, 4vw, 36px);
     }
 
     .section-heading {
-      margin-bottom: 5px;
-      color: var(--brown-dark);
-      font-family: var(--serif);
-      font-size: 32px;
-      font-weight: 500;
+      margin-bottom: 8px;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 400;
+      letter-spacing: -.035em;
       line-height: 1.2;
     }
 
     .section-description {
-      margin-bottom: 23px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
+      max-width: 650px;
+      margin-bottom: 28px;
+      color: #746d66;
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      line-height: 1.6;
     }
+
+    /* Breathing */
 
     .breathing-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(230px, 0.8fr);
+      grid-template-columns: minmax(0, 1fr) minmax(260px, .85fr);
       align-items: center;
-      gap: 30px;
+      gap: 36px;
     }
 
     .breathing-visual {
       display: flex;
+      min-height: 390px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 350px;
-      border-radius: 15px;
-      background: var(--cream);
-      padding: 25px 15px;
+      padding: 28px 20px;
+      border: 1px solid #e9dfdd;
+      background: #f7f0ed;
+      text-align: center;
+    }
+
+    .breathing-visual .eyebrow {
+      margin-bottom: 4px;
     }
 
     .breath-circle-wrap {
       display: grid;
+      width: 240px;
+      height: 240px;
+      flex-shrink: 0;
       place-items: center;
-      width: 220px;
-      height: 220px;
-      margin: 12px 0 16px;
+      margin: 6px 0 16px;
     }
 
     .breath-circle {
       display: grid;
-      place-items: center;
       width: 155px;
       height: 155px;
-      border: 1px solid #C8C9B9;
+      place-items: center;
+      border: 1px solid #d4c4c1;
       border-radius: 50%;
-      background: #E4E3D5;
-      box-shadow: 0 0 0 12px rgba(228, 227, 213, 0.42);
+      background: #eadcda;
+      box-shadow: 0 0 0 12px rgba(234,220,218,.35);
       transition: transform 4s ease-in-out, background 1s ease;
+      will-change: transform;
     }
 
     .breath-circle.inhale {
-      transform: scale(1.28);
-      background: #D8DDD0;
+      transform: scale(1.25);
+      background: #e2d0d0;
     }
 
     .breath-circle.hold {
-      transform: scale(1.28);
-      background: #E8DDDB;
+      transform: scale(1.25);
+      background: #e8dfd8;
     }
 
     .breath-circle.exhale {
-      transform: scale(0.84);
-      background: #E4E3D5;
+      transform: scale(.84);
+      background: #eee5df;
     }
 
     .breath-word {
-      color: var(--brown-dark);
+      color: #655550;
       font-family: var(--serif);
-      font-size: 25px;
+      font-size: 1.8rem;
     }
 
     .breath-reminder {
-      width: min(100%, 280px);
-      padding: 11px 15px;
-      border-radius: 12px;
-      background: #F8F3E8;
-      color: var(--brown);
-      font-size: 11px;
-      text-align: center;
+      width: min(100%, 300px);
+      padding: 12px 15px;
+      border: 1px solid #e9dfdd;
+      background: #fcf8f3;
+      color: #766b64;
+      font-family: var(--serif);
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .breathing-controls {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 9px;
-      margin-top: 16px;
+      margin-top: 17px;
+    }
+
+    .primary-button,
+    .secondary-button {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      font-size: .59rem;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+      transition: background .2s ease, border-color .2s ease;
     }
 
     .primary-button {
-      border: 1px solid var(--pink-deep);
-      border-radius: 24px;
-      background: var(--pink);
-      color: var(--brown-dark);
-      padding: 10px 19px;
-      font-size: 12px;
-      transition: background 0.2s ease, transform 0.2s ease;
+      border-color: #d4b9ba;
+      background: #eee0e0;
+      color: #514341;
     }
 
     .primary-button:hover {
-      background: #E1CECF;
-      transform: translateY(-1px);
+      border-color: #c9a7a9;
+      background: #e8d6d7;
     }
 
     .secondary-button {
-      border: 1px solid var(--line);
-      border-radius: 24px;
       background: var(--paper);
-      color: var(--brown);
-      padding: 10px 19px;
-      font-size: 12px;
+      color: #6c625b;
     }
 
     .secondary-button:hover {
@@ -394,101 +452,109 @@
     }
 
     .breathing-info {
-      padding: 6px 4px;
+      padding: 8px 0;
     }
 
     .breathing-info h3 {
-      margin-bottom: 8px;
-      color: var(--brown-dark);
-      font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 500;
+      margin-bottom: 13px;
+      font-size: 1.9rem;
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: 1.25;
     }
 
-    .breathing-info > p {
-      color: var(--brown);
-      font-size: 12px;
-      line-height: 1.9;
+    .breathing-info > p:not(.eyebrow) {
+      color: #726a64;
+      font-family: var(--serif);
+      font-size: 1.16rem;
+      line-height: 1.65;
     }
 
     .steps {
       display: grid;
-      gap: 11px;
-      margin: 20px 0;
+      gap: 0;
+      margin: 22px 0;
+      border-top: 1px solid var(--line);
     }
 
     .step {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 11px 13px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--paper);
+      gap: 14px;
+      padding: 14px 4px;
+      border-bottom: 1px solid var(--line);
     }
 
     .step-number {
       display: grid;
+      width: 34px;
+      height: 34px;
       flex-shrink: 0;
       place-items: center;
-      width: 29px;
-      height: 29px;
-      border-radius: 50%;
+      border: 1px solid #dce1d5;
       background: var(--sage);
-      color: var(--brown-dark);
+      color: #626b5b;
       font-family: var(--serif);
-      font-size: 16px;
+      font-size: 1.1rem;
     }
 
     .step:nth-child(2) .step-number {
-      background: var(--pink);
+      border-color: #e6d5d5;
+      background: var(--rose-light);
     }
 
     .step:nth-child(3) .step-number {
+      border-color: #e9e1cd;
       background: var(--butter);
     }
 
     .step strong {
       display: block;
-      color: var(--brown-dark);
-      font-size: 12px;
-      font-weight: 500;
+      margin-bottom: 2px;
+      font-size: .66rem;
+      font-weight: 400;
+      letter-spacing: .025em;
     }
 
     .step span {
       display: block;
       color: var(--muted);
-      font-size: 11px;
+      font-family: var(--serif);
+      font-size: 1rem;
+      line-height: 1.4;
     }
 
     .note {
-      padding: 13px 15px;
-      border-left: 2px solid var(--sage-deep);
-      border-radius: 0 9px 9px 0;
-      background: #F0F1E9;
-      color: var(--brown);
-      font-size: 11px;
-      line-height: 1.8;
+      padding: 15px 17px;
+      border-left: 2px solid #bdc7b5;
+      background: #f1f3ec;
+      color: #696c61;
+      font-family: var(--serif);
+      font-size: 1rem;
+      line-height: 1.65;
     }
+
+    /* Color Flow */
 
     .color-flow-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 210px;
+      grid-template-columns: minmax(0, 1fr) 225px;
+      align-items: start;
       gap: 20px;
     }
 
     .canvas-wrap {
-      overflow: hidden;
+      min-width: 0;
       min-height: 320px;
+      overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #F3EDE2;
+      background: #f7f1e9;
     }
 
     #colorCanvas {
       display: block;
       width: 100%;
-      height: 320px;
+      height: 360px;
       touch-action: none;
       cursor: crosshair;
     }
@@ -496,331 +562,488 @@
     .flow-controls {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 13px;
     }
 
     .control-box {
-      padding: 16px;
+      padding: 17px;
       border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--cream);
+      background: #faf6f0;
     }
 
     .control-box h3 {
-      margin-bottom: 10px;
-      color: var(--brown-dark);
-      font-family: var(--serif);
-      font-size: 21px;
-      font-weight: 500;
+      margin-bottom: 14px;
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: -.025em;
     }
 
     .color-options {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 12px;
+      padding: 3px;
     }
 
     .color-choice {
       width: 100%;
       aspect-ratio: 1;
-      border: 2px solid transparent;
+      border: 1px solid rgba(48,45,43,.1);
       border-radius: 50%;
-      box-shadow: inset 0 0 0 1px rgba(81, 68, 60, 0.12);
+      box-shadow: none;
+      transition: outline .15s ease, transform .15s ease;
+    }
+
+    .color-choice:hover {
+      transform: scale(1.06);
     }
 
     .color-choice.selected {
-      outline: 2px solid var(--brown);
+      outline: 2px solid var(--rose-dark);
       outline-offset: 3px;
     }
 
-    .color-choice[data-color="#EADBDC"] { background: #EADBDC; }
-    .color-choice[data-color="#E5E8DE"] { background: #E5E8DE; }
-    .color-choice[data-color="#F1E8CF"] { background: #F1E8CF; }
-    .color-choice[data-color="#EAE5E8"] { background: #EAE5E8; }
-    .color-choice[data-color="#F0E4D7"] { background: #F0E4D7; }
-    .color-choice[data-color="#DCDCCF"] { background: #DCDCCF; }
+    .color-choice[data-color="#EADBDC"] { background: #eadbdc; }
+    .color-choice[data-color="#E5E8DE"] { background: #e5e8de; }
+    .color-choice[data-color="#F1E8CF"] { background: #f1e8cf; }
+    .color-choice[data-color="#EAE5E8"] { background: #eae5e8; }
+    .color-choice[data-color="#F0E4D7"] { background: #f0e4d7; }
+    .color-choice[data-color="#DCDCCF"] { background: #dcdccf; }
 
     .control-label {
       display: flex;
       justify-content: space-between;
       gap: 8px;
       margin-bottom: 7px;
-      color: var(--brown);
-      font-size: 11px;
+      color: #756b64;
+      font-size: .6rem;
+      letter-spacing: .025em;
     }
 
     input[type="range"] {
       width: 100%;
-      accent-color: var(--pink-deep);
+      accent-color: var(--rose-dark);
+      cursor: pointer;
     }
 
     .control-hint {
-      margin: 10px 0 0;
+      margin: 12px 0 0;
       color: var(--muted);
-      font-size: 10px;
-      line-height: 1.7;
+      font-family: var(--serif);
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .flow-actions {
       display: flex;
-      gap: 8px;
       flex-wrap: wrap;
+      gap: 7px;
     }
 
     .flow-actions button {
       flex: 1;
-      padding: 9px 8px;
-      font-size: 11px;
+      padding: 10px 8px;
     }
+
+    /* Gratitude Garden */
 
     .gratitude-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(230px, 0.75fr);
-      gap: 25px;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      align-items: stretch;
+      gap: 26px;
     }
 
     .gratitude-form {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      align-items: flex-start;
+      gap: 11px;
     }
 
     .gratitude-form label {
-      color: var(--brown-dark);
-      font-size: 12px;
+      margin-top: 4px;
+      color: #635951;
+      font-size: .65rem;
+      letter-spacing: .035em;
     }
 
-    .gratitude-form textarea {
-      width: 100%;
-      min-height: 115px;
-      resize: vertical;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #FFFCF7;
-      padding: 13px;
-      color: var(--ink);
-      font-family: var(--heading);
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    .gratitude-form textarea::placeholder {
-      color: #B2A69B;
-    }
-
+    .gratitude-form textarea,
     .gratitude-form input {
       width: 100%;
       border: 1px solid var(--line);
-      border-radius: 10px;
-      background: #FFFCF7;
-      padding: 11px 12px;
+      border-radius: 0;
+      background: #fffdf9;
       color: var(--ink);
-      font-size: 12px;
+      font-family: var(--serif);
+      font-size: 1.15rem;
+    }
+
+    .gratitude-form textarea {
+      min-height: 155px;
+      resize: vertical;
+      padding: 16px;
+      line-height: 1.7;
+    }
+
+    .gratitude-form textarea::placeholder,
+    .gratitude-form input::placeholder {
+      color: #aaa099;
+    }
+
+    .gratitude-form input {
+      padding: 12px;
+    }
+
+    .gratitude-form .primary-button {
+      margin-top: 5px;
     }
 
     .gratitude-garden {
       display: flex;
+      min-height: 310px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 270px;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
+      padding: 28px 20px;
+      border: 1px solid #dce2d6;
       background: var(--sage);
       text-align: center;
     }
 
     .garden-illustration {
-      margin-bottom: 10px;
-      font-size: 43px;
-      line-height: 1.3;
+      margin-bottom: 15px;
+      color: #78866e;
+      font-family: var(--serif);
+      font-size: 3.8rem;
+      line-height: 1;
     }
 
     .gratitude-garden h3 {
-      margin-bottom: 5px;
-      color: var(--brown-dark);
-      font-family: var(--serif);
-      font-size: 25px;
-      font-weight: 500;
+      margin-bottom: 9px;
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: -.025em;
     }
 
     .gratitude-garden p {
-      max-width: 210px;
-      margin-bottom: 12px;
-      color: var(--brown);
-      font-size: 11px;
-      line-height: 1.8;
+      max-width: 230px;
+      margin-bottom: 17px;
+      color: #687060;
+      font-family: var(--serif);
+      font-size: 1.12rem;
+      line-height: 1.6;
     }
 
     .garden-count {
       display: inline-block;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: rgba(255, 252, 246, 0.75);
-      color: var(--brown);
-      font-size: 10px;
+      padding: 8px 12px;
+      border: 1px solid rgba(105,117,96,.2);
+      background: rgba(252,250,247,.7);
+      color: #69725f;
+      font-size: .55rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
     .entries-heading {
       display: flex;
+      align-items: baseline;
       justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin: 27px 0 12px;
+      gap: 15px;
+      margin: 36px 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
     }
 
     .entries-heading h3 {
       margin: 0;
-      color: var(--brown-dark);
-      font-family: var(--serif);
-      font-size: 25px;
-      font-weight: 500;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: -.025em;
     }
 
     .entries-list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      align-items: stretch;
+      gap: 13px;
     }
 
     .gratitude-entry {
-      padding: 15px;
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      padding: 19px;
       border: 1px solid var(--line);
-      border-radius: 12px;
       background: var(--paper);
     }
 
     .gratitude-entry p {
-      margin-bottom: 9px;
-      color: var(--brown-dark);
+      margin-bottom: 17px;
+      color: #49423d;
       font-family: var(--serif);
-      font-size: 19px;
-      line-height: 1.5;
+      font-size: 1.35rem;
+      line-height: 1.55;
       overflow-wrap: anywhere;
       white-space: pre-wrap;
     }
 
     .entry-date {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid #eee7e2;
       color: var(--muted);
-      font-size: 10px;
+      font-size: .52rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
     .entry-empty {
       grid-column: 1 / -1;
-      padding: 22px;
-      border: 1px dashed #D7CEC2;
-      border-radius: 12px;
+      display: flex;
+      min-height: 140px;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      border: 1px dashed #ddd1cc;
       color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.2rem;
       text-align: center;
-      font-size: 12px;
     }
 
     .status-message {
-      min-height: 18px;
+      min-height: 20px;
       margin: 0;
-      color: var(--sage-deep);
-      font-size: 11px;
+      color: var(--sage-dark);
+      font-size: .6rem;
+      line-height: 1.6;
     }
 
+    /* Closing note and footer */
+
     .footer-note {
-      max-width: 470px;
-      margin: 28px auto 0;
-      color: var(--muted);
+      margin: 43px auto 0;
+      color: var(--rose-ink);
       font-family: var(--serif);
-      font-size: 19px;
+      font-size: 1.45rem;
       font-style: italic;
       text-align: center;
     }
 
     footer {
-      padding: 20px;
+      padding: 23px 20px 17px;
       border-top: 1px solid var(--line);
       color: var(--muted);
-      font-size: 10px;
       text-align: center;
     }
+
+    footer .script {
+      margin-bottom: 5px;
+      color: var(--rose-ink);
+      font-family: var(--script);
+      font-size: 2.1rem;
+      line-height: 1.25;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: .53rem;
+      letter-spacing: .09em;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    /* Sign-in modal */
 
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 1000;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(57, 51, 47, 0.35);
+      background: rgba(48,45,43,.4);
+      backdrop-filter: blur(4px);
     }
 
     .modal-backdrop.open {
       display: flex;
+      animation: overlayEnter .2s ease both;
     }
 
     .modal-card {
       width: min(440px, 100%);
-      padding: 26px;
+      padding: 30px;
       border: 1px solid var(--line);
-      border-radius: 17px;
       background: var(--paper);
-      box-shadow: 0 20px 60px rgba(57, 51, 47, 0.15);
+      animation: modalEnter .22s ease both;
+    }
+
+    .modal-card .eyebrow {
+      margin-bottom: 13px;
     }
 
     .modal-card h2 {
-      margin-bottom: 9px;
-      color: var(--brown-dark);
+      margin-bottom: 12px;
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: 1.2;
+    }
+
+    .modal-card p:not(.eyebrow) {
+      color: #746b64;
       font-family: var(--serif);
-      font-size: 31px;
-      font-weight: 500;
-    }
-
-    .modal-card p,
-    .modal-card li {
-      color: var(--brown);
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    .modal-card ul {
-      padding-left: 19px;
+      font-size: 1.12rem;
+      line-height: 1.65;
     }
 
     .modal-actions {
       display: flex;
       justify-content: flex-end;
-      margin-top: 15px;
+      margin-top: 22px;
     }
+
+    /* Motion */
+
+    @keyframes pageEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(9px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes overlayEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalEnter {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    body.is-leaving {
+      opacity: 0;
+      transition: opacity .16s ease;
+      pointer-events: none;
+    }
+
+    /* Tablet */
+
+    @media (max-width: 1000px) {
+      .page {
+        width: calc(100% - 44px);
+      }
+
+      .breathing-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(230px, .85fr);
+        gap: 24px;
+      }
+
+      .color-flow-layout {
+        grid-template-columns: minmax(0, 1fr) 200px;
+        gap: 14px;
+      }
+
+      .gratitude-layout {
+        grid-template-columns: minmax(0, 1fr) 250px;
+        gap: 18px;
+      }
+
+      .panel-card {
+        padding: 25px;
+      }
+    }
+
+    /* Mobile */
 
     @media (max-width: 760px) {
       .top-nav {
-        padding: 12px 5%;
-        align-items: flex-start;
+        padding: 17px 20px;
+        gap: 18px;
       }
 
       .nav-links {
         justify-content: flex-end;
-        gap: 10px 15px;
+        gap: 13px;
+      }
+
+      .nav-links a {
+        font-size: .52rem;
       }
 
       .nav-user {
         display: none;
       }
 
-      main {
-        width: 92%;
-        padding-top: 30px;
+      .page {
+        width: calc(100% - 36px);
+        padding-top: 40px;
+      }
+
+      .page-header {
+        display: block;
+        padding-bottom: 24px;
+        margin-bottom: 25px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 12vw, 4.8rem);
+      }
+
+      .header-intro {
+        margin-top: 19px;
+        font-size: 1.2rem;
+      }
+
+      .calm-tabs {
+        gap: 7px;
+        margin-bottom: 23px;
+      }
+
+      .c-tab {
+        gap: 7px;
+        padding: 8px 10px;
+        font-size: .51rem;
+      }
+
+      .tab-icon {
+        width: 27px;
+        height: 27px;
+      }
+
+      .panel-card {
+        padding: 20px;
       }
 
       .breathing-layout,
       .gratitude-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 25px;
       }
 
       .breathing-visual {
-        min-height: 310px;
+        min-height: 350px;
+      }
+
+      .breath-circle-wrap {
+        width: 220px;
+        height: 220px;
       }
 
       .color-flow-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #colorCanvas {
+        height: 310px;
       }
 
       .flow-controls {
@@ -831,38 +1054,93 @@
       .control-box:last-child {
         grid-column: 1 / -1;
       }
+
+      .gratitude-garden {
+        min-height: 250px;
+      }
+
+      .entries-list {
+        gap: 10px;
+      }
+
+      .gratitude-entry {
+        padding: 14px;
+      }
+
+      .gratitude-entry p {
+        font-size: 1.2rem;
+      }
+
+      .footer-note {
+        margin-top: 32px;
+        font-size: 1.25rem;
+      }
     }
 
     @media (max-width: 480px) {
       .top-nav {
         flex-direction: column;
-        gap: 8px;
+        align-items: flex-start;
+        gap: 13px;
+        padding: 15px 18px;
       }
 
-      .brand {
-        font-size: 25px;
+      .nav-wordmark {
+        font-size: .72rem;
       }
 
       .nav-links {
         justify-content: flex-start;
+        gap: 12px 15px;
       }
 
-      .page-heading {
-        margin-bottom: 22px;
+      .nav-links a {
+        font-size: .49rem;
+      }
+
+      .page {
+        width: calc(100% - 28px);
+        padding-top: 33px;
+      }
+
+      .page-header {
+        padding-bottom: 21px;
+      }
+
+      .eyebrow {
+        font-size: .56rem;
+      }
+
+      .header-intro {
+        font-size: 1.12rem;
+      }
+
+      .calm-tabs {
+        display: grid;
+        grid-template-columns: 1fr;
       }
 
       .c-tab {
-        padding: 7px 11px 7px 7px;
-        font-size: 11px;
-      }
-
-      .tab-icon {
-        width: 25px;
-        height: 25px;
+        justify-content: flex-start;
+        padding: 8px 11px;
+        font-size: .57rem;
       }
 
       .panel-card {
-        padding: 17px;
+        padding: 16px;
+      }
+
+      .section-heading {
+        font-size: 1.8rem;
+      }
+
+      .section-description {
+        font-size: 1.08rem;
+      }
+
+      .breathing-visual {
+        min-height: 320px;
+        padding: 20px 12px;
       }
 
       .breath-circle-wrap {
@@ -875,8 +1153,14 @@
         height: 135px;
       }
 
-      .entries-list {
-        grid-template-columns: 1fr;
+      .breathing-controls {
+        gap: 7px;
+      }
+
+      .primary-button,
+      .secondary-button {
+        padding: 11px 12px;
+        font-size: .54rem;
       }
 
       .flow-controls {
@@ -886,6 +1170,34 @@
       .control-box:last-child {
         grid-column: auto;
       }
+
+      #colorCanvas {
+        height: 260px;
+      }
+
+      .entries-list {
+        grid-template-columns: 1fr;
+      }
+
+      .entries-heading {
+        align-items: flex-start;
+      }
+
+      .entries-heading h3 {
+        font-size: 1.25rem;
+      }
+
+      .modal-card {
+        padding: 23px;
+      }
+
+      footer {
+        padding: 20px 15px 16px;
+      }
+
+      footer .script {
+        font-size: 1.9rem;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -893,9 +1205,9 @@
       *::before,
       *::after {
         scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
+        animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -903,48 +1215,54 @@
 
 <body>
   <nav class="top-nav">
-    <a class="brand" href="index.html">
-      <span class="brand-flower">✿</span>
-      zenene
-    </a>
+    <a class="nav-wordmark" href="index.html">zenene</a>
 
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="journal.html">Journal</a>
-      <a href="mood.html">Mood</a>
-      <a href="explore.html">Explore</a>
-      <a href="calm.html" class="active">Calm</a>
+      <a href="index.html">home</a>
+      <a href="journal.html">journal</a>
+      <a href="mood.html">mood</a>
+      <a href="explore.html">explore</a>
+      <a href="vera.html">vera</a>
+      <a href="calm.html" class="active">calm</a>
+      <a href="profile.html" id="navAuthLink">sign in</a>
     </div>
 
     <div class="nav-user">
       <span class="user-name" id="userName">your little corner</span>
-      <button class="small-button" id="authButton" type="button">Sign in</button>
+      <button class="small-button" id="authButton" type="button">sign in</button>
     </div>
   </nav>
 
-  <main>
-    <header class="page-heading">
-      <p class="eyebrow">a softer moment</p>
-      <h1>Come back to yourself.</h1>
-      <p class="script-subtitle">you can take your time</p>
-      <p class="page-description">
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">a softer moment</p>
+        <h1>come back to <em>yourself.</em></h1>
+      </div>
+
+      <p class="header-intro">
         Nothing to solve right now. Nothing to prove.
-        Just a little space to breathe, make something, and notice what is good.
+        Just a little space to breathe, create, and notice the quieter things.
       </p>
     </header>
 
     <div class="calm-tabs" role="tablist" aria-label="Calm activities">
-      <button class="c-tab active" type="button" role="tab" aria-selected="true" data-tab="breathing">
-        <span class="tab-icon">☁</span>
-        Breathe
+      <button class="c-tab active" type="button" role="tab"
+        aria-selected="true" aria-controls="panel-breathing" data-tab="breathing">
+        <span class="tab-icon" aria-hidden="true">☁</span>
+        breathe
       </button>
-      <button class="c-tab" type="button" role="tab" aria-selected="false" data-tab="flow">
-        <span class="tab-icon">〰</span>
-        Color flow
+
+      <button class="c-tab" type="button" role="tab"
+        aria-selected="false" aria-controls="panel-flow" data-tab="flow">
+        <span class="tab-icon" aria-hidden="true">〰</span>
+        color flow
       </button>
-      <button class="c-tab" type="button" role="tab" aria-selected="false" data-tab="gratitude">
-        <span class="tab-icon">✿</span>
-        Gratitude garden
+
+      <button class="c-tab" type="button" role="tab"
+        aria-selected="false" aria-controls="panel-gratitude" data-tab="gratitude">
+        <span class="tab-icon" aria-hidden="true">✿</span>
+        gratitude garden
       </button>
     </div>
 
@@ -966,14 +1284,19 @@
             </div>
 
             <div class="breathing-controls">
-              <button class="primary-button" id="breathStart" type="button">Begin breathing</button>
-              <button class="secondary-button" id="breathReset" type="button">Reset</button>
+              <button class="primary-button" id="breathStart" type="button">
+                begin breathing
+              </button>
+              <button class="secondary-button" id="breathReset" type="button">
+                reset
+              </button>
             </div>
           </div>
 
           <div class="breathing-info">
             <p class="eyebrow">a moment for you</p>
             <h3>Let the day get a little quieter.</h3>
+
             <p>
               Follow the circle if it feels comfortable. You don't need to take
               unusually deep breaths or hold your breath. Let your breathing
@@ -984,7 +1307,7 @@
               <div class="step">
                 <span class="step-number">1</span>
                 <div>
-                  <strong>Breathe in gently</strong>
+                  <strong>breathe in gently</strong>
                   <span>Let the circle grow at its own pace.</span>
                 </div>
               </div>
@@ -992,7 +1315,7 @@
               <div class="step">
                 <span class="step-number">2</span>
                 <div>
-                  <strong>Pause if comfortable</strong>
+                  <strong>pause if comfortable</strong>
                   <span>You can skip the pause whenever you like.</span>
                 </div>
               </div>
@@ -1000,17 +1323,16 @@
               <div class="step">
                 <span class="step-number">3</span>
                 <div>
-                  <strong>Breathe out slowly</strong>
+                  <strong>breathe out slowly</strong>
                   <span>Let your body choose a comfortable rhythm.</span>
                 </div>
               </div>
             </div>
 
             <div class="note">
-              A gentle reminder: if focusing on your breathing makes you
-              uncomfortable or light-headed, stop the exercise and return
-              to your usual breathing. You can simply look around and notice
-              the room instead.
+              If focusing on your breathing makes you uncomfortable or
+              light-headed, stop and return to your usual breathing.
+              You can simply look around and notice the room instead.
             </div>
           </div>
         </div>
@@ -1018,10 +1340,11 @@
     </section>
 
     <!-- COLOR FLOW -->
-    <section class="calm-panel" id="panel-flow" role="tabpanel">
+    <section class="calm-panel" id="panel-flow" role="tabpanel" hidden>
       <div class="panel-card">
         <p class="eyebrow">make without a plan</p>
-        <h2 class="section-heading">A little color, a little quiet.</h2>
+        <h2 class="section-heading">a little color, a little quiet.</h2>
+
         <p class="section-description">
           Move your pointer or finger across the canvas. There is no right
           way to make something here.
@@ -1029,33 +1352,43 @@
 
         <div class="color-flow-layout">
           <div class="canvas-wrap">
-            <canvas id="colorCanvas" aria-label="A drawing canvas for freeform color exploration"></canvas>
+            <canvas id="colorCanvas"
+              aria-label="A drawing canvas for freeform color exploration"></canvas>
           </div>
 
           <div class="flow-controls">
             <div class="control-box">
               <h3>Choose a shade</h3>
+
               <div class="color-options" id="colorOptions">
-                <button class="color-choice selected" data-color="#EADBDC" type="button" aria-label="Dusty pink" aria-pressed="true"></button>
-                <button class="color-choice" data-color="#E5E8DE" type="button" aria-label="Soft sage" aria-pressed="false"></button>
-                <button class="color-choice" data-color="#F1E8CF" type="button" aria-label="Butter yellow" aria-pressed="false"></button>
-                <button class="color-choice" data-color="#EAE5E8" type="button" aria-label="Muted lavender" aria-pressed="false"></button>
-                <button class="color-choice" data-color="#F0E4D7" type="button" aria-label="Soft peach" aria-pressed="false"></button>
-                <button class="color-choice" data-color="#DCDCCF" type="button" aria-label="Muted olive" aria-pressed="false"></button>
+                <button class="color-choice selected" data-color="#EADBDC"
+                  type="button" aria-label="Dusty pink" aria-pressed="true"></button>
+                <button class="color-choice" data-color="#E5E8DE"
+                  type="button" aria-label="Soft sage" aria-pressed="false"></button>
+                <button class="color-choice" data-color="#F1E8CF"
+                  type="button" aria-label="Butter yellow" aria-pressed="false"></button>
+                <button class="color-choice" data-color="#EAE5E8"
+                  type="button" aria-label="Muted lavender" aria-pressed="false"></button>
+                <button class="color-choice" data-color="#F0E4D7"
+                  type="button" aria-label="Soft peach" aria-pressed="false"></button>
+                <button class="color-choice" data-color="#DCDCCF"
+                  type="button" aria-label="Muted olive" aria-pressed="false"></button>
               </div>
+
               <p class="control-hint">Choose whatever feels right today.</p>
             </div>
 
             <div class="control-box">
               <h3>Your brush</h3>
+
               <label class="control-label" for="brushSize">
-                <span>Brush size</span>
+                <span>brush size</span>
                 <span id="brushSizeValue">12</span>
               </label>
               <input id="brushSize" type="range" min="2" max="32" value="12">
 
               <label class="control-label" for="brushOpacity" style="margin-top:15px;">
-                <span>Softness</span>
+                <span>softness</span>
                 <span id="brushOpacityValue">65%</span>
               </label>
               <input id="brushOpacity" type="range" min="15" max="100" value="65">
@@ -1063,11 +1396,15 @@
 
             <div class="control-box">
               <h3>Make some space</h3>
+
               <div class="flow-actions">
-                <button class="secondary-button" id="undoDrawing" type="button">Undo</button>
-                <button class="secondary-button" id="clearDrawing" type="button">Clear</button>
+                <button class="secondary-button" id="undoDrawing" type="button">undo</button>
+                <button class="secondary-button" id="clearDrawing" type="button">clear</button>
               </div>
-              <p class="control-hint">You can begin again as many times as you need.</p>
+
+              <p class="control-hint">
+                You can begin again as many times as you need.
+              </p>
             </div>
           </div>
         </div>
@@ -1075,10 +1412,11 @@
     </section>
 
     <!-- GRATITUDE GARDEN -->
-    <section class="calm-panel" id="panel-gratitude" role="tabpanel">
+    <section class="calm-panel" id="panel-gratitude" role="tabpanel" hidden>
       <div class="panel-card">
         <p class="eyebrow">small things count, too</p>
-        <h2 class="section-heading">What helped today?</h2>
+        <h2 class="section-heading">what helped today?</h2>
+
         <p class="section-description">
           It doesn't have to be a big thing. A warm drink, a funny message,
           a few minutes of rest. You can write about anything that felt
@@ -1087,38 +1425,42 @@
 
         <div class="gratitude-layout">
           <form class="gratitude-form" id="gratitudeForm">
-            <label for="gratitudeText">Today, I'm grateful for…</label>
-            <textarea
-              id="gratitudeText"
-              maxlength="1000"
-              placeholder="A little thing I want to remember..."
-              required
-            ></textarea>
+            <label for="gratitudeText">today, i'm grateful for…</label>
 
-            <label for="gratitudeDate">Date</label>
+            <textarea id="gratitudeText" maxlength="1000"
+              placeholder="A little thing I want to remember..." required></textarea>
+
+            <label for="gratitudeDate">date</label>
             <input id="gratitudeDate" type="date" required>
 
-            <button class="primary-button" type="submit">Plant this thought ✿</button>
+            <button class="primary-button" type="submit">
+              plant this thought ✿
+            </button>
+
             <p class="status-message" id="gratitudeStatus" aria-live="polite"></p>
           </form>
 
           <div class="gratitude-garden">
-            <div class="garden-illustration" aria-hidden="true">🌱</div>
+            <div class="garden-illustration" aria-hidden="true">❀</div>
             <h3>Your little garden</h3>
+
             <p>
               Every thought you choose to keep is a little seed.
               Let this space grow at your own pace.
             </p>
+
             <span class="garden-count" id="gardenCount">0 thoughts planted</span>
           </div>
         </div>
 
         <div class="entries-heading">
-          <h3>Things worth keeping</h3>
-          <button class="small-button" id="refreshGratitude" type="button">Refresh</button>
+          <h3>things worth keeping</h3>
+          <button class="small-button" id="refreshGratitude" type="button">
+            refresh
+          </button>
         </div>
 
-        <div class="entries-list" id="gratitudeEntries">
+        <div class="entries-list" id="gratitudeEntries" aria-live="polite">
           <div class="entry-empty">Your garden is waiting for its first seed.</div>
         </div>
       </div>
@@ -1128,75 +1470,87 @@
   </main>
 
   <footer>
-    Zenene · a gentle space for reflection · not a substitute for professional mental-health care
+    <div class="script">be gentle with yourself.</div>
+    <p>zenene · where your mind blooms · a space for reflection</p>
   </footer>
 
   <!-- Sign-in reminder -->
-  <div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+  <div class="modal-backdrop" id="authModal" role="dialog"
+    aria-modal="true" aria-labelledby="authModalTitle" aria-hidden="true">
     <div class="modal-card">
       <p class="eyebrow">your little corner</p>
-      <h2 id="authModalTitle">A note about saving</h2>
+      <h2 id="authModalTitle">A note about saving.</h2>
+
       <p>
         You can use the breathing and color activities without signing in.
         Saving gratitude thoughts to your account requires authentication.
       </p>
+
       <p id="authModalMessage">
-        Sign in through the account flow configured for your Zenene website
-        to access your saved thoughts.
+        Sign in through your Zenene account to access your saved thoughts.
       </p>
+
       <div class="modal-actions">
-        <button class="primary-button" id="closeAuthModal" type="button">Okay</button>
+        <button class="primary-button" id="closeAuthModal" type="button">
+          okay
+        </button>
       </div>
     </div>
   </div>
 
+  <!-- Keep your existing Supabase and authentication scripts -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav-auth.js"></script>
+
   <script>
-    /*
-      ZENENE CALM PAGE
-
-      Optional Supabase setup:
-      1. Load your Supabase JS client before this script.
-      2. Configure window.supabaseClient with your existing client.
-      3. Use a gratitude_entries table with:
-         id, user_id, entry_text, entry_date, created_at
-      4. Enable Row Level Security and policies that restrict records
-         to the authenticated user.
-
-      If Supabase is not configured, the breathing and drawing activities
-      still work. Gratitude saving will explain that sign-in is unavailable.
-    */
-
     (() => {
       "use strict";
 
-      const $ = (selector) => document.querySelector(selector);
-      const $$ = (selector) => [...document.querySelectorAll(selector)];
+      const $ = selector => document.querySelector(selector);
+      const $$ = selector => [...document.querySelectorAll(selector)];
 
       // ---------------------------
-      // Tab navigation
+      // Tabs
       // ---------------------------
 
       const tabs = $$(".c-tab");
       const panels = $$(".calm-panel");
 
-      function activateTab(tabName) {
-        tabs.forEach((tab) => {
-          const selected = tab.dataset.tab === tabName;
+      function activateTab(name) {
+        tabs.forEach(tab => {
+          const selected = tab.dataset.tab === name;
           tab.classList.toggle("active", selected);
           tab.setAttribute("aria-selected", String(selected));
+          tab.tabIndex = selected ? 0 : -1;
         });
 
-        panels.forEach((panel) => {
-          panel.classList.toggle("active", panel.id === `panel-${tabName}`);
+        panels.forEach(panel => {
+          const selected = panel.id === `panel-${name}`;
+          panel.classList.toggle("active", selected);
+          panel.hidden = !selected;
         });
 
-        if (tabName === "flow") {
+        if (name === "flow") {
           requestAnimationFrame(resizeCanvas);
         }
       }
 
-      tabs.forEach((tab) => {
+      tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => activateTab(tab.dataset.tab));
+
+        tab.addEventListener("keydown", event => {
+          let next = index;
+
+          if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+          else if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+          else return;
+
+          event.preventDefault();
+          tabs[next].focus();
+          activateTab(tabs[next].dataset.tab);
+        });
       });
 
       // ---------------------------
@@ -1208,12 +1562,10 @@
       const breathStatus = $("#breathStatus");
       const breathReminder = $("#breathReminder");
       const breathStart = $("#breathStart");
-      const breathReset = $("#breathReset");
 
       let breathing = false;
       let breathingTimer = null;
       let breathingPhaseIndex = 0;
-      let breathingTimeouts = [];
 
       const breathingPhases = [
         {
@@ -1244,15 +1596,13 @@
           clearTimeout(breathingTimer);
           breathingTimer = null;
         }
-
-        breathingTimeouts.forEach(clearTimeout);
-        breathingTimeouts = [];
       }
 
       function setBreathingPhase(index) {
         if (!breathing) return;
 
         const phase = breathingPhases[index];
+
         breathCircle.classList.remove("inhale", "hold", "exhale");
         breathCircle.classList.add(phase.className);
 
@@ -1264,20 +1614,8 @@
 
         breathingTimer = setTimeout(() => {
           if (!breathing) return;
-          const nextIndex = (breathingPhaseIndex + 1) % breathingPhases.length;
-          setBreathingPhase(nextIndex);
+          setBreathingPhase((breathingPhaseIndex + 1) % breathingPhases.length);
         }, phase.duration);
-      }
-
-      function startBreathing() {
-        if (breathing) {
-          stopBreathing();
-          return;
-        }
-
-        breathing = true;
-        breathStart.textContent = "Pause exercise";
-        setBreathingPhase(0);
       }
 
       function stopBreathing() {
@@ -1287,13 +1625,22 @@
         breathCircle.classList.remove("inhale", "hold", "exhale");
         breathWord.textContent = "breathe";
         breathStatus.textContent = "whenever you're ready";
-        breathReminder.textContent =
-          "Let your shoulders soften. There is no rush.";
-        breathStart.textContent = "Begin breathing";
+        breathReminder.textContent = "Let your shoulders soften. There is no rush.";
+        breathStart.textContent = "begin breathing";
       }
 
-      breathStart.addEventListener("click", startBreathing);
-      breathReset.addEventListener("click", stopBreathing);
+      breathStart.addEventListener("click", () => {
+        if (breathing) {
+          stopBreathing();
+          return;
+        }
+
+        breathing = true;
+        breathStart.textContent = "pause exercise";
+        setBreathingPhase(0);
+      });
+
+      $("#breathReset").addEventListener("click", stopBreathing);
 
       document.addEventListener("visibilitychange", () => {
         if (document.hidden && breathing) stopBreathing();
@@ -1310,13 +1657,10 @@
       let brushSize = 12;
       let brushOpacity = 0.65;
       let drawing = false;
-      let previousPoint = null;
       let drawingHistory = [];
       let activeStroke = null;
 
-      function getCanvasBackground() {
-        return "#F3EDE2";
-      }
+      const canvasBackground = "#f7f1e9";
 
       function resizeCanvas() {
         if (!canvas || !ctx) return;
@@ -1324,64 +1668,35 @@
         const rect = canvas.getBoundingClientRect();
         if (!rect.width || !rect.height) return;
 
-        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        const oldCanvas = document.createElement("canvas");
+        oldCanvas.width = canvas.width;
+        oldCanvas.height = canvas.height;
+
+        const oldContext = oldCanvas.getContext("2d");
+
+        if (oldContext && canvas.width && canvas.height) {
+          oldContext.drawImage(canvas, 0, 0);
+        }
+
         const oldWidth = canvas.width;
         const oldHeight = canvas.height;
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
 
-        let oldImage = null;
+        canvas.width = Math.round(rect.width * ratio);
+        canvas.height = Math.round(rect.height * ratio);
+
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ctx.fillStyle = canvasBackground;
+        ctx.fillRect(0, 0, rect.width, rect.height);
+
         if (oldWidth && oldHeight) {
-          try {
-            oldImage = ctx.getImageData(0, 0, oldWidth, oldHeight);
-          } catch (_) {
-            oldImage = null;
-          }
+          ctx.drawImage(oldCanvas, 0, 0, oldWidth, oldHeight,
+            0, 0, rect.width, rect.height);
         }
-
-        canvas.width = Math.round(rect.width * pixelRatio);
-        canvas.height = Math.round(rect.height * pixelRatio);
-
-        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-        ctx.fillStyle = getCanvasBackground();
-        ctx.fillRect(0, 0, rect.width, rect.height);
-
-        if (oldImage && oldWidth && oldHeight) {
-          const temporary = document.createElement("canvas");
-          temporary.width = oldWidth;
-          temporary.height = oldHeight;
-          const temporaryContext = temporary.getContext("2d");
-
-          if (temporaryContext) {
-            temporaryContext.putImageData(oldImage, 0, 0);
-            ctx.drawImage(
-              temporary,
-              0,
-              0,
-              oldWidth,
-              oldHeight,
-              0,
-              0,
-              rect.width,
-              rect.height
-            );
-          }
-        }
-
-        if (drawingHistory.length) {
-          redrawHistory();
-        }
-      }
-
-      function redrawHistory() {
-        const rect = canvas.getBoundingClientRect();
-        ctx.fillStyle = getCanvasBackground();
-        ctx.fillRect(0, 0, rect.width, rect.height);
-
-        drawingHistory.forEach((stroke) => drawStroke(stroke));
-        if (activeStroke) drawStroke(activeStroke);
       }
 
       function drawStroke(stroke) {
-        if (!stroke || !stroke.points || !stroke.points.length) return;
+        if (!stroke || !stroke.points.length) return;
 
         ctx.save();
         ctx.strokeStyle = stroke.color;
@@ -1391,42 +1706,34 @@
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
 
-        const points = stroke.points;
-
-        if (points.length === 1) {
+        if (stroke.points.length === 1) {
+          const point = stroke.points[0];
           ctx.beginPath();
-          ctx.arc(
-            points[0].x,
-            points[0].y,
-            stroke.size / 2,
-            0,
-            Math.PI * 2
-          );
+          ctx.arc(point.x, point.y, stroke.size / 2, 0, Math.PI * 2);
           ctx.fill();
         } else {
           ctx.beginPath();
-          ctx.moveTo(points[0].x, points[0].y);
+          ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
 
-          for (let i = 1; i < points.length; i++) {
-            const previous = points[i - 1];
-            const current = points[i];
-            const middleX = (previous.x + current.x) / 2;
-            const middleY = (previous.y + current.y) / 2;
-
-            ctx.quadraticCurveTo(
-              previous.x,
-              previous.y,
-              middleX,
-              middleY
-            );
+          for (let i = 1; i < stroke.points.length; i++) {
+            const point = stroke.points[i];
+            ctx.lineTo(point.x, point.y);
           }
 
-          const last = points[points.length - 1];
-          ctx.lineTo(last.x, last.y);
           ctx.stroke();
         }
 
         ctx.restore();
+      }
+
+      function redrawHistory() {
+        const rect = canvas.getBoundingClientRect();
+
+        ctx.fillStyle = canvasBackground;
+        ctx.fillRect(0, 0, rect.width, rect.height);
+
+        drawingHistory.forEach(drawStroke);
+        if (activeStroke) drawStroke(activeStroke);
       }
 
       function getCanvasPoint(event) {
@@ -1438,16 +1745,16 @@
         };
       }
 
-      canvas.addEventListener("pointerdown", (event) => {
+      canvas.addEventListener("pointerdown", event => {
         if (!$("#panel-flow").classList.contains("active")) return;
 
         drawing = true;
-        previousPoint = getCanvasPoint(event);
+
         activeStroke = {
           color: selectedColor,
           size: brushSize,
           opacity: brushOpacity,
-          points: [previousPoint]
+          points: [getCanvasPoint(event)]
         };
 
         try {
@@ -1458,45 +1765,23 @@
         event.preventDefault();
       });
 
-      canvas.addEventListener("pointermove", (event) => {
+      canvas.addEventListener("pointermove", event => {
         if (!drawing || !activeStroke) return;
 
-        const point = getCanvasPoint(event);
-        activeStroke.points.push(point);
-
-        const points = activeStroke.points;
-        if (points.length >= 2) {
-          const previous = points[points.length - 2];
-
-          ctx.save();
-          ctx.strokeStyle = activeStroke.color;
-          ctx.globalAlpha = activeStroke.opacity;
-          ctx.lineWidth = activeStroke.size;
-          ctx.lineCap = "round";
-          ctx.lineJoin = "round";
-          ctx.beginPath();
-          ctx.moveTo(previous.x, previous.y);
-          ctx.lineTo(point.x, point.y);
-          ctx.stroke();
-          ctx.restore();
-        }
-
-        previousPoint = point;
+        activeStroke.points.push(getCanvasPoint(event));
+        redrawHistory();
       });
 
       function finishStroke() {
         if (!drawing) return;
 
         drawing = false;
-        previousPoint = null;
 
         if (activeStroke) {
           drawingHistory.push(activeStroke);
           activeStroke = null;
 
-          if (drawingHistory.length > 100) {
-            drawingHistory.shift();
-          }
+          if (drawingHistory.length > 100) drawingHistory.shift();
         }
       }
 
@@ -1504,11 +1789,11 @@
       canvas.addEventListener("pointercancel", finishStroke);
       canvas.addEventListener("lostpointercapture", finishStroke);
 
-      $$(".color-choice").forEach((button) => {
+      $$(".color-choice").forEach(button => {
         button.addEventListener("click", () => {
           selectedColor = button.dataset.color;
 
-          $$(".color-choice").forEach((choice) => {
+          $$(".color-choice").forEach(choice => {
             const selected = choice === button;
             choice.classList.toggle("selected", selected);
             choice.setAttribute("aria-pressed", String(selected));
@@ -1516,12 +1801,12 @@
         });
       });
 
-      $("#brushSize").addEventListener("input", (event) => {
+      $("#brushSize").addEventListener("input", event => {
         brushSize = Number(event.target.value);
         $("#brushSizeValue").textContent = String(brushSize);
       });
 
-      $("#brushOpacity").addEventListener("input", (event) => {
+      $("#brushOpacity").addEventListener("input", event => {
         brushOpacity = Number(event.target.value) / 100;
         $("#brushOpacityValue").textContent = `${event.target.value}%`;
       });
@@ -1534,17 +1819,17 @@
       $("#clearDrawing").addEventListener("click", () => {
         drawingHistory = [];
         activeStroke = null;
-
-        const rect = canvas.getBoundingClientRect();
-        ctx.fillStyle = getCanvasBackground();
-        ctx.fillRect(0, 0, rect.width, rect.height);
+        redrawHistory();
       });
 
       let resizeFrame = null;
+
       window.addEventListener("resize", () => {
         if (resizeFrame !== null) cancelAnimationFrame(resizeFrame);
+
         resizeFrame = requestAnimationFrame(() => {
           resizeCanvas();
+          redrawHistory();
           resizeFrame = null;
         });
       });
@@ -1552,47 +1837,52 @@
       resizeCanvas();
 
       // ---------------------------
-      // Account and modal handling
+      // Account and modal
       // ---------------------------
 
       const authModal = $("#authModal");
       const authButton = $("#authButton");
+      let lastFocusedElement = null;
 
       function openAuthModal(message) {
+        lastFocusedElement = document.activeElement;
+
         if (message) $("#authModalMessage").textContent = message;
+
         authModal.classList.add("open");
+        authModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
         $("#closeAuthModal").focus();
       }
 
       function closeAuthModal() {
         authModal.classList.remove("open");
-        authButton.focus();
+        authModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+          lastFocusedElement.focus();
+        }
       }
 
       authButton.addEventListener("click", () => {
-        /*
-          Replace this with your existing Zenene sign-in route if one exists.
-          For example, you might navigate to login.html.
-        */
-        openAuthModal(
-          "Connect your existing sign-in page to enable account-based saving. Your gratitude entries should only be accessible to you."
-        );
+        window.location.href = "profile.html";
       });
 
       $("#closeAuthModal").addEventListener("click", closeAuthModal);
 
-      authModal.addEventListener("click", (event) => {
+      authModal.addEventListener("click", event => {
         if (event.target === authModal) closeAuthModal();
       });
 
-      document.addEventListener("keydown", (event) => {
+      document.addEventListener("keydown", event => {
         if (event.key === "Escape" && authModal.classList.contains("open")) {
           closeAuthModal();
         }
       });
 
       // ---------------------------
-      // Gratitude garden + Supabase
+      // Gratitude Garden + Supabase
       // ---------------------------
 
       const gratitudeForm = $("#gratitudeForm");
@@ -1606,6 +1896,7 @@
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, "0");
         const day = String(date.getDate()).padStart(2, "0");
+
         return `${year}-${month}-${day}`;
       }
 
@@ -1624,7 +1915,7 @@
           empty.textContent = "Your garden is waiting for its first seed.";
           gratitudeEntries.appendChild(empty);
         } else {
-          entries.forEach((entry) => {
+          entries.forEach(entry => {
             const card = document.createElement("article");
             card.className = "gratitude-entry";
 
@@ -1650,13 +1941,12 @@
         if (!client) {
           showGratitudeEntries([]);
           gratitudeStatus.textContent =
-            "Sign-in and cloud saving aren't connected on this page yet.";
+            "Cloud saving isn't connected on this page yet.";
           return;
         }
 
         try {
-          const { data: authData, error: authError } =
-            await client.auth.getUser();
+          const { data: authData, error: authError } = await client.auth.getUser();
 
           if (authError || !authData?.user) {
             showGratitudeEntries([]);
@@ -1682,7 +1972,7 @@
         }
       }
 
-      gratitudeForm.addEventListener("submit", async (event) => {
+      gratitudeForm.addEventListener("submit", async event => {
         event.preventDefault();
 
         const text = gratitudeText.value.trim();
@@ -1698,19 +1988,20 @@
         if (!client) {
           gratitudeStatus.textContent =
             "Cloud saving isn't connected yet. Your thought hasn't been saved.";
+
           openAuthModal(
-            "To save gratitude entries, connect your Supabase client and authentication. This page does not store your thoughts in a private account unless that connection is configured."
+            "Connect your existing Supabase client and authentication to save gratitude entries securely."
           );
           return;
         }
 
         const submitButton = gratitudeForm.querySelector('button[type="submit"]');
+
         submitButton.disabled = true;
-        submitButton.textContent = "Planting...";
+        submitButton.textContent = "planting...";
 
         try {
-          const { data: authData, error: authError } =
-            await client.auth.getUser();
+          const { data: authData, error: authError } = await client.auth.getUser();
 
           if (authError || !authData?.user) {
             gratitudeStatus.textContent = "Please sign in before saving a thought.";
@@ -1730,6 +2021,7 @@
 
           gratitudeText.value = "";
           gratitudeStatus.textContent = "Your thought has been planted. ✿";
+
           await loadGratitudeEntries();
         } catch (error) {
           console.error("Unable to save gratitude entry:", error);
@@ -1737,14 +2029,14 @@
             "Your thought couldn't be saved. Please try again.";
         } finally {
           submitButton.disabled = false;
-          submitButton.textContent = "Plant this thought ✿";
+          submitButton.textContent = "plant this thought ✿";
         }
       });
 
       $("#refreshGratitude").addEventListener("click", loadGratitudeEntries);
 
       // ---------------------------
-      // Reflect the existing session
+      // User display and auth state
       // ---------------------------
 
       async function updateUserDisplay() {
@@ -1753,9 +2045,15 @@
 
         try {
           const { data, error } = await client.auth.getUser();
-          if (error || !data?.user) return;
+
+          if (error || !data?.user) {
+            $("#userName").textContent = "your little corner";
+            authButton.textContent = "sign in";
+            return;
+          }
 
           const user = data.user;
+
           const displayName =
             user.user_metadata?.full_name ||
             user.user_metadata?.name ||
@@ -1763,7 +2061,8 @@
             "your little corner";
 
           $("#userName").textContent = displayName;
-          authButton.textContent = "Account";
+          authButton.textContent = "account";
+
           await loadGratitudeEntries();
         } catch (error) {
           console.error("Unable to read the current user:", error);
@@ -1772,11 +2071,46 @@
 
       updateUserDisplay();
 
-      if (getSupabaseClient()?.auth?.onAuthStateChange) {
-        getSupabaseClient().auth.onAuthStateChange(() => {
+      const client = getSupabaseClient();
+
+      if (client?.auth?.onAuthStateChange) {
+        client.auth.onAuthStateChange(() => {
           updateUserDisplay();
         });
       }
+
+      // ---------------------------
+      // Smooth navigation
+      // ---------------------------
+
+      document.querySelectorAll(".nav-links a, .nav-wordmark").forEach(link => {
+        link.addEventListener("click", event => {
+          if (
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey ||
+            link.target === "_blank"
+          ) return;
+
+          const destination = new URL(link.href, window.location.href);
+
+          if (
+            destination.origin !== window.location.origin ||
+            destination.pathname === window.location.pathname ||
+            !["http:", "https:"].includes(destination.protocol)
+          ) return;
+
+          event.preventDefault();
+          document.body.classList.add("is-leaving");
+
+          window.setTimeout(() => {
+            window.location.href = destination.href;
+          }, 150);
+        });
+      });
     })();
   </script>
 </body>

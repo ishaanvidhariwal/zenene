@@ -22,11 +22,14 @@ async function getCurrentProfile() {
         .from("profiles")
         .select("display_name")
         .eq("id", user.id)
-        .single();
+        .maybeSingle();
+
+    // Fall back to the name given at sign-up until a profile row exists.
+    const savedName = !error && data ? data.display_name : null;
 
     return {
         id: user.id,
         email: user.email,
-        display_name: !error && data ? data.display_name : null
+        display_name: savedName || user.user_metadata?.display_name || null
     };
 }

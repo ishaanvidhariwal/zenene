@@ -50,6 +50,7 @@
     /* ---------- Support window ---------- */
 
     const SUPPORT_LINKS = [
+        ["tel:14416", "📞 India: Tele-MANAS 14416 (free, 24/7)"],
         ["tel:988", "📞 US: call or text 988"],
         ["sms:741741?body=HOME", "💬 US/Canada: text HOME to 741741"],
         ["tel:116123", "📞 UK/ROI: Samaritans 116 123"],

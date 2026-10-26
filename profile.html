@@ -234,7 +234,13 @@ body {
 
     display: flex;
 
+    flex-wrap: wrap;
+
+    align-items: flex-start;
+
     justify-content: center;
+
+    gap: 24px;
 
     padding: 10px 0 0;
 
@@ -383,6 +389,115 @@ body {
 .profile-message.success {
 
     color: var(--sage-deep);
+
+}
+
+/* What Vera remembers */
+
+.memory-intro,
+.memory-empty {
+
+    margin: 0 0 18px;
+
+    color: var(--muted);
+
+    font-family: var(--serif);
+
+    font-size: 1.05rem;
+
+    line-height: 1.45;
+
+}
+
+.memory-list {
+
+    margin: 0 0 18px;
+
+    padding: 0;
+
+    list-style: none;
+
+    border-top: 1px solid var(--line);
+
+}
+
+.memory-item {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+.memory-text {
+
+    color: var(--ink);
+
+    font-family: var(--serif);
+
+    font-size: 1.08rem;
+
+    line-height: 1.4;
+
+}
+
+.memory-date {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-family: var(--typewriter);
+
+    font-size: .55rem;
+
+    letter-spacing: .06em;
+
+    text-transform: uppercase;
+
+}
+
+.memory-forget {
+
+    flex-shrink: 0;
+
+    width: 28px;
+
+    height: 28px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 50%;
+
+    background: none;
+
+    color: var(--muted);
+
+    font-size: 1rem;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: color .2s ease, border-color .2s ease;
+
+}
+
+.memory-forget:hover {
+
+    color: var(--pink);
+
+    border-color: var(--pink);
 
 }
 
@@ -594,6 +709,29 @@ footer p {
 
     </div>
 
+    <div class="profile-card" id="memoryCard">
+
+        <div class="profile-label">What Vera remembers</div>
+
+        <p class="memory-intro">
+            Small things you've shared, kept so Vera doesn't have to ask again.
+            Only you and Vera can see them, and you can remove any of them.
+        </p>
+
+        <ul class="memory-list" id="memoryList"></ul>
+
+        <p class="memory-empty" id="memoryEmpty" hidden>
+            Nothing yet. As you talk with Vera, anything worth remembering will show up here.
+        </p>
+
+        <button class="profile-logout" id="forgetAllBtn" type="button" hidden>
+            Forget everything, including past chats
+        </button>
+
+        <p class="profile-message" id="memoryMessage"></p>
+
+    </div>
+
 </div>
 
 </main>
@@ -687,6 +825,126 @@ document.getElementById("profileSaveBtn").addEventListener("click", async () => 
     document.getElementById("profileGreeting").textContent = name ? "Hi, " + name : "Hi there";
 
 });
+
+/* =========================================================
+   WHAT VERA REMEMBERS
+   Rows in "memories" are only ever readable by their owner
+   (row level security), so this list is the person's own.
+   ========================================================= */
+
+const memoryList = document.getElementById("memoryList");
+const memoryEmpty = document.getElementById("memoryEmpty");
+const forgetAllBtn = document.getElementById("forgetAllBtn");
+const memoryMessage = document.getElementById("memoryMessage");
+
+function showMemoryMessage(text, isSuccess = false) {
+    memoryMessage.textContent = text;
+    memoryMessage.classList.toggle("success", isSuccess);
+}
+
+async function loadMemories() {
+
+    const user = await getCurrentUser();
+    if (!user) return;
+
+    const { data, error } = await supabaseClient
+        .from("memories")
+        .select("id, memory, created_at")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        showMemoryMessage("Couldn't load what Vera remembers. Try refreshing.");
+        return;
+    }
+
+    memoryList.replaceChildren();
+
+    (data || []).forEach(row => {
+
+        const item = document.createElement("li");
+        item.className = "memory-item";
+
+        const text = document.createElement("span");
+        text.className = "memory-text";
+        text.textContent = row.memory;
+
+        const date = document.createElement("span");
+        date.className = "memory-date";
+        date.textContent = new Date(row.created_at).toLocaleDateString(undefined, {
+            day: "numeric", month: "short", year: "numeric"
+        });
+        text.appendChild(date);
+
+        const forget = document.createElement("button");
+        forget.type = "button";
+        forget.className = "memory-forget";
+        forget.textContent = "×";
+        forget.setAttribute("aria-label", "Forget this");
+
+        forget.addEventListener("click", async () => {
+            forget.disabled = true;
+
+            const { error: deleteError } = await supabaseClient
+                .from("memories")
+                .delete()
+                .eq("id", row.id)
+                .eq("user_id", user.id);
+
+            if (deleteError) {
+                forget.disabled = false;
+                showMemoryMessage("Couldn't remove that. Try again.");
+                return;
+            }
+
+            item.remove();
+            showMemoryMessage("Forgotten.", true);
+            updateEmptyState();
+        });
+
+        item.append(text, forget);
+        memoryList.appendChild(item);
+    });
+
+    updateEmptyState();
+}
+
+function updateEmptyState() {
+    const hasMemories = memoryList.children.length > 0;
+    memoryEmpty.hidden = hasMemories;
+    forgetAllBtn.hidden = false;
+}
+
+forgetAllBtn.addEventListener("click", async () => {
+
+    const sure = window.confirm(
+        "This deletes everything Vera remembers about you and all your past conversations with her. It can't be undone. Continue?"
+    );
+    if (!sure) return;
+
+    const user = await getCurrentUser();
+    if (!user) return;
+
+    forgetAllBtn.disabled = true;
+
+    const [memories, conversations] = await Promise.all([
+        supabaseClient.from("memories").delete().eq("user_id", user.id),
+        supabaseClient.from("vera_conversations").delete().eq("user_id", user.id)
+    ]);
+
+    forgetAllBtn.disabled = false;
+
+    if (memories.error || conversations.error) {
+        showMemoryMessage("Something didn't delete. Try again.");
+        return;
+    }
+
+    memoryList.replaceChildren();
+    updateEmptyState();
+    showMemoryMessage("Vera has forgotten everything. You're starting fresh.", true);
+});
+
+loadMemories();
 
 document.getElementById("profileLogoutBtn").addEventListener("click", async () => {
     await supabaseClient.auth.signOut();

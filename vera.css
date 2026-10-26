@@ -1174,3 +1174,494 @@ body {
     font-size: .65rem;
 
 }
+
+
+
+/* =========================
+   SIDEBAR: CONVERSATIONS + MEMORY
+========================= */
+
+.vera-page {
+
+    gap:
+        24px;
+
+}
+
+
+.vera-sidebar {
+
+    width:
+        250px;
+
+    flex-shrink:
+        0;
+
+    height:
+        calc(100vh - 121px);
+
+    min-height:
+        600px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    padding:
+        18px 4px;
+
+    overflow-y:
+        auto;
+
+}
+
+
+.vera-new-chat {
+
+    width:
+        100%;
+
+    padding:
+        12px 14px;
+
+    border:
+        1px solid var(--line-on-dark);
+
+    border-radius:
+        14px;
+
+    background:
+        var(--card-on-dark);
+
+    color:
+        var(--paper);
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        0.68rem;
+
+    letter-spacing:
+        0.04em;
+
+    text-transform:
+        uppercase;
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+
+}
+
+
+.vera-new-chat:hover {
+
+    border-color:
+        var(--pink);
+
+}
+
+
+.vera-side-label {
+
+    margin:
+        26px 0 10px;
+
+    padding:
+        0 6px;
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        0.6rem;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--muted-on-dark);
+
+}
+
+
+.vera-convo-list,
+.vera-memory-list {
+
+    list-style:
+        none;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+}
+
+
+.vera-convo-list li {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    border-radius:
+        10px;
+
+}
+
+
+.vera-convo-list li.active,
+.vera-convo-list li:hover {
+
+    background:
+        var(--card-on-dark);
+
+}
+
+
+.vera-convo-list li.active {
+
+    box-shadow:
+        inset 2px 0 0 var(--pink);
+
+}
+
+
+.vera-convo-open {
+
+    flex:
+        1;
+
+    min-width:
+        0;
+
+    padding:
+        9px 8px;
+
+    border:
+        none;
+
+    background:
+        none;
+
+    color:
+        var(--paper);
+
+    font-family:
+        var(--serif);
+
+    font-size:
+        0.95rem;
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+
+}
+
+
+.vera-convo-title {
+
+    display:
+        block;
+
+    overflow:
+        hidden;
+
+    white-space:
+        nowrap;
+
+    text-overflow:
+        ellipsis;
+
+}
+
+
+.vera-convo-date {
+
+    display:
+        block;
+
+    margin-top:
+        2px;
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        0.55rem;
+
+    color:
+        var(--muted-on-dark);
+
+}
+
+
+.vera-delete {
+
+    flex-shrink:
+        0;
+
+    width:
+        28px;
+
+    height:
+        28px;
+
+    border:
+        none;
+
+    background:
+        none;
+
+    color:
+        var(--muted-on-dark);
+
+    font-size:
+        1rem;
+
+    cursor:
+        pointer;
+
+    opacity:
+        0;
+
+}
+
+
+li:hover > .vera-delete,
+.vera-delete:focus {
+
+    opacity:
+        1;
+
+}
+
+
+.vera-delete:hover {
+
+    color:
+        var(--pink-soft);
+
+}
+
+
+.vera-memory-list li {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        4px;
+
+    padding:
+        6px 4px 6px 8px;
+
+    font-family:
+        var(--serif);
+
+    font-style:
+        italic;
+
+    font-size:
+        0.88rem;
+
+    line-height:
+        1.4;
+
+    color:
+        var(--pink-soft);
+
+}
+
+
+.vera-memory-list li span {
+
+    flex:
+        1;
+
+}
+
+
+.vera-side-empty,
+.vera-side-note {
+
+    padding:
+        4px 8px;
+
+    font-family:
+        var(--serif);
+
+    font-style:
+        italic;
+
+    font-size:
+        0.82rem;
+
+    line-height:
+        1.45;
+
+    color:
+        var(--muted-on-dark);
+
+}
+
+
+.vera-side-note {
+
+    margin-top:
+        auto;
+
+    padding-top:
+        24px;
+
+}
+
+
+.vera-remembered {
+
+    margin:
+        6px 0 0 44px;
+
+    font-family:
+        var(--typewriter);
+
+    font-size:
+        0.58rem;
+
+    letter-spacing:
+        0.03em;
+
+    color:
+        var(--muted-on-dark);
+
+}
+
+
+.vera-sidebar-toggle {
+
+    display:
+        none;
+
+    margin-right:
+        14px;
+
+    padding:
+        6px 10px;
+
+    border:
+        1px solid var(--line-on-dark);
+
+    border-radius:
+        10px;
+
+    background:
+        none;
+
+    color:
+        var(--paper);
+
+    font-size:
+        1rem;
+
+    cursor:
+        pointer;
+
+}
+
+
+@media (max-width: 860px) {
+
+    .vera-header {
+
+        justify-content:
+            flex-start;
+
+    }
+
+    .vera-status {
+
+        margin-left:
+            auto;
+
+    }
+
+    .vera-sidebar-toggle {
+
+        display:
+            block;
+
+    }
+
+    .vera-sidebar {
+
+        position:
+            fixed;
+
+        top:
+            0;
+
+        left:
+            0;
+
+        z-index:
+            600;
+
+        height:
+            100vh;
+
+        min-height:
+            0;
+
+        width:
+            min(290px, 85vw);
+
+        padding:
+            24px 16px;
+
+        background:
+            var(--brown-darker);
+
+        box-shadow:
+            0 0 40px rgba(0, 0, 0, 0.5);
+
+        transform:
+            translateX(-105%);
+
+        transition:
+            transform 0.25s ease;
+
+    }
+
+    .vera-sidebar.open {
+
+        transform:
+            translateX(0);
+
+    }
+
+    .vera-delete {
+
+        opacity:
+            1;
+
+    }
+
+}

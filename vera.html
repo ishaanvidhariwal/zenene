@@ -25,7 +25,7 @@
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="vera.css">
+    <link rel="stylesheet" href="vera.css?v=3">
 
 <link rel="stylesheet" href="zenene.css">
 </head>
@@ -53,6 +53,64 @@
 
 <main class="vera-page">
 
+    <!-- =========================
+         SIDEBAR: CONVERSATIONS + MEMORY
+    ========================== -->
+
+    <aside
+        class="vera-sidebar"
+        id="veraSidebar"
+    >
+
+        <button
+            type="button"
+            class="vera-new-chat"
+            id="veraNewChat"
+        >
+            + new conversation
+        </button>
+
+
+        <div class="vera-side-label">
+            conversations
+        </div>
+
+        <ul
+            class="vera-convo-list"
+            id="veraConvoList"
+        ></ul>
+
+
+        <div
+            class="vera-memory-section"
+            id="veraMemorySection"
+            style="display: none;"
+        >
+
+            <div class="vera-side-label">
+                what vera remembers
+            </div>
+
+            <ul
+                class="vera-memory-list"
+                id="veraMemoryList"
+            ></ul>
+
+        </div>
+
+
+        <p
+            class="vera-side-note"
+            id="veraSideNote"
+        >
+            Saved on this device only.
+            Log in to keep your conversations
+            and let Vera remember you.
+        </p>
+
+    </aside>
+
+
     <div class="vera-shell">
 
 
@@ -61,6 +119,16 @@
         ========================== -->
 
         <header class="vera-header">
+
+            <button
+                type="button"
+                class="vera-sidebar-toggle"
+                id="veraSidebarToggle"
+                aria-label="Show conversations"
+            >
+                ☰
+            </button>
+
 
             <div class="vera-brand">
 
@@ -259,7 +327,7 @@
 <script src="js/supabase.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/nav-auth.js"></script>
-<script src="vera.js"></script>
+<script src="vera.js?v=3"></script>
 
 <script src="js/zenene-ui.js"></script>
 </body>

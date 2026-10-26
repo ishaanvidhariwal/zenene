@@ -101,10 +101,26 @@ What you are not:
   shared.
 
 You may be given "Account context" below, pulled from the user's own
-journal and mood check-ins. Use it lightly, only when it helps, and
+journal, mood check-ins, things they asked you to keep ("What you
+remember"), and their recent past conversations with you. Use it lightly, only when it helps, and
 only in their words (for example, noticing that they wrote "tired"
 three days this week). Don't recite it, and don't use it to name a
 feeling for them.
+
+Memory between conversations:
+- You remember people the way a good listener does: the names of
+  people in their life, what's going on for them, what has helped
+  before. If it fits naturally, you can gently pick up a thread
+  ("Last time you mentioned your exam on Friday. How did it go?").
+- When they share something lasting and worth carrying into future
+  conversations (a person, an ongoing situation, something that helps
+  them, something they want you to know), add ONE line at the very
+  end of your reply, exactly in this form:
+  [[remember: short fact in their own words]]
+  Keep it under 15 words. Only do this when it truly matters, not for
+  passing moods or small talk, and never for anything they asked you
+  not to keep. Never repeat something already in "What you remember".
+  The person never sees this line; it's saved for you.
 `.trim();
 
 // Extra guidance for the free model. Llama follows the rules above
@@ -116,6 +132,7 @@ Before you reply, check these four things:
 2. Is it three sentences or fewer, with no lists, headings or bold?
 3. Am I asking at most one question?
 4. If they asked for help or ideas, did I actually give one or two in this reply?
+5. Only add a [[remember: ...]] line when they shared something lasting (a person, an ongoing situation, something that helps). Most replies have none.
 
 Examples of how Vera replies. Match this voice, not these exact words.
 
@@ -134,6 +151,11 @@ Vera: Thank you for telling me. What does the anxiety feel like for you, when it
 User: lol nothing deep, just bored
 Vera: Bored is allowed. Want a random question to pass the time, or something to do with your hands for five minutes?
 `.trim();
+
+const LOGGED_OUT_MEMORY_NOTE = `
+
+The user is not logged in, so nothing can be remembered between
+conversations. Never add a [[remember: ...]] line.`;
 
 const CRISIS_KEYWORDS = [
     "kill myself", "killing myself", "want to die", "wanna die",
@@ -202,9 +224,9 @@ function json(body, status, origin) {
     });
 }
 
-async function fetchAccountContext(accessToken) {
+async function fetchAccountContext(accessToken, conversationId) {
     if (!accessToken) {
-        return "The user is not logged in, so no account history is available.";
+        return { text: "The user is not logged in, so no account history is available.", userId: null };
     }
 
     try {
@@ -216,7 +238,7 @@ async function fetchAccountContext(accessToken) {
         });
 
         if (!userRes.ok) {
-            return "The user's session could not be verified, so no account history is available.";
+            return { text: "The user's session could not be verified, so no account history is available.", userId: null };
         }
 
         const user = await userRes.json();
@@ -227,15 +249,39 @@ async function fetchAccountContext(accessToken) {
             Authorization: `Bearer ${accessToken}`
         };
 
-        const [profileRes, moodRes, journalRes] = await Promise.all([
+        const otherConvos = /^[0-9a-f-]{36}$/i.test(conversationId || "")
+            ? `&id=neq.${conversationId}`
+            : "";
+
+        const [profileRes, moodRes, journalRes, memoryRes, convoRes] = await Promise.all([
             fetch(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${userId}&select=display_name`, { headers: authHeaders }),
             fetch(`${SUPABASE_URL}/rest/v1/mood_entries?user_id=eq.${userId}&select=entry_date,mood&order=entry_date.desc&limit=14`, { headers: authHeaders }),
-            fetch(`${SUPABASE_URL}/rest/v1/journal_entries?user_id=eq.${userId}&select=text,mood,date,timestamp&order=timestamp.desc&limit=3`, { headers: authHeaders })
+            fetch(`${SUPABASE_URL}/rest/v1/journal_entries?user_id=eq.${userId}&select=text,mood,date,timestamp&order=timestamp.desc&limit=3`, { headers: authHeaders }),
+            fetch(`${SUPABASE_URL}/rest/v1/memories?user_id=eq.${userId}&select=memory&order=created_at.desc&limit=30`, { headers: authHeaders }),
+            fetch(`${SUPABASE_URL}/rest/v1/vera_conversations?user_id=eq.${userId}${otherConvos}&select=title,messages,updated_at&order=updated_at.desc&limit=3`, { headers: authHeaders })
         ]);
 
         const profile = profileRes.ok ? await profileRes.json() : [];
         const moods = moodRes.ok ? await moodRes.json() : [];
         const journalEntries = journalRes.ok ? await journalRes.json() : [];
+        const memories = memoryRes.ok ? await memoryRes.json() : [];
+        const pastConvos = convoRes.ok ? await convoRes.json() : [];
+
+        const memoryLines = memories.length
+            ? memories.map(m => `  - ${m.memory}`).join("\n")
+            : "  (nothing yet)";
+
+        // What they said (not Vera's replies) in their last few chats.
+        const convoLines = pastConvos.length
+            ? pastConvos.map(c => {
+                const said = (Array.isArray(c.messages) ? c.messages : [])
+                    .filter(m => m && m.role === "user" && typeof m.content === "string")
+                    .slice(-4)
+                    .map(m => `"${m.content.slice(0, 150)}"`)
+                    .join(" / ");
+                return `  - ${(c.updated_at || "").slice(0, 10)}: ${said || "(empty)"}`;
+            }).join("\n")
+            : "  (no earlier conversations)";
 
         const name = profile[0] && profile[0].display_name ? profile[0].display_name : null;
 
@@ -250,17 +296,23 @@ async function fetchAccountContext(accessToken) {
             }).join("\n")
             : "  (no journal entries recorded yet)";
 
-        return [
+        const text = [
             "Account context for this user (use naturally, do not recite verbatim):",
             `- Name: ${name || "not set"}`,
             "- Recent mood check-ins (most recent first):",
             moodLines,
             "- Recent journal entries (most recent first, may be truncated):",
-            journalLines
+            journalLines,
+            "- What you remember about them (from earlier conversations):",
+            memoryLines,
+            "- What they said in recent past conversations with you (most recent first):",
+            convoLines
         ].join("\n");
 
+        return { text, userId };
+
     } catch (err) {
-        return "There was an error loading account history, so proceed without it.";
+        return { text: "There was an error loading account history, so proceed without it.", userId: null };
     }
 }
 
@@ -309,6 +361,38 @@ async function askWorkersAI(env, systemPrompt, messages) {
     }
 }
 
+function extractMemories(reply) {
+    const memories = [];
+    const cleaned = reply.replace(/\[\[\s*remember\s*:\s*([^\]]+?)\s*\]\]/gi, (_, fact) => {
+        memories.push(fact.trim().slice(0, 200));
+        return "";
+    });
+    return { reply: cleaned.trim(), memories: memories.slice(0, 2) };
+}
+
+async function saveMemories(accessToken, userId, memories) {
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/memories`, {
+            method: "POST",
+            headers: {
+                apikey: SUPABASE_ANON_KEY,
+                Authorization: `Bearer ${accessToken}`,
+                "Content-Type": "application/json",
+                Prefer: "return=minimal"
+            },
+            body: JSON.stringify(memories.map(memory => ({ user_id: userId, memory })))
+        });
+        if (!res.ok) {
+            console.error("Couldn't save memory:", await res.text());
+            return [];
+        }
+        return memories;
+    } catch (err) {
+        console.error("Couldn't save memory:", err);
+        return [];
+    }
+}
+
 export default {
     async fetch(request, env) {
         const origin = request.headers.get("Origin") || "";
@@ -342,6 +426,7 @@ export default {
         const message = (payload.message || "").toString().trim().slice(0, MAX_MESSAGE_CHARS);
         const history = Array.isArray(payload.history) ? payload.history : [];
         const accessToken = payload.accessToken || null;
+        const conversationId = typeof payload.conversationId === "string" ? payload.conversationId : null;
 
         if (!message) {
             return json({ error: "Missing message" }, 400, origin);
@@ -351,13 +436,14 @@ export default {
             return json({ error: "Server is not configured (missing ANTHROPIC_API_KEY)" }, 500, origin);
         }
 
-        const accountContext = await fetchAccountContext(accessToken);
+        const account = await fetchAccountContext(accessToken, conversationId);
 
         const crisisDetected = CRISIS_KEYWORDS.some(k => message.toLowerCase().includes(k));
 
         const systemPrompt =
             SYSTEM_PROMPT_BASE +
-            "\n\n" + accountContext +
+            "\n\n" + account.text +
+            (account.userId ? "" : LOGGED_OUT_MEMORY_NOTE) +
             (crisisDetected ? CRISIS_INSTRUCTION : "");
 
         let claudeMessages = history
@@ -388,6 +474,15 @@ export default {
                 return json({ error: "Vera's brain is unavailable right now" }, 502, origin);
             }
 
+            const extracted = extractMemories(reply);
+            reply = extracted.reply;
+
+            let remembered = [];
+
+            if (account.userId && extracted.memories.length) {
+                remembered = await saveMemories(accessToken, account.userId, extracted.memories);
+            }
+
             if (crisisDetected) {
                 // Only our vetted list may carry numbers; drop any the
                 // model wrote itself (they can be outdated or wrong).
@@ -399,7 +494,7 @@ export default {
                 reply = (kept || "I'm really glad you told me. I'm here with you.") + "\n\n" + CRISIS_RESOURCES_TEXT;
             }
 
-            return json({ message: reply }, 200, origin);
+            return json({ message: reply, remembered }, 200, origin);
 
         } catch (err) {
             console.error("Worker error:", err);

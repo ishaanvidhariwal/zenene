@@ -36,14 +36,16 @@ const SUPABASE_ANON_KEY = "sb_publishable_hVaM64loLJeTKLN0LeYJKQ_x0oD6Xy4";
 // EDIT THIS: the origin(s) your site is actually served from.
 const ALLOWED_ORIGINS = [
     "https://ishaanvidhariwal.github.io",
-    "https://zenene.com",
-    "https://www.zenene.com"
+    "https://zenene.in",
+    "https://www.zenene.in"
 ];
 
 const CLAUDE_MODEL = "claude-sonnet-5-5";
 
-// Free fallback (Cloudflare Workers AI, via the AI binding in
-// wrangler.toml), used when Claude is unavailable, e.g. no credits.
+// Free model (Cloudflare Workers AI, via the AI binding in
+// wrangler.toml). With no ANTHROPIC_API_KEY secret set, Vera uses
+// this for every reply. With the secret set, Claude answers first
+// and this is only the backup.
 const FALLBACK_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 
 // Cost/abuse guards.
@@ -105,6 +107,34 @@ three days this week). Don't recite it, and don't use it to name a
 feeling for them.
 `.trim();
 
+// Extra guidance for the free model. Llama follows the rules above
+// less tightly than Claude, so it gets a short recap plus examples
+// of Vera's voice. Claude never sees this.
+const FREE_MODEL_GUIDE = `
+Before you reply, check these four things:
+1. Did I name a feeling or condition they haven't named? If so, remove it and use their words.
+2. Is it three sentences or fewer, with no lists, headings or bold?
+3. Am I asking at most one question?
+4. If they asked for help or ideas, did I actually give one or two in this reply?
+
+Examples of how Vera replies. Match this voice, not these exact words.
+
+User: idk everything just feels heavy today
+Vera: Heavy today. Is it heavy like tired, or heavy like something's sitting on you?
+
+User: my best friend didn't invite me to her party and i'm so stressed
+Vera: Not being invited by your best friend stings, and you've been carrying that stress with you. Do you want to talk about what happened, or just let it out for a bit?
+
+User: can you give me something to help me fall asleep, my brain won't switch off
+Vera: Try writing every thought that's looping onto paper, then telling yourself you'll pick them up tomorrow. If you're still awake after that, slow your breathing so the out-breath is a little longer than the in-breath, for a few minutes.
+
+User: i think i have anxiety
+Vera: Thank you for telling me. What does the anxiety feel like for you, when it shows up?
+
+User: lol nothing deep, just bored
+Vera: Bored is allowed. Want a random question to pass the time, or something to do with your hands for five minutes?
+`.trim();
+
 const CRISIS_KEYWORDS = [
     "kill myself", "killing myself", "want to die", "wanna die",
     "end my life", "ending my life", "ending it all", "no reason to live",
@@ -145,11 +175,12 @@ suicide or self-harm if they have raised it.`;
 
 const CRISIS_RESOURCES_TEXT = `—
 If you're in crisis or thinking about suicide, please reach out right now:
+• India: call Tele-MANAS on 14416 (free, 24/7, many languages)
 • US: call or text 988 (Suicide & Crisis Lifeline)
 • US/Canada: text HOME to 741741 (Crisis Text Line)
 • UK/ROI: call Samaritans at 116 123
 • Elsewhere: findahelpline.com has a directory by country
-If you're in immediate danger, please contact local emergency services.`;
+If you're in immediate danger, please contact local emergency services (112 in India).`;
 
 function corsHeaders(origin) {
     const allowed = ALLOWED_ORIGINS.includes(origin);
@@ -264,8 +295,12 @@ async function askClaude(env, systemPrompt, messages) {
 async function askWorkersAI(env, systemPrompt, messages) {
     try {
         const data = await env.AI.run(FALLBACK_MODEL, {
-            messages: [{ role: "system", content: systemPrompt }, ...messages],
-            max_tokens: 400
+            messages: [
+                { role: "system", content: systemPrompt + "\n\n" + FREE_MODEL_GUIDE },
+                ...messages
+            ],
+            max_tokens: 300,
+            temperature: 0.6
         });
         return data && data.response ? data.response : null;
     } catch (err) {
